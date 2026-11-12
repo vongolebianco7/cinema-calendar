@@ -28,6 +28,8 @@ const auditFixture = {
   director: 'James Cameron',
   genres: ['ドラマ'],
 };
+const IMAGE_SETTLE_TIMEOUT_MS = 10_000;
+
 const routes = [
   { name: 'calendar', path: '/index.html' },
   { name: 'discover', path: '/discover.html' },
@@ -47,7 +49,11 @@ async function settleImages(page) {
     await images.nth(index).evaluate(image => image.scrollIntoView({ block: 'center' }));
     await page.waitForTimeout(35);
   }
-  await page.waitForTimeout(1200);
+  // Wait for real network image requests to finish instead of assuming a fixed delay is enough.
+  // The audit still reports timed-out images as pending and failed images as broken.
+  await page.waitForFunction(() => [...document.images]
+    .filter(image => /^https?:/.test(image.getAttribute('src') || ''))
+    .every(image => image.complete), null, { timeout: IMAGE_SETTLE_TIMEOUT_MS }).catch(() => {});
 }
 
 async function imageResult(page, name, imageResponses) {

@@ -68,7 +68,7 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
         resolve({ tile: context.getImageData(600, 700, 1, 1).data[3], emblem: context.getImageData(627, 627, 1, 1).data[3] });
       };
       image.onerror = reject;
-      image.src = "assets/cinelva-best10-mark-transparent.svg";
+      image.src = "assets/cinelva-best10-mark-transparent.png";
     }));
     assert.equal(markPixels.tile, 0, "the logo's black tile is transparent in the exported mark");
     assert.ok(markPixels.emblem > 200, "the original white logo emblem remains visible");

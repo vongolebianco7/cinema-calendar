@@ -40,10 +40,8 @@ test('cinema template text has no glow and its share mark removes the black tile
  r.context.drawArtwork([{id:'42',title:'読みやすい作品名',rating:4.6}]);
  assert.ok(r.calls.shadowBlurs.length>0);
  assert.ok(r.calls.shadowBlurs.every(value=>value===0),'no blur shadow is assigned to title or movie text');
- const mark=fs.readFileSync('assets/cinelva-best10-mark-transparent.svg','utf8');
- assert.match(mark,/cinelva_original_colors_transparent\.png/);
- assert.match(mark,/feColorMatrix/);
- assert.match(mark,/feFuncA type="linear" slope="3" intercept="-\.11"/);
+ const mark=fs.readFileSync('assets/cinelva-best10-mark-transparent.png');
+ assert.deepEqual([...mark.subarray(0,8)],[137,80,78,71,13,10,26,10],'share mark is a raster PNG with real alpha support');
  assert.ok(!r.calls.draws.some(url=>url.endsWith('cinelva_original_colors_transparent.png')),'export uses the transparent variant');
 });
 test('rating import filters release decades, keeps all-time mode, and removes duplicate works',()=>{
@@ -105,7 +103,7 @@ for(const theme of ['minimal','noir','burgundy','cinema-projector','cinema-theat
  const movies=[{title:'Film One',year:2024,director:'Director One',poster:'https://image.tmdb.org/t/p/w342/poster.jpg'}];r.context.picks=movies;
  r.context.drawArtwork(movies);r.load();r.calls.text=[];r.calls.draws=[];r.context.drawArtwork(movies);
  assert.ok(r.calls.draws.some(v=>v.includes('/poster.jpg')),'poster must be drawn');
- assert.ok(r.calls.draws.some(v=>v.includes('cinelva-best10-mark-transparent.svg')),'transparent approved emblem must be drawn');
+ assert.ok(r.calls.draws.some(v=>v.includes('cinelva-best10-mark-transparent.png')),'transparent approved emblem must be drawn');
  assert.ok(r.calls.text.includes('Film One'));assert.ok(!r.calls.text.some(v=>/2024|Director One/.test(v)),'metadata must never return');
  assert.ok(!r.calls.text.includes('C'),'no invented emblem');
 });

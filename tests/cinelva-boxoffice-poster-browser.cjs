@@ -4,7 +4,12 @@ const { spawn } = require('node:child_process');
 const net = require('node:net');
 const path = require('node:path');
 const assert = require('node:assert/strict');
-const boxRows=JSON.parse(require('node:fs').readFileSync('data/boxoffice.json','utf8')).all_time;
+const boxoffice=JSON.parse(require('node:fs').readFileSync('data/boxoffice.json','utf8'));
+const boxRows=boxoffice.all_time;
+const compoundRows=[
+  {year:'1999',title:'リング2 / 死国',posterTitles:['リング 2','死国'],gross:'21.0億円',rank:7},
+  {year:'2000',title:'リング0 バースデイ / ISOLA 多重人格少女',posterTitles:['リング０ バースデイ','ISOLA 多重人格少女'],gross:'16.0億円',rank:25},
+];
 
 function normalizeTitle(value) { return String(value).normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, ''); }
 
@@ -24,7 +29,8 @@ async function freePort() {
   try {
     const base = `http://127.0.0.1:${port}`;
     await waitForLocalServer(port);
-    browser = await chromium.launch({ headless: true });
+    const executablePath = process.env.CINELVA_BROWSER_EXECUTABLE;
+    browser = await chromium.launch({ headless: true, ...(executablePath ? { executablePath } : {}) });
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     const backendQueries = [];
     await page.route('https://backend-one-gray-94.vercel.app/**', route => { backendQueries.push(new URL(route.request().url()).searchParams.get('q') || ''); return route.abort(); });
@@ -58,8 +64,29 @@ async function freePort() {
         await page.waitForTimeout(10);
         assert.equal(await card.locator('img[data-box-poster]:not([hidden])').evaluateAll(images => images.some(img => img.complete && img.naturalWidth === 0)), false, 'failed poster requests never leave a visible broken image');
       }
+
+      for (const fixture of compoundRows) {
+        await page.goto(`${base}/rankings.html?axis=boxoffice&boxYear=${fixture.year}`, { waitUntil: 'domcontentloaded' });
+        const groupedCard = page.locator('#grid .rankReviewWrap').filter({ hasText: fixture.title });
+        await groupedCard.waitFor({ state: 'visible' });
+        const posterSet = groupedCard.locator('[data-box-poster-set]');
+        await posterSet.waitFor({ state: 'visible' });
+        const posters = groupedCard.locator('img[data-box-group-poster]');
+        assert.equal(await posters.count(), 2, `${fixture.year} source row renders both distinct film posters`);
+        assert.deepEqual(await posters.evaluateAll(images => images.map(image => image.alt)), fixture.posterTitles);
+        assert.deepEqual(await posters.evaluateAll(images => images.map(image => new URL(image.src).hostname)), ['image.tmdb.org','image.tmdb.org']);
+        await posters.first().scrollIntoViewIfNeeded();
+        await posters.last().scrollIntoViewIfNeeded();
+        await groupedCard.locator('.boxPosterTileFallback:not([hidden])').first().waitFor({ state: 'visible' });
+        assert.equal(await groupedCard.locator('.boxPosterTileFallback:not([hidden])').count(), 2, 'failed artwork uses one placeholder per title');
+        assert.match(await groupedCard.locator('.boxGroupNote').innerText(), /収入は合算/);
+        assert.match(await groupedCard.locator('.meta').filter({ hasText: '億円' }).innerText(), new RegExp(fixture.gross));
+        assert.equal((await groupedCard.locator('.no').innerText()).trim(), `#${fixture.rank}`, 'source competition rank is unchanged');
+        assert.equal(await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth)), 0, 'grouped artwork stays within the viewport');
+        assert.equal(backendQueries.filter(query => normalizeTitle(query) === normalizeTitle(fixture.title)).length, 0, 'grouped titles never trigger single-film identity lookup');
+      }
     }
-    console.log('Box-office poster fallback passed at 390px and 1280px with image/API requests unavailable.');
+    console.log('Box-office single-row fallback and multi-poster compound rendering passed at 390px and 1280px with external image/API requests unavailable.');
   } finally {
     if (browser) await browser.close();
     server.kill('SIGTERM');

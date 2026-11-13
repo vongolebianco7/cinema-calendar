@@ -74,9 +74,21 @@ test('only isolated synthetic fixture routes force lazy images to eager loading'
 
 test('production poster acceptance reports source-level missing rows separately from rendered image failures', () => {
   assert.match(script, /fetch\('\/data\/boxoffice\.json', \{ cache: 'no-store' \}\)/);
-  for (const field of ['total_rows', 'poster_rows', 'missing_poster_rows', 'missing_tmdb_id_rows', 'missing_by_year', 'missing_examples']) {
+  for (const field of ['total_rows', 'poster_rows', 'single_poster_rows', 'grouped_poster_rows', 'missing_poster_rows', 'missing_tmdb_id_rows', 'missing_by_year', 'missing_examples']) {
     assert.match(script, new RegExp(field));
   }
   assert.match(script, /dataset_coverage: datasetCoverage/);
   assert.match(script, /invalid row in/);
+});
+
+test('production poster acceptance audits both catalog-backed posters for unchanged grouped source rows', () => {
+  assert.match(script, /const compoundBoxOfficeFixtures = \[/);
+  assert.match(script, /auditCompoundBoxOffice\(context, fixture\)/);
+  assert.match(script, /expected both catalog-backed posters in source-row order/);
+  assert.match(script, /shared gross changed/);
+  assert.match(script, /source competition rank changed/);
+  assert.match(script, /収入は合算/);
+  assert.match(script, /item\?\.tmdbId/);
+  assert.match(script, /themoviedb\.org\/movie/);
+  assert.match(script, /image\.tmdb\.org/);
 });

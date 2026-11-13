@@ -39,6 +39,10 @@ const routes = [
   { name: 'my-cinelva-awards', path: '/my-cinelva/', tab: 'awards', fixture: true },
   { name: 'my-cinelva-directors', path: '/my-cinelva/', tab: 'directors', fixture: true },
 ];
+const compoundBoxOfficeFixtures = [
+  { year: '1999', title: 'リング2 / 死国', posterTitles: ['リング 2', '死国'], gross: '21.0億円', rank: '#7' },
+  { year: '2000', title: 'リング0 バースデイ / ISOLA 多重人格少女', posterTitles: ['リング０ バースデイ', 'ISOLA 多重人格少女'], gross: '16.0億円', rank: '#25' },
+];
 
 async function settleImages(page, { forceEager = false } = {}) {
   const images = page.locator('img[src]');
@@ -186,9 +190,31 @@ async function auditHistoricalBoxOffice(context) {
 
       let totalRows = 0;
       let posterRows = 0;
+      let singlePosterRows = 0;
+      let groupedPosterRows = 0;
       let missingTmdbIdRows = 0;
       const missingByYear = {};
       const missingExamples = [];
+      const normalize = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+      const hasCompleteGroupedPosters = row => {
+        const titleParts = String(row.title || '').split(/\s\/\s/).map(normalize);
+        const posters = Array.isArray(row.posters) ? row.posters : [];
+        if (titleParts.length < 2 || posters.length !== titleParts.length) return false;
+        const ids = new Set();
+        const titles = new Set();
+        for (const item of posters) {
+          const id = Number(item?.tmdbId || item?.tmdb_id || item?.id || 0);
+          const title = normalize(item?.title);
+          const poster = String(item?.poster || '');
+          const detail = String(item?.tmdb || item?.tmdb_url || '');
+          if (!id || ids.has(id) || !titleParts.includes(title) || Number(item?.year) !== Number(row.year)
+            || detail !== `https://www.themoviedb.org/movie/${id}`
+            || !/^https:\/\/image\.tmdb\.org\/t\/p\/(?:w\d+|original)\/[^?#]+$/i.test(poster)) return false;
+          ids.add(id);
+          titles.add(title);
+        }
+        return titles.size === titleParts.length;
+      };
       for (const [year, entries] of Object.entries(byYear)) {
         if (!Array.isArray(entries)) throw new Error(`boxoffice.json has invalid year ${year}`);
         for (const row of entries) {
@@ -198,6 +224,12 @@ async function auditHistoricalBoxOffice(context) {
           totalRows += 1;
           if (typeof row.poster === 'string' && row.poster.trim()) {
             posterRows += 1;
+            singlePosterRows += 1;
+            continue;
+          }
+          if (hasCompleteGroupedPosters(row)) {
+            posterRows += 1;
+            groupedPosterRows += 1;
             continue;
           }
           missingByYear[year] = (missingByYear[year] || 0) + 1;
@@ -212,6 +244,8 @@ async function auditHistoricalBoxOffice(context) {
         generated_at: dataset.generated_at || null,
         total_rows: totalRows,
         poster_rows: posterRows,
+        single_poster_rows: singlePosterRows,
+        grouped_poster_rows: groupedPosterRows,
         missing_poster_rows: totalRows - posterRows,
         missing_tmdb_id_rows: missingTmdbIdRows,
         missing_by_year: missingByYear,
@@ -243,6 +277,49 @@ async function auditHistoricalBoxOffice(context) {
   }
 }
 
+async function auditCompoundBoxOffice(context, fixture) {
+  const page = await context.newPage();
+  const imageResponses = new Set();
+  const pageErrors = [];
+  page.on('response', response => {
+    if (response.request().resourceType() === 'image' && response.status() >= 400) {
+      imageResponses.add(`${response.status()} ${response.url()}`);
+    }
+  });
+  page.on('pageerror', error => pageErrors.push(error.message));
+  try {
+    const path = `/rankings.html?axis=boxoffice&boxYear=${encodeURIComponent(fixture.year)}`;
+    const response = await page.goto(new URL(path, base).href, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    if (!response || response.status() >= 400) throw new Error(`box-office-${fixture.year}: HTTP ${response?.status() ?? 'missing'}`);
+    await page.waitForFunction(title => [...document.querySelectorAll('.rankCard .title')]
+      .some(node => node.textContent.trim() === title), fixture.title, { timeout: 15000 });
+    await settleImages(page);
+    const artwork = await page.evaluate(title => {
+      const card = [...document.querySelectorAll('.rankCard')]
+        .find(node => node.querySelector('.title')?.textContent.trim() === title);
+      if (!card) return { found: false, poster_titles: [], loaded: 0, note: '', gross: '', rank: '' };
+      const images = [...card.querySelectorAll('img[data-box-group-poster]')];
+      return {
+        found: true,
+        poster_titles: images.map(image => image.alt),
+        loaded: images.filter(image => image.complete && image.naturalWidth > 0).length,
+        note: card.querySelector('.boxGroupNote')?.textContent.trim() || '',
+        gross: [...card.querySelectorAll('.meta')].map(node => node.textContent.trim()).find(text => /億円/.test(text)) || '',
+        rank: card.querySelector('.no')?.textContent.trim() || '',
+      };
+    }, fixture.title);
+    return {
+      ...(await imageResult(page, `box-office-${fixture.year}-compound`, imageResponses)),
+      compound_artwork: artwork,
+      expected_poster_titles: fixture.posterTitles,
+      expected_gross: fixture.gross,
+      page_errors: pageErrors,
+    };
+  } finally {
+    await page.close();
+  }
+}
+
 const failures = [];
 const results = [];
 const browser = await browserType.launch(executablePath ? {
@@ -253,6 +330,7 @@ try {
   const context = await browser.newContext({ viewport: { width, height: 844 }, deviceScaleFactor: 1 });
   for (const route of routes) results.push(await auditRoute(context, route, browser, width));
   results.push(await auditHistoricalBoxOffice(context));
+  for (const fixture of compoundBoxOfficeFixtures) results.push(await auditCompoundBoxOffice(context, fixture));
   await context.close();
 } finally {
   await browser.close();
@@ -261,6 +339,18 @@ try {
 for (const result of results) failures.push(...posterFailures(result, width));
 const historical = results.find(result => result.name === 'box-office-1980');
 if (!historical?.caligula_loaded) failures.push('box-office-1980: restored Caligula poster did not render');
+for (const fixture of compoundBoxOfficeFixtures) {
+  const result = results.find(item => item.name === `box-office-${fixture.year}-compound`);
+  const artwork = result?.compound_artwork;
+  if (!artwork?.found) failures.push(`box-office-${fixture.year}-compound: grouped source row not rendered`);
+  if (JSON.stringify(artwork?.poster_titles || []) !== JSON.stringify(fixture.posterTitles)) {
+    failures.push(`box-office-${fixture.year}-compound: expected both catalog-backed posters in source-row order`);
+  }
+  if (artwork?.loaded !== fixture.posterTitles.length) failures.push(`box-office-${fixture.year}-compound: expected all compound posters to load`);
+  if (artwork?.gross !== fixture.gross) failures.push(`box-office-${fixture.year}-compound: shared gross changed`);
+  if (artwork?.rank !== fixture.rank) failures.push(`box-office-${fixture.year}-compound: source competition rank changed`);
+  if (!/収入は合算/.test(artwork?.note || '')) failures.push(`box-office-${fixture.year}-compound: combined source-row note missing`);
+}
 
 const report = {
   schema_version: 1,

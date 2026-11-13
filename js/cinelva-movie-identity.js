@@ -188,6 +188,16 @@
     return fetch(url);
   }
   async function fetchOne(q) {
+    const requestedTitle = norm(q?.film_title || q?.title || q?.original_title);
+    if (
+      requestedTitle &&
+      typeof document !== "undefined" &&
+      [...document.querySelectorAll('[data-box-grouped="true"][data-box-film]')].some(
+        (card) => norm(card.dataset.boxFilm) === requestedTitle,
+      )
+    ) {
+      return null;
+    }
     const cached = resolve(q);
     if (cached?.poster && !badPosters.has(cached.poster)) return cached;
     const wanted = id(q),

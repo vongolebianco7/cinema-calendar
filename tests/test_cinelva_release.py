@@ -34,13 +34,17 @@ class DisplayCopy(HTMLParser):
 
 
 class RebrandReleaseTests(unittest.TestCase):
+    def test_my_best10_entry_busts_the_export_renderer_cache(self):
+        source = (ROOT / 'my-best10.html').read_text()
+        self.assertIn('js/my-cinemap-art.js?v=20261114-rank-stars-logo', source)
+
     def test_changed_artwork_scripts_have_a_new_cache_version(self):
-        for path in ['cinelva/my-cinemap.html', 'js/my-cinemap-art.js', 'cinelva/js/my-cinemap-art.js', 'js/my-cinemap-art-direction.js', 'cinelva/js/my-cinemap-art-direction.js']:
+        for path in ['my-best10.html', 'cinelva/my-cinemap.html', 'js/my-cinemap-art.js', 'cinelva/js/my-cinemap-art.js', 'js/my-cinemap-art-direction.js', 'cinelva/js/my-cinemap-art-direction.js']:
             with self.subTest(path=path):
                 source = (ROOT / path).read_text()
                 urls = re.findall(r'''js/my-cinemap-(?:art|tools|art-direction|cinema-templates)\.js\?([^'"\s]+)''', source)
                 self.assertTrue(urls)
-                expected = 'v=20261114-crisp-stars-logo' if path.startswith('js/') else 'v=20261016-cinelva-case'
+                expected = 'v=20261114-rank-stars-logo' if path == 'my-best10.html' or path.startswith('js/') else 'v=20261016-cinelva-case'
                 self.assertTrue(all(url == expected for url in urls), urls)
 
     def test_legacy_namespaces_and_record_modules_are_preserved(self):

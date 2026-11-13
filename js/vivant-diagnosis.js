@@ -124,5 +124,5 @@
     return selected;
   }
 
-  return { AXES, QUESTIONS: questions, RESULTS: results, MOVIES: movies, getResult, recommendMovies };
+  return { AXES, QUESTIONS: questions, RESULTS: results, MOVIES: movies, scoreAnswers, getResult, recommendMovies };
 });

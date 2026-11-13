@@ -39,12 +39,12 @@
     const top=Math.max(0,y-26),bottom=Math.min(h,y+brandHeight+14);
     const g=ctx.createLinearGradient(0,top,0,bottom);
     if(p.dark){
-      g.addColorStop(0,'rgba(4,6,8,0)');g.addColorStop(.32,'rgba(4,6,8,.72)');g.addColorStop(1,'rgba(4,6,8,.90)');
+      g.addColorStop(0,'rgba(4,6,8,0)');g.addColorStop(.48,'rgba(4,6,8,.18)');g.addColorStop(1,'rgba(4,6,8,.38)');
     }else{
-      g.addColorStop(0,'rgba(249,244,234,0)');g.addColorStop(.32,'rgba(249,244,234,.78)');g.addColorStop(1,'rgba(249,244,234,.94)');
+      g.addColorStop(0,'rgba(249,244,234,0)');g.addColorStop(.48,'rgba(249,244,234,.32)');g.addColorStop(1,'rgba(249,244,234,.58)');
     }
-    const width=242;
-    ctx.save();ctx.fillStyle=g;ctx.fillRect((w-width)/2,top,width,bottom-top);ctx.restore();
+    
+    ctx.save();ctx.fillStyle=g;ctx.fillRect(0,top,w,bottom-top);ctx.restore();
   }
 
   drawBrand=function(ctx,w,h,theme,y){
@@ -115,7 +115,7 @@
     const items=(movies||[]).slice(0,10),rows=columns===2?5:10,bottomTarget=h-(shape==='portrait'?174:shape==='square'?142:122),gap=columns===2?72:0,cellW=(inner-gap*(columns-1))/columns,rowH=Math.max(40,(bottomTarget-listTop)/rows),listBottom=listTop+rows*rowH;
 
     drawContentScrim(ctx,w,h,p,listTop,listBottom,columns);
-    ctx.save();ctx.shadowColor=p.dark?'rgba(0,0,0,.72)':'rgba(255,255,255,0)';ctx.shadowBlur=p.dark?5:0;ctx.textBaseline='top';ctx.fillStyle=p.fg;ctx.textAlign='center';
+    ctx.save();ctx.shadowColor='rgba(0,0,0,0)';ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;ctx.textBaseline='top';ctx.fillStyle=p.fg;ctx.textAlign='center';
     writeLines(ctx,title,w/2,metrics.titleY,inner*.76,2,metrics.titleSize*fontScale,40*fontScale,font.title,font.titleWeight,1.04);
     if(note){ctx.fillStyle=p.muted;ctx.globalAlpha=.96;writeLines(ctx,note,w/2,noteY,inner*.76,2,23*fontScale,18*fontScale,artSans,noteTextWeight);ctx.globalAlpha=1;ctx.fillStyle=p.fg}
     ctx.textAlign='left';

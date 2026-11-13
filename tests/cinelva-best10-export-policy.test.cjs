@@ -17,7 +17,7 @@ test('the three font choices use visibly distinct Japanese font fallbacks',()=>{
 });
 test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
- assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-title-rating/);
+ assert.match(html,/js\/my-cinemap-art\.js\?v=20261114-crisp-stars-logo/);
 });
 test('MY Rating visibility toggle shows a star row and score in the export',()=>{
  const r=renderer(),movie={id:'42',title:'千と千尋の神隠し'};

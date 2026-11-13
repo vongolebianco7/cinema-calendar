@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-12T23:38:26.841480+00:00",
+  "generated_at": "2026-11-13T20:49:07.398189+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-10-13",
-      "2027-03-12"
+      "2026-10-14",
+      "2027-03-13"
     ],
     "background_slice": [
-      "2027-09-03",
-      "2027-11-01"
+      "2027-11-03",
+      "2027-11-13"
     ],
     "max_detail_requests": 40
   },
@@ -24573,6 +24573,31 @@
       "checked_at": "2026-11-12T18:56:17.831849+00:00"
     },
     {
+      "id": 1824798,
+      "title": "仮面ライダーマイス with 仮面ライダーエグゼイド",
+      "original_title": "仮面ライダーマイス with 仮面ライダーエグゼイド",
+      "date": "2026-12-25",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/S3MLIhP020vWA3o8XnDxhTIBoh.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1824798",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "秋谷郁甫",
+        "飯島寛騎"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [],
+      "checked_at": "2026-11-13T20:49:07.398189+00:00"
+    },
+    {
       "id": 1320392,
       "title": "One to One：ジョン＆ヨーコ",
       "original_title": "One to One: John & Yoko",
@@ -26024,6 +26049,36 @@
       ],
       "runtime": 0,
       "genres": []
+    },
+    {
+      "id": 1585239,
+      "title": "Club Kid",
+      "original_title": "Club Kid",
+      "date": "2027-03-12",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/o1qMU0ZB5XDX8IXJFFu3AkhOqjh.jpg",
+      "score": 7.9,
+      "votes": 21,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1585239",
+      "director": "ジョーダン・ファーストマン",
+      "director_id": 1760947,
+      "cast": [
+        "ジョーダン・ファーストマン",
+        "Reggie Absolom",
+        "カーラ・デルヴィーニュ",
+        "ディエゴ・カルバ"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 122,
+      "genres": [
+        "コメディ",
+        "ドラマ"
+      ],
+      "checked_at": "2026-11-13T20:49:07.398189+00:00"
     },
     {
       "id": 1275096,

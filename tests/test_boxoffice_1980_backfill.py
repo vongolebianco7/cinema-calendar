@@ -78,11 +78,13 @@ class BoxOffice1980BackfillTests(unittest.TestCase):
             self.assertEqual(row.get("identity_source"), f"https://www.themoviedb.org/movie/{tmdb_id}")
             self.assertTrue(row.get("identity_match"))
 
-    def test_unresolved_2024_title_keeps_no_poster_instead_of_guessing(self):
+    def test_verified_2024_title_keeps_its_canonical_poster_identity(self):
         data = json.loads((ROOT / "data/boxoffice.json").read_text(encoding="utf-8"))
         row = next(x for x in data["by_year"]["2024"] if x["title"] == "映画クレヨンしんちゃん オラたちの恐竜日記")
-        self.assertFalse(row.get("tmdbId"))
-        self.assertFalse(row.get("poster"))
+        self.assertEqual(row.get("tmdbId"), 1221404)
+        self.assertTrue(row.get("poster", "").startswith("https://image.tmdb.org/t/p/w500/"))
+        self.assertEqual(row.get("identity_source"), "https://www.themoviedb.org/movie/1221404")
+        self.assertEqual(row.get("identity_match"), "exact_tmdb_alternative_title_and_release_year_window")
     def test_ranking_ui_labels_pre_2000_measure_correctly(self):
         text = (ROOT / "rankings.html").read_text(encoding="utf-8")
         self.assertIn('m.metric||"興行収入"', text)

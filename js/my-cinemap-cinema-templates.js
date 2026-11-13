@@ -115,7 +115,8 @@
     const items=(movies||[]).slice(0,10),rows=columns===2?5:10,bottomTarget=h-(shape==='portrait'?174:shape==='square'?142:122),gap=columns===2?72:0,cellW=(inner-gap*(columns-1))/columns,rowH=Math.max(40,(bottomTarget-listTop)/rows),listBottom=listTop+rows*rowH;
 
     drawContentScrim(ctx,w,h,p,listTop,listBottom,columns);
-    ctx.save();ctx.shadowColor=p.dark?'rgba(0,0,0,.72)':'rgba(255,255,255,0)';ctx.shadowBlur=p.dark?5:0;ctx.textBaseline='top';ctx.fillStyle=p.fg;ctx.textAlign='center';
+    // Keep exported lettering crisp after social apps resize the PNG.
+    ctx.save();ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;ctx.textBaseline='top';ctx.fillStyle=p.fg;ctx.textAlign='center';
     writeLines(ctx,title,w/2,metrics.titleY,inner*.76,2,metrics.titleSize*fontScale,40*fontScale,font.title,font.titleWeight,1.04);
     if(note){ctx.fillStyle=p.muted;ctx.globalAlpha=.96;writeLines(ctx,note,w/2,noteY,inner*.76,2,23*fontScale,18*fontScale,artSans,noteTextWeight);ctx.globalAlpha=1;ctx.fillStyle=p.fg}
     ctx.textAlign='left';

@@ -147,7 +147,7 @@ function drawCinemaBackground(ctx,w,h,kind){
 // One asset and one row renderer are shared by every export template.
 const artworkImages=new Map();
 let artworkMovies=[];
-const officialEmblem='assets/cinelva_original_colors_transparent.png';
+const officialEmblem='assets/cinelva-best10-mark-transparent.svg';
 const posterRecoveryRequests=new Set();
 const missingPosterRecoveryAttempts=new Set();
 function artworkImage(url,movie=null){
@@ -301,7 +301,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');
   s.src='js/my-cinemap-tools.js?v=20261107-my-rating';
   s.defer=true;
-  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261107-my-rating';a.defer=true;document.body.appendChild(a)};
+  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261114-sharp-stars-logo';a.defer=true;document.body.appendChild(a)};
   document.body.appendChild(s)
 });
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

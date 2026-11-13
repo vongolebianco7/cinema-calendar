@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),test=require('node:test'),assert=require('node:assert/strict');
 function renderer(){
- const calls={images:[],draws:[],text:[],fonts:[],fetches:[]};const recovery={poster:'https://image.tmdb.org/t/p/w342/seven-recovered.jpg'};
- const ctx=new Proxy({save(){},restore(){},createLinearGradient(){return {addColorStop(){}}},measureText(s){return {width:String(s).length*22}},fillText(s){calls.text.push(String(s))},drawImage(img){calls.draws.push(img.src)}},{get(o,k){return k in o?o[k]:(()=>{})},set(o,k,v){if(k==='font')calls.fonts.push(String(v));o[k]=v;return true}});
+ const calls={images:[],draws:[],text:[],fonts:[],fetches:[],clips:[],shadowBlurs:[]};const recovery={poster:'https://image.tmdb.org/t/p/w342/seven-recovered.jpg'};
+ const ctx=new Proxy({save(){},restore(){},createLinearGradient(){return {addColorStop(){}}},measureText(s){return {width:String(s).length*22}},fillText(s){calls.text.push(String(s))},drawImage(img){calls.draws.push(img.src)},clip(){calls.clips.push(true)}},{get(o,k){return k in o?o[k]:(()=>{})},set(o,k,v){if(k==='font')calls.fonts.push(String(v));if(k==='shadowBlur')calls.shadowBlurs.push(Number(v));o[k]=v;return true}});
  const canvas={getContext:()=>ctx,setAttribute(name,value){if(name==='aria-label')this.ariaLabel=value},toBlob(cb){cb({})}};
  const elements={artCanvas:canvas,share:{},save:{},saveToPhotos:{},format:{value:'portrait'},layout:{value:'double'},theme:{value:'minimal'},fontSize:{value:'medium'},fontStyle:{value:'modern'},title:{value:'My Best 10'},sub:{value:''},cinemaBackground:{value:'none'},artworkTitleMode:{value:'japanese'},showMyRating:{checked:false}};
  class Image{constructor(){this.complete=false;calls.images.push(this)}set src(v){this._src=v}get src(){return this._src}}
@@ -17,7 +17,8 @@ test('the three font choices use visibly distinct Japanese font fallbacks',()=>{
 });
 test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
- assert.match(html,/js\/my-cinemap-art\.js\?v=20261107-title-rating/);
+ assert.match(html,/js\/my-cinemap-art\.js\?v=20261114-sharp-stars-logo/);
+ assert.match(fs.readFileSync('js/my-cinemap-art-direction.js','utf8'),/my-cinemap-cinema-templates\.js\?v=20261114-sharp-stars-logo/);
 });
 test('MY Rating visibility toggle shows a star row and score in the export',()=>{
  const r=renderer(),movie={id:'42',title:'千と千尋の神隠し'};
@@ -26,8 +27,24 @@ test('MY Rating visibility toggle shows a star row and score in the export',()=>
  assert.ok(!r.calls.text.includes('4.6'),'ratings are hidden by default');
  r.elements.showMyRating.checked=true;r.calls.text=[];r.context.drawArtwork([movie]);
  assert.ok(r.calls.text.includes('4.6'),'the checked toggle adds the personal rating score beside the stars');
+ assert.equal(r.calls.clips.length,5,'five star shapes, including the fractional fifth star, are used instead of square gauge cells');
+ const rendererSource=fs.readFileSync('js/my-cinemap-art.js','utf8').split('function drawRankingMovie(')[1].split('function drawBrand(')[0];
+ assert.match(rendererSource,/for\(let index=0;index<5;index\+\+\)/);
+ assert.match(rendererSource,/ctx\.clip\(\)/);
+ assert.doesNotMatch(rendererSource,/fillRect\(/,'rating fill must follow the star silhouette, not fill square bars');
  r.context.CinelvaLibraryRecords={all:()=>[{id:'42',title:movie.title,rating:null,watched:true}]};r.calls.text=[];r.context.drawArtwork([{...movie,rating:4.8}]);
  assert.ok(!r.calls.text.includes('4.8'),'a cleared rating does not fall back to a stale imported score');
+});
+test('cinema template text has no glow and its share mark removes the black tile',()=>{
+ const r=renderer();r.elements.theme.value='cinema-projector';
+ r.context.drawArtwork([{id:'42',title:'読みやすい作品名',rating:4.6}]);
+ assert.ok(r.calls.shadowBlurs.length>0);
+ assert.ok(r.calls.shadowBlurs.every(value=>value===0),'no blur shadow is assigned to title or movie text');
+ const mark=fs.readFileSync('assets/cinelva-best10-mark-transparent.svg','utf8');
+ assert.match(mark,/cinelva_original_colors_transparent\.png/);
+ assert.match(mark,/feColorMatrix/);
+ assert.match(mark,/feFuncA type="linear" slope="3" intercept="-\.11"/);
+ assert.ok(!r.calls.draws.some(url=>url.endsWith('cinelva_original_colors_transparent.png')),'export uses the transparent variant');
 });
 test('rating import filters release decades, keeps all-time mode, and removes duplicate works',()=>{
  const scope={window:{}};vm.runInNewContext(fs.readFileSync('js/my-best10-rating-import.js','utf8'),scope);
@@ -88,7 +105,7 @@ for(const theme of ['minimal','noir','burgundy','cinema-projector','cinema-theat
  const movies=[{title:'Film One',year:2024,director:'Director One',poster:'https://image.tmdb.org/t/p/w342/poster.jpg'}];r.context.picks=movies;
  r.context.drawArtwork(movies);r.load();r.calls.text=[];r.calls.draws=[];r.context.drawArtwork(movies);
  assert.ok(r.calls.draws.some(v=>v.includes('/poster.jpg')),'poster must be drawn');
- assert.ok(r.calls.draws.some(v=>v.includes('cinelva_original_colors_transparent.png')),'approved emblem must be drawn');
+ assert.ok(r.calls.draws.some(v=>v.includes('cinelva-best10-mark-transparent.svg')),'transparent approved emblem must be drawn');
  assert.ok(r.calls.text.includes('Film One'));assert.ok(!r.calls.text.some(v=>/2024|Director One/.test(v)),'metadata must never return');
  assert.ok(!r.calls.text.includes('C'),'no invented emblem');
 });

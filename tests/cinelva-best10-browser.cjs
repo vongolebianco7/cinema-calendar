@@ -58,6 +58,20 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
     const pageErrors = [];
     page.on("pageerror", (error) => pageErrors.push(error.message));
     await page.goto(`${origin}/my-best10.html`, { waitUntil: "domcontentloaded" });
+    const markPixels = await page.evaluate(() => new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = canvas.height = 1254;
+        const context = canvas.getContext("2d", { willReadFrequently: true });
+        context.drawImage(image, 0, 0);
+        resolve({ tile: context.getImageData(600, 700, 1, 1).data[3], emblem: context.getImageData(627, 627, 1, 1).data[3] });
+      };
+      image.onerror = reject;
+      image.src = "assets/cinelva-best10-mark-transparent.svg";
+    }));
+    assert.equal(markPixels.tile, 0, "the logo's black tile is transparent in the exported mark");
+    assert.ok(markPixels.emblem > 200, "the original white logo emblem remains visible");
     await page.waitForFunction(() => {
       const img = document.querySelector("#list img");
       return img && img.complete && img.naturalWidth > 0;
@@ -91,6 +105,14 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
     const canvasData = await page.locator("#artCanvas").evaluate((canvas) => canvas.toDataURL());
     assert.match(canvasData, /^data:image\/png;base64,/);
     assert.ok(canvasData.length > 1000, "the populated ranking renders an exportable portrait image");
+    const ratingStars = await page.evaluate(() => {
+      document.getElementById("showMyRating").checked = true;
+      document.getElementById("theme").value = "cinema-projector";
+      drawArtwork(picks);
+      return document.getElementById("artCanvas").toDataURL();
+    });
+    assert.match(ratingStars, /^data:image\/png;base64,/);
+    assert.match(await page.locator("script[src*='my-cinemap-art.js']").getAttribute("src"), /20261114-sharp-stars-logo/);
     await page.locator("#saveToPhotos").click();
     await page.locator("#saveImageDialog[open]").waitFor();
     assert.match(await page.locator("#saveImagePreview").getAttribute("src"), /^data:image\/png;base64,/);

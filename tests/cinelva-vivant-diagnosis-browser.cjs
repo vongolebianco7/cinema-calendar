@@ -45,6 +45,7 @@ assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
     await page.getByRole('link', { name: '診断する' }).click();
     await page.getByRole('heading', { name: 'VIVANT診断' }).waitFor();
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+    assert.equal(await page.evaluate(() => { const d = window.VivantDiagnosis; return d.recommendMovies(d.QUESTIONS.map(q => q.choices[0].id), [], 'ベイビー・ドライバー').length; }), 3, 'favorite movie must still produce three recommendations');
     assert.match(await page.locator('.fanNote').innerText(), /非公式ファン企画/);
     for (let question = 0; question < 8; question++) {
       assert.equal(await page.locator('.choice').count(), 4);
@@ -54,6 +55,7 @@ assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
     await page.getByLabel('好きな映画').fill('ベイビー・ドライバー');
     await page.locator('#nextButton').click();
     await page.getByRole('heading', { name: '診断結果' }).waitFor();
+    assert.deepEqual(errors, [], 'result rendering has no uncaught browser errors');
     assert.equal(await page.locator('.movie').count(), 3);
     assert.equal(await page.locator('.identityBlock').count(), 2);
     assert.match(await page.locator('.favoriteResult').innerText(), /ベイビー・ドライバー/);

@@ -229,6 +229,9 @@ function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p)
   }
 }
 function drawTransparentEmblem(ctx,image,x,y,size){
+  if(typeof document.createElement!=='function'){
+    ctx.save();ctx.globalCompositeOperation='screen';ctx.drawImage(image,x,y,size,size);ctx.restore();return;
+  }
   if(!transparentEmblemCanvas){
     const canvas=document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
     const off=canvas.getContext('2d',{willReadFrequently:true});off.drawImage(image,0,0);

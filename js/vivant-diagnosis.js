@@ -93,10 +93,13 @@
     return results.map((result, index) => ({ result, index, score: similarity(scores, result.vector) }))
       .sort((a, b) => b.score - a.score || (hash(`${(answerIds || []).join('|')}:${a.result.id}`) - hash(`${(answerIds || []).join('|')}:${b.result.id}`)))[0].result;
   }
-  function recommendMovies(answerIds, watchedIds = []) {
+  function recommendMovies(answerIds, watchedIds = [], favoriteTitle = '') {
     const profile = scoreAnswers(answerIds);
     const result = getResult(answerIds);
     const excluded = new Set(watchedIds);
+    const titleKey = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
+    const favorite = movies.find(movie => titleKey(movie.title) === titleKey(favoriteTitle));
+    if (favorite) excluded.add(favorite.id);
     const seed = hash((answerIds || []).join('|'));
     const seenTitles = new Set();
     const ranked = movies.filter(movie => {
@@ -105,7 +108,7 @@
       return true;
     }).map(movie => ({
       movie,
-      score: similarity(profile, movie.traits) + similarity(result.vector, movie.traits) * 0.2 + (hash(`${seed}:${movie.id}`) % 1000) / 100000
+      score: similarity(profile, movie.traits) + similarity(result.vector, movie.traits) * 0.2 + (favorite && movie.genre === favorite.genre ? 2 : 0) + (hash(`${seed}:${movie.id}`) % 1000) / 100000
     })).sort((a, b) => b.score - a.score || a.movie.id.localeCompare(b.movie.id));
     const selected = [];
     const genres = new Set();

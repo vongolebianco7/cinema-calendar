@@ -35,20 +35,32 @@ assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
+    await page.route('https://backend-one-gray-94.vercel.app/api/movies**', async route => {
+      const title = new URL(route.request().url()).searchParams.get('q') || '';
+      await route.fulfill({ json: { movies: [], external: [{ id: 987654, title, poster: 'https://image.tmdb.org/t/p/w342/cinelva-test.jpg' }] } });
+    });
+    await page.route('https://image.tmdb.org/t/p/w342/*', route => route.fulfill({ status: 200, contentType: 'image/png', body: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aQXcAAAAASUVORK5CYII=', 'base64') }));
     await page.goto(`http://127.0.0.1:${port}/specials.html`, { waitUntil: 'domcontentloaded' });
     await page.getByRole('heading', { name: '特集・診断' }).waitFor();
     await page.getByRole('link', { name: '診断する' }).click();
     await page.getByRole('heading', { name: 'VIVANT診断' }).waitFor();
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+    assert.equal(await page.evaluate(() => { const d = window.VivantDiagnosis; return d.recommendMovies(d.QUESTIONS.map(q => q.choices[0].id), [], 'ベイビー・ドライバー').length; }), 3, 'favorite movie must still produce three recommendations');
     assert.match(await page.locator('.fanNote').innerText(), /非公式ファン企画/);
     for (let question = 0; question < 8; question++) {
       assert.equal(await page.locator('.choice').count(), 4);
       await page.locator('.choice').nth(question % 4).click();
       await page.locator('#nextButton').click();
     }
+    await page.getByLabel('好きな映画').fill('ベイビー・ドライバー');
+    await page.locator('#nextButton').click();
     await page.getByRole('heading', { name: '診断結果' }).waitFor();
+    assert.deepEqual(errors, [], 'result rendering has no uncaught browser errors');
     assert.equal(await page.locator('.movie').count(), 3);
     assert.equal(await page.locator('.identityBlock').count(), 2);
+    assert.match(await page.locator('.favoriteResult').innerText(), /ベイビー・ドライバー/);
+    assert.ok(!((await page.locator('.movie h3').allInnerTexts()).includes('ベイビー・ドライバー')));
+    await page.locator('.moviePoster img').first().waitFor({ state: 'visible' });
     const contrast = await page.locator('.identityBlock strong').first().evaluate(el => ({ color: getComputedStyle(el).color, background: getComputedStyle(el.closest('.identity')).backgroundColor }));
     assert.notEqual(contrast.color, contrast.background, 'result label must remain visible in light theme');
     await page.evaluate(() => { Object.defineProperty(navigator, 'share', { configurable: true, value: async payload => { window.__sharedPayload = payload; } }); });
@@ -72,7 +84,7 @@ assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
       assert.ok(layout.scrollWidth <= layout.width, `no horizontal page overflow at ${width}px: ${JSON.stringify(layout)}`);
     }
     assert.deepEqual(errors, [], 'no uncaught browser errors');
-    console.log(`VIVANT diagnosis ${process.env.CINELVA_BROWSER || 'chromium'} 390px journey passed; 8 answers, 3 recommendations, replacement and saved-data preservation verified.`);
+    console.log(`VIVANT diagnosis ${process.env.CINELVA_BROWSER || 'chromium'} 390px journey passed; 8 answers, favorite movie, 3 poster-backed recommendations, replacement and saved-data preservation verified.`);
     await context.close();
   } finally {
     if (browser) await browser.close();

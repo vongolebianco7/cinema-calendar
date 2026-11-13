@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "24c9d48a80c736098a1e7f0648546ed071b00746",
-  "verified_at": "2026-11-12T19:29:39Z",
-  "note": "Exact-source CI receipt for PR #811 source head 24c9d48a80c736098a1e7f0648546ed071b00746. Required pull_request workflows succeeded on this exact head: Autonomous quality gate run 43289425664; CINELVA smoke tests run 43289425662; Validate frontend run 43289425716; Reproducible backend build run 43289425685. Additional exact-head checks succeeded: Production poster acceptance contract run 43289425622, mobile layout run 43289425765, continuous visual QA run 43289425691, and completeness scorecard run 43289425730. This receipt proves exact-source CI only; it does not claim Neon synchronization, restoration of all missing posters, production deployment success, or physical iPhone Safari acceptance."
+  "head_sha": "149afb3d8eb0de0eec1efab6eaffda0934b4a40c",
+  "verified_at": "2026-11-13T16:30:45Z",
+  "note": "Exact-source CI receipt for PR #812 source head 149afb3d8eb0de0eec1efab6eaffda0934b4a40c. All four required pull_request workflows succeeded on this exact head: Autonomous quality gate run 43461890038; CINELVA smoke tests run 43461890055; Validate frontend run 43461890379; Reproducible backend build run 43461890058. Additional exact-head checks succeeded: Check brand identity run 43461890046, CINELVA mobile layout smoke test run 43461890026, Cinemap completeness scorecard run 43461890134, CINELVA backup safety run 43461890174, and CINELVA continuous visual QA run 43461890033. This receipt proves exact-source CI only; it does not claim production deployment or device-level acceptance."
 }

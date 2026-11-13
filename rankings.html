@@ -249,7 +249,6 @@ function boxPosterItems(row){
 }
 
 async function resolveMovie(name,id,year){
- if(isGroupedBoxTitle(name))return null;
  const key=String(id||'')+'|'+name+'|'+String(year||'');
  if(movieLookupCache.has(key))return movieLookupCache.get(key);
  const norm=normalizeBoxTitle(name);

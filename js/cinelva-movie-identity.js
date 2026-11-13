@@ -410,6 +410,10 @@
       ...(scope.querySelectorAll?.(selector) || []),
     ];
     for (const container of containers) {
+      // Box-office cards have their own guarded poster resolver. Keeping them out
+      // of this generic observer prevents a grouped source row from being searched
+      // as if it were one film, while the ranking page still resolves single rows.
+      if (container.closest("[data-box-film]")) continue;
       const card =
         container.closest(
           "[data-mi],[data-i],[data-popular-id],[data-id],[data-record-card],[data-box-film],.want-watch-item,.outdoorFilmEntry,.outdoorFilmWrap,.rankCard,.award-film-unit",

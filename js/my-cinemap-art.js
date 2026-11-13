@@ -228,7 +228,20 @@ function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p)
     ctx.restore();
   }
 }
-function drawTransparentEmblem(ctx,image,x,y,size){\n  if(!transparentEmblemCanvas){\n    const canvas=document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;\n    const off=canvas.getContext('2d',{willReadFrequently:true});off.drawImage(image,0,0);\n    const pixels=off.getImageData(0,0,canvas.width,canvas.height),data=pixels.data;\n    for(let i=0;i<data.length;i+=4){\n      const luminance=.2126*data[i]+.7152*data[i+1]+.0722*data[i+2];\n      data[i+3]=Math.round(data[i+3]*Math.max(0,Math.min(1,(luminance-10)/54)));\n    }\n    off.putImageData(pixels,0,0);transparentEmblemCanvas=canvas;\n  }\n  ctx.drawImage(transparentEmblemCanvas,x,y,size,size);\n}\nfunction drawBrand(ctx,w,h,theme,y=h-98){
+function drawTransparentEmblem(ctx,image,x,y,size){
+  if(!transparentEmblemCanvas){
+    const canvas=document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
+    const off=canvas.getContext('2d',{willReadFrequently:true});off.drawImage(image,0,0);
+    const pixels=off.getImageData(0,0,canvas.width,canvas.height),data=pixels.data;
+    for(let i=0;i<data.length;i+=4){
+      const luminance=.2126*data[i]+.7152*data[i+1]+.0722*data[i+2];
+      data[i+3]=Math.round(data[i+3]*Math.max(0,Math.min(1,(luminance-10)/54)));
+    }
+    off.putImageData(pixels,0,0);transparentEmblemCanvas=canvas;
+  }
+  ctx.drawImage(transparentEmblemCanvas,x,y,size,size);
+}
+function drawBrand(ctx,w,h,theme,y=h-98){
   const p=artPalettes[theme]||artPalettes.minimal;
   const tile=50,gap=12,wordWidth=156,total=tile+gap+wordWidth,x=(w-total)/2;
   const image=artworkImage(officialEmblem);

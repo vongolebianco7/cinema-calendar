@@ -273,14 +273,20 @@ QUERIES=[
     "query": "Titanic 3D"
   }
 ]
-out={"metadata":[]}
+out={"metadata":[],"candidate_details":[]}
+def get_json(url):
+    with urllib.request.urlopen(url,timeout=20) as response:
+        return json.load(response)
 for item in QUERIES:
     params={"query":item["query"],"region":"JP","include_adult":"false","page":1,"language":"ja-JP","api_key":KEY}
     try:
-        url=API+"?"+urllib.parse.urlencode(params)
-        with urllib.request.urlopen(url,timeout=20) as response:
-            result=json.load(response)
+        result=get_json(API+"?"+urllib.parse.urlencode(params))
         rows=result.get("results",[])
+        eligible=[]
+        for m in rows[:10]:
+            release=(m.get("release_date") or "")[:4]
+            if m.get("poster_path") and release.isdigit() and abs(int(release)-int(item["market_year"]))<=2:
+                eligible.append(m)
         out["metadata"].append({
             "market_year":item["market_year"],
             "source_title":item["source_title"],
@@ -288,8 +294,21 @@ for item in QUERIES:
             "request":"TMDB official /search/movie",
             "results":[{k:m.get(k) for k in ["id","title","original_title","release_date","poster_path"]} for m in rows[:10]]
         })
+        for m in eligible:
+            try:
+                detail=get_json("https://api.themoviedb.org/3/movie/"+str(m["id"])+"/release_dates?"+urllib.parse.urlencode({"api_key":KEY}))
+                jp=next((r.get("release_dates",[]) for r in detail.get("results",[]) if r.get("iso_3166_1")=="JP"),[])
+                out["candidate_details"].append({
+                    "source_title":item["source_title"],"market_year":item["market_year"],"query":item["query"],
+                    "id":m["id"],"title":m.get("title"),"original_title":m.get("original_title"),
+                    "tmdb_release_date":m.get("release_date"),"poster_path":m.get("poster_path"),
+                    "japan_release_dates":[{"date":x.get("release_date"),"type":x.get("type"),"note":x.get("note")} for x in jp]
+                })
+            except Exception as exc:
+                out["candidate_details"].append({"source_title":item["source_title"],"query":item["query"],"id":m["id"],"error":type(exc).__name__})
+            time.sleep(0.15)
     except Exception as exc:
         out["metadata"].append({"market_year":item["market_year"],"source_title":item["source_title"],"query":item["query"],"error":type(exc).__name__})
-    time.sleep(0.2)
+    time.sleep(0.15)
 pathlib.Path("metadata-diagnostic.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-print("Queried",len(QUERIES),"official TMDB title variants; no product data writes")
+print("Queried",len(QUERIES),"official title variants and Japan release dates for year-window poster candidates; no product data writes")

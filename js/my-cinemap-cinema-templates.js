@@ -81,7 +81,7 @@
       const a=-1.02+i*.27,rx=side*(25+Math.cos(a)*12),ry=Math.sin(a)*27;
       ctx.save();ctx.translate(rx,ry);ctx.rotate(side*(.62-a*.18));ctx.beginPath();ctx.ellipse(0,0,6,2.2,0,0,Math.PI*2);ctx.stroke();ctx.restore();
     }
-    ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`${rankNumberWeight} 34px ${artNumber}`;ctx.fillText(String(rank),0,0);ctx.restore();
+    ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`${rankNumberWeight} 44px ${artNumber}`;ctx.fillText(String(rank),0,0);ctx.restore();
   }
 
   function drawCinemaBrand(ctx,w,h,p,y=h-110){
@@ -123,7 +123,7 @@
     items.forEach((m,i)=>{
       const col=columns===1?0:Math.floor(i/5),row=columns===1?i:i%5,x=pad+col*(cellW+gap),y=listTop+row*rowH,numberX=x+(columns===2?42:48);
       rule(ctx,x,y,cellW,p.line,p.dark?.68:.54);
-      if(i<3)drawCinemaMedal(ctx,numberX,y+rowH*.5,i+1,p,.92*fontScale);else{ctx.save();ctx.font=`${rankNumberWeight} ${(columns===2?33:35)*fontScale}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=.96;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
+      if(i<3)drawCinemaMedal(ctx,numberX,y+rowH*.5,i+1,p,1.18*fontScale);else{ctx.save();ctx.font=`${rankNumberWeight} ${(columns===2?46:46)*fontScale}px ${artNumber}`;ctx.fillStyle=p.muted;ctx.globalAlpha=.96;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),numberX,y+rowH*.5);ctx.restore()}
       drawRankingMovie(ctx,m,x,y,cellW,rowH,columns,shape,font,fontScale,p);
     });
     rule(ctx,pad,listBottom,inner,p.line,p.dark?.68:.54);

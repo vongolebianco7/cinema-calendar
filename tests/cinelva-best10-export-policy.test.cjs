@@ -17,7 +17,16 @@ test('the three font choices use visibly distinct Japanese font fallbacks',()=>{
 });
 test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
- assert.match(html,/js\/my-cinemap-art\.js\?v=20261114-crisp-stars-logo/);
+ assert.match(html,/js\/my-cinemap-art\.js\?v=20261114-rank-stars-logo/);
+});
+test('cinema ranking uses larger numbers, clipped star shapes, and the original black emblem',()=>{
+ const art=fs.readFileSync('js/my-cinemap-art.js','utf8'),templates=fs.readFileSync('js/my-cinemap-cinema-templates.js','utf8');
+ assert.match(art,/ctx\.save\(\);ctx\.clip\(\);ctx\.globalAlpha=1;ctx\.fillRect\(/,'rating fills stay clipped to the star outline');
+ assert.doesNotMatch(art,/beginPath\(\);ctx\.rect\(cx-starSize/,'rating fill does not replace the star path with a square');
+ assert.match(art,/ctx\.drawImage\(image,x,y,tile,tile\)/,'the emblem is drawn intact, including its black tile');
+ assert.doesNotMatch(art,/getImageData|drawTransparentEmblem/,'the icon background is not keyed to transparency');
+ assert.match(templates,/44px \$\{artNumber\}/,'top three rank numerals are enlarged');
+ assert.match(templates,/columns===2\?46:46/,'remaining rank numerals are enlarged');
 });
 test('MY Rating visibility toggle shows a star row and score in the export',()=>{
  const r=renderer(),movie={id:'42',title:'千と千尋の神隠し'};

@@ -75,8 +75,9 @@ async function freePort() {
         assert.equal(await posters.count(), 2, `${fixture.year} source row renders both distinct film posters`);
         assert.deepEqual(await posters.evaluateAll(images => images.map(image => image.alt)), fixture.posterTitles);
         assert.deepEqual(await posters.evaluateAll(images => images.map(image => new URL(image.src).hostname)), ['image.tmdb.org','image.tmdb.org']);
-        await posters.first().scrollIntoViewIfNeeded();
-        await posters.last().scrollIntoViewIfNeeded();
+        const posterTiles = groupedCard.locator('.boxPosterTile');
+        await posterTiles.first().scrollIntoViewIfNeeded();
+        await posterTiles.last().scrollIntoViewIfNeeded();
         await groupedCard.locator('.boxPosterTileFallback:not([hidden])').first().waitFor({ state: 'visible' });
         assert.equal(await groupedCard.locator('.boxPosterTileFallback:not([hidden])').count(), 2, 'failed artwork uses one placeholder per title');
         assert.match(await groupedCard.locator('.boxGroupNote').innerText(), /収入は合算/);

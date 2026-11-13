@@ -32,6 +32,7 @@ async function freePort() {
     const executablePath = process.env.CINELVA_BROWSER_EXECUTABLE;
     browser = await chromium.launch({ headless: true, ...(executablePath ? { executablePath } : {}) });
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    page.on('pageerror', error => console.error('Box-office browser page error:', error.stack || error.message));
     const backendQueries = [];
     await page.route('https://backend-one-gray-94.vercel.app/**', route => { backendQueries.push(new URL(route.request().url()).searchParams.get('q') || ''); return route.abort(); });
     await page.route('https://image.tmdb.org/**', route => route.abort());
@@ -39,7 +40,22 @@ async function freePort() {
     for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 900 }]) {
       await page.setViewportSize(viewport);
       await page.goto(`${base}/rankings.html?axis=boxoffice`, { waitUntil: 'domcontentloaded' });
-      await page.waitForFunction(() => document.querySelectorAll('#grid [data-box-film]').length >= 100);
+      await page.locator('#boxRegionChips [data-box-region="すべて"]').waitFor({ state: 'visible' });
+      await page.locator('#boxRegionChips [data-box-region="すべて"]').click();
+      await page.locator('#boxEraChips [data-box-era="歴代"]').click();
+      try {
+        await page.waitForFunction(() => document.querySelectorAll('#grid [data-box-film]').length >= 100);
+      } catch (error) {
+        const diagnostics = await page.evaluate(() => ({
+          url: location.href,
+          title: document.title,
+          boxFilmCount: document.querySelectorAll('#grid [data-box-film]').length,
+          gridText: document.querySelector('#grid')?.innerText?.slice(0, 300) || '',
+          scripts: [...document.scripts].map(script => script.src).filter(Boolean),
+        }));
+        console.error('Box-office browser diagnostics:', JSON.stringify(diagnostics));
+        throw error;
+      }
       const firstCard = page.locator('#grid [data-box-film]').first();
       await firstCard.scrollIntoViewIfNeeded();
       await firstCard.locator('[data-box-placeholder]').waitFor({ state: 'visible' });

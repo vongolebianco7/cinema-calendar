@@ -5,7 +5,7 @@ const artPalettes = {
   burgundy: {bg:'#57252d', fg:'#f7eee4', muted:'#d4bdb2', line:'#87505a', accent:'#c89a68', border:'#a66f52', dark:true},
   bluegray: {bg:'#d9dfe3', fg:'#1d2730', muted:'#697681', line:'#aab4bb', accent:'#827665', border:'#8c9296', dark:false}
 };
-let artworkFile=null, artworkRevision=0, artworkURL=null, artworkRatingLookup=new Map();
+let artworkFile=null, artworkRevision=0, artworkURL=null, artworkRatingLookup=new Map(), transparentEmblemCanvas=null;
 const artValue=id=>document.getElementById(id)?.value||'';
 const artDisplay='"Bodoni 72",Didot,"Hoefler Text","Times New Roman",serif';
 const artBodySerif='"Iowan Old Style",Palatino,"Palatino Linotype","Yu Mincho",serif';
@@ -220,7 +220,7 @@ function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p)
         const angle=-Math.PI/2+point*Math.PI/5,radius=point%2===0?starSize/2:starSize*.22,px=cx+Math.cos(angle)*radius,py=cy+Math.sin(angle)*radius;
         if(point===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
       }
-      ctx.closePath();ctx.lineWidth=1.5;ctx.strokeStyle=p.accent;ctx.fillStyle=p.accent;ctx.globalAlpha=.35;ctx.stroke();
+      ctx.closePath();ctx.lineWidth=2.2;ctx.strokeStyle=p.accent;ctx.fillStyle=p.accent;ctx.globalAlpha=.78;ctx.stroke();
       if(fraction>0){ctx.save();ctx.beginPath();ctx.rect(cx-starSize/2,cy-starSize/2,starSize*fraction,starSize);ctx.clip();ctx.globalAlpha=1;ctx.fill();ctx.restore();}
       ctx.globalAlpha=1;
     }
@@ -228,12 +228,12 @@ function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p)
     ctx.restore();
   }
 }
-function drawBrand(ctx,w,h,theme,y=h-98){
+function drawTransparentEmblem(ctx,image,x,y,size){\n  if(!transparentEmblemCanvas){\n    const canvas=document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;\n    const off=canvas.getContext('2d',{willReadFrequently:true});off.drawImage(image,0,0);\n    const pixels=off.getImageData(0,0,canvas.width,canvas.height),data=pixels.data;\n    for(let i=0;i<data.length;i+=4){\n      const luminance=.2126*data[i]+.7152*data[i+1]+.0722*data[i+2];\n      data[i+3]=Math.round(data[i+3]*Math.max(0,Math.min(1,(luminance-10)/54)));\n    }\n    off.putImageData(pixels,0,0);transparentEmblemCanvas=canvas;\n  }\n  ctx.drawImage(transparentEmblemCanvas,x,y,size,size);\n}\nfunction drawBrand(ctx,w,h,theme,y=h-98){
   const p=artPalettes[theme]||artPalettes.minimal;
   const tile=50,gap=12,wordWidth=156,total=tile+gap+wordWidth,x=(w-total)/2;
   const image=artworkImage(officialEmblem);
   ctx.save();ctx.globalAlpha=1;ctx.shadowBlur=0;
-  if(image?.complete&&image.naturalWidth)ctx.drawImage(image,x,y,tile,tile);
+  if(image?.complete&&image.naturalWidth)drawTransparentEmblem(ctx,image,x,y,tile);
   ctx.fillStyle=p.dark?'#f2dfbb':'#b18e60';ctx.textAlign='left';ctx.textBaseline='middle';
   ctx.font='600 42px Georgia,"Times New Roman",serif';ctx.fillText('Cinelva',x+tile+gap,y+tile/2-5);
   ctx.font='600 9px '+artSans;ctx.fillText('EXPLORE CINEMA',x+tile+gap,y+tile-3);ctx.restore();
@@ -301,7 +301,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');
   s.src='js/my-cinemap-tools.js?v=20261107-my-rating';
   s.defer=true;
-  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261107-my-rating';a.defer=true;document.body.appendChild(a)};
+  s.onload=()=>{const a=document.createElement('script');a.src='js/my-cinemap-art-direction.js?v=20261114-crisp-stars-logo';a.defer=true;document.body.appendChild(a)};
   document.body.appendChild(s)
 });
 window.addEventListener('pagehide',()=>{if(artworkURL)URL.revokeObjectURL(artworkURL)});

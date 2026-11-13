@@ -40,6 +40,9 @@ async function freePort() {
     for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 900 }]) {
       await page.setViewportSize(viewport);
       await page.goto(`${base}/rankings.html?axis=boxoffice`, { waitUntil: 'domcontentloaded' });
+      await page.locator('#boxRegionChips [data-box-region="すべて"]').waitFor({ state: 'visible' });
+      await page.locator('#boxRegionChips [data-box-region="すべて"]').click();
+      await page.locator('#boxEraChips [data-box-era="歴代"]').click();
       try {
         await page.waitForFunction(() => document.querySelectorAll('#grid [data-box-film]').length >= 100);
       } catch (error) {

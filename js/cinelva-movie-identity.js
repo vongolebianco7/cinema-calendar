@@ -414,6 +414,9 @@
         container.closest(
           "[data-mi],[data-i],[data-popular-id],[data-id],[data-record-card],[data-box-film],.want-watch-item,.outdoorFilmEntry,.outdoorFilmWrap,.rankCard,.award-film-unit",
         ) || container;
+      // Combined box-office source rows cannot be resolved as a single TMDB film.
+      // Skip this generic observer too; the ranking renderer separately handles verified poster sets.
+      if (card.dataset.boxGrouped === "true") continue;
       let movie = null;
       if (card.dataset.mi !== undefined)
         movie = root.CinelvaRatingResolve?.(card.dataset.mi, "calendar");

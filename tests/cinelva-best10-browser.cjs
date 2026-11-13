@@ -8,7 +8,10 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
 (async () => {
   const engineName = process.env.CINELVA_BROWSER === "webkit" ? "webkit" : "chromium";
   const engine = engineName === "webkit" ? webkit : chromium;
-  const browser = await engine.launch();
+  const launchOptions = engineName === "chromium" && process.env.CINELVA_CHROMIUM_EXECUTABLE
+    ? { executablePath: process.env.CINELVA_CHROMIUM_EXECUTABLE, args: ["--no-sandbox"] }
+    : {};
+  const browser = await engine.launch(launchOptions);
   const listener = net.createServer();
   await new Promise((resolve) => listener.listen(0, "127.0.0.1", resolve));
   const port = listener.address().port;
@@ -88,6 +91,26 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
     await page.waitForFunction(() => document.querySelector("#count")?.textContent === "2/10");
     await page.locator("#layout").selectOption("double");
     assert.equal(await page.locator("#layout").inputValue(), "double");
+    const emblemBackground = await page.locator("#artCanvas").evaluate((canvas) => {
+      const context = canvas.getContext("2d");
+      return Array.from(context.getImageData(730, 1908, 1, 1).data);
+    });
+    assert.ok(
+      emblemBackground.slice(0, 3).every((channel) => channel > 220),
+      `the dark logo tile must blend into the Minimal canvas, got ${emblemBackground.slice(0, 3).join(",")}`,
+    );
+    const ratingRegion = () => page.locator("#artCanvas").evaluate((canvas) => {
+      const { data } = canvas.getContext("2d").getImageData(370, 500, 200, 60);
+      let accentPixels = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        if (data[i] > 150 && data[i] < 215 && data[i + 1] > 130 && data[i + 1] < 190 && data[i + 2] > 100 && data[i + 2] < 175) accentPixels++;
+      }
+      return accentPixels;
+    });
+    const starsBeforeRating = await ratingRegion();
+    await page.locator("#showMyRating").check();
+    const starsAfterRating = await ratingRegion();
+    assert.ok(starsAfterRating > starsBeforeRating + 250, `MY Rating should draw visible stars (${starsBeforeRating} -> ${starsAfterRating} accent pixels)`);
     const canvasData = await page.locator("#artCanvas").evaluate((canvas) => canvas.toDataURL());
     assert.match(canvasData, /^data:image\/png;base64,/);
     assert.ok(canvasData.length > 1000, "the populated ranking renders an exportable portrait image");

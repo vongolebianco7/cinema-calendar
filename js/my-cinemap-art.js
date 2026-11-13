@@ -238,7 +238,10 @@ function drawTransparentEmblem(ctx,image,x,y,size){
     const pixels=off.getImageData(0,0,canvas.width,canvas.height),data=pixels.data;
     for(let i=0;i<data.length;i+=4){
       const luminance=.2126*data[i]+.7152*data[i+1]+.0722*data[i+2];
-      data[i+3]=Math.round(data[i+3]*Math.max(0,Math.min(1,(luminance-10)/54)));
+      // The supplied mark has a textured charcoal tile baked into its pixels.
+      // Key the dark range out gradually so it blends with every artwork palette
+      // while keeping the gold outline, white letter and projector beam intact.
+      data[i+3]=Math.round(data[i+3]*Math.max(0,Math.min(1,(luminance-42)/60)));
     }
     off.putImageData(pixels,0,0);transparentEmblemCanvas=canvas;
   }

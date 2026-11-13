@@ -211,7 +211,25 @@ async function renderAsiaRating(){
 }
 function renderRating(){if(regionActive==="アジア"){renderAsiaRating();return}const regions=baseRegions(),genres=allGenres(regions),genreOpts=["すべて",...genres];if(!genreOpts.includes(genreActive))genreActive="すべて";const useGenres=genreActive==="すべて"?genres:[genreActive];let eras=availableEras(regions,useGenres);const eraNum=e=>{const m=String(e).match(/(\d{4})/);return m?Number(m[1]):-1};eras.sort((a,b)=>eraNum(b)-eraNum(a)||String(b).localeCompare(String(a),"ja"));const eraOpts=["すべて","今年",...eras];if(!eraOpts.includes(eraActive))eraActive="すべて";$("#regionChips").innerHTML=allRegions().map(x=>'<button class="chip '+(x===regionActive?'active':'')+'" data-region="'+x+'">'+x+'</button>').join("");$("#genreChips").innerHTML=genreOpts.map(x=>'<button class="chip '+(x===genreActive?'active':'')+'" data-genre="'+x+'">'+x+'</button>').join("");$("#eraChips").innerHTML=eraOpts.map(x=>'<button class="chip '+(x===eraActive?'active':'')+'" data-era="'+x+'">'+x+'</button>').join("");document.querySelectorAll("[data-region]").forEach(b=>b.onclick=()=>{regionActive=b.dataset.region;genreActive="すべて";eraActive="すべて";render()});document.querySelectorAll("[data-genre]").forEach(b=>b.onclick=()=>{genreActive=b.dataset.genre;eraActive="すべて";render()});document.querySelectorAll("[data-era]").forEach(b=>b.onclick=()=>{eraActive=b.dataset.era;render()});const list=ratingList(regions,genreActive,eraActive).slice(0,80);$("#grid").className="rankGrid";$("#grid").innerHTML=list.length?list.map(ratingCard).join(""):'<div class="empty">該当作品がありません</div>';$("#sourceNote").textContent=(eraActive==="今年"?(yearValue||new Date().getFullYear())+"年公開作品 · ":"")+"TMDB評価順";mountRankingGauges()}
 const normalizeBoxTitle=t=>String(t||'').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
-const isGroupedBoxTitle=title=>/\s\/\s/.test(String(title||''));
+function isGroupedBoxTitle(title){
+ const value=String(title||'');
+ const unseparatedPairs=[
+  ['仮面ライダーオーズ WONDERFUL 将軍と21のコアメダル','海賊戦隊ゴーカイジャー THE MOVIE'],
+  ['仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ!','特命戦隊ゴーバスターズ THE MOVIE'],
+  ['仮面ライダージオウ Over Quartzer','騎士竜戦隊リュウソウジャー THE MOVIE'],
+  ['ポケモン・ザ・ムービーXY 光輪(リング)の超魔神フーパ','ピカチュウとポケモンおんがくたい']
+ ];
+ if(unseparatedPairs.some(([first,second])=>value.includes(first)&&value.includes(second)))return true;
+ if(/\s\/\s/.test(value)||/「[^」]+」\s*「[^」]+」|『[^』]+』\s*『[^』]+』/.test(value))return true;
+ const parts=value.split(/[\/／]/);
+ if(parts.length!==2)return false;
+ const [left,right]=parts;
+ const franchisePairs=[['男はつらいよ','釣りバカ日誌'],['ドラえもん','チンプイ'],['リング','らせん']];
+ if(franchisePairs.some(([first,second])=>(left.includes(first)&&right.includes(second))||(right.includes(first)&&left.includes(second))))return true;
+ if((left.includes('仮面ライダー')&&right.includes('戦隊'))||(right.includes('仮面ライダー')&&left.includes('戦隊')))return true;
+ if(/[」』]\s*$/.test(left)&&/^\s*ピカチュウ[、と]/.test(right))return true;
+ return left.includes('劇場版')&&right.includes('劇場版');
+}
 let boxMovieIndexPromise=null;
 function collectPosterMovies(value,rows){if(Array.isArray(value)){for(const item of value){if(item&&typeof item==='object'&&item.poster&&(item.title||item.original_title))rows.push(item);else collectPosterMovies(item,rows)}return}if(value&&typeof value==='object')Object.values(value).forEach(item=>collectPosterMovies(item,rows))}
 async function localBoxMovies(){if(!boxMovieIndexPromise)boxMovieIndexPromise=Promise.allSettled([fetch('data/movies.json').then(r=>{if(!r.ok)throw Error('movies');return r.json()}),fetch('data/rankings.json').then(r=>{if(!r.ok)throw Error('rankings');return r.json()})]).then(parts=>{let rows=[];for(const p of parts){if(p.status!=='fulfilled')continue;const v=p.value;collectPosterMovies(Array.isArray(v)?v:(v.movies||[]),rows);collectPosterMovies(v.rankings||{},rows)}return rows});return boxMovieIndexPromise;}

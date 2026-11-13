@@ -66,6 +66,8 @@ async function freePort() {
       }
 
       for (const fixture of compoundRows) {
+        // Isolate each fixture's API observation from earlier pages and viewports.
+        backendQueries.length = 0;
         await page.goto(`${base}/rankings.html?axis=boxoffice&boxYear=${fixture.year}`, { waitUntil: 'domcontentloaded' });
         const groupedCard = page.locator('#grid .rankReviewWrap').filter({ hasText: fixture.title });
         await groupedCard.waitFor({ state: 'visible' });
@@ -84,7 +86,9 @@ async function freePort() {
         assert.match(await groupedCard.locator('.meta').filter({ hasText: '億円' }).innerText(), new RegExp(fixture.gross));
         assert.equal((await groupedCard.locator('.no').innerText()).trim(), `#${fixture.rank}`, 'source competition rank is unchanged');
         assert.equal(await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth)), 0, 'grouped artwork stays within the viewport');
-        assert.equal(backendQueries.filter(query => normalizeTitle(query) === normalizeTitle(fixture.title)).length, 0, 'grouped titles never trigger single-film identity lookup');
+        await page.waitForTimeout(50);
+        const groupedQueries = backendQueries.filter(query => normalizeTitle(query) === normalizeTitle(fixture.title));
+        assert.equal(groupedQueries.length, 0, `grouped titles never trigger single-film identity lookup: ${JSON.stringify(groupedQueries)}`);
       }
     }
     console.log('Box-office single-row fallback and multi-poster compound rendering passed at 390px and 1280px with external image/API requests unavailable.');

@@ -48,6 +48,11 @@
     @media(max-width:620px){.gNav{height:56px;padding:0 12px;gap:8px}.gBrand img{height:27px}.gNav form{width:auto;flex:1}.gSearch{width:100%;min-width:0;height:34px;font-size:12px}.gMenuBtn{width:36px;flex:0 0 36px}.wrap{padding:0 14px}.hero{padding:26px 0 18px}.choices{grid-template-columns:1fr;gap:8px}.choice{min-height:54px}.quiz{min-height:360px;padding:18px}.quizActions{margin-top:19px}.identityGrid{gap:12px}.identity{padding:16px}.movies{grid-template-columns:1fr}.movie{min-height:0;display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:start;padding:13px}.movieNum{grid-row:1 / span 2;padding-top:4px}.movie h3{margin:0;font-size:16px}.genre{grid-column:2;margin-top:4px}.movie .replace{grid-column:1 / -1;margin-top:12px}.resultHead{display:block}.resultHead p{margin-top:5px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
+  <style id="vivant-result-art-styles">
+    .identityGrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 112px;align-items:center}.identityVisual{width:112px;height:112px;border:1px solid #61502b;border-radius:50%;background:radial-gradient(circle,#241f12 0,#111 68%);display:grid;place-items:center;overflow:hidden}.identityVisual svg{width:100%;height:100%}.favoriteQuestionInput{width:100%;min-height:54px;border:1px solid #49443a;border-radius:9px;background:#111;color:var(--text);padding:12px 14px;font-size:16px}.favoriteQuestionHint{color:var(--muted);font-size:12px;line-height:1.6;margin-top:9px}.favoriteResult{margin:12px 0 0;padding:10px 12px;border-left:2px solid var(--gold);color:var(--muted);font-size:13px}.movie{display:grid;grid-template-columns:84px minmax(0,1fr);grid-template-rows:auto auto 1fr;gap:6px 13px;min-height:0}.moviePoster{grid-column:1;grid-row:1 / span 3;width:84px;aspect-ratio:2/3;border-radius:6px;background:linear-gradient(145deg,#302817,#111);display:grid;place-items:center;overflow:hidden;border:1px solid #403721;color:#c5a451;font-size:10px;letter-spacing:.12em}.moviePoster img{width:100%;height:100%;object-fit:cover;display:block}.movieInfo{grid-column:2;grid-row:1 / span 3;min-width:0;display:flex;flex-direction:column;align-items:flex-start}.movieInfo .movieNum{margin-top:2px}.movieInfo h3{margin:8px 0 5px}.movieInfo .genre{margin:0}.movieInfo .replace{width:100%;margin-top:auto;padding:8px 5px}.fieldTrace{margin-top:17px;padding-top:13px;border-top:1px solid var(--line)}.fieldTraceTitle{color:var(--muted);font-size:11px;margin-bottom:8px}.fieldTraceRow{display:grid;grid-template-columns:90px 1fr 24px;align-items:center;gap:8px;margin:7px 0;font-size:11px;color:var(--muted)}.fieldTraceBar{height:4px;border-radius:9px;background:#292929;overflow:hidden}.fieldTraceBar i{display:block;height:100%;background:linear-gradient(90deg,#b98f3e,#e7cf8a)}.posterLoading{font-size:9px;color:var(--muted)}
+    html[data-theme="light"] .identityVisual{background:radial-gradient(circle,#fff8e7,#f3ead6);border-color:#b89a5b}html[data-theme="light"] .favoriteQuestionInput{background:#fff;color:#292a27;border-color:#c8c4bb}html[data-theme="light"] .moviePoster{background:linear-gradient(145deg,#eee5d0,#ded8ca);border-color:#c4b78f}
+    @media(max-width:620px){.identityGrid{grid-template-columns:1fr 1fr}.identityVisual{grid-column:1 / -1;grid-row:2;width:82px;height:82px;justify-self:center}.movie{grid-template-columns:78px minmax(0,1fr);padding:12px}.moviePoster{width:78px}.movieInfo h3{font-size:15px}.fieldTraceRow{grid-template-columns:76px 1fr 20px}}
+  </style>
 </head>
 <body>
 <header class="gTop"><div class="gNav">
@@ -60,17 +65,17 @@
   <section class="hero" aria-labelledby="pageTitle">
     <span class="eyebrow">MOVIE DNA / SPECIAL</span>
     <h1 id="pageTitle">VIVANT診断</h1>
-    <p>8問でVIVANTの所属を診断。映画も3本おすすめします。</p>
+    <p>8問に答え、好きな映画も入力。VIVANTの所属とおすすめ映画を診断します。</p>
     <div class="fanNote">非公式ファン企画です。TBSテレビとは関係ありません。</div>
   </section>
   <section id="quiz" class="quiz" aria-label="VIVANT診断">
-    <div class="quizTop"><span id="questionCount">質問 1 / 8</span></div>
-    <div class="progress" role="progressbar" aria-label="診断の進み具合" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><span id="progressBar"></span></div>
+    <div class="quizTop"><span id="questionCount">質問 1 / 9</span></div>
+    <div class="progress" role="progressbar" aria-label="診断の進み具合" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"><span id="progressBar"></span></div>
     <div id="questionContent" aria-live="polite"></div>
     <div class="quizActions"><button type="button" id="backButton" class="action" disabled>戻る</button><span class="stepHint" id="stepHint">選択肢をひとつ選んでください</span><button type="button" id="nextButton" class="action primary" disabled>次へ</button></div>
   </section>
   <section id="result" class="result hidden" aria-live="polite"></section>
-  <footer class="siteFooter">回答は保存されません。映画の推薦は診断結果に基づいています。</footer>
+  <footer class="siteFooter">回答は保存されません。好きな映画を入力すると、候補内の同じジャンルもおすすめに反映します。</footer>
 </main>
 <script src="js/vivant-diagnosis.js"></script><script>(()=>{const b=document.getElementById('gMenuBtn'),d=document.getElementById('gDrawer'),m=document.getElementById('gDrawerMask'),x=document.getElementById('gDrawerClose');if(!b||!d||!m)return;const open=()=>{d.classList.add('show');m.classList.add('show')},close=()=>{d.classList.remove('show');m.classList.remove('show')};b.onclick=open;m.onclick=close;x?.addEventListener('click',close)})();</script>
 <script>
@@ -78,6 +83,9 @@
   const data = window.VivantDiagnosis;
   const answers = Array(data.QUESTIONS.length).fill(null);
   const watched = new Set();
+  const favoriteStep = data.QUESTIONS.length;
+  const totalSteps = favoriteStep + 1;
+  let favoriteTitle = '';
   let index = 0;
   const qContent = document.getElementById('questionContent');
   const qCount = document.getElementById('questionCount');
@@ -88,48 +96,90 @@
   const result = document.getElementById('result');
   const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   function drawQuestion() {
-    const question = data.QUESTIONS[index];
-    qCount.textContent = `質問 ${index + 1} / ${data.QUESTIONS.length}`;
+    const isFavoriteStep = index === favoriteStep;
+    qCount.textContent = `質問 ${index + 1} / ${totalSteps}`;
+    progress.setAttribute('aria-valuemax', String(totalSteps));
     progress.setAttribute('aria-valuenow', String(index));
-    progressBar.style.width = `${(index / data.QUESTIONS.length) * 100}%`;
+    progressBar.style.width = `${(index / totalSteps) * 100}%`;
     qContent.replaceChildren();
     const title = document.createElement('h2');
-    title.className = 'question'; title.textContent = question.prompt;
+    title.className = 'question';
+    title.textContent = isFavoriteStep ? '好きな映画をひとつ教えてください' : data.QUESTIONS[index].prompt;
     qContent.append(title);
-    const choices = document.createElement('div'); choices.className = 'choices';
-    choices.setAttribute('role', 'group'); choices.setAttribute('aria-label', `質問 ${index + 1} の選択肢`);
-    question.choices.forEach(choice => {
-      const button = document.createElement('button'); button.type = 'button'; button.className = 'choice';
-      button.textContent = choice.label; button.setAttribute('aria-pressed', String(answers[index] === choice.id));
-      button.addEventListener('click', () => { answers[index] = choice.id; drawQuestion(); });
-      choices.append(button);
-    });
-    qContent.append(choices);
+    if (isFavoriteStep) {
+      const input = document.createElement('input'); input.type = 'text'; input.className = 'favoriteQuestionInput';
+      input.name = 'favoriteMovie'; input.autocomplete = 'off'; input.setAttribute('list', 'favoriteMovieOptions');
+      input.setAttribute('aria-label', '好きな映画'); input.placeholder = '映画のタイトル（任意）'; input.value = favoriteTitle;
+      const list = document.createElement('datalist'); list.id = 'favoriteMovieOptions';
+      [...new Set(data.MOVIES.map(movie => movie.title))].forEach(name => { const option = document.createElement('option'); option.value = name; list.append(option); });
+      const hint = document.createElement('p'); hint.className = 'favoriteQuestionHint';
+      hint.textContent = '入力は任意です。候補にある作品を選ぶと、同じジャンルをおすすめに反映します。';
+      input.addEventListener('input', () => { favoriteTitle = input.value; });
+      qContent.append(input, list, hint);
+    } else {
+      const question = data.QUESTIONS[index];
+      const choices = document.createElement('div'); choices.className = 'choices';
+      choices.setAttribute('role', 'group'); choices.setAttribute('aria-label', `質問 ${index + 1} の選択肢`);
+      question.choices.forEach(choice => {
+        const button = document.createElement('button'); button.type = 'button'; button.className = 'choice';
+        button.textContent = choice.label; button.setAttribute('aria-pressed', String(answers[index] === choice.id));
+        button.addEventListener('click', () => { answers[index] = choice.id; drawQuestion(); });
+        choices.append(button);
+      });
+      qContent.append(choices);
+    }
     back.disabled = index === 0;
-    next.disabled = !answers[index];
-    next.textContent = index === data.QUESTIONS.length - 1 ? '結果を見る' : '次へ';
+    next.disabled = !isFavoriteStep && !answers[index];
+    next.textContent = index === totalSteps - 1 ? '結果を見る' : '次へ';
   }
   function drawResult() {
     const profile = data.getResult(answers);
-    const picks = data.recommendMovies(answers, [...watched]);
+    const picks = data.recommendMovies(answers, [...watched], favoriteTitle);
     result.classList.remove('hidden');
     result.replaceChildren();
     const head = document.createElement('div'); head.className = 'resultHead';
     head.innerHTML = '<h2>診断結果</h2>'; result.append(head);
     const identity = document.createElement('section'); identity.className = 'identity';
-    identity.innerHTML = `<div class="identityGrid"><div class="identityBlock"><span>所属組織</span><strong>${escapeHtml(profile.organization)}</strong></div><div class="identityBlock"><span>役割</span><strong>${escapeHtml(profile.role)}</strong></div></div><p class="identityReason"><b>この結果になった理由</b>${escapeHtml(profile.reason)}</p>`;
-    result.append(identity);
+    identity.innerHTML = `<div class="identityGrid"><div class="identityBlock"><span>所属組織</span><strong>${escapeHtml(profile.organization)}</strong></div><div class="identityBlock"><span>役割</span><strong>${escapeHtml(profile.role)}</strong></div><div class="identityVisual" aria-hidden="true"><svg viewBox="0 0 112 112" fill="none"><circle cx="56" cy="56" r="48" stroke="#b9954e" stroke-width="1.5"/><circle cx="56" cy="56" r="34" stroke="#67542d"/><circle cx="56" cy="56" r="20" stroke="#b9954e"/><path d="M56 8v20M56 84v20M8 56h20M84 56h20M23 23l14 14M75 75l14 14M89 23 75 37M37 75 23 89" stroke="#b9954e" stroke-width="1.5"/><path d="m56 40 6 16-6 16-6-16 6-16Z" fill="#dfbd70"/><circle cx="56" cy="56" r="3" fill="#101010"/></svg></div></div><p class="identityReason"><b>この結果になった理由</b>${escapeHtml(profile.reason)}</p>`;
+    const axisNames = {trust:'信頼',nerve:'行動力',empathy:'共感',curiosity:'好奇心',patience:'慎重さ',mischief:'機転'};
+    const axes = data.scoreAnswers(answers); const maxAxis = Math.max(1, ...Object.values(axes));
+    const trace = document.createElement('div'); trace.className = 'fieldTrace';
+    trace.innerHTML = '<div class="fieldTraceTitle">回答に表れた傾向</div>' + data.AXES.map(axis => `<div class="fieldTraceRow"><span>${axisNames[axis]}</span><span class="fieldTraceBar"><i style="width:${Math.round(axes[axis] / maxAxis * 100)}%"></i></span><span>${axes[axis]}</span></div>`).join('');
+    identity.append(trace); result.append(identity);
+    if (favoriteTitle.trim()) { const favorite = document.createElement('p'); favorite.className = 'favoriteResult'; favorite.textContent = `好きな映画：${favoriteTitle.trim()}`; result.append(favorite); }
     const movieHead = document.createElement('div'); movieHead.className = 'movieHead'; movieHead.innerHTML = '<h2>おすすめ映画 3本</h2><p>鑑賞済みなら入れ替えられます。</p>'; result.append(movieHead);
     const cards = document.createElement('div'); cards.className = 'movies'; cards.setAttribute('aria-label', 'おすすめ映画');
     picks.forEach((movie, movieIndex) => {
       const article = document.createElement('article'); article.className = 'movie';
-      article.innerHTML = `<span class="movieNum">PICK 0${movieIndex + 1}</span><h3>${escapeHtml(movie.title)}</h3><span class="genre">${escapeHtml(movie.genre)}</span>`;
-      const replace = document.createElement('button'); replace.type = 'button'; replace.className = 'replace'; replace.textContent = '鑑賞済みなので入れ替える';
+      article.innerHTML = `<div class="moviePoster" aria-label="${escapeHtml(movie.title)}のポスター"><span class="posterLoading">ポスター検索中</span></div><div class="movieInfo"><span class="movieNum">PICK 0${movieIndex + 1}</span><h3>${escapeHtml(movie.title)}</h3><span class="genre">${escapeHtml(movie.genre)}</span></div>`;
+      const posterBox = article.querySelector('.moviePoster');
+      const replace = document.createElement('button'); replace.type = 'button'; replace.className = 'replace'; replace.textContent = '鑑賞済みなら入れ替え';
       replace.setAttribute('aria-label', `${movie.title}を鑑賞済みにして別の映画に入れ替える`);
       replace.addEventListener('click', () => { watched.add(movie.id); drawResult(); });
-      article.append(replace); cards.append(article);
+      article.querySelector('.movieInfo').append(replace); cards.append(article);
     });
     result.append(cards);
+    const posterKey = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
+    const fetchPoster = async movie => {
+      const box = [...cards.querySelectorAll('.movie')].find(card => card.querySelector('h3')?.textContent === movie.title)?.querySelector('.moviePoster');
+      if (!box) return;
+      try {
+        const response = await fetch('https://backend-one-gray-94.vercel.app/api/movies?q=' + encodeURIComponent(movie.title) + '&limit=30', { signal: AbortSignal.timeout(10000) });
+        if (!response.ok) throw new Error('poster lookup');
+        const data = await response.json();
+        const rows = [...(data.movies || []), ...(data.external || [])].filter(row => posterKey(row.title || row.name) === posterKey(movie.title) && (row.poster || row.poster_path));
+        const unique = new Map(rows.map(row => [String(row.id || row.tmdbId || row.poster || row.poster_path), row]));
+        if (unique.size !== 1) throw new Error('no unique poster');
+        const row = [...unique.values()][0];
+        let src = row.poster || '';
+        if (!src && /^\/[A-Za-z0-9_-]+\.(?:jpg|png|webp)$/i.test(row.poster_path || '')) src = 'https://image.tmdb.org/t/p/w342' + row.poster_path;
+        if (!/^https:\/\/image\.tmdb\.org\/t\/p\/w\d+\/[A-Za-z0-9_-]+\.(?:jpg|png|webp)$/i.test(src)) throw new Error('invalid poster');
+        const image = document.createElement('img'); image.src = src; image.alt = `${movie.title}のポスター`; image.loading = 'lazy'; image.decoding = 'async';
+        image.addEventListener('error', () => { image.remove(); box.textContent = 'ポスター未確認'; }, { once: true });
+        box.replaceChildren(image);
+      } catch { box.textContent = 'ポスター未確認'; box.classList.add('posterUnavailable'); }
+    };
+    picks.forEach(movie => { fetchPoster(movie); });
     const sharePrompt = document.createElement('div'); sharePrompt.className = 'sharePrompt';
     sharePrompt.innerHTML = '<div><strong>あなたはどの組織？</strong><br><span>結果を送って、相手の所属も見てみよう。</span></div>';
     result.append(sharePrompt);
@@ -139,7 +189,8 @@
     const shareActions = document.createElement('div'); shareActions.className = 'shareActions';
     const share = document.createElement('button'); share.type = 'button'; share.className = 'shareButton'; share.textContent = '結果をシェア';
     share.addEventListener('click', async () => {
-      const text = `VIVANT診断の結果、私は「${profile.organization}／${profile.role}」でした。おすすめ映画は「${picks.map(movie => movie.title).join('」「')}」。あなたはどの組織？ #VIVANT診断 #Cinelva`;
+      const favoriteLine = favoriteTitle.trim() ? `好きな映画は「${favoriteTitle.trim()}」。` : '';
+      const text = `VIVANT診断の結果、私は「${profile.organization}／${profile.role}」でした。${favoriteLine}おすすめ映画は「${picks.map(movie => movie.title).join('」「')}」。あなたはどの組織？ #VIVANT診断 #Cinelva`;
       try { if (navigator.share) await navigator.share({title:'VIVANT診断', text, url:location.href.split('#')[0]}); else { await navigator.clipboard.writeText(`${text} ${location.href.split('#')[0]}`); status.textContent='結果をコピーしました'; } }
       catch (error) { if (error.name !== 'AbortError') status.textContent='共有できませんでした。'; }
     });
@@ -160,13 +211,13 @@
     });
     shareActions.append(share,saveCard); actions.append(status,shareActions);
     const restart = document.createElement('button'); restart.type = 'button'; restart.className = 'action'; restart.textContent = 'もう一度診断する';
-    restart.addEventListener('click', () => { answers.fill(null); watched.clear(); index = 0; result.classList.add('hidden'); drawQuestion(); document.getElementById('quiz').scrollIntoView({behavior:'smooth',block:'start'}); });
+    restart.addEventListener('click', () => { answers.fill(null); watched.clear(); favoriteTitle = ''; index = 0; result.classList.add('hidden'); drawQuestion(); document.getElementById('quiz').scrollIntoView({behavior:'smooth',block:'start'}); });
     actions.append(restart); result.append(actions);
-    progress.setAttribute('aria-valuenow', String(data.QUESTIONS.length)); progressBar.style.width = '100%';
+    progress.setAttribute('aria-valuenow', String(totalSteps)); progressBar.style.width = '100%';
     result.scrollIntoView({behavior:'smooth',block:'start'});
   }
   back.addEventListener('click', () => { if (index > 0) { index -= 1; drawQuestion(); } });
-  next.addEventListener('click', () => { if (!answers[index]) return; if (index === data.QUESTIONS.length - 1) drawResult(); else { index += 1; drawQuestion(); } });
+  next.addEventListener('click', () => { if (index < favoriteStep && !answers[index]) return; if (index === totalSteps - 1) drawResult(); else { index += 1; drawQuestion(); } });
   drawQuestion();
 })();
 </script>

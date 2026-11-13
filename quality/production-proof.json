@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "0843837854767877eb5edeebf62828b63c1ef82f",
-  "verified_at": "2026-11-13T17:15:45.598Z",
-  "note": "Exact-source CI receipt for PR #815 source head 0843837854767877eb5edeebf62828b63c1ef82f. All four required pull_request workflows succeeded on this exact head: Autonomous quality gate run 43469339671; CINELVA smoke tests run 43469339585; Validate frontend run 43469339937; Reproducible backend build run 43469339837. Additional exact-head checks succeeded: Full Python contract suite run 43469339914, CINELVA backup safety run 43469339887, CINELVA mobile layout smoke test run 43469339988, Cinemap completeness scorecard run 43469339733, CINELVA continuous visual QA run 43469339844, and Check brand identity run 43469339562. This receipt proves exact-source CI only; it does not claim production deployment or device-level acceptance."
+  "head_sha": "860e80e15b484c666f53e757ae7d323cfc90f0a4",
+  "verified_at": "2026-11-13T18:22:51Z",
+  "note": "Exact-source CI receipt for PR #817 source head 860e80e15b484c666f53e757ae7d323cfc90f0a4. All four required pull_request workflows succeeded on this exact head: Autonomous quality gate run 43480919768; CINELVA smoke tests run 43480920096; Validate frontend run 43480919744; Reproducible backend build run 43480919952. Additional exact-head checks succeeded: CINELVA backup safety run 43480919698, CINELVA mobile layout smoke test run 43480919706, Cinemap completeness scorecard run 43480919662, and CINELVA continuous visual QA run 43480920218. This receipt proves exact-source CI only; it does not claim production deployment or device-level acceptance."
 }

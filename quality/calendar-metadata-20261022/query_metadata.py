@@ -1,208 +1,281 @@
 import json,os,pathlib,time,urllib.parse,urllib.request
-
 API="https://api.themoviedb.org/3/search/movie"
 KEY=os.environ["TMDB_API_KEY"]
 QUERIES=[
   {
+    "source_title": "ブッシュマン",
     "market_year": 1982,
-    "title": "ブッシュマン"
+    "query": "The Gods Must Be Crazy"
   },
   {
+    "source_title": "エンドレス・ラブ",
     "market_year": 1982,
-    "title": "エンドレス・ラブ"
+    "query": "Endless Love 1981"
   },
   {
+    "source_title": "インディー・ジョーンズ 魔宮の伝説",
     "market_year": 1984,
-    "title": "インディー・ジョーンズ 魔宮の伝説"
+    "query": "Indiana Jones and the Temple of Doom"
   },
   {
+    "source_title": "キングコング2",
     "market_year": 1987,
-    "title": "キングコング2"
+    "query": "King Kong Lives"
   },
   {
+    "source_title": "シュワルツェネッガー プレデター",
     "market_year": 1987,
-    "title": "シュワルツェネッガー プレデター"
+    "query": "Predator"
   },
   {
+    "source_title": "星の王子 ニューヨークに行く",
     "market_year": 1989,
-    "title": "星の王子 ニューヨークに行く"
+    "query": "Coming to America"
   },
   {
+    "source_title": "おもいでぽろぽろ",
     "market_year": 1991,
-    "title": "おもいでぽろぽろ"
+    "query": "Only Yesterday"
   },
   {
+    "source_title": "ダンス・ウィズ・ウルブス",
     "market_year": 1991,
-    "title": "ダンス・ウィズ・ウルブス"
+    "query": "Dances with Wolves"
   },
   {
+    "source_title": "ツイン・ピークス ローラ・パーマー最期の七日間",
     "market_year": 1992,
-    "title": "ツイン・ピークス ローラ・パーマー最期の七日間"
+    "query": "Twin Peaks: Fire Walk with Me"
   },
   {
+    "source_title": "クレヨンしんちゃん",
     "market_year": 1993,
-    "title": "クレヨンしんちゃん"
+    "query": "Crayon Shin-chan: Action Mask vs. Leotard Devil"
   },
   {
+    "source_title": "シュワルツェネッガー ラスト・アクション・ヒーロー",
     "market_year": 1993,
-    "title": "シュワルツェネッガー ラスト・アクション・ヒーロー"
+    "query": "Last Action Hero"
   },
   {
+    "source_title": "RAMPO",
     "market_year": 1994,
-    "title": "RAMPO"
+    "query": "RAMPO"
   },
   {
+    "source_title": "マディソン群の橋",
     "market_year": 1995,
-    "title": "マディソン群の橋"
+    "query": "The Bridges of Madison County"
   },
   {
+    "source_title": "藏 (くら)",
     "market_year": 1995,
-    "title": "藏 (くら)"
+    "query": "Kura"
   },
   {
+    "source_title": "藏 (くら)",
+    "market_year": 1995,
+    "query": "藏"
+  },
+  {
+    "source_title": "ロスト・ワールド",
     "market_year": 1997,
-    "title": "ロスト・ワールド"
+    "query": "The Lost World: Jurassic Park"
   },
   {
+    "source_title": "スターウォーズ(3部作)",
     "market_year": 1997,
-    "title": "スターウォーズ(3部作)"
+    "query": "Star Wars"
   },
   {
+    "source_title": "スターウォーズ(3部作)",
     "market_year": 1997,
-    "title": "新世紀エヴァンゲリオン劇場版"
+    "query": "The Empire Strikes Back"
   },
   {
+    "source_title": "スターウォーズ(3部作)",
+    "market_year": 1997,
+    "query": "Return of the Jedi"
+  },
+  {
+    "source_title": "新世紀エヴァンゲリオン劇場版",
+    "market_year": 1997,
+    "query": "Death and Rebirth"
+  },
+  {
+    "source_title": "新世紀エヴァンゲリオン劇場版",
+    "market_year": 1997,
+    "query": "The End of Evangelion"
+  },
+  {
+    "source_title": "恋に落ちたシェイクスピア",
     "market_year": 1999,
-    "title": "恋に落ちたシェイクスピア"
+    "query": "Shakespeare in Love"
   },
   {
+    "source_title": "007/ワールド・イズ・ノット・ナイフ",
     "market_year": 2000,
-    "title": "007/ワールド・イズ・ノット・ナイフ"
+    "query": "The World Is Not Enough"
   },
   {
+    "source_title": "エクソシスト ディレクターズカット版",
     "market_year": 2000,
-    "title": "エクソシスト ディレクターズカット版"
+    "query": "The Exorcist"
   },
   {
+    "source_title": "ザ・キッド",
     "market_year": 2000,
-    "title": "ザ・キッド"
+    "query": "The Kid 2000"
   },
   {
+    "source_title": "エクソシスト(ディレクターズ・カット版)",
     "market_year": 2001,
-    "title": "エクソシスト(ディレクターズ・カット版)"
+    "query": "The Exorcist"
   },
   {
+    "source_title": "スターウォーズ エピソード2",
     "market_year": 2002,
-    "title": "スターウォーズ エピソード2"
+    "query": "Star Wars: Episode II – Attack of the Clones"
   },
   {
+    "source_title": "007 ダイ・アナザー・ディ",
     "market_year": 2003,
-    "title": "007 ダイ・アナザー・ディ"
+    "query": "Die Another Day"
   },
   {
+    "source_title": "バトル・ロワイアルII 鎮魂歌(レクイエム)",
     "market_year": 2003,
-    "title": "バトル・ロワイアルII 鎮魂歌(レクイエム)"
+    "query": "Battle Royale II: Requiem"
   },
   {
+    "source_title": "エイリアンVSプレディター",
     "market_year": 2005,
-    "title": "エイリアンVSプレディター"
+    "query": "AVP: Alien vs. Predator"
   },
   {
+    "source_title": "ティム・バートンのコープス・プライド",
     "market_year": 2005,
-    "title": "ティム・バートンのコープス・プライド"
+    "query": "Corpse Bride"
   },
   {
+    "source_title": "ナルニア国物語 第一章:ライオンと魔女",
     "market_year": 2006,
-    "title": "ナルニア国物語 第一章:ライオンと魔女"
+    "query": "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe"
   },
   {
+    "source_title": "デスノート 前編",
     "market_year": 2006,
-    "title": "デスノート 前編"
+    "query": "Death Note 2006"
   },
   {
+    "source_title": "ダイハード4.0",
     "market_year": 2007,
-    "title": "ダイハード4.0"
+    "query": "Live Free or Die Hard"
   },
   {
+    "source_title": "ザ・ハプニング",
     "market_year": 2008,
-    "title": "ザ・ハプニング"
+    "query": "The Happening"
   },
   {
+    "source_title": "20世紀少年<第二章>最後の希望",
     "market_year": 2009,
-    "title": "20世紀少年<第二章>最後の希望"
+    "query": "20th Century Boys 2: The Last Hope"
   },
   {
+    "source_title": "ドロップ",
     "market_year": 2009,
-    "title": "ドロップ"
+    "query": "Drop 2009"
   },
   {
+    "source_title": "劇場版 仮面ライダーディケイド侍戦隊シンケンジャー 銀幕版",
     "market_year": 2009,
-    "title": "劇場版 仮面ライダーディケイド侍戦隊シンケンジャー 銀幕版"
+    "query": "Kamen Rider Decade: All Riders vs. Dai-Shocker"
   },
   {
+    "source_title": "劇場版 仮面ライダーディケイド侍戦隊シンケンジャー 銀幕版",
     "market_year": 2009,
-    "title": "マダカスカル2"
+    "query": "Samurai Sentai Shinkenger the Movie"
   },
   {
+    "source_title": "マダカスカル2",
     "market_year": 2009,
-    "title": "映画クレヨンしんちゃん オタケベ!カスカベ野生王国"
+    "query": "Madagascar: Escape 2 Africa"
   },
   {
+    "source_title": "映画クレヨンしんちゃん オタケベ!カスカベ野生王国",
+    "market_year": 2009,
+    "query": "Crayon Shin-chan: Roar! Kasukabe Animal Kingdom"
+  },
+  {
+    "source_title": "劇場版 ポケットモンスター ダイアモンド&パール 幻影の覇者 ゾロアーク",
     "market_year": 2010,
-    "title": "劇場版 ポケットモンスター ダイアモンド&パール 幻影の覇者 ゾロアーク"
+    "query": "Pokémon: Zoroark: Master of Illusions"
   },
   {
+    "source_title": "猿の惑星:創世記(ジェネシス)",
     "market_year": 2011,
-    "title": "猿の惑星:創世記(ジェネシス)"
+    "query": "Rise of the Planet of the Apes"
   },
   {
+    "source_title": "劇場版ポケットモンスター ベストウィッシュ キュレムVS(たい)聖剣士ケルディオ",
     "market_year": 2012,
-    "title": "劇場版ポケットモンスター ベストウィッシュ キュレムVS(たい)聖剣士ケルディオ"
+    "query": "Pokémon the Movie: Kyurem vs. the Sword of Justice"
   },
   {
+    "source_title": "映画ドラえもん のび太のひみつ道具博物館(ミュージアム)",
     "market_year": 2013,
-    "title": "映画ドラえもん のび太のひみつ道具博物館(ミュージアム)"
+    "query": "Doraemon: Nobita's Secret Gadget Museum"
   },
   {
+    "source_title": "映画クレヨンしんちゃん バカうまっ!B級グルメサバイバル!!",
     "market_year": 2013,
-    "title": "映画クレヨンしんちゃん バカうまっ!B級グルメサバイバル!!"
+    "query": "Crayon Shin-chan: Bakauma! B-grade Gourmet Survival!!"
   },
   {
+    "source_title": "猿の惑星:新世紀(ライジング)",
     "market_year": 2014,
-    "title": "猿の惑星:新世紀(ライジング)"
+    "query": "Dawn of the Planet of the Apes"
   },
   {
+    "source_title": "LIFE!",
     "market_year": 2014,
-    "title": "LIFE!"
+    "query": "The Secret Life of Walter Mitty"
   },
   {
+    "source_title": "名探偵コナン 業火の向日葵(ひまわり)",
     "market_year": 2015,
-    "title": "名探偵コナン 業火の向日葵(ひまわり)"
+    "query": "Detective Conan: Sunflowers of Inferno"
   },
   {
+    "source_title": "信長協奏曲 ノブナガコンツェルト",
     "market_year": 2016,
-    "title": "信長協奏曲 ノブナガコンツェルト"
+    "query": "Nobunaga Concerto"
   },
   {
+    "source_title": "映画クレヨンしんちゃん 爆盛!カンフーボーイズ ~拉麵大乱~",
     "market_year": 2018,
-    "title": "映画クレヨンしんちゃん 爆盛!カンフーボーイズ ~拉麵大乱~"
+    "query": "Crayon Shin-chan: Kung Fu Boys – Ramen Rebellion"
   },
   {
+    "source_title": "コンフィデンスマンJP",
     "market_year": 2019,
-    "title": "コンフィデンスマンJP"
+    "query": "The Confidence Man JP: The Movie"
   },
   {
+    "source_title": "映画クレヨンしんちゃん 新婚旅行ハリケーン ~失われたひろし~",
     "market_year": 2019,
-    "title": "映画クレヨンしんちゃん 新婚旅行ハリケーン ~失われたひろし~"
+    "query": "Crayon Shin-chan: Honeymoon Hurricane – The Lost Hiroshi"
   },
   {
+    "source_title": "タイタニック：ジェームズ・キャメロン25周年3Dリマスター",
     "market_year": 2023,
-    "title": "タイタニック：ジェームズ・キャメロン25周年3Dリマスター"
+    "query": "Titanic 3D"
   }
 ]
 out={"metadata":[]}
 for item in QUERIES:
-    params={"query":item["title"],"region":"JP","include_adult":"false","page":1,"language":"ja-JP","api_key":KEY}
+    params={"query":item["query"],"region":"JP","include_adult":"false","page":1,"language":"ja-JP","api_key":KEY}
     try:
         url=API+"?"+urllib.parse.urlencode(params)
         with urllib.request.urlopen(url,timeout=20) as response:
@@ -210,12 +283,13 @@ for item in QUERIES:
         rows=result.get("results",[])
         out["metadata"].append({
             "market_year":item["market_year"],
-            "source_title":item["title"],
+            "source_title":item["source_title"],
+            "query":item["query"],
             "request":"TMDB official /search/movie",
             "results":[{k:m.get(k) for k in ["id","title","original_title","release_date","poster_path"]} for m in rows[:10]]
         })
     except Exception as exc:
-        out["metadata"].append({"market_year":item["market_year"],"source_title":item["title"],"error":type(exc).__name__})
+        out["metadata"].append({"market_year":item["market_year"],"source_title":item["source_title"],"query":item["query"],"error":type(exc).__name__})
     time.sleep(0.2)
 pathlib.Path("metadata-diagnostic.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-print("Queried",len(QUERIES),"remaining single-title records through the official TMDB API; no product data writes")
+print("Queried",len(QUERIES),"official TMDB title variants; no product data writes")

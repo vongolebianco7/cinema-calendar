@@ -137,6 +137,8 @@ def grouped_title(title):
     # markers. Ordinary single-film slash titles (007/ムーンレイカー,
     # アベンジャーズ/エンドゲーム, etc.) must remain eligible.
     value = str(title or "")
+    if normalize(value) in EXPLICIT_GROUPED_TITLE_SPLITS:
+        return True
     # Some official historical market rows concatenate separately billed
     # theatrical features with whitespace only. Exclude only these distinctive
     # paired-title signatures; do not treat every Rider/Sentai crossover as a

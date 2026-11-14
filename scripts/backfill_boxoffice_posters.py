@@ -149,6 +149,14 @@ EXPLICIT_GROUPED_TITLE_SPLITS = {
         "21エモン 宇宙行け！裸足のプリンセス",
         "トキメキソーラーくるまによん",
     ],
+    # Eiren reports the 1994 RAMPO package as one 1,200-million-yen entry.
+    # Shochiku's official database identifies the two same-day versions as
+    # separate films; each exact title is looked up independently while the
+    # published package gross remains unchanged on both rows.
+    "rampo": [
+        "ＲＡＭＰＯ（奥山バージョン）",
+        "ＲＡＭＰＯ（黛バージョン）",
+    ],
     # The 2009 Eiren entry combines a Kamen Rider feature with its separately
     # billed Super Sentai feature; each must resolve to its own TMDB identity.
     "劇場版仮面ライダーディケイド侍戦隊シンケンジャー銀幕版": [

@@ -34,10 +34,17 @@ MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
 # 2009 film titled ドロップ. TMDB also returns another exact-title result from
 # 2008, so only the result with this reviewed JP release date is eligible.
 REVIEWED_JAPANESE_RELEASE_DATES = {
+    # Toei official premiere dates
+    (2000, "onepiece"): "2000-03-04",
+    (2001, "onepieceねじまき島の冒険"): "2001-03-03",
     (2009, "ドロップ"): "2009-03-20",
 }
 
 REVIEWED_TITLE_ALIASES = {
+    (2001, "ONE PIECE ねじまき島の冒険"): [
+        "One Piece: Clockwork Island Adventure",
+        "ONE PIECE: Nejimaki-jima no Daibōken",
+    ],
     (1990, "チンプイ"): ["チンプイ エリさま活動大写真"],
     (1981, "ブルージーンズメモリー"): ["Blue Jeans Memory", "ブルージーンズメモリー BLUE JEANS MEMORY"],
     (1981, "青春グラフィティ スニーカーぶるーす"): ["Sneaker Blues", "青春グラフィティ スニーカーぶる〜す"],
@@ -95,7 +102,7 @@ REVIEWED_TITLE_ALIASES = {
     (2013, "劇場版 仮面ライダーウィザード イン マジックランド"): ["Kamen Rider Wizard in Magic Land"],
     (2019, "騎士竜戦隊リュウソウジャー THE MOVIE"): ["Kishiryu Sentai Ryusoulger the Movie"],
 }
-POSTER_CHECK_VERSION = 7
+POSTER_CHECK_VERSION = 8
 RECHECK_DAYS = 1
 
 
@@ -355,6 +362,20 @@ def expand_grouped_rows(data):
     for market_year, rows in (data.get("by_year") or {}).items():
         if not isinstance(rows, list):
             continue
+
+        # Eiren's 2001 ONE PIECE child is Clockwork Island Adventure. The old
+        # identity reports a 2000 Japan premiere; correct only this exact
+        # source row and retain the full shared gross for its official lookup.
+        for row in rows:
+            if (str(market_year) != "2001" or not isinstance(row, dict)
+                    or normalize(row.get("title")) != normalize("ONE PIECE")
+                    or normalize(row.get("source_group_title")) != normalize(
+                        "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル"
+                    )):
+                continue
+            if str(row.get("tmdb_release_date") or "")[:10] != "2001-03-03":
+                clear_inherited_poster_identity(row)
+                row["title"] = "ONE PIECE ねじまき島の冒険"
 
         # Rename only the two unresolved child rows from the verified 1988
         # source group. Never overwrite a sibling with an established identity.

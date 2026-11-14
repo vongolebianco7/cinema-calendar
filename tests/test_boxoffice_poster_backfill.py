@@ -538,6 +538,27 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             "スター・ウォーズ エピソード6／ジェダイの帰還",
         ])
 
+    def test_one_piece_rejects_cross_year_same_title_identity(self):
+        self.assertTrue(backfill.matches_reviewed_release_window("ONE PIECE", 2000, "2000-03-04"))
+        self.assertFalse(backfill.matches_reviewed_release_window("ONE PIECE", 2000, "2001-03-03"))
+        self.assertTrue(backfill.matches_reviewed_release_window("ONE PIECE ねじまき島の冒険", 2001, "2001-03-03"))
+        self.assertFalse(backfill.matches_reviewed_release_window("ONE PIECE ねじまき島の冒険", 2001, "2000-03-04"))
+        self.assertIn("One Piece: Clockwork Island Adventure", backfill.exact_title_aliases("ONE PIECE ねじまき島の冒険", 2001))
+
+        data = {"by_year": {"2001": [{
+            "title": "ONE PIECE", "gross": 30, "year": 2001,
+            "source_group_title": "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル",
+            "tmdbId": 19576, "tmdb_release_date": "2000-03-04",
+            "poster": "https://image.tmdb.org/t/p/w500/wrong-film.jpg",
+        }]}}
+        backfill.expand_grouped_rows(data)
+        row = data["by_year"]["2001"][0]
+        self.assertEqual(row["title"], "ONE PIECE ねじまき島の冒険")
+        self.assertEqual(row["gross"], 30)
+        self.assertEqual(row["source_group_title"], "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル")
+        self.assertNotIn("tmdbId", row)
+        self.assertNotIn("poster", row)
+
     def test_drop_filters_same_title_tmdb_candidates_by_official_japan_date(self):
         self.assertTrue(backfill.matches_reviewed_release_window(
             "ドロップ", 2009, "2009-03-20"))

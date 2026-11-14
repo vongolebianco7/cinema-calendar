@@ -331,7 +331,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertTrue(all(row["identity_source"].startswith(
             "https://www.themoviedb.org/movie/"
         ) for row in rows))
-        self.assertEqual(len(requests), 4)
+        self.assertEqual(len(requests), 3)
 
     def test_compound_market_row_is_split_and_shared_gross_is_preserved(self):
         data, requests, result = self.run_rows(

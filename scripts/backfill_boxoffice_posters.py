@@ -89,7 +89,7 @@ REVIEWED_TITLE_ALIASES = {
     (2013, "劇場版 仮面ライダーウィザード イン マジックランド"): ["Kamen Rider Wizard in Magic Land"],
     (2019, "騎士竜戦隊リュウソウジャー THE MOVIE"): ["Kishiryu Sentai Ryusoulger the Movie"],
 }
-POSTER_CHECK_VERSION = 5
+POSTER_CHECK_VERSION = 6
 RECHECK_DAYS = 1
 
 
@@ -592,6 +592,7 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 candidates = [result] if result.get("id") == int(existing_id) else []
             else:
                 aliases = exact_title_aliases(title, market_year)
+                alias_keys = {normalize(alias) for alias in aliases}
                 search_results_by_id = {}
                 for query in aliases:
                     url = SEARCH + "?" + urllib.parse.urlencode({
@@ -603,10 +604,15 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                     for movie in result.get("results", []):
                         if movie.get("id"):
                             search_results_by_id[str(movie["id"])] = movie
-                # Search the alternate title localization only when the primary
-                # title search returns no records. This keeps normal API traffic
-                # unchanged and recovers titles indexed under the other locale.
-                if not search_results_by_id:
+                # Search the alternate title localization if the primary search
+                # has no exact title. TMDB may return nearby records while omitting
+                # the exact localized title from its primary-language results.
+                has_exact_primary_title = any(
+                    alias_keys.intersection({normalize(movie.get("title")),
+                                             normalize(movie.get("original_title"))})
+                    for movie in search_results_by_id.values()
+                )
+                if not has_exact_primary_title:
                     for query in aliases:
                         alternate_language = search_languages(query)[1]
                         url = SEARCH + "?" + urllib.parse.urlencode({
@@ -619,7 +625,6 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                             if movie.get("id"):
                                 search_results_by_id[str(movie["id"])] = movie
                 search_results = list(search_results_by_id.values())
-                alias_keys = {normalize(alias) for alias in aliases}
                 exact_title_candidates = [movie for movie in search_results
                                           if alias_keys.intersection({normalize(movie.get("title")),
                                                                       normalize(movie.get("original_title"))})]

@@ -207,7 +207,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         data, requests, result = self.run_rows(
             [{"title": "テスト作品", "gross": 8.4, "year": 1980}],
             [
-                {"results": []},
+                {"results": [{"id": 987, "title": "Unrelated Film", "original_title": "Unrelated Film", "release_date": "1980-02-01", "poster_path": "/unrelated.jpg"}]},
                 {"results": [{"id": 123456, "title": "Test Film",
                               "original_title": "テスト作品", "release_date": "1980-01-01",
                               "poster_path": "/test-film.jpg"}]},
@@ -585,8 +585,8 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["unresolved"], 1)
         self.assertEqual(data["by_year"]["1980"][0]["poster_check_version"], backfill.POSTER_CHECK_VERSION)
         self.assertEqual(data["by_year"]["1980"][0]["poster_match_status"], "not_found")
-        self.assertEqual(len(requests), 2)
-        self.assertIn("/movie/10/alternative_titles?", requests[1][0].full_url)
+        self.assertEqual(len(requests), 3)
+        self.assertIn("/movie/10/alternative_titles?", requests[2][0].full_url)
 
     def test_existing_poster_is_never_replaced_and_missing_key_is_read_only(self):
         data, requests, result = self.run_rows(
@@ -707,8 +707,8 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/raiders.jpg")
         self.assertEqual(row["identity_match"],
                          "exact_tmdb_alternative_title_and_release_year_window")
-        self.assertEqual(len(requests), 2)
-        self.assertIn("/movie/85/alternative_titles?", requests[1][0].full_url)
+        self.assertEqual(len(requests), 3)
+        self.assertIn("/movie/85/alternative_titles?", requests[2][0].full_url)
         self.assertIn("country=JP", requests[1][0].full_url)
         self.assertEqual(result["enriched"], 1)
 
@@ -737,7 +737,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1981"][0]
         self.assertNotIn("tmdbId", row)
         self.assertNotIn("poster", row)
-        self.assertEqual(len(requests), 2)
+        self.assertEqual(len(requests), 3)
         self.assertEqual(result["unresolved"], 1)
 
     def test_alias_candidate_overflow_is_unresolved_without_guessing(self):
@@ -761,7 +761,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1981"][0]
         self.assertNotIn("tmdbId", row)
         self.assertNotIn("poster", row)
-        self.assertEqual(len(requests), 1)
+        self.assertEqual(len(requests), 2)
         self.assertEqual(result["ambiguous"], 1)
 
     def test_reuses_unique_verified_ranking_poster(self):

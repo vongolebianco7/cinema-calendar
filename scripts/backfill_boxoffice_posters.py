@@ -46,6 +46,29 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (2009, "ドロップ"): "2009-03-20",
 }
 
+# Official source pages provide Japanese release date and director credits for
+# a small set of known false-positive-prone titles. TMDB's own movie credits
+# are checked before any of these records can receive artwork.
+REVIEWED_JAPANESE_DIRECTORS = {
+    (1986, "オバケのq太郎とびだせバケバケ大作戦"): {
+        "names": ("原田益次",),
+        "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C410040",
+    },
+    (2000, "おジャ魔女どれみ♯"): {
+        "names": ("五十嵐卓哉",),
+        "source_url": "https://lineup.toei-anim.co.jp/ja/movie/doremi_movie/song/",
+    },
+    (2001, "も~っと!おジャ魔女どれみ"): {
+        "names": ("山内重保",),
+        "source_url": "https://lineup.toei-anim.co.jp/ja/movie/doremi_movie_kaeru/song/",
+    },
+    (2001, "デジモンティマース"): {
+        "names": ("今沢哲男",),
+        "source_url": "https://shop.toei-video.co.jp/products/bstd03773",
+    },
+}
+MIN_DIRECTOR_FUZZY_TITLE_RATIO = 0.5
+
 REVIEWED_TITLE_ALIASES = {
     (2001, "ONE PIECE ねじまき島の冒険"): [
         "One Piece: Clockwork Island Adventure",
@@ -575,6 +598,53 @@ def matches_reviewed_release_window(title, market_year, release_date):
     return eligible_release_year(release_date, market_year)
 
 
+def reviewed_director(title, market_year):
+    if not str(market_year or "").isdigit():
+        return None
+    return REVIEWED_JAPANESE_DIRECTORS.get((int(market_year), normalize(title)))
+
+
+def title_similarity(movie, aliases):
+    from difflib import SequenceMatcher
+
+    keys = {normalize(alias) for alias in aliases if normalize(alias)}
+    labels = {normalize(movie.get("title")), normalize(movie.get("original_title"))}
+    labels.discard("")
+    return max((SequenceMatcher(None, label, key).ratio()
+                for label in labels for key in keys), default=0.0)
+
+
+def tmdb_director_names(movie_id, api_key, rate_limited_fetch):
+    url = DETAILS.format(int(movie_id)) + "?" + urllib.parse.urlencode({
+        "api_key": api_key, "language": "ja-JP", "append_to_response": "credits",
+    })
+    details = rate_limited_fetch(url)
+    credits = details.get("credits") or {}
+    return details, {
+        normalize(member.get("name"))
+        for member in credits.get("crew", [])
+        if member.get("job") == "Director" and member.get("name")
+    }
+
+
+def retain_reviewed_director_matches(candidates, title, market_year, api_key,
+                                     rate_limited_fetch):
+    """Require TMDB's official director credit for independently reviewed films."""
+    evidence = reviewed_director(title, market_year)
+    if not evidence:
+        return candidates
+    expected = {normalize(name) for name in evidence["names"]}
+    verified = []
+    for movie in candidates:
+        details, directors = tmdb_director_names(movie["id"], api_key, rate_limited_fetch)
+        if not expected.intersection(directors):
+            continue
+        # Prefer detail response fields: they are from the identified TMDB movie,
+        # not the localized search-result summary.
+        verified.append({**movie, **details})
+    return verified
+
+
 def eligible_release_year(release_date, market_year):
     release = str(release_date or "")[:4]
     if not release.isdigit() or not str(market_year).isdigit():
@@ -881,6 +951,33 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                             match_type = ("exact_tmdb_alternative_title_and_release_year_window"
                                           if in_window else
                                           "unique_exact_tmdb_alternative_title_outside_release_year_window")
+                director_evidence = reviewed_director(title, market_year)
+                director_checked_ids = set()
+                if director_evidence and candidates:
+                    director_checked_ids = {str(movie.get("id")) for movie in candidates}
+                    candidates = retain_reviewed_director_matches(
+                        candidates, title, market_year, api_key, rate_limited_fetch)
+                    if candidates:
+                        match_type = "tmdb_title_jp_release_window_and_director_verified"
+                if director_evidence and not candidates:
+                    # Search is allowed to surface nearby title spellings, but
+                    # the exact Japanese release date and TMDB director credit
+                    # must independently agree before a poster can be attached.
+                    fuzzy_candidates = [movie for movie in search_results
+                                        if movie.get("id") and str(movie.get("id")) not in director_checked_ids
+                                        and movie.get("poster_path")
+                                        and matches_reviewed_release_window(
+                                            title, market_year, movie.get("release_date"))
+                                        and title_similarity(movie, aliases)
+                                            >= MIN_DIRECTOR_FUZZY_TITLE_RATIO]
+                    fuzzy_candidates.sort(
+                        key=lambda movie: title_similarity(movie, aliases), reverse=True)
+                    fuzzy_candidates = fuzzy_candidates[:MAX_ALTERNATIVE_TITLE_CANDIDATES]
+                    candidates = retain_reviewed_director_matches(
+                        fuzzy_candidates, title, market_year, api_key, rate_limited_fetch)
+                    if candidates:
+                        too_many_alias_candidates = False
+                        match_type = "fuzzy_title_jp_release_window_and_director_verified"
         except Exception as exc:
             print("TMDB box-office poster lookup skipped:", title, type(exc).__name__)
             # A transient API failure must remain retryable on the next run.
@@ -907,6 +1004,10 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 "identity_source": f"https://www.themoviedb.org/movie/{mid}",
                 "identity_checked_at": checked_at,
                 "identity_match": match_type,
+                **({
+                    "identity_director": list(reviewed_director(title, market_year)["names"]),
+                    "identity_director_source": reviewed_director(title, market_year)["source_url"],
+                } if reviewed_director(title, market_year) else {}),
                 "poster_checked_at": checked_at,
                 "poster_check_version": POSTER_CHECK_VERSION,
                 "poster_match_status": "matched",

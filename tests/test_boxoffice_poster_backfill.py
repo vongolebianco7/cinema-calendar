@@ -739,6 +739,108 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                     snapshot,
                 )
 
+    def test_1993_dr_slump_title_fragments_rejoin_without_changing_shared_gross(self):
+        cases = (
+            {
+                "source_group": (
+                    "93春東映アニメフェア / "
+                    "ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦 / "
+                    "Drスランプアラレちゃん / んちゃ!ペンギン村はハレのち晴れ"
+                ),
+                "children": (
+                    "ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦",
+                    "Drスランプアラレちゃん",
+                    "んちゃ!ペンギン村はハレのち晴れ",
+                ),
+                "merged": "Dr.スランプ アラレちゃん んちゃ!ペンギン村はハレのち晴れ",
+                "expected_titles": (
+                    "ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦",
+                    "Dr.スランプ アラレちゃん んちゃ!ペンギン村はハレのち晴れ",
+                ),
+                "gross": 13.7,
+            },
+            {
+                "source_group": (
+                    "93夏東映アニメフェア / ドラゴンボールZ / "
+                    "銀河ギリギリ!ぶっち切りの凄い奴 / "
+                    "Drスランプアラレちゃん / んちゃ!ペンギン村より愛を込めて / 幽遊白書"
+                ),
+                "children": (
+                    "ドラゴンボールZ",
+                    "銀河ギリギリ!ぶっち切りの凄い奴",
+                    "Drスランプアラレちゃん",
+                    "んちゃ!ペンギン村より愛を込めて",
+                    "幽遊白書",
+                ),
+                "merged": "Dr.スランプ アラレちゃん んちゃ!ペンギン村より愛をこめて",
+                "expected_titles": (
+                    "ドラゴンボールZ",
+                    "銀河ギリギリ!ぶっち切りの凄い奴",
+                    "Dr.スランプ アラレちゃん んちゃ!ペンギン村より愛をこめて",
+                    "幽遊白書",
+                ),
+                "gross": 13.1,
+            },
+        )
+
+        for case_index, case in enumerate(cases, start=1):
+            rows = []
+            merge_fragments = {
+                "Drスランプアラレちゃん",
+                "んちゃ!ペンギン村はハレのち晴れ",
+                "んちゃ!ペンギン村より愛を込めて",
+            }
+            for child_index, title in enumerate(case["children"], start=1):
+                row = {
+                    "title": title,
+                    "gross": case["gross"],
+                    "year": 1993,
+                    "source_group_title": case["source_group"],
+                }
+                if title not in merge_fragments:
+                    row["tmdbId"] = case_index * 100 + child_index
+                    row["poster"] = (
+                        f"https://image.tmdb.org/t/p/w500/"
+                        f"preserved-{case_index}-{child_index}.jpg"
+                    )
+                rows.append(row)
+
+            data = {"by_year": {"1993": rows}}
+            preserved = {
+                row["title"]: (row.get("tmdbId"), row.get("poster"))
+                for row in rows if row.get("poster")
+            }
+
+            self.assertEqual(backfill.expand_grouped_rows(data), 1)
+            merged_rows = data["by_year"]["1993"]
+            self.assertEqual(
+                tuple(row["title"] for row in merged_rows),
+                case["expected_titles"],
+            )
+            self.assertEqual(
+                [row["gross"] for row in merged_rows],
+                [case["gross"]] * len(case["expected_titles"]),
+            )
+            self.assertTrue(all(
+                row["source_group_title"] == case["source_group"]
+                for row in merged_rows
+            ))
+            for title, identity in preserved.items():
+                row = next(item for item in merged_rows if item["title"] == title)
+                self.assertEqual((row["tmdbId"], row["poster"]), identity)
+            merged = next(
+                row for row in merged_rows if row["title"] == case["merged"]
+            )
+            self.assertNotIn("tmdbId", merged)
+            self.assertNotIn("poster", merged)
+
+            snapshot = json.dumps(merged_rows, ensure_ascii=False, sort_keys=True)
+            self.assertEqual(backfill.expand_grouped_rows(data), 0)
+            self.assertEqual(
+                json.dumps(data["by_year"]["1993"], ensure_ascii=False, sort_keys=True),
+                snapshot,
+            )
+
     def test_2005_magiranger_title_fragments_rejoin_without_changing_shared_gross(self):
         source_group = (
             "劇場版 仮面ライダーヒビキと7人の戦鬼 / "

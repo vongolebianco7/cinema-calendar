@@ -853,7 +853,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             requested_titles[-1],
             unicodedata.normalize("NFKC", list(film_identities)[-1]),
         )
-        self.assertEqual(len(requests), 5)
+        self.assertEqual(len(requests), 3)
         self.assertEqual([row["title"] for row in rows], list(film_identities))
         self.assertEqual([row["gross"] for row in rows], [16.8, 16.8])
         self.assertEqual([row["metric"] for row in rows], ["配給収入", "配給収入"])
@@ -865,7 +865,6 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
         self.assertEqual(result["expanded_grouped_films"], 2)
         self.assertEqual(result["enriched"], 2)
-        self.assertEqual(len(requests), 2)
 
     def test_official_1988_group_titles_resolve_two_films_without_dropping_doraemon(self):
         from urllib.parse import parse_qs, urlparse

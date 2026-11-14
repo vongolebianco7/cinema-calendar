@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "eb510a7a36ad82e84be9b97f280a08590ad9d1ad",
-  "verified_at": "2026-11-14T14:06:00Z",
-  "note": "Exact-source CI receipt for PR #838. Tested head eb510a7a36ad82e84be9b97f280a08590ad9d1ad was merged as 8835a0a097a7a02397ee641e79a9bca0679c3ad7; tested and merged Git tree SHA is identical (c21b030d05498ce9fce7974527487a73dfaa4343). All four required pull_request workflows passed on the exact tested source head: Autonomous quality gate run 43601891240; CINELVA smoke tests run 43601891288; Validate frontend run 43601891366; Reproducible backend build run 43601891279. The full Python contract suite (run 43601891336), mobile layout smoke (43601891254), continuous visual QA (43601891205), and completeness scorecard (43601891364) also succeeded. Vercel backend preview was READY for the exact source head. The first quality/frontend attempts encountered transient WebKit navigation/access-control failures; only the failed jobs were rerun and both workflows completed successfully without a source change."
+  "head_sha": "3fa6577412245bd7f5d28cbc1a6b2ceb187bd6d8",
+  "verified_at": "2026-11-14T17:15:27Z",
+  "note": "Exact-source CI receipt for PR #839. Tested head 3fa6577412245bd7f5d28cbc1a6b2ceb187bd6d8 was merged as 63ed5b5e48bc595458badcffa2da81445de0ae4e; tested and merged Git tree SHA is identical (485dd9c2d5a6d0f164d4e1b7dddf57204d5d61b2). All four required pull_request workflows passed on the exact tested source head: Autonomous quality gate run 43605280978; CINELVA smoke tests run 43605281000; Validate frontend run 43605281031; Reproducible backend build run 43605281068. The completeness scorecard (43605281043), continuous visual QA (43605281051), and mobile layout smoke (43605281014) also succeeded. Cloudflare Pages preview succeeded. Vercel backend preview was blocked by the Hobby daily deployment limit; no paid action, bypass, or repeated manual deployment was attempted."
 }

@@ -39,9 +39,21 @@ const routes = [
   { name: 'my-cinelva-awards', path: '/my-cinelva/', tab: 'awards', fixture: true },
   { name: 'my-cinelva-directors', path: '/my-cinelva/', tab: 'directors', fixture: true },
 ];
-const compoundBoxOfficeFixtures = [
-  { year: '1999', title: 'リング2 / 死国', posterTitles: ['リング 2', '死国'], gross: '21.0億円', rank: '#7' },
-  { year: '2000', title: 'リング0 バースデイ / ISOLA 多重人格少女', posterTitles: ['リング０ バースデイ', 'ISOLA 多重人格少女'], gross: '16.0億円', rank: '#25' },
+const splitBoxOfficeFixtures = [
+  {
+    year: '1999',
+    films: [
+      { title: 'リング2', gross: '配給収入 21.0億円' },
+      { title: '死国', gross: '配給収入 21.0億円' },
+    ],
+  },
+  {
+    year: '2000',
+    films: [
+      { title: 'リング0 バースデイ', gross: '興行収入 16.0億円' },
+      { title: 'ISOLA 多重人格少女', gross: '興行収入 16.0億円' },
+    ],
+  },
 ];
 
 async function settleImages(page, { forceEager = false } = {}) {
@@ -297,7 +309,7 @@ async function auditHistoricalBoxOffice(context) {
   }
 }
 
-async function auditCompoundBoxOffice(context, fixture) {
+async function auditSplitBoxOffice(context, fixture) {
   const page = await context.newPage();
   const imageResponses = new Set();
   const pageErrors = [];
@@ -311,28 +323,26 @@ async function auditCompoundBoxOffice(context, fixture) {
     const path = `/rankings.html?axis=boxoffice&boxYear=${encodeURIComponent(fixture.year)}`;
     const response = await page.goto(new URL(path, base).href, { waitUntil: 'domcontentloaded', timeout: 30000 });
     if (!response || response.status() >= 400) throw new Error(`box-office-${fixture.year}: HTTP ${response?.status() ?? 'missing'}`);
-    await page.waitForFunction(title => [...document.querySelectorAll('.rankCard .title')]
-      .some(node => node.textContent.trim() === title), fixture.title, { timeout: 15000 });
+    await page.waitForFunction(titles => titles.every(title => [...document.querySelectorAll('.rankCard .title')]
+      .some(node => node.textContent.trim() === title)), fixture.films.map(film => film.title), { timeout: 15000 });
     await settleImages(page);
-    const artwork = await page.evaluate(title => {
+    const artwork = await page.evaluate(titles => titles.map(title => {
       const card = [...document.querySelectorAll('.rankCard')]
         .find(node => node.querySelector('.title')?.textContent.trim() === title);
-      if (!card) return { found: false, poster_titles: [], loaded: 0, note: '', gross: '', rank: '' };
-      const images = [...card.querySelectorAll('img[data-box-group-poster]')];
+      if (!card) return { title, found: false, loaded: 0, gross: '', compound_posters: 0 };
+      const images = [...card.querySelectorAll('img[data-box-poster]')];
       return {
+        title,
         found: true,
-        poster_titles: images.map(image => image.alt),
         loaded: images.filter(image => image.complete && image.naturalWidth > 0).length,
-        note: card.querySelector('.boxGroupNote')?.textContent.trim() || '',
         gross: [...card.querySelectorAll('.meta')].map(node => node.textContent.trim()).find(text => /億円/.test(text)) || '',
-        rank: card.querySelector('.no')?.textContent.trim() || '',
+        compound_posters: card.querySelectorAll('img[data-box-group-poster]').length,
       };
-    }, fixture.title);
+    }), fixture.films.map(film => film.title));
     return {
-      ...(await imageResult(page, `box-office-${fixture.year}-compound`, imageResponses)),
-      compound_artwork: artwork,
-      expected_poster_titles: fixture.posterTitles,
-      expected_gross: fixture.gross,
+      ...(await imageResult(page, `box-office-${fixture.year}-split`, imageResponses)),
+      split_artwork: artwork,
+      expected_films: fixture.films,
       page_errors: pageErrors,
     };
   } finally {
@@ -350,7 +360,7 @@ try {
   const context = await browser.newContext({ viewport: { width, height: 844 }, deviceScaleFactor: 1 });
   for (const route of routes) results.push(await auditRoute(context, route, browser, width));
   results.push(await auditHistoricalBoxOffice(context));
-  for (const fixture of compoundBoxOfficeFixtures) results.push(await auditCompoundBoxOffice(context, fixture));
+  for (const fixture of splitBoxOfficeFixtures) results.push(await auditSplitBoxOffice(context, fixture));
   await context.close();
 } finally {
   await browser.close();
@@ -359,17 +369,15 @@ try {
 for (const result of results) failures.push(...posterFailures(result, width));
 const historical = results.find(result => result.name === 'box-office-1980');
 if (!historical?.caligula_loaded) failures.push('box-office-1980: restored Caligula poster did not render');
-for (const fixture of compoundBoxOfficeFixtures) {
-  const result = results.find(item => item.name === `box-office-${fixture.year}-compound`);
-  const artwork = result?.compound_artwork;
-  if (!artwork?.found) failures.push(`box-office-${fixture.year}-compound: grouped source row not rendered`);
-  if (JSON.stringify(artwork?.poster_titles || []) !== JSON.stringify(fixture.posterTitles)) {
-    failures.push(`box-office-${fixture.year}-compound: expected both catalog-backed posters in source-row order`);
+for (const fixture of splitBoxOfficeFixtures) {
+  const result = results.find(item => item.name === `box-office-${fixture.year}-split`);
+  for (const expected of fixture.films) {
+    const artwork = result?.split_artwork?.find(item => item.title === expected.title);
+    if (!artwork?.found) failures.push(`box-office-${fixture.year}-split: ${expected.title} not rendered as its own row`);
+    if (artwork?.loaded !== 1) failures.push(`box-office-${fixture.year}-split: ${expected.title} poster did not load`);
+    if (artwork?.gross !== expected.gross) failures.push(`box-office-${fixture.year}-split: ${expected.title} shared gross changed`);
+    if (artwork?.compound_posters !== 0) failures.push(`box-office-${fixture.year}-split: ${expected.title} regressed to compound poster rendering`);
   }
-  if (artwork?.loaded !== fixture.posterTitles.length) failures.push(`box-office-${fixture.year}-compound: expected all compound posters to load`);
-  if (artwork?.gross !== fixture.gross) failures.push(`box-office-${fixture.year}-compound: shared gross changed`);
-  if (artwork?.rank !== fixture.rank) failures.push(`box-office-${fixture.year}-compound: source competition rank changed`);
-  if (!/収入は合算/.test(artwork?.note || '')) failures.push(`box-office-${fixture.year}-compound: combined source-row note missing`);
 }
 
 const report = {

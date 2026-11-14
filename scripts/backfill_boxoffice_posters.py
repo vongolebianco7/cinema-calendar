@@ -3,9 +3,9 @@
 
 The box-office year is the Japanese market year, not necessarily a film's
 original release year. Only a unique exact-title TMDB movie released in the
-market year or up to two years earlier is eligible. Grouped multi-film rows,
-ambiguous titles, and titles without a dated TMDB identity stay unresolved.
-Source revenue, order, and market-year fields are never changed.
+market year or up to two years earlier is eligible. Clearly separated film
+titles in a shared market row are looked up independently and retain the shared
+gross; ambiguous titles and titles without a dated TMDB identity stay unresolved.
 """
 import datetime
 import json
@@ -28,8 +28,8 @@ DETAILS = "https://api.themoviedb.org/3/movie/{}"
 IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
 MAX_DAILY_LOOKUPS = 100
 MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
-POSTER_CHECK_VERSION = 2
-RECHECK_DAYS = 30
+POSTER_CHECK_VERSION = 3
+RECHECK_DAYS = 1
 
 
 def normalize(value):
@@ -94,6 +94,55 @@ def grouped_title(title):
             return True
 
     return False
+
+
+def split_grouped_titles(title):
+    """Return separately billed film titles when the source has a clear slash.
+
+    The original source row is one joint market record, but each billed film
+    needs its own TMDB identity and poster. The caller preserves the shared
+    gross value on every resulting film record, as requested by the product
+    policy; it does not invent a per-film split.
+    """
+    value = str(title or "").strip()
+    if not grouped_title(value):
+        return []
+    parts = [part.strip() for part in re.split(r"\s*[/／]\s*", value) if part.strip()]
+    if len(parts) == 2:
+        return parts
+    return []
+
+
+def expand_grouped_rows(data):
+    """Turn explicitly slash-separated joint rows into one lookup row per film."""
+    expanded = 0
+    for market_year, rows in (data.get("by_year") or {}).items():
+        if not isinstance(rows, list):
+            continue
+        result = []
+        for row in rows:
+            if not isinstance(row, dict) or row.get("source_group_id"):
+                result.append(row)
+                continue
+            titles = split_grouped_titles(row.get("title"))
+            if not titles:
+                result.append(row)
+                continue
+            source_title = row["title"]
+            group_id = f"{market_year}:{normalize(source_title)}"
+            for index, title in enumerate(titles, start=1):
+                film = dict(row)
+                film.update({
+                    "title": title,
+                    "source_title": source_title,
+                    "source_group_id": group_id,
+                    "source_group_index": index,
+                    "source_group_size": len(titles),
+                })
+                result.append(film)
+            expanded += len(titles)
+        data["by_year"][market_year] = result
+    return expanded
 
 
 def valid_poster_path(value):
@@ -218,6 +267,8 @@ def reuse_verified_local_posters(data, now, catalog_paths):
                 "identity_match": "verified_local_exact_title_and_release_year_window",
                 "poster_checked_at": checked_at,
                 "poster_check_version": POSTER_CHECK_VERSION,
+                "poster_match_status": "matched",
+                "poster_check_skip_reason": None,
             })
             enriched += 1
     return enriched
@@ -230,11 +281,45 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
     if not isinstance(data, dict) or not isinstance(data.get("by_year"), dict):
         raise ValueError("Invalid box-office dataset; refusing to modify it")
     now = now or datetime.datetime.now(datetime.timezone.utc)
+    expanded = expand_grouped_rows(data)
+    for rows in data["by_year"].values():
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            row["poster_match_status"] = "matched" if row.get("poster") else "unexamined"
+            row["poster_check_skip_reason"] = None if row.get("poster") else "pending"
     local_enriched = reuse_verified_local_posters(data, now, catalog_paths)
+
+    all_candidates = candidate_rows(data, now, 1_000_000)
+    selected_candidates = candidate_rows(data, now, limit)
+    selected_rows = {id(row) for _, _, _, row in selected_candidates}
+    eligible_rows = {id(row) for _, _, _, row in all_candidates}
+    for rows in data["by_year"].values():
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if not isinstance(row, dict) or row.get("poster"):
+                continue
+            if grouped_title(row.get("title")):
+                row["poster_check_skip_reason"] = "grouped_title_not_splittable"
+            elif poster_checked_recently(row, now):
+                row["poster_check_skip_reason"] = "cooldown"
+            elif id(row) in eligible_rows and id(row) not in selected_rows:
+                row["poster_check_skip_reason"] = "daily_lookup_limit"
     if not api_key:
-        if local_enriched:
-            atomic_write(path, data)
+        for rows in data["by_year"].values():
+            if isinstance(rows, list):
+                for row in rows:
+                    if isinstance(row, dict) and not row.get("poster") and row.get("poster_check_skip_reason") == "pending":
+                        row["poster_check_skip_reason"] = "tmdb_api_key_missing"
+        atomic_write(path, data)
         return {"enriched": local_enriched, "local_enriched": local_enriched,
+                "expanded_grouped_films": expanded,
+                "unexamined": sum(row.get("poster_match_status") == "unexamined"
+                                   for rows in data["by_year"].values() if isinstance(rows, list)
+                                   for row in rows if isinstance(row, dict)),
                 "ambiguous": 0, "unresolved": 0, "grouped": sum(
             grouped_title(row.get("title")) for rows in data["by_year"].values() if isinstance(rows, list)
             for row in rows if isinstance(row, dict) and not row.get("poster"))}
@@ -253,17 +338,20 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
         last_request = time.monotonic()
         return result
 
-    for _, index, market_year, row in candidate_rows(data, now, limit):
+    for _, index, market_year, row in selected_candidates:
         title = str(row.get("title") or "").strip()
         if not title or not normalize(title):
+            row["poster_check_skip_reason"] = "title_missing"
             unresolved += 1
             continue
+        row["poster_check_skip_reason"] = None
         existing_id = row.get("tmdbId") or row.get("tmdb_id")
         match_type = "exact_title_and_release_year_window"
         too_many_alias_candidates = False
         try:
             if existing_id:
                 if not str(existing_id).isdigit() or int(existing_id) <= 0:
+                    row["poster_match_status"] = "invalid_tmdb_id"
                     unresolved += 1
                     continue
                 url = DETAILS.format(int(existing_id)) + "?" + urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"})
@@ -304,6 +392,7 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
         except Exception as exc:
             print("TMDB box-office poster lookup skipped:", title, type(exc).__name__)
             # A transient API failure must remain retryable on the next run.
+            row["poster_match_status"] = "retryable_error"
             unresolved += 1
             continue
 
@@ -314,6 +403,7 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
             if not valid_poster_path(path_value):
                 row["poster_checked_at"] = checked_at
                 row["poster_check_version"] = POSTER_CHECK_VERSION
+                row["poster_match_status"] = "matched_without_poster"
                 unresolved += 1
                 continue
             mid = int(movie["id"])
@@ -327,22 +417,29 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 "identity_match": match_type,
                 "poster_checked_at": checked_at,
                 "poster_check_version": POSTER_CHECK_VERSION,
+                "poster_match_status": "matched",
+                "poster_check_skip_reason": None,
             })
             enriched += 1
         else:
             row["poster_checked_at"] = checked_at
             row["poster_check_version"] = POSTER_CHECK_VERSION
             if len(unique) > 1 or too_many_alias_candidates:
+                row["poster_match_status"] = "ambiguous"
                 ambiguous += 1
             else:
+                row["poster_match_status"] = "not_found"
                 unresolved += 1
 
-    if enriched or ambiguous or unresolved:
-        atomic_write(path, data)
+    atomic_write(path, data)
     grouped = sum(grouped_title(row.get("title")) for rows in data["by_year"].values()
                   if isinstance(rows, list) for row in rows if isinstance(row, dict) and not row.get("poster"))
     return {"enriched": enriched, "local_enriched": local_enriched,
-            "ambiguous": ambiguous, "unresolved": unresolved, "grouped": grouped}
+            "expanded_grouped_films": expanded,
+            "ambiguous": ambiguous, "unresolved": unresolved, "grouped": grouped,
+            "unexamined": sum(row.get("poster_match_status") == "unexamined"
+                               for rows in data["by_year"].values() if isinstance(rows, list)
+                               for row in rows if isinstance(row, dict))}
 
 
 if __name__ == "__main__":

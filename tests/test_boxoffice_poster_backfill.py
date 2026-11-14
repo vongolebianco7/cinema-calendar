@@ -822,9 +822,12 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
             requested_titles.append(title)
             official_title = next(
-                name for name in film_identities
-                if backfill.normalize(name) == backfill.normalize(title)
+                (name for name in film_identities
+                 if backfill.normalize(name) == backfill.normalize(title)),
+                None,
             )
+            if official_title is None:
+                return Response({"results": []})
             identifier, poster_path = film_identities[official_title]
             return Response({"results": [{
                 "id": identifier, "title": official_title, "original_title": official_title,

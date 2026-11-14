@@ -538,6 +538,24 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             "スター・ウォーズ エピソード6／ジェダイの帰還",
         ])
 
+    def test_official_1994_rampo_versions_split_with_shared_gross(self):
+        data = {"by_year": {"1994": [{
+            "title": "RAMPO", "gross": 12.0, "year": 1994,
+            "metric": "配給収入",
+        }]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 2)
+        rows = data["by_year"]["1994"]
+        self.assertEqual([row["title"] for row in rows], [
+            "ＲＡＭＰＯ（奥山バージョン）",
+            "ＲＡＭＰＯ（黛バージョン）",
+        ])
+        self.assertEqual([row["gross"] for row in rows], [12.0, 12.0])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2])
+        self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
+        self.assertEqual([row["source_title"] for row in rows], ["RAMPO", "RAMPO"])
+        self.assertTrue(all(not row.get("poster") and not row.get("tmdbId") for row in rows))
+
     def test_official_1992_21_emon_package_splits_into_individual_films(self):
         import unicodedata
         from urllib.parse import parse_qs, urlparse

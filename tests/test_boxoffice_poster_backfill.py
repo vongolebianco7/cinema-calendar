@@ -837,5 +837,26 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(backfill.search_language("バトル・ロワイアルII Requiem"), "ja-JP")
         self.assertEqual(backfill.search_language("Dragon Ball Z"), "en-US")
 
-if __name__ == "__main__":
+    def test_reviewed_kid_alias_queries_tmdb_by_english_title_and_keeps_exact_year(self):
+        data, requests, result = self.run_rows(
+            [{"title": "ザ・キッド", "gross": 14.5, "year": 2000}],
+            {"results": [{
+                "id": 900001,
+                "title": "The Kid",
+                "original_title": "The Kid",
+                "release_date": "2000-07-07",
+                "poster_path": "/fixture-the-kid-poster.jpg",
+            }]},
+            market_year="2000",
+        )
+        row = data["by_year"]["2000"][0]
+        self.assertEqual(row["tmdbId"], 900001)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/fixture-the-kid-poster.jpg")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"]), (14.5, 2000))
+        self.assertEqual([request[0].full_url.split("language=")[1].split("&")[0]
+                          for request in requests], ["ja-JP", "en-US"])
+        self.assertEqual(result["enriched"], 1)
+
+    if __name__ == "__main__":
     unittest.main()

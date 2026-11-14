@@ -339,6 +339,8 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
               "gross": 7.2, "year": 1992, "metric": "配給収入"}],
             [
                 {"results": []},
+                {"results": []},
+                {"results": []},
                 {"results": [{
                     "id": 873387,
                     "title": "21エモン 宇宙いけ！裸足のプリンセス",
@@ -346,7 +348,6 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                     "release_date": "1992-03-07",
                     "poster_path": "/official-21-emon-poster.jpg",
                 }]},
-                {"results": []},
             ],
             market_year="1992",
         )
@@ -358,11 +359,11 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["identity_match"], "exact_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"], row["metric"]), (7.2, 1992, "配給収入"))
         self.assertEqual(result["enriched"], 1)
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
         from urllib.parse import parse_qs, urlparse
         self.assertEqual(
-            parse_qs(urlparse(requests[1][0].full_url).query)["query"][0],
-            "21エモン 宇宙いけ!裸足のプリンセス",
+            parse_qs(urlparse(requests[3][0].full_url).query)["query"][0],
+            "21エモン 宇宙いけ！ 裸足のプリンセス",
         )
 
     def test_compound_market_row_is_split_and_shared_gross_is_preserved(self):

@@ -51,6 +51,10 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (1994, "ウメ星デンカ宇宙の果てからパンパロパン"): "1994-03-12",
     # Shin-Ei official filmography and TMDB identify the 1992 short film.
     (1992, "21エモン宇宙行け裸足のプリンセス"): "1992-03-07",
+    # Toei's official Rider history and Toei Video catalog confirm the
+    # separately billed 2005 features and their shared Japanese premiere.
+    (2005, "劇場版仮面ライダーヒビキと7人の戦鬼"): "2005-09-03",
+    (2005, "魔法戦隊マジレンジャーthemovieインフェルシアの花嫁"): "2005-09-03",
     (2009, "ドロップ"): "2009-03-20",
 }
 
@@ -145,8 +149,15 @@ REVIEWED_TITLE_ALIASES = {
     (2003, "バトル・ロワイアルII 鎮魂歌(レクイエム)"): ["Battle Royale II: Requiem"],
     (2003, "仮面ライダー555(ファイズ )"): ["Kamen Rider 555: Paradise Lost"],
     (2003, "爆竜戦隊アバレンジャー DELUXE"): ["Bakuryuu Sentai Abaranger Deluxe"],
-    (2005, "劇場版 仮面ライダーヒビキと7人の戦鬼"): ["Kamen Rider Hibiki and the Seven War Oni"],
+    (2005, "劇場版 仮面ライダーヒビキと7人の戦鬼"): [
+        "劇場版 仮面ライダー響鬼と7人の戦鬼",
+        "Kamen Rider Hibiki and the Seven War Oni",
+    ],
     (2005, "魔法戦隊マジレンジャーTHE MOVIE"): ["Mahou Sentai Magiranger the Movie"],
+    (2005, "魔法戦隊マジレンジャーTHE MOVIE インフェルシアの花嫁"): [
+        "魔法戦隊マジレンジャー THE MOVIE インフェルシアの花嫁",
+        "Mahou Sentai Magiranger the Movie",
+    ],
     (2006, "ポケモンレンジャーと蒼海の王子マナフィ"): ["Pokémon Ranger and the Temple of the Sea"],
     (2007, "「ディアルガVSパルキアVSダークライ」"): ["Pokémon: The Rise of Darkrai"],
     (2008, "ギラティナと氷空<そら>の花束シェイミ"): ["Pokémon: Giratina and the Sky Warrior"],
@@ -340,6 +351,24 @@ EXPLICIT_SOURCE_GROUP_MERGES = {
             "ぶちやぶれ!!新生6大将軍 他",
         ),
         "film_title": "DRAGON QUEST ダイの大冒険 ぶちやぶれ!! 新生6大将軍",
+    },
+    # Eiren's 2005 row split the Magiranger movie title at a slash even though
+    # Toei Video lists the subtitle as part of one feature. Rejoin only this
+    # exact complete sibling set; the shared package gross remains unchanged.
+    normalize(
+        "劇場版 仮面ライダーヒビキと7人の戦鬼 / "
+        "魔法戦隊マジレンジャーTHE MOVIE / インフェルシアの花嫁"
+    ): {
+        "source_child_titles": (
+            "劇場版 仮面ライダーヒビキと7人の戦鬼",
+            "魔法戦隊マジレンジャーTHE MOVIE",
+            "インフェルシアの花嫁",
+        ),
+        "merge_titles": (
+            "魔法戦隊マジレンジャーTHE MOVIE",
+            "インフェルシアの花嫁",
+        ),
+        "film_title": "魔法戦隊マジレンジャーTHE MOVIE インフェルシアの花嫁",
     },
 }
 

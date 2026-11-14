@@ -739,6 +739,49 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                     snapshot,
                 )
 
+    def test_2005_magiranger_title_fragments_rejoin_without_changing_shared_gross(self):
+        source_group = (
+            "劇場版 仮面ライダーヒビキと7人の戦鬼 / "
+            "魔法戦隊マジレンジャーTHE MOVIE / インフェルシアの花嫁"
+        )
+        data = {"by_year": {"2005": [
+            {"title": "劇場版 仮面ライダーヒビキと7人の戦鬼",
+             "gross": 11.0, "year": 2005, "source_group_title": source_group},
+            {"title": "魔法戦隊マジレンジャーTHE MOVIE",
+             "gross": 11.0, "year": 2005, "source_group_title": source_group,
+             "poster_match_status": "not_found"},
+            {"title": "インフェルシアの花嫁",
+             "gross": 11.0, "year": 2005, "source_group_title": source_group,
+             "poster_match_status": "not_found"},
+        ]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 1)
+        rows = data["by_year"]["2005"]
+        self.assertEqual([row["title"] for row in rows], [
+            "劇場版 仮面ライダーヒビキと7人の戦鬼",
+            "魔法戦隊マジレンジャーTHE MOVIE インフェルシアの花嫁",
+        ])
+        self.assertEqual([row["gross"] for row in rows], [11.0, 11.0])
+        self.assertEqual([row["source_group_title"] for row in rows],
+                         [source_group, source_group])
+        self.assertEqual(
+            backfill.reviewed_japanese_release_date(rows[0]["title"], 2005),
+            "2005-09-03",
+        )
+        self.assertEqual(
+            backfill.reviewed_japanese_release_date(rows[1]["title"], 2005),
+            "2005-09-03",
+        )
+        self.assertIn(
+            "劇場版 仮面ライダー響鬼と7人の戦鬼",
+            backfill.exact_title_aliases(rows[0]["title"], 2005),
+        )
+        self.assertIn(
+            "魔法戦隊マジレンジャー THE MOVIE インフェルシアの花嫁",
+            backfill.exact_title_aliases(rows[1]["title"], 2005),
+        )
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+
     def test_1992_dai_fragments_do_not_merge_if_group_or_gross_is_incomplete(self):
         source_group = (
             "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / "

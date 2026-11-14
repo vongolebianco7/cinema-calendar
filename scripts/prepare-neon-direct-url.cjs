@@ -25,6 +25,10 @@ if (databaseUrl.hostname.endsWith('.neon.tech')) {
   if (databaseUrl.hostname.includes('-pooler.')) {
     throw new Error('Could not resolve the Neon pooler hostname to its direct endpoint');
   }
+  // Prisma's default timeout can expire while a suspended Neon compute wakes.
+  if (!databaseUrl.searchParams.has('connect_timeout')) {
+    databaseUrl.searchParams.set('connect_timeout', '30');
+  }
 }
 
 fs.appendFileSync(envFile, `DATABASE_URL=${databaseUrl.toString()}\n`, { mode: 0o600 });

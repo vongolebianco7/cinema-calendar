@@ -82,9 +82,17 @@ class DigimonTamersAliasTests(unittest.TestCase):
             queries = []
 
             def opener(request, timeout):
-                params = urllib.parse.parse_qs(urllib.parse.urlsplit(request.full_url).query)
+                parsed = urllib.parse.urlsplit(request.full_url)
+                params = urllib.parse.parse_qs(parsed.query)
                 query = params.get("query", [""])[0]
                 queries.append(query)
+                if parsed.path.endswith("/movie/987654321") and params.get("append_to_response"):
+                    return Response({"id": 987654321,
+                                     "title": "デジモンテイマーズ 冒険者たちの戦い",
+                                     "original_title": "Digimon Tamers: Battle of Adventurers",
+                                     "release_date": "2001-07-14",
+                                     "poster_path": "/fixture-only-poster.jpg",
+                                     "credits": {"crew": [{"job": "Director", "name": "今沢哲男"}]}})
                 if query == "デジモンテイマーズ 冒険者たちの戦い":
                     return Response({"results": [{
                         "id": 987654321,
@@ -112,7 +120,10 @@ class DigimonTamersAliasTests(unittest.TestCase):
         self.assertEqual(row["identity_source"],
                          "https://www.themoviedb.org/movie/987654321")
         self.assertEqual(row["identity_match"],
-                         "exact_cleaned_title_and_release_year_window")
+                         "tmdb_title_jp_release_window_and_director_verified")
+        self.assertEqual(row["identity_director"], ["今沢哲男"])
+        self.assertEqual(row["identity_director_source"],
+                         "https://shop.toei-video.co.jp/products/bstd03773")
         self.assertEqual(row["tmdb_release_date"], "2001-07-14")
         self.assertEqual(row["gross"], 10)
         self.assertEqual(row["source_group_title"], group)
@@ -201,11 +212,18 @@ class DigimonTamersAliasTests(unittest.TestCase):
             queries = []
 
             def opener(request, timeout):
-                params = urllib.parse.parse_qs(
-                    urllib.parse.urlsplit(request.full_url).query
-                )
+                parsed = urllib.parse.urlsplit(request.full_url)
+                params = urllib.parse.parse_qs(parsed.query)
                 query = params.get("query", [""])[0]
                 queries.append(query)
+                for case in cases:
+                    if parsed.path.endswith(f"/movie/{case['id']}") and params.get("append_to_response"):
+                        director = backfill.reviewed_director(case["title"], case["year"])["names"][0]
+                        return Response({"id": case["id"], "title": case["title"],
+                                         "original_title": case["title"],
+                                         "release_date": case["release_date"],
+                                         "poster_path": case["poster_path"],
+                                         "credits": {"crew": [{"job": "Director", "name": director}]}})
                 for case in cases:
                     if query in backfill.exact_title_aliases(
                         case["title"], case["year"]
@@ -287,6 +305,89 @@ class DigimonTamersAliasTests(unittest.TestCase):
                     self.assertNotIn("tmdbId", row)
                     self.assertEqual(row["poster_match_status"], "not_found")
                     self.assertEqual(result["enriched"], 0)
+
+
+    def test_fuzzy_title_requires_exact_japan_release_and_tmdb_director(self):
+        for director in ("原田益次", "別の監督"):
+            with self.subTest(director=director), tempfile.TemporaryDirectory() as directory:
+                path = Path(directory) / "boxoffice.json"
+                title = "オバケのQ太郎 とびだせ!バケバケ大作戦"
+                path.write_text(json.dumps({"by_year": {"1986": [{
+                    "title": title, "gross": 77,
+                }]}, "all_time": []}), encoding="utf-8")
+                requested = []
+
+                def opener(request, timeout):
+                    parsed = urllib.parse.urlsplit(request.full_url)
+                    params = urllib.parse.parse_qs(parsed.query)
+                    requested.append(parsed.path)
+                    if parsed.path.endswith("/movie/9860315") and params.get("append_to_response"):
+                        return Response({
+                            "id": 9860315,
+                            "title": "オバケのQ太郎 とびだせ！バケバケ大作戦",
+                            "original_title": "Obake no Q-tarō: Tobidase! Bakabake Daisakusen",
+                            "release_date": "1986-03-15",
+                            "poster_path": "/fixture-q-taro.jpg",
+                            "credits": {"crew": [{"job": "Director", "name": director}]},
+                        })
+                    if params.get("query"):
+                        return Response({"results": [{
+                            "id": 9860315,
+                            "title": "おばけのQ太郎飛び出せバケバケ大作戦",
+                            "original_title": "Obake no Q-taro Tobidase Bakabake Daisakusen",
+                            "release_date": "1986-03-15",
+                            "poster_path": "/fixture-q-taro.jpg",
+                        }]})
+                    return Response({"results": []})
+
+                result = backfill.backfill(
+                    path, api_key="fixture", opener=opener, delay=0,
+                    now=datetime.datetime(2026, 11, 14, tzinfo=datetime.timezone.utc),
+                    catalog_paths=[],
+                )
+                row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1986"][0]
+                if director == "原田益次":
+                    self.assertEqual(row["tmdbId"], 9860315)
+                    self.assertEqual(row["gross"], 77)
+                    self.assertEqual(row["poster_match_status"], "matched")
+                    self.assertEqual(row["identity_match"],
+                                     "fuzzy_title_jp_release_window_and_director_verified")
+                    self.assertIn("/movie/9860315", requested)
+                    self.assertEqual(result["enriched"], 1)
+                else:
+                    self.assertNotIn("poster", row)
+                    self.assertNotIn("tmdbId", row)
+                    self.assertEqual(row["poster_match_status"], "not_found")
+                    self.assertEqual(result["enriched"], 0)
+
+    def test_fuzzy_candidate_with_wrong_japan_release_date_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "boxoffice.json"
+            path.write_text(json.dumps({"by_year": {"1986": [{
+                "title": "オバケのQ太郎 とびだせ!バケバケ大作戦", "gross": 77,
+            }]}, "all_time": []}), encoding="utf-8")
+
+            def opener(request, timeout):
+                params = urllib.parse.parse_qs(urllib.parse.urlsplit(request.full_url).query)
+                if params.get("query"):
+                    return Response({"results": [{
+                        "id": 9860316,
+                        "title": "おばけのQ太郎飛び出せバケバケ大作戦",
+                        "original_title": "Obake no Q-taro Tobidase Bakabake Daisakusen",
+                        "release_date": "1986-03-16",
+                        "poster_path": "/wrong-date.jpg",
+                    }]})
+                return Response({"results": []})
+
+            result = backfill.backfill(
+                path, api_key="fixture", opener=opener, delay=0,
+                now=datetime.datetime(2026, 11, 14, tzinfo=datetime.timezone.utc),
+                catalog_paths=[],
+            )
+            row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1986"][0]
+        self.assertNotIn("poster", row)
+        self.assertEqual(row["poster_match_status"], "not_found")
+        self.assertEqual(result["enriched"], 0)
 
 
 if __name__ == "__main__":

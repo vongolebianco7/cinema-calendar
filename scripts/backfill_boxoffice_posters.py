@@ -27,6 +27,7 @@ SEARCH = "https://api.themoviedb.org/3/search/movie"
 DETAILS = "https://api.themoviedb.org/3/movie/{}"
 IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
 MAX_DAILY_LOOKUPS = 100
+MAX_MANUAL_LOOKUPS = 200
 MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
 POSTER_CHECK_VERSION = 3
 RECHECK_DAYS = 1
@@ -34,6 +35,21 @@ RECHECK_DAYS = 1
 
 def normalize(value):
     return "".join(c for c in unicodedata.normalize("NFKC", str(value or "")).casefold() if c.isalnum())
+
+
+def exact_title_aliases(title):
+    """Return only editorially obvious title forms, never fuzzy substrings."""
+    value = unicodedata.normalize("NFKC", str(title or "")).strip()
+    aliases = [value]
+    clean = re.sub(r"^[・･\s]+", "", value)
+    clean = re.sub(r"^(?:劇場版|映画)\s*", "", clean)
+    clean = re.sub(r"\s+他$", "", clean)
+    clean = re.sub(r"\s*[：:]\s*ジェームズ・キャメロン\s*\d+周年.*$", "", clean)
+    clean = re.sub(r"\s*[（(](?:ディレクターズ?カット|完全版|リマスター)[^）)]*[）)]\s*$", "", clean)
+    clean = re.sub(r"\s+(?:\d+周年)?(?:3D)?リマスター\s*$", "", clean)
+    if clean and clean not in aliases:
+        aliases.append(clean)
+    return list(dict.fromkeys(alias for alias in aliases if normalize(alias)))
 
 
 def grouped_title(title):
@@ -188,7 +204,7 @@ def poster_checked_recently(row, now):
         return False
 
 
-def candidate_rows(data, now, limit):
+def candidate_rows(data, now, limit, ignore_cooldown=False):
     rows = []
     for market_year, entries in (data.get("by_year") or {}).items():
         if not isinstance(entries, list):
@@ -196,7 +212,7 @@ def candidate_rows(data, now, limit):
         for index, row in enumerate(entries):
             if not isinstance(row, dict) or row.get("poster") or grouped_title(row.get("title")):
                 continue
-            if poster_checked_recently(row, now):
+            if not ignore_cooldown and poster_checked_recently(row, now):
                 continue
             rows.append((int(market_year) if str(market_year).isdigit() else 0,
                          index, str(market_year), row))
@@ -237,9 +253,10 @@ def reuse_verified_local_posters(data, now, catalog_paths):
         if not identifier or not str(identifier).isdigit() or not valid_tmdb_poster_url(poster):
             continue
         for title in {movie.get("title"), movie.get("original_title")}:
-            key = normalize(title)
-            if key:
-                indexed.setdefault(key, {})[str(identifier)] = movie
+            for alias in exact_title_aliases(title):
+                key = normalize(alias)
+                if key:
+                    indexed.setdefault(key, {})[str(identifier)] = movie
 
     checked_at = now.astimezone(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
     enriched = 0
@@ -249,11 +266,15 @@ def reuse_verified_local_posters(data, now, catalog_paths):
         for row in rows:
             if not isinstance(row, dict) or row.get("poster") or grouped_title(row.get("title")):
                 continue
-            candidates = {}
-            for identifier, movie in indexed.get(normalize(row.get("title")), {}).items():
+            exact_candidates = {}
+            for alias in exact_title_aliases(row.get("title")):
+                exact_candidates.update(indexed.get(normalize(alias), {}))
+            in_window = {}
+            for identifier, movie in exact_candidates.items():
                 release = movie.get("date") or movie.get("release_date") or movie.get("year")
                 if eligible_release_year(release, market_year):
-                    candidates[identifier] = movie
+                    in_window[identifier] = movie
+            candidates = in_window or exact_candidates
             if len(candidates) != 1:
                 continue
             identifier, movie = next(iter(candidates.items()))
@@ -264,7 +285,9 @@ def reuse_verified_local_posters(data, now, catalog_paths):
                 "poster": movie["poster"],
                 "identity_source": movie.get("identity_source") or movie.get("source_url") or f"https://www.themoviedb.org/movie/{identifier}",
                 "identity_checked_at": checked_at,
-                "identity_match": "verified_local_exact_title_and_release_year_window",
+                "identity_match": ("verified_local_exact_title_and_release_year_window"
+                                    if in_window else
+                                    "verified_local_unique_title_outside_release_year_window"),
                 "poster_checked_at": checked_at,
                 "poster_check_version": POSTER_CHECK_VERSION,
                 "poster_match_status": "matched",
@@ -290,10 +313,18 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 continue
             row["poster_match_status"] = "matched" if row.get("poster") else "unexamined"
             row["poster_check_skip_reason"] = None if row.get("poster") else "pending"
+    force_recheck = os.environ.get("FORCE_BOXOFFICE_POSTER_RECHECK", "").lower() == "true"
+    try:
+        requested_limit = int(os.environ.get("BOXOFFICE_POSTER_LOOKUP_LIMIT", limit))
+    except (TypeError, ValueError):
+        requested_limit = limit
+    requested_limit = max(0, min(requested_limit, MAX_MANUAL_LOOKUPS))
+
     local_enriched = reuse_verified_local_posters(data, now, catalog_paths)
 
-    all_candidates = candidate_rows(data, now, 1_000_000)
-    selected_candidates = candidate_rows(data, now, limit)
+    all_candidates = candidate_rows(data, now, 1_000_000, ignore_cooldown=force_recheck)
+    selected_candidates = candidate_rows(data, now, requested_limit,
+                                         ignore_cooldown=force_recheck)
     selected_rows = {id(row) for _, _, _, row in selected_candidates}
     eligible_rows = {id(row) for _, _, _, row in all_candidates}
     for rows in data["by_year"].values():
@@ -304,7 +335,7 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 continue
             if grouped_title(row.get("title")):
                 row["poster_check_skip_reason"] = "grouped_title_not_splittable"
-            elif poster_checked_recently(row, now):
+            elif not force_recheck and poster_checked_recently(row, now):
                 row["poster_check_skip_reason"] = "cooldown"
             elif id(row) in eligible_rows and id(row) not in selected_rows:
                 row["poster_check_skip_reason"] = "daily_lookup_limit"
@@ -358,37 +389,66 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 result = rate_limited_fetch(url)
                 candidates = [result] if result.get("id") == int(existing_id) else []
             else:
-                url = SEARCH + "?" + urllib.parse.urlencode({
-                    "api_key": api_key, "query": title, "language": "ja-JP", "region": "JP",
-                    "include_adult": "false", "page": 1,
-                })
-                result = rate_limited_fetch(url)
-                search_results = result.get("results", [])
-                exact_candidates = [movie for movie in search_results
-                                    if normalize(title) in {normalize(movie.get("title")), normalize(movie.get("original_title"))}
-                                    and eligible_release_year(movie.get("release_date"), market_year)]
+                aliases = exact_title_aliases(title)
+                search_results_by_id = {}
+                for query in aliases:
+                    url = SEARCH + "?" + urllib.parse.urlencode({
+                        "api_key": api_key, "query": query, "language": "ja-JP", "region": "JP",
+                        "include_adult": "false", "page": 1,
+                    })
+                    result = rate_limited_fetch(url)
+                    for movie in result.get("results", []):
+                        if movie.get("id"):
+                            search_results_by_id[str(movie["id"])] = movie
+                search_results = list(search_results_by_id.values())
+                alias_keys = {normalize(alias) for alias in aliases}
+                exact_title_candidates = [movie for movie in search_results
+                                          if alias_keys.intersection({normalize(movie.get("title")),
+                                                                      normalize(movie.get("original_title"))})]
+                exact_candidates = [movie for movie in exact_title_candidates
+                                    if eligible_release_year(movie.get("release_date"), market_year)]
                 if exact_candidates:
                     candidates = exact_candidates
+                    if not any(normalize(title) in {normalize(movie.get("title")),
+                                                    normalize(movie.get("original_title"))}
+                               for movie in exact_candidates):
+                        match_type = "exact_cleaned_title_and_release_year_window"
+                elif len(exact_title_candidates) == 1:
+                    # The Japanese box-office year is a market/ranking year and
+                    # can differ substantially for theatrical revivals and
+                    # anniversary editions. A unique exact TMDB title is still
+                    # strong identity evidence; the year remains recorded for
+                    # audit but does not block its poster.
+                    candidates = exact_title_candidates
+                    match_type = "unique_exact_title_alias_outside_release_year_window"
                 else:
                     # TMDB search also indexes alternative names. Verify those candidates
                     # against TMDB's official Japan-scoped alternative-title endpoint
                     # before assigning artwork; search ranking alone is never proof.
                     year_candidates = [movie for movie in search_results
                                        if movie.get("id") and eligible_release_year(movie.get("release_date"), market_year)]
-                    if len(year_candidates) > MAX_ALTERNATIVE_TITLE_CANDIDATES:
+                    alternative_candidates = year_candidates
+                    if not alternative_candidates:
+                        alternative_candidates = [movie for movie in search_results
+                                                  if movie.get("id") and movie.get("poster_path")]
+                    if len(alternative_candidates) > MAX_ALTERNATIVE_TITLE_CANDIDATES:
                         candidates = []
                         too_many_alias_candidates = True
                     else:
                         candidates = []
-                        for movie in year_candidates:
+                        for movie in alternative_candidates:
                             alt_url = f"https://api.themoviedb.org/3/movie/{int(movie['id'])}/alternative_titles?" + urllib.parse.urlencode({
                                 "api_key": api_key, "country": "JP",
                             })
                             alternatives = rate_limited_fetch(alt_url).get("titles", [])
-                            if any(normalize(title) == normalize(item.get("title")) for item in alternatives):
+                            if any(normalize(item.get("title")) in alias_keys for item in alternatives):
                                 candidates.append(movie)
                         if candidates:
-                            match_type = "exact_tmdb_alternative_title_and_release_year_window"
+                            in_window = all(eligible_release_year(movie.get("release_date"), market_year)
+                                            for movie in candidates)
+                            match_type = ("exact_tmdb_alternative_title_and_release_year_window"
+                                          if in_window else
+                                          "unique_exact_tmdb_alternative_title_outside_release_year_window")
         except Exception as exc:
             print("TMDB box-office poster lookup skipped:", title, type(exc).__name__)
             # A transient API failure must remain retryable on the next run.
@@ -427,9 +487,21 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
             if len(unique) > 1 or too_many_alias_candidates:
                 row["poster_match_status"] = "ambiguous"
                 ambiguous += 1
+                print("Box-office poster match requires review:", json.dumps({
+                    "year": market_year, "title": title,
+                    "candidates": [{"id": movie.get("id"), "title": movie.get("title"),
+                                    "original_title": movie.get("original_title"),
+                                    "release_date": movie.get("release_date"),
+                                    "has_poster": bool(movie.get("poster_path"))}
+                                   for movie in unique.values()],
+                    "too_many_candidates": too_many_alias_candidates,
+                }, ensure_ascii=False), flush=True)
             else:
                 row["poster_match_status"] = "not_found"
                 unresolved += 1
+                print("Box-office poster match not found:", json.dumps({
+                    "year": market_year, "title": title,
+                }, ensure_ascii=False), flush=True)
 
     atomic_write(path, data)
     grouped = sum(grouped_title(row.get("title")) for rows in data["by_year"].values()

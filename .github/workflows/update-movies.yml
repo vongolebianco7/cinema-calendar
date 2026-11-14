@@ -19,6 +19,7 @@ concurrency:
   group: cinema-database-write
   cancel-in-progress: false
 permissions:
+  actions: read
   contents: write
 jobs:
   # Compliance-gated production update
@@ -37,6 +38,8 @@ jobs:
         with:
           node-version: "22"
       - name: Verify approved source and exact-source CI before collection
+        env:
+          ACTIONS_READ_TOKEN: ${{ github.token }}
         run: |
           python scripts/check_sources.py
           node scripts/verify-production-release.cjs --require
@@ -133,6 +136,8 @@ jobs:
           node-version: "22"
 
       - name: Commit JSON backup snapshots
+        env:
+          ACTIONS_READ_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

@@ -352,6 +352,44 @@ EXPLICIT_SOURCE_GROUP_MERGES = {
         ),
         "film_title": "DRAGON QUEST ダイの大冒険 ぶちやぶれ!! 新生6大将軍",
     },
+    # Eiren's 1993 spring/summer rows split each Dr. Slump film title at
+    # a slash. Toei Animation's official filmography lists each prefix and
+    # subtitle as one theatrical feature. Rejoin only the complete sibling
+    # sets, preserving the package gross and already verified sibling films.
+    normalize(
+        "93春東映アニメフェア / "
+        "ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦 / "
+        "Drスランプアラレちゃん / んちゃ!ペンギン村はハレのち晴れ"
+    ): {
+        "source_child_titles": (
+            "ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦",
+            "Drスランプアラレちゃん",
+            "んちゃ!ペンギン村はハレのち晴れ",
+        ),
+        "merge_titles": (
+            "Drスランプアラレちゃん",
+            "んちゃ!ペンギン村はハレのち晴れ",
+        ),
+        "film_title": "Dr.スランプ アラレちゃん んちゃ!ペンギン村はハレのち晴れ",
+    },
+    normalize(
+        "93夏東映アニメフェア / ドラゴンボールZ / "
+        "銀河ギリギリ!ぶっ切りの凄い奴 / "
+        "Drスランプアラレちゃん / んちゃ!ペンギン村より愛を込めて / 幽遊白書"
+    ): {
+        "source_child_titles": (
+            "ドラゴンボールZ",
+            "銀河ギリギリ!ぶっ切りの凄い奴",
+            "Drスランプアラレちゃん",
+            "んちゃ!ペンギン村より愛を込めて",
+            "幽遊白書",
+        ),
+        "merge_titles": (
+            "Drスランプアラレちゃん",
+            "んちゃ!ペンギン村より愛を込めて",
+        ),
+        "film_title": "Dr.スランプ アラレちゃん んちゃ!ペンギン村より愛をこめて",
+    },
     # Eiren's 2005 row split the Magiranger movie title at a slash even though
     # Toei Video lists the subtitle as part of one feature. Rejoin only this
     # exact complete sibling set; the shared package gross remains unchanged.

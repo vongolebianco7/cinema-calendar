@@ -18,7 +18,7 @@ const approvedGroups = [
   { year: '2000', title: 'リング0 バースデイ / ISOLA 多重人格少女', titles: ['リング0 バースデイ', 'ISOLA 多重人格少女'], ids: [9674, 68820], gross: 16 }
 ];
 
-const norm = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[^\\p{L}\\p{N}]/gu, '');
+const norm = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
 for (const group of approvedGroups) {
   const rows = boxoffice.by_year[group.year].filter(item => item.source_group_title === group.title);
   assert.equal(rows.length, group.titles.length, 'each film has its own row');
@@ -42,4 +42,15 @@ for (const group of approvedGroups) {
   }
 }
 
-console.log('Combined box-office records are split into individual rows with the same shared gross and verified posters.');
+const starWars = boxoffice.by_year['1999'].filter(item => item.source_group_title === 'スター・ウォーズ エピソード1 / ファントム・メナス');
+assert.equal(starWars.length, 1, 'slash inside one film title must not create two film rows');
+assert.equal(starWars[0].title, 'スター・ウォーズ エピソード1 ファントム・メナス');
+assert.equal(starWars[0].gross, 78);
+assert.equal(Number(starWars[0].tmdbId), 1893);
+assert.ok(starWars[0].poster);
+
+const pokemon = boxoffice.by_year['1999'].filter(item => item.source_group_title === '劇場版 ポケットモンスター / 幻のポケモン・ルギア爆誕 / ピカチュウたんけんたい');
+assert.deepEqual(pokemon.map(item => item.title), ['劇場版 ポケットモンスター 幻のポケモン・ルギア爆誕', 'ピカチュウたんけんたい']);
+assert.deepEqual(pokemon.map(item => item.gross), [35, 35]);
+
+console.log('Combined box-office records are split into individual films with the same gross and verified poster identities.');

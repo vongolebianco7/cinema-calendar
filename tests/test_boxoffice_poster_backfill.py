@@ -566,6 +566,75 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual([row["source_title"] for row in rows], ["RAMPO", "RAMPO"])
         self.assertTrue(all(not row.get("poster") and not row.get("tmdbId") for row in rows))
 
+    def test_1992_dai_film_fragments_merge_without_changing_other_package_film(self):
+        cases = [
+            (
+                "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / "
+                "ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他",
+                "ドラゴンボールZ 激突!!100億円パワーの戦士たち",
+                "起ちあがれ!!アバンの使徒 他",
+                "DRAGON QUEST ダイの大冒険 起ちあがれ! アバンの使徒",
+                16.0, 39103,
+            ),
+            (
+                "ドラゴンボールZ 激突バトル!!三大超サイヤ人 / "
+                "ドラゴンクエストダイの大冒険 / ぶちやぶれ!!新生6大将軍 他",
+                "ドラゴンボールZ 激突バトル!!三大超サイヤ人",
+                "ぶちやぶれ!!新生6大将軍 他",
+                "DRAGON QUEST ダイの大冒険 ぶちやぶれ!! 新生6大将軍",
+                15.0, 39104,
+            ),
+        ]
+        for source_group, dragon_title, subtitle, canonical, gross, dragon_id in cases:
+            with self.subTest(canonical=canonical):
+                dragon_poster = f"https://image.tmdb.org/t/p/w500/{dragon_id}.jpg"
+                data = {"by_year": {"1992": [
+                    {"title": dragon_title, "gross": gross, "year": 1992,
+                     "source_group_title": source_group, "tmdbId": dragon_id,
+                     "poster": dragon_poster},
+                    {"title": "ドラゴンクエストダイの大冒険", "gross": gross,
+                     "year": 1992, "source_group_title": source_group,
+                     "poster_match_status": "unresolved"},
+                    {"title": subtitle, "gross": gross, "year": 1992,
+                     "source_group_title": source_group,
+                     "poster_match_status": "unresolved"},
+                ]}}
+                self.assertEqual(backfill.expand_grouped_rows(data), 1)
+                rows = data["by_year"]["1992"]
+                self.assertEqual(len(rows), 2)
+                self.assertEqual(rows[0]["title"], dragon_title)
+                self.assertEqual((rows[0]["tmdbId"], rows[0]["poster"]),
+                                 (dragon_id, dragon_poster))
+                self.assertEqual(rows[1]["title"], canonical)
+                self.assertEqual([row["gross"] for row in rows], [gross, gross])
+                self.assertFalse(rows[1].get("tmdbId"))
+                self.assertFalse(rows[1].get("poster"))
+                self.assertEqual(rows[1]["source_group_title"], source_group)
+                self.assertEqual(rows[1]["source_group_index"], 2)
+                self.assertEqual(rows[1]["source_group_size"], 2)
+                snapshot = json.dumps(data["by_year"]["1992"], ensure_ascii=False, sort_keys=True)
+                self.assertEqual(backfill.expand_grouped_rows(data), 0)
+                self.assertEqual(
+                    json.dumps(data["by_year"]["1992"], ensure_ascii=False, sort_keys=True),
+                    snapshot,
+                )
+
+    def test_1992_dai_fragments_do_not_merge_if_group_or_gross_is_incomplete(self):
+        source_group = (
+            "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / "
+            "ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他"
+        )
+        data = {"by_year": {"1992": [
+            {"title": "ドラゴンクエストダイの大冒険", "gross": 16.0,
+             "year": 1992, "source_group_title": source_group},
+            {"title": "起ちあがれ!!アバンの使徒 他", "gross": 15.9,
+             "year": 1992, "source_group_title": source_group},
+        ]}}
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        self.assertEqual([row["title"] for row in data["by_year"]["1992"]], [
+            "ドラゴンクエストダイの大冒険", "起ちあがれ!!アバンの使徒 他",
+        ])
+
     def test_existing_1982_double_bill_siblings_are_not_duplicated(self):
         poster = "https://image.tmdb.org/t/p/w500/good-luck.jpg"
         source_group = "グッドラックLOVE / すっかり・・・その気で!"

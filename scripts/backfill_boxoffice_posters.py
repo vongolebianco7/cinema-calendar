@@ -209,6 +209,45 @@ EXPLICIT_SOURCE_GROUP_SPLITS = {
 }
 
 
+# Eiren's 1992 entries report two joint-market packages. In each package,
+# Dragon Ball Z is one film, while the two Dai no Daibouken fragments form one
+# second film. The official Media Arts Database lists each full Dai title as a
+# single movie. Merge only this exact, complete child set; preserve the already
+# identified Dragon Ball row and never divide the package gross.
+EXPLICIT_SOURCE_GROUP_MERGES = {
+    normalize(
+        "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / "
+        "ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他"
+    ): {
+        "source_child_titles": (
+            "ドラゴンボールZ 激突!!100億円パワーの戦士たち",
+            "ドラゴンクエストダイの大冒険",
+            "起ちあがれ!!アバンの使徒 他",
+        ),
+        "merge_titles": (
+            "ドラゴンクエストダイの大冒険",
+            "起ちあがれ!!アバンの使徒 他",
+        ),
+        "film_title": "DRAGON QUEST ダイの大冒険 起ちあがれ! アバンの使徒",
+    },
+    normalize(
+        "ドラゴンボールZ 激突バトル!!三大超サイヤ人 / "
+        "ドラゴンクエストダイの大冒険 / ぶちやぶれ!!新生6大将軍 他"
+    ): {
+        "source_child_titles": (
+            "ドラゴンボールZ 激突バトル!!三大超サイヤ人",
+            "ドラゴンクエストダイの大冒険",
+            "ぶちやぶれ!!新生6大将軍 他",
+        ),
+        "merge_titles": (
+            "ドラゴンクエストダイの大冒険",
+            "ぶちやぶれ!!新生6大将軍 他",
+        ),
+        "film_title": "DRAGON QUEST ダイの大冒険 ぶちやぶれ!! 新生6大将軍",
+    },
+}
+
+
 
 def grouped_title(title):
     # Historical association records usually combine separate films with spaced
@@ -336,6 +375,47 @@ def expand_grouped_rows(data):
         # and no sibling already has an identity/poster that would be discarded.
         replacements = {}
         consumed = set()
+        # Rejoin two title fragments only for the two exact 1992 Eiren
+        # packages whose official catalog records identify the fragments as a
+        # single Dai movie. Require the complete sibling set, equal gross, and
+        # unresolved target fragments; preserve other siblings byte-for-byte.
+        for group_key, spec in EXPLICIT_SOURCE_GROUP_MERGES.items():
+            matching = [
+                index for index, row in enumerate(rows)
+                if isinstance(row, dict)
+                and normalize(row.get("source_group_title")) == group_key
+            ]
+            expected = {normalize(title) for title in spec["source_child_titles"]}
+            actual = {normalize(rows[index].get("title")) for index in matching}
+            if len(matching) != len(spec["source_child_titles"]) or actual != expected:
+                continue
+            source_rows = [rows[index] for index in matching]
+            if any(row.get("gross") != source_rows[0].get("gross")
+                   for row in source_rows[1:]):
+                continue
+            merge_titles = {normalize(title) for title in spec["merge_titles"]}
+            merge_indices = [
+                index for index in matching
+                if normalize(rows[index].get("title")) in merge_titles
+            ]
+            if len(merge_indices) != len(spec["merge_titles"]):
+                continue
+            if any(rows[index].get("poster") or rows[index].get("tmdbId")
+                   or rows[index].get("tmdb_id") for index in merge_indices):
+                continue
+
+            merged = dict(rows[merge_indices[0]])
+            clear_inherited_poster_identity(merged)
+            merged.update({
+                "title": spec["film_title"],
+                "source_group_id": f"{market_year}:{normalize(merged.get('source_group_title'))}",
+                "source_group_index": 2,
+                "source_group_size": 2,
+            })
+            replacements[merge_indices[0]] = [merged]
+            consumed.update(merge_indices[1:])
+            expanded += 1
+
         for group_key, spec in EXPLICIT_SOURCE_GROUP_SPLITS.items():
             matching = [
                 index for index, row in enumerate(rows)

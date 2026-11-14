@@ -156,7 +156,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(be_bop["tmdbId"], 433967)
         self.assertEqual(be_bop["poster"], "https://image.tmdb.org/t/p/w500/official-be-bop-poster.jpg")
         self.assertEqual(be_bop["identity_source"], "https://www.themoviedb.org/movie/433967")
-        self.assertEqual(be_bop["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual(be_bop["identity_match"], "exact_title_and_release_year_window")
         self.assertEqual(haikara["title"], "はいからさんが通る")
         self.assertNotIn("tmdbId", haikara)
         self.assertNotIn("poster", haikara)

@@ -550,8 +550,10 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                 (21002, "/tokimeki-solar.jpg"),
         }
         requested_titles = []
+        requests = []
 
         def opener(request, timeout):
+            requests.append((request, timeout))
             title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
             requested_titles.append(title)
             identifier, poster_path = film_identities[title]
@@ -560,11 +562,19 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                 "release_date": "1992-03-07", "poster_path": poster_path,
             }]})
 
-        data, requests, result = self.run_rows(
-            [{"title": source_title, "gross": 16.8, "year": 1992,
-              "metric": "配給収入", "source_url": source_url}],
-            {}, market_year="1992", opener=opener,
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps({"by_year": {"1992": [{
+            "title": source_title, "gross": 16.8, "year": 1992,
+            "metric": "配給収入", "source_url": source_url,
+        }]}, "all_time": []}), encoding="utf-8")
+        result = backfill.backfill(
+            path, api_key="fixture", opener=opener, delay=0,
+            now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+            catalog_paths=[],
         )
+        data = json.loads(path.read_text(encoding="utf-8"))
         rows = data["by_year"]["1992"]
         self.assertEqual(requested_titles, list(film_identities))
         self.assertEqual([row["title"] for row in rows], list(film_identities))

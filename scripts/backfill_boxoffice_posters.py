@@ -113,6 +113,23 @@ def exact_title_aliases(title, market_year=None):
     return list(dict.fromkeys(alias for alias in aliases if normalize(alias)))
 
 
+EXPLICIT_GROUPED_TITLE_SPLITS = {
+    # The Japanese 1997 market entry reports the original Star Wars trilogy as
+    # one package. Keep that reported gross on each separately identified film.
+    "スターウォーズ3部作": [
+        "スター・ウォーズ エピソード4／新たなる希望",
+        "スター・ウォーズ エピソード5／帝国の逆襲",
+        "スター・ウォーズ エピソード6／ジェダイの帰還",
+    ],
+    # The 2009 Eiren entry combines a Kamen Rider feature with its separately
+    # billed Super Sentai feature; each must resolve to its own TMDB identity.
+    "劇場版仮面ライダーディケイド侍戦隊シンケンジャー銀幕版": [
+        "劇場版 仮面ライダーディケイド オールライダー対大ショッカー",
+        "侍戦隊シンケンジャー銀幕版 天下分け目の戦",
+    ],
+}
+
+
 def grouped_title(title):
     # Historical association records usually combine separate films with spaced
     # slashes. Some source rows omit those spaces, so only treat an unspaced
@@ -185,6 +202,9 @@ def split_grouped_titles(title):
     policy; it does not invent a per-film split.
     """
     value = str(title or "").strip()
+    explicit_titles = EXPLICIT_GROUPED_TITLE_SPLITS.get(normalize(value))
+    if explicit_titles:
+        return list(explicit_titles)
     if "スラムダンク" in value and "ママレードボーイ" in value:
         return ["スラムダンク", "ママレードボーイ"]
     if "のび太とブリキの迷宮" in value and "ドラミちゃん" in value:

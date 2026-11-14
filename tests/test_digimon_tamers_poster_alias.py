@@ -23,6 +23,48 @@ class Response:
 
 
 class DigimonTamersAliasTests(unittest.TestCase):
+    def test_toei_full_title_alias_matches_only_its_2012_movie(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "boxoffice.json"
+            path.write_text(json.dumps({"by_year": {"2012": [{
+                "title": "特命戦隊ゴーバスターズ THE MOVIE",
+                "gross": 11112222,
+                "source_group_title": (
+                    "仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ! "
+                    "特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ!"
+                ),
+            }]}, "all_time": []}), encoding="utf-8")
+            queries = []
+
+            def opener(request, timeout):
+                params = urllib.parse.parse_qs(urllib.parse.urlsplit(request.full_url).query)
+                query = params.get("query", [""])[0]
+                queries.append(query)
+                if query == "特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ！":
+                    return Response({"results": [{
+                        "id": 987654322,
+                        "title": "特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ！",
+                        "original_title": "Tokumei Sentai Go-Busters the Movie",
+                        "release_date": "2012-08-04",
+                        "poster_path": "/fixture-only-gobusters.jpg",
+                    }]})
+                return Response({"results": []})
+
+            result = backfill.backfill(
+                path, api_key="fixture", opener=opener, delay=0,
+                now=datetime.datetime(2026, 11, 14, tzinfo=datetime.timezone.utc),
+                catalog_paths=[],
+            )
+            row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["2012"][0]
+
+        self.assertIn("特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ！", queries)
+        self.assertEqual(row["tmdbId"], 987654322)
+        self.assertEqual(row["poster"],
+                         "https://image.tmdb.org/t/p/w500/fixture-only-gobusters.jpg")
+        self.assertEqual(row["gross"], 11112222)
+        self.assertTrue(row["source_group_title"].startswith("仮面ライダーオーズ"))
+        self.assertEqual(result["enriched"], 1)
+
     def test_official_title_alias_requires_exact_japan_release_and_own_tmdb_poster(self):
         group = "デジモンティマース/キン肉マンII世 / も~っと!おジャ魔女どれみ"
         original = {

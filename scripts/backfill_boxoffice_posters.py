@@ -44,7 +44,7 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     # The Media Arts Database records the Japanese theatrical release.
     (1986, "オバケのq太郎とびだせバケバケ大作戦"): "1986-03-15",
     # Media Arts Database confirms the 1993 Japanese theatrical date.
-    (1993, "銀河ギリギリ!ぶっち切りの凄い奴"): "1993-07-10",
+    (1993, "銀河ギリギリぶっち切りの凄い奴"): "1993-07-10",
     (2009, "ドロップ"): "2009-03-20",
 }
 
@@ -56,7 +56,7 @@ REVIEWED_JAPANESE_DIRECTORS = {
         "names": ("原田益次",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C410040",
     },
-    (1993, "銀河ギリギリ!ぶっち切りの凄い奴"): {
+    (1993, "銀河ギリギリぶっち切りの凄い奴"): {
         "names": ("上田芳裕",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C410531",
     },

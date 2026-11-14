@@ -35,7 +35,7 @@ REVIEWED_TITLE_ALIASES = {
     (1981, "青春グラフィティ スニーカーぶるーす"): ["Sneaker Blues"],
     (1982, "ブッシュマン"): ["The Gods Must Be Crazy"],
     (1982, "エンドレス・ラブ"): ["Endless Love"],
-    (1983, "パーマン バードマンがやってきた!!"): ["Perman: Birdman Has Come"],
+    (1983, "パーマン バードマンがやってきた!!"): ["Perman: Birdman Has Come", "パーマン バードマンがやって来た！！"],
     (1985, "うる星やつら3 リメンバー・マイ・ラブ"): ["Urusei Yatsura 3: Remember My Love"],
     (1985, "Dr.スランプアラレちゃん ほよよ!夢の都メカポリス"): ["Dr. Slump: Hoyoyo! The City of Dreams, Mechapolis"],
     (1991, "おもいでぽろぽろ"): ["Only Yesterday"],

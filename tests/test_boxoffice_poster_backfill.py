@@ -590,6 +590,70 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["enriched"], 2)
         self.assertEqual(len(requests), 2)
 
+    def test_official_1988_group_titles_resolve_two_films_without_dropping_doraemon(self):
+        from urllib.parse import parse_qs, urlparse
+
+        source_group = (
+            "ドラえもん のび太のパラレル西遊記 / エスパー魔美 / "
+            "星空のダンシング・ドール 他"
+        )
+        identities = {
+            "エスパー魔美 星空のダンシングドール":
+                (88001, "/esper-mami-dancing-doll.jpg"),
+            "ウルトラB ブラックホールからの独裁者B・B!!":
+                (88002, "/ultra-b-black-hole.jpg"),
+        }
+        requests = []
+        queried_titles = []
+
+        def opener(request, timeout):
+            requests.append((request, timeout))
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            queried_titles.append(title)
+            identifier, poster_path = identities[title]
+            return Response({"results": [{
+                "id": identifier, "title": title, "original_title": title,
+                "release_date": "1988-03-12", "poster_path": poster_path,
+            }]})
+
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        doraemon = {
+            "title": "ドラえもん のび太のパラレル西遊記",
+            "gross": 13.6, "year": 1988, "metric": "配給収入",
+            "source_group_title": source_group,
+            "tmdbId": 136241,
+            "poster": "https://image.tmdb.org/t/p/w500/doraemon.jpg",
+        }
+        path.write_text(json.dumps({"by_year": {"1988": [
+            dict(doraemon),
+            {"title": "エスパー魔美", "gross": 13.6, "year": 1988,
+             "metric": "配給収入", "source_group_title": source_group},
+            {"title": "星空のダンシング・ドール 他", "gross": 13.6,
+             "year": 1988, "metric": "配給収入",
+             "source_group_title": source_group},
+        ]}, "all_time": []}), encoding="utf-8")
+
+        result = backfill.backfill(
+            path, api_key="fixture", opener=opener, delay=0,
+            now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+            catalog_paths=[],
+        )
+        rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1988"]
+        self.assertEqual(queried_titles, list(identities))
+        self.assertEqual([row["title"] for row in rows], [
+            doraemon["title"], *identities.keys(),
+        ])
+        self.assertEqual([row["gross"] for row in rows], [13.6, 13.6, 13.6])
+        self.assertEqual([row["tmdbId"] for row in rows], [136241, 88001, 88002])
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], [
+            "doraemon.jpg", "esper-mami-dancing-doll.jpg", "ultra-b-black-hole.jpg",
+        ])
+        self.assertEqual([row["source_group_title"] for row in rows], [source_group] * 3)
+        self.assertEqual(result["enriched"], 2)
+        self.assertEqual(len(requests), 2)
+
     def test_unspaced_official_double_feature_separators_are_split(self):
         titles = [
             "仮面ライダーダブル/天装戦隊ゴセイジャー",

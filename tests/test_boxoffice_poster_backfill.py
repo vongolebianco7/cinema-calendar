@@ -858,5 +858,5 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                           for request in requests], ["ja-JP", "en-US"])
         self.assertEqual(result["enriched"], 1)
 
-    if __name__ == "__main__":
+if __name__ == "__main__":
     unittest.main()

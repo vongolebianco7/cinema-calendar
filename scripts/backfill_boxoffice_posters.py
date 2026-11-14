@@ -62,6 +62,7 @@ REVIEWED_TITLE_ALIASES = {
     (1998, "ドラえもん 南海の大冒険"): ["Doraemon: Nobita's Great Adventure in the South Seas"],
     (2000, "劇場版ポケットモンスター 結晶塔の帝王"): ["Pokémon 3: The Movie"],
     (2000, "ピチュウとピカチュウ"): ["Pikachu & Pichu"],
+    (2000, "ザ・キッド"): ["The Kid"],
     (2000, "エクソシスト ディレクターズカット版"): ["The Exorcist: The Version You've Never Seen"],
     (2000, "デジモンアドベンチャー02"): ["Digimon Adventure 02: Diablomon Strikes Back"],
     (2000, "おジャ魔女どれみ♯"): ["Ojamajo Doremi Sharp"],

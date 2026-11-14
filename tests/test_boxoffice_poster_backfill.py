@@ -333,6 +333,38 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         ) for row in rows))
         self.assertEqual(len(requests), 3)
 
+    def test_verified_21_emon_japanese_spelling_variant_recovers_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "21エモン 宇宙行け！裸足のプリンセス",
+              "gross": 7.2, "year": 1992, "metric": "配給収入"}],
+            [
+                {"results": []},
+                {"results": [{
+                    "id": 873387,
+                    "title": "21エモン 宇宙いけ！裸足のプリンセス",
+                    "original_title": "21エモン 宇宙いけ！裸足のプリンセス",
+                    "release_date": "1992-03-07",
+                    "poster_path": "/official-21-emon-poster.jpg",
+                }]},
+                {"results": []},
+            ],
+            market_year="1992",
+        )
+        row = data["by_year"]["1992"][0]
+        self.assertEqual(row["tmdbId"], 873387)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-21-emon-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/873387")
+        self.assertEqual(row["tmdb_release_date"], "1992-03-07")
+        self.assertEqual(row["identity_match"], "exact_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"], row["metric"]), (7.2, 1992, "配給収入"))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+        from urllib.parse import parse_qs, urlparse
+        self.assertEqual(
+            parse_qs(urlparse(requests[1][0].full_url).query)["query"][0],
+            "21エモン 宇宙いけ!裸足のプリンセス",
+        )
+
     def test_compound_market_row_is_split_and_shared_gross_is_preserved(self):
         data, requests, result = self.run_rows(
             [{"title": "映画A / 映画B", "gross": 15.5, "year": 1980}],

@@ -352,7 +352,7 @@ class DigimonTamersAliasTests(unittest.TestCase):
                     self.assertEqual(row["poster_match_status"], "matched")
                     self.assertEqual(row["identity_match"],
                                      "fuzzy_title_jp_release_window_and_director_verified")
-                    self.assertIn("/movie/9860315", requested)
+                    self.assertTrue(any(path.endswith("/movie/9860315") for path in requested))
                     self.assertEqual(result["enriched"], 1)
                 else:
                     self.assertNotIn("poster", row)

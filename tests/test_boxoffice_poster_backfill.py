@@ -53,6 +53,27 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertIn("api.themoviedb.org/3/search/movie", requests[0][0].full_url)
         self.assertEqual(result["enriched"], 1)
 
+    def test_verified_parman_japanese_title_variant_recovers_its_own_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "パーマン バードマンがやってきた!!", "gross": 10, "year": 1983}],
+            {"results": [{
+                "id": 859292,
+                "title": "パーマン バードマンがやって来た！！",
+                "original_title": "パーマン バードマンがやって来た！！",
+                "release_date": "1983-03-12",
+                "poster_path": "/official-parman-poster.jpg",
+            }]},
+            market_year="1983",
+        )
+        row = data["by_year"]["1983"][0]
+        self.assertEqual(row["tmdbId"], 859292)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-parman-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/859292")
+        self.assertEqual(row["identity_match"], "exact_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"]), (10, 1983))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+
     def test_multiple_exact_title_candidates_remain_unresolved(self):
         data, requests, result = self.run_rows(
             [{"title": "同名作品", "gross": 10, "year": 1980}],

@@ -52,7 +52,10 @@ REVIEWED_TITLE_ALIASES = {
     (1993, "銀河ギリギリ!ぶっちぎりの凄い奴"): ["Dragon Ball Z: Bojack Unbound"],
     (1994, "ドラえもん のび太と夢幻三銃士"): ["Doraemon: Nobita's Three Visionary Swordsmen"],
     (1994, "メイクアップセーラー戦士"): ["Make Up! Sailor Soldiers"],
-    (1995, "スラムダンク ママレードボーイ"): ["Slam Dunk", "Marmalade Boy"],
+    (1993, "ドラえもん のび太とブリキの迷宮"): ["Doraemon: Nobita and the Tin Labyrinth"],
+    (1993, "ドラミちゃん アララ・少年山賊団!"): ["Dorami-chan: Arara! Shounen Sanzoku Dan"],
+    (1995, "スラムダンク"): ["Slam Dunk"],
+    (1995, "ママレードボーイ"): ["Marmalade Boy: The Movie"],
     (1997, "新世紀エヴァンゲリオン劇場版"): ["Neon Genesis Evangelion: Death and Rebirth"],
     (1998, "ドラえもん 南海の大冒険"): ["Doraemon: Nobita's Great Adventure in the South Seas"],
     (2000, "劇場版ポケットモンスター 結晶塔の帝王"): ["Pokémon 3: The Movie"],
@@ -124,6 +127,8 @@ def grouped_title(title):
         ("仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ!", "特命戦隊ゴーバスターズ THE MOVIE"),
         ("仮面ライダージオウ Over Quartzer", "騎士竜戦隊リュウソウジャー THE MOVIE"),
         ("ポケモン・ザ・ムービーXY 光輪(リング)の超魔神フーパ", "ピカチュウとポケモンおんがくたい"),
+        ("スラムダンク", "ママレードボーイ"),
+        ("のび太とブリキの迷宮", "ドラミちゃん"),
     )
     if any(first in value and second in value for first, second in unseparated_feature_pairs):
         return True
@@ -146,6 +151,7 @@ def grouped_title(title):
             ("男はつらいよ", "釣りバカ日誌"),
             ("ドラえもん", "チンプイ"),
             ("リング", "らせん"),
+            ("デジモンティマース", "キン肉マンII世"),
         )
         if any((first in left and second in right) or (second in left and first in right)
                for first, second in franchise_pairs):
@@ -177,6 +183,10 @@ def split_grouped_titles(title):
     policy; it does not invent a per-film split.
     """
     value = str(title or "").strip()
+    if "スラムダンク" in value and "ママレードボーイ" in value:
+        return ["スラムダンク", "ママレードボーイ"]
+    if "のび太とブリキの迷宮" in value and "ドラミちゃん" in value:
+        return ["ドラえもん のび太とブリキの迷宮", "ドラミちゃん アララ・少年山賊団!"]
     if not grouped_title(value):
         return []
     parts = [part.strip() for part in re.split(r"\s*[/／]\s*", value) if part.strip()]

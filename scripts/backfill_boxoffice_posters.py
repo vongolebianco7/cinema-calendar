@@ -44,7 +44,6 @@ REVIEWED_TITLE_ALIASES = {
     (1991, "ドラえもん のび太のトラビアンナイト"): ["Doraemon: Nobita's Dorabian Nights", "映画ドラえもん のび太のドラビアンナイト"],
     (1991, "ドラゴンボールZ・とびっきり最強対最強"): ["Dragon Ball Z: Cooler's Revenge"],
     (1991, "まじかるタルるートくん"): ["Magical Taruruto-kun"],
-    (1992, "21エモン 他"): ["21 Emon: Welcome to the Space"],
     (1992, "ドラゴンボールZ 激突!!100億円パワーの戦士たち"): ["Dragon Ball Z: The Return of Cooler"],
     (1992, "ドラゴンボールZ 激突バトル!!三大超サイヤ人"): ["Dragon Ball Z: Super Android 13"],
     (1993, "ドラえもん ソラえもん号"): ["The Sun Is Our Friend: Hold Out! Soraemon!"],
@@ -142,6 +141,13 @@ EXPLICIT_GROUPED_TITLE_SPLITS = {
         "スター・ウォーズ エピソード4／新たなる希望",
         "スター・ウォーズ エピソード5／帝国の逆襲",
         "スター・ウォーズ エピソード6／ジェダイの帰還",
+    ],
+    # Official Shin-Ei 50th-anniversary program lists the two short films
+    # paired with the Doraemon feature; the Eiren package gross stays intact
+    # for each separately identified film.
+    "21エモン他": [
+        "21エモン 宇宙行け！裸足のプリンセス",
+        "トキメキソーラーくるまによん",
     ],
     # The 2009 Eiren entry combines a Kamen Rider feature with its separately
     # billed Super Sentai feature; each must resolve to its own TMDB identity.

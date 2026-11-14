@@ -177,7 +177,15 @@ async function auditHistoricalBoxOffice(context) {
     await page.waitForTimeout(2500);
     await page.getByRole('button', { name: '興行収入', exact: true }).click();
     await page.getByRole('button', { name: '1980', exact: true }).click();
-    await page.waitForFunction(() => document.querySelectorAll('.rankCard').length === 19, null, { timeout: 15000 });
+    const expected1980Rows = await page.evaluate(async () => {
+      const response = await fetch('/data/boxoffice.json', { cache: 'no-store' });
+      if (!response.ok) throw new Error(`boxoffice.json: HTTP ${response.status}`);
+      const entries = (await response.json())?.by_year?.['1980'];
+      if (!Array.isArray(entries)) throw new Error('boxoffice.json has no valid 1980 rows');
+      return entries.length;
+    });
+    await page.waitForFunction(expected => document.querySelectorAll('.rankCard').length === expected,
+      expected1980Rows, { timeout: 15000 });
     await settleImages(page);
     const datasetCoverage = await page.evaluate(async () => {
       const response = await fetch('/data/boxoffice.json', { cache: 'no-store' });

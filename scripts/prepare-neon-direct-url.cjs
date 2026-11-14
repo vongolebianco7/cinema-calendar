@@ -20,6 +20,12 @@ if (!['postgres:', 'postgresql:'].includes(databaseUrl.protocol)) {
 
 // Prisma schema synchronization is a one-off CLI operation. Use Neon’s direct
 // endpoint for it; serverless application connections keep their existing URL.
+// Prisma's default connection timeout can expire while a suspended Neon compute wakes.
+// Keep migrations on the direct URL and allow the free compute to start before failing.
+if (!databaseUrl.searchParams.has('connect_timeout')) {
+  databaseUrl.searchParams.set('connect_timeout', '30');
+}
+
 if (databaseUrl.hostname.endsWith('.neon.tech')) {
   databaseUrl.hostname = databaseUrl.hostname.replace(/-pooler(?=\.c-)/, '');
   if (databaseUrl.hostname.includes('-pooler.')) {

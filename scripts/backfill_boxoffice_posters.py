@@ -45,6 +45,10 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (1986, "オバケのq太郎とびだせバケバケ大作戦"): "1986-03-15",
     # Media Arts Database confirms the 1993 Japanese theatrical date.
     (1993, "銀河ギリギリぶっち切りの凄い奴"): "1993-07-10",
+    # Shin-Ei's official 1994 film list and TMDB detail pages identify these
+    # two separately billed films with the same Japanese premiere date.
+    (1994, "ドラミちゃん青いストローハット"): "1994-03-12",
+    (1994, "ウメ星デンカ宇宙の果てからパンパロパン"): "1994-03-12",
     (2009, "ドロップ"): "2009-03-20",
 }
 
@@ -243,6 +247,25 @@ EXPLICIT_SOURCE_ROW_TITLE_RENAMES = {
     },
 }
 
+
+
+# Eiren's 1994 row abbreviates two separately billed short films as
+# "ドラミちゃん ウメ星デンカ". Shin-Ei's official filmography lists the
+# distinct titles; split only this exact unresolved child while preserving the
+# full shared gross for each movie.
+EXPLICIT_SOURCE_CHILD_SPLITS = {
+    normalize("ドラえもん のび太と夢幻三銃士 / ドラミちゃん ウメ星デンカ"): {
+        "source_child_titles": (
+            "ドラえもん のび太と夢幻三銃士",
+            "ドラミちゃん ウメ星デンカ",
+        ),
+        "split_child_title": "ドラミちゃん ウメ星デンカ",
+        "film_titles": (
+            "ドラミちゃん 青いストローハット",
+            "ウメ星デンカ 宇宙の果てからパンパロパン！",
+        ),
+    },
+}
 
 EXPLICIT_SOURCE_GROUP_SPLITS = {
     normalize("仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"): {
@@ -552,6 +575,67 @@ def expand_grouped_rows(data):
                 generated.append(film)
             replacements[matching[0]] = generated
             consumed.update(matching)
+            expanded += len(generated)
+
+        # Split the exact 1994 abbreviated child into its two official
+        # Shin-Ei titles. Keep the matched Doraemon sibling and its identity;
+        # duplicate the Eiren gross on each new child without sharing posters.
+        for group_key, spec in EXPLICIT_SOURCE_CHILD_SPLITS.items():
+            matching = [
+                index for index, row in enumerate(rows)
+                if isinstance(row, dict)
+                and normalize(row.get("source_group_title")) == group_key
+            ]
+            expected = {normalize(title) for title in spec["source_child_titles"]}
+            actual = {normalize(rows[index].get("title")) for index in matching}
+            if len(matching) != len(spec["source_child_titles"]) or actual != expected:
+                continue
+
+            source_rows = [rows[index] for index in matching]
+            if any(row.get("gross") != source_rows[0].get("gross")
+                   for row in source_rows[1:]):
+                continue
+
+            target_index = next(
+                index for index in matching
+                if normalize(rows[index].get("title"))
+                == normalize(spec["split_child_title"])
+            )
+            target = rows[target_index]
+            if target.get("poster") or target.get("tmdbId") or target.get("tmdb_id"):
+                continue
+
+            source_group_title = target.get("source_group_title")
+            group_id = f"{market_year}:{normalize(source_group_title)}"
+            total_group_size = len(matching) - 1 + len(spec["film_titles"])
+            generated = []
+            for film_index, title in enumerate(spec["film_titles"], start=2):
+                film = dict(target)
+                clear_inherited_poster_identity(film)
+                film.update({
+                    "title": title,
+                    "source_title": spec["split_child_title"],
+                    "source_group_id": group_id,
+                    "source_group_index": film_index,
+                    "source_group_size": total_group_size,
+                })
+                generated.append(film)
+
+            # Preserve all previously verified fields on the existing sibling.
+            first_index = min(matching)
+            sibling = next(index for index in matching if index != target_index)
+            preserved_sibling = dict(rows[sibling])
+            preserved_sibling.update({
+                "source_title": source_group_title,
+                "source_group_id": group_id,
+                "source_group_index": 1,
+                "source_group_size": total_group_size,
+            })
+            if first_index == sibling:
+                replacements[first_index] = [preserved_sibling, *generated]
+            else:
+                replacements[first_index] = generated
+            consumed.update(index for index in matching if index != first_index)
             expanded += len(generated)
 
         result = []

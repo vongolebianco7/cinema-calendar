@@ -1150,12 +1150,22 @@
         "poster": "https://image.tmdb.org/t/p/w342/rtjpX18grVqIlCnvEHZl7drImmN.jpg"
       },
       {
-        "title": "ドラえもん のび太の恐竜 / モスラ対ゴジラ",
+        "title": "ドラえもん のび太の恐竜",
         "gross": 15.5,
         "year": 1980,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1980.html"
+        "source_url": "https://www.eiren.org/toukei/1980.html",
+        "source_group_title": "ドラえもん のび太の恐竜 / モスラ対ゴジラ"
+      },
+      {
+        "title": "モスラ対ゴジラ",
+        "gross": 15.5,
+        "year": 1980,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1980.html",
+        "source_group_title": "ドラえもん のび太の恐竜 / モスラ対ゴジラ"
       },
       {
         "title": "ヤマトよ永遠に",
@@ -1183,20 +1193,40 @@
         "tmdbId": 73990
       },
       {
-        "title": "男はつらいよ 寅次郎ハイビスカスの花 / 思えば遠くへ来たもんだ",
+        "title": "男はつらいよ 寅次郎ハイビスカスの花",
         "gross": 12,
         "year": 1980,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1980.html"
+        "source_url": "https://www.eiren.org/toukei/1980.html",
+        "source_group_title": "男はつらいよ 寅次郎ハイビスカスの花 / 思えば遠くへ来たもんだ"
       },
       {
-        "title": "男はつらいよ 寅次郎春の夢 / 神様のくれた赤ん坊",
+        "title": "思えば遠くへ来たもんだ",
         "gross": 12,
         "year": 1980,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1980.html"
+        "source_url": "https://www.eiren.org/toukei/1980.html",
+        "source_group_title": "男はつらいよ 寅次郎ハイビスカスの花 / 思えば遠くへ来たもんだ"
+      },
+      {
+        "title": "男はつらいよ 寅次郎春の夢",
+        "gross": 12,
+        "year": 1980,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1980.html",
+        "source_group_title": "男はつらいよ 寅次郎春の夢 / 神様のくれた赤ん坊"
+      },
+      {
+        "title": "神様のくれた赤ん坊",
+        "gross": 12,
+        "year": 1980,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1980.html",
+        "source_group_title": "男はつらいよ 寅次郎春の夢 / 神様のくれた赤ん坊"
       },
       {
         "title": "天平の甍",
@@ -1352,12 +1382,22 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "ドラえもん のび太の宇宙開拓史 / 怪物くん 怪物ランドへの招待",
+        "title": "ドラえもん のび太の宇宙開拓史",
         "gross": 17.5,
         "year": 1981,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1981.html"
+        "source_url": "https://www.eiren.org/toukei/1981.html",
+        "source_group_title": "ドラえもん のび太の宇宙開拓史 / 怪物くん 怪物ランドへの招待"
+      },
+      {
+        "title": "怪物くん 怪物ランドへの招待",
+        "gross": 17.5,
+        "year": 1981,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1981.html",
+        "source_group_title": "ドラえもん のび太の宇宙開拓史 / 怪物くん 怪物ランドへの招待"
       },
       {
         "title": "スーパーマンII 冒険篇",
@@ -1392,20 +1432,40 @@
         "tmdb_release_region": "JP"
       },
       {
-        "title": "男はつらいよ 寅次郎かもめ歌 / 土佐の一本釣り",
+        "title": "男はつらいよ 寅次郎かもめ歌",
         "gross": 13.8,
         "year": 1981,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1981.html"
+        "source_url": "https://www.eiren.org/toukei/1981.html",
+        "source_group_title": "男はつらいよ 寅次郎かもめ歌 / 土佐の一本釣り"
       },
       {
-        "title": "男はつらいよ 浪花の恋の寅次郎 / 俺とあいつの物語",
+        "title": "土佐の一本釣り",
+        "gross": 13.8,
+        "year": 1981,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1981.html",
+        "source_group_title": "男はつらいよ 寅次郎かもめ歌 / 土佐の一本釣り"
+      },
+      {
+        "title": "男はつらいよ 浪花の恋の寅次郎",
         "gross": 13.1,
         "year": 1981,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1981.html"
+        "source_url": "https://www.eiren.org/toukei/1981.html",
+        "source_group_title": "男はつらいよ 浪花の恋の寅次郎 / 俺とあいつの物語"
+      },
+      {
+        "title": "俺とあいつの物語",
+        "gross": 13.1,
+        "year": 1981,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1981.html",
+        "source_group_title": "男はつらいよ 浪花の恋の寅次郎 / 俺とあいつの物語"
       },
       {
         "title": "典子は、今",
@@ -1424,12 +1484,22 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "ブルージーンズメモリー / ねらわれた学園",
+        "title": "ブルージーンズメモリー",
         "gross": 12.5,
         "year": 1981,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1981.html"
+        "source_url": "https://www.eiren.org/toukei/1981.html",
+        "source_group_title": "ブルージーンズメモリー / ねらわれた学園"
+      },
+      {
+        "title": "ねらわれた学園",
+        "gross": 12.5,
+        "year": 1981,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1981.html",
+        "source_group_title": "ブルージーンズメモリー / ねらわれた学園"
       },
       {
         "title": "駅 STATION",
@@ -1452,12 +1522,22 @@
         "tmdbId": 59717
       },
       {
-        "title": "青春グラフィティ スニーカーぶるーす / 帰ってきた若大将",
+        "title": "青春グラフィティ スニーカーぶるーす",
         "gross": 10.8,
         "year": 1981,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1981.html"
+        "source_url": "https://www.eiren.org/toukei/1981.html",
+        "source_group_title": "青春グラフィティ スニーカーぶるーす / 帰ってきた若大将"
+      },
+      {
+        "title": "帰ってきた若大将",
+        "gross": 10.8,
+        "year": 1981,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1981.html",
+        "source_group_title": "青春グラフィティ スニーカーぶるーす / 帰ってきた若大将"
       },
       {
         "title": "魔界転生",
@@ -1601,12 +1681,22 @@
         "poster_check_version": 2
       },
       {
-        "title": "セーラー服と機関銃 / 燃える勇者",
+        "title": "セーラー服と機関銃",
         "gross": 23,
         "year": 1982,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1982.html"
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "セーラー服と機関銃 / 燃える勇者"
+      },
+      {
+        "title": "燃える勇者",
+        "gross": 23,
+        "year": 1982,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "セーラー服と機関銃 / 燃える勇者"
       },
       {
         "title": "キャノンボール",
@@ -1730,20 +1820,49 @@
         "tmdbId": 39230
       },
       {
-        "title": "ドラえもん のび太の大魔境 / 怪物くん デーモンの剣 / 忍者ハットリくん ニンニン忍法絵日記の巻",
+        "title": "ドラえもん のび太の大魔境",
         "gross": 12.2,
         "year": 1982,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1982.html"
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "ドラえもん のび太の大魔境 / 怪物くん デーモンの剣 / 忍者ハットリくん ニンニン忍法絵日記の巻"
       },
       {
-        "title": "男はつらいよ 寅次郎紙風船 / シュンマオ物語タオタオ",
+        "title": "怪物くん デーモンの剣",
+        "gross": 12.2,
+        "year": 1982,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "ドラえもん のび太の大魔境 / 怪物くん デーモンの剣 / 忍者ハットリくん ニンニン忍法絵日記の巻"
+      },
+      {
+        "title": "忍者ハットリくん ニンニン忍法絵日記の巻",
+        "gross": 12.2,
+        "year": 1982,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "ドラえもん のび太の大魔境 / 怪物くん デーモンの剣 / 忍者ハットリくん ニンニン忍法絵日記の巻"
+      },
+      {
+        "title": "男はつらいよ 寅次郎紙風船",
         "gross": 12.1,
         "year": 1982,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1982.html"
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "男はつらいよ 寅次郎紙風船 / シュンマオ物語タオタオ"
+      },
+      {
+        "title": "シュンマオ物語タオタオ",
+        "gross": 12.1,
+        "year": 1982,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "男はつらいよ 寅次郎紙風船 / シュンマオ物語タオタオ"
       },
       {
         "title": "鬼龍院花子の生涯",
@@ -1766,20 +1885,40 @@
         "poster_check_version": 2
       },
       {
-        "title": "グッドラックLOVE / すっかり・・・その気で!",
+        "title": "グッドラックLOVE",
         "gross": 10.5,
         "year": 1982,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1982.html"
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "グッドラックLOVE / すっかり・・・その気で!"
       },
       {
-        "title": "男はつらいよ 寅次郎あじさいの恋 / えきすとら",
+        "title": "すっかり・・・その気で!",
+        "gross": 10.5,
+        "year": 1982,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "グッドラックLOVE / すっかり・・・その気で!"
+      },
+      {
+        "title": "男はつらいよ 寅次郎あじさいの恋",
         "gross": 10.4,
         "year": 1982,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1982.html"
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "男はつらいよ 寅次郎あじさいの恋 / えきすとら"
+      },
+      {
+        "title": "えきすとら",
+        "gross": 10.4,
+        "year": 1982,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1982.html",
+        "source_group_title": "男はつらいよ 寅次郎あじさいの恋 / えきすとら"
       },
       {
         "title": "1000年女王",
@@ -1864,12 +2003,22 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "探偵物語 / 時をかける少女",
+        "title": "探偵物語",
         "gross": 28,
         "year": 1983,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1983.html"
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "探偵物語 / 時をかける少女"
+      },
+      {
+        "title": "時をかける少女",
+        "gross": 28,
+        "year": 1983,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "探偵物語 / 時をかける少女"
       },
       {
         "title": "007/オクトパシー",
@@ -1893,28 +2042,58 @@
         "poster": "https://image.tmdb.org/t/p/w500/dL7n7NNwI2AoXOzn4vRwU7JdBzB.jpg"
       },
       {
-        "title": "汚れた英雄 / 伊賀忍法帖",
+        "title": "汚れた英雄",
         "gross": 16,
         "year": 1983,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1983.html"
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "汚れた英雄 / 伊賀忍法帖"
       },
       {
-        "title": "男はつらいよ 花も嵐も寅次郎 / 次郎長青春篇 つっぱり清水港",
+        "title": "伊賀忍法帖",
+        "gross": 16,
+        "year": 1983,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "汚れた英雄 / 伊賀忍法帖"
+      },
+      {
+        "title": "男はつらいよ 花も嵐も寅次郎",
         "gross": 15.5,
         "year": 1983,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1983.html"
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "男はつらいよ 花も嵐も寅次郎 / 次郎長青春篇 つっぱり清水港"
       },
       {
-        "title": "プルメリアの伝説 天国のキッス / 刑事物語2 りんごの詩",
+        "title": "次郎長青春篇 つっぱり清水港",
+        "gross": 15.5,
+        "year": 1983,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "男はつらいよ 花も嵐も寅次郎 / 次郎長青春篇 つっぱり清水港"
+      },
+      {
+        "title": "プルメリアの伝説 天国のキッス",
         "gross": 12,
         "year": 1983,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1983.html"
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "プルメリアの伝説 天国のキッス / 刑事物語2 りんごの詩"
+      },
+      {
+        "title": "刑事物語2 りんごの詩",
+        "gross": 12,
+        "year": 1983,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "プルメリアの伝説 天国のキッス / 刑事物語2 りんごの詩"
       },
       {
         "title": "ランボー",
@@ -1927,12 +2106,22 @@
         "tmdbId": 1368
       },
       {
-        "title": "ウィーン物語 ジェミニ・YとS / 三等高校生",
+        "title": "ウィーン物語 ジェミニ・YとS",
         "gross": 11,
         "year": 1983,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1983.html"
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "ウィーン物語 ジェミニ・YとS / 三等高校生"
+      },
+      {
+        "title": "三等高校生",
+        "gross": 11,
+        "year": 1983,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "ウィーン物語 ジェミニ・YとS / 三等高校生"
       },
       {
         "title": "愛と青春の旅だち",
@@ -1987,20 +2176,40 @@
         "tmdbId": 42113
       },
       {
-        "title": "伊賀野カバ丸 / カンニング・モンキー 天中拳",
+        "title": "伊賀野カバ丸",
         "gross": 10.4,
         "year": 1983,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1983.html"
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "伊賀野カバ丸 / カンニング・モンキー 天中拳"
       },
       {
-        "title": "男はつらいよ 旅と女と寅次郎 / いとしのラハイナ",
+        "title": "カンニング・モンキー 天中拳",
+        "gross": 10.4,
+        "year": 1983,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "伊賀野カバ丸 / カンニング・モンキー 天中拳"
+      },
+      {
+        "title": "男はつらいよ 旅と女と寅次郎",
         "gross": 10.2,
         "year": 1983,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1983.html"
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "男はつらいよ 旅と女と寅次郎 / いとしのラハイナ"
+      },
+      {
+        "title": "いとしのラハイナ",
+        "gross": 10.2,
+        "year": 1983,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "男はつらいよ 旅と女と寅次郎 / いとしのラハイナ"
       },
       {
         "title": "宇宙戦艦ヤマト完結編",
@@ -2019,12 +2228,31 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "ドラえもん のび太の海底鬼岩城 / 忍者ハットリくん ニンニンふるさと大作戦の巻 / パーマン バードマンがやってきた!!",
+        "title": "ドラえもん のび太の海底鬼岩城",
         "gross": 10,
         "year": 1983,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1983.html"
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "ドラえもん のび太の海底鬼岩城 / 忍者ハットリくん ニンニンふるさと大作戦の巻 / パーマン バードマンがやってきた!!"
+      },
+      {
+        "title": "忍者ハットリくん ニンニンふるさと大作戦の巻",
+        "gross": 10,
+        "year": 1983,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "ドラえもん のび太の海底鬼岩城 / 忍者ハットリくん ニンニンふるさと大作戦の巻 / パーマン バードマンがやってきた!!"
+      },
+      {
+        "title": "パーマン バードマンがやってきた!!",
+        "gross": 10,
+        "year": 1983,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1983.html",
+        "source_group_title": "ドラえもん のび太の海底鬼岩城 / 忍者ハットリくん ニンニンふるさと大作戦の巻 / パーマン バードマンがやってきた!!"
       },
       {
         "title": "トッツィー",
@@ -2128,12 +2356,22 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "メイン・テーマ / 愛情物語",
+        "title": "メイン・テーマ",
         "gross": 18.5,
         "year": 1984,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1984.html"
+        "source_url": "https://www.eiren.org/toukei/1984.html",
+        "source_group_title": "メイン・テーマ / 愛情物語"
+      },
+      {
+        "title": "愛情物語",
+        "gross": 18.5,
+        "year": 1984,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1984.html",
+        "source_group_title": "メイン・テーマ / 愛情物語"
       },
       {
         "title": "愛情物語",
@@ -2175,12 +2413,22 @@
         "tmdb_release_region": "JP"
       },
       {
-        "title": "ドラえもん のび太の魔界大冒険 / 忍者ハットリくん+パーマン 超能力ウォーズ",
+        "title": "ドラえもん のび太の魔界大冒険",
         "gross": 16.5,
         "year": 1984,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1984.html"
+        "source_url": "https://www.eiren.org/toukei/1984.html",
+        "source_group_title": "ドラえもん のび太の魔界大冒険 / 忍者ハットリくん+パーマン 超能力ウォーズ"
+      },
+      {
+        "title": "忍者ハットリくん+パーマン 超能力ウォーズ",
+        "gross": 16.5,
+        "year": 1984,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1984.html",
+        "source_group_title": "ドラえもん のび太の魔界大冒険 / 忍者ハットリくん+パーマン 超能力ウォーズ"
       },
       {
         "title": "プロジェクトA",
@@ -2235,12 +2483,22 @@
         "tmdbId": 10805
       },
       {
-        "title": "男はつらいよ 口笛を吹く寅次郎 / 喜劇 家族同盟",
+        "title": "男はつらいよ 口笛を吹く寅次郎",
         "gross": 12.5,
         "year": 1984,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1984.html"
+        "source_url": "https://www.eiren.org/toukei/1984.html",
+        "source_group_title": "男はつらいよ 口笛を吹く寅次郎 / 喜劇 家族同盟"
+      },
+      {
+        "title": "喜劇 家族同盟",
+        "gross": 12.5,
+        "year": 1984,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1984.html",
+        "source_group_title": "男はつらいよ 口笛を吹く寅次郎 / 喜劇 家族同盟"
       },
       {
         "title": "男はつらいよ 口笛を吹く寅次郎",
@@ -2264,12 +2522,22 @@
         "poster": "https://image.tmdb.org/t/p/w500/ralb3yaYsZIF5C6zkWEHDzQOXOU.jpg"
       },
       {
-        "title": "男はつらいよ 夜霧にむせぶ寅次郎 / ときめき海岸物語",
+        "title": "男はつらいよ 夜霧にむせぶ寅次郎",
         "gross": 11.5,
         "year": 1984,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1984.html"
+        "source_url": "https://www.eiren.org/toukei/1984.html",
+        "source_group_title": "男はつらいよ 夜霧にむせぶ寅次郎 / ときめき海岸物語"
+      },
+      {
+        "title": "ときめき海岸物語",
+        "gross": 11.5,
+        "year": 1984,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1984.html",
+        "source_group_title": "男はつらいよ 夜霧にむせぶ寅次郎 / ときめき海岸物語"
       },
       {
         "title": "男はつらいよ 夜霧にむせぶ寅次郎",
@@ -2400,12 +2668,22 @@
         "tmdbId": 11645
       },
       {
-        "title": "Wの悲劇 / 天国にいちばん近い島",
+        "title": "Wの悲劇",
         "gross": 15.5,
         "year": 1985,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1985.html"
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "Wの悲劇 / 天国にいちばん近い島"
+      },
+      {
+        "title": "天国にいちばん近い島",
+        "gross": 15.5,
+        "year": 1985,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "Wの悲劇 / 天国にいちばん近い島"
       },
       {
         "title": "007 美しき獲物たち",
@@ -2418,28 +2696,58 @@
         "poster": "https://image.tmdb.org/t/p/w500/hoX0uMn24EQ6U6XjDlSixy5yS7l.jpg"
       },
       {
-        "title": "男はつらいよ 寅次郎真実一路 / ねずみ小僧怪盗伝",
+        "title": "男はつらいよ 寅次郎真実一路",
         "gross": 12.7,
         "year": 1985,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1985.html"
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "男はつらいよ 寅次郎真実一路 / ねずみ小僧怪盗伝"
       },
       {
-        "title": "早春物語 / 二代目はクリスチャン",
+        "title": "ねずみ小僧怪盗伝",
+        "gross": 12.7,
+        "year": 1985,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "男はつらいよ 寅次郎真実一路 / ねずみ小僧怪盗伝"
+      },
+      {
+        "title": "早春物語",
         "gross": 12.5,
         "year": 1985,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1985.html"
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "早春物語 / 二代目はクリスチャン"
       },
       {
-        "title": "ドラえもん のび太の宇宙小戦争 / 忍者ハットリくん+パーマン 忍者怪獣ジッポウVSミラクル卵",
+        "title": "二代目はクリスチャン",
+        "gross": 12.5,
+        "year": 1985,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "早春物語 / 二代目はクリスチャン"
+      },
+      {
+        "title": "ドラえもん のび太の宇宙小戦争",
         "gross": 12,
         "year": 1985,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1985.html"
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "ドラえもん のび太の宇宙小戦争 / 忍者ハットリくん+パーマン 忍者怪獣ジッポウVSミラクル卵"
+      },
+      {
+        "title": "忍者ハットリくん+パーマン 忍者怪獣ジッポウVSミラクル卵",
+        "gross": 12,
+        "year": 1985,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "ドラえもん のび太の宇宙小戦争 / 忍者ハットリくん+パーマン 忍者怪獣ジッポウVSミラクル卵"
       },
       {
         "title": "007/美しき獲物たち",
@@ -2453,12 +2761,22 @@
         "poster": "https://image.tmdb.org/t/p/w500/hoX0uMn24EQ6U6XjDlSixy5yS7l.jpg"
       },
       {
-        "title": "愛・旅立ち / うる星やつら3 リメンバー・マイ・ラブ",
+        "title": "愛・旅立ち",
         "gross": 11.7,
         "year": 1985,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1985.html"
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "愛・旅立ち / うる星やつら3 リメンバー・マイ・ラブ"
+      },
+      {
+        "title": "うる星やつら3 リメンバー・マイ・ラブ",
+        "gross": 11.7,
+        "year": 1985,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "愛・旅立ち / うる星やつら3 リメンバー・マイ・ラブ"
       },
       {
         "title": "スパルタンX",
@@ -2477,12 +2795,22 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "男はつらいよ 寅次郎恋愛塾 / 俺ら東京さ行ぐだ",
+        "title": "男はつらいよ 寅次郎恋愛塾",
         "gross": 11,
         "year": 1985,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1985.html"
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "男はつらいよ 寅次郎恋愛塾 / 俺ら東京さ行ぐだ"
+      },
+      {
+        "title": "俺ら東京さ行ぐだ",
+        "gross": 11,
+        "year": 1985,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "男はつらいよ 寅次郎恋愛塾 / 俺ら東京さ行ぐだ"
       },
       {
         "title": "TAN TAN たぬき",
@@ -2517,12 +2845,40 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "キン肉マン 逆襲!宇宙かくれ超人 / キャプテン翼 ヨーロッパ大決戦 / Dr.スランプアラレちゃん ほよよ!夢の都メカポリス / 電撃戦隊チェンジマン2",
+        "title": "キン肉マン 逆襲!宇宙かくれ超人",
         "gross": 10.7,
         "year": 1985,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1985.html"
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "キン肉マン 逆襲!宇宙かくれ超人 / キャプテン翼 ヨーロッパ大決戦 / Dr.スランプアラレちゃん ほよよ!夢の都メカポリス / 電撃戦隊チェンジマン2"
+      },
+      {
+        "title": "キャプテン翼 ヨーロッパ大決戦",
+        "gross": 10.7,
+        "year": 1985,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "キン肉マン 逆襲!宇宙かくれ超人 / キャプテン翼 ヨーロッパ大決戦 / Dr.スランプアラレちゃん ほよよ!夢の都メカポリス / 電撃戦隊チェンジマン2"
+      },
+      {
+        "title": "Dr.スランプアラレちゃん ほよよ!夢の都メカポリス",
+        "gross": 10.7,
+        "year": 1985,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "キン肉マン 逆襲!宇宙かくれ超人 / キャプテン翼 ヨーロッパ大決戦 / Dr.スランプアラレちゃん ほよよ!夢の都メカポリス / 電撃戦隊チェンジマン2"
+      },
+      {
+        "title": "電撃戦隊チェンジマン2",
+        "gross": 10.7,
+        "year": 1985,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1985.html",
+        "source_group_title": "キン肉マン 逆襲!宇宙かくれ超人 / キャプテン翼 ヨーロッパ大決戦 / Dr.スランプアラレちゃん ほよよ!夢の都メカポリス / 電撃戦隊チェンジマン2"
       },
       {
         "title": "ビバリーヒルズ・コップ",
@@ -2604,12 +2960,22 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "野蛮人のように / ビー・バップ・ハイスクール",
+        "title": "野蛮人のように",
         "gross": 14.5,
         "year": 1986,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1986.html"
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "野蛮人のように / ビー・バップ・ハイスクール"
+      },
+      {
+        "title": "ビー・バップ・ハイスクール",
+        "gross": 14.5,
+        "year": 1986,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "野蛮人のように / ビー・バップ・ハイスクール"
       },
       {
         "title": "野蛮人のように",
@@ -2665,12 +3031,31 @@
         "poster": "https://image.tmdb.org/t/p/w342/8BI7mLh9MsOXzObuS5k0SW94AH.jpg"
       },
       {
-        "title": "ドラえもん のび太と鉄人兵団 / オバケのQ太郎 とびだせ!バケバケ大作戦 / プロゴルファー猿 スーパーGOLFワールドへの挑戦!!",
+        "title": "ドラえもん のび太と鉄人兵団",
         "gross": 13,
         "year": 1986,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1986.html"
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "ドラえもん のび太と鉄人兵団 / オバケのQ太郎 とびだせ!バケバケ大作戦 / プロゴルファー猿 スーパーGOLFワールドへの挑戦!!"
+      },
+      {
+        "title": "オバケのQ太郎 とびだせ!バケバケ大作戦",
+        "gross": 13,
+        "year": 1986,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "ドラえもん のび太と鉄人兵団 / オバケのQ太郎 とびだせ!バケバケ大作戦 / プロゴルファー猿 スーパーGOLFワールドへの挑戦!!"
+      },
+      {
+        "title": "プロゴルファー猿 スーパーGOLFワールドへの挑戦!!",
+        "gross": 13,
+        "year": 1986,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "ドラえもん のび太と鉄人兵団 / オバケのQ太郎 とびだせ!バケバケ大作戦 / プロゴルファー猿 スーパーGOLFワールドへの挑戦!!"
       },
       {
         "title": "エイリアン2",
@@ -2683,12 +3068,22 @@
         "tmdbId": 679
       },
       {
-        "title": "ビー・バップ・ハイスクール 高校与太郎哀歌 / BE FREE!",
+        "title": "ビー・バップ・ハイスクール 高校与太郎哀歌",
         "gross": 11.5,
         "year": 1986,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1986.html"
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "ビー・バップ・ハイスクール 高校与太郎哀歌 / BE FREE!"
+      },
+      {
+        "title": "BE FREE!",
+        "gross": 11.5,
+        "year": 1986,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "ビー・バップ・ハイスクール 高校与太郎哀歌 / BE FREE!"
       },
       {
         "title": "愛と哀しみの果て",
@@ -2701,20 +3096,49 @@
         "tmdbId": 606
       },
       {
-        "title": "キン肉マン 晴れ姿!正義超人 / キャプテン翼 危うし!全日本Jr. / ゲゲゲの鬼太郎",
+        "title": "キン肉マン 晴れ姿!正義超人",
         "gross": 10.7,
         "year": 1986,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1986.html"
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "キン肉マン 晴れ姿!正義超人 / キャプテン翼 危うし!全日本Jr. / ゲゲゲの鬼太郎"
       },
       {
-        "title": "男はつらいよ 柴又より愛をこめて / 祝辞",
+        "title": "キャプテン翼 危うし!全日本Jr.",
+        "gross": 10.7,
+        "year": 1986,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "キン肉マン 晴れ姿!正義超人 / キャプテン翼 危うし!全日本Jr. / ゲゲゲの鬼太郎"
+      },
+      {
+        "title": "ゲゲゲの鬼太郎",
+        "gross": 10.7,
+        "year": 1986,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "キン肉マン 晴れ姿!正義超人 / キャプテン翼 危うし!全日本Jr. / ゲゲゲの鬼太郎"
+      },
+      {
+        "title": "男はつらいよ 柴又より愛をこめて",
         "gross": 10.5,
         "year": 1986,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1986.html"
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "男はつらいよ 柴又より愛をこめて / 祝辞"
+      },
+      {
+        "title": "祝辞",
+        "gross": 10.5,
+        "year": 1986,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1986.html",
+        "source_group_title": "男はつらいよ 柴又より愛をこめて / 祝辞"
       },
       {
         "title": "ポリス・ストーリー 香港国際警察",
@@ -2805,12 +3229,31 @@
         "tmdbId": 117
       },
       {
-        "title": "ドラえもん のび太と竜の騎士 / プロゴルファー猿 甲賀秘境!影の忍法ゴルファー参上! / オバケのQ太郎 とびだせ!1/100大作戦",
+        "title": "ドラえもん のび太と竜の騎士",
         "gross": 15,
         "year": 1987,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1987.html"
+        "source_url": "https://www.eiren.org/toukei/1987.html",
+        "source_group_title": "ドラえもん のび太と竜の騎士 / プロゴルファー猿 甲賀秘境!影の忍法ゴルファー参上! / オバケのQ太郎 とびだせ!1/100大作戦"
+      },
+      {
+        "title": "プロゴルファー猿 甲賀秘境!影の忍法ゴルファー参上!",
+        "gross": 15,
+        "year": 1987,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1987.html",
+        "source_group_title": "ドラえもん のび太と竜の騎士 / プロゴルファー猿 甲賀秘境!影の忍法ゴルファー参上! / オバケのQ太郎 とびだせ!1/100大作戦"
+      },
+      {
+        "title": "オバケのQ太郎 とびだせ!1/100大作戦",
+        "gross": 15,
+        "year": 1987,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1987.html",
+        "source_group_title": "ドラえもん のび太と竜の騎士 / プロゴルファー猿 甲賀秘境!影の忍法ゴルファー参上! / オバケのQ太郎 とびだせ!1/100大作戦"
       },
       {
         "title": "ドラえもん のび太と竜の騎士",
@@ -2882,12 +3325,22 @@
         "tmdbId": 42011
       },
       {
-        "title": "男はつらいよ 知床慕情 / 塀の中の懲りない面々",
+        "title": "男はつらいよ 知床慕情",
         "gross": 12.4,
         "year": 1987,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1987.html"
+        "source_url": "https://www.eiren.org/toukei/1987.html",
+        "source_group_title": "男はつらいよ 知床慕情 / 塀の中の懲りない面々"
+      },
+      {
+        "title": "塀の中の懲りない面々",
+        "gross": 12.4,
+        "year": 1987,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1987.html",
+        "source_group_title": "男はつらいよ 知床慕情 / 塀の中の懲りない面々"
       },
       {
         "title": "次郎物語",
@@ -2932,20 +3385,40 @@
         "tmdbId": 21521
       },
       {
-        "title": "男はつらいよ 幸福の青い鳥 / 愛しのチィパッパ",
+        "title": "男はつらいよ 幸福の青い鳥",
         "gross": 10.3,
         "year": 1987,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1987.html"
+        "source_url": "https://www.eiren.org/toukei/1987.html",
+        "source_group_title": "男はつらいよ 幸福の青い鳥 / 愛しのチィパッパ"
       },
       {
-        "title": "ビー・バップ・ハイスクール 高校与太郎行進曲 / 本場ぢょしこうマニュアル 初恋微熱篇",
+        "title": "愛しのチィパッパ",
+        "gross": 10.3,
+        "year": 1987,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1987.html",
+        "source_group_title": "男はつらいよ 幸福の青い鳥 / 愛しのチィパッパ"
+      },
+      {
+        "title": "ビー・バップ・ハイスクール 高校与太郎行進曲",
         "gross": 10.1,
         "year": 1987,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1987.html"
+        "source_url": "https://www.eiren.org/toukei/1987.html",
+        "source_group_title": "ビー・バップ・ハイスクール 高校与太郎行進曲 / 本場ぢょしこうマニュアル 初恋微熱篇"
+      },
+      {
+        "title": "本場ぢょしこうマニュアル 初恋微熱篇",
+        "gross": 10.1,
+        "year": 1987,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1987.html",
+        "source_group_title": "ビー・バップ・ハイスクール 高校与太郎行進曲 / 本場ぢょしこうマニュアル 初恋微熱篇"
       },
       {
         "title": "キングコング2",
@@ -3105,12 +3578,22 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "あぶない刑事 / 七福星",
+        "title": "あぶない刑事",
         "gross": 15,
         "year": 1988,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1988.html"
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "あぶない刑事 / 七福星"
+      },
+      {
+        "title": "七福星",
+        "gross": 15,
+        "year": 1988,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "あぶない刑事 / 七福星"
       },
       {
         "title": "ウィロー",
@@ -3123,20 +3606,49 @@
         "tmdbId": 847
       },
       {
-        "title": "ドラえもん のび太のパラレル西遊記 / エスパー魔美 / 星空のダンシング・ドール 他",
+        "title": "ドラえもん のび太のパラレル西遊記",
         "gross": 13.6,
         "year": 1988,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1988.html"
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "ドラえもん のび太のパラレル西遊記 / エスパー魔美 / 星空のダンシング・ドール 他"
       },
       {
-        "title": "ビーバップ・ハイスクール高校与太郎狂騒曲 / はいからさんが通る",
+        "title": "エスパー魔美",
+        "gross": 13.6,
+        "year": 1988,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "ドラえもん のび太のパラレル西遊記 / エスパー魔美 / 星空のダンシング・ドール 他"
+      },
+      {
+        "title": "星空のダンシング・ドール 他",
+        "gross": 13.6,
+        "year": 1988,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "ドラえもん のび太のパラレル西遊記 / エスパー魔美 / 星空のダンシング・ドール 他"
+      },
+      {
+        "title": "ビーバップ・ハイスクール高校与太郎狂騒曲",
         "gross": 12.5,
         "year": 1988,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1988.html"
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "ビーバップ・ハイスクール高校与太郎狂騒曲 / はいからさんが通る"
+      },
+      {
+        "title": "はいからさんが通る",
+        "gross": 12.5,
+        "year": 1988,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "ビーバップ・ハイスクール高校与太郎狂騒曲 / はいからさんが通る"
       },
       {
         "title": "マリリンに逢いたい",
@@ -3175,20 +3687,40 @@
         "tmdbId": 74576
       },
       {
-        "title": "男はつらいよ 寅次郎物語 / 女咲かせます",
+        "title": "男はつらいよ 寅次郎物語",
         "gross": 10.5,
         "year": 1988,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1988.html"
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "男はつらいよ 寅次郎物語 / 女咲かせます"
       },
       {
-        "title": "またまたあぶない刑事 / ふたりぼっち",
+        "title": "女咲かせます",
         "gross": 10.5,
         "year": 1988,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1988.html"
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "男はつらいよ 寅次郎物語 / 女咲かせます"
+      },
+      {
+        "title": "またまたあぶない刑事",
+        "gross": 10.5,
+        "year": 1988,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "またまたあぶない刑事 / ふたりぼっち"
+      },
+      {
+        "title": "ふたりぼっち",
+        "gross": 10.5,
+        "year": 1988,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1988.html",
+        "source_group_title": "またまたあぶない刑事 / ふたりぼっち"
       },
       {
         "title": "ロボコップ",
@@ -3284,12 +3816,22 @@
         "tmdbId": 16859
       },
       {
-        "title": "ドラえもん のび太の日本誕生 / ドラミちゃん・ミニドラSOS!!",
+        "title": "ドラえもん のび太の日本誕生",
         "gross": 20.2,
         "year": 1989,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1989.html"
+        "source_url": "https://www.eiren.org/toukei/1989.html",
+        "source_group_title": "ドラえもん のび太の日本誕生 / ドラミちゃん・ミニドラSOS!!"
+      },
+      {
+        "title": "ドラミちゃん・ミニドラSOS!!",
+        "gross": 20.2,
+        "year": 1989,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1989.html",
+        "source_group_title": "ドラえもん のび太の日本誕生 / ドラミちゃん・ミニドラSOS!!"
       },
       {
         "title": "ドラえもん のび太の日本誕生",
@@ -3383,14 +3925,26 @@
         "tmdbId": 41939
       },
       {
-        "title": "男はつらいよ 寅次郎サラダ記念日/釣りバカ日誌",
+        "title": "男はつらいよ 寅次郎サラダ記念日",
         "gross": 12.5,
         "year": 1989,
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1989.html",
         "poster_checked_at": "2026-11-12T03:27:17.670755Z",
-        "poster_check_version": 2
+        "poster_check_version": 2,
+        "source_group_title": "男はつらいよ 寅次郎サラダ記念日/釣りバカ日誌"
+      },
+      {
+        "title": "釣りバカ日誌",
+        "gross": 12.5,
+        "year": 1989,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1989.html",
+        "poster_checked_at": "2026-11-12T03:27:17.670755Z",
+        "poster_check_version": 2,
+        "source_group_title": "男はつらいよ 寅次郎サラダ記念日/釣りバカ日誌"
       },
       {
         "title": "男はつらいよ 寅次郎サラダ記念日",
@@ -3491,12 +4045,22 @@
         "tmdbId": 40644
       },
       {
-        "title": "これからの物語 少年たちのブルース / ふ・し・ぎ・なBABY",
+        "title": "これからの物語 少年たちのブルース",
         "gross": 10.5,
         "year": 1989,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1989.html"
+        "source_url": "https://www.eiren.org/toukei/1989.html",
+        "source_group_title": "これからの物語 少年たちのブルース / ふ・し・ぎ・なBABY"
+      },
+      {
+        "title": "ふ・し・ぎ・なBABY",
+        "gross": 10.5,
+        "year": 1989,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1989.html",
+        "source_group_title": "これからの物語 少年たちのブルース / ふ・し・ぎ・なBABY"
       }
     ],
     "1990": [
@@ -3593,14 +4157,26 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "ドラえもん のび太とアニマル惑星/チンプイ",
+        "title": "ドラえもん のび太とアニマル惑星",
         "gross": 19.1,
         "year": 1990,
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1990.html",
         "poster_checked_at": "2026-11-12T03:27:17.670755Z",
-        "poster_check_version": 2
+        "poster_check_version": 2,
+        "source_group_title": "ドラえもん のび太とアニマル惑星/チンプイ"
+      },
+      {
+        "title": "チンプイ",
+        "gross": 19.1,
+        "year": 1990,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1990.html",
+        "poster_checked_at": "2026-11-12T03:27:17.670755Z",
+        "poster_check_version": 2,
+        "source_group_title": "ドラえもん のび太とアニマル惑星/チンプイ"
       },
       {
         "title": "バットマン",
@@ -3671,12 +4247,22 @@
         "tmdbId": 2604
       },
       {
-        "title": "男はつらいよ ぼくの伯父さん / 釣りバカ日誌",
+        "title": "男はつらいよ ぼくの伯父さん",
         "gross": 14.1,
         "year": 1990,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1990.html"
+        "source_url": "https://www.eiren.org/toukei/1990.html",
+        "source_group_title": "男はつらいよ ぼくの伯父さん / 釣りバカ日誌"
+      },
+      {
+        "title": "釣りバカ日誌",
+        "gross": 14.1,
+        "year": 1990,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1990.html",
+        "source_group_title": "男はつらいよ ぼくの伯父さん / 釣りバカ日誌"
       },
       {
         "title": "デイズ・オブ・サンダー",
@@ -3870,12 +4456,22 @@
         "tmdbId": 15080
       },
       {
-        "title": "ドラえもん のび太のトラビアンナイト / ドラミちゃん アララ少年山賊団",
+        "title": "ドラえもん のび太のトラビアンナイト",
         "gross": 18,
         "year": 1991,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1991.html"
+        "source_url": "https://www.eiren.org/toukei/1991.html",
+        "source_group_title": "ドラえもん のび太のトラビアンナイト / ドラミちゃん アララ少年山賊団"
+      },
+      {
+        "title": "ドラミちゃん アララ少年山賊団",
+        "gross": 18,
+        "year": 1991,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1991.html",
+        "source_group_title": "ドラえもん のび太のトラビアンナイト / ドラミちゃん アララ少年山賊団"
       },
       {
         "title": "ダンス・ウィズ・ウルブス",
@@ -3907,20 +4503,40 @@
         "tmdbId": 581
       },
       {
-        "title": "男はつらいよ 寅次郎の休日 / 釣りバカ日誌3",
+        "title": "男はつらいよ 寅次郎の休日",
         "gross": 14.1,
         "year": 1991,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1991.html"
+        "source_url": "https://www.eiren.org/toukei/1991.html",
+        "source_group_title": "男はつらいよ 寅次郎の休日 / 釣りバカ日誌3"
       },
       {
-        "title": "ドラゴンボールZ・とびっきり最強対最強 / ドラゴンクエスト・ダイの大冒険 他",
+        "title": "釣りバカ日誌3",
+        "gross": 14.1,
+        "year": 1991,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1991.html",
+        "source_group_title": "男はつらいよ 寅次郎の休日 / 釣りバカ日誌3"
+      },
+      {
+        "title": "ドラゴンボールZ・とびっきり最強対最強",
         "gross": 14,
         "year": 1991,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1991.html"
+        "source_url": "https://www.eiren.org/toukei/1991.html",
+        "source_group_title": "ドラゴンボールZ・とびっきり最強対最強 / ドラゴンクエスト・ダイの大冒険 他"
+      },
+      {
+        "title": "ドラゴンクエスト・ダイの大冒険 他",
+        "gross": 14,
+        "year": 1991,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1991.html",
+        "source_group_title": "ドラゴンボールZ・とびっきり最強対最強 / ドラゴンクエスト・ダイの大冒険 他"
       },
       {
         "title": "ちびまる子ちゃん",
@@ -3939,12 +4555,22 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "ドラゴンボールZ・超サイヤ人だ孫悟空 / まじかるタルるーとくん",
+        "title": "ドラゴンボールZ・超サイヤ人だ孫悟空",
         "gross": 13,
         "year": 1991,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1991.html"
+        "source_url": "https://www.eiren.org/toukei/1991.html",
+        "source_group_title": "ドラゴンボールZ・超サイヤ人だ孫悟空 / まじかるタルるーとくん"
+      },
+      {
+        "title": "まじかるタルるーとくん",
+        "gross": 13,
+        "year": 1991,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1991.html",
+        "source_group_title": "ドラゴンボールZ・超サイヤ人だ孫悟空 / まじかるタルるーとくん"
       },
       {
         "title": "ゴッドファーザー PARTIII",
@@ -4115,20 +4741,49 @@
         "tmdbId": 820
       },
       {
-        "title": "ドラえもん のび太と雲の王国 / 21エモン 他",
+        "title": "ドラえもん のび太と雲の王国",
         "gross": 16.8,
         "year": 1992,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1992.html"
+        "source_url": "https://www.eiren.org/toukei/1992.html",
+        "source_group_title": "ドラえもん のび太と雲の王国 / 21エモン 他"
       },
       {
-        "title": "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他",
+        "title": "21エモン 他",
+        "gross": 16.8,
+        "year": 1992,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1992.html",
+        "source_group_title": "ドラえもん のび太と雲の王国 / 21エモン 他"
+      },
+      {
+        "title": "ドラゴンボールZ 激突!!100億円パワーの戦士たち",
         "gross": 16,
         "year": 1992,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1992.html"
+        "source_url": "https://www.eiren.org/toukei/1992.html",
+        "source_group_title": "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他"
+      },
+      {
+        "title": "ドラゴンクエストダイの大冒険",
+        "gross": 16,
+        "year": 1992,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1992.html",
+        "source_group_title": "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他"
+      },
+      {
+        "title": "起ちあがれ!!アバンの使徒 他",
+        "gross": 16,
+        "year": 1992,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1992.html",
+        "source_group_title": "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他"
       },
       {
         "title": "美女と野獣",
@@ -4151,12 +4806,31 @@
         "tmdbId": 110283
       },
       {
-        "title": "ドラゴンボールZ 激突バトル!!三大超サイヤ人 / ドラゴンクエストダイの大冒険 / ぶちやぶれ!!新生6大将軍 他",
+        "title": "ドラゴンボールZ 激突バトル!!三大超サイヤ人",
         "gross": 15,
         "year": 1992,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1992.html"
+        "source_url": "https://www.eiren.org/toukei/1992.html",
+        "source_group_title": "ドラゴンボールZ 激突バトル!!三大超サイヤ人 / ドラゴンクエストダイの大冒険 / ぶちやぶれ!!新生6大将軍 他"
+      },
+      {
+        "title": "ドラゴンクエストダイの大冒険",
+        "gross": 15,
+        "year": 1992,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1992.html",
+        "source_group_title": "ドラゴンボールZ 激突バトル!!三大超サイヤ人 / ドラゴンクエストダイの大冒険 / ぶちやぶれ!!新生6大将軍 他"
+      },
+      {
+        "title": "ぶちやぶれ!!新生6大将軍 他",
+        "gross": 15,
+        "year": 1992,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1992.html",
+        "source_group_title": "ドラゴンボールZ 激突バトル!!三大超サイヤ人 / ドラゴンクエストダイの大冒険 / ぶちやぶれ!!新生6大将軍 他"
       },
       {
         "title": "遠き落日",
@@ -4395,28 +5069,67 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "ドラえもん ソラえもん号 / のび太とブリキの迷宮ドラミちゃん",
+        "title": "ドラえもん ソラえもん号",
         "gross": 16.5,
         "year": 1993,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1993.html"
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "ドラえもん ソラえもん号 / のび太とブリキの迷宮ドラミちゃん"
       },
       {
-        "title": "男はつらいよ 寅次郎の青春 / 釣りバカ日誌5",
+        "title": "のび太とブリキの迷宮ドラミちゃん",
+        "gross": 16.5,
+        "year": 1993,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "ドラえもん ソラえもん号 / のび太とブリキの迷宮ドラミちゃん"
+      },
+      {
+        "title": "男はつらいよ 寅次郎の青春",
         "gross": 14.5,
         "year": 1993,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1993.html"
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "男はつらいよ 寅次郎の青春 / 釣りバカ日誌5"
       },
       {
-        "title": "93春東映アニメフェア / ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦 / Drスランプアラレちゃん / んちゃ!ペンギン村はハレのち晴れ",
+        "title": "釣りバカ日誌5",
+        "gross": 14.5,
+        "year": 1993,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "男はつらいよ 寅次郎の青春 / 釣りバカ日誌5"
+      },
+      {
+        "title": "ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦",
         "gross": 13.7,
         "year": 1993,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1993.html"
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "93春東映アニメフェア / ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦 / Drスランプアラレちゃん / んちゃ!ペンギン村はハレのち晴れ"
+      },
+      {
+        "title": "Drスランプアラレちゃん",
+        "gross": 13.7,
+        "year": 1993,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "93春東映アニメフェア / ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦 / Drスランプアラレちゃん / んちゃ!ペンギン村はハレのち晴れ"
+      },
+      {
+        "title": "んちゃ!ペンギン村はハレのち晴れ",
+        "gross": 13.7,
+        "year": 1993,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "93春東映アニメフェア / ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦 / Drスランプアラレちゃん / んちゃ!ペンギン村はハレのち晴れ"
       },
       {
         "title": "幸福の条件",
@@ -4435,12 +5148,49 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "93夏東映アニメフェア / ドラゴンボールZ / 銀河ギリギリ!ぶっち切りの凄い奴 / Drスランプアラレちゃん / んちゃ!ペンギン村より愛を込めて / 幽遊白書",
+        "title": "ドラゴンボールZ",
         "gross": 13.1,
         "year": 1993,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1993.html"
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "93夏東映アニメフェア / ドラゴンボールZ / 銀河ギリギリ!ぶっち切りの凄い奴 / Drスランプアラレちゃん / んちゃ!ペンギン村より愛を込めて / 幽遊白書"
+      },
+      {
+        "title": "銀河ギリギリ!ぶっち切りの凄い奴",
+        "gross": 13.1,
+        "year": 1993,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "93夏東映アニメフェア / ドラゴンボールZ / 銀河ギリギリ!ぶっち切りの凄い奴 / Drスランプアラレちゃん / んちゃ!ペンギン村より愛を込めて / 幽遊白書"
+      },
+      {
+        "title": "Drスランプアラレちゃん",
+        "gross": 13.1,
+        "year": 1993,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "93夏東映アニメフェア / ドラゴンボールZ / 銀河ギリギリ!ぶっち切りの凄い奴 / Drスランプアラレちゃん / んちゃ!ペンギン村より愛を込めて / 幽遊白書"
+      },
+      {
+        "title": "んちゃ!ペンギン村より愛を込めて",
+        "gross": 13.1,
+        "year": 1993,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "93夏東映アニメフェア / ドラゴンボールZ / 銀河ギリギリ!ぶっち切りの凄い奴 / Drスランプアラレちゃん / んちゃ!ペンギン村より愛を込めて / 幽遊白書"
+      },
+      {
+        "title": "幽遊白書",
+        "gross": 13.1,
+        "year": 1993,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1993.html",
+        "source_group_title": "93夏東映アニメフェア / ドラゴンボールZ / 銀河ギリギリ!ぶっち切りの凄い奴 / Drスランプアラレちゃん / んちゃ!ペンギン村より愛を込めて / 幽遊白書"
       },
       {
         "title": "クレヨンしんちゃん",
@@ -4632,20 +5382,58 @@
         "tmdbId": 788
       },
       {
-        "title": "男はつらいよ 寅次郎の縁談 / 釣りバカ日誌 6",
+        "title": "男はつらいよ 寅次郎の縁談",
         "gross": 15.7,
         "year": 1994,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1994.html"
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "男はつらいよ 寅次郎の縁談 / 釣りバカ日誌 6"
       },
       {
-        "title": "94春東映アニメフェア / ドラゴンボールZ / 危険なふたり!超戦士はねむれない / スラムダンク / Drスランプ ほよよ!助けたサメに連れられて",
+        "title": "釣りバカ日誌 6",
+        "gross": 15.7,
+        "year": 1994,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "男はつらいよ 寅次郎の縁談 / 釣りバカ日誌 6"
+      },
+      {
+        "title": "ドラゴンボールZ",
         "gross": 14.5,
         "year": 1994,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1994.html"
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "94春東映アニメフェア / ドラゴンボールZ / 危険なふたり!超戦士はねむれない / スラムダンク / Drスランプ ほよよ!助けたサメに連れられて"
+      },
+      {
+        "title": "危険なふたり!超戦士はねむれない",
+        "gross": 14.5,
+        "year": 1994,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "94春東映アニメフェア / ドラゴンボールZ / 危険なふたり!超戦士はねむれない / スラムダンク / Drスランプ ほよよ!助けたサメに連れられて"
+      },
+      {
+        "title": "スラムダンク",
+        "gross": 14.5,
+        "year": 1994,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "94春東映アニメフェア / ドラゴンボールZ / 危険なふたり!超戦士はねむれない / スラムダンク / Drスランプ ほよよ!助けたサメに連れられて"
+      },
+      {
+        "title": "Drスランプ ほよよ!助けたサメに連れられて",
+        "gross": 14.5,
+        "year": 1994,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "94春東映アニメフェア / ドラゴンボールZ / 危険なふたり!超戦士はねむれない / スラムダンク / Drスランプ ほよよ!助けたサメに連れられて"
       },
       {
         "title": "メジャーリーグ2",
@@ -4664,12 +5452,22 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "ドラえもん のび太と夢幻三銃士 / ドラミちゃん ウメ星デンカ",
+        "title": "ドラえもん のび太と夢幻三銃士",
         "gross": 13.5,
         "year": 1994,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1994.html"
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "ドラえもん のび太と夢幻三銃士 / ドラミちゃん ウメ星デンカ"
+      },
+      {
+        "title": "ドラミちゃん ウメ星デンカ",
+        "gross": 13.5,
+        "year": 1994,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "ドラえもん のび太と夢幻三銃士 / ドラミちゃん ウメ星デンカ"
       },
       {
         "title": "ヒーローインタビュー",
@@ -4688,12 +5486,31 @@
         "poster_checked_at": "2026-11-09T23:59:14.783504Z"
       },
       {
-        "title": "美少女戦士セーラームーンR / メイクアップセーラー戦士 / ツヨシしっかりしなさい",
+        "title": "美少女戦士セーラームーンR",
         "gross": 13,
         "year": 1994,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1994.html"
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "美少女戦士セーラームーンR / メイクアップセーラー戦士 / ツヨシしっかりしなさい"
+      },
+      {
+        "title": "メイクアップセーラー戦士",
+        "gross": 13,
+        "year": 1994,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "美少女戦士セーラームーンR / メイクアップセーラー戦士 / ツヨシしっかりしなさい"
+      },
+      {
+        "title": "ツヨシしっかりしなさい",
+        "gross": 13,
+        "year": 1994,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "美少女戦士セーラームーンR / メイクアップセーラー戦士 / ツヨシしっかりしなさい"
       },
       {
         "title": "めぐり逢えたら",
@@ -4722,12 +5539,31 @@
         "poster_check_version": 2
       },
       {
-        "title": "94夏東映アニメフェア / ドラゴンボールZ 超戦士撃破!勝つのはオレだ / スラムダンク 全国制覇だ!桜木花道 / Drスランプ アラレちゃん",
+        "title": "ドラゴンボールZ 超戦士撃破!勝つのはオレだ",
         "gross": 11.2,
         "year": 1994,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1994.html"
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "94夏東映アニメフェア / ドラゴンボールZ 超戦士撃破!勝つのはオレだ / スラムダンク 全国制覇だ!桜木花道 / Drスランプ アラレちゃん"
+      },
+      {
+        "title": "スラムダンク 全国制覇だ!桜木花道",
+        "gross": 11.2,
+        "year": 1994,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "94夏東映アニメフェア / ドラゴンボールZ 超戦士撃破!勝つのはオレだ / スラムダンク 全国制覇だ!桜木花道 / Drスランプ アラレちゃん"
+      },
+      {
+        "title": "Drスランプ アラレちゃん",
+        "gross": 11.2,
+        "year": 1994,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1994.html",
+        "source_group_title": "94夏東映アニメフェア / ドラゴンボールZ 超戦士撃破!勝つのはオレだ / スラムダンク 全国制覇だ!桜木花道 / Drスランプ アラレちゃん"
       },
       {
         "title": "フリントストーン モダン石器時代",
@@ -4879,12 +5715,22 @@
         "tmdbId": 39466
       },
       {
-        "title": "男はつらいよ 拝啓 車寅次郎様 / 釣りバカ日誌 7",
+        "title": "男はつらいよ 拝啓 車寅次郎様",
         "gross": 15.5,
         "year": 1995,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1995.html"
+        "source_url": "https://www.eiren.org/toukei/1995.html",
+        "source_group_title": "男はつらいよ 拝啓 車寅次郎様 / 釣りバカ日誌 7"
+      },
+      {
+        "title": "釣りバカ日誌 7",
+        "gross": 15.5,
+        "year": 1995,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1995.html",
+        "source_group_title": "男はつらいよ 拝啓 車寅次郎様 / 釣りバカ日誌 7"
       },
       {
         "title": "学校の怪談",
@@ -4903,12 +5749,22 @@
         "poster_checked_at": "2026-11-10T01:31:36.897255Z"
       },
       {
-        "title": "ドラえもん のび太の創世日記 / 2112年 ドラえもん誕生",
+        "title": "ドラえもん のび太の創世日記",
         "gross": 13,
         "year": 1995,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1995.html"
+        "source_url": "https://www.eiren.org/toukei/1995.html",
+        "source_group_title": "ドラえもん のび太の創世日記 / 2112年 ドラえもん誕生"
+      },
+      {
+        "title": "2112年 ドラえもん誕生",
+        "gross": 13,
+        "year": 1995,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1995.html",
+        "source_group_title": "ドラえもん のび太の創世日記 / 2112年 ドラえもん誕生"
       },
       {
         "title": "アウトブレイク",
@@ -4927,12 +5783,22 @@
         "poster_checked_at": "2026-11-10T01:31:36.897255Z"
       },
       {
-        "title": "95春東映アニメフェア / ドラゴンボールZ / スラムダンク ママレードボーイ",
+        "title": "ドラゴンボールZ",
         "gross": 12.7,
         "year": 1995,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1995.html"
+        "source_url": "https://www.eiren.org/toukei/1995.html",
+        "source_group_title": "95春東映アニメフェア / ドラゴンボールZ / スラムダンク ママレードボーイ"
+      },
+      {
+        "title": "スラムダンク ママレードボーイ",
+        "gross": 12.7,
+        "year": 1995,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1995.html",
+        "source_group_title": "95春東映アニメフェア / ドラゴンボールZ / スラムダンク ママレードボーイ"
       },
       {
         "title": "家なき子",
@@ -4951,12 +5817,31 @@
         "poster_checked_at": "2026-11-10T01:31:36.897255Z"
       },
       {
-        "title": "美少女戦士セーラームーンS / 蒼き伝説シュート / おおわがスーパーベビー",
+        "title": "美少女戦士セーラームーンS",
         "gross": 10.5,
         "year": 1995,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1995.html"
+        "source_url": "https://www.eiren.org/toukei/1995.html",
+        "source_group_title": "美少女戦士セーラームーンS / 蒼き伝説シュート / おおわがスーパーベビー"
+      },
+      {
+        "title": "蒼き伝説シュート",
+        "gross": 10.5,
+        "year": 1995,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1995.html",
+        "source_group_title": "美少女戦士セーラームーンS / 蒼き伝説シュート / おおわがスーパーベビー"
+      },
+      {
+        "title": "おおわがスーパーベビー",
+        "gross": 10.5,
+        "year": 1995,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1995.html",
+        "source_group_title": "美少女戦士セーラームーンS / 蒼き伝説シュート / おおわがスーパーベビー"
       },
       {
         "title": "フランケンシュタイン",
@@ -5177,12 +6062,22 @@
         "poster_checked_at": "2026-11-10T01:31:36.897255Z"
       },
       {
-        "title": "男はつらいよ 寅次郎紅の花 / サラリーマン専科",
+        "title": "男はつらいよ 寅次郎紅の花",
         "gross": 11.6,
         "year": 1996,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1996.html"
+        "source_url": "https://www.eiren.org/toukei/1996.html",
+        "source_group_title": "男はつらいよ 寅次郎紅の花 / サラリーマン専科"
+      },
+      {
+        "title": "サラリーマン専科",
+        "gross": 11.6,
+        "year": 1996,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1996.html",
+        "source_group_title": "男はつらいよ 寅次郎紅の花 / サラリーマン専科"
       },
       {
         "title": "男はつらいよ 寅次郎紅の花",
@@ -5304,12 +6199,22 @@
         "tmdbId": 68606
       },
       {
-        "title": "ドラえもん のび太のねじ巻き都市冒険記 / ドラえもんズ",
+        "title": "ドラえもん のび太のねじ巻き都市冒険記",
         "gross": 20,
         "year": 1997,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1997.html"
+        "source_url": "https://www.eiren.org/toukei/1997.html",
+        "source_group_title": "ドラえもん のび太のねじ巻き都市冒険記 / ドラえもんズ"
+      },
+      {
+        "title": "ドラえもんズ",
+        "gross": 20,
+        "year": 1997,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1997.html",
+        "source_group_title": "ドラえもん のび太のねじ巻き都市冒険記 / ドラえもんズ"
       },
       {
         "title": "スピード2",
@@ -5561,12 +6466,22 @@
         "poster_checked_at": "2026-11-10T00:59:33.763331Z"
       },
       {
-        "title": "ポケットモンスター ミュウツーの逆襲 / ピカチュウのなつやすみ",
+        "title": "ポケットモンスター ミュウツーの逆襲",
         "gross": 41.5,
         "year": 1998,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1998.html"
+        "source_url": "https://www.eiren.org/toukei/1998.html",
+        "source_group_title": "ポケットモンスター ミュウツーの逆襲 / ピカチュウのなつやすみ"
+      },
+      {
+        "title": "ピカチュウのなつやすみ",
+        "gross": 41.5,
+        "year": 1998,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1998.html",
+        "source_group_title": "ポケットモンスター ミュウツーの逆襲 / ピカチュウのなつやすみ"
       },
       {
         "title": "ポケットモンスター ミュウツーの逆襲",
@@ -5627,12 +6542,31 @@
         "tmdbId": 857
       },
       {
-        "title": "ドラえもん 南海の大冒険 / ザ・ドラえもんズ / 帰ってきたドラえもん",
+        "title": "ドラえもん 南海の大冒険",
         "gross": 21,
         "year": 1998,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1998.html"
+        "source_url": "https://www.eiren.org/toukei/1998.html",
+        "source_group_title": "ドラえもん 南海の大冒険 / ザ・ドラえもんズ / 帰ってきたドラえもん"
+      },
+      {
+        "title": "ザ・ドラえもんズ",
+        "gross": 21,
+        "year": 1998,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1998.html",
+        "source_group_title": "ドラえもん 南海の大冒険 / ザ・ドラえもんズ / 帰ってきたドラえもん"
+      },
+      {
+        "title": "帰ってきたドラえもん",
+        "gross": 21,
+        "year": 1998,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1998.html",
+        "source_group_title": "ドラえもん 南海の大冒険 / ザ・ドラえもんズ / 帰ってきたドラえもん"
       },
       {
         "title": "エアフォース・ワン",
@@ -5813,14 +6747,26 @@
         "tmdbId": 36212
       },
       {
-        "title": "リング/らせん",
+        "title": "リング",
         "gross": 10,
         "year": 1998,
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1998.html",
         "poster_checked_at": "2026-11-12T03:27:17.670755Z",
-        "poster_check_version": 2
+        "poster_check_version": 2,
+        "source_group_title": "リング/らせん"
+      },
+      {
+        "title": "らせん",
+        "gross": 10,
+        "year": 1998,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1998.html",
+        "poster_checked_at": "2026-11-12T03:27:17.670755Z",
+        "poster_check_version": 2,
+        "source_group_title": "リング/らせん"
       },
       {
         "title": "エイリアン4",
@@ -5845,12 +6791,19 @@
         "tmdbId": 95
       },
       {
-        "title": "スター・ウォーズ エピソード1 / ファントム・メナス",
+        "title": "スター・ウォーズ エピソード1 ファントム・メナス",
         "gross": 78,
         "year": 1999,
         "region": "洋画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1999.html"
+        "source_url": "https://www.eiren.org/toukei/1999.html",
+        "source_group_title": "スター・ウォーズ エピソード1 / ファントム・メナス",
+        "poster": "https://image.tmdb.org/t/p/w342/l2s53sR2LAFaP5xDot1CvrKPj8V.jpg",
+        "tmdbId": 1893,
+        "original_title": "Star Wars: Episode I - The Phantom Menace",
+        "identity_source": "https://www.themoviedb.org/movie/1893",
+        "identity_checked_at": "2026-10-25",
+        "identity_match": "manually_reviewed_title_alias_and_release_date"
       },
       {
         "title": "マトリックス",
@@ -5873,12 +6826,22 @@
         "tmdbId": 745
       },
       {
-        "title": "劇場版 ポケットモンスター / 幻のポケモン・ルギア爆誕 / ピカチュウたんけんたい",
+        "title": "劇場版 ポケットモンスター 幻のポケモン・ルギア爆誕",
         "gross": 35,
         "year": 1999,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1999.html"
+        "source_url": "https://www.eiren.org/toukei/1999.html",
+        "source_group_title": "劇場版 ポケットモンスター / 幻のポケモン・ルギア爆誕 / ピカチュウたんけんたい"
+      },
+      {
+        "title": "ピカチュウたんけんたい",
+        "gross": 35,
+        "year": 1999,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1999.html",
+        "source_group_title": "劇場版 ポケットモンスター / 幻のポケモン・ルギア爆誕 / ピカチュウたんけんたい"
       },
       {
         "title": "ポケットモンスター 幻のポケモン・ルギア爆誕",
@@ -5903,28 +6866,28 @@
         "tmdb_release_region": "JP"
       },
       {
-        "title": "リング2 / 死国",
+        "title": "リング2",
         "gross": 21,
         "year": 1999,
         "region": "邦画",
         "metric": "配給収入",
         "source_url": "https://www.eiren.org/toukei/1999.html",
-        "posters": [
-          {
-            "title": "リング 2",
-            "year": 1999,
-            "tmdbId": 9669,
-            "poster": "https://image.tmdb.org/t/p/w342/mZrniHCiAmCRD9t0eTgLJvQrFwe.jpg",
-            "tmdb": "https://www.themoviedb.org/movie/9669"
-          },
-          {
-            "title": "死国",
-            "year": 1999,
-            "tmdbId": 68905,
-            "poster": "https://image.tmdb.org/t/p/w342/nr9an9wscTJQxKopJ0YO50WsT43.jpg",
-            "tmdb": "https://www.themoviedb.org/movie/68905"
-          }
-        ]
+        "source_group_title": "リング2 / 死国",
+        "tmdbId": 9669,
+        "poster": "https://image.tmdb.org/t/p/w342/mZrniHCiAmCRD9t0eTgLJvQrFwe.jpg",
+        "tmdb": "https://www.themoviedb.org/movie/9669"
+      },
+      {
+        "title": "死国",
+        "gross": 21,
+        "year": 1999,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1999.html",
+        "source_group_title": "リング2 / 死国",
+        "tmdbId": 68905,
+        "poster": "https://image.tmdb.org/t/p/w342/nr9an9wscTJQxKopJ0YO50WsT43.jpg",
+        "tmdb": "https://www.themoviedb.org/movie/68905"
       },
       {
         "title": "リング2",
@@ -5948,12 +6911,31 @@
         "tmdbId": 68837
       },
       {
-        "title": "ドラえもん のび太の宇宙漂流記 / のび太の結婚前夜 / ザ・ドラえもんズ おかしなお菓子なオカシナナ!?",
+        "title": "ドラえもん のび太の宇宙漂流記",
         "gross": 20,
         "year": 1999,
         "region": "邦画",
         "metric": "配給収入",
-        "source_url": "https://www.eiren.org/toukei/1999.html"
+        "source_url": "https://www.eiren.org/toukei/1999.html",
+        "source_group_title": "ドラえもん のび太の宇宙漂流記 / のび太の結婚前夜 / ザ・ドラえもんズ おかしなお菓子なオカシナナ!?"
+      },
+      {
+        "title": "のび太の結婚前夜",
+        "gross": 20,
+        "year": 1999,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1999.html",
+        "source_group_title": "ドラえもん のび太の宇宙漂流記 / のび太の結婚前夜 / ザ・ドラえもんズ おかしなお菓子なオカシナナ!?"
+      },
+      {
+        "title": "ザ・ドラえもんズ おかしなお菓子なオカシナナ!?",
+        "gross": 20,
+        "year": 1999,
+        "region": "邦画",
+        "metric": "配給収入",
+        "source_url": "https://www.eiren.org/toukei/1999.html",
+        "source_group_title": "ドラえもん のび太の宇宙漂流記 / のび太の結婚前夜 / ザ・ドラえもんズ おかしなお菓子なオカシナナ!?"
       },
       {
         "title": "鉄道員(ぽっぽや)",
@@ -6149,12 +7131,22 @@
         "tmdbId": 497
       },
       {
-        "title": "劇場版ポケットモンスター 結晶塔の帝王 / ピチュウとピカチュウ",
+        "title": "劇場版ポケットモンスター 結晶塔の帝王",
         "gross": 48.5,
         "year": 2000,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2000.html"
+        "source_url": "https://www.eiren.org/toukei/2000.html",
+        "source_group_title": "劇場版ポケットモンスター 結晶塔の帝王 / ピチュウとピカチュウ"
+      },
+      {
+        "title": "ピチュウとピカチュウ",
+        "gross": 48.5,
+        "year": 2000,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2000.html",
+        "source_group_title": "劇場版ポケットモンスター 結晶塔の帝王 / ピチュウとピカチュウ"
       },
       {
         "title": "ホワイトアウト",
@@ -6215,12 +7207,31 @@
         "poster_checked_at": "2026-11-10T01:31:36.897255Z"
       },
       {
-        "title": "ドラえもん のび太の太陽王伝説 / ザ・ドラえもんズ ドキドキ機関車大爆走! / おばあちゃんの思い出",
+        "title": "ドラえもん のび太の太陽王伝説",
         "gross": 30.5,
         "year": 2000,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2000.html"
+        "source_url": "https://www.eiren.org/toukei/2000.html",
+        "source_group_title": "ドラえもん のび太の太陽王伝説 / ザ・ドラえもんズ ドキドキ機関車大爆走! / おばあちゃんの思い出"
+      },
+      {
+        "title": "ザ・ドラえもんズ ドキドキ機関車大爆走!",
+        "gross": 30.5,
+        "year": 2000,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2000.html",
+        "source_group_title": "ドラえもん のび太の太陽王伝説 / ザ・ドラえもんズ ドキドキ機関車大爆走! / おばあちゃんの思い出"
+      },
+      {
+        "title": "おばあちゃんの思い出",
+        "gross": 30.5,
+        "year": 2000,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2000.html",
+        "source_group_title": "ドラえもん のび太の太陽王伝説 / ザ・ドラえもんズ ドキドキ機関車大爆走! / おばあちゃんの思い出"
       },
       {
         "title": "ターザン",
@@ -6253,12 +7264,22 @@
         "tmdbId": 10047
       },
       {
-        "title": "デジモンアドベンチャー ぼくらのウォーゲーム! / ONE PIECE",
+        "title": "デジモンアドベンチャー ぼくらのウォーゲーム!",
         "gross": 21.6,
         "year": 2000,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2000.html"
+        "source_url": "https://www.eiren.org/toukei/2000.html",
+        "source_group_title": "デジモンアドベンチャー ぼくらのウォーゲーム! / ONE PIECE"
+      },
+      {
+        "title": "ONE PIECE",
+        "gross": 21.6,
+        "year": 2000,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2000.html",
+        "source_group_title": "デジモンアドベンチャー ぼくらのウォーゲーム! / ONE PIECE"
       },
       {
         "title": "スチュアート・リトル",
@@ -6430,28 +7451,28 @@
         "poster": "https://image.tmdb.org/t/p/w342/qEPIYNcJQg149L9h7t7bHOMStp3.jpg"
       },
       {
-        "title": "リング0 バースデイ / ISOLA 多重人格少女",
+        "title": "リング0 バースデイ",
         "gross": 16,
         "year": 2000,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/2000.html",
-        "posters": [
-          {
-            "title": "リング０ バースデイ",
-            "year": 2000,
-            "tmdbId": 9674,
-            "poster": "https://image.tmdb.org/t/p/w342/x0ZrQmfBHgF0VA8en7K6tpnDGIT.jpg",
-            "tmdb": "https://www.themoviedb.org/movie/9674"
-          },
-          {
-            "title": "ISOLA 多重人格少女",
-            "year": 2000,
-            "tmdbId": 68820,
-            "poster": "https://image.tmdb.org/t/p/w342/l5mBFunpO5IiMQNvcyaPm8tB3xo.jpg",
-            "tmdb": "https://www.themoviedb.org/movie/68820"
-          }
-        ]
+        "source_group_title": "リング0 バースデイ / ISOLA 多重人格少女",
+        "tmdbId": 9674,
+        "poster": "https://image.tmdb.org/t/p/w342/x0ZrQmfBHgF0VA8en7K6tpnDGIT.jpg",
+        "tmdb": "https://www.themoviedb.org/movie/9674"
+      },
+      {
+        "title": "ISOLA 多重人格少女",
+        "gross": 16,
+        "year": 2000,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2000.html",
+        "source_group_title": "リング0 バースデイ / ISOLA 多重人格少女",
+        "tmdbId": 68820,
+        "poster": "https://image.tmdb.org/t/p/w342/l5mBFunpO5IiMQNvcyaPm8tB3xo.jpg",
+        "tmdb": "https://www.themoviedb.org/movie/68820"
       },
       {
         "title": "海の上のピアニスト",
@@ -6594,12 +7615,22 @@
         "poster_checked_at": "2026-11-10T01:31:36.897255Z"
       },
       {
-        "title": "デジモンアドベンチャー02 / おジャ魔女どれみ♯",
+        "title": "デジモンアドベンチャー02",
         "gross": 12.7,
         "year": 2000,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2000.html"
+        "source_url": "https://www.eiren.org/toukei/2000.html",
+        "source_group_title": "デジモンアドベンチャー02 / おジャ魔女どれみ♯"
+      },
+      {
+        "title": "おジャ魔女どれみ♯",
+        "gross": 12.7,
+        "year": 2000,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2000.html",
+        "source_group_title": "デジモンアドベンチャー02 / おジャ魔女どれみ♯"
       },
       {
         "title": "ミッション・トゥ・マーズ",
@@ -6814,12 +7845,22 @@
         "tmdbId": 871
       },
       {
-        "title": "劇場版ポケットモンスター セレビィ時を超えた遭遇 / ピカチュウのドキドキかくれんぼ",
+        "title": "劇場版ポケットモンスター セレビィ時を超えた遭遇",
         "gross": 39,
         "year": 2001,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2001.html"
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "劇場版ポケットモンスター セレビィ時を超えた遭遇 / ピカチュウのドキドキかくれんぼ"
+      },
+      {
+        "title": "ピカチュウのドキドキかくれんぼ",
+        "gross": 39,
+        "year": 2001,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "劇場版ポケットモンスター セレビィ時を超えた遭遇 / ピカチュウのドキドキかくれんぼ"
       },
       {
         "title": "バーティカル・リミット",
@@ -6889,20 +7930,58 @@
         "tmdbId": 21325
       },
       {
-        "title": "ドラえもん のび太と翼の勇者たち / がんばれ!ジャイアン / ドラミ&ドラえもんズ宇宙ランド危機イッパツ",
+        "title": "ドラえもん のび太と翼の勇者たち",
         "gross": 30,
         "year": 2001,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2001.html"
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "ドラえもん のび太と翼の勇者たち / がんばれ!ジャイアン / ドラミ&ドラえもんズ宇宙ランド危機イッパツ"
       },
       {
-        "title": "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル",
+        "title": "がんばれ!ジャイアン",
         "gross": 30,
         "year": 2001,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2001.html"
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "ドラえもん のび太と翼の勇者たち / がんばれ!ジャイアン / ドラミ&ドラえもんズ宇宙ランド危機イッパツ"
+      },
+      {
+        "title": "ドラミ&ドラえもんズ宇宙ランド危機イッパツ",
+        "gross": 30,
+        "year": 2001,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "ドラえもん のび太と翼の勇者たち / がんばれ!ジャイアン / ドラミ&ドラえもんズ宇宙ランド危機イッパツ"
+      },
+      {
+        "title": "ONE PIECE",
+        "gross": 30,
+        "year": 2001,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル"
+      },
+      {
+        "title": "デジモン アドベンチャー02",
+        "gross": 30,
+        "year": 2001,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル"
+      },
+      {
+        "title": "ジャンゴのダンスカーニバル",
+        "gross": 30,
+        "year": 2001,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル"
       },
       {
         "title": "アンブレイカブル",
@@ -7166,12 +8245,22 @@
         "poster": "https://image.tmdb.org/t/p/w342/6Z7jBc56gsCsehcTCa9JNsRUkAf.jpg"
       },
       {
-        "title": "仮面ライダーアギト PROJECT G4 / 百獣戦隊ガオレンジャー 火の山、吼える",
+        "title": "仮面ライダーアギト PROJECT G4",
         "gross": 12.5,
         "year": 2001,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2001.html"
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "仮面ライダーアギト PROJECT G4 / 百獣戦隊ガオレンジャー 火の山、吼える"
+      },
+      {
+        "title": "百獣戦隊ガオレンジャー 火の山、吼える",
+        "gross": 12.5,
+        "year": 2001,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "仮面ライダーアギト PROJECT G4 / 百獣戦隊ガオレンジャー 火の山、吼える"
       },
       {
         "title": "ゴジラ×メガギラス G消滅作戦",
@@ -7252,12 +8341,22 @@
         "poster_checked_at": "2026-11-10T01:31:36.897255Z"
       },
       {
-        "title": "デジモンティマース/キン肉マンII世 / も~っと!おジャ魔女どれみ",
+        "title": "デジモンティマース/キン肉マンII世",
         "gross": 10,
         "year": 2001,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2001.html"
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "デジモンティマース/キン肉マンII世 / も~っと!おジャ魔女どれみ"
+      },
+      {
+        "title": "も~っと!おジャ魔女どれみ",
+        "gross": 10,
+        "year": 2001,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2001.html",
+        "source_group_title": "デジモンティマース/キン肉マンII世 / も~っと!おジャ魔女どれみ"
       },
       {
         "title": "ファイナルファンタジー",
@@ -7366,12 +8465,22 @@
         "tmdbId": 161
       },
       {
-        "title": "猫の恩返し / ギブリーズ episodeII",
+        "title": "猫の恩返し",
         "gross": 64.6,
         "year": 2002,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2002.html"
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "猫の恩返し / ギブリーズ episodeII"
+      },
+      {
+        "title": "ギブリーズ episodeII",
+        "gross": 64.6,
+        "year": 2002,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "猫の恩返し / ギブリーズ episodeII"
       },
       {
         "title": "メン・イン・ブラック2",
@@ -7469,20 +8578,40 @@
         "poster_checked_at": "2026-11-10T01:31:36.897255Z"
       },
       {
-        "title": "ゴジラ・モスラ・キングギドラ 大怪獣総攻撃 / 劇場版とっとこハム太郎 ハムハムランド大冒険",
+        "title": "ゴジラ・モスラ・キングギドラ 大怪獣総攻撃",
         "gross": 27.1,
         "year": 2002,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2002.html"
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "ゴジラ・モスラ・キングギドラ 大怪獣総攻撃 / 劇場版とっとこハム太郎 ハムハムランド大冒険"
       },
       {
-        "title": "劇場版ポケットモンスター / 水の都の護神 ラティアスとラティオス / ピカピカ星空キャンプ",
+        "title": "劇場版とっとこハム太郎 ハムハムランド大冒険",
+        "gross": 27.1,
+        "year": 2002,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "ゴジラ・モスラ・キングギドラ 大怪獣総攻撃 / 劇場版とっとこハム太郎 ハムハムランド大冒険"
+      },
+      {
+        "title": "劇場版ポケットモンスター 水の都の護神 ラティアスとラティオス",
         "gross": 26.7,
         "year": 2002,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2002.html"
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "劇場版ポケットモンスター / 水の都の護神 ラティアスとラティオス / ピカピカ星空キャンプ"
+      },
+      {
+        "title": "ピカピカ星空キャンプ",
+        "gross": 26.7,
+        "year": 2002,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "劇場版ポケットモンスター / 水の都の護神 ラティアスとラティオス / ピカピカ星空キャンプ"
       },
       {
         "title": "スパイ・ゲーム",
@@ -7511,12 +8640,31 @@
         "poster": "https://image.tmdb.org/t/p/w342/9xXwdlm4u9JoanXhf76vIxuxIua.jpg"
       },
       {
-        "title": "ドラえもん のび太とロボット王国 / ぼくの生まれた日 / ザ・ドラえもんズ ゴール!ゴール!ゴール!!",
+        "title": "ドラえもん のび太とロボット王国",
         "gross": 23.1,
         "year": 2002,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2002.html"
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "ドラえもん のび太とロボット王国 / ぼくの生まれた日 / ザ・ドラえもんズ ゴール!ゴール!ゴール!!"
+      },
+      {
+        "title": "ぼくの生まれた日",
+        "gross": 23.1,
+        "year": 2002,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "ドラえもん のび太とロボット王国 / ぼくの生まれた日 / ザ・ドラえもんズ ゴール!ゴール!ゴール!!"
+      },
+      {
+        "title": "ザ・ドラえもんズ ゴール!ゴール!ゴール!!",
+        "gross": 23.1,
+        "year": 2002,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "ドラえもん のび太とロボット王国 / ぼくの生まれた日 / ザ・ドラえもんズ ゴール!ゴール!ゴール!!"
       },
       {
         "title": "バイオハザード",
@@ -7571,12 +8719,31 @@
         "poster_checked_at": "2026-11-10T01:31:36.897255Z"
       },
       {
-        "title": "2002年春東映アニメフェア / ONE PIECE 珍獣島のチョッパー王国 / デジモンテイマーズ 爆走デジモン特急 / ワンピース 夢のサッカー王",
+        "title": "ONE PIECE 珍獣島のチョッパー王国",
         "gross": 20,
         "year": 2002,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2002.html"
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "2002年春東映アニメフェア / ONE PIECE 珍獣島のチョッパー王国 / デジモンテイマーズ 爆走デジモン特急 / ワンピース 夢のサッカー王"
+      },
+      {
+        "title": "デジモンテイマーズ 爆走デジモン特急",
+        "gross": 20,
+        "year": 2002,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "2002年春東映アニメフェア / ONE PIECE 珍獣島のチョッパー王国 / デジモンテイマーズ 爆走デジモン特急 / ワンピース 夢のサッカー王"
+      },
+      {
+        "title": "ワンピース 夢のサッカー王",
+        "gross": 20,
+        "year": 2002,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "2002年春東映アニメフェア / ONE PIECE 珍獣島のチョッパー王国 / デジモンテイマーズ 爆走デジモン特急 / ワンピース 夢のサッカー王"
       },
       {
         "title": "ビューティフル・マインド",
@@ -7725,12 +8892,22 @@
         "poster_checked_at": "2026-11-10T01:31:36.897255Z"
       },
       {
-        "title": "仮面ライダー龍騎 EPISODE FINAL / 忍風戦隊ハリケンジャー シュシュと THE MOVIE",
+        "title": "仮面ライダー龍騎 EPISODE FINAL",
         "gross": 14.3,
         "year": 2002,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2002.html"
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "仮面ライダー龍騎 EPISODE FINAL / 忍風戦隊ハリケンジャー シュシュと THE MOVIE"
+      },
+      {
+        "title": "忍風戦隊ハリケンジャー シュシュと THE MOVIE",
+        "gross": 14.3,
+        "year": 2002,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "仮面ライダー龍騎 EPISODE FINAL / 忍風戦隊ハリケンジャー シュシュと THE MOVIE"
       },
       {
         "title": "ピンポン",
@@ -7743,12 +8920,13 @@
         "tmdbId": 25675
       },
       {
-        "title": "クレヨンしんちゃん / 嵐を呼ぶアッパレ!戦国大合戦",
+        "title": "クレヨンしんちゃん 嵐を呼ぶアッパレ!戦国大合戦",
         "gross": 13,
         "year": 2002,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2002.html"
+        "source_url": "https://www.eiren.org/toukei/2002.html",
+        "source_group_title": "クレヨンしんちゃん / 嵐を呼ぶアッパレ!戦国大合戦"
       },
       {
         "title": "ブラックホーク・ダウン",
@@ -7980,12 +9158,31 @@
         "tmdbId": 180
       },
       {
-        "title": "ポケットモンスター アドバンスジェネレーション / 七夜の願い星ジラーチ / おどるポケモンひみつ基地",
+        "title": "ポケットモンスター アドバンスジェネレーション",
         "gross": 45,
         "year": 2003,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2003.html"
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "ポケットモンスター アドバンスジェネレーション / 七夜の願い星ジラーチ / おどるポケモンひみつ基地"
+      },
+      {
+        "title": "七夜の願い星ジラーチ",
+        "gross": 45,
+        "year": 2003,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "ポケットモンスター アドバンスジェネレーション / 七夜の願い星ジラーチ / おどるポケモンひみつ基地"
+      },
+      {
+        "title": "おどるポケモンひみつ基地",
+        "gross": 45,
+        "year": 2003,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "ポケットモンスター アドバンスジェネレーション / 七夜の願い星ジラーチ / おどるポケモンひみつ基地"
       },
       {
         "title": "HERO",
@@ -8106,12 +9303,22 @@
         "tmdbId": 246
       },
       {
-        "title": "ドラえもん のび太とふしぎ風使い / Pa-Pa-Pa ザ☆ムービー パーマン",
+        "title": "ドラえもん のび太とふしぎ風使い",
         "gross": 25.4,
         "year": 2003,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2003.html"
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "ドラえもん のび太とふしぎ風使い / Pa-Pa-Pa ザ☆ムービー パーマン"
+      },
+      {
+        "title": "Pa-Pa-Pa ザ☆ムービー パーマン",
+        "gross": 25.4,
+        "year": 2003,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "ドラえもん のび太とふしぎ風使い / Pa-Pa-Pa ザ☆ムービー パーマン"
       },
       {
         "title": "キル・ビル",
@@ -8243,12 +9450,31 @@
         "poster_checked_at": "2026-11-10T03:48:13.649024Z"
       },
       {
-        "title": "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス",
+        "title": "ゴジラ×メカゴジラ",
         "gross": 19.1,
         "year": 2003,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2003.html"
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
+      },
+      {
+        "title": "とっとこハム太郎",
+        "gross": 19.1,
+        "year": 2003,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
+      },
+      {
+        "title": "ハムハムハムージャ!幻のプリンセス",
+        "gross": 19.1,
+        "year": 2003,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
       },
       {
         "title": "バトル・ロワイアルII 鎮魂歌(レクイエム)",
@@ -8317,12 +9543,40 @@
         "tmdbId": 65
       },
       {
-        "title": "仮面ライダー555(ファイズ ) / パラダイス・ロスト / 爆竜戦隊アバレンジャー DELUXE / アバレサマーはキンキン中!",
+        "title": "仮面ライダー555(ファイズ )",
         "gross": 15,
         "year": 2003,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2003.html"
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "仮面ライダー555(ファイズ ) / パラダイス・ロスト / 爆竜戦隊アバレンジャー DELUXE / アバレサマーはキンキン中!"
+      },
+      {
+        "title": "パラダイス・ロスト",
+        "gross": 15,
+        "year": 2003,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "仮面ライダー555(ファイズ ) / パラダイス・ロスト / 爆竜戦隊アバレンジャー DELUXE / アバレサマーはキンキン中!"
+      },
+      {
+        "title": "爆竜戦隊アバレンジャー DELUXE",
+        "gross": 15,
+        "year": 2003,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "仮面ライダー555(ファイズ ) / パラダイス・ロスト / 爆竜戦隊アバレンジャー DELUXE / アバレサマーはキンキン中!"
+      },
+      {
+        "title": "アバレサマーはキンキン中!",
+        "gross": 15,
+        "year": 2003,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2003.html",
+        "source_group_title": "仮面ライダー555(ファイズ ) / パラダイス・ロスト / 爆竜戦隊アバレンジャー DELUXE / アバレサマーはキンキン中!"
       },
       {
         "title": "木更津キャッツアイ 日本シリーズ",
@@ -8563,12 +9817,13 @@
         "tmdbId": 36092
       },
       {
-        "title": "劇場版ポケットモンスター / アドバンスジェネレーション 裂空の訪問者 デオキシス",
+        "title": "劇場版ポケットモンスター アドバンスジェネレーション 裂空の訪問者 デオキシス",
         "gross": 43.8,
         "year": 2004,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2004.html"
+        "source_url": "https://www.eiren.org/toukei/2004.html",
+        "source_group_title": "劇場版ポケットモンスター / アドバンスジェネレーション 裂空の訪問者 デオキシス"
       },
       {
         "title": "トロイ",
@@ -8619,12 +9874,31 @@
         "identity_match": "verified_local_exact_title_and_release_year_window"
       },
       {
-        "title": "・ドラえもん のび太のワンニャン時空伝 / ・Pa-Pa-Paザ☆ムービーパーマン / タコDEポン!アシHAポン!",
+        "title": "・ドラえもん のび太のワンニャン時空伝",
         "gross": 30.5,
         "year": 2004,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2004.html"
+        "source_url": "https://www.eiren.org/toukei/2004.html",
+        "source_group_title": "・ドラえもん のび太のワンニャン時空伝 / ・Pa-Pa-Paザ☆ムービーパーマン / タコDEポン!アシHAポン!"
+      },
+      {
+        "title": "・Pa-Pa-Paザ☆ムービーパーマン",
+        "gross": 30.5,
+        "year": 2004,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2004.html",
+        "source_group_title": "・ドラえもん のび太のワンニャン時空伝 / ・Pa-Pa-Paザ☆ムービーパーマン / タコDEポン!アシHAポン!"
+      },
+      {
+        "title": "タコDEポン!アシHAポン!",
+        "gross": 30.5,
+        "year": 2004,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2004.html",
+        "source_group_title": "・ドラえもん のび太のワンニャン時空伝 / ・Pa-Pa-Paザ☆ムービーパーマン / タコDEポン!アシHAポン!"
       },
       {
         "title": "名探偵コナン 銀翼の奇術師",
@@ -8914,12 +10188,22 @@
         "tmdbId": 11658
       },
       {
-        "title": "・劇場版NARUTO 大活劇!雪姫忍法帖だってばよ!! / ・劇場版NARUTO 木の葉の里の大うん動会",
+        "title": "・劇場版NARUTO 大活劇!雪姫忍法帖だってばよ!!",
         "gross": 13.7,
         "year": 2004,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2004.html"
+        "source_url": "https://www.eiren.org/toukei/2004.html",
+        "source_group_title": "・劇場版NARUTO 大活劇!雪姫忍法帖だってばよ!! / ・劇場版NARUTO 木の葉の里の大うん動会"
+      },
+      {
+        "title": "・劇場版NARUTO 木の葉の里の大うん動会",
+        "gross": 13.7,
+        "year": 2004,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2004.html",
+        "source_group_title": "・劇場版NARUTO 大活劇!雪姫忍法帖だってばよ!! / ・劇場版NARUTO 木の葉の里の大うん動会"
       },
       {
         "title": "リディック",
@@ -8970,12 +10254,31 @@
         "identity_match": "verified_local_exact_title_and_release_year_window"
       },
       {
-        "title": "・ゴジラ×モスラ×メカゴジラ 東京SOS / ・劇場版とっとこハム太郎 ハムハムグランプリン / オーロラ谷の奇跡 リボンちゃん危機一髪!",
+        "title": "・ゴジラ×モスラ×メカゴジラ 東京SOS",
         "gross": 13,
         "year": 2004,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2004.html"
+        "source_url": "https://www.eiren.org/toukei/2004.html",
+        "source_group_title": "・ゴジラ×モスラ×メカゴジラ 東京SOS / ・劇場版とっとこハム太郎 ハムハムグランプリン / オーロラ谷の奇跡 リボンちゃん危機一髪!"
+      },
+      {
+        "title": "・劇場版とっとこハム太郎 ハムハムグランプリン",
+        "gross": 13,
+        "year": 2004,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2004.html",
+        "source_group_title": "・ゴジラ×モスラ×メカゴジラ 東京SOS / ・劇場版とっとこハム太郎 ハムハムグランプリン / オーロラ谷の奇跡 リボンちゃん危機一髪!"
+      },
+      {
+        "title": "オーロラ谷の奇跡 リボンちゃん危機一髪!",
+        "gross": 13,
+        "year": 2004,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2004.html",
+        "source_group_title": "・ゴジラ×モスラ×メカゴジラ 東京SOS / ・劇場版とっとこハム太郎 ハムハムグランプリン / オーロラ谷の奇跡 リボンちゃん危機一髪!"
       },
       {
         "title": "タイムライン",
@@ -9190,12 +10493,13 @@
         "tmdbId": 9806
       },
       {
-        "title": "劇場版ポケットモンスター / アドバンスジェネレーション ミュウと波導の勇者ルカリオ",
+        "title": "劇場版ポケットモンスター アドバンスジェネレーション ミュウと波導の勇者ルカリオ",
         "gross": 43,
         "year": 2005,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2005.html"
+        "source_url": "https://www.eiren.org/toukei/2005.html",
+        "source_group_title": "劇場版ポケットモンスター / アドバンスジェネレーション ミュウと波導の勇者ルカリオ"
       },
       {
         "title": "交渉人 真下正義",
@@ -9635,20 +10939,31 @@
         "tmdbId": 70
       },
       {
-        "title": "クレヨンしんちゃん / 伝説を呼ぶブリブリ3分ポッキリ大進撃",
+        "title": "クレヨンしんちゃん 伝説を呼ぶブリブリ3分ポッキリ大進撃",
         "gross": 13,
         "year": 2005,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2005.html"
+        "source_url": "https://www.eiren.org/toukei/2005.html",
+        "source_group_title": "クレヨンしんちゃん / 伝説を呼ぶブリブリ3分ポッキリ大進撃"
       },
       {
-        "title": "ブリジット・ジョーンズの日記 / きれそうなわたしの12カ月",
+        "title": "ブリジット・ジョーンズの日記",
         "gross": 13,
         "year": 2005,
         "region": "洋画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2005.html"
+        "source_url": "https://www.eiren.org/toukei/2005.html",
+        "source_group_title": "ブリジット・ジョーンズの日記 / きれそうなわたしの12カ月"
+      },
+      {
+        "title": "きれそうなわたしの12カ月",
+        "gross": 13,
+        "year": 2005,
+        "region": "洋画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2005.html",
+        "source_group_title": "ブリジット・ジョーンズの日記 / きれそうなわたしの12カ月"
       },
       {
         "title": "春の雪",
@@ -9807,12 +11122,31 @@
         "poster": "https://image.tmdb.org/t/p/w342/iS93rR33JBR26KTrwoxdEN5zqP0.jpg"
       },
       {
-        "title": "劇場版 仮面ライダーヒビキと7人の戦鬼 / 魔法戦隊マジレンジャーTHE MOVIE / インフェルシアの花嫁",
+        "title": "劇場版 仮面ライダーヒビキと7人の戦鬼",
         "gross": 11,
         "year": 2005,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2005.html"
+        "source_url": "https://www.eiren.org/toukei/2005.html",
+        "source_group_title": "劇場版 仮面ライダーヒビキと7人の戦鬼 / 魔法戦隊マジレンジャーTHE MOVIE / インフェルシアの花嫁"
+      },
+      {
+        "title": "魔法戦隊マジレンジャーTHE MOVIE",
+        "gross": 11,
+        "year": 2005,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2005.html",
+        "source_group_title": "劇場版 仮面ライダーヒビキと7人の戦鬼 / 魔法戦隊マジレンジャーTHE MOVIE / インフェルシアの花嫁"
+      },
+      {
+        "title": "インフェルシアの花嫁",
+        "gross": 11,
+        "year": 2005,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2005.html",
+        "source_group_title": "劇場版 仮面ライダーヒビキと7人の戦鬼 / 魔法戦隊マジレンジャーTHE MOVIE / インフェルシアの花嫁"
       },
       {
         "title": "ネバーランド",
@@ -10097,12 +11431,22 @@
         "poster_checked_at": "2026-11-10T03:48:13.649024Z"
       },
       {
-        "title": "劇場版ポケットモンスター アドバンスジェネレーション / ポケモンレンジャーと蒼海の王子マナフィ",
+        "title": "劇場版ポケットモンスター アドバンスジェネレーション",
         "gross": 34,
         "year": 2006,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2006.html"
+        "source_url": "https://www.eiren.org/toukei/2006.html",
+        "source_group_title": "劇場版ポケットモンスター アドバンスジェネレーション / ポケモンレンジャーと蒼海の王子マナフィ"
+      },
+      {
+        "title": "ポケモンレンジャーと蒼海の王子マナフィ",
+        "gross": 34,
+        "year": 2006,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2006.html",
+        "source_group_title": "劇場版ポケットモンスター アドバンスジェネレーション / ポケモンレンジャーと蒼海の王子マナフィ"
       },
       {
         "title": "ドラえもん のび太の恐竜2006",
@@ -10420,12 +11764,13 @@
         "poster_checked_at": "2026-11-10T03:48:13.649024Z"
       },
       {
-        "title": "映画 クレヨンしんちゃん / 伝説を呼ぶ踊れ!アミーゴ!",
+        "title": "映画クレヨンしんちゃん 伝説を呼ぶ踊れ!アミーゴ!",
         "gross": 13.8,
         "year": 2006,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2006.html"
+        "source_url": "https://www.eiren.org/toukei/2006.html",
+        "source_group_title": "映画 クレヨンしんちゃん / 伝説を呼ぶ踊れ!アミーゴ!"
       },
       {
         "title": "UDON",
@@ -10663,12 +12008,22 @@
         "tmdbId": 1251
       },
       {
-        "title": "劇場版ポケットモンスター ダイヤモンド・パール / 「ディアルガVSパルキアVSダークライ」",
+        "title": "劇場版ポケットモンスター ダイヤモンド・パール",
         "gross": 50.2,
         "year": 2007,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2007.html"
+        "source_url": "https://www.eiren.org/toukei/2007.html",
+        "source_group_title": "劇場版ポケットモンスター ダイヤモンド・パール / 「ディアルガVSパルキアVSダークライ」"
+      },
+      {
+        "title": "「ディアルガVSパルキアVSダークライ」",
+        "gross": 50.2,
+        "year": 2007,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2007.html",
+        "source_group_title": "劇場版ポケットモンスター ダイヤモンド・パール / 「ディアルガVSパルキアVSダークライ」"
       },
       {
         "title": "ALWAYS 続・三丁目の夕日",
@@ -11134,12 +12489,22 @@
         "poster_checked_at": "2026-11-10T09:10:12.612958Z"
       },
       {
-        "title": "劇場版 仮面ライダー電王 俺、誕生! / 電影版 獣拳戦隊ゲキレンジャー ネイネイ!ホウホウ!香港大決戦",
+        "title": "劇場版 仮面ライダー電王 俺、誕生!",
         "gross": 13.8,
         "year": 2007,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2007.html"
+        "source_url": "https://www.eiren.org/toukei/2007.html",
+        "source_group_title": "劇場版 仮面ライダー電王 俺、誕生! / 電影版 獣拳戦隊ゲキレンジャー ネイネイ!ホウホウ!香港大決戦"
+      },
+      {
+        "title": "電影版 獣拳戦隊ゲキレンジャー ネイネイ!ホウホウ!香港大決戦",
+        "gross": 13.8,
+        "year": 2007,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2007.html",
+        "source_group_title": "劇場版 仮面ライダー電王 俺、誕生! / 電影版 獣拳戦隊ゲキレンジャー ネイネイ!ホウホウ!香港大決戦"
       },
       {
         "title": "ホリデイ",
@@ -11301,20 +12666,40 @@
         "tmdbId": 42341
       },
       {
-        "title": "劇場版ポケットモンスター ダイヤモンド・パール / ギラティナと氷空<そら>の花束シェイミ",
+        "title": "劇場版ポケットモンスター ダイヤモンド・パール",
         "gross": 48,
         "year": 2008,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2008.html"
+        "source_url": "https://www.eiren.org/toukei/2008.html",
+        "source_group_title": "劇場版ポケットモンスター ダイヤモンド・パール / ギラティナと氷空<そら>の花束シェイミ"
       },
       {
-        "title": "相棒 -劇場版- / 絶体絶命!42.195km東京ビッグシティマラソン",
+        "title": "ギラティナと氷空<そら>の花束シェイミ",
+        "gross": 48,
+        "year": 2008,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2008.html",
+        "source_group_title": "劇場版ポケットモンスター ダイヤモンド・パール / ギラティナと氷空<そら>の花束シェイミ"
+      },
+      {
+        "title": "相棒 -劇場版-",
         "gross": 44.4,
         "year": 2008,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2008.html"
+        "source_url": "https://www.eiren.org/toukei/2008.html",
+        "source_group_title": "相棒 -劇場版- / 絶体絶命!42.195km東京ビッグシティマラソン"
+      },
+      {
+        "title": "絶体絶命!42.195km東京ビッグシティマラソン",
+        "gross": 44.4,
+        "year": 2008,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2008.html",
+        "source_group_title": "相棒 -劇場版- / 絶体絶命!42.195km東京ビッグシティマラソン"
       },
       {
         "title": "アイ・アム・レジェンド",
@@ -13132,13 +14517,24 @@
         "tmdbId": 1885
       },
       {
-        "title": "仮面ライダーダブル/天装戦隊ゴセイジャー",
+        "title": "仮面ライダーダブル",
         "gross": 14.7,
         "year": 2010,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/2010.html",
-        "poster_checked_at": "2026-11-10T09:10:12.612958Z"
+        "poster_checked_at": "2026-11-10T09:10:12.612958Z",
+        "source_group_title": "仮面ライダーダブル/天装戦隊ゴセイジャー"
+      },
+      {
+        "title": "天装戦隊ゴセイジャー",
+        "gross": 14.7,
+        "year": 2010,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2010.html",
+        "poster_checked_at": "2026-11-10T09:10:12.612958Z",
+        "source_group_title": "仮面ライダーダブル/天装戦隊ゴセイジャー"
       },
       {
         "title": "パーシー・ジャクソンとオリンポスの神々",
@@ -13157,12 +14553,22 @@
         "poster_checked_at": "2026-11-10T08:46:44.850718Z"
       },
       {
-        "title": "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー",
+        "title": "仮面ライダー×仮面ライダー×仮面ライダー",
         "gross": 13.1,
         "year": 2010,
         "region": "邦画",
         "metric": "興行収入",
-        "source_url": "https://www.eiren.org/toukei/2010.html"
+        "source_url": "https://www.eiren.org/toukei/2010.html",
+        "source_group_title": "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"
+      },
+      {
+        "title": "超・電王トリロジー",
+        "gross": 13.1,
+        "year": 2010,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/2010.html",
+        "source_group_title": "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"
       },
       {
         "title": "映画クレヨンしんちゃん 超時空!嵐を呼ぶオラの花嫁",
@@ -13372,13 +14778,24 @@
         "poster_checked_at": "2026-11-10T08:46:44.850718Z"
       },
       {
-        "title": "劇場版ポケットモンスター ベストウィッシュ「ビクティニと黒き英雄ゼク ロム」「ビクティニと白き英雄レシラム」",
+        "title": "劇場版ポケットモンスター ベストウィッシュ「ビクティニと黒き英雄ゼク ロム」",
         "gross": 43.3,
         "year": 2011,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2011.pdf",
-        "poster_checked_at": "2026-11-10T09:10:12.612958Z"
+        "poster_checked_at": "2026-11-10T09:10:12.612958Z",
+        "source_group_title": "劇場版ポケットモンスター ベストウィッシュ「ビクティニと黒き英雄ゼク ロム」「ビクティニと白き英雄レシラム」"
+      },
+      {
+        "title": "劇場版ポケットモンスター ベストウィッシュ「ビクティニと白き英雄レシラム」",
+        "gross": 43.3,
+        "year": 2011,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2011.pdf",
+        "poster_checked_at": "2026-11-10T09:10:12.612958Z",
+        "source_group_title": "劇場版ポケットモンスター ベストウィッシュ「ビクティニと黒き英雄ゼク ロム」「ビクティニと白き英雄レシラム」"
       },
       {
         "title": "ステキな金縛り",
@@ -13686,13 +15103,24 @@
         "poster_checked_at": "2026-11-10T08:46:44.850718Z"
       },
       {
-        "title": "劇場版 仮面ライダーオーズ WONDERFUL 将軍と21のコアメダル 海賊戦隊ゴーカイジャー THE MOVIE 空飛ぶ幽霊船",
+        "title": "仮面ライダーオーズ WONDERFUL 将軍と21のコアメダル",
         "gross": 17.6,
         "year": 2011,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2011.pdf",
-        "poster_checked_at": "2026-11-10T09:10:12.612958Z"
+        "poster_checked_at": "2026-11-10T09:10:12.612958Z",
+        "source_group_title": "劇場版 仮面ライダーオーズ WONDERFUL 将軍と21のコアメダル 海賊戦隊ゴーカイジャー THE MOVIE 空飛ぶ幽霊船"
+      },
+      {
+        "title": "海賊戦隊ゴーカイジャー THE MOVIE",
+        "gross": 17.6,
+        "year": 2011,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2011.pdf",
+        "poster_checked_at": "2026-11-10T09:10:12.612958Z",
+        "source_group_title": "劇場版 仮面ライダーオーズ WONDERFUL 将軍と21のコアメダル 海賊戦隊ゴーカイジャー THE MOVIE 空飛ぶ幽霊船"
       },
       {
         "title": "SUPER8/スーパーエイト",
@@ -14650,13 +16078,24 @@
         "poster_checked_at": "2026-11-10T09:10:12.612958Z"
       },
       {
-        "title": "仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ! 特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ!",
+        "title": "仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ!",
         "gross": 11112222,
         "year": 2012,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2012.pdf",
-        "poster_checked_at": "2026-11-10T09:10:12.612958Z"
+        "poster_checked_at": "2026-11-10T09:10:12.612958Z",
+        "source_group_title": "仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ! 特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ!"
+      },
+      {
+        "title": "特命戦隊ゴーバスターズ THE MOVIE",
+        "gross": 11112222,
+        "year": 2012,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2012.pdf",
+        "poster_checked_at": "2026-11-10T09:10:12.612958Z",
+        "source_group_title": "仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ! 特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ!"
       },
       {
         "title": "エイトレンジャー",
@@ -14914,13 +16353,24 @@
         "tmdbId": 177945
       },
       {
-        "title": "劇場版ポケットモンスター ベストウィッシュ『神速のゲノセクト ミュウツー覚醒』/ピカチュウとイーブイ☆フレンズ",
+        "title": "劇場版ポケットモンスター ベストウィッシュ『神速のゲノセクト ミュウツー覚醒』",
         "gross": 31.7,
         "year": 2013,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2013.pdf",
-        "poster_checked_at": "2026-11-10T09:10:12.612958Z"
+        "poster_checked_at": "2026-11-10T09:10:12.612958Z",
+        "source_group_title": "劇場版ポケットモンスター ベストウィッシュ『神速のゲノセクト ミュウツー覚醒』/ピカチュウとイーブイ☆フレンズ"
+      },
+      {
+        "title": "ピカチュウとイーブイ☆フレンズ",
+        "gross": 31.7,
+        "year": 2013,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2013.pdf",
+        "poster_checked_at": "2026-11-10T09:10:12.612958Z",
+        "source_group_title": "劇場版ポケットモンスター ベストウィッシュ『神速のゲノセクト ミュウツー覚醒』/ピカチュウとイーブイ☆フレンズ"
       },
       {
         "title": "シュガー・ラッシュ",
@@ -15317,13 +16767,24 @@
         "tmdbId": 204053
       },
       {
-        "title": "劇場版 仮面ライダーウィザード イン マジックランド/劇場版 獣電戦隊キョウリュウジャー ガブリンチョ・オブ・ミュージック",
+        "title": "劇場版 仮面ライダーウィザード イン マジックランド",
         "gross": 12.3,
         "year": 2013,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2013.pdf",
-        "poster_checked_at": "2026-11-10T09:26:06.489407Z"
+        "poster_checked_at": "2026-11-10T09:26:06.489407Z",
+        "source_group_title": "劇場版 仮面ライダーウィザード イン マジックランド/劇場版 獣電戦隊キョウリュウジャー ガブリンチョ・オブ・ミュージック"
+      },
+      {
+        "title": "劇場版 獣電戦隊キョウリュウジャー ガブリンチョ・オブ・ミュージック",
+        "gross": 12.3,
+        "year": 2013,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2013.pdf",
+        "poster_checked_at": "2026-11-10T09:26:06.489407Z",
+        "source_group_title": "劇場版 仮面ライダーウィザード イン マジックランド/劇場版 獣電戦隊キョウリュウジャー ガブリンチョ・オブ・ミュージック"
       },
       {
         "title": "劇場版 HUNTER×HUNTER 緋色の幻影",
@@ -15667,13 +17128,24 @@
         "poster_checked_at": "2026-11-10T08:46:44.850718Z"
       },
       {
-        "title": "ポケモン・ザ・ムービーXY「破壊の繭とディアンシー」/ピカチュウ、これなんのカギ?",
+        "title": "ポケモン・ザ・ムービーXY「破壊の繭とディアンシー」",
         "gross": 29.1,
         "year": 2014,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2014.pdf",
-        "poster_checked_at": "2026-11-10T09:26:06.489407Z"
+        "poster_checked_at": "2026-11-10T09:26:06.489407Z",
+        "source_group_title": "ポケモン・ザ・ムービーXY「破壊の繭とディアンシー」/ピカチュウ、これなんのカギ?"
+      },
+      {
+        "title": "ピカチュウ、これなんのカギ?",
+        "gross": 29.1,
+        "year": 2014,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2014.pdf",
+        "poster_checked_at": "2026-11-10T09:26:06.489407Z",
+        "source_group_title": "ポケモン・ザ・ムービーXY「破壊の繭とディアンシー」/ピカチュウ、これなんのカギ?"
       },
       {
         "title": "トランスフォーマー/ロスト・エイジ",
@@ -16376,13 +17848,24 @@
         "poster_checked_at": "2026-11-10T08:46:44.850718Z"
       },
       {
-        "title": "ポケモン・ザ・ムービーXY 光輪(リング)の超魔神フーパ ピカチュウとポケモンおんがくたい",
+        "title": "ポケモン・ザ・ムービーXY 光輪(リング)の超魔神フーパ",
         "gross": 26.1,
         "year": 2015,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2015.pdf",
-        "poster_checked_at": "2026-11-10T09:26:06.489407Z"
+        "poster_checked_at": "2026-11-10T09:26:06.489407Z",
+        "source_group_title": "ポケモン・ザ・ムービーXY 光輪(リング)の超魔神フーパ ピカチュウとポケモンおんがくたい"
+      },
+      {
+        "title": "ピカチュウとポケモンおんがくたい",
+        "gross": 26.1,
+        "year": 2015,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2015.pdf",
+        "poster_checked_at": "2026-11-10T09:26:06.489407Z",
+        "source_group_title": "ポケモン・ザ・ムービーXY 光輪(リング)の超魔神フーパ ピカチュウとポケモンおんがくたい"
       },
       {
         "title": "テッド2",
@@ -19023,13 +20506,24 @@
         "tmdbId": 486266
       },
       {
-        "title": "劇場版 仮面ライダービルド Be The One/快盗戦隊ルパンレンジャーVS警察戦隊パトレンジャー en film",
+        "title": "劇場版 仮面ライダービルド Be The One",
         "gross": 10.2,
         "year": 2018,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2018.pdf",
-        "poster_checked_at": "2026-11-10T09:26:06.489407Z"
+        "poster_checked_at": "2026-11-10T09:26:06.489407Z",
+        "source_group_title": "劇場版 仮面ライダービルド Be The One/快盗戦隊ルパンレンジャーVS警察戦隊パトレンジャー en film"
+      },
+      {
+        "title": "快盗戦隊ルパンレンジャーVS警察戦隊パトレンジャー en film",
+        "gross": 10.2,
+        "year": 2018,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2018.pdf",
+        "poster_checked_at": "2026-11-10T09:26:06.489407Z",
+        "source_group_title": "劇場版 仮面ライダービルド Be The One/快盗戦隊ルパンレンジャーVS警察戦隊パトレンジャー en film"
       },
       {
         "title": "人魚の眠る家",
@@ -19762,13 +21256,24 @@
         "poster": "https://image.tmdb.org/t/p/w342/llL8gOaJajTMRRVosY1htPwTMgg.jpg"
       },
       {
-        "title": "劇場版 仮面ライダージオウ Over Quartzer 騎士竜戦隊リュウソウジャー THE MOVIE タイムスリップ!恐竜パニック!!",
+        "title": "仮面ライダージオウ Over Quartzer",
         "gross": 11.7,
         "year": 2019,
         "region": "邦画",
         "metric": "興行収入",
         "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2019.pdf",
-        "poster_checked_at": "2026-11-10T09:26:06.489407Z"
+        "poster_checked_at": "2026-11-10T09:26:06.489407Z",
+        "source_group_title": "劇場版 仮面ライダージオウ Over Quartzer 騎士竜戦隊リュウソウジャー THE MOVIE タイムスリップ!恐竜パニック!!"
+      },
+      {
+        "title": "騎士竜戦隊リュウソウジャー THE MOVIE",
+        "gross": 11.7,
+        "year": 2019,
+        "region": "邦画",
+        "metric": "興行収入",
+        "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2019.pdf",
+        "poster_checked_at": "2026-11-10T09:26:06.489407Z",
+        "source_group_title": "劇場版 仮面ライダージオウ Over Quartzer 騎士竜戦隊リュウソウジャー THE MOVIE タイムスリップ!恐竜パニック!!"
       },
       {
         "title": "空母いぶき",

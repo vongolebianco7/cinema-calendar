@@ -88,7 +88,7 @@ REVIEWED_TITLE_ALIASES = {
     (2013, "劇場版 仮面ライダーウィザード イン マジックランド"): ["Kamen Rider Wizard in Magic Land"],
     (2019, "騎士竜戦隊リュウソウジャー THE MOVIE"): ["Kishiryu Sentai Ryusoulger the Movie"],
 }
-POSTER_CHECK_VERSION = 4
+POSTER_CHECK_VERSION = 5
 RECHECK_DAYS = 1
 
 
@@ -125,6 +125,13 @@ def search_language(query):
     has_latin = bool(re.search(r"[A-Za-z]", value))
     has_japanese = bool(re.search(r"[\u3040-\u30ff\u3400-\u9fff]", value))
     return "en-US" if has_latin and not has_japanese else "ja-JP"
+
+
+def search_languages(query):
+    """Search both TMDB title localizations while keeping JP release scope."""
+    primary = search_language(query)
+    secondary = "ja-JP" if primary == "en-US" else "en-US"
+    return (primary, secondary)
 
 
 EXPLICIT_GROUPED_TITLE_SPLITS = {
@@ -595,6 +602,21 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                     for movie in result.get("results", []):
                         if movie.get("id"):
                             search_results_by_id[str(movie["id"])] = movie
+                # Search the alternate title localization only when the primary
+                # title search returns no records. This keeps normal API traffic
+                # unchanged and recovers titles indexed under the other locale.
+                if not search_results_by_id:
+                    for query in aliases:
+                        alternate_language = search_languages(query)[1]
+                        url = SEARCH + "?" + urllib.parse.urlencode({
+                            "api_key": api_key, "query": query,
+                            "language": alternate_language, "region": "JP",
+                            "include_adult": "false", "page": 1,
+                        })
+                        result = rate_limited_fetch(url)
+                        for movie in result.get("results", []):
+                            if movie.get("id"):
+                                search_results_by_id[str(movie["id"])] = movie
                 search_results = list(search_results_by_id.values())
                 alias_keys = {normalize(alias) for alias in aliases}
                 exact_title_candidates = [movie for movie in search_results

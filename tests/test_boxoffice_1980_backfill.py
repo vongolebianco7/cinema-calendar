@@ -43,17 +43,33 @@ class BoxOffice1980BackfillTests(unittest.TestCase):
             self.assertTrue(row.get("identity_checked_at"))
             self.assertTrue(row.get("identity_match"))
 
-    def test_ambiguous_1980_entries_are_not_assigned_an_unverified_poster(self):
+    def test_1980_co_billed_films_are_split_and_keep_shared_gross(self):
         data = json.loads((ROOT / "data/boxoffice.json").read_text(encoding="utf-8"))
-        rows = {row["title"]: row for row in data["by_year"]["1980"]}
-        unresolved = [
-            "ドラえもん のび太の恐竜 / モスラ対ゴジラ",
-            "男はつらいよ 寅次郎ハイビスカスの花 / 思えば遠くへ来たもんだ",
-            "男はつらいよ 寅次郎春の夢 / 神様のくれた赤ん坊",
-        ]
-        for title in unresolved:
-            self.assertFalse(rows[title].get("tmdbId"))
-            self.assertFalse(rows[title].get("poster"))
+        rows = data["by_year"]["1980"]
+        groups = {
+            "ドラえもん のび太の恐竜 / モスラ対ゴジラ": {
+                "ドラえもん のび太の恐竜", "モスラ対ゴジラ",
+            },
+            "男はつらいよ 寅次郎ハイビスカスの花 / 思えば遠くへ来たもんだ": {
+                "男はつらいよ 寅次郎ハイビスカスの花", "思えば遠くへ来たもんだ",
+            },
+            "男はつらいよ 寅次郎春の夢 / 神様のくれた赤ん坊": {
+                "男はつらいよ 寅次郎春の夢", "神様のくれた赤ん坊",
+            },
+        }
+        for source_title, expected_titles in groups.items():
+            films = [row for row in rows if row.get("source_group_title") == source_title]
+            self.assertEqual({row["title"] for row in films}, expected_titles)
+            self.assertEqual(len({row.get("gross") for row in films}), 1)
+            for row in films:
+                if row.get("poster"):
+                    self.assertTrue(row.get("tmdbId"))
+                    self.assertTrue(row["poster"].startswith("https://image.tmdb.org/t/p/"))
+                    if row.get("identity_source"):
+                        self.assertEqual(row["identity_source"],
+                                         f"https://www.themoviedb.org/movie/{row['tmdbId']}")
+                else:
+                    self.assertFalse(row.get("tmdbId"))
 
     def test_verified_2024_boxoffice_titles_have_canonical_posters(self):
         data = json.loads((ROOT / "data/boxoffice.json").read_text(encoding="utf-8"))

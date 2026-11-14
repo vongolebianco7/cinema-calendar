@@ -43,6 +43,8 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (2001, "もっとおジャ魔女どれみ"): "2001-07-14",
     # The Media Arts Database records the Japanese theatrical release.
     (1986, "オバケのq太郎とびだせバケバケ大作戦"): "1986-03-15",
+    # Media Arts Database confirms the 1993 Japanese theatrical date.
+    (1993, "銀河ギリギリぶっち切りの凄い奴"): "1993-07-10",
     (2009, "ドロップ"): "2009-03-20",
 }
 
@@ -53,6 +55,10 @@ REVIEWED_JAPANESE_DIRECTORS = {
     (1986, "オバケのq太郎とびだせバケバケ大作戦"): {
         "names": ("原田益次",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C410040",
+    },
+    (1993, "銀河ギリギリぶっち切りの凄い奴"): {
+        "names": ("上田芳裕",),
+        "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C410531",
     },
     (2000, "おジャ魔女どれみ♯"): {
         "names": ("五十嵐卓哉",),
@@ -97,7 +103,10 @@ REVIEWED_TITLE_ALIASES = {
     (1993, "のび太とブリキの迷宮ドラミちゃん"): ["Doraemon: Nobita and the Tin Labyrinth"],
     (1993, "ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦"): ["Dragon Ball Z: Broly - The Legendary Super Saiyan"],
     (1993, "んちゃ!ペンギン村はハレのち晴れ"): ["Dr. Slump: N-cha! From Penguin Village with Love"],
-    (1993, "銀河ギリギリ!ぶっちぎりの凄い奴"): ["Dragon Ball Z: Bojack Unbound"],
+    (1993, "銀河ギリギリ!ぶっち切りの凄い奴"): [
+        "Dragon Ball Z: Bojack Unbound",
+        "ドラゴンボールZ 銀河ギリギリ!! ぶっちぎりの凄い奴",
+    ],
     (1994, "ドラえもん のび太と夢幻三銃士"): ["Doraemon: Nobita's Three Visionary Swordsmen"],
     (1994, "メイクアップセーラー戦士"): ["Make Up! Sailor Soldiers"],
     (1993, "ドラえもん のび太とブリキの迷宮"): ["Doraemon: Nobita and the Tin Labyrinth"],
@@ -142,7 +151,7 @@ REVIEWED_TITLE_ALIASES = {
         "特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ！",
     ],
 }
-POSTER_CHECK_VERSION = 9
+POSTER_CHECK_VERSION = 10
 RECHECK_DAYS = 1
 
 

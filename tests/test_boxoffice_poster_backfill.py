@@ -1179,5 +1179,16 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         )
         self.assertEqual(result["enriched"], 1)
 
+
+    def test_official_bojack_tmdb_alias_is_scoped_by_japan_date_and_director(self):
+        title = "銀河ギリギリ!ぶっち切りの凄い奴"
+        aliases = backfill.exact_title_aliases(title, 1993)
+        self.assertIn("ドラゴンボールZ 銀河ギリギリ!! ぶっちぎりの凄い奴", aliases)
+        self.assertTrue(backfill.matches_reviewed_release_window(title, 1993, "1993-07-10"))
+        self.assertFalse(backfill.matches_reviewed_release_window(title, 1993, "1992-07-10"))
+        self.assertEqual(backfill.reviewed_director(title, 1993)["names"], ("上田芳裕",))
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 10)
+
+
 if __name__ == "__main__":
     unittest.main()

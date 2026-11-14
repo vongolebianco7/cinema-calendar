@@ -7,8 +7,8 @@ const assert = require('node:assert/strict');
 const boxoffice=JSON.parse(require('node:fs').readFileSync('data/boxoffice.json','utf8'));
 const boxRows=boxoffice.all_time;
 const compoundRows=[
-  {year:'1999',title:'リング2 / 死国',posterTitles:['リング 2','死国'],gross:'21.0億円',rank:7},
-  {year:'2000',title:'リング0 バースデイ / ISOLA 多重人格少女',posterTitles:['リング０ バースデイ','ISOLA 多重人格少女'],gross:'16.0億円',rank:25},
+  {year:'1999',films:[{title:'リング2',poster:'/mZrniHCiAmCRD9t0eTgLJvQrFwe.jpg'},{title:'死国',poster:'/nr9an9wscTJQxKopJ0YO50WsT43.jpg'}],gross:'21.0億円'},
+  {year:'2000',films:[{title:'リング0 バースデイ',poster:'/x0ZrQmfBHgF0VA8en7K6tpnDGIT.jpg'},{title:'ISOLA 多重人格少女',poster:'/l5mBFunpO5IiMQNvcyaPm8tB3xo.jpg'}],gross:'16.0億円'},
 ];
 
 function normalizeTitle(value) { return String(value).normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, ''); }
@@ -82,29 +82,27 @@ async function freePort() {
       }
 
       for (const fixture of compoundRows) {
-        // Isolate each fixture's API observation from earlier pages and viewports.
-        backendQueries.length = 0;
-        await page.goto(`${base}/rankings.html?axis=boxoffice&boxYear=${fixture.year}`, { waitUntil: 'domcontentloaded' });
-        const groupedCard = page.locator('#grid .rankReviewWrap').filter({ hasText: fixture.title });
-        await groupedCard.waitFor({ state: 'visible' });
-        const posterSet = groupedCard.locator('[data-box-poster-set]');
-        await posterSet.waitFor({ state: 'visible' });
-        const posters = groupedCard.locator('img[data-box-group-poster]');
-        assert.equal(await posters.count(), 2, `${fixture.year} source row renders both distinct film posters`);
-        assert.deepEqual(await posters.evaluateAll(images => images.map(image => image.alt)), fixture.posterTitles);
-        assert.deepEqual(await posters.evaluateAll(images => images.map(image => new URL(image.src).hostname)), ['image.tmdb.org','image.tmdb.org']);
-        const posterTiles = groupedCard.locator('.boxPosterTile');
-        await posterTiles.first().scrollIntoViewIfNeeded();
-        await posterTiles.last().scrollIntoViewIfNeeded();
-        await groupedCard.locator('.boxPosterTileFallback:not([hidden])').first().waitFor({ state: 'visible' });
-        assert.equal(await groupedCard.locator('.boxPosterTileFallback:not([hidden])').count(), 2, 'failed artwork uses one placeholder per title');
-        assert.match(await groupedCard.locator('.boxGroupNote').innerText(), /収入は合算/);
-        assert.match(await groupedCard.locator('.meta').filter({ hasText: '億円' }).innerText(), new RegExp(fixture.gross));
-        assert.equal((await groupedCard.locator('.no').innerText()).trim(), `#${fixture.rank}`, 'source competition rank is unchanged');
-        assert.equal(await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth)), 0, 'grouped artwork stays within the viewport');
-        await page.waitForTimeout(50);
-        const groupedQueries = backendQueries.filter(query => normalizeTitle(query) === normalizeTitle(fixture.title));
-        assert.equal(groupedQueries.length, 0, `grouped titles never trigger single-film identity lookup: ${JSON.stringify(groupedQueries)}`);
+        await page.goto(`${base}/rankings.html?axis=boxoffice`, { waitUntil: 'domcontentloaded' });
+        const yearFilter = page.locator(`#boxEraChips [data-box-era="${fixture.year}"]`);
+        await yearFilter.waitFor({ state: 'visible' });
+        await yearFilter.click();
+        const cards = page.locator('#grid [data-box-film]');
+        const matchingCards = await cards.evaluateAll((elements, titles) => titles.map(title => elements.findIndex(element => element.getAttribute('data-box-film') === title)), fixture.films.map(film => film.title));
+        assert.ok(matchingCards.every(index => index >= 0), `${fixture.year} renders each billed film as its own row`);
+        const observedPosters = [];
+        for (const [filmIndex, film] of fixture.films.entries()) {
+          const card = cards.nth(matchingCards[filmIndex]);
+          await card.waitFor({ state: 'visible' });
+          assert.equal((await card.locator('.title').innerText()).trim(), film.title);
+          assert.match(await card.locator('.meta').filter({ hasText: '億円' }).innerText(), new RegExp(fixture.gross));
+          const poster = card.locator('img[data-box-poster]');
+          await poster.waitFor({ state: 'attached' });
+          const source = await poster.getAttribute('src');
+          assert.ok(source?.endsWith(film.poster), `${film.title} uses its independent verified poster`);
+          observedPosters.push(source);
+        }
+        assert.equal(new Set(observedPosters).size, fixture.films.length, `${fixture.year} uses a different poster for each film`);
+        assert.equal(await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth)), 0, 'individual film rows stay within the viewport');
       }
     }
     console.log('Box-office single-row fallback and multi-poster compound rendering passed at 390px and 1280px with external image/API requests unavailable.');

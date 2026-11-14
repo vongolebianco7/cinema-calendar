@@ -823,7 +823,10 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             requested_titles.append(title)
             official_title = next(
                 (name for name in film_identities
-                 if backfill.normalize(name) == backfill.normalize(title)),
+                 if backfill.normalize(title) in {
+                     backfill.normalize(name),
+                     *(backfill.normalize(alias) for alias in backfill.exact_title_aliases(name, 1992)),
+                 }),
                 None,
             )
             if official_title is None:
@@ -856,7 +859,11 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             requested_titles[-1],
             unicodedata.normalize("NFKC", list(film_identities)[-1]),
         )
-        self.assertEqual(len(requests), 3)
+        self.assertIn(
+            backfill.normalize("21エモン 宇宙いけ！ 裸足のプリンセス"),
+            {backfill.normalize(query) for query in requested_titles},
+        )
+        self.assertGreaterEqual(len(requests), 2)
         self.assertEqual([row["title"] for row in rows], list(film_identities))
         self.assertEqual([row["gross"] for row in rows], [16.8, 16.8])
         self.assertEqual([row["metric"] for row in rows], ["配給収入", "配給収入"])

@@ -871,7 +871,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         row = data["by_year"]["2000"][0]
         self.assertEqual(row["tmdbId"], 900001)
         self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/fixture-the-kid-poster.jpg")
-        self.assertEqual(row["identity_match"], "exact_title_and_release_year_window")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"]), (14.5, 2000))
         self.assertEqual(
             [request[0].full_url.split("language=")[1].split("&")[0] for request in requests],

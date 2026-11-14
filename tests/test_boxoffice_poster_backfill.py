@@ -545,19 +545,33 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertFalse(backfill.matches_reviewed_release_window("ONE PIECE ねじまき島の冒険", 2001, "2000-03-04"))
         self.assertIn("One Piece: Clockwork Island Adventure", backfill.exact_title_aliases("ONE PIECE ねじまき島の冒険", 2001))
 
-        data = {"by_year": {"2001": [{
-            "title": "ONE PIECE", "gross": 30, "year": 2001,
-            "source_group_title": "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル",
-            "tmdbId": 19576, "tmdb_release_date": "2000-03-04",
-            "poster": "https://image.tmdb.org/t/p/w500/wrong-film.jpg",
-        }]}}
+        data = {"by_year": {
+            "2000": [{
+                "title": "ONE PIECE", "gross": 21.6, "year": 2000,
+                "source_group_title": "デジモンアドベンチャー ぼくらのウォーゲーム! / ONE PIECE",
+            }],
+            "2001": [{
+                "title": "ONE PIECE", "gross": 30, "year": 2001,
+                "source_group_title": "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル",
+                "tmdbId": 19576, "original_title": "ワンピース",
+                "tmdb_release_date": "2000-03-04",
+                "identity_source": "https://www.themoviedb.org/movie/19576",
+                "identity_match": "exact_cleaned_title_and_release_year_window",
+                "poster_checked_at": "2026-11-14T07:32:35Z",
+                "poster": "https://image.tmdb.org/t/p/w500/verified-existing.jpg",
+            }],
+        }}
         backfill.expand_grouped_rows(data)
-        row = data["by_year"]["2001"][0]
-        self.assertEqual(row["title"], "ONE PIECE ねじまき島の冒険")
-        self.assertEqual(row["gross"], 30)
-        self.assertEqual(row["source_group_title"], "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル")
-        self.assertNotIn("tmdbId", row)
-        self.assertNotIn("poster", row)
+        first, second = data["by_year"]["2000"][0], data["by_year"]["2001"][0]
+        self.assertEqual((first["tmdbId"], first["tmdb_release_date"]), (19576, "2000-03-04"))
+        self.assertEqual(first["poster"], "https://image.tmdb.org/t/p/w500/verified-existing.jpg")
+        self.assertEqual(first["gross"], 21.6)
+        self.assertEqual(first["source_group_title"], "デジモンアドベンチャー ぼくらのウォーゲーム! / ONE PIECE")
+        self.assertEqual(second["title"], "ONE PIECE ねじまき島の冒険")
+        self.assertEqual(second["gross"], 30)
+        self.assertEqual(second["source_group_title"], "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル")
+        self.assertNotIn("tmdbId", second)
+        self.assertNotIn("poster", second)
 
     def test_drop_filters_same_title_tmdb_candidates_by_official_japan_date(self):
         self.assertTrue(backfill.matches_reviewed_release_window(

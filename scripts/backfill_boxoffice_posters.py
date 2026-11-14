@@ -374,6 +374,34 @@ def expand_grouped_rows(data):
                     )):
                 continue
             if str(row.get("tmdb_release_date") or "")[:10] != "2001-03-03":
+                target_rows = (data.get("by_year") or {}).get("2000", [])
+                target = next((candidate for candidate in target_rows
+                               if isinstance(candidate, dict)
+                               and normalize(candidate.get("title")) == normalize("ONE PIECE")
+                               and normalize(candidate.get("source_group_title")) == normalize(
+                                   "デジモンアドベンチャー ぼくらのウォーゲーム! / ONE PIECE"
+                               )
+                               and not candidate.get("poster")
+                               and not candidate.get("tmdbId")
+                               and not candidate.get("tmdb_id")), None)
+                # Reassign only the verified 2000 TMDB identity to the exact
+                # 2000 child row; its official release date matches Toei.
+                if (target and str(row.get("tmdbId") or row.get("tmdb_id") or "") == "19576"
+                        and str(row.get("tmdb_release_date") or "")[:10] == "2000-03-04"
+                        and str(row.get("identity_source") or "").startswith(
+                            "https://www.themoviedb.org/movie/19576"
+                        )
+                        and str(row.get("poster") or "").startswith("https://image.tmdb.org/t/p/")):
+                    for key in (
+                        "poster", "tmdbId", "original_title", "tmdb_release_date",
+                        "identity_source", "identity_checked_at", "identity_match",
+                    ):
+                        if row.get(key):
+                            target[key] = row[key]
+                    target["poster_checked_at"] = row.get("poster_checked_at")
+                    target["poster_check_version"] = POSTER_CHECK_VERSION
+                    target["poster_match_status"] = "matched"
+                    target["poster_check_skip_reason"] = None
                 clear_inherited_poster_identity(row)
                 row["title"] = "ONE PIECE ねじまき島の冒険"
 

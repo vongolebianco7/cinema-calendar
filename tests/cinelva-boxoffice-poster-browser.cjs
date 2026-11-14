@@ -82,7 +82,10 @@ async function freePort() {
       }
 
       for (const fixture of compoundRows) {
-        await page.goto(`${base}/rankings.html?axis=boxoffice&boxYear=${fixture.year}`, { waitUntil: 'domcontentloaded' });
+        await page.goto(`${base}/rankings.html?axis=boxoffice`, { waitUntil: 'domcontentloaded' });
+        const yearFilter = page.locator(`#boxEraChips [data-box-era="${fixture.year}"]`);
+        await yearFilter.waitFor({ state: 'visible' });
+        await yearFilter.click();
         const cards = page.locator('#grid [data-box-film]');
         const matchingCards = await cards.evaluateAll((elements, titles) => titles.map(title => elements.findIndex(element => element.getAttribute('data-box-film') === title)), fixture.films.map(film => film.title));
         assert.ok(matchingCards.every(index => index >= 0), `${fixture.year} renders each billed film as its own row`);

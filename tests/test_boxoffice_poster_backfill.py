@@ -538,6 +538,16 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             "スター・ウォーズ エピソード6／ジェダイの帰還",
         ])
 
+    def test_drop_filters_same_title_tmdb_candidates_by_official_japan_date(self):
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            "ドロップ", 2009, "2009-03-20"))
+        self.assertFalse(backfill.matches_reviewed_release_window(
+            "ドロップ", 2009, "2008-05-11"))
+        self.assertFalse(backfill.matches_reviewed_release_window(
+            "ドロップ", 2009, ""))
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            "別タイトル", 2009, "2008-01-01"))
+
     def test_official_1994_rampo_versions_split_with_shared_gross(self):
         data = {"by_year": {"1994": [{
             "title": "RAMPO", "gross": 12.0, "year": 1994,

@@ -287,9 +287,16 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         data = {"by_year": {"2010": [
             {"title": "仮面ライダー×仮面ライダー×仮面ライダー",
              "gross": 13.1, "year": 2010, "metric": "興行収入",
-             "source_group_title": source_group, "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2010.pdf"},
+             "source_group_title": source_group,
+             "poster_checked_at": "2026-11-14T04:00:00Z",
+             "poster_check_version": backfill.POSTER_CHECK_VERSION,
+             "poster_match_status": "unresolved",
+             "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2010.pdf"},
             {"title": "超・電王トリロジー", "gross": 13.1, "year": 2010,
              "metric": "興行収入", "source_group_title": source_group,
+             "poster_checked_at": "2026-11-14T04:00:00Z",
+             "poster_check_version": backfill.POSTER_CHECK_VERSION,
+             "poster_match_status": "unresolved",
              "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2010.pdf"},
         ]}, "all_time": []}
         identities = {
@@ -340,6 +347,21 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         ) for row in rows))
         self.assertEqual(result["expanded_grouped_films"], 3)
         self.assertEqual(result["enriched"], 3)
+
+    def test_eiren_group_sibling_with_existing_poster_is_not_discarded(self):
+        source_group = "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"
+        poster = "https://image.tmdb.org/t/p/w500/verified.jpg"
+        data = {"by_year": {"2010": [
+            {"title": "仮面ライダー×仮面ライダー×仮面ライダー",
+             "gross": 13.1, "source_group_title": source_group,
+             "tmdbId": 111, "poster": poster},
+            {"title": "超・電王トリロジー", "gross": 13.1,
+             "source_group_title": source_group},
+        ]}, "all_time": []}
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        self.assertEqual(len(data["by_year"]["2010"]), 2)
+        self.assertEqual(data["by_year"]["2010"][0]["poster"], poster)
+        self.assertEqual(data["by_year"]["2010"][0]["tmdbId"], 111)
 
     def test_eiren_group_siblings_with_conflicting_gross_are_not_rewritten(self):
         source_group = "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"

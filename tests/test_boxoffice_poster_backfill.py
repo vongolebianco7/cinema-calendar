@@ -95,6 +95,48 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 3)
 
+    def test_verified_blue_jeans_memory_japanese_title_recovers_its_own_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "ブルージーンズメモリー", "gross": 12.5, "year": 1981}],
+            {"results": [{
+                "id": 547528,
+                "title": "ブルージーンズメモリー BLUE JEANS MEMORY",
+                "original_title": "ブルージーンズメモリー BLUE JEANS MEMORY",
+                "release_date": "1981-07-11",
+                "poster_path": "/official-blue-jeans-memory-poster.jpg",
+            }]},
+            market_year="1981",
+        )
+        row = data["by_year"]["1981"][0]
+        self.assertEqual(row["tmdbId"], 547528)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-blue-jeans-memory-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/547528")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"]), (12.5, 1981))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+
+    def test_verified_sneaker_blues_japanese_title_recovers_its_own_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "青春グラフィティ スニーカーぶるーす", "gross": 10.8, "year": 1981}],
+            {"results": [{
+                "id": 548191,
+                "title": "青春グラフィティ スニーカーぶる〜す",
+                "original_title": "青春グラフィティ スニーカーぶる〜す",
+                "release_date": "1981-02-11",
+                "poster_path": "/official-sneaker-blues-poster.jpg",
+            }]},
+            market_year="1981",
+        )
+        row = data["by_year"]["1981"][0]
+        self.assertEqual(row["tmdbId"], 548191)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-sneaker-blues-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/548191")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"]), (10.8, 1981))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+
     def test_multiple_exact_title_candidates_remain_unresolved(self):
         data, requests, result = self.run_rows(
             [{"title": "同名作品", "gross": 10, "year": 1980}],

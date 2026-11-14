@@ -107,6 +107,10 @@ REVIEWED_TITLE_ALIASES = {
     (2012, "仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ!"): ["Kamen Rider OOO Wonderful: The Shogun and the 21 Core Medals"],
     (2013, "劇場版 仮面ライダーウィザード イン マジックランド"): ["Kamen Rider Wizard in Magic Land"],
     (2019, "騎士竜戦隊リュウソウジャー THE MOVIE"): ["Kishiryu Sentai Ryusoulger the Movie"],
+    # Toei Video's official product entry confirms the full Japanese title.
+    (2012, "特命戦隊ゴーバスターズ THE MOVIE"): [
+        "特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ！",
+    ],
 }
 POSTER_CHECK_VERSION = 9
 RECHECK_DAYS = 1

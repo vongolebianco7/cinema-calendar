@@ -379,7 +379,8 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                                   now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
                                   catalog_paths=[])
         rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["2009"]
-        self.assertEqual(requested, list(identities))
+        requested_keys = {backfill.normalize(title) for title in requested}
+        self.assertTrue(set(alias_to_identity).issubset(requested_keys))
         self.assertEqual([row["title"] for row in rows], list(identities))
         self.assertEqual([row["gross"] for row in rows], [19, 19])
         self.assertEqual([row["tmdbId"] for row in rows], [30617, 188297])

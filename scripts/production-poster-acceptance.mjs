@@ -182,7 +182,19 @@ async function auditHistoricalBoxOffice(context) {
       if (!response.ok) throw new Error(`boxoffice.json: HTTP ${response.status}`);
       const entries = (await response.json())?.by_year?.['1980'];
       if (!Array.isArray(entries)) throw new Error('boxoffice.json has no valid 1980 rows');
-      return entries.length;
+      const normalize = value => String(value || '').normalize('NFKC').toLowerCase()
+        .replace(/[^\p{L}\p{N}]/gu, '');
+      const titles = new Set();
+      const ids = new Set();
+      return [...entries].sort((a, b) => Number(b.gross || 0) - Number(a.gross || 0))
+        .filter(row => {
+          const id = row.tmdbId || row.tmdb_id || row.movieId;
+          const key = `title:${normalize(row.original_title || row.title)}|1980`;
+          if (titles.has(key) || (id && ids.has(String(id)))) return false;
+          titles.add(key);
+          if (id) ids.add(String(id));
+          return true;
+        }).length;
     });
     await page.waitForFunction(expected => document.querySelectorAll('.rankCard').length === expected,
       expected1980Rows, { timeout: 15000 });

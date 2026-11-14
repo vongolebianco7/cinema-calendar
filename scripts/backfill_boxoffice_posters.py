@@ -30,7 +30,21 @@ MAX_DAILY_LOOKUPS = 100
 MAX_MANUAL_LOOKUPS = 200
 MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
 
+# KADOKAWA's official product entry confirms the Japan premiere date for the
+# 2009 film titled ドロップ. TMDB also returns another exact-title result from
+# 2008, so only the result with this reviewed JP release date is eligible.
+REVIEWED_JAPANESE_RELEASE_DATES = {
+    # Toei official premiere dates
+    (2000, "onepiece"): "2000-03-04",
+    (2001, "onepieceねじまき島の冒険"): "2001-03-03",
+    (2009, "ドロップ"): "2009-03-20",
+}
+
 REVIEWED_TITLE_ALIASES = {
+    (2001, "ONE PIECE ねじまき島の冒険"): [
+        "One Piece: Clockwork Island Adventure",
+        "ONE PIECE: Nejimaki-jima no Daibōken",
+    ],
     (1990, "チンプイ"): ["チンプイ エリさま活動大写真"],
     (1981, "ブルージーンズメモリー"): ["Blue Jeans Memory", "ブルージーンズメモリー BLUE JEANS MEMORY"],
     (1981, "青春グラフィティ スニーカーぶるーす"): ["Sneaker Blues", "青春グラフィティ スニーカーぶる〜す"],
@@ -44,7 +58,6 @@ REVIEWED_TITLE_ALIASES = {
     (1991, "ドラえもん のび太のトラビアンナイト"): ["Doraemon: Nobita's Dorabian Nights", "映画ドラえもん のび太のドラビアンナイト"],
     (1991, "ドラゴンボールZ・とびっきり最強対最強"): ["Dragon Ball Z: Cooler's Revenge"],
     (1991, "まじかるタルるートくん"): ["Magical Taruruto-kun"],
-    (1992, "21エモン 他"): ["21 Emon: Welcome to the Space"],
     (1992, "ドラゴンボールZ 激突!!100億円パワーの戦士たち"): ["Dragon Ball Z: The Return of Cooler"],
     (1992, "ドラゴンボールZ 激突バトル!!三大超サイヤ人"): ["Dragon Ball Z: Super Android 13"],
     (1993, "ドラえもん ソラえもん号"): ["The Sun Is Our Friend: Hold Out! Soraemon!"],
@@ -89,7 +102,7 @@ REVIEWED_TITLE_ALIASES = {
     (2013, "劇場版 仮面ライダーウィザード イン マジックランド"): ["Kamen Rider Wizard in Magic Land"],
     (2019, "騎士竜戦隊リュウソウジャー THE MOVIE"): ["Kishiryu Sentai Ryusoulger the Movie"],
 }
-POSTER_CHECK_VERSION = 5
+POSTER_CHECK_VERSION = 8
 RECHECK_DAYS = 1
 
 
@@ -143,6 +156,21 @@ EXPLICIT_GROUPED_TITLE_SPLITS = {
         "スター・ウォーズ エピソード5／帝国の逆襲",
         "スター・ウォーズ エピソード6／ジェダイの帰還",
     ],
+    # Official Shin-Ei 50th-anniversary program lists the two short films
+    # paired with the Doraemon feature; the Eiren package gross stays intact
+    # for each separately identified film.
+    "21エモン他": [
+        "21エモン 宇宙行け！裸足のプリンセス",
+        "トキメキソーラーくるまによん",
+    ],
+    # Eiren reports the 1994 RAMPO package as one 1,200-million-yen entry.
+    # Shochiku's official database identifies the two same-day versions as
+    # separate films; each exact title is looked up independently while the
+    # published package gross remains unchanged on both rows.
+    "rampo": [
+        "ＲＡＭＰＯ（奥山バージョン）",
+        "ＲＡＭＰＯ（黛バージョン）",
+    ],
     # The 2009 Eiren entry combines a Kamen Rider feature with its separately
     # billed Super Sentai feature; each must resolve to its own TMDB identity.
     "劇場版仮面ライダーディケイド侍戦隊シンケンジャー銀幕版": [
@@ -156,6 +184,17 @@ EXPLICIT_GROUPED_TITLE_SPLITS = {
 # separately released Trilogy episodes. The current JSON already has two
 # slash-split siblings; replace that exact sibling set with the three official
 # episode titles, preserving the shared gross on every row.
+# Shin-Ei's official 1988 co-bill listing resolves two abbreviated Eiren
+# sibling rows to distinct films. Only rename rows without an existing identity;
+# the already matched Doraemon row and the shared reported gross remain intact.
+EXPLICIT_SOURCE_ROW_TITLE_RENAMES = {
+    normalize("ドラえもん のび太のパラレル西遊記 / エスパー魔美 / 星空のダンシング・ドール 他"): {
+        normalize("エスパー魔美"): "エスパー魔美 星空のダンシングドール",
+        normalize("星空のダンシング・ドール 他"): "ウルトラB ブラックホールからの独裁者B・B!!",
+    },
+}
+
+
 EXPLICIT_SOURCE_GROUP_SPLITS = {
     normalize("仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"): {
         "source_child_titles": (
@@ -173,6 +212,45 @@ EXPLICIT_SOURCE_GROUP_SPLITS = {
             "超・電王トリロジー EPISODE BLUE 派遣イマジンはNEWトラル",
             "超・電王トリロジー EPISODE YELLOW お宝 DE エンド・パイレーツ",
         ),
+    },
+}
+
+
+# Eiren's 1992 entries report two joint-market packages. In each package,
+# Dragon Ball Z is one film, while the two Dai no Daibouken fragments form one
+# second film. The official Media Arts Database lists each full Dai title as a
+# single movie. Merge only this exact, complete child set; preserve the already
+# identified Dragon Ball row and never divide the package gross.
+EXPLICIT_SOURCE_GROUP_MERGES = {
+    normalize(
+        "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / "
+        "ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他"
+    ): {
+        "source_child_titles": (
+            "ドラゴンボールZ 激突!!100億円パワーの戦士たち",
+            "ドラゴンクエストダイの大冒険",
+            "起ちあがれ!!アバンの使徒 他",
+        ),
+        "merge_titles": (
+            "ドラゴンクエストダイの大冒険",
+            "起ちあがれ!!アバンの使徒 他",
+        ),
+        "film_title": "DRAGON QUEST ダイの大冒険 起ちあがれ! アバンの使徒",
+    },
+    normalize(
+        "ドラゴンボールZ 激突バトル!!三大超サイヤ人 / "
+        "ドラゴンクエストダイの大冒険 / ぶちやぶれ!!新生6大将軍 他"
+    ): {
+        "source_child_titles": (
+            "ドラゴンボールZ 激突バトル!!三大超サイヤ人",
+            "ドラゴンクエストダイの大冒険",
+            "ぶちやぶれ!!新生6大将軍 他",
+        ),
+        "merge_titles": (
+            "ドラゴンクエストダイの大冒険",
+            "ぶちやぶれ!!新生6大将軍 他",
+        ),
+        "film_title": "DRAGON QUEST ダイの大冒険 ぶちやぶれ!! 新生6大将軍",
     },
 }
 
@@ -285,12 +363,108 @@ def expand_grouped_rows(data):
         if not isinstance(rows, list):
             continue
 
+        # Eiren's 2001 ONE PIECE child is Clockwork Island Adventure. The old
+        # identity reports a 2000 Japan premiere; correct only this exact
+        # source row and retain the full shared gross for its official lookup.
+        for row in rows:
+            if (str(market_year) != "2001" or not isinstance(row, dict)
+                    or normalize(row.get("title")) != normalize("ONE PIECE")
+                    or normalize(row.get("source_group_title")) != normalize(
+                        "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル"
+                    )):
+                continue
+            if str(row.get("tmdb_release_date") or "")[:10] != "2001-03-03":
+                target_rows = (data.get("by_year") or {}).get("2000", [])
+                target = next((candidate for candidate in target_rows
+                               if isinstance(candidate, dict)
+                               and normalize(candidate.get("title")) == normalize("ONE PIECE")
+                               and normalize(candidate.get("source_group_title")) == normalize(
+                                   "デジモンアドベンチャー ぼくらのウォーゲーム! / ONE PIECE"
+                               )
+                               and not candidate.get("poster")
+                               and not candidate.get("tmdbId")
+                               and not candidate.get("tmdb_id")), None)
+                # Reassign only the verified 2000 TMDB identity to the exact
+                # 2000 child row; its official release date matches Toei.
+                if (target and str(row.get("tmdbId") or row.get("tmdb_id") or "") == "19576"
+                        and str(row.get("tmdb_release_date") or "")[:10] == "2000-03-04"
+                        and str(row.get("identity_source") or "").startswith(
+                            "https://www.themoviedb.org/movie/19576"
+                        )
+                        and str(row.get("poster") or "").startswith("https://image.tmdb.org/t/p/")):
+                    for key in (
+                        "poster", "tmdbId", "original_title", "tmdb_release_date",
+                        "identity_source", "identity_checked_at", "identity_match",
+                    ):
+                        if row.get(key):
+                            target[key] = row[key]
+                    target["poster_checked_at"] = row.get("poster_checked_at")
+                    target["poster_check_version"] = POSTER_CHECK_VERSION
+                    target["poster_match_status"] = "matched"
+                    target["poster_check_skip_reason"] = None
+                clear_inherited_poster_identity(row)
+                row["title"] = "ONE PIECE ねじまき島の冒険"
+
+        # Rename only the two unresolved child rows from the verified 1988
+        # source group. Never overwrite a sibling with an established identity.
+        for row in rows:
+            if not isinstance(row, dict) or row.get("poster") or row.get("tmdbId") or row.get("tmdb_id"):
+                continue
+            renames = EXPLICIT_SOURCE_ROW_TITLE_RENAMES.get(
+                normalize(row.get("source_group_title")), {}
+            )
+            replacement_title = renames.get(normalize(row.get("title")))
+            if replacement_title:
+                clear_inherited_poster_identity(row)
+                row["title"] = replacement_title
+
         # Some source rows were already split on "/" before this backfill was
         # introduced. Only rewrite a known source group when its complete,
         # expected sibling set is present, all siblings report the same gross,
         # and no sibling already has an identity/poster that would be discarded.
         replacements = {}
         consumed = set()
+        # Rejoin two title fragments only for the two exact 1992 Eiren
+        # packages whose official catalog records identify the fragments as a
+        # single Dai movie. Require the complete sibling set, equal gross, and
+        # unresolved target fragments; preserve other siblings byte-for-byte.
+        for group_key, spec in EXPLICIT_SOURCE_GROUP_MERGES.items():
+            matching = [
+                index for index, row in enumerate(rows)
+                if isinstance(row, dict)
+                and normalize(row.get("source_group_title")) == group_key
+            ]
+            expected = {normalize(title) for title in spec["source_child_titles"]}
+            actual = {normalize(rows[index].get("title")) for index in matching}
+            if len(matching) != len(spec["source_child_titles"]) or actual != expected:
+                continue
+            source_rows = [rows[index] for index in matching]
+            if any(row.get("gross") != source_rows[0].get("gross")
+                   for row in source_rows[1:]):
+                continue
+            merge_titles = {normalize(title) for title in spec["merge_titles"]}
+            merge_indices = [
+                index for index in matching
+                if normalize(rows[index].get("title")) in merge_titles
+            ]
+            if len(merge_indices) != len(spec["merge_titles"]):
+                continue
+            if any(rows[index].get("poster") or rows[index].get("tmdbId")
+                   or rows[index].get("tmdb_id") for index in merge_indices):
+                continue
+
+            merged = dict(rows[merge_indices[0]])
+            clear_inherited_poster_identity(merged)
+            merged.update({
+                "title": spec["film_title"],
+                "source_group_id": f"{market_year}:{normalize(merged.get('source_group_title'))}",
+                "source_group_index": 2,
+                "source_group_size": 2,
+            })
+            replacements[merge_indices[0]] = [merged]
+            consumed.update(merge_indices[1:])
+            expanded += 1
+
         for group_key, spec in EXPLICIT_SOURCE_GROUP_SPLITS.items():
             matching = [
                 index for index, row in enumerate(rows)
@@ -369,6 +543,19 @@ def valid_poster_path(value):
 
 def valid_tmdb_poster_url(value):
     return isinstance(value, str) and value.startswith("https://image.tmdb.org/t/p/")
+
+
+def reviewed_japanese_release_date(title, market_year):
+    if not str(market_year or "").isdigit():
+        return None
+    return REVIEWED_JAPANESE_RELEASE_DATES.get((int(market_year), normalize(title)))
+
+
+def matches_reviewed_release_window(title, market_year, release_date):
+    expected_date = reviewed_japanese_release_date(title, market_year)
+    if expected_date:
+        return str(release_date or "")[:10] == expected_date
+    return eligible_release_year(release_date, market_year)
 
 
 def eligible_release_year(release_date, market_year):
@@ -592,6 +779,7 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 candidates = [result] if result.get("id") == int(existing_id) else []
             else:
                 aliases = exact_title_aliases(title, market_year)
+                alias_keys = {normalize(alias) for alias in aliases}
                 search_results_by_id = {}
                 for query in aliases:
                     url = SEARCH + "?" + urllib.parse.urlencode({
@@ -603,10 +791,15 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                     for movie in result.get("results", []):
                         if movie.get("id"):
                             search_results_by_id[str(movie["id"])] = movie
-                # Search the alternate title localization only when the primary
-                # title search returns no records. This keeps normal API traffic
-                # unchanged and recovers titles indexed under the other locale.
-                if not search_results_by_id:
+                # Search the alternate title localization if the primary search
+                # has no exact title. TMDB may return nearby records while omitting
+                # the exact localized title from its primary-language results.
+                has_exact_primary_title = any(
+                    alias_keys.intersection({normalize(movie.get("title")),
+                                             normalize(movie.get("original_title"))})
+                    for movie in search_results_by_id.values()
+                )
+                if not has_exact_primary_title:
                     for query in aliases:
                         alternate_language = search_languages(query)[1]
                         url = SEARCH + "?" + urllib.parse.urlencode({
@@ -619,19 +812,20 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                             if movie.get("id"):
                                 search_results_by_id[str(movie["id"])] = movie
                 search_results = list(search_results_by_id.values())
-                alias_keys = {normalize(alias) for alias in aliases}
                 exact_title_candidates = [movie for movie in search_results
                                           if alias_keys.intersection({normalize(movie.get("title")),
                                                                       normalize(movie.get("original_title"))})]
                 exact_candidates = [movie for movie in exact_title_candidates
-                                    if eligible_release_year(movie.get("release_date"), market_year)]
+                                    if matches_reviewed_release_window(
+                                        title, market_year, movie.get("release_date"))]
                 if exact_candidates:
                     candidates = exact_candidates
                     if not any(normalize(title) in {normalize(movie.get("title")),
                                                     normalize(movie.get("original_title"))}
                                for movie in exact_candidates):
                         match_type = "exact_cleaned_title_and_release_year_window"
-                elif len(exact_title_candidates) == 1:
+                elif len(exact_title_candidates) == 1 and not reviewed_japanese_release_date(
+                        title, market_year):
                     # The Japanese box-office year is a market/ranking year and
                     # can differ substantially for theatrical revivals and
                     # anniversary editions. A unique exact TMDB title is still
@@ -644,9 +838,11 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                     # against TMDB's official Japan-scoped alternative-title endpoint
                     # before assigning artwork; search ranking alone is never proof.
                     year_candidates = [movie for movie in search_results
-                                       if movie.get("id") and eligible_release_year(movie.get("release_date"), market_year)]
+                                       if movie.get("id") and matches_reviewed_release_window(
+                                           title, market_year, movie.get("release_date"))]
                     alternative_candidates = year_candidates
-                    if not alternative_candidates:
+                    if not alternative_candidates and not reviewed_japanese_release_date(
+                            title, market_year):
                         alternative_candidates = [movie for movie in search_results
                                                   if movie.get("id") and movie.get("poster_path")]
                     if len(alternative_candidates) > MAX_ALTERNATIVE_TITLE_CANDIDATES:
@@ -662,8 +858,9 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                             if any(normalize(item.get("title")) in alias_keys for item in alternatives):
                                 candidates.append(movie)
                         if candidates:
-                            in_window = all(eligible_release_year(movie.get("release_date"), market_year)
-                                            for movie in candidates)
+                            in_window = all(matches_reviewed_release_window(
+                                title, market_year, movie.get("release_date"))
+                                for movie in candidates)
                             match_type = ("exact_tmdb_alternative_title_and_release_year_window"
                                           if in_window else
                                           "unique_exact_tmdb_alternative_title_outside_release_year_window")

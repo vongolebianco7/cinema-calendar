@@ -207,7 +207,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         data, requests, result = self.run_rows(
             [{"title": "テスト作品", "gross": 8.4, "year": 1980}],
             [
-                {"results": []},
+                {"results": [{"id": 987, "title": "Unrelated Film", "original_title": "Unrelated Film", "release_date": "1980-02-01", "poster_path": "/unrelated.jpg"}]},
                 {"results": [{"id": 123456, "title": "Test Film",
                               "original_title": "テスト作品", "release_date": "1980-01-01",
                               "poster_path": "/test-film.jpg"}]},
@@ -538,6 +538,306 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             "スター・ウォーズ エピソード6／ジェダイの帰還",
         ])
 
+    def test_one_piece_rejects_cross_year_same_title_identity(self):
+        self.assertTrue(backfill.matches_reviewed_release_window("ONE PIECE", 2000, "2000-03-04"))
+        self.assertFalse(backfill.matches_reviewed_release_window("ONE PIECE", 2000, "2001-03-03"))
+        self.assertTrue(backfill.matches_reviewed_release_window("ONE PIECE ねじまき島の冒険", 2001, "2001-03-03"))
+        self.assertFalse(backfill.matches_reviewed_release_window("ONE PIECE ねじまき島の冒険", 2001, "2000-03-04"))
+        self.assertIn("One Piece: Clockwork Island Adventure", backfill.exact_title_aliases("ONE PIECE ねじまき島の冒険", 2001))
+
+        data = {"by_year": {
+            "2000": [{
+                "title": "ONE PIECE", "gross": 21.6, "year": 2000,
+                "source_group_title": "デジモンアドベンチャー ぼくらのウォーゲーム! / ONE PIECE",
+            }],
+            "2001": [{
+                "title": "ONE PIECE", "gross": 30, "year": 2001,
+                "source_group_title": "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル",
+                "tmdbId": 19576, "original_title": "ワンピース",
+                "tmdb_release_date": "2000-03-04",
+                "identity_source": "https://www.themoviedb.org/movie/19576",
+                "identity_match": "exact_cleaned_title_and_release_year_window",
+                "poster_checked_at": "2026-11-14T07:32:35Z",
+                "poster": "https://image.tmdb.org/t/p/w500/verified-existing.jpg",
+            }],
+        }}
+        backfill.expand_grouped_rows(data)
+        first, second = data["by_year"]["2000"][0], data["by_year"]["2001"][0]
+        self.assertEqual((first["tmdbId"], first["tmdb_release_date"]), (19576, "2000-03-04"))
+        self.assertEqual(first["poster"], "https://image.tmdb.org/t/p/w500/verified-existing.jpg")
+        self.assertEqual(first["gross"], 21.6)
+        self.assertEqual(first["source_group_title"], "デジモンアドベンチャー ぼくらのウォーゲーム! / ONE PIECE")
+        self.assertEqual(second["title"], "ONE PIECE ねじまき島の冒険")
+        self.assertEqual(second["gross"], 30)
+        self.assertEqual(second["source_group_title"], "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル")
+        self.assertNotIn("tmdbId", second)
+        self.assertNotIn("poster", second)
+
+    def test_drop_filters_same_title_tmdb_candidates_by_official_japan_date(self):
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            "ドロップ", 2009, "2009-03-20"))
+        self.assertFalse(backfill.matches_reviewed_release_window(
+            "ドロップ", 2009, "2008-05-11"))
+        self.assertFalse(backfill.matches_reviewed_release_window(
+            "ドロップ", 2009, ""))
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            "別タイトル", 2009, "2008-01-01"))
+
+    def test_official_1994_rampo_versions_split_with_shared_gross(self):
+        data = {"by_year": {"1994": [{
+            "title": "RAMPO", "gross": 12.0, "year": 1994,
+            "metric": "配給収入",
+        }]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 2)
+        rows = data["by_year"]["1994"]
+        self.assertEqual([row["title"] for row in rows], [
+            "ＲＡＭＰＯ（奥山バージョン）",
+            "ＲＡＭＰＯ（黛バージョン）",
+        ])
+        self.assertEqual([row["gross"] for row in rows], [12.0, 12.0])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2])
+        self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
+        self.assertEqual([row["source_title"] for row in rows], ["RAMPO", "RAMPO"])
+        self.assertTrue(all(not row.get("poster") and not row.get("tmdbId") for row in rows))
+
+    def test_1992_dai_film_fragments_merge_without_changing_other_package_film(self):
+        cases = [
+            (
+                "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / "
+                "ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他",
+                "ドラゴンボールZ 激突!!100億円パワーの戦士たち",
+                "起ちあがれ!!アバンの使徒 他",
+                "DRAGON QUEST ダイの大冒険 起ちあがれ! アバンの使徒",
+                16.0, 39103,
+            ),
+            (
+                "ドラゴンボールZ 激突バトル!!三大超サイヤ人 / "
+                "ドラゴンクエストダイの大冒険 / ぶちやぶれ!!新生6大将軍 他",
+                "ドラゴンボールZ 激突バトル!!三大超サイヤ人",
+                "ぶちやぶれ!!新生6大将軍 他",
+                "DRAGON QUEST ダイの大冒険 ぶちやぶれ!! 新生6大将軍",
+                15.0, 39104,
+            ),
+        ]
+        for source_group, dragon_title, subtitle, canonical, gross, dragon_id in cases:
+            with self.subTest(canonical=canonical):
+                dragon_poster = f"https://image.tmdb.org/t/p/w500/{dragon_id}.jpg"
+                data = {"by_year": {"1992": [
+                    {"title": dragon_title, "gross": gross, "year": 1992,
+                     "source_group_title": source_group, "tmdbId": dragon_id,
+                     "poster": dragon_poster},
+                    {"title": "ドラゴンクエストダイの大冒険", "gross": gross,
+                     "year": 1992, "source_group_title": source_group,
+                     "poster_match_status": "unresolved"},
+                    {"title": subtitle, "gross": gross, "year": 1992,
+                     "source_group_title": source_group,
+                     "poster_match_status": "unresolved"},
+                ]}}
+                self.assertEqual(backfill.expand_grouped_rows(data), 1)
+                rows = data["by_year"]["1992"]
+                self.assertEqual(len(rows), 2)
+                self.assertEqual(rows[0]["title"], dragon_title)
+                self.assertEqual((rows[0]["tmdbId"], rows[0]["poster"]),
+                                 (dragon_id, dragon_poster))
+                self.assertEqual(rows[1]["title"], canonical)
+                self.assertEqual([row["gross"] for row in rows], [gross, gross])
+                self.assertFalse(rows[1].get("tmdbId"))
+                self.assertFalse(rows[1].get("poster"))
+                self.assertEqual(rows[1]["source_group_title"], source_group)
+                self.assertEqual(rows[1]["source_group_index"], 2)
+                self.assertEqual(rows[1]["source_group_size"], 2)
+                snapshot = json.dumps(data["by_year"]["1992"], ensure_ascii=False, sort_keys=True)
+                self.assertEqual(backfill.expand_grouped_rows(data), 0)
+                self.assertEqual(
+                    json.dumps(data["by_year"]["1992"], ensure_ascii=False, sort_keys=True),
+                    snapshot,
+                )
+
+    def test_1992_dai_fragments_do_not_merge_if_group_or_gross_is_incomplete(self):
+        source_group = (
+            "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / "
+            "ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他"
+        )
+        data = {"by_year": {"1992": [
+            {"title": "ドラゴンクエストダイの大冒険", "gross": 16.0,
+             "year": 1992, "source_group_title": source_group},
+            {"title": "起ちあがれ!!アバンの使徒 他", "gross": 15.9,
+             "year": 1992, "source_group_title": source_group},
+        ]}}
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        self.assertEqual([row["title"] for row in data["by_year"]["1992"]], [
+            "ドラゴンクエストダイの大冒険", "起ちあがれ!!アバンの使徒 他",
+        ])
+
+    def test_existing_1982_double_bill_siblings_are_not_duplicated(self):
+        poster = "https://image.tmdb.org/t/p/w500/good-luck.jpg"
+        source_group = "グッドラックLOVE / すっかり・・・その気で!"
+        data = {"by_year": {"1982": [
+            {"title": "グッドラックLOVE", "gross": 10.5,
+             "source_group_title": source_group, "tmdbId": 547500, "poster": poster},
+            {"title": "すっかり・・・その気で!", "gross": 10.5,
+             "source_group_title": source_group},
+        ]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        rows = data["by_year"]["1982"]
+        self.assertEqual(len(rows), 2)
+        self.assertEqual([row["title"] for row in rows], [
+            "グッドラックLOVE", "すっかり・・・その気で!",
+        ])
+        self.assertEqual([row["gross"] for row in rows], [10.5, 10.5])
+        self.assertEqual(rows[0]["poster"], poster)
+        self.assertEqual(rows[0]["tmdbId"], 547500)
+
+    def test_existing_1987_triple_bill_siblings_are_not_duplicated(self):
+        source_group = (
+            "ドラえもん のび太と竜の騎士 / プロゴルファー猿 "
+            "甲賀秘境!影の忍法ゴルファー参上! / "
+            "オバケのQ太郎 とびだせ!1/100大作戦"
+        )
+        poster_a = "https://image.tmdb.org/t/p/w500/doraemon.jpg"
+        poster_b = "https://image.tmdb.org/t/p/w500/saru.jpg"
+        data = {"by_year": {"1987": [
+            {"title": "ドラえもん のび太と竜の騎士", "gross": 15.0,
+             "source_group_title": source_group, "tmdbId": 72565, "poster": poster_a},
+            {"title": "プロゴルファー猿 甲賀秘境!影の忍法ゴルファー参上!",
+             "gross": 15.0, "source_group_title": source_group,
+             "tmdbId": 1005349, "poster": poster_b},
+            {"title": "オバケのQ太郎 とびだせ!1/100大作戦",
+             "gross": 15.0, "source_group_title": source_group},
+        ]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        rows = data["by_year"]["1987"]
+        self.assertEqual(len(rows), 3)
+        self.assertEqual([row["gross"] for row in rows], [15.0, 15.0, 15.0])
+        self.assertEqual([row["poster"] for row in rows[:2]], [poster_a, poster_b])
+        self.assertEqual([row["tmdbId"] for row in rows[:2]], [72565, 1005349])
+        self.assertFalse(rows[2].get("poster"))
+        self.assertFalse(rows[2].get("tmdbId"))
+
+    def test_official_1992_21_emon_package_splits_into_individual_films(self):
+        import unicodedata
+        from urllib.parse import parse_qs, urlparse
+
+        source_title = "21エモン 他"
+        source_url = "https://shin-ei-animation.jp/50th/"
+        film_identities = {
+            "21エモン 宇宙行け！裸足のプリンセス":
+                (21001, "/21-emon-princess.jpg"),
+            "トキメキソーラーくるまによん":
+                (21002, "/tokimeki-solar.jpg"),
+        }
+        requested_titles = []
+        requests = []
+
+        def opener(request, timeout):
+            requests.append((request, timeout))
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            requested_titles.append(title)
+            official_title = next(
+                name for name in film_identities
+                if unicodedata.normalize("NFKC", name) == title
+            )
+            identifier, poster_path = film_identities[official_title]
+            return Response({"results": [{
+                "id": identifier, "title": official_title, "original_title": official_title,
+                "release_date": "1992-03-07", "poster_path": poster_path,
+            }]})
+
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps({"by_year": {"1992": [{
+            "title": source_title, "gross": 16.8, "year": 1992,
+            "metric": "配給収入", "source_url": source_url,
+        }]}, "all_time": []}), encoding="utf-8")
+        result = backfill.backfill(
+            path, api_key="fixture", opener=opener, delay=0,
+            now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+            catalog_paths=[],
+        )
+        data = json.loads(path.read_text(encoding="utf-8"))
+        rows = data["by_year"]["1992"]
+        self.assertEqual(requested_titles, [unicodedata.normalize("NFKC", title) for title in film_identities])
+        self.assertEqual([row["title"] for row in rows], list(film_identities))
+        self.assertEqual([row["gross"] for row in rows], [16.8, 16.8])
+        self.assertEqual([row["metric"] for row in rows], ["配給収入", "配給収入"])
+        self.assertEqual([row["source_url"] for row in rows], [source_url, source_url])
+        self.assertEqual([row["tmdbId"] for row in rows], [21001, 21002])
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows],
+                         ["21-emon-princess.jpg", "tokimeki-solar.jpg"])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2])
+        self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
+        self.assertEqual(result["expanded_grouped_films"], 2)
+        self.assertEqual(result["enriched"], 2)
+        self.assertEqual(len(requests), 2)
+
+    def test_official_1988_group_titles_resolve_two_films_without_dropping_doraemon(self):
+        from urllib.parse import parse_qs, urlparse
+
+        source_group = (
+            "ドラえもん のび太のパラレル西遊記 / エスパー魔美 / "
+            "星空のダンシング・ドール 他"
+        )
+        identities = {
+            "エスパー魔美 星空のダンシングドール":
+                (88001, "/esper-mami-dancing-doll.jpg"),
+            "ウルトラB ブラックホールからの独裁者B・B!!":
+                (88002, "/ultra-b-black-hole.jpg"),
+        }
+        requests = []
+        queried_titles = []
+
+        def opener(request, timeout):
+            requests.append((request, timeout))
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            queried_titles.append(title)
+            identifier, poster_path = identities[title]
+            return Response({"results": [{
+                "id": identifier, "title": title, "original_title": title,
+                "release_date": "1988-03-12", "poster_path": poster_path,
+            }]})
+
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        doraemon = {
+            "title": "ドラえもん のび太のパラレル西遊記",
+            "gross": 13.6, "year": 1988, "metric": "配給収入",
+            "source_group_title": source_group,
+            "tmdbId": 136241,
+            "poster": "https://image.tmdb.org/t/p/w500/doraemon.jpg",
+        }
+        path.write_text(json.dumps({"by_year": {"1988": [
+            dict(doraemon),
+            {"title": "エスパー魔美", "gross": 13.6, "year": 1988,
+             "metric": "配給収入", "source_group_title": source_group},
+            {"title": "星空のダンシング・ドール 他", "gross": 13.6,
+             "year": 1988, "metric": "配給収入",
+             "source_group_title": source_group},
+        ]}, "all_time": []}), encoding="utf-8")
+
+        result = backfill.backfill(
+            path, api_key="fixture", opener=opener, delay=0,
+            now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+            catalog_paths=[],
+        )
+        rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1988"]
+        self.assertEqual(queried_titles, list(identities))
+        self.assertEqual([row["title"] for row in rows], [
+            doraemon["title"], *identities.keys(),
+        ])
+        self.assertEqual([row["gross"] for row in rows], [13.6, 13.6, 13.6])
+        self.assertEqual([row["tmdbId"] for row in rows], [136241, 88001, 88002])
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], [
+            "doraemon.jpg", "esper-mami-dancing-doll.jpg", "ultra-b-black-hole.jpg",
+        ])
+        self.assertEqual([row["source_group_title"] for row in rows], [source_group] * 3)
+        self.assertEqual(result["enriched"], 2)
+        self.assertEqual(len(requests), 2)
+
     def test_unspaced_official_double_feature_separators_are_split(self):
         titles = [
             "仮面ライダーダブル/天装戦隊ゴセイジャー",
@@ -585,8 +885,8 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["unresolved"], 1)
         self.assertEqual(data["by_year"]["1980"][0]["poster_check_version"], backfill.POSTER_CHECK_VERSION)
         self.assertEqual(data["by_year"]["1980"][0]["poster_match_status"], "not_found")
-        self.assertEqual(len(requests), 2)
-        self.assertIn("/movie/10/alternative_titles?", requests[1][0].full_url)
+        self.assertEqual(len(requests), 3)
+        self.assertIn("/movie/10/alternative_titles?", requests[2][0].full_url)
 
     def test_existing_poster_is_never_replaced_and_missing_key_is_read_only(self):
         data, requests, result = self.run_rows(
@@ -707,9 +1007,9 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/raiders.jpg")
         self.assertEqual(row["identity_match"],
                          "exact_tmdb_alternative_title_and_release_year_window")
-        self.assertEqual(len(requests), 2)
-        self.assertIn("/movie/85/alternative_titles?", requests[1][0].full_url)
-        self.assertIn("country=JP", requests[1][0].full_url)
+        self.assertEqual(len(requests), 3)
+        self.assertIn("/movie/85/alternative_titles?", requests[2][0].full_url)
+        self.assertIn("country=JP", requests[2][0].full_url)
         self.assertEqual(result["enriched"], 1)
 
     def test_unverified_tmdb_search_result_stays_unresolved(self):
@@ -737,7 +1037,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1981"][0]
         self.assertNotIn("tmdbId", row)
         self.assertNotIn("poster", row)
-        self.assertEqual(len(requests), 2)
+        self.assertEqual(len(requests), 3)
         self.assertEqual(result["unresolved"], 1)
 
     def test_alias_candidate_overflow_is_unresolved_without_guessing(self):
@@ -761,7 +1061,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1981"][0]
         self.assertNotIn("tmdbId", row)
         self.assertNotIn("poster", row)
-        self.assertEqual(len(requests), 1)
+        self.assertEqual(len(requests), 2)
         self.assertEqual(result["ambiguous"], 1)
 
     def test_reuses_unique_verified_ranking_poster(self):

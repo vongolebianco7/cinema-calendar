@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T14:05:54.231Z",
+  "generated_at": "2026-11-14T17:17:58.015Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -152,13 +152,13 @@
       "status": "automated",
       "source": "TMDB API",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-14T12:21:43.195Z",
+      "source_observed_at": "2026-11-14T17:17:57.769Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-now-playing.yml",
       "trigger": "毎日18:13 UTCと手動実行。",
       "coverage": "TMDBで公開中として返る作品。全劇場の上映時間や上映館別回数ではない。",
-      "record_count": 90
+      "record_count": 89
     },
     {
       "id": "film-events",

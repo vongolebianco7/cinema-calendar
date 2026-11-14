@@ -45,6 +45,16 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (1986, "オバケのq太郎とびだせバケバケ大作戦"): "1986-03-15",
     # Media Arts Database confirms the 1993 Japanese theatrical date.
     (1993, "銀河ギリギリぶっち切りの凄い奴"): "1993-07-10",
+    # Shin-Ei's official 1994 film list and TMDB detail pages identify these
+    # two separately billed films with the same Japanese premiere date.
+    (1994, "ドラミちゃん青いストローハット"): "1994-03-12",
+    (1994, "ウメ星デンカ宇宙の果てからパンパロパン"): "1994-03-12",
+    # Shin-Ei official filmography and TMDB identify the 1992 short film.
+    (1992, "21エモン宇宙行け裸足のプリンセス"): "1992-03-07",
+    # Toei's official Rider history and Toei Video catalog confirm the
+    # separately billed 2005 features and their shared Japanese premiere.
+    (2005, "劇場版仮面ライダーヒビキと7人の戦鬼"): "2005-09-03",
+    (2005, "魔法戦隊マジレンジャーthemovieインフェルシアの花嫁"): "2005-09-03",
     (2009, "ドロップ"): "2009-03-20",
 }
 
@@ -96,7 +106,11 @@ REVIEWED_TITLE_ALIASES = {
     (1991, "ドラゴンボールZ・とびっきり最強対最強"): ["Dragon Ball Z: Cooler's Revenge"],
     (1991, "まじかるタルるートくん"): ["まじかる☆タルるートくん", "Magical Taruruto-kun"],
     (1987, "オバケのQ太郎 とびだせ!1/100大作戦"): ["オバケのQ太郎 進め! 1/100大作戦", "オバケのＱ太郎 進め！1/100大作戦"],
-    (1992, "21エモン 宇宙行け！裸足のプリンセス"): ["21エモン 宇宙いけ!裸足のプリンセス", "21エモン 宇宙いけ！裸足のプリンセス"],
+    (1992, "21エモン 宇宙行け！裸足のプリンセス"): [
+        "21エモン 宇宙いけ!裸足のプリンセス",
+        "21エモン 宇宙いけ！裸足のプリンセス",
+        "21エモン 宇宙いけ！ 裸足のプリンセス",
+    ],
     (1992, "ドラゴンボールZ 激突!!100億円パワーの戦士たち"): ["Dragon Ball Z: The Return of Cooler"],
     (1992, "ドラゴンボールZ 激突バトル!!三大超サイヤ人"): ["Dragon Ball Z: Super Android 13"],
     (1993, "ドラえもん ソラえもん号"): ["The Sun Is Our Friend: Hold Out! Soraemon!"],
@@ -135,8 +149,15 @@ REVIEWED_TITLE_ALIASES = {
     (2003, "バトル・ロワイアルII 鎮魂歌(レクイエム)"): ["Battle Royale II: Requiem"],
     (2003, "仮面ライダー555(ファイズ )"): ["Kamen Rider 555: Paradise Lost"],
     (2003, "爆竜戦隊アバレンジャー DELUXE"): ["Bakuryuu Sentai Abaranger Deluxe"],
-    (2005, "劇場版 仮面ライダーヒビキと7人の戦鬼"): ["Kamen Rider Hibiki and the Seven War Oni"],
+    (2005, "劇場版 仮面ライダーヒビキと7人の戦鬼"): [
+        "劇場版 仮面ライダー響鬼と7人の戦鬼",
+        "Kamen Rider Hibiki and the Seven War Oni",
+    ],
     (2005, "魔法戦隊マジレンジャーTHE MOVIE"): ["Mahou Sentai Magiranger the Movie"],
+    (2005, "魔法戦隊マジレンジャーTHE MOVIE インフェルシアの花嫁"): [
+        "魔法戦隊マジレンジャー THE MOVIE インフェルシアの花嫁",
+        "Mahou Sentai Magiranger the Movie",
+    ],
     (2006, "ポケモンレンジャーと蒼海の王子マナフィ"): ["Pokémon Ranger and the Temple of the Sea"],
     (2007, "「ディアルガVSパルキアVSダークライ」"): ["Pokémon: The Rise of Darkrai"],
     (2008, "ギラティナと氷空<そら>の花束シェイミ"): ["Pokémon: Giratina and the Sky Warrior"],
@@ -164,7 +185,18 @@ def exact_title_aliases(title, market_year=None):
     value = unicodedata.normalize("NFKC", str(title or "")).strip()
     aliases = [value]
     if str(market_year or '').isdigit():
-        aliases.extend(REVIEWED_TITLE_ALIASES.get((int(market_year), value), []))
+        year = int(market_year)
+        reviewed = REVIEWED_TITLE_ALIASES.get((year, value))
+        if reviewed is None:
+            # NFKC above can change punctuation (for example full-width !).
+            # Resolve a curated key by its normalized form only when exactly
+            # one reviewed key matches that year.
+            matches = [candidate_aliases for (reviewed_year, reviewed_title), candidate_aliases
+                       in REVIEWED_TITLE_ALIASES.items()
+                       if reviewed_year == year and normalize(reviewed_title) == normalize(value)]
+            if len(matches) == 1:
+                reviewed = matches[0]
+        aliases.extend(reviewed or [])
     clean = re.sub(r"^[・･\s]+", "", value)
     clean = re.sub(r"^(?:劇場版|映画)\s*", "", clean)
     clean = re.sub(r"\s+他$", "", clean)
@@ -244,6 +276,25 @@ EXPLICIT_SOURCE_ROW_TITLE_RENAMES = {
 }
 
 
+
+# Eiren's 1994 row abbreviates two separately billed short films as
+# "ドラミちゃん ウメ星デンカ". Shin-Ei's official filmography lists the
+# distinct titles; split only this exact unresolved child while preserving the
+# full shared gross for each movie.
+EXPLICIT_SOURCE_CHILD_SPLITS = {
+    normalize("ドラえもん のび太と夢幻三銃士 / ドラミちゃん ウメ星デンカ"): {
+        "source_child_titles": (
+            "ドラえもん のび太と夢幻三銃士",
+            "ドラミちゃん ウメ星デンカ",
+        ),
+        "split_child_title": "ドラミちゃん ウメ星デンカ",
+        "film_titles": (
+            "ドラミちゃん 青いストローハット",
+            "ウメ星デンカ 宇宙の果てからパンパロパン！",
+        ),
+    },
+}
+
 EXPLICIT_SOURCE_GROUP_SPLITS = {
     normalize("仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"): {
         "source_child_titles": (
@@ -300,6 +351,24 @@ EXPLICIT_SOURCE_GROUP_MERGES = {
             "ぶちやぶれ!!新生6大将軍 他",
         ),
         "film_title": "DRAGON QUEST ダイの大冒険 ぶちやぶれ!! 新生6大将軍",
+    },
+    # Eiren's 2005 row split the Magiranger movie title at a slash even though
+    # Toei Video lists the subtitle as part of one feature. Rejoin only this
+    # exact complete sibling set; the shared package gross remains unchanged.
+    normalize(
+        "劇場版 仮面ライダーヒビキと7人の戦鬼 / "
+        "魔法戦隊マジレンジャーTHE MOVIE / インフェルシアの花嫁"
+    ): {
+        "source_child_titles": (
+            "劇場版 仮面ライダーヒビキと7人の戦鬼",
+            "魔法戦隊マジレンジャーTHE MOVIE",
+            "インフェルシアの花嫁",
+        ),
+        "merge_titles": (
+            "魔法戦隊マジレンジャーTHE MOVIE",
+            "インフェルシアの花嫁",
+        ),
+        "film_title": "魔法戦隊マジレンジャーTHE MOVIE インフェルシアの花嫁",
     },
 }
 
@@ -552,6 +621,67 @@ def expand_grouped_rows(data):
                 generated.append(film)
             replacements[matching[0]] = generated
             consumed.update(matching)
+            expanded += len(generated)
+
+        # Split the exact 1994 abbreviated child into its two official
+        # Shin-Ei titles. Keep the matched Doraemon sibling and its identity;
+        # duplicate the Eiren gross on each new child without sharing posters.
+        for group_key, spec in EXPLICIT_SOURCE_CHILD_SPLITS.items():
+            matching = [
+                index for index, row in enumerate(rows)
+                if isinstance(row, dict)
+                and normalize(row.get("source_group_title")) == group_key
+            ]
+            expected = {normalize(title) for title in spec["source_child_titles"]}
+            actual = {normalize(rows[index].get("title")) for index in matching}
+            if len(matching) != len(spec["source_child_titles"]) or actual != expected:
+                continue
+
+            source_rows = [rows[index] for index in matching]
+            if any(row.get("gross") != source_rows[0].get("gross")
+                   for row in source_rows[1:]):
+                continue
+
+            target_index = next(
+                index for index in matching
+                if normalize(rows[index].get("title"))
+                == normalize(spec["split_child_title"])
+            )
+            target = rows[target_index]
+            if target.get("poster") or target.get("tmdbId") or target.get("tmdb_id"):
+                continue
+
+            source_group_title = target.get("source_group_title")
+            group_id = f"{market_year}:{normalize(source_group_title)}"
+            total_group_size = len(matching) - 1 + len(spec["film_titles"])
+            generated = []
+            for film_index, title in enumerate(spec["film_titles"], start=2):
+                film = dict(target)
+                clear_inherited_poster_identity(film)
+                film.update({
+                    "title": title,
+                    "source_title": spec["split_child_title"],
+                    "source_group_id": group_id,
+                    "source_group_index": film_index,
+                    "source_group_size": total_group_size,
+                })
+                generated.append(film)
+
+            # Preserve all previously verified fields on the existing sibling.
+            first_index = min(matching)
+            sibling = next(index for index in matching if index != target_index)
+            preserved_sibling = dict(rows[sibling])
+            preserved_sibling.update({
+                "source_title": source_group_title,
+                "source_group_id": group_id,
+                "source_group_index": 1,
+                "source_group_size": total_group_size,
+            })
+            if first_index == sibling:
+                replacements[first_index] = [preserved_sibling, *generated]
+            else:
+                replacements[first_index] = generated
+            consumed.update(index for index in matching if index != first_index)
             expanded += len(generated)
 
         result = []

@@ -281,6 +281,91 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["ambiguous"], 1)
         self.assertEqual(len(requests), 1)
 
+    def test_official_1994_dorami_child_splits_into_two_verified_films(self):
+        source_group = "ドラえもん のび太と夢幻三銃士 / ドラミちゃん ウメ星デンカ"
+        data, requests, result = self.run_rows([
+            {
+                "title": "ドラえもん のび太と夢幻三銃士",
+                "gross": 13.5, "year": 1994, "metric": "配給収入",
+                "source_group_title": source_group,
+                "tmdbId": 161715,
+                "poster": "https://image.tmdb.org/t/p/w342/doraemon.jpg",
+                "identity_source": "https://www.themoviedb.org/movie/161715",
+            },
+            {
+                "title": "ドラミちゃん ウメ星デンカ",
+                "gross": 13.5, "year": 1994, "metric": "配給収入",
+                "source_group_title": source_group,
+                "poster_match_status": "not_found",
+            },
+        ], [
+            {"results": [{
+                "id": 326497, "title": "ドラミちゃん 青いストローハット",
+                "original_title": "ドラミちゃん 青いストローハット",
+                "release_date": "1994-03-12", "poster_path": "/dorami.jpg",
+            }]},
+            {"results": []},
+            {"results": [{
+                "id": 1185956, "title": "ウメ星デンカ 宇宙の果てからパンパロパン！",
+                "original_title": "ウメ星デンカ 宇宙の果てからパンパロパン！",
+                "release_date": "1994-03-12", "poster_path": "/umeboshi.jpg",
+            }]},
+            {"results": []},
+        ], market_year="1994")
+
+        rows = data["by_year"]["1994"]
+        self.assertEqual([row["title"] for row in rows], [
+            "ドラえもん のび太と夢幻三銃士",
+            "ドラミちゃん 青いストローハット",
+            "ウメ星デンカ 宇宙の果てからパンパロパン！",
+        ])
+        self.assertEqual([row["gross"] for row in rows], [13.5, 13.5, 13.5])
+        self.assertEqual([row["tmdbId"] for row in rows], [161715, 326497, 1185956])
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], [
+            "doraemon.jpg", "dorami.jpg", "umeboshi.jpg",
+        ])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2, 3])
+        self.assertEqual([row["source_group_size"] for row in rows], [3, 3, 3])
+        self.assertEqual(result["enriched"], 2)
+        self.assertEqual(result["expanded_grouped_films"], 2)
+        self.assertTrue(all(row["identity_source"].startswith(
+            "https://www.themoviedb.org/movie/"
+        ) for row in rows))
+        self.assertEqual(len(requests), 3)
+
+    def test_verified_21_emon_japanese_spelling_variant_recovers_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "21エモン 宇宙行け！裸足のプリンセス",
+              "gross": 7.2, "year": 1992, "metric": "配給収入"}],
+            [
+                {"results": []},
+                {"results": []},
+                {"results": []},
+                {"results": [{
+                    "id": 873387,
+                    "title": "21エモン 宇宙いけ！裸足のプリンセス",
+                    "original_title": "21エモン 宇宙いけ！裸足のプリンセス",
+                    "release_date": "1992-03-07",
+                    "poster_path": "/official-21-emon-poster.jpg",
+                }]},
+            ],
+            market_year="1992",
+        )
+        row = data["by_year"]["1992"][0]
+        self.assertEqual(row["tmdbId"], 873387)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-21-emon-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/873387")
+        self.assertEqual(row["tmdb_release_date"], "1992-03-07")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"], row["metric"]), (7.2, 1992, "配給収入"))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 4)
+        from urllib.parse import parse_qs, urlparse
+        self.assertEqual(
+            parse_qs(urlparse(requests[3][0].full_url).query)["query"][0],
+            "21エモン 宇宙いけ！ 裸足のプリンセス",
+        )
+
     def test_compound_market_row_is_split_and_shared_gross_is_preserved(self):
         data, requests, result = self.run_rows(
             [{"title": "映画A / 映画B", "gross": 15.5, "year": 1980}],
@@ -654,6 +739,49 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                     snapshot,
                 )
 
+    def test_2005_magiranger_title_fragments_rejoin_without_changing_shared_gross(self):
+        source_group = (
+            "劇場版 仮面ライダーヒビキと7人の戦鬼 / "
+            "魔法戦隊マジレンジャーTHE MOVIE / インフェルシアの花嫁"
+        )
+        data = {"by_year": {"2005": [
+            {"title": "劇場版 仮面ライダーヒビキと7人の戦鬼",
+             "gross": 11.0, "year": 2005, "source_group_title": source_group},
+            {"title": "魔法戦隊マジレンジャーTHE MOVIE",
+             "gross": 11.0, "year": 2005, "source_group_title": source_group,
+             "poster_match_status": "not_found"},
+            {"title": "インフェルシアの花嫁",
+             "gross": 11.0, "year": 2005, "source_group_title": source_group,
+             "poster_match_status": "not_found"},
+        ]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 1)
+        rows = data["by_year"]["2005"]
+        self.assertEqual([row["title"] for row in rows], [
+            "劇場版 仮面ライダーヒビキと7人の戦鬼",
+            "魔法戦隊マジレンジャーTHE MOVIE インフェルシアの花嫁",
+        ])
+        self.assertEqual([row["gross"] for row in rows], [11.0, 11.0])
+        self.assertEqual([row["source_group_title"] for row in rows],
+                         [source_group, source_group])
+        self.assertEqual(
+            backfill.reviewed_japanese_release_date(rows[0]["title"], 2005),
+            "2005-09-03",
+        )
+        self.assertEqual(
+            backfill.reviewed_japanese_release_date(rows[1]["title"], 2005),
+            "2005-09-03",
+        )
+        self.assertIn(
+            "劇場版 仮面ライダー響鬼と7人の戦鬼",
+            backfill.exact_title_aliases(rows[0]["title"], 2005),
+        )
+        self.assertIn(
+            "魔法戦隊マジレンジャー THE MOVIE インフェルシアの花嫁",
+            backfill.exact_title_aliases(rows[1]["title"], 2005),
+        )
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+
     def test_1992_dai_fragments_do_not_merge_if_group_or_gross_is_incomplete(self):
         source_group = (
             "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / "
@@ -737,9 +865,15 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
             requested_titles.append(title)
             official_title = next(
-                name for name in film_identities
-                if unicodedata.normalize("NFKC", name) == title
+                (name for name in film_identities
+                 if backfill.normalize(title) in {
+                     backfill.normalize(name),
+                     *(backfill.normalize(alias) for alias in backfill.exact_title_aliases(name, 1992)),
+                 }),
+                None,
             )
+            if official_title is None:
+                return Response({"results": []})
             identifier, poster_path = film_identities[official_title]
             return Response({"results": [{
                 "id": identifier, "title": official_title, "original_title": official_title,
@@ -760,7 +894,19 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         )
         data = json.loads(path.read_text(encoding="utf-8"))
         rows = data["by_year"]["1992"]
-        self.assertEqual(requested_titles, [unicodedata.normalize("NFKC", title) for title in film_identities])
+        self.assertEqual(
+            requested_titles[0],
+            unicodedata.normalize("NFKC", next(iter(film_identities))),
+        )
+        self.assertEqual(
+            requested_titles[-1],
+            unicodedata.normalize("NFKC", list(film_identities)[-1]),
+        )
+        self.assertIn(
+            backfill.normalize("21エモン 宇宙いけ！ 裸足のプリンセス"),
+            {backfill.normalize(query) for query in requested_titles},
+        )
+        self.assertGreaterEqual(len(requests), 2)
         self.assertEqual([row["title"] for row in rows], list(film_identities))
         self.assertEqual([row["gross"] for row in rows], [16.8, 16.8])
         self.assertEqual([row["metric"] for row in rows], ["配給収入", "配給収入"])
@@ -772,7 +918,6 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
         self.assertEqual(result["expanded_grouped_films"], 2)
         self.assertEqual(result["enriched"], 2)
-        self.assertEqual(len(requests), 2)
 
     def test_official_1988_group_titles_resolve_two_films_without_dropping_doraemon(self):
         from urllib.parse import parse_qs, urlparse

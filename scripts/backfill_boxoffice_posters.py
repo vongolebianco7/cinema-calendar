@@ -30,6 +30,13 @@ MAX_DAILY_LOOKUPS = 100
 MAX_MANUAL_LOOKUPS = 200
 MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
 
+# KADOKAWA's official product entry confirms the Japan premiere date for the
+# 2009 film titled ドロップ. TMDB also returns another exact-title result from
+# 2008, so only the result with this reviewed JP release date is eligible.
+REVIEWED_JAPANESE_RELEASE_DATES = {
+    (2009, "ドロップ"): "2009-03-20",
+}
+
 REVIEWED_TITLE_ALIASES = {
     (1990, "チンプイ"): ["チンプイ エリさま活動大写真"],
     (1981, "ブルージーンズメモリー"): ["Blue Jeans Memory", "ブルージーンズメモリー BLUE JEANS MEMORY"],
@@ -88,7 +95,7 @@ REVIEWED_TITLE_ALIASES = {
     (2013, "劇場版 仮面ライダーウィザード イン マジックランド"): ["Kamen Rider Wizard in Magic Land"],
     (2019, "騎士竜戦隊リュウソウジャー THE MOVIE"): ["Kishiryu Sentai Ryusoulger the Movie"],
 }
-POSTER_CHECK_VERSION = 6
+POSTER_CHECK_VERSION = 7
 RECHECK_DAYS = 1
 
 
@@ -409,6 +416,19 @@ def valid_tmdb_poster_url(value):
     return isinstance(value, str) and value.startswith("https://image.tmdb.org/t/p/")
 
 
+def reviewed_japanese_release_date(title, market_year):
+    if not str(market_year or "").isdigit():
+        return None
+    return REVIEWED_JAPANESE_RELEASE_DATES.get((int(market_year), normalize(title)))
+
+
+def matches_reviewed_release_window(title, market_year, release_date):
+    expected_date = reviewed_japanese_release_date(title, market_year)
+    if expected_date:
+        return str(release_date or "")[:10] == expected_date
+    return eligible_release_year(release_date, market_year)
+
+
 def eligible_release_year(release_date, market_year):
     release = str(release_date or "")[:4]
     if not release.isdigit() or not str(market_year).isdigit():
@@ -667,14 +687,16 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                                           if alias_keys.intersection({normalize(movie.get("title")),
                                                                       normalize(movie.get("original_title"))})]
                 exact_candidates = [movie for movie in exact_title_candidates
-                                    if eligible_release_year(movie.get("release_date"), market_year)]
+                                    if matches_reviewed_release_window(
+                                        title, market_year, movie.get("release_date"))]
                 if exact_candidates:
                     candidates = exact_candidates
                     if not any(normalize(title) in {normalize(movie.get("title")),
                                                     normalize(movie.get("original_title"))}
                                for movie in exact_candidates):
                         match_type = "exact_cleaned_title_and_release_year_window"
-                elif len(exact_title_candidates) == 1:
+                elif len(exact_title_candidates) == 1 and not reviewed_japanese_release_date(
+                        title, market_year):
                     # The Japanese box-office year is a market/ranking year and
                     # can differ substantially for theatrical revivals and
                     # anniversary editions. A unique exact TMDB title is still
@@ -687,9 +709,11 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                     # against TMDB's official Japan-scoped alternative-title endpoint
                     # before assigning artwork; search ranking alone is never proof.
                     year_candidates = [movie for movie in search_results
-                                       if movie.get("id") and eligible_release_year(movie.get("release_date"), market_year)]
+                                       if movie.get("id") and matches_reviewed_release_window(
+                                           title, market_year, movie.get("release_date"))]
                     alternative_candidates = year_candidates
-                    if not alternative_candidates:
+                    if not alternative_candidates and not reviewed_japanese_release_date(
+                            title, market_year):
                         alternative_candidates = [movie for movie in search_results
                                                   if movie.get("id") and movie.get("poster_path")]
                     if len(alternative_candidates) > MAX_ALTERNATIVE_TITLE_CANDIDATES:
@@ -705,8 +729,9 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                             if any(normalize(item.get("title")) in alias_keys for item in alternatives):
                                 candidates.append(movie)
                         if candidates:
-                            in_window = all(eligible_release_year(movie.get("release_date"), market_year)
-                                            for movie in candidates)
+                            in_window = all(matches_reviewed_release_window(
+                                title, market_year, movie.get("release_date"))
+                                for movie in candidates)
                             match_type = ("exact_tmdb_alternative_title_and_release_year_window"
                                           if in_window else
                                           "unique_exact_tmdb_alternative_title_outside_release_year_window")

@@ -539,6 +539,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         ])
 
     def test_official_1992_21_emon_package_splits_into_individual_films(self):
+        import unicodedata
         from urllib.parse import parse_qs, urlparse
 
         source_title = "21エモン 他"
@@ -556,9 +557,13 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             requests.append((request, timeout))
             title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
             requested_titles.append(title)
-            identifier, poster_path = film_identities[title]
+            official_title = next(
+                name for name in film_identities
+                if unicodedata.normalize("NFKC", name) == title
+            )
+            identifier, poster_path = film_identities[official_title]
             return Response({"results": [{
-                "id": identifier, "title": title, "original_title": title,
+                "id": identifier, "title": official_title, "original_title": official_title,
                 "release_date": "1992-03-07", "poster_path": poster_path,
             }]})
 
@@ -576,7 +581,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         )
         data = json.loads(path.read_text(encoding="utf-8"))
         rows = data["by_year"]["1992"]
-        self.assertEqual(requested_titles, list(film_identities))
+        self.assertEqual(requested_titles, [unicodedata.normalize("NFKC", title) for title in film_identities])
         self.assertEqual([row["title"] for row in rows], list(film_identities))
         self.assertEqual([row["gross"] for row in rows], [16.8, 16.8])
         self.assertEqual([row["metric"] for row in rows], ["配給収入", "配給収入"])

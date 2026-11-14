@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "a32af68ebb7025edd664e9b56383f4735b6b40a0",
-  "verified_at": "2026-11-14T04:44:00Z",
-  "note": "Exact-source CI receipt for PR #829. Required pull_request workflows succeeded on this exact source head: Autonomous quality gate run 43557992588; CINELVA smoke tests run 43557992585; Validate frontend run 43557992601; Reproducible backend build run 43557992625. Additional exact-head checks succeeded: CINELVA mobile layout smoke test run 43557992668, CINELVA continuous visual QA run 43557992586, Cinemap completeness scorecard run 43557992623, and Full Python contract suite run 43557992579. This receipt proves CI source verification only; it does not claim production deployment or device-level acceptance."
+  "head_sha": "5b2181bc3dd771644da50ee0e80f570329afd725",
+  "verified_at": "2026-11-14T06:52:52.576Z",
+  "note": "Exact-source CI receipt for PR #830. Required pull_request workflows succeeded on this exact source head: Autonomous quality gate run 43563181215; CINELVA smoke tests run 43563181202; Validate frontend run 43563181183; Reproducible backend build run 43563181188. Additional exact-head checks succeeded: CINELVA mobile layout smoke test run 43563181195; CINELVA continuous visual QA run 43563181245; Cinemap completeness scorecard run 43563181233; Full Python contract suite run 43563181193. The Vercel backend preview was rate limited; this receipt proves CI source verification only and does not claim production deployment."
 }

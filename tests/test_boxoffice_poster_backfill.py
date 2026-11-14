@@ -282,6 +282,220 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], ["ring2.jpg", "shikoku.jpg"])
         self.assertEqual(result["enriched"], 2)
 
+    def test_eiren_2010_den_o_trilogy_sibling_rows_expand_to_three_distinct_films(self):
+        source_group = "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"
+        data = {"by_year": {"2010": [
+            {"title": "仮面ライダー×仮面ライダー×仮面ライダー",
+             "gross": 13.1, "year": 2010, "metric": "興行収入",
+             "source_group_title": source_group,
+             "poster_checked_at": "2026-11-14T04:00:00Z",
+             "poster_check_version": backfill.POSTER_CHECK_VERSION,
+             "poster_match_status": "unresolved",
+             "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2010.pdf"},
+            {"title": "超・電王トリロジー", "gross": 13.1, "year": 2010,
+             "metric": "興行収入", "source_group_title": source_group,
+             "poster_checked_at": "2026-11-14T04:00:00Z",
+             "poster_check_version": backfill.POSTER_CHECK_VERSION,
+             "poster_match_status": "unresolved",
+             "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2010.pdf"},
+        ]}, "all_time": []}
+        identities = {
+            "超・電王トリロジー EPISODE RED ゼロのスタートウィンクル":
+                (7001, "2010-05-22", "/den-o-red.jpg"),
+            "超・電王トリロジー EPISODE BLUE 派遣イマジンはNEWトラル":
+                (7002, "2010-06-05", "/den-o-blue.jpg"),
+            "超・電王トリロジー EPISODE YELLOW お宝 DE エンド・パイレーツ":
+                (7003, "2010-06-19", "/den-o-yellow.jpg"),
+        }
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps(data), encoding="utf-8")
+        requested = []
+
+        def opener(request, timeout):
+            from urllib.parse import parse_qs, urlparse
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            requested.append(title)
+            identity = identities.get(title)
+            if identity is None:
+                return Response({"results": []})
+            identifier, release, poster = identity
+            return Response({"results": [{
+                "id": identifier, "title": title, "original_title": title,
+                "release_date": release, "poster_path": poster,
+            }]})
+
+        result = backfill.backfill(
+            path, api_key="fixture", opener=opener, delay=0,
+            now=datetime.datetime(2026, 11, 14, tzinfo=datetime.timezone.utc),
+            catalog_paths=[],
+        )
+        rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["2010"]
+        self.assertEqual(requested, list(identities))
+        self.assertEqual([row["title"] for row in rows], list(identities))
+        self.assertEqual([row["gross"] for row in rows], [13.1, 13.1, 13.1])
+        self.assertEqual([row["tmdbId"] for row in rows], [7001, 7002, 7003])
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], [
+            "den-o-red.jpg", "den-o-blue.jpg", "den-o-yellow.jpg",
+        ])
+        self.assertEqual([row["source_group_title"] for row in rows], [source_group] * 3)
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2, 3])
+        self.assertEqual([row["source_group_size"] for row in rows], [3, 3, 3])
+        self.assertTrue(all(row["source_title"].startswith(
+            "仮面ライダー×仮面ライダー×仮面ライダー 超・電王トリロジー"
+        ) for row in rows))
+        self.assertEqual(result["expanded_grouped_films"], 3)
+        self.assertEqual(result["enriched"], 3)
+
+    def test_eiren_group_sibling_with_existing_poster_is_not_discarded(self):
+        source_group = "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"
+        poster = "https://image.tmdb.org/t/p/w500/verified.jpg"
+        data = {"by_year": {"2010": [
+            {"title": "仮面ライダー×仮面ライダー×仮面ライダー",
+             "gross": 13.1, "source_group_title": source_group,
+             "tmdbId": 111, "poster": poster},
+            {"title": "超・電王トリロジー", "gross": 13.1,
+             "source_group_title": source_group},
+        ]}, "all_time": []}
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        self.assertEqual(len(data["by_year"]["2010"]), 2)
+        self.assertEqual(data["by_year"]["2010"][0]["poster"], poster)
+        self.assertEqual(data["by_year"]["2010"][0]["tmdbId"], 111)
+
+    def test_eiren_group_siblings_with_conflicting_gross_are_not_rewritten(self):
+        source_group = "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"
+        data = {"by_year": {"2010": [
+            {"title": "仮面ライダー×仮面ライダー×仮面ライダー",
+             "gross": 13.1, "source_group_title": source_group},
+            {"title": "超・電王トリロジー", "gross": 12.9,
+             "source_group_title": source_group},
+        ]}, "all_time": []}
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        self.assertEqual([row["gross"] for row in data["by_year"]["2010"]], [13.1, 12.9])
+        self.assertEqual([row["title"] for row in data["by_year"]["2010"]], [
+            "仮面ライダー×仮面ライダー×仮面ライダー", "超・電王トリロジー",
+        ])
+
+    def test_star_wars_trilogy_expands_with_original_gross_and_distinct_posters(self):
+        data = {"by_year": {"1997": [{
+            "title": "スターウォーズ(3部作)", "gross": 19, "year": 1997,
+            "region": "洋画", "metric": "配給収入",
+            "source_url": "https://www.eiren.org/toukei/1997.html",
+        }]}, "all_time": []}
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps(data), encoding="utf-8")
+        identities = {
+            "スター・ウォーズ エピソード4／新たなる希望": (1001, "1977-05-25", "/star-wars-4.jpg"),
+            "スター・ウォーズ エピソード5／帝国の逆襲": (1002, "1980-05-21", "/star-wars-5.jpg"),
+            "スター・ウォーズ エピソード6／ジェダイの帰還": (1003, "1983-05-25", "/star-wars-6.jpg"),
+        }
+        requested = []
+
+        def opener(request, timeout):
+            from urllib.parse import parse_qs, urlparse
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            requested.append(title)
+            identity_key = backfill.normalize(title)
+            identity = next((item for key, item in identities.items()
+                             if backfill.normalize(key) == identity_key), None)
+            if identity is None:
+                return Response({"results": []})
+            identifier, release, poster = identity
+            return Response({"results": [{
+                "id": identifier, "title": title, "original_title": title,
+                "release_date": release, "poster_path": poster,
+            }]})
+
+        result = backfill.backfill(path, api_key="fixture", opener=opener, delay=0,
+                                  now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+                                  catalog_paths=[])
+        rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1997"]
+        requested_keys = {backfill.normalize(title) for title in requested}
+        identity_keys = {backfill.normalize(title) for title in identities}
+        self.assertTrue(identity_keys.issubset(requested_keys))
+        self.assertEqual([row["title"] for row in rows], list(identities))
+        self.assertEqual([row["gross"] for row in rows], [19, 19, 19])
+        self.assertEqual([row["metric"] for row in rows], ["配給収入"] * 3)
+        self.assertEqual(len({row["tmdbId"] for row in rows}), 3)
+        self.assertEqual(len({row["poster"] for row in rows}), 3)
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], [
+            "star-wars-4.jpg", "star-wars-5.jpg", "star-wars-6.jpg",
+        ])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2, 3])
+        self.assertEqual([row["source_group_size"] for row in rows], [3, 3, 3])
+        self.assertEqual([row["source_title"] for row in rows], ["スターウォーズ(3部作)"] * 3)
+        self.assertEqual(result["expanded_grouped_films"], 3)
+        self.assertEqual(result["enriched"], 3)
+
+    def test_kamen_rider_and_shinkenger_double_feature_get_separate_posters(self):
+        data = {"by_year": {"2009": [{
+            "title": "劇場版 仮面ライダーディケイド侍戦隊シンケンジャー 銀幕版",
+            "gross": 19, "year": 2009, "region": "邦画",
+            "metric": "興行収入",
+            "source_url": "https://www.eiren.org/toukei/2009.html",
+        }]}, "all_time": []}
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps(data), encoding="utf-8")
+        identities = {
+            "劇場版 仮面ライダーディケイド オールライダー対大ショッカー":
+                (30617, "2009-08-08", "/kamen-rider.jpg"),
+            "侍戦隊シンケンジャー銀幕版 天下分け目の戦":
+                (188297, "2009-08-08", "/shinkenger.jpg"),
+        }
+        requested = []
+
+        alias_to_identity = {
+            backfill.normalize("仮面ライダーディケイド オールライダー対大ショッカー"):
+                backfill.normalize("劇場版 仮面ライダーディケイド オールライダー対大ショッカー"),
+            backfill.normalize("侍戦隊シンケンジャー銀幕版 天下分け目の戦"):
+                backfill.normalize("侍戦隊シンケンジャー銀幕版 天下分け目の戦"),
+        }
+
+        def opener(request, timeout):
+            from urllib.parse import parse_qs, urlparse
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            requested.append(title)
+            identity_key = alias_to_identity.get(backfill.normalize(title))
+            identity = next((item for key, item in identities.items()
+                             if backfill.normalize(key) == identity_key), None)
+            if identity is None:
+                return Response({"results": []})
+            identifier, release, poster = identity
+            return Response({"results": [{
+                "id": identifier, "title": title, "original_title": title,
+                "release_date": release, "poster_path": poster,
+            }]})
+
+        result = backfill.backfill(path, api_key="fixture", opener=opener, delay=0,
+                                  now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+                                  catalog_paths=[])
+        rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["2009"]
+        requested_keys = {backfill.normalize(title) for title in requested}
+        self.assertTrue(set(alias_to_identity).issubset(requested_keys))
+        self.assertEqual([row["title"] for row in rows], list(identities))
+        self.assertEqual([row["gross"] for row in rows], [19, 19])
+        self.assertEqual([row["tmdbId"] for row in rows], [30617, 188297])
+        self.assertNotEqual(rows[0]["poster"], rows[1]["poster"])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2])
+        self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
+        self.assertEqual(result["expanded_grouped_films"], 2)
+        self.assertEqual(result["enriched"], 2)
+
+    def test_explicit_combined_market_titles_are_classified_as_groups(self):
+        self.assertTrue(backfill.grouped_title("スターウォーズ(3部作)"))
+        self.assertTrue(backfill.grouped_title(
+            "劇場版 仮面ライダーディケイド侍戦隊シンケンジャー 銀幕版"))
+        self.assertEqual(backfill.split_grouped_titles("スターウォーズ(3部作)"), [
+            "スター・ウォーズ エピソード4／新たなる希望",
+            "スター・ウォーズ エピソード5／帝国の逆襲",
+            "スター・ウォーズ エピソード6／ジェダイの帰還",
+        ])
+
     def test_unspaced_official_double_feature_separators_are_split(self):
         titles = [
             "仮面ライダーダブル/天装戦隊ゴセイジャー",

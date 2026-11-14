@@ -113,6 +113,49 @@ def exact_title_aliases(title, market_year=None):
     return list(dict.fromkeys(alias for alias in aliases if normalize(alias)))
 
 
+EXPLICIT_GROUPED_TITLE_SPLITS = {
+    # The Japanese 1997 market entry reports the original Star Wars trilogy as
+    # one package. Keep that reported gross on each separately identified film.
+    "スターウォーズ3部作": [
+        "スター・ウォーズ エピソード4／新たなる希望",
+        "スター・ウォーズ エピソード5／帝国の逆襲",
+        "スター・ウォーズ エピソード6／ジェダイの帰還",
+    ],
+    # The 2009 Eiren entry combines a Kamen Rider feature with its separately
+    # billed Super Sentai feature; each must resolve to its own TMDB identity.
+    "劇場版仮面ライダーディケイド侍戦隊シンケンジャー銀幕版": [
+        "劇場版 仮面ライダーディケイド オールライダー対大ショッカー",
+        "侍戦隊シンケンジャー銀幕版 天下分け目の戦",
+    ],
+}
+
+# Official Eiren 2010 entry 23 publishes one gross for the Kamen Rider x
+# Kamen Rider x Kamen Rider / Cho-Den-O Trilogy package and names the three
+# separately released Trilogy episodes. The current JSON already has two
+# slash-split siblings; replace that exact sibling set with the three official
+# episode titles, preserving the shared gross on every row.
+EXPLICIT_SOURCE_GROUP_SPLITS = {
+    normalize("仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"): {
+        "source_child_titles": (
+            "仮面ライダー×仮面ライダー×仮面ライダー",
+            "超・電王トリロジー",
+        ),
+        "source_title": (
+            "仮面ライダー×仮面ライダー×仮面ライダー 超・電王トリロジー"
+            "（EPISODE RED ゼロのスタートウィンクル）"
+            "（EPISODE BLUE 派遣イマジンはNEWトラル）"
+            "（EPISODE YELLOW お宝 DE エンド・パイレーツ）"
+        ),
+        "film_titles": (
+            "超・電王トリロジー EPISODE RED ゼロのスタートウィンクル",
+            "超・電王トリロジー EPISODE BLUE 派遣イマジンはNEWトラル",
+            "超・電王トリロジー EPISODE YELLOW お宝 DE エンド・パイレーツ",
+        ),
+    },
+}
+
+
+
 def grouped_title(title):
     # Historical association records usually combine separate films with spaced
     # slashes. Some source rows omit those spaces, so only treat an unspaced
@@ -120,6 +163,8 @@ def grouped_title(title):
     # markers. Ordinary single-film slash titles (007/ムーンレイカー,
     # アベンジャーズ/エンドゲーム, etc.) must remain eligible.
     value = str(title or "")
+    if normalize(value) in EXPLICIT_GROUPED_TITLE_SPLITS:
+        return True
     # Some official historical market rows concatenate separately billed
     # theatrical features with whitespace only. Exclude only these distinctive
     # paired-title signatures; do not treat every Rider/Sentai crossover as a
@@ -185,6 +230,9 @@ def split_grouped_titles(title):
     policy; it does not invent a per-film split.
     """
     value = str(title or "").strip()
+    explicit_titles = EXPLICIT_GROUPED_TITLE_SPLITS.get(normalize(value))
+    if explicit_titles:
+        return list(explicit_titles)
     if "スラムダンク" in value and "ママレードボーイ" in value:
         return ["スラムダンク", "ママレードボーイ"]
     if "のび太とブリキの迷宮" in value and "ドラミちゃん" in value:
@@ -197,14 +245,77 @@ def split_grouped_titles(title):
     return []
 
 
+def clear_inherited_poster_identity(row):
+    """A grouped parent/sibling identity must never leak onto child films."""
+    for key in (
+        "poster", "poster_source", "tmdbId", "tmdb_id", "original_title",
+        "tmdb_release_date", "identity_source", "identity_checked_at",
+        "identity_match", "poster_checked_at", "poster_check_version",
+        "poster_match_status", "poster_check_skip_reason",
+    ):
+        row.pop(key, None)
+
+
 def expand_grouped_rows(data):
-    """Turn explicitly slash-separated joint rows into one lookup row per film."""
+    """Split verified group siblings or explicit slash-separated rows by film."""
     expanded = 0
     for market_year, rows in (data.get("by_year") or {}).items():
         if not isinstance(rows, list):
             continue
+
+        # Some source rows were already split on "/" before this backfill was
+        # introduced. Only rewrite a known source group when its complete,
+        # expected sibling set is present, all siblings report the same gross,
+        # and no sibling already has an identity/poster that would be discarded.
+        replacements = {}
+        consumed = set()
+        for group_key, spec in EXPLICIT_SOURCE_GROUP_SPLITS.items():
+            matching = [
+                index for index, row in enumerate(rows)
+                if isinstance(row, dict)
+                and normalize(row.get("source_group_title")) == group_key
+            ]
+            expected_children = {
+                normalize(title) for title in spec["source_child_titles"]
+            }
+            actual_children = {
+                normalize(rows[index].get("title")) for index in matching
+            }
+            if (len(matching) != len(spec["source_child_titles"])
+                    or actual_children != expected_children):
+                continue
+            source_rows = [rows[index] for index in matching]
+            if (any(row.get("gross") != source_rows[0].get("gross")
+                    for row in source_rows[1:])
+                    or any(row.get("poster") or row.get("tmdbId") or row.get("tmdb_id")
+                           for row in source_rows)):
+                continue
+
+            source_group_title = source_rows[0].get("source_group_title")
+            group_id = f"{market_year}:{normalize(source_group_title)}"
+            generated = []
+            for index, title in enumerate(spec["film_titles"], start=1):
+                film = dict(source_rows[0])
+                clear_inherited_poster_identity(film)
+                film.update({
+                    "title": title,
+                    "source_title": spec["source_title"],
+                    "source_group_id": group_id,
+                    "source_group_index": index,
+                    "source_group_size": len(spec["film_titles"]),
+                })
+                generated.append(film)
+            replacements[matching[0]] = generated
+            consumed.update(matching)
+            expanded += len(generated)
+
         result = []
-        for row in rows:
+        for index, row in enumerate(rows):
+            if index in replacements:
+                result.extend(replacements[index])
+                continue
+            if index in consumed:
+                continue
             if not isinstance(row, dict) or row.get("source_group_id"):
                 result.append(row)
                 continue
@@ -214,13 +325,14 @@ def expand_grouped_rows(data):
                 continue
             source_title = row["title"]
             group_id = f"{market_year}:{normalize(source_title)}"
-            for index, title in enumerate(titles, start=1):
+            for group_index, title in enumerate(titles, start=1):
                 film = dict(row)
+                clear_inherited_poster_identity(film)
                 film.update({
                     "title": title,
                     "source_title": source_title,
                     "source_group_id": group_id,
-                    "source_group_index": index,
+                    "source_group_index": group_index,
                     "source_group_size": len(titles),
                 })
                 result.append(film)

@@ -282,6 +282,79 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], ["ring2.jpg", "shikoku.jpg"])
         self.assertEqual(result["enriched"], 2)
 
+    def test_eiren_2010_den_o_trilogy_sibling_rows_expand_to_three_distinct_films(self):
+        source_group = "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"
+        data = {"by_year": {"2010": [
+            {"title": "仮面ライダー×仮面ライダー×仮面ライダー",
+             "gross": 13.1, "year": 2010, "metric": "興行収入",
+             "source_group_title": source_group, "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2010.pdf"},
+            {"title": "超・電王トリロジー", "gross": 13.1, "year": 2010,
+             "metric": "興行収入", "source_group_title": source_group,
+             "source_url": "https://www.eiren.org/toukei/img/eiren_kosyu/data_2010.pdf"},
+        ]}, "all_time": []}
+        identities = {
+            "超・電王トリロジー EPISODE RED ゼロのスタートウィンクル":
+                (7001, "2010-05-22", "/den-o-red.jpg"),
+            "超・電王トリロジー EPISODE BLUE 派遣イマジンはNEWトラル":
+                (7002, "2010-06-05", "/den-o-blue.jpg"),
+            "超・電王トリロジー EPISODE YELLOW お宝 DE エンド・パイレーツ":
+                (7003, "2010-06-19", "/den-o-yellow.jpg"),
+        }
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps(data), encoding="utf-8")
+        requested = []
+
+        def opener(request, timeout):
+            from urllib.parse import parse_qs, urlparse
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            requested.append(title)
+            identity = identities.get(title)
+            if identity is None:
+                return Response({"results": []})
+            identifier, release, poster = identity
+            return Response({"results": [{
+                "id": identifier, "title": title, "original_title": title,
+                "release_date": release, "poster_path": poster,
+            }]})
+
+        result = backfill.backfill(
+            path, api_key="fixture", opener=opener, delay=0,
+            now=datetime.datetime(2026, 11, 14, tzinfo=datetime.timezone.utc),
+            catalog_paths=[],
+        )
+        rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["2010"]
+        self.assertEqual(requested, list(identities))
+        self.assertEqual([row["title"] for row in rows], list(identities))
+        self.assertEqual([row["gross"] for row in rows], [13.1, 13.1, 13.1])
+        self.assertEqual([row["tmdbId"] for row in rows], [7001, 7002, 7003])
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], [
+            "den-o-red.jpg", "den-o-blue.jpg", "den-o-yellow.jpg",
+        ])
+        self.assertEqual([row["source_group_title"] for row in rows], [source_group] * 3)
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2, 3])
+        self.assertEqual([row["source_group_size"] for row in rows], [3, 3, 3])
+        self.assertTrue(all(row["source_title"].startswith(
+            "仮面ライダー×仮面ライダー×仮面ライダー 超・電王トリロジー"
+        ) for row in rows))
+        self.assertEqual(result["expanded_grouped_films"], 3)
+        self.assertEqual(result["enriched"], 3)
+
+    def test_eiren_group_siblings_with_conflicting_gross_are_not_rewritten(self):
+        source_group = "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"
+        data = {"by_year": {"2010": [
+            {"title": "仮面ライダー×仮面ライダー×仮面ライダー",
+             "gross": 13.1, "source_group_title": source_group},
+            {"title": "超・電王トリロジー", "gross": 12.9,
+             "source_group_title": source_group},
+        ]}, "all_time": []}
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        self.assertEqual([row["gross"] for row in data["by_year"]["2010"]], [13.1, 12.9])
+        self.assertEqual([row["title"] for row in data["by_year"]["2010"]], [
+            "仮面ライダー×仮面ライダー×仮面ライダー", "超・電王トリロジー",
+        ])
+
     def test_star_wars_trilogy_expands_with_original_gross_and_distinct_posters(self):
         data = {"by_year": {"1997": [{
             "title": "スターウォーズ(3部作)", "gross": 19, "year": 1997,

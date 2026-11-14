@@ -34,6 +34,9 @@ MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
 # 2009 film titled ドロップ. TMDB also returns another exact-title result from
 # 2008, so only the result with this reviewed JP release date is eligible.
 REVIEWED_JAPANESE_RELEASE_DATES = {
+    # Toei Animation and the Media Arts Database confirm the film title,
+    # 1994 Japanese premiere, and director for the 1995 box-office entry.
+    (1995, "美少女戦士セーラームーンs"): "1994-12-04",
     # Toei official premiere dates
     (2000, "onepiece"): "2000-03-04",
     (2001, "onepieceねじまき島の冒険"): "2001-03-03",
@@ -62,6 +65,10 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
 # a small set of known false-positive-prone titles. TMDB's own movie credits
 # are checked before any of these records can receive artwork.
 REVIEWED_JAPANESE_DIRECTORS = {
+    (1995, "美少女戦士セーラームーンs"): {
+        "names": ("芝田浩樹",),
+        "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C410641",
+    },
     (1986, "オバケのq太郎とびだせバケバケ大作戦"): {
         "names": ("原田益次",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C410040",

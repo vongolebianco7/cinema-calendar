@@ -1437,5 +1437,15 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(backfill.POSTER_CHECK_VERSION, 10)
 
 
+    def test_official_sailor_moon_s_identity_is_scoped_by_japan_date_and_director(self):
+        title = "美少女戦士セーラームーンS"
+        self.assertTrue(backfill.matches_reviewed_release_window(title, 1995, "1994-12-04"))
+        self.assertFalse(backfill.matches_reviewed_release_window(title, 1995, "1994-12-05"))
+        self.assertEqual(backfill.reviewed_director(title, 1995)["names"], ("芝田浩樹",))
+        self.assertEqual(backfill.reviewed_director(title, 1995)["source_url"],
+                         "https://mediaarts-db.artmuseums.go.jp/id/C410641")
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 10)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -566,6 +566,40 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual([row["source_title"] for row in rows], ["RAMPO", "RAMPO"])
         self.assertTrue(all(not row.get("poster") and not row.get("tmdbId") for row in rows))
 
+    def test_official_1982_double_bill_splits_with_full_shared_gross(self):
+        data = {"by_year": {"1982": [{
+            "title": "すっかり・・・その気で!", "gross": 10.5,
+            "year": 1982, "metric": "配給収入",
+        }]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 2)
+        rows = data["by_year"]["1982"]
+        self.assertEqual([row["title"] for row in rows], [
+            "グッドラックLOVE", "すっかり・・・その気で！",
+        ])
+        self.assertEqual([row["gross"] for row in rows], [10.5, 10.5])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2])
+        self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
+        self.assertTrue(all(not row.get("poster") and not row.get("tmdbId") for row in rows))
+
+    def test_official_1987_eiren_shin_ei_package_splits_three_films(self):
+        data = {"by_year": {"1987": [{
+            "title": "オバケのQ太郎 とびだせ!1/100大作戦",
+            "gross": 15.0, "year": 1987, "metric": "配給収入",
+        }]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 3)
+        rows = data["by_year"]["1987"]
+        self.assertEqual([row["title"] for row in rows], [
+            "映画ドラえもん のび太と竜の騎士",
+            "プロゴルファー猿 甲賀秘境！影の忍法ゴルファー参上！",
+            "オバケのQ太郎 とびだせ！1/100大作戦",
+        ])
+        self.assertEqual([row["gross"] for row in rows], [15.0, 15.0, 15.0])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2, 3])
+        self.assertEqual([row["source_group_size"] for row in rows], [3, 3, 3])
+        self.assertTrue(all(not row.get("poster") and not row.get("tmdbId") for row in rows))
+
     def test_official_1992_21_emon_package_splits_into_individual_films(self):
         import unicodedata
         from urllib.parse import parse_qs, urlparse

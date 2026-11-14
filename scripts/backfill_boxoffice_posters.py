@@ -149,6 +149,19 @@ EXPLICIT_GROUPED_TITLE_SPLITS = {
         "スター・ウォーズ エピソード5／帝国の逆襲",
         "スター・ウォーズ エピソード6／ジェダイの帰還",
     ],
+    # Eiren's 1982 table places these two December 1981 releases in one
+    # 1,050-million-yen package. Keep that amount on both film-specific rows.
+    "すっかりその気で": [
+        "グッドラックLOVE",
+        "すっかり・・・その気で！",
+    ],
+    # Eiren's 1987 row reports the Doraemon feature and two separately billed
+    # Shin-Ei shorts as one 1,500-million-yen package. Shin-Ei names each film.
+    "オバケのq太郎とびだせ1100大作戦": [
+        "映画ドラえもん のび太と竜の騎士",
+        "プロゴルファー猿 甲賀秘境！影の忍法ゴルファー参上！",
+        "オバケのQ太郎 とびだせ！1/100大作戦",
+    ],
     # Official Shin-Ei 50th-anniversary program lists the two short films
     # paired with the Doraemon feature; the Eiren package gross stays intact
     # for each separately identified film.

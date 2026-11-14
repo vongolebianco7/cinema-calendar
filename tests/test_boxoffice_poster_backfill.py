@@ -566,39 +566,52 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual([row["source_title"] for row in rows], ["RAMPO", "RAMPO"])
         self.assertTrue(all(not row.get("poster") and not row.get("tmdbId") for row in rows))
 
-    def test_official_1982_double_bill_splits_with_full_shared_gross(self):
-        data = {"by_year": {"1982": [{
-            "title": "すっかり・・・その気で!", "gross": 10.5,
-            "year": 1982, "metric": "配給収入",
-        }]}}
+    def test_existing_1982_double_bill_siblings_are_not_duplicated(self):
+        poster = "https://image.tmdb.org/t/p/w500/good-luck.jpg"
+        source_group = "グッドラックLOVE / すっかり・・・その気で!"
+        data = {"by_year": {"1982": [
+            {"title": "グッドラックLOVE", "gross": 10.5,
+             "source_group_title": source_group, "tmdbId": 547500, "poster": poster},
+            {"title": "すっかり・・・その気で!", "gross": 10.5,
+             "source_group_title": source_group},
+        ]}}
 
-        self.assertEqual(backfill.expand_grouped_rows(data), 2)
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
         rows = data["by_year"]["1982"]
+        self.assertEqual(len(rows), 2)
         self.assertEqual([row["title"] for row in rows], [
-            "グッドラックLOVE", "すっかり・・・その気で！",
+            "グッドラックLOVE", "すっかり・・・その気で!",
         ])
         self.assertEqual([row["gross"] for row in rows], [10.5, 10.5])
-        self.assertEqual([row["source_group_index"] for row in rows], [1, 2])
-        self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
-        self.assertTrue(all(not row.get("poster") and not row.get("tmdbId") for row in rows))
+        self.assertEqual(rows[0]["poster"], poster)
+        self.assertEqual(rows[0]["tmdbId"], 547500)
 
-    def test_official_1987_eiren_shin_ei_package_splits_three_films(self):
-        data = {"by_year": {"1987": [{
-            "title": "オバケのQ太郎 とびだせ!1/100大作戦",
-            "gross": 15.0, "year": 1987, "metric": "配給収入",
-        }]}}
+    def test_existing_1987_triple_bill_siblings_are_not_duplicated(self):
+        source_group = (
+            "ドラえもん のび太と竜の騎士 / プロゴルファー猿 "
+            "甲賀秘境!影の忍法ゴルファー参上! / "
+            "オバケのQ太郎 とびだせ!1/100大作戦"
+        )
+        poster_a = "https://image.tmdb.org/t/p/w500/doraemon.jpg"
+        poster_b = "https://image.tmdb.org/t/p/w500/saru.jpg"
+        data = {"by_year": {"1987": [
+            {"title": "ドラえもん のび太と竜の騎士", "gross": 15.0,
+             "source_group_title": source_group, "tmdbId": 72565, "poster": poster_a},
+            {"title": "プロゴルファー猿 甲賀秘境!影の忍法ゴルファー参上!",
+             "gross": 15.0, "source_group_title": source_group,
+             "tmdbId": 1005349, "poster": poster_b},
+            {"title": "オバケのQ太郎 とびだせ!1/100大作戦",
+             "gross": 15.0, "source_group_title": source_group},
+        ]}}
 
-        self.assertEqual(backfill.expand_grouped_rows(data), 3)
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
         rows = data["by_year"]["1987"]
-        self.assertEqual([row["title"] for row in rows], [
-            "映画ドラえもん のび太と竜の騎士",
-            "プロゴルファー猿 甲賀秘境！影の忍法ゴルファー参上！",
-            "オバケのQ太郎 とびだせ！1/100大作戦",
-        ])
+        self.assertEqual(len(rows), 3)
         self.assertEqual([row["gross"] for row in rows], [15.0, 15.0, 15.0])
-        self.assertEqual([row["source_group_index"] for row in rows], [1, 2, 3])
-        self.assertEqual([row["source_group_size"] for row in rows], [3, 3, 3])
-        self.assertTrue(all(not row.get("poster") and not row.get("tmdbId") for row in rows))
+        self.assertEqual([row["poster"] for row in rows[:2]], [poster_a, poster_b])
+        self.assertEqual([row["tmdbId"] for row in rows[:2]], [72565, 1005349])
+        self.assertFalse(rows[2].get("poster"))
+        self.assertFalse(rows[2].get("tmdbId"))
 
     def test_official_1992_21_emon_package_splits_into_individual_films(self):
         import unicodedata

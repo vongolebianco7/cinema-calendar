@@ -245,6 +245,17 @@ def split_grouped_titles(title):
     return []
 
 
+def clear_inherited_poster_identity(row):
+    """A grouped parent/sibling identity must never leak onto child films."""
+    for key in (
+        "poster", "poster_source", "tmdbId", "tmdb_id", "original_title",
+        "tmdb_release_date", "identity_source", "identity_checked_at",
+        "identity_match", "poster_checked_at", "poster_check_version",
+        "poster_match_status", "poster_check_skip_reason",
+    ):
+        row.pop(key, None)
+
+
 def expand_grouped_rows(data):
     """Split verified group siblings or explicit slash-separated rows by film."""
     expanded = 0
@@ -254,7 +265,8 @@ def expand_grouped_rows(data):
 
         # Some source rows were already split on "/" before this backfill was
         # introduced. Only rewrite a known source group when its complete,
-        # expected sibling set is present and all siblings report the same gross.
+        # expected sibling set is present, all siblings report the same gross,
+        # and no sibling already has an identity/poster that would be discarded.
         replacements = {}
         consumed = set()
         for group_key, spec in EXPLICIT_SOURCE_GROUP_SPLITS.items():
@@ -273,8 +285,10 @@ def expand_grouped_rows(data):
                     or actual_children != expected_children):
                 continue
             source_rows = [rows[index] for index in matching]
-            if any(row.get("gross") != source_rows[0].get("gross")
-                   for row in source_rows[1:]):
+            if (any(row.get("gross") != source_rows[0].get("gross")
+                    for row in source_rows[1:])
+                    or any(row.get("poster") or row.get("tmdbId") or row.get("tmdb_id")
+                           for row in source_rows)):
                 continue
 
             source_group_title = source_rows[0].get("source_group_title")
@@ -282,6 +296,7 @@ def expand_grouped_rows(data):
             generated = []
             for index, title in enumerate(spec["film_titles"], start=1):
                 film = dict(source_rows[0])
+                clear_inherited_poster_identity(film)
                 film.update({
                     "title": title,
                     "source_title": spec["source_title"],
@@ -312,6 +327,7 @@ def expand_grouped_rows(data):
             group_id = f"{market_year}:{normalize(source_title)}"
             for group_index, title in enumerate(titles, start=1):
                 film = dict(row)
+                clear_inherited_poster_identity(film)
                 film.update({
                     "title": title,
                     "source_title": source_title,

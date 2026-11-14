@@ -366,7 +366,8 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
             requested.append(title)
             identity_key = alias_to_identity.get(backfill.normalize(title))
-            identity = identities.get(identity_key)
+            identity = next((item for key, item in identities.items()
+                             if backfill.normalize(key) == identity_key), None)
             if identity is None:
                 return Response({"results": []})
             identifier, release, poster = identity

@@ -37,8 +37,12 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     # Toei official premiere dates
     (2000, "onepiece"): "2000-03-04",
     (2001, "onepieceねじまき島の冒険"): "2001-03-03",
-    # Toei Animation's official lineup confirms the Japanese premiere date.
+    # Toei Animation's official lineup confirms the Japanese premiere dates.
+    (2000, "おジャ魔女どれみ♯"): "2000-07-08",
     (2001, "デジモンティマース"): "2001-07-14",
+    (2001, "も~っと!おジャ魔女どれみ"): "2001-07-14",
+    # The Media Arts Database records the Japanese theatrical release.
+    (1986, "オバケのQ太郎 とびだせ!バケバケ大作戦"): "1986-03-15",
     (2009, "ドロップ"): "2009-03-20",
 }
 
@@ -88,7 +92,10 @@ REVIEWED_TITLE_ALIASES = {
     (2001, "ONE PIECE"): ["One Piece: The Movie"],
     (2001, "デジモン アドベンチャー02"): ["Digimon Adventure 02: Hurricane Touchdown"],
     (2001, "ジャンゴのダンスカーニバル"): ["Jango's Dance Carnival"],
-    (2001, "も~っと!おジャ魔女どれみ"): ["Ojamajo Doremi Motto"],
+    (2001, "も~っと!おジャ魔女どれみ"): [
+        "Ojamajo Doremi Motto",
+        "も～っと！おジャ魔女どれみ　カエル石のひみつ",
+    ],
     (2002, "ギブリーズ episodeII"): ["Ghiblies Episode 2"],
     (2002, "ONE PIECE 珍獣島のチョッパー王国"): ["One Piece: Chopper's Kingdom on the Island of Strange Animals"],
     (2002, "デジモンテイマーズ 爆走デジモン特急"): ["Digimon Tamers: Runaway Locomon"],

@@ -31,6 +31,7 @@ MAX_MANUAL_LOOKUPS = 200
 MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
 
 REVIEWED_TITLE_ALIASES = {
+    (1990, "チンプイ"): ["チンプイ エリさま活動大写真"],
     (1981, "ブルージーンズメモリー"): ["Blue Jeans Memory", "ブルージーンズメモリー BLUE JEANS MEMORY"],
     (1981, "青春グラフィティ スニーカーぶるーす"): ["Sneaker Blues", "青春グラフィティ スニーカーぶる〜す"],
     (1988, "ビーバップ・ハイスクール高校与太郎狂騒曲"): ["ビー・バップ・ハイスクール 高校与太郎狂騒曲"],

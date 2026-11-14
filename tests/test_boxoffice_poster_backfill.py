@@ -137,6 +137,27 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 3)
 
+    def test_verified_chimpui_official_title_recovers_its_own_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "チンプイ", "gross": 19.1, "year": 1990, "metric": "配給収入"}],
+            {"results": [{
+                "id": 1136099,
+                "title": "チンプイ エリさま活動大写真",
+                "original_title": "チンプイ エリさま活動大写真",
+                "release_date": "1990-03-10",
+                "poster_path": "/official-chimpui-poster.jpg",
+            }]},
+            market_year="1990",
+        )
+        row = data["by_year"]["1990"][0]
+        self.assertEqual(row["tmdbId"], 1136099)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-chimpui-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/1136099")
+        self.assertEqual(row["identity_match"], "exact_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"], row["metric"]), (19.1, 1990, "配給収入"))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 2)
+
     def test_verified_be_bop_group_match_keeps_each_film_and_shared_gross(self):
         data, requests, result = self.run_rows(
             [{"title": "ビーバップ・ハイスクール高校与太郎狂騒曲 / はいからさんが通る",

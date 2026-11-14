@@ -57,7 +57,9 @@ REVIEWED_TITLE_ALIASES = {
     (1991, "おもいでぽろぽろ"): ["Only Yesterday", "おもひでぽろぽろ"],
     (1991, "ドラえもん のび太のトラビアンナイト"): ["Doraemon: Nobita's Dorabian Nights", "映画ドラえもん のび太のドラビアンナイト"],
     (1991, "ドラゴンボールZ・とびっきり最強対最強"): ["Dragon Ball Z: Cooler's Revenge"],
-    (1991, "まじかるタルるートくん"): ["Magical Taruruto-kun"],
+    (1991, "まじかるタルるートくん"): ["まじかる☆タルるートくん", "Magical Taruruto-kun"],
+    (1987, "オバケのQ太郎 とびだせ!1/100大作戦"): ["オバケのQ太郎 進め! 1/100大作戦", "オバケのＱ太郎 進め！1/100大作戦"],
+    (1992, "21エモン 宇宙行け！裸足のプリンセス"): ["21エモン 宇宙いけ!裸足のプリンセス", "21エモン 宇宙いけ！裸足のプリンセス"],
     (1992, "ドラゴンボールZ 激突!!100億円パワーの戦士たち"): ["Dragon Ball Z: The Return of Cooler"],
     (1992, "ドラゴンボールZ 激突バトル!!三大超サイヤ人"): ["Dragon Ball Z: Super Android 13"],
     (1993, "ドラえもん ソラえもん号"): ["The Sun Is Our Friend: Hold Out! Soraemon!"],
@@ -102,7 +104,7 @@ REVIEWED_TITLE_ALIASES = {
     (2013, "劇場版 仮面ライダーウィザード イン マジックランド"): ["Kamen Rider Wizard in Magic Land"],
     (2019, "騎士竜戦隊リュウソウジャー THE MOVIE"): ["Kishiryu Sentai Ryusoulger the Movie"],
 }
-POSTER_CHECK_VERSION = 8
+POSTER_CHECK_VERSION = 9
 RECHECK_DAYS = 1
 
 

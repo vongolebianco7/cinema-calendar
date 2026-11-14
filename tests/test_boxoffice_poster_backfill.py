@@ -53,6 +53,161 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertIn("api.themoviedb.org/3/search/movie", requests[0][0].full_url)
         self.assertEqual(result["enriched"], 1)
 
+    def test_verified_parman_japanese_title_variant_recovers_its_own_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "パーマン バードマンがやってきた!!", "gross": 10, "year": 1983}],
+            {"results": [{
+                "id": 859292,
+                "title": "パーマン バードマンがやって来た！！",
+                "original_title": "パーマン バードマンがやって来た！！",
+                "release_date": "1983-03-12",
+                "poster_path": "/official-parman-poster.jpg",
+            }]},
+            market_year="1983",
+        )
+        row = data["by_year"]["1983"][0]
+        self.assertEqual(row["tmdbId"], 859292)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-parman-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/859292")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"]), (10, 1983))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+
+    def test_verified_ghibli_japanese_title_variant_recovers_its_own_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "おもいでぽろぽろ", "gross": 18.7, "year": 1991}],
+            {"results": [{
+                "id": 15080,
+                "title": "おもひでぽろぽろ",
+                "original_title": "おもひでぽろぽろ",
+                "release_date": "1991-07-20",
+                "poster_path": "/official-only-yesterday-poster.jpg",
+            }]},
+            market_year="1991",
+        )
+        row = data["by_year"]["1991"][0]
+        self.assertEqual(row["tmdbId"], 15080)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-only-yesterday-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/15080")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"]), (18.7, 1991))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+
+    def test_verified_blue_jeans_memory_japanese_title_recovers_its_own_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "ブルージーンズメモリー", "gross": 12.5, "year": 1981}],
+            {"results": [{
+                "id": 547528,
+                "title": "ブルージーンズメモリー BLUE JEANS MEMORY",
+                "original_title": "ブルージーンズメモリー BLUE JEANS MEMORY",
+                "release_date": "1981-07-11",
+                "poster_path": "/official-blue-jeans-memory-poster.jpg",
+            }]},
+            market_year="1981",
+        )
+        row = data["by_year"]["1981"][0]
+        self.assertEqual(row["tmdbId"], 547528)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-blue-jeans-memory-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/547528")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"]), (12.5, 1981))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+
+    def test_verified_sneaker_blues_japanese_title_recovers_its_own_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "青春グラフィティ スニーカーぶるーす", "gross": 10.8, "year": 1981}],
+            {"results": [{
+                "id": 548191,
+                "title": "青春グラフィティ スニーカーぶる〜す",
+                "original_title": "青春グラフィティ スニーカーぶる〜す",
+                "release_date": "1981-02-11",
+                "poster_path": "/official-sneaker-blues-poster.jpg",
+            }]},
+            market_year="1981",
+        )
+        row = data["by_year"]["1981"][0]
+        self.assertEqual(row["tmdbId"], 548191)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-sneaker-blues-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/548191")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"]), (10.8, 1981))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+
+    def test_verified_doraemon_official_japanese_title_variant_recovers_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "ドラえもん のび太のトラビアンナイト",
+              "gross": 18.0, "year": 1991, "metric": "配給収入"}],
+            {"results": [{
+                "id": 188403,
+                "title": "映画ドラえもん のび太のドラビアンナイト",
+                "original_title": "映画ドラえもん のび太のドラビアンナイト",
+                "release_date": "1991-03-09",
+                "poster_path": "/official-doraemon-dorabian-nights-poster.jpg",
+            }]},
+            market_year="1991",
+        )
+        row = data["by_year"]["1991"][0]
+        self.assertEqual(row["tmdbId"], 188403)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-doraemon-dorabian-nights-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/188403")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"], row["metric"]), (18.0, 1991, "配給収入"))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+
+    def test_verified_chimpui_official_title_recovers_its_own_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "チンプイ", "gross": 19.1, "year": 1990, "metric": "配給収入"}],
+            {"results": [{
+                "id": 1136099,
+                "title": "チンプイ エリさま活動大写真",
+                "original_title": "チンプイ エリさま活動大写真",
+                "release_date": "1990-03-10",
+                "poster_path": "/official-chimpui-poster.jpg",
+            }]},
+            market_year="1990",
+        )
+        row = data["by_year"]["1990"][0]
+        self.assertEqual(row["tmdbId"], 1136099)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-chimpui-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/1136099")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"], row["metric"]), (19.1, 1990, "配給収入"))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 2)
+
+    def test_verified_be_bop_group_match_keeps_each_film_and_shared_gross(self):
+        data, requests, result = self.run_rows(
+            [{"title": "ビーバップ・ハイスクール高校与太郎狂騒曲 / はいからさんが通る",
+              "gross": 12.5, "year": 1988, "metric": "配給収入"}],
+            {"results": [{
+                "id": 433967,
+                "title": "ビー・バップ・ハイスクール 高校与太郎狂騒曲",
+                "original_title": "ビー・バップ・ハイスクール 高校与太郎狂騒曲",
+                "release_date": "1987-12-12",
+                "poster_path": "/official-be-bop-poster.jpg",
+            }]},
+            market_year="1988",
+        )
+        rows = data["by_year"]["1988"]
+        be_bop, haikara = rows
+        self.assertEqual(be_bop["title"], "ビーバップ・ハイスクール高校与太郎狂騒曲")
+        self.assertEqual(be_bop["tmdbId"], 433967)
+        self.assertEqual(be_bop["poster"], "https://image.tmdb.org/t/p/w500/official-be-bop-poster.jpg")
+        self.assertEqual(be_bop["identity_source"], "https://www.themoviedb.org/movie/433967")
+        self.assertEqual(be_bop["identity_match"], "exact_title_and_release_year_window")
+        self.assertEqual(haikara["title"], "はいからさんが通る")
+        self.assertNotIn("tmdbId", haikara)
+        self.assertNotIn("poster", haikara)
+        self.assertEqual([row["gross"] for row in rows], [12.5, 12.5])
+        self.assertEqual([row["year"] for row in rows], [1988, 1988])
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(result["expanded_grouped_films"], 2)
+
     def test_multiple_exact_title_candidates_remain_unresolved(self):
         data, requests, result = self.run_rows(
             [{"title": "同名作品", "gross": 10, "year": 1980}],

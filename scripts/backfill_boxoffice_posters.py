@@ -31,15 +31,17 @@ MAX_MANUAL_LOOKUPS = 200
 MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
 
 REVIEWED_TITLE_ALIASES = {
-    (1981, "ブルージーンズメモリー"): ["Blue Jeans Memory"],
-    (1981, "青春グラフィティ スニーカーぶるーす"): ["Sneaker Blues"],
+    (1990, "チンプイ"): ["チンプイ エリさま活動大写真"],
+    (1981, "ブルージーンズメモリー"): ["Blue Jeans Memory", "ブルージーンズメモリー BLUE JEANS MEMORY"],
+    (1981, "青春グラフィティ スニーカーぶるーす"): ["Sneaker Blues", "青春グラフィティ スニーカーぶる〜す"],
+    (1988, "ビーバップ・ハイスクール高校与太郎狂騒曲"): ["ビー・バップ・ハイスクール 高校与太郎狂騒曲"],
     (1982, "ブッシュマン"): ["The Gods Must Be Crazy"],
     (1982, "エンドレス・ラブ"): ["Endless Love"],
-    (1983, "パーマン バードマンがやってきた!!"): ["Perman: Birdman Has Come"],
+    (1983, "パーマン バードマンがやってきた!!"): ["Perman: Birdman Has Come", "パーマン バードマンがやって来た！！"],
     (1985, "うる星やつら3 リメンバー・マイ・ラブ"): ["Urusei Yatsura 3: Remember My Love"],
     (1985, "Dr.スランプアラレちゃん ほよよ!夢の都メカポリス"): ["Dr. Slump: Hoyoyo! The City of Dreams, Mechapolis"],
-    (1991, "おもいでぽろぽろ"): ["Only Yesterday"],
-    (1991, "ドラえもん のび太のトラビアンナイト"): ["Doraemon: Nobita's Dorabian Nights"],
+    (1991, "おもいでぽろぽろ"): ["Only Yesterday", "おもひでぽろぽろ"],
+    (1991, "ドラえもん のび太のトラビアンナイト"): ["Doraemon: Nobita's Dorabian Nights", "映画ドラえもん のび太のドラビアンナイト"],
     (1991, "ドラゴンボールZ・とびっきり最強対最強"): ["Dragon Ball Z: Cooler's Revenge"],
     (1991, "まじかるタルるートくん"): ["Magical Taruruto-kun"],
     (1992, "21エモン 他"): ["21 Emon: Welcome to the Space"],

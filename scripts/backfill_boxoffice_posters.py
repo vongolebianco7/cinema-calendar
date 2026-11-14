@@ -49,6 +49,8 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     # two separately billed films with the same Japanese premiere date.
     (1994, "ドラミちゃん青いストローハット"): "1994-03-12",
     (1994, "ウメ星デンカ宇宙の果てからパンパロパン"): "1994-03-12",
+    # Shin-Ei official filmography and TMDB identify the 1992 short film.
+    (1992, "21エモン宇宙行け裸足のプリンセス"): "1992-03-07",
     (2009, "ドロップ"): "2009-03-20",
 }
 
@@ -100,7 +102,11 @@ REVIEWED_TITLE_ALIASES = {
     (1991, "ドラゴンボールZ・とびっきり最強対最強"): ["Dragon Ball Z: Cooler's Revenge"],
     (1991, "まじかるタルるートくん"): ["まじかる☆タルるートくん", "Magical Taruruto-kun"],
     (1987, "オバケのQ太郎 とびだせ!1/100大作戦"): ["オバケのQ太郎 進め! 1/100大作戦", "オバケのＱ太郎 進め！1/100大作戦"],
-    (1992, "21エモン 宇宙行け！裸足のプリンセス"): ["21エモン 宇宙いけ!裸足のプリンセス", "21エモン 宇宙いけ！裸足のプリンセス"],
+    (1992, "21エモン 宇宙行け！裸足のプリンセス"): [
+        "21エモン 宇宙いけ!裸足のプリンセス",
+        "21エモン 宇宙いけ！裸足のプリンセス",
+        "21エモン 宇宙いけ！ 裸足のプリンセス",
+    ],
     (1992, "ドラゴンボールZ 激突!!100億円パワーの戦士たち"): ["Dragon Ball Z: The Return of Cooler"],
     (1992, "ドラゴンボールZ 激突バトル!!三大超サイヤ人"): ["Dragon Ball Z: Super Android 13"],
     (1993, "ドラえもん ソラえもん号"): ["The Sun Is Our Friend: Hold Out! Soraemon!"],
@@ -168,7 +174,18 @@ def exact_title_aliases(title, market_year=None):
     value = unicodedata.normalize("NFKC", str(title or "")).strip()
     aliases = [value]
     if str(market_year or '').isdigit():
-        aliases.extend(REVIEWED_TITLE_ALIASES.get((int(market_year), value), []))
+        year = int(market_year)
+        reviewed = REVIEWED_TITLE_ALIASES.get((year, value))
+        if reviewed is None:
+            # NFKC above can change punctuation (for example full-width !).
+            # Resolve a curated key by its normalized form only when exactly
+            # one reviewed key matches that year.
+            matches = [candidate_aliases for (reviewed_year, reviewed_title), candidate_aliases
+                       in REVIEWED_TITLE_ALIASES.items()
+                       if reviewed_year == year and normalize(reviewed_title) == normalize(value)]
+            if len(matches) == 1:
+                reviewed = matches[0]
+        aliases.extend(reviewed or [])
     clean = re.sub(r"^[・･\s]+", "", value)
     clean = re.sub(r"^(?:劇場版|映画)\s*", "", clean)
     clean = re.sub(r"\s+他$", "", clean)

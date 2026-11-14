@@ -162,6 +162,17 @@ EXPLICIT_GROUPED_TITLE_SPLITS = {
 # separately released Trilogy episodes. The current JSON already has two
 # slash-split siblings; replace that exact sibling set with the three official
 # episode titles, preserving the shared gross on every row.
+# Shin-Ei's official 1988 co-bill listing resolves two abbreviated Eiren
+# sibling rows to distinct films. Only rename rows without an existing identity;
+# the already matched Doraemon row and the shared reported gross remain intact.
+EXPLICIT_SOURCE_ROW_TITLE_RENAMES = {
+    normalize("ドラえもん のび太のパラレル西遊記 / エスパー魔美 / 星空のダンシング・ドール 他"): {
+        normalize("エスパー魔美"): "エスパー魔美 星空のダンシングドール",
+        normalize("星空のダンシング・ドール 他"): "ウルトラB ブラックホールからの独裁者B・B!!",
+    },
+}
+
+
 EXPLICIT_SOURCE_GROUP_SPLITS = {
     normalize("仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"): {
         "source_child_titles": (
@@ -290,6 +301,19 @@ def expand_grouped_rows(data):
     for market_year, rows in (data.get("by_year") or {}).items():
         if not isinstance(rows, list):
             continue
+
+        # Rename only the two unresolved child rows from the verified 1988
+        # source group. Never overwrite a sibling with an established identity.
+        for row in rows:
+            if not isinstance(row, dict) or row.get("poster") or row.get("tmdbId") or row.get("tmdb_id"):
+                continue
+            renames = EXPLICIT_SOURCE_ROW_TITLE_RENAMES.get(
+                normalize(row.get("source_group_title")), {}
+            )
+            replacement_title = renames.get(normalize(row.get("title")))
+            if replacement_title:
+                clear_inherited_poster_identity(row)
+                row["title"] = replacement_title
 
         # Some source rows were already split on "/" before this backfill was
         # introduced. Only rewrite a known source group when its complete,

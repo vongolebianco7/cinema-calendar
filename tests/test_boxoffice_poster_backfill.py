@@ -371,6 +371,16 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["expanded_grouped_films"], 2)
         self.assertEqual(result["enriched"], 2)
 
+    def test_explicit_combined_market_titles_are_classified_as_groups(self):
+        self.assertTrue(backfill.grouped_title("スターウォーズ(3部作)"))
+        self.assertTrue(backfill.grouped_title(
+            "劇場版 仮面ライダーディケイド侍戦隊シンケンジャー 銀幕版"))
+        self.assertEqual(backfill.split_grouped_titles("スターウォーズ(3部作)"), [
+            "スター・ウォーズ エピソード4／新たなる希望",
+            "スター・ウォーズ エピソード5／帝国の逆襲",
+            "スター・ウォーズ エピソード6／ジェダイの帰還",
+        ])
+
     def test_unspaced_official_double_feature_separators_are_split(self):
         titles = [
             "仮面ライダーダブル/天装戦隊ゴセイジャー",

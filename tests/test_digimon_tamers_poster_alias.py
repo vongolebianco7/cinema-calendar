@@ -243,6 +243,51 @@ class DigimonTamersAliasTests(unittest.TestCase):
         )
 
 
+    def test_official_release_date_overrides_reject_wrong_day(self):
+        cases = [
+            ("1986", "オバケのQ太郎 とびだせ!バケバケ大作戦",
+             "1986-03-16", "1986-03-15", 9860316),
+            ("2000", "おジャ魔女どれみ♯",
+             "2000-07-09", "2000-07-08", 20000709),
+            ("2001", "も~っと!おジャ魔女どれみ",
+             "2001-07-15", "2001-07-14", 20010715),
+        ]
+        for year, title, wrong_date, expected_date, identifier in cases:
+            with self.subTest(title=title):
+                with tempfile.TemporaryDirectory() as directory:
+                    path = Path(directory) / "boxoffice.json"
+                    path.write_text(json.dumps({
+                        "by_year": {year: [{"title": title, "gross": 1}]},
+                        "all_time": [],
+                    }), encoding="utf-8")
+
+                    def opener(request, timeout):
+                        params = urllib.parse.parse_qs(
+                            urllib.parse.urlsplit(request.full_url).query
+                        )
+                        query = params.get("query", [""])[0]
+                        return Response({"results": [{
+                            "id": identifier,
+                            "title": query,
+                            "original_title": query,
+                            "release_date": wrong_date,
+                            "poster_path": "/fixture-wrong-day.jpg",
+                        }]})
+
+                    result = backfill.backfill(
+                        path, api_key="fixture", opener=opener, delay=0,
+                        now=datetime.datetime(2026, 11, 14,
+                                              tzinfo=datetime.timezone.utc),
+                        catalog_paths=[],
+                    )
+                    row = json.loads(path.read_text(encoding="utf-8"))[
+                        "by_year"
+                    ][year][0]
+                    self.assertNotIn("poster", row)
+                    self.assertNotIn("tmdbId", row)
+                    self.assertEqual(row["poster_match_status"], "not_found")
+                    self.assertEqual(result["enriched"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

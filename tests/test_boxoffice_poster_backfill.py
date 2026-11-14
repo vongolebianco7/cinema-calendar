@@ -709,7 +709,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                          "exact_tmdb_alternative_title_and_release_year_window")
         self.assertEqual(len(requests), 3)
         self.assertIn("/movie/85/alternative_titles?", requests[2][0].full_url)
-        self.assertIn("country=JP", requests[1][0].full_url)
+        self.assertIn("country=JP", requests[2][0].full_url)
         self.assertEqual(result["enriched"], 1)
 
     def test_unverified_tmdb_search_result_stays_unresolved(self):

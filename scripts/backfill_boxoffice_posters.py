@@ -36,7 +36,7 @@ MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
 REVIEWED_JAPANESE_RELEASE_DATES = {
     # Toei Animation and the Media Arts Database confirm the film title,
     # 1994 Japanese premiere, and director for the 1995 box-office entry.
-    (1995, "美少女戦士セーラームーンS"): "1994-12-04",
+    (1995, "美少女戦士セーラームーンs"): "1994-12-04",
     # Toei official premiere dates
     (2000, "onepiece"): "2000-03-04",
     (2001, "onepieceねじまき島の冒険"): "2001-03-03",
@@ -65,7 +65,7 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
 # a small set of known false-positive-prone titles. TMDB's own movie credits
 # are checked before any of these records can receive artwork.
 REVIEWED_JAPANESE_DIRECTORS = {
-    (1995, "美少女戦士セーラームーンS"): {
+    (1995, "美少女戦士セーラームーンs"): {
         "names": ("芝田浩樹",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C410641",
     },

@@ -137,6 +137,28 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 3)
 
+    def test_verified_doraemon_official_japanese_title_variant_recovers_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "ドラえもん のび太のトラビアンナイト",
+              "gross": 18.0, "year": 1991, "metric": "配給収入"}],
+            {"results": [{
+                "id": 188403,
+                "title": "映画ドラえもん のび太のドラビアンナイト",
+                "original_title": "映画ドラえもん のび太のドラビアンナイト",
+                "release_date": "1991-03-09",
+                "poster_path": "/official-doraemon-dorabian-nights-poster.jpg",
+            }]},
+            market_year="1991",
+        )
+        row = data["by_year"]["1991"][0]
+        self.assertEqual(row["tmdbId"], 188403)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-doraemon-dorabian-nights-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/188403")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"], row["metric"]), (18.0, 1991, "配給収入"))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+
     def test_verified_chimpui_official_title_recovers_its_own_poster(self):
         data, requests, result = self.run_rows(
             [{"title": "チンプイ", "gross": 19.1, "year": 1990, "metric": "配給収入"}],

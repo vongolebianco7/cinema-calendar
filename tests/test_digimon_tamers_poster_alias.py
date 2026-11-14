@@ -156,6 +156,93 @@ class DigimonTamersAliasTests(unittest.TestCase):
                     self.assertNotIn("tmdbId", row)
                     self.assertEqual(result["enriched"], 0)
 
+    def test_official_release_dates_gate_each_film_and_preserve_shared_gross(self):
+        group = "official festival program"
+        cases = [
+            {
+                "year": "1986",
+                "title": "オバケのQ太郎 とびだせ!バケバケ大作戦",
+                "release_date": "1986-03-15",
+                "id": 9860315,
+                "poster_path": "/fixture-q-taro-1986.jpg",
+                "gross": 13,
+            },
+            {
+                "year": "2000",
+                "title": "おジャ魔女どれみ♯",
+                "release_date": "2000-07-08",
+                "id": 20000708,
+                "poster_path": "/fixture-doremi-2000.jpg",
+                "gross": 12.7,
+            },
+            {
+                "year": "2001",
+                "title": "も~っと!おジャ魔女どれみ",
+                "release_date": "2001-07-14",
+                "id": 20010714,
+                "poster_path": "/fixture-doremi-2001.jpg",
+                "gross": 10,
+            },
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "boxoffice.json"
+            rows = [{
+                "title": case["title"],
+                "gross": case["gross"],
+                "source_group_title": group,
+                "source_group_id": f'{case["year"]}:fixture',
+            } for case in cases]
+            path.write_text(json.dumps({
+                "by_year": {year: [row] for year, row in zip(
+                    [case["year"] for case in cases], rows
+                )},
+                "all_time": [],
+            }), encoding="utf-8")
+            queries = []
+
+            def opener(request, timeout):
+                params = urllib.parse.parse_qs(
+                    urllib.parse.urlsplit(request.full_url).query
+                )
+                query = params.get("query", [""])[0]
+                queries.append(query)
+                for case in cases:
+                    if query in backfill.exact_title_aliases(
+                        case["title"], case["year"]
+                    ):
+                        return Response({"results": [{
+                            "id": case["id"],
+                            "title": query,
+                            "original_title": query,
+                            "release_date": case["release_date"],
+                            "poster_path": case["poster_path"],
+                        }]})
+                return Response({"results": []})
+
+            result = backfill.backfill(
+                path, api_key="fixture", opener=opener, delay=0,
+                now=datetime.datetime(2026, 11, 14, tzinfo=datetime.timezone.utc),
+                catalog_paths=[],
+            )
+            saved = json.loads(path.read_text(encoding="utf-8"))["by_year"]
+
+        self.assertEqual(result["enriched"], 3)
+        for case in cases:
+            with self.subTest(title=case["title"]):
+                row = saved[case["year"]][0]
+                self.assertEqual(row["tmdbId"], case["id"])
+                self.assertEqual(
+                    row["poster"],
+                    f'https://image.tmdb.org/t/p/w500{case["poster_path"]}',
+                )
+                self.assertEqual(row["tmdb_release_date"], case["release_date"])
+                self.assertEqual(row["gross"], case["gross"])
+                self.assertEqual(row["source_group_title"], group)
+        self.assertIn(
+            "も～っと！おジャ魔女どれみ　カエル石のひみつ", queries
+        )
+
+
 
 if __name__ == "__main__":
     unittest.main()

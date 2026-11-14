@@ -5,11 +5,16 @@
   "source": {
     "id": "tmdb",
     "endpoint": "/movie/now_playing",
-    "url": "https://developer.themoviedb.org/reference/movie-now-playing-list"
+    "url": "https://developer.themoviedb.org/reference/movie-now-playing-list",
+    "retrieval_endpoint": "/discover/movie",
+    "upstream_window": {
+      "minimum": "2026-10-07",
+      "maximum": "2026-11-18"
+    }
   },
   "complete": true,
-  "generated_at": "2026-11-14T07:56:49.716722+00:00",
-  "upstream_total_results": 89,
+  "generated_at": "2026-11-14T10:29:14.991308+00:00",
+  "upstream_total_results": 90,
   "movies": [
     {
       "id": 1423191,
@@ -18,8 +23,8 @@
       "original_title": "Resident Evil",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/wHXSnGH3zQtvpxPwaBXMoS9o8Vl.jpg",
-      "score": 7.524,
-      "votes": 2135,
+      "score": 7.52,
+      "votes": 2141,
       "popularity": 550.7621,
       "overview": "ある医療品の配送を請け負った男を襲う、地獄の一夜。 男は、己の命運を懸けた壮絶なサバイバルを余儀なくされる…",
       "source_url": "https://www.themoviedb.org/movie/1423191"
@@ -31,8 +36,8 @@
       "original_title": "ゴジラ-0.0",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/zpcoFlZwyLnBt7bb5wmvGDCdg06.jpg",
-      "score": 7.741,
-      "votes": 185,
+      "score": 7.754,
+      "votes": 189,
       "popularity": 173.6675,
       "overview": "第96回アカデミー賞でアジア映画として初の視覚効果賞を受賞するなど、世界的に大きな話題を集めた「ゴジラ－1.0」の続編。山崎貴が引き続き監督・脚本・VFXを担い、前作から2年後の世界を舞台に、再び姿を現したゴジラとの新たな戦いを描き出す。  戦争によって「無（ゼロ）」となった日本を、ゴジラが「負（マイナス）」に叩き落としてから2年。もがき苦しみながらも復興を遂げ、ようやく取り戻したはずの日常に、再びゴジラが襲いかかる。人々はこの戦いを終わらせるべく、総力を結集して新たな作戦に乗り出す。  キャストは、前作でゴジラと壮絶な死闘を繰り広げた主人公・敷島浩一役の神木隆之介、ゴジラに襲われながらも奇跡的に一命をとりとめたヒロイン・敷島典子役の浜辺美波をはじめ、山田裕貴、佐々木蔵之介、安藤サクラ、吉岡秀隆ら前作の顔ぶれが再集結。さらに新たなメンバーとして、気象台から大型災害対策事務局に出向した天才気象予報官・青山真琴役で長澤まさみ、戦争で心に深い傷を負った生物学者・村上寛治役で田中泯、医師・緒方役で國村隼が出演。",
       "source_url": "https://www.themoviedb.org/movie/1381071"
@@ -44,8 +49,8 @@
       "original_title": "Verity",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/rmaNMA1seHqpjtnYKzyynFAr1g8.jpg",
-      "score": 6.992,
-      "votes": 687,
+      "score": 7.0,
+      "votes": 688,
       "popularity": 130.0063,
       "overview": "仕事にも人生にも行き詰まっている売れない作家ローウェン・アシュリー（ダコタ・ジョンソン）のもとへ、突然、驚くようなオファーが届く。それは交通事故で生死を彷徨う人気作家ヴェリティ・クロフォード（アン・ハサウェイ）のためのゴーストライター業だった。なぜ自分が選ばれたのか疑問を持ちながらも、またとないチャンスを引き受けるべく、ローウェンは人里離れたクロフォード家の邸宅へと移り住む。次第にヴェリティの夫ジェレミー（ジョシュ・ハートネット）と親密な関係になっていくローウェンだったが、ある日ヴェリティが書いたと思われる不気味な原稿を発見してしまう。そこには、夫との性愛や子供たちへの激しい感情、そして自らにまつわる衝撃の告白が記されていた── クロフォード家に一体何があったのか？ 善悪の境界線が揺らぐ中、やがてローウェンは闇深い真実に辿り着く…。",
       "source_url": "https://www.themoviedb.org/movie/1283515"
@@ -57,8 +62,8 @@
       "original_title": "Ebenezer",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/zy5CBj2ZHOqPWCW124oE4a74dZE.jpg",
-      "score": 7.919,
-      "votes": 43,
+      "score": 7.9,
+      "votes": 44,
       "popularity": 111.9037,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1567605"
@@ -70,8 +75,8 @@
       "original_title": "Clayface",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/6ttcIVdQbS6esi5wPEUuVKQN8SX.jpg",
-      "score": 7.403,
-      "votes": 436,
+      "score": 7.397,
+      "votes": 437,
       "popularity": 72.2631,
       "overview": "ゴッサムの路地裏で育った少年から、ハリウッドの主演俳優へ。瞬く間にスターの座へ駆け上がったマット・ヘイゲンだったが、地元の犯罪組織のボスによって顔を無残に損なわれ、その輝かしいキャリアは突然、悲劇的な終わりを迎える。周囲のスタッフにも見捨てられ、すべてを失ったマットは、最先端の治療に最後の望みを託す。奇跡的に元の姿を取り戻した彼だったが、その治療は思いもよらぬ形で彼の現実感覚を蝕んでいく。やがてマットは、すべてを呑み込むほどの復讐心に駆られ、破滅への道を転がり落ちていく——。",
       "source_url": "https://www.themoviedb.org/movie/1400940"
@@ -96,8 +101,8 @@
       "original_title": "ஜெயிலர் 2",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/upwdEyhhYZ7pT2hD535fr2MGfpx.jpg",
-      "score": 8.0,
-      "votes": 32,
+      "score": 7.971,
+      "votes": 35,
       "popularity": 60.8568,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1234139"
@@ -109,8 +114,8 @@
       "original_title": "가능한 사랑",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/hGUnENS15d3Ve5W9TQY5ZdP2O18.jpg",
-      "score": 7.5,
-      "votes": 70,
+      "score": 7.403,
+      "votes": 72,
       "popularity": 46.3574,
       "overview": "まったく異なる人生を歩む2 組の夫婦の交錯する日常を捉え、平穏に見えた日々に少しずつ亀裂が生まれていく様子を描き出す。",
       "source_url": "https://www.themoviedb.org/movie/1483525"
@@ -149,7 +154,7 @@
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/12lO7y7j57j6mpQCUccOdEpSZzA.jpg",
       "score": 7.958,
-      "votes": 143,
+      "votes": 144,
       "popularity": 12.3058,
       "overview": "夜のテルアビブ、とある建物の屋上でイスラエル人ジャーナリストのユヴァル・アブラハームとラヘル・ショールは、イスラエル軍の兵士と諜報員24名に極秘インタビューを行った。ガザでの民間人殺害について、どのような指令を受けたのか。何をしたのか。ある者はデジタル化された遠隔攻撃を「事務作業のようなものだ」と語り、ある者は「食糧配給所に人が集まったところを撃った」と証言する。ひとりひとりの言葉から浮かび上がるのは、イスラエル国家が組織的に作り上げた、人間を人間としてみなさない＜虐殺を可能にするシステム＞だった。",
       "source_url": "https://www.themoviedb.org/movie/1755291"
@@ -201,7 +206,7 @@
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/cCWojb6N9UcTzNVtS4bOM3vQ30x.jpg",
       "score": 5.928,
-      "votes": 471,
+      "votes": 472,
       "popularity": 7.0629,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/338969"
@@ -382,8 +387,8 @@
       "original_title": "呪いのスマホ",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/7ZsxOt6MnEf2Z67sEMJoEPKMPe4.jpg",
-      "score": 0,
-      "votes": 0,
+      "score": 8.0,
+      "votes": 1,
       "popularity": 1.8732,
       "overview": "ある事件をきっかけに心を閉ざしてしまった孤独な女子高生・榊ユラは、同級生と一緒に立入禁止の旧校舎を掃除することになる。彼らはそこで、ボロボロになった1台のスマホを見つけるが、突如として画面が起動し不気味な動画が流れはじめる。その動画を目にしたことで呪いのスマホとつながってしまったユラたちは、それ以来「死の通知」を受け取るようになり、1人また1人と命を落としていく。やがてユラは呪いのスマホに隠された衝撃の真実にたどり着くが、それはさらなる恐怖の幕開けに過ぎなかった。",
       "source_url": "https://www.themoviedb.org/movie/1707955"
@@ -421,8 +426,8 @@
       "original_title": "バッド・ルーテナント：トウキョウ",
       "year": 2026,
       "poster": "https://image.tmdb.org/t/p/w342/rWiwfGrHgTd2bqOtJ1UxhtpOZQM.jpg",
-      "score": 4.0,
-      "votes": 1,
+      "score": 5.5,
+      "votes": 2,
       "popularity": 1.9355,
       "overview": "まるでこの世の業を全て請け負うかのように、自暴自棄な生活を送る警部補・矢吹恭二。闇に落ちた彼の悪行は、警察署内でも噂として囁かれはじめていた。時を同じくしてアメリカのＦＢＩ捜査官・グエンが来日。とある目的をもって来日したグエンと矢吹の思惑はこの東京の街で複雑に絡み合っていく。果たして彼らを待つものは絶望か、それとも―。",
       "source_url": "https://www.themoviedb.org/movie/1473439"
@@ -1060,7 +1065,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/mntDfwy3aPhEMSyNFT92ILg4bOY.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.1461,
+      "popularity": 0.1792,
       "overview": "世界のことが嫌いで\r 自分のことはもっと嫌いで",
       "source_url": "https://www.themoviedb.org/movie/1703008"
     },
@@ -1073,7 +1078,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/rLoYc3cPgoNPBZfBkvsEaVlHr7f.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.119,
+      "popularity": 0.0944,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1369767"
     },
@@ -1086,7 +1091,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/upbw6TJwIDXabpV0aKmDmbRMPS.jpg",
       "score": 10.0,
       "votes": 1,
-      "popularity": 0.117,
+      "popularity": 0.0795,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1803043"
     },
@@ -1099,7 +1104,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/4GD7hvB2OaIi5xLL6cv4adsHxZx.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.1164,
+      "popularity": 0.3501,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1823861"
     },
@@ -1112,7 +1117,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/dXRX2GKmYJTaB0KygwxfZsveCVD.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.1136,
+      "popularity": 0.1287,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1793888"
     },
@@ -1125,7 +1130,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/ziYU7xKR9G7WdwrtPVzWUEicuEI.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.101,
+      "popularity": 0.0743,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1793343"
     },
@@ -1138,7 +1143,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/dMgeb6YgLAmYUFQyUK9q0KD4Zxw.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.0913,
+      "popularity": 0.0437,
       "overview": "豊かな自然と温暖な気候に恵まれ、琉球王国時代から受け継がれてきた独自の文化・風習をもつ沖縄の島々。その一方で、戦争では20万人以上が犠牲となり、戦後も日本国内における米軍基地の約7割がこの地に集まり、県民所得は全国最下位で3人に1人の子どもが貧困状態にある。戦後81年、本土復帰54年を経た現在、沖縄では何が起こり、そこに暮らす人々は何を見つめ、どのような問題と向き合っているのか。10代から80代までの市井の人々の語りの集積から、沖縄の実像を重層的に浮かび上がらせていく。",
       "source_url": "https://www.themoviedb.org/movie/1807421"
     },
@@ -1151,7 +1156,7 @@
       "poster": "https://image.tmdb.org/t/p/w342/8gTvoCjJwR6y7VQ4CzcCYuBjuwm.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.0817,
+      "popularity": 0.2193,
       "overview": "2005年に始動したデフサッカー女子日本代表は、4年後の台北デフリンピックでは世界の壁を前に無力感を味わった。その後サッカーとは別に立ち上げられたデフフットサル代表では選手たちの意識も覚醒し、2023年デフフットサルW杯でついに頂点へとのぼりつめる。4度目の挑戦となる東京デフリンピックでは、世界一を経験した監督と選手たちを中心に、サッカーでも悲願の優勝を目指す。一方、新たに立ち上げられたデフハンドボール男子日本代表には、初心者も数多く参加。彼らの挑戦はボールの投げ方から始まり、まずは初勝利を目指すことになる。",
       "source_url": "https://www.themoviedb.org/movie/1807483"
     },
@@ -1164,9 +1169,22 @@
       "poster": null,
       "score": 0,
       "votes": 0,
-      "popularity": 0.0344,
+      "popularity": 0.0298,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1730910"
+    },
+    {
+      "id": 1825490,
+      "tmdbId": 1825490,
+      "title": "うそがほんとに ほんとがうそに",
+      "original_title": "うそがほんとに ほんとがうそに",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/yht2Xv5C7WCL1TMch4ZWeiqtRkg.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 0,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1825490"
     }
   ]
 }

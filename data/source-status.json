@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T07:58:45.476Z",
+  "generated_at": "2026-11-14T10:29:15.519Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -8,15 +8,15 @@
       "status": "automated",
       "source": "TMDB watch/providers (JustWatch)",
       "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
-      "source_observed_at": "2026-11-14T07:33:59.459Z",
+      "source_observed_at": "2026-11-14T08:02:41.773Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
-        "total": 3091,
-        "fresh": 3086,
+        "total": 3161,
+        "fresh": 3156,
         "stale": 5,
         "unknown": 0
       }
@@ -111,7 +111,7 @@
       "status": "automated",
       "source": "TMDB API plus source-reviewed release records",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-14T07:32:10.524Z",
+      "source_observed_at": "2026-11-14T08:00:54.182Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
@@ -152,13 +152,13 @@
       "status": "automated",
       "source": "TMDB API",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-14T07:56:49.716Z",
+      "source_observed_at": "2026-11-14T10:29:14.991Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-now-playing.yml",
       "trigger": "毎日18:13 UTCと手動実行。",
       "coverage": "TMDBで公開中として返る作品。全劇場の上映時間や上映館別回数ではない。",
-      "record_count": 89
+      "record_count": 90
     },
     {
       "id": "film-events",

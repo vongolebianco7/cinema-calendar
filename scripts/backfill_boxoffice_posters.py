@@ -38,11 +38,11 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (2000, "onepiece"): "2000-03-04",
     (2001, "onepieceねじまき島の冒険"): "2001-03-03",
     # Toei Animation's official lineup confirms the Japanese premiere dates.
-    (2000, "おジャ魔女どれみ♯"): "2000-07-08",
+    (2000, "おジャ魔女どれみ"): "2000-07-08",
     (2001, "デジモンティマース"): "2001-07-14",
-    (2001, "も~っと!おジャ魔女どれみ"): "2001-07-14",
+    (2001, "もっとおジャ魔女どれみ"): "2001-07-14",
     # The Media Arts Database records the Japanese theatrical release.
-    (1986, "オバケのQ太郎 とびだせ!バケバケ大作戦"): "1986-03-15",
+    (1986, "オバケのq太郎とびだせバケバケ大作戦"): "1986-03-15",
     (2009, "ドロップ"): "2009-03-20",
 }
 

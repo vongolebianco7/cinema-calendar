@@ -538,6 +538,48 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             "スター・ウォーズ エピソード6／ジェダイの帰還",
         ])
 
+    def test_official_1992_21_emon_package_splits_into_individual_films(self):
+        from urllib.parse import parse_qs, urlparse
+
+        source_title = "21エモン 他"
+        source_url = "https://shin-ei-animation.jp/50th/"
+        film_identities = {
+            "21エモン 宇宙行け！裸足のプリンセス":
+                (21001, "/21-emon-princess.jpg"),
+            "トキメキソーラーくるまによん":
+                (21002, "/tokimeki-solar.jpg"),
+        }
+        requested_titles = []
+
+        def opener(request, timeout):
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            requested_titles.append(title)
+            identifier, poster_path = film_identities[title]
+            return Response({"results": [{
+                "id": identifier, "title": title, "original_title": title,
+                "release_date": "1992-03-07", "poster_path": poster_path,
+            }]})
+
+        data, requests, result = self.run_rows(
+            [{"title": source_title, "gross": 16.8, "year": 1992,
+              "metric": "配給収入", "source_url": source_url}],
+            {}, market_year="1992", opener=opener,
+        )
+        rows = data["by_year"]["1992"]
+        self.assertEqual(requested_titles, list(film_identities))
+        self.assertEqual([row["title"] for row in rows], list(film_identities))
+        self.assertEqual([row["gross"] for row in rows], [16.8, 16.8])
+        self.assertEqual([row["metric"] for row in rows], ["配給収入", "配給収入"])
+        self.assertEqual([row["source_url"] for row in rows], [source_url, source_url])
+        self.assertEqual([row["tmdbId"] for row in rows], [21001, 21002])
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows],
+                         ["21-emon-princess.jpg", "tokimeki-solar.jpg"])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2])
+        self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
+        self.assertEqual(result["expanded_grouped_films"], 2)
+        self.assertEqual(result["enriched"], 2)
+        self.assertEqual(len(requests), 2)
+
     def test_unspaced_official_double_feature_separators_are_split(self):
         titles = [
             "仮面ライダーダブル/天装戦隊ゴセイジャー",

@@ -1,6 +1,12 @@
 name: Update movie data
 on:
   workflow_dispatch:
+    inputs:
+      rematch_boxoffice_posters:
+        description: Ignore the recent-match cooldown for the historical poster recovery step
+        required: false
+        default: false
+        type: boolean
   push:
     branches: [main]
     paths:
@@ -66,6 +72,8 @@ jobs:
       - name: Recover verified historical box-office posters
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          FORCE_BOXOFFICE_POSTER_RECHECK: ${{ inputs.rematch_boxoffice_posters || false }}
+          BOXOFFICE_POSTER_LOOKUP_LIMIT: ${{ inputs.rematch_boxoffice_posters && '200' || '100' }}
         run: python scripts/backfill_boxoffice_posters.py
       - name: Validate award and official on-demand provenance
         run: python scripts/check_release_data.py

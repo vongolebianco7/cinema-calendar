@@ -47,7 +47,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         row = data["by_year"]["1980"][0]
         self.assertEqual(row["tmdbId"], 9453)
         self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/caligula.jpg")
-        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual(row["identity_match"], "exact_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"], row["metric"]), (47.2, 1980, "配給収入"))
         self.assertEqual(len(requests), 1)
         self.assertIn("api.themoviedb.org/3/search/movie", requests[0][0].full_url)
@@ -69,7 +69,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["tmdbId"], 859292)
         self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-parman-poster.jpg")
         self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/859292")
-        self.assertEqual(row["identity_match"], "exact_title_and_release_year_window")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"]), (10, 1983))
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 3)

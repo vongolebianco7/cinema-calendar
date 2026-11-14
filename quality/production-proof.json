@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "40fadf5c51ab7dfa8fc3fe0ef7a9c239b6a95744",
-  "verified_at": "2026-11-13T23:43:56.695Z",
-  "note": "Exact-source CI receipt for PR #821 grouped box-office poster lookup guard. Required pull_request workflows succeeded on this exact source head: Autonomous quality gate run 43528506470; CINELVA smoke tests run 43528506529; Validate frontend run 43528506525; Reproducible backend build run 43528506680. Validate frontend includes the grouped box-office poster browser acceptance. Additional exact-head checks: CINELVA backup safety, CINELVA mobile layout smoke test, Cinemap completeness scorecard, CINELVA continuous visual QA, Full Python contract suite, and Check brand identity succeeded. This receipt proves CI source verification only; it does not claim production deployment or device-level acceptance."
+  "head_sha": "3249e2a863cb8e75c0e6119bd178e687cda25934",
+  "verified_at": "2026-11-14T00:45:08.169Z",
+  "note": "Exact-source CI receipt for PR #823, which updates box-office poster browser acceptance to the split-film model. Required pull_request workflows succeeded on this exact source head: Autonomous quality gate run 43534222074; CINELVA smoke tests run 43534222139; Validate frontend run 43534222127 attempt 2; Reproducible backend build run 43534222117. Additional exact-head checks: CINELVA mobile layout smoke test run 43534222172, completeness scorecard run 43534222144, and continuous visual QA run 43534222071. This receipt proves CI source verification only; it does not claim production deployment or device-level acceptance."
 }

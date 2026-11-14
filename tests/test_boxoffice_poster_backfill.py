@@ -74,6 +74,27 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 3)
 
+    def test_verified_ghibli_japanese_title_variant_recovers_its_own_poster(self):
+        data, requests, result = self.run_rows(
+            [{"title": "おもいでぽろぽろ", "gross": 18.7, "year": 1991}],
+            {"results": [{
+                "id": 15080,
+                "title": "おもひでぽろぽろ",
+                "original_title": "おもひでぽろぽろ",
+                "release_date": "1991-07-20",
+                "poster_path": "/official-only-yesterday-poster.jpg",
+            }]},
+            market_year="1991",
+        )
+        row = data["by_year"]["1991"][0]
+        self.assertEqual(row["tmdbId"], 15080)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-only-yesterday-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/15080")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"]), (18.7, 1991))
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 3)
+
     def test_multiple_exact_title_candidates_remain_unresolved(self):
         data, requests, result = self.run_rows(
             [{"title": "同名作品", "gross": 10, "year": 1980}],

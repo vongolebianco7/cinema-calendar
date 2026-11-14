@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "bbf3ff8c04e0abf392e4f829cafefbfdb89765d0",
-  "verified_at": "2026-11-14T08:00:00Z",
-  "note": "Exact-source CI receipt for PR #833. All four required pull_request workflows passed on this exact source head: Autonomous quality gate run 43572942271; CINELVA smoke tests run 43572942300; Validate frontend run 43572942258; Reproducible backend build run 43572942231. The full Python contract suite (run 43572942282) and additional checks also passed. This receipt verifies CI source only and does not claim production deployment."
+  "head_sha": "a012a59080f0c470b29bf629a172c2770510e71a",
+  "verified_at": "2026-11-14T10:28:30Z",
+  "note": "Exact-source CI receipt for PR #834. The PR head a012a59080f0c470b29bf629a172c2770510e71a was merged as e4fc5b37b277e61df8498e298c6d223eec69acd5. All four required pull_request workflows passed on the exact PR source head: Autonomous quality gate run 43584910145; CINELVA smoke tests run 43584910045; Validate frontend run 43584910047; Reproducible backend build run 43584910051. The full Python contract suite (run 43584910054), mobile smoke, visual QA, and completeness scorecard also succeeded. This receipt verifies CI source only and does not claim production deployment."
 }

@@ -831,5 +831,11 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["local_enriched"], 0)
 
 
+    def test_alias_search_language_preserves_japanese_and_latin_title_identity(self):
+        self.assertEqual(backfill.search_language("The Kid"), "en-US")
+        self.assertEqual(backfill.search_language("ザ・キッド"), "ja-JP")
+        self.assertEqual(backfill.search_language("バトル・ロワイアルII Requiem"), "ja-JP")
+        self.assertEqual(backfill.search_language("Dragon Ball Z"), "en-US")
+
 if __name__ == "__main__":
     unittest.main()

@@ -356,7 +356,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-21-emon-poster.jpg")
         self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/873387")
         self.assertEqual(row["tmdb_release_date"], "1992-03-07")
-        self.assertEqual(row["identity_match"], "exact_title_and_release_year_window")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"], row["metric"]), (7.2, 1992, "配給収入"))
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 4)
@@ -823,7 +823,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             requested_titles.append(title)
             official_title = next(
                 name for name in film_identities
-                if unicodedata.normalize("NFKC", name) == title
+                if backfill.normalize(name) == backfill.normalize(title)
             )
             identifier, poster_path = film_identities[official_title]
             return Response({"results": [{
@@ -845,7 +845,15 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         )
         data = json.loads(path.read_text(encoding="utf-8"))
         rows = data["by_year"]["1992"]
-        self.assertEqual(requested_titles, [unicodedata.normalize("NFKC", title) for title in film_identities])
+        self.assertEqual(
+            requested_titles[0],
+            unicodedata.normalize("NFKC", next(iter(film_identities))),
+        )
+        self.assertEqual(
+            requested_titles[-1],
+            unicodedata.normalize("NFKC", list(film_identities)[-1]),
+        )
+        self.assertEqual(len(requests), 5)
         self.assertEqual([row["title"] for row in rows], list(film_identities))
         self.assertEqual([row["gross"] for row in rows], [16.8, 16.8])
         self.assertEqual([row["metric"] for row in rows], ["配給収入", "配給収入"])

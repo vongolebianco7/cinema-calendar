@@ -88,7 +88,7 @@ REVIEWED_TITLE_ALIASES = {
     (2013, "劇場版 仮面ライダーウィザード イン マジックランド"): ["Kamen Rider Wizard in Magic Land"],
     (2019, "騎士竜戦隊リュウソウジャー THE MOVIE"): ["Kishiryu Sentai Ryusoulger the Movie"],
 }
-POSTER_CHECK_VERSION = 3
+POSTER_CHECK_VERSION = 4
 RECHECK_DAYS = 1
 
 
@@ -111,6 +111,20 @@ def exact_title_aliases(title, market_year=None):
     if clean and clean not in aliases:
         aliases.append(clean)
     return list(dict.fromkeys(alias for alias in aliases if normalize(alias)))
+
+
+def search_language(query):
+    """Use TMDB's matching display language for a reviewed title alias.
+
+    English aliases searched with ja-JP can return Japanese-only localized
+    title fields, so the exact alias comparison then loses the identity proof.
+    Keep Japanese aliases in Japanese and use English display fields for Latin
+    script aliases. The JP region remains fixed for release metadata.
+    """
+    value = str(query or "")
+    has_latin = bool(re.search(r"[A-Za-z]", value))
+    has_japanese = bool(re.search(r"[\u3040-\u30ff\u3400-\u9fff]", value))
+    return "en-US" if has_latin and not has_japanese else "ja-JP"
 
 
 EXPLICIT_GROUPED_TITLE_SPLITS = {
@@ -573,7 +587,8 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 search_results_by_id = {}
                 for query in aliases:
                     url = SEARCH + "?" + urllib.parse.urlencode({
-                        "api_key": api_key, "query": query, "language": "ja-JP", "region": "JP",
+                        "api_key": api_key, "query": query,
+                        "language": search_language(query), "region": "JP",
                         "include_adult": "false", "page": 1,
                     })
                     result = rate_limited_fetch(url)

@@ -180,6 +180,27 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 2)
 
+    def test_reviewed_english_alias_uses_english_tmdb_title_fields(self):
+        data, requests, result = self.run_rows(
+            [{"title": "ドラゴンボールZ・とびっきり最強対最強", "gross": 16.5,
+              "year": 1991}],
+            {"results": [{
+                "id": 39108,
+                "title": "Dragon Ball Z: Cooler's Revenge",
+                "original_title": "Dragon Ball Z: Cooler's Revenge",
+                "release_date": "1991-07-20",
+                "poster_path": "/coolers-revenge-poster.jpg",
+            }]},
+            market_year="1991",
+        )
+        row = data["by_year"]["1991"][0]
+        self.assertEqual(row["tmdbId"], 39108)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/coolers-revenge-poster.jpg")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual([request[0].full_url.split("language=")[1].split("&")[0]
+                          for request in requests], ["ja-JP", "en-US"])
+
     def test_verified_be_bop_group_match_keeps_each_film_and_shared_gross(self):
         data, requests, result = self.run_rows(
             [{"title": "ビーバップ・ハイスクール高校与太郎狂騒曲 / はいからさんが通る",
@@ -220,7 +241,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("poster", row)
         self.assertNotIn("tmdbId", row)
         self.assertTrue(row["poster_checked_at"])
-        self.assertEqual(row["poster_check_version"], 3)
+        self.assertEqual(row["poster_check_version"], backfill.POSTER_CHECK_VERSION)
         self.assertEqual(row["poster_match_status"], "ambiguous")
         self.assertEqual(result["ambiguous"], 1)
         self.assertEqual(len(requests), 1)
@@ -541,7 +562,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("poster", data["by_year"]["1980"][0])
         self.assertNotIn("tmdbId", data["by_year"]["1980"][0])
         self.assertEqual(result["unresolved"], 1)
-        self.assertEqual(data["by_year"]["1980"][0]["poster_check_version"], 3)
+        self.assertEqual(data["by_year"]["1980"][0]["poster_check_version"], backfill.POSTER_CHECK_VERSION)
         self.assertEqual(data["by_year"]["1980"][0]["poster_match_status"], "not_found")
         self.assertEqual(len(requests), 2)
         self.assertIn("/movie/10/alternative_titles?", requests[1][0].full_url)
@@ -601,7 +622,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         )
         row = data["by_year"]["1980"][0]
         self.assertEqual(row["tmdbId"], 55)
-        self.assertEqual(row["poster_check_version"], 3)
+        self.assertEqual(row["poster_check_version"], backfill.POSTER_CHECK_VERSION)
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 1)
 
@@ -609,7 +630,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         recently_checked = {
             "title": "現方式で確認済みの作品",
             "poster_checked_at": "2026-11-08T12:00:00Z",
-            "poster_check_version": 3,
+            "poster_check_version": backfill.POSTER_CHECK_VERSION,
         }
         data, requests, result = self.run_rows(
             [recently_checked],
@@ -625,7 +646,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         recently_checked = {
             "title": "冷却期間中の未解決作品",
             "poster_checked_at": "2026-11-09T12:00:00Z",
-            "poster_check_version": 3,
+            "poster_check_version": backfill.POSTER_CHECK_VERSION,
         }
         data, requests, result = self.run_rows(
             [recently_checked],

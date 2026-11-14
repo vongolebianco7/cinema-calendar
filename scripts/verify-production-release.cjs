@@ -1,4 +1,4 @@
-/* Public, read-only CI proof. No token, mutation, paid service or retry loop. */
+/* Read-only CI proof. Uses the workflow token only for authenticated GitHub metadata reads. */
 const {createHash}=require('node:crypto');
 const {isDeepStrictEqual}=require('node:util');
 const {execFileSync}=require('node:child_process');
@@ -51,8 +51,13 @@ async function verifyProof({receipt,currentEntries,dirtyPaths=[],readJson}){
  return {head_sha:head,source_digest:digest,workflows:REQUIRED_WORKFLOWS};
 }
 async function readJson(route){
- const response=await fetch(`https://api.github.com/repos/${REPOSITORY}${route}`,{headers:{Accept:'application/vnd.github+json','User-Agent':'Cinelva-production-proof','X-GitHub-Api-Version':'2022-11-28'},signal:AbortSignal.timeout(15000),redirect:'error'});
- if(!response.ok)throw Error(`Public CI proof HTTP${response.status}; production remains blocked`);
+ const headers={Accept:'application/vnd.github+json','User-Agent':'Cinelva-production-proof','X-GitHub-Api-Version':'2022-11-28'};
+ if(process.env.ACTIONS_READ_TOKEN)headers.Authorization=`Bearer ${process.env.ACTIONS_READ_TOKEN}`;
+ const response=await fetch(`https://api.github.com/repos/${REPOSITORY}${route}`,{headers,signal:AbortSignal.timeout(15000),redirect:'error'});
+ if(!response.ok){
+  const detail=(await response.text()).slice(0,300);
+  throw Error(`GitHub CI proof HTTP${response.status} at ${route}: ${detail}; production remains blocked`);
+ }
  return response.json();
 }
 async function main(argv=process.argv.slice(2),env=process.env){

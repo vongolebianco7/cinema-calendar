@@ -137,6 +137,34 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 3)
 
+    def test_verified_be_bop_group_match_keeps_each_film_and_shared_gross(self):
+        data, requests, result = self.run_rows(
+            [{"title": "ビーバップ・ハイスクール高校与太郎狂騒曲 / はいからさんが通る",
+              "gross": 12.5, "year": 1988, "metric": "配給収入"}],
+            {"results": [{
+                "id": 433967,
+                "title": "ビー・バップ・ハイスクール 高校与太郎狂騒曲",
+                "original_title": "ビー・バップ・ハイスクール 高校与太郎狂騒曲",
+                "release_date": "1987-12-12",
+                "poster_path": "/official-be-bop-poster.jpg",
+            }]},
+            market_year="1988",
+        )
+        rows = data["by_year"]["1988"]
+        be_bop, haikara = rows
+        self.assertEqual(be_bop["title"], "ビーバップ・ハイスクール高校与太郎狂騒曲")
+        self.assertEqual(be_bop["tmdbId"], 433967)
+        self.assertEqual(be_bop["poster"], "https://image.tmdb.org/t/p/w500/official-be-bop-poster.jpg")
+        self.assertEqual(be_bop["identity_source"], "https://www.themoviedb.org/movie/433967")
+        self.assertEqual(be_bop["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual(haikara["title"], "はいからさんが通る")
+        self.assertNotIn("tmdbId", haikara)
+        self.assertNotIn("poster", haikara)
+        self.assertEqual([row["gross"] for row in rows], [12.5, 12.5])
+        self.assertEqual([row["year"] for row in rows], [1988, 1988])
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(result["expanded_grouped_films"], 2)
+
     def test_multiple_exact_title_candidates_remain_unresolved(self):
         data, requests, result = self.run_rows(
             [{"title": "同名作品", "gross": 10, "year": 1980}],

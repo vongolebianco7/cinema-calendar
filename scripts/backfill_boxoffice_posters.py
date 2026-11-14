@@ -33,6 +33,7 @@ MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
 REVIEWED_TITLE_ALIASES = {
     (1981, "ブルージーンズメモリー"): ["Blue Jeans Memory", "ブルージーンズメモリー BLUE JEANS MEMORY"],
     (1981, "青春グラフィティ スニーカーぶるーす"): ["Sneaker Blues", "青春グラフィティ スニーカーぶる〜す"],
+    (1988, "ビーバップ・ハイスクール高校与太郎狂騒曲"): ["ビー・バップ・ハイスクール 高校与太郎狂騒曲"],
     (1982, "ブッシュマン"): ["The Gods Must Be Crazy"],
     (1982, "エンドレス・ラブ"): ["Endless Love"],
     (1983, "パーマン バードマンがやってきた!!"): ["Perman: Birdman Has Come", "パーマン バードマンがやって来た！！"],

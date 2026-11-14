@@ -65,7 +65,8 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("poster", row)
         self.assertNotIn("tmdbId", row)
         self.assertTrue(row["poster_checked_at"])
-        self.assertEqual(row["poster_check_version"], 2)
+        self.assertEqual(row["poster_check_version"], 3)
+        self.assertEqual(row["poster_match_status"], "ambiguous")
         self.assertEqual(result["ambiguous"], 1)
         self.assertEqual(len(requests), 1)
 
@@ -83,17 +84,50 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["ambiguous"], 1)
         self.assertEqual(len(requests), 1)
 
-    def test_compound_market_row_is_not_assigned_one_film_poster(self):
+    def test_compound_market_row_is_split_and_shared_gross_is_preserved(self):
         data, requests, result = self.run_rows(
             [{"title": "映画A / 映画B", "gross": 15.5, "year": 1980}],
-            {"results": [{"id": 10, "title": "映画A / 映画B", "release_date": "1980-01-01",
-                          "poster_path": "/wrong.jpg"}]},
+            {"results": []},
         )
-        self.assertNotIn("poster", data["by_year"]["1980"][0])
-        self.assertEqual(requests, [])
-        self.assertEqual(result["grouped"], 1)
+        rows = data["by_year"]["1980"]
+        self.assertEqual([row["title"] for row in rows], ["映画A", "映画B"])
+        self.assertEqual([row["gross"] for row in rows], [15.5, 15.5])
+        self.assertEqual([row["source_title"] for row in rows], ["映画A / 映画B"] * 2)
+        self.assertEqual(result["expanded_grouped_films"], 2)
 
-    def test_unspaced_official_double_feature_separators_are_excluded(self):
+    def test_compound_market_titles_are_individually_matchable(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps({"by_year": {"1999": [{
+            "title": "リング2 / 死国", "gross": 21, "year": 1999,
+            "metric": "配給収入", "source_url": "https://example.org/source",
+        }]}, "all_time": []}), encoding="utf-8")
+        requested_titles = []
+
+        def opener(request, timeout):
+            from urllib.parse import parse_qs, urlparse
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            requested_titles.append(title)
+            movie_id = 9669 if title == "リング2" else 999001
+            poster = "/ring2.jpg" if title == "リング2" else "/shikoku.jpg"
+            return Response({"results": [{
+                "id": movie_id, "title": title, "release_date": "1999-01-01",
+                "poster_path": poster,
+            }]})
+
+        result = backfill.backfill(path, api_key="fixture", opener=opener, delay=0,
+                                  now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+                                  catalog_paths=[])
+        rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1999"]
+        self.assertEqual(requested_titles, ["リング2", "死国"])
+        self.assertEqual([row["title"] for row in rows], ["リング2", "死国"])
+        self.assertEqual([row["gross"] for row in rows], [21, 21])
+        self.assertEqual([row["tmdbId"] for row in rows], [9669, 999001])
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], ["ring2.jpg", "shikoku.jpg"])
+        self.assertEqual(result["enriched"], 2)
+
+    def test_unspaced_official_double_feature_separators_are_split(self):
         titles = [
             "仮面ライダーダブル/天装戦隊ゴセイジャー",
             "劇場版 仮面ライダーウィザード イン マジックランド/劇場版 獣電戦隊キョウリュウジャー ガブリンチョ・オブ・ミュージック",
@@ -103,16 +137,9 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         for title in titles:
             with self.subTest(title=title):
                 self.assertTrue(backfill.grouped_title(title))
-
-        data, requests, result = self.run_rows(
-            [{"title": titles[0], "gross": 15.5, "year": 2010}],
-            {"results": [{"id": 10, "title": titles[0], "release_date": "2010-01-01",
-                          "poster_path": "/wrong.jpg"}]},
-            market_year="2010",
-        )
-        self.assertNotIn("poster", data["by_year"]["2010"][0])
-        self.assertEqual(requests, [])
-        self.assertEqual(result["grouped"], 1)
+        self.assertEqual(backfill.split_grouped_titles(titles[0]), [
+            "仮面ライダーダブル", "天装戦隊ゴセイジャー",
+        ])
 
     def test_multiple_quoted_features_are_excluded_but_single_slash_titles_stay_eligible(self):
         self.assertTrue(backfill.grouped_title(
@@ -145,7 +172,8 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("poster", data["by_year"]["1980"][0])
         self.assertNotIn("tmdbId", data["by_year"]["1980"][0])
         self.assertEqual(result["unresolved"], 1)
-        self.assertEqual(data["by_year"]["1980"][0]["poster_check_version"], 2)
+        self.assertEqual(data["by_year"]["1980"][0]["poster_check_version"], 3)
+        self.assertEqual(data["by_year"]["1980"][0]["poster_match_status"], "not_found")
         self.assertEqual(len(requests), 2)
         self.assertIn("/movie/10/alternative_titles?", requests[1][0].full_url)
 
@@ -204,15 +232,15 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         )
         row = data["by_year"]["1980"][0]
         self.assertEqual(row["tmdbId"], 55)
-        self.assertEqual(row["poster_check_version"], 2)
+        self.assertEqual(row["poster_check_version"], 3)
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 1)
 
-    def test_recent_unresolved_row_in_current_matcher_backoff_is_skipped(self):
+    def test_recent_unresolved_row_is_retried_after_one_day(self):
         recently_checked = {
             "title": "現方式で確認済みの作品",
-            "poster_checked_at": "2026-11-09T12:00:00Z",
-            "poster_check_version": 2,
+            "poster_checked_at": "2026-11-08T12:00:00Z",
+            "poster_check_version": 3,
         }
         data, requests, result = self.run_rows(
             [recently_checked],
@@ -220,9 +248,25 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                           "release_date": "1980-01-01", "poster_path": "/ignored.jpg"}]},
         )
         row = data["by_year"]["1980"][0]
-        self.assertNotIn("poster", row)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/ignored.jpg")
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 1)
+
+    def test_recent_row_skipped_by_cooldown_is_explicitly_unexamined(self):
+        recently_checked = {
+            "title": "冷却期間中の未解決作品",
+            "poster_checked_at": "2026-11-09T12:00:00Z",
+            "poster_check_version": 3,
+        }
+        data, requests, result = self.run_rows(
+            [recently_checked],
+            {"results": []},
+        )
+        row = data["by_year"]["1980"][0]
+        self.assertEqual(row["poster_match_status"], "unexamined")
+        self.assertEqual(row["poster_check_skip_reason"], "cooldown")
+        self.assertEqual(result["unexamined"], 1)
         self.assertEqual(requests, [])
-        self.assertEqual(result["enriched"], 0)
 
     def test_unique_tmdb_japan_alternative_title_recovers_poster(self):
         tmp = tempfile.TemporaryDirectory()

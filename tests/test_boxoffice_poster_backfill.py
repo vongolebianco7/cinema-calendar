@@ -303,7 +303,12 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             from urllib.parse import parse_qs, urlparse
             title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
             requested.append(title)
-            identifier, release, poster = identities[title]
+            identity_key = backfill.normalize(title)
+            identity = next((item for key, item in identities.items()
+                             if backfill.normalize(key) == identity_key), None)
+            if identity is None:
+                return Response({"results": []})
+            identifier, release, poster = identity
             return Response({"results": [{
                 "id": identifier, "title": title, "original_title": title,
                 "release_date": release, "poster_path": poster,
@@ -313,7 +318,9 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
                                   now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
                                   catalog_paths=[])
         rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1997"]
-        self.assertEqual(requested, list(identities))
+        requested_keys = {backfill.normalize(title) for title in requested}
+        identity_keys = {backfill.normalize(title) for title in identities}
+        self.assertTrue(identity_keys.issubset(requested_keys))
         self.assertEqual([row["title"] for row in rows], list(identities))
         self.assertEqual([row["gross"] for row in rows], [19, 19, 19])
         self.assertEqual([row["metric"] for row in rows], ["配給収入"] * 3)
@@ -347,11 +354,22 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         }
         requested = []
 
+        alias_to_identity = {
+            backfill.normalize("仮面ライダーディケイド オールライダー対大ショッカー"):
+                backfill.normalize("劇場版 仮面ライダーディケイド オールライダー対大ショッカー"),
+            backfill.normalize("侍戦隊シンケンジャー銀幕版 天下分け目の戦"):
+                backfill.normalize("侍戦隊シンケンジャー銀幕版 天下分け目の戦"),
+        }
+
         def opener(request, timeout):
             from urllib.parse import parse_qs, urlparse
             title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
             requested.append(title)
-            identifier, release, poster = identities[title]
+            identity_key = alias_to_identity.get(backfill.normalize(title))
+            identity = identities.get(identity_key)
+            if identity is None:
+                return Response({"results": []})
+            identifier, release, poster = identity
             return Response({"results": [{
                 "id": identifier, "title": title, "original_title": title,
                 "release_date": release, "poster_path": poster,

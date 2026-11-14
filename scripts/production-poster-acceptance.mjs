@@ -183,7 +183,7 @@ async function auditHistoricalBoxOffice(context) {
       const entries = (await response.json())?.by_year?.['1980'];
       if (!Array.isArray(entries)) throw new Error('boxoffice.json has no valid 1980 rows');
       const normalize = value => String(value || '').normalize('NFKC').toLowerCase()
-        .replace(/[^\\p{L}\\p{N}]/gu, '');
+        .replace(/[^\p{L}\p{N}]/gu, '');
       const titles = new Set();
       const ids = new Set();
       return [...entries].sort((a, b) => Number(b.gross || 0) - Number(a.gross || 0))

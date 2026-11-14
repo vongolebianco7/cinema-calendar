@@ -282,6 +282,95 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], ["ring2.jpg", "shikoku.jpg"])
         self.assertEqual(result["enriched"], 2)
 
+    def test_star_wars_trilogy_expands_with_original_gross_and_distinct_posters(self):
+        data = {"by_year": {"1997": [{
+            "title": "スターウォーズ(3部作)", "gross": 19, "year": 1997,
+            "region": "洋画", "metric": "配給収入",
+            "source_url": "https://www.eiren.org/toukei/1997.html",
+        }]}, "all_time": []}
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps(data), encoding="utf-8")
+        identities = {
+            "スター・ウォーズ エピソード4／新たなる希望": (1001, "1977-05-25", "/star-wars-4.jpg"),
+            "スター・ウォーズ エピソード5／帝国の逆襲": (1002, "1980-05-21", "/star-wars-5.jpg"),
+            "スター・ウォーズ エピソード6／ジェダイの帰還": (1003, "1983-05-25", "/star-wars-6.jpg"),
+        }
+        requested = []
+
+        def opener(request, timeout):
+            from urllib.parse import parse_qs, urlparse
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            requested.append(title)
+            identifier, release, poster = identities[title]
+            return Response({"results": [{
+                "id": identifier, "title": title, "original_title": title,
+                "release_date": release, "poster_path": poster,
+            }]})
+
+        result = backfill.backfill(path, api_key="fixture", opener=opener, delay=0,
+                                  now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+                                  catalog_paths=[])
+        rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1997"]
+        self.assertEqual(requested, list(identities))
+        self.assertEqual([row["title"] for row in rows], list(identities))
+        self.assertEqual([row["gross"] for row in rows], [19, 19, 19])
+        self.assertEqual([row["metric"] for row in rows], ["配給収入"] * 3)
+        self.assertEqual(len({row["tmdbId"] for row in rows}), 3)
+        self.assertEqual(len({row["poster"] for row in rows}), 3)
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], [
+            "star-wars-4.jpg", "star-wars-5.jpg", "star-wars-6.jpg",
+        ])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2, 3])
+        self.assertEqual([row["source_group_size"] for row in rows], [3, 3, 3])
+        self.assertEqual([row["source_title"] for row in rows], ["スターウォーズ(3部作)"] * 3)
+        self.assertEqual(result["expanded_grouped_films"], 3)
+        self.assertEqual(result["enriched"], 3)
+
+    def test_kamen_rider_and_shinkenger_double_feature_get_separate_posters(self):
+        data = {"by_year": {"2009": [{
+            "title": "劇場版 仮面ライダーディケイド侍戦隊シンケンジャー 銀幕版",
+            "gross": 19, "year": 2009, "region": "邦画",
+            "metric": "興行収入",
+            "source_url": "https://www.eiren.org/toukei/2009.html",
+        }]}, "all_time": []}
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        path = Path(tmp.name) / "boxoffice.json"
+        path.write_text(json.dumps(data), encoding="utf-8")
+        identities = {
+            "劇場版 仮面ライダーディケイド オールライダー対大ショッカー":
+                (30617, "2009-08-08", "/kamen-rider.jpg"),
+            "侍戦隊シンケンジャー銀幕版 天下分け目の戦":
+                (188297, "2009-08-08", "/shinkenger.jpg"),
+        }
+        requested = []
+
+        def opener(request, timeout):
+            from urllib.parse import parse_qs, urlparse
+            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            requested.append(title)
+            identifier, release, poster = identities[title]
+            return Response({"results": [{
+                "id": identifier, "title": title, "original_title": title,
+                "release_date": release, "poster_path": poster,
+            }]})
+
+        result = backfill.backfill(path, api_key="fixture", opener=opener, delay=0,
+                                  now=datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc),
+                                  catalog_paths=[])
+        rows = json.loads(path.read_text(encoding="utf-8"))["by_year"]["2009"]
+        self.assertEqual(requested, list(identities))
+        self.assertEqual([row["title"] for row in rows], list(identities))
+        self.assertEqual([row["gross"] for row in rows], [19, 19])
+        self.assertEqual([row["tmdbId"] for row in rows], [30617, 188297])
+        self.assertNotEqual(rows[0]["poster"], rows[1]["poster"])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2])
+        self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
+        self.assertEqual(result["expanded_grouped_films"], 2)
+        self.assertEqual(result["enriched"], 2)
+
     def test_unspaced_official_double_feature_separators_are_split(self):
         titles = [
             "仮面ライダーダブル/天装戦隊ゴセイジャー",

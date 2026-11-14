@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "be914260060c446d581c44fdaf24c4bc1792b3b5",
-  "verified_at": "2026-11-14T23:20:56.348Z",
-  "note": "Exact-source CI receipt for PR #845. Tested head be914260060c446d581c44fdaf24c4bc1792b3b5 was merged to main as e2e31367e02220d1c5110a8d12e8c4236f7ed013; the merged executable sources match the tested head. All four required pull_request workflows passed on the exact tested source head: Autonomous quality gate run 43652189932; CINELVA smoke tests run 43652189869; Validate frontend run 43652189872; Reproducible backend build run 43652189892. This receipt records exact-source CI validation; it does not claim production poster acceptance or successful database synchronization."
+  "head_sha": "5854c1a93764c17e0735174339c14ea87e8ba019",
+  "verified_at": "2026-11-14T23:39:02.944Z",
+  "note": "Exact-source CI receipt for PR #846. Tested head 5854c1a93764c17e0735174339c14ea87e8ba019 was merged to main as 6e2940fcc7210f899c1da5e8571c907c1319a836; the merged executable sources match the tested head. All four required pull_request workflows passed on the exact tested source head: Autonomous quality gate run 43653761367; CINELVA smoke tests run 43653761409; Validate frontend run 43653761397; Reproducible backend build run 43653761430. This receipt records exact-source CI validation; it does not claim successful production database synchronization or poster acceptance."
 }

@@ -81,14 +81,17 @@ test('production poster acceptance reports source-level missing rows separately 
   assert.match(script, /invalid row in/);
 });
 
-test('production poster acceptance audits both catalog-backed posters for unchanged grouped source rows', () => {
-  assert.match(script, /const compoundBoxOfficeFixtures = \[/);
-  assert.match(script, /auditCompoundBoxOffice\(context, fixture\)/);
-  assert.match(script, /expected both catalog-backed posters in source-row order/);
+test('production poster acceptance audits split films as separate rows with their own poster and unchanged shared gross', () => {
+  assert.match(script, /const splitBoxOfficeFixtures = \[/);
+  assert.match(script, /auditSplitBoxOffice\(context, fixture\)/);
+  for (const title of ['リング2', '死国', 'リング0 バースデイ', 'ISOLA 多重人格少女']) {
+    assert.ok(script.includes(`title: '${title}'`), `missing split fixture for ${title}`);
+  }
+  assert.match(script, /img\[data-box-poster\]/);
+  assert.match(script, /compound_posters/);
   assert.match(script, /shared gross changed/);
-  assert.match(script, /source competition rank changed/);
-  assert.match(script, /収入は合算/);
-  assert.match(script, /item\?\.tmdbId/);
-  assert.match(script, /themoviedb\.org\/movie/);
-  assert.match(script, /image\.tmdb\.org/);
+  assert.match(script, /not rendered as its own row/);
+  assert.match(script, /regressed to compound poster rendering/);
+  assert.doesNotMatch(script, /const compoundBoxOfficeFixtures = \[/);
+  assert.doesNotMatch(script, /auditCompoundBoxOffice\(context, fixture\)/);
 });

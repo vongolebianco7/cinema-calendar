@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T17:17:58.015Z",
+  "generated_at": "2026-11-14T17:19:16.440Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -83,7 +83,7 @@
       "status": "automated",
       "source": "しょぼいカレンダー公開番組表 API（映画カテゴリ）",
       "source_url": "https://docs.cal.syoboi.jp/spec/rss2.php/",
-      "source_observed_at": "2026-11-14T14:05:53.032Z",
+      "source_observed_at": "2026-11-14T17:19:16.285Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-tv-movie-broadcasts.yml",

@@ -281,6 +281,58 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["ambiguous"], 1)
         self.assertEqual(len(requests), 1)
 
+    def test_official_1994_dorami_child_splits_into_two_verified_films(self):
+        source_group = "ドラえもん のび太と夢幻三銃士 / ドラミちゃん ウメ星デンカ"
+        data, requests, result = self.run_rows([
+            {
+                "title": "ドラえもん のび太と夢幻三銃士",
+                "gross": 13.5, "year": 1994, "metric": "配給収入",
+                "source_group_title": source_group,
+                "tmdbId": 161715,
+                "poster": "https://image.tmdb.org/t/p/w342/doraemon.jpg",
+                "identity_source": "https://www.themoviedb.org/movie/161715",
+            },
+            {
+                "title": "ドラミちゃん ウメ星デンカ",
+                "gross": 13.5, "year": 1994, "metric": "配給収入",
+                "source_group_title": source_group,
+                "poster_match_status": "not_found",
+            },
+        ], [
+            {"results": [{
+                "id": 326497, "title": "ドラミちゃん 青いストローハット",
+                "original_title": "ドラミちゃん 青いストローハット",
+                "release_date": "1994-03-12", "poster_path": "/dorami.jpg",
+            }]},
+            {"results": []},
+            {"results": [{
+                "id": 1185956, "title": "ウメ星デンカ 宇宙の果てからパンパロパン！",
+                "original_title": "ウメ星デンカ 宇宙の果てからパンパロパン！",
+                "release_date": "1994-03-12", "poster_path": "/umeboshi.jpg",
+            }]},
+            {"results": []},
+        ], market_year="1994")
+
+        rows = data["by_year"]["1994"]
+        self.assertEqual([row["title"] for row in rows], [
+            "ドラえもん のび太と夢幻三銃士",
+            "ドラミちゃん 青いストローハット",
+            "ウメ星デンカ 宇宙の果てからパンパロパン！",
+        ])
+        self.assertEqual([row["gross"] for row in rows], [13.5, 13.5, 13.5])
+        self.assertEqual([row["tmdbId"] for row in rows], [161715, 326497, 1185956])
+        self.assertEqual([row["poster"].rsplit("/", 1)[-1] for row in rows], [
+            "doraemon.jpg", "dorami.jpg", "umeboshi.jpg",
+        ])
+        self.assertEqual([row["source_group_index"] for row in rows], [1, 2, 3])
+        self.assertEqual([row["source_group_size"] for row in rows], [3, 3, 3])
+        self.assertEqual(result["enriched"], 2)
+        self.assertEqual(result["expanded_grouped_films"], 2)
+        self.assertTrue(all(row["identity_source"].startswith(
+            "https://www.themoviedb.org/movie/"
+        ) for row in rows))
+        self.assertEqual(len(requests), 4)
+
     def test_compound_market_row_is_split_and_shared_gross_is_preserved(self):
         data, requests, result = self.run_rows(
             [{"title": "映画A / 映画B", "gross": 15.5, "year": 1980}],

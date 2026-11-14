@@ -28,10 +28,12 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         path = Path(tmp.name) / "boxoffice.json"
         path.write_text(json.dumps({"by_year": {market_year: rows}, "all_time": []}), encoding="utf-8")
         requests = []
+        payloads = list(payload) if isinstance(payload, list) else None
 
         def opener(request, timeout):
             requests.append((request, timeout))
-            return Response(payload)
+            response_payload = payloads.pop(0) if payloads else payload
+            return Response(response_payload)
 
         now = datetime.datetime(2026, 11, 10, tzinfo=datetime.timezone.utc)
         result = backfill.backfill(path, api_key="fixture", opener=opener, delay=0,
@@ -200,6 +202,25 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["enriched"], 1)
         self.assertEqual([request[0].full_url.split("language=")[1].split("&")[0]
                           for request in requests], ["ja-JP", "en-US"])
+
+    def test_japanese_alias_retries_english_localization_before_marking_not_found(self):
+        data, requests, result = self.run_rows(
+            [{"title": "テスト作品", "gross": 8.4, "year": 1980}],
+            [
+                {"results": []},
+                {"results": [{"id": 123456, "title": "Test Film",
+                              "original_title": "テスト作品", "release_date": "1980-01-01",
+                              "poster_path": "/test-film.jpg"}]},
+            ],
+            market_year="1980",
+        )
+        row = data["by_year"]["1980"][0]
+        self.assertEqual(row["tmdbId"], 123456)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/test-film.jpg")
+        self.assertEqual(row["identity_match"], "exact_title_and_release_year_window")
+        self.assertEqual([request[0].full_url.split("language=")[1].split("&")[0]
+                          for request in requests], ["ja-JP", "en-US"])
+        self.assertEqual(result["enriched"], 1)
 
     def test_verified_be_bop_group_match_keeps_each_film_and_shared_gross(self):
         data, requests, result = self.run_rows(
@@ -830,6 +851,33 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertNotIn("tmdbId", row)
         self.assertEqual(result["local_enriched"], 0)
 
+
+
+    def test_reviewed_kid_alias_uses_official_title_and_japan_market_year(self):
+        data, requests, result = self.run_rows(
+            [{"title": "ザ・キッド", "gross": 14.5, "year": 2000}],
+            [
+                {"results": []},
+                {"results": [{
+                    "id": 900001,
+                    "title": "The Kid",
+                    "original_title": "The Kid",
+                    "release_date": "2000-07-07",
+                    "poster_path": "/fixture-the-kid-poster.jpg",
+                }]},
+            ],
+            market_year="2000",
+        )
+        row = data["by_year"]["2000"][0]
+        self.assertEqual(row["tmdbId"], 900001)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/fixture-the-kid-poster.jpg")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
+        self.assertEqual((row["gross"], row["year"]), (14.5, 2000))
+        self.assertEqual(
+            [request[0].full_url.split("language=")[1].split("&")[0] for request in requests],
+            ["ja-JP", "en-US"],
+        )
+        self.assertEqual(result["enriched"], 1)
 
 if __name__ == "__main__":
     unittest.main()

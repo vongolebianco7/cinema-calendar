@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "8b84a2a51668fb2fa6de6a79a94cb4048969c727",
-  "verified_at": "2026-11-14T22:41:57.712Z",
-  "note": "Exact-source CI receipt for PR #842. Tested head 8b84a2a51668fb2fa6de6a79a94cb4048969c727 was merged to main as bee366c35c7e4f720f38f29e66ce512a6e60584e; tested and merged Git trees are identical (c0c5833a28f4321c6a5c2e278d44d374e07d69a0). All four required pull_request workflows passed on the exact tested source head: Autonomous quality gate run 43623424538; CINELVA smoke tests run 43623424522; Validate frontend run 43623424508; Reproducible backend build run 43623424533. The completeness scorecard (43623424611), continuous visual QA (43623424518), mobile layout smoke (43623424524), and Cloudflare Pages preview also succeeded. Production rendering of existing posters remains a separate acceptance gate and is not claimed as passing."
+  "head_sha": "21376de848b9483ed518fc0be5b4741004bd9743",
+  "verified_at": "2026-11-14T23:05:51.804Z",
+  "note": "Exact-source CI receipt for PR #844. Tested head 21376de848b9483ed518fc0be5b4741004bd9743 was merged to main as 2cb7eda404996c58f69c5d9f98c2b81a9546aa2e; the merged executable sources match the tested head. All four required pull_request workflows passed on the exact tested source head: Autonomous quality gate run 43650937297; CINELVA smoke tests run 43650937319; Validate frontend run 43650937345; Reproducible backend build run 43650937373. Full Python contract suite run 43650937341 also passed. This receipt only records exact-source validation; it does not claim production poster acceptance or production data sync."
 }

@@ -29,6 +29,60 @@ IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
 MAX_DAILY_LOOKUPS = 100
 MAX_MANUAL_LOOKUPS = 200
 MAX_ALTERNATIVE_TITLE_CANDIDATES = 3
+
+REVIEWED_TITLE_ALIASES = {
+    (1981, "ブルージーンズメモリー"): ["Blue Jeans Memory"],
+    (1981, "青春グラフィティ スニーカーぶるーす"): ["Sneaker Blues"],
+    (1982, "ブッシュマン"): ["The Gods Must Be Crazy"],
+    (1982, "エンドレス・ラブ"): ["Endless Love"],
+    (1983, "パーマン バードマンがやってきた!!"): ["Perman: Birdman Has Come"],
+    (1985, "うる星やつら3 リメンバー・マイ・ラブ"): ["Urusei Yatsura 3: Remember My Love"],
+    (1985, "Dr.スランプアラレちゃん ほよよ!夢の都メカポリス"): ["Dr. Slump: Hoyoyo! The City of Dreams, Mechapolis"],
+    (1991, "おもいでぽろぽろ"): ["Only Yesterday"],
+    (1991, "ドラえもん のび太のトラビアンナイト"): ["Doraemon: Nobita's Dorabian Nights"],
+    (1991, "ドラゴンボールZ・とびっきり最強対最強"): ["Dragon Ball Z: Cooler's Revenge"],
+    (1991, "まじかるタルるートくん"): ["Magical Taruruto-kun"],
+    (1992, "21エモン 他"): ["21 Emon: Welcome to the Space"],
+    (1992, "ドラゴンボールZ 激突!!100億円パワーの戦士たち"): ["Dragon Ball Z: The Return of Cooler"],
+    (1992, "ドラゴンボールZ 激突バトル!!三大超サイヤ人"): ["Dragon Ball Z: Super Android 13"],
+    (1993, "ドラえもん ソラえもん号"): ["Doraemon: Nobita and the Tin Labyrinth"],
+    (1993, "のび太とブリキの迷宮ドラミちゃん"): ["Doraemon: Nobita and the Tin Labyrinth"],
+    (1993, "ドラゴンボールZ 燃えつきろ!熱戦・列戦・超激戦"): ["Dragon Ball Z: Broly - The Legendary Super Saiyan"],
+    (1993, "んちゃ!ペンギン村はハレのち晴れ"): ["Dr. Slump: N-cha! From Penguin Village with Love"],
+    (1993, "銀河ギリギリ!ぶっちぎりの凄い奴"): ["Dragon Ball Z: Bojack Unbound"],
+    (1994, "ドラえもん のび太と夢幻三銃士"): ["Doraemon: Nobita's Three Visionary Swordsmen"],
+    (1994, "メイクアップセーラー戦士"): ["Make Up! Sailor Soldiers"],
+    (1995, "スラムダンク ママレードボーイ"): ["Slam Dunk", "Marmalade Boy"],
+    (1997, "新世紀エヴァンゲリオン劇場版"): ["Neon Genesis Evangelion: Death and Rebirth"],
+    (1998, "ドラえもん 南海の大冒険"): ["Doraemon: Nobita's Great Adventure in the South Seas"],
+    (2000, "劇場版ポケットモンスター 結晶塔の帝王"): ["Pokémon 3: The Movie"],
+    (2000, "ピチュウとピカチュウ"): ["Pikachu & Pichu"],
+    (2000, "エクソシスト ディレクターズカット版"): ["The Exorcist: The Version You've Never Seen"],
+    (2000, "デジモンアドベンチャー02"): ["Digimon Adventure 02: Diablomon Strikes Back"],
+    (2000, "おジャ魔女どれみ♯"): ["Ojamajo Doremi Sharp"],
+    (2001, "ONE PIECE"): ["One Piece: The Movie"],
+    (2001, "デジモン アドベンチャー02"): ["Digimon Adventure 02: Hurricane Touchdown"],
+    (2001, "ジャンゴのダンスカーニバル"): ["Jango's Dance Carnival"],
+    (2001, "も~っと!おジャ魔女どれみ"): ["Ojamajo Doremi Motto"],
+    (2002, "ギブリーズ episodeII"): ["Ghiblies Episode 2"],
+    (2002, "ONE PIECE 珍獣島のチョッパー王国"): ["One Piece: Chopper's Kingdom on the Island of Strange Animals"],
+    (2002, "デジモンテイマーズ 爆走デジモン特急"): ["Digimon Tamers: Runaway Locomon"],
+    (2003, "七夜の願い星ジラーチ"): ["Pokémon: Jirachi Wish Maker"],
+    (2003, "バトル・ロワイアルII 鎮魂歌(レクイエム)"): ["Battle Royale II: Requiem"],
+    (2003, "仮面ライダー555(ファイズ )"): ["Kamen Rider 555: Paradise Lost"],
+    (2003, "爆竜戦隊アバレンジャー DELUXE"): ["Bakuryuu Sentai Abaranger Deluxe"],
+    (2005, "劇場版 仮面ライダーヒビキと7人の戦鬼"): ["Kamen Rider Hibiki and the Seven War Oni"],
+    (2005, "魔法戦隊マジレンジャーTHE MOVIE"): ["Mahou Sentai Magiranger the Movie"],
+    (2006, "ポケモンレンジャーと蒼海の王子マナフィ"): ["Pokémon Ranger and the Temple of the Sea"],
+    (2007, "「ディアルガVSパルキアVSダークライ」"): ["Pokémon: The Rise of Darkrai"],
+    (2008, "ギラティナと氷空<そら>の花束シェイミ"): ["Pokémon: Giratina and the Sky Warrior"],
+    (2008, "相棒 -劇場版-"): ["Aibou: The Movie"],
+    (2008, "絶体絶命!42.195km東京ビッグシティマラソン"): ["Aibou: The Movie"],
+    (2011, "海賊戦隊ゴーカイジャー THE MOVIE"): ["Kaizoku Sentai Gokaiger the Movie"],
+    (2012, "仮面ライダーオーズ THE MOVIE みんなで宇宙キターッ!"): ["Kamen Rider OOO Wonderful: The Shogun and the 21 Core Medals"],
+    (2013, "劇場版 仮面ライダーウィザード イン マジックランド"): ["Kamen Rider Wizard in Magic Land"],
+    (2019, "騎士竜戦隊リュウソウジャー THE MOVIE"): ["Kishiryu Sentai Ryusoulger the Movie"],
+}
 POSTER_CHECK_VERSION = 3
 RECHECK_DAYS = 1
 
@@ -37,10 +91,12 @@ def normalize(value):
     return "".join(c for c in unicodedata.normalize("NFKC", str(value or "")).casefold() if c.isalnum())
 
 
-def exact_title_aliases(title):
+def exact_title_aliases(title, market_year=None):
     """Return only editorially obvious title forms, never fuzzy substrings."""
     value = unicodedata.normalize("NFKC", str(title or "")).strip()
     aliases = [value]
+    if str(market_year or '').isdigit():
+        aliases.extend(REVIEWED_TITLE_ALIASES.get((int(market_year), value), []))
     clean = re.sub(r"^[・･\s]+", "", value)
     clean = re.sub(r"^(?:劇場版|映画)\s*", "", clean)
     clean = re.sub(r"\s+他$", "", clean)
@@ -389,7 +445,7 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 result = rate_limited_fetch(url)
                 candidates = [result] if result.get("id") == int(existing_id) else []
             else:
-                aliases = exact_title_aliases(title)
+                aliases = exact_title_aliases(title, market_year)
                 search_results_by_id = {}
                 for query in aliases:
                     url = SEARCH + "?" + urllib.parse.urlencode({

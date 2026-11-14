@@ -37,6 +37,8 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     # Toei official premiere dates
     (2000, "onepiece"): "2000-03-04",
     (2001, "onepieceねじまき島の冒険"): "2001-03-03",
+    # Toei Animation's official lineup confirms the Japanese premiere date.
+    (2001, "デジモンティマース"): "2001-07-14",
     (2009, "ドロップ"): "2009-03-20",
 }
 
@@ -45,6 +47,8 @@ REVIEWED_TITLE_ALIASES = {
         "One Piece: Clockwork Island Adventure",
         "ONE PIECE: Nejimaki-jima no Daibōken",
     ],
+    # The Eiren source row uses a transliteration typo; Toei confirms the title.
+    (2001, "デジモンティマース"): ["デジモンテイマーズ 冒険者たちの戦い"],
     (1990, "チンプイ"): ["チンプイ エリさま活動大写真"],
     (1981, "ブルージーンズメモリー"): ["Blue Jeans Memory", "ブルージーンズメモリー BLUE JEANS MEMORY"],
     (1981, "青春グラフィティ スニーカーぶるーす"): ["Sneaker Blues", "青春グラフィティ スニーカーぶる〜す"],

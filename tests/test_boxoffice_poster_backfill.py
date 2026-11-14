@@ -153,7 +153,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["tmdbId"], 1136099)
         self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/official-chimpui-poster.jpg")
         self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/1136099")
-        self.assertEqual(row["identity_match"], "exact_title_and_release_year_window")
+        self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"], row["metric"]), (19.1, 1990, "配給収入"))
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(len(requests), 2)

@@ -1666,6 +1666,62 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             merged["title"], 2004, "2003-12-13"))
         self.assertIn("出﨑統", backfill.reviewed_director(merged["title"], 2004)["names"])
 
+    def test_official_shochiku_rampo_versions_keep_distinct_directors_and_posters(self):
+        mayuzumi = "ＲＡＭＰＯ（黛バージョン）"
+        okuyama = "ＲＡＭＰＯ（奥山バージョン）"
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            mayuzumi, 1994, "1994-06-25"))
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            okuyama, 1994, "1994-06-25"))
+        self.assertEqual(backfill.reviewed_director(mayuzumi, 1994)["names"],
+                         ("黛りんたろう", "Rintaro Mayuzumi"))
+        self.assertEqual(backfill.reviewed_director(okuyama, 1994)["names"],
+                         ("奥山和由", "Kazuyoshi Okuyama"))
+        self.assertEqual(backfill.reviewed_director(mayuzumi, 1994)["source_url"],
+                         "https://www.shochiku.co.jp/cinema/database/04403/")
+        self.assertEqual(backfill.reviewed_director(okuyama, 1994)["source_url"],
+                         "https://www.shochiku.co.jp/cinema/database/04402/")
+
+        mayuzumi_search = {"results": [{
+            "id": 940001, "title": mayuzumi, "original_title": "RAMPO Mayuzumi Version",
+            "release_date": "1994-06-25", "poster_path": "/rampo-mayuzumi.jpg",
+        }]}
+        mayuzumi_detail = {
+            **mayuzumi_search["results"][0],
+            "credits": {"crew": [{"job": "Director", "name": "黛りんたろう"}]},
+        }
+        okuyama_search = {"results": [{
+            "id": 940002, "title": okuyama, "original_title": "RAMPO Okuyama Version",
+            "release_date": "1994-06-25", "poster_path": "/rampo-okuyama.jpg",
+        }]}
+        okuyama_detail = {
+            **okuyama_search["results"][0],
+            "credits": {"crew": [{"job": "Director", "name": "奥山和由"}]},
+        }
+        stale_sibling_poster = "https://image.tmdb.org/t/p/w500/oURgB9BSFJoQuT3jbTeJ7wMBceF.jpg"
+        rows = [
+            {"title": mayuzumi, "gross": 12, "year": 1994, "poster": stale_sibling_poster,
+             "poster_match_status": "fuzzy_related_title_or_screening_group"},
+            {"title": okuyama, "gross": 12, "year": 1994, "tmdbId": 124484,
+             "poster": stale_sibling_poster, "poster_match_status": "matched"},
+        ]
+        data, requests, result = self.run_rows(
+            rows, [mayuzumi_search, mayuzumi_detail, okuyama_search, okuyama_detail],
+            market_year="1994",
+        )
+        output = data["by_year"]["1994"]
+        by_title = {row["title"]: row for row in output}
+        self.assertEqual(by_title[mayuzumi]["tmdbId"], 940001)
+        self.assertEqual(by_title[mayuzumi]["poster"],
+                         "https://image.tmdb.org/t/p/w500/rampo-mayuzumi.jpg")
+        self.assertEqual(by_title[okuyama]["tmdbId"], 940002)
+        self.assertEqual(by_title[okuyama]["poster"],
+                         "https://image.tmdb.org/t/p/w500/rampo-okuyama.jpg")
+        self.assertNotEqual(by_title[mayuzumi]["poster"], by_title[okuyama]["poster"])
+        self.assertEqual([row["gross"] for row in output], [12, 12])
+        self.assertEqual(result["enriched"], 2)
+        self.assertEqual(len(requests), 6)
+
     def test_official_abaranger_title_fragments_merge_without_touching_kamen_rider(self):
         group = (
             "仮面ライダー555(ファイズ ) / パラダイス・ロスト / "

@@ -1889,7 +1889,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual((updated["gross"], updated["year"], updated["metric"]), (13, 1994, "配給収入"))
         self.assertEqual(updated["source_group_title"], row["source_group_title"])
         self.assertEqual(updated["poster_match_status"], "matched")
-        self.assertEqual(backfill.POSTER_CHECK_VERSION, 11)
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 12)
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(result["unresolved"], 0)
         self.assertEqual(len(requests), 4)
@@ -1939,7 +1939,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertTrue(backfill.matches_reviewed_release_window(title, 1993, "1993-07-10"))
         self.assertFalse(backfill.matches_reviewed_release_window(title, 1993, "1992-07-10"))
         self.assertEqual(backfill.reviewed_director(title, 1993)["names"], ("上田芳裕",))
-        self.assertEqual(backfill.POSTER_CHECK_VERSION, 11)
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 12)
 
 
     def test_official_sailor_moon_s_identity_is_scoped_by_japan_date_and_director(self):
@@ -1949,7 +1949,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(backfill.reviewed_director(title, 1995)["names"], ("芝田浩樹",))
         self.assertEqual(backfill.reviewed_director(title, 1995)["source_url"],
                          "https://mediaarts-db.artmuseums.go.jp/id/C410641")
-        self.assertEqual(backfill.POSTER_CHECK_VERSION, 11)
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 12)
 
 
 if __name__ == "__main__":

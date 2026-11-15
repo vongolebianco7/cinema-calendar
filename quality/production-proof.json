@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "25ee604ebb0c9f7c3b84bd73033192e672f4b049",
-  "verified_at": "2026-11-15T08:51:00Z",
-  "note": "Staged production-proof refresh. Required exact-head pull_request checks are pending on this PR; this receipt must be finalized to that tested PR head only after all required checks pass."
+  "head_sha": "5630ebdd4574ec2613aaa54ca1898fdcf5887c8b",
+  "verified_at": "2026-11-15T09:03:44.222Z",
+  "note": "Exact-source CI receipt for current executable source, tested on PR #862 head 5630ebdd4574ec2613aaa54ca1898fdcf5887c8b. Required workflows passed: Autonomous quality gate run 43696910970; CINELVA smoke tests run 43696910878; Validate frontend run 43696910947; Reproducible backend build run 43696910877. Chromium/WebKit reported-regression journeys, iPhone-size smoke, and continuous visual QA passed. This receipt records CI validation; production status is verified separately."
 }

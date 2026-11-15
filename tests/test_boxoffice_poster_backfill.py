@@ -1626,6 +1626,24 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(director["source_url"],
                          "https://www.tms-e.co.jp/alltitles/2000s/593302.html")
 
+    def test_hamtaro_merge_requires_exact_complete_unresolved_fragments(self):
+        group = "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
+        rows = [
+            {"title": "ゴジラ×メカゴジラ", "gross": 19.1, "year": 2003,
+             "source_group_title": group, "tmdbId": 12636,
+             "poster": "https://image.tmdb.org/t/p/w342/godzilla.jpg"},
+            {"title": "とっとこハム太郎", "gross": 19.1, "year": 2003,
+             "source_group_title": group, "poster": "https://image.tmdb.org/t/p/w342/hamtaro.jpg",
+             "tmdbId": 992002, "poster_match_status": "matched"},
+            {"title": "ハムハムハムージャ!幻のプリンセス", "gross": 19.1, "year": 2003,
+             "source_group_title": group, "poster": "https://image.tmdb.org/t/p/w342/fallback.jpg",
+             "poster_match_status": "fuzzy_related_title_or_screening_group"},
+        ]
+        data = {"by_year": {"2003": rows}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        self.assertEqual(data["by_year"]["2003"], rows)
+
     def test_official_makeup_sailor_warriors_uses_own_poster_and_preserves_shared_gross(self):
         title = "メイクアップセーラー戦士"
         self.assertIn("メイクアップ！セーラー戦士", backfill.exact_title_aliases(title, 1994))

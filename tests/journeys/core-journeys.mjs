@@ -110,7 +110,7 @@ async function bodyText(page){return (await page.locator('body').innerText().cat
   const relatedUsable=detailLoaded&&(await related.count())>0&&await related.isVisible().catch(()=>false);emit('DETAIL-08',1,relatedUsable,'related-work control usable');
   let relatedOpened=false;if(relatedUsable){await related.click();relatedOpened=((await page.locator('#detail h2').textContent().catch(()=>''))||'').includes('CI Related Film');}
   emit('DETAIL-09',1,relatedOpened,'related work opens correct detail');emit('FLOW-RELATED',5,relatedUsable&&relatedOpened&&errors.length===0,JSON.stringify({relatedUsable,relatedOpened,errors}),(relatedUsable?2:0)+(relatedOpened?3:0));
-  await openFixture(page);const person=page.locator('.infoPerson').first();let personOpened=false;if((await person.count())>0){await person.click();await page.waitForLoadState('domcontentloaded');personOpened=page.url().includes('discover.html?person=director-a');}
+  await openFixture(page);const person=page.locator('.infoPerson').first();let personOpened=false;if((await person.count())>0){await person.click();await page.waitForLoadState('domcontentloaded');personOpened=/\/search\.html\?[^#]*type=person/.test(page.url());}
   emit('DETAIL-10',1,personOpened,'creator navigation enters discover person mode');emit('FLOW-PERSON',5,personOpened&&errors.length===0,JSON.stringify({personOpened,errors}),personOpened?5:0);await page.close();
 }
 

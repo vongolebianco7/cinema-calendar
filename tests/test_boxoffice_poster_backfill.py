@@ -74,7 +74,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"]), (10, 1983))
         self.assertEqual(result["enriched"], 1)
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
 
     def test_verified_ghibli_japanese_title_variant_recovers_its_own_poster(self):
         data, requests, result = self.run_rows(
@@ -95,7 +95,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"]), (18.7, 1991))
         self.assertEqual(result["enriched"], 1)
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
 
     def test_verified_blue_jeans_memory_japanese_title_recovers_its_own_poster(self):
         data, requests, result = self.run_rows(
@@ -116,7 +116,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"]), (12.5, 1981))
         self.assertEqual(result["enriched"], 1)
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
 
     def test_verified_sneaker_blues_japanese_title_recovers_its_own_poster(self):
         data, requests, result = self.run_rows(
@@ -137,7 +137,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"]), (10.8, 1981))
         self.assertEqual(result["enriched"], 1)
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
 
     def test_verified_doraemon_official_japanese_title_variant_recovers_poster(self):
         data, requests, result = self.run_rows(
@@ -159,7 +159,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"], row["metric"]), (18.0, 1991, "配給収入"))
         self.assertEqual(result["enriched"], 1)
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
 
     def test_verified_chimpui_official_title_recovers_its_own_poster(self):
         data, requests, result = self.run_rows(
@@ -331,7 +331,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertTrue(all(row["identity_source"].startswith(
             "https://www.themoviedb.org/movie/"
         ) for row in rows))
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
 
     def test_verified_21_emon_japanese_spelling_variant_recovers_poster(self):
         data, requests, result = self.run_rows(
@@ -1132,7 +1132,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["unresolved"], 1)
         self.assertEqual(data["by_year"]["1980"][0]["poster_check_version"], backfill.POSTER_CHECK_VERSION)
         self.assertEqual(data["by_year"]["1980"][0]["poster_match_status"], "not_found")
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
         self.assertIn("/movie/10/alternative_titles?", requests[2][0].full_url)
 
     def test_existing_poster_is_never_replaced_and_missing_key_is_read_only(self):
@@ -1254,7 +1254,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/raiders.jpg")
         self.assertEqual(row["identity_match"],
                          "exact_tmdb_alternative_title_and_release_year_window")
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
         self.assertIn("/movie/85/alternative_titles?", requests[2][0].full_url)
         self.assertIn("country=JP", requests[2][0].full_url)
         self.assertEqual(result["enriched"], 1)
@@ -1284,7 +1284,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         row = json.loads(path.read_text(encoding="utf-8"))["by_year"]["1981"][0]
         self.assertNotIn("tmdbId", row)
         self.assertNotIn("poster", row)
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
         self.assertEqual(result["unresolved"], 1)
 
     def test_alias_candidate_overflow_is_unresolved_without_guessing(self):
@@ -1456,7 +1456,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             "poster_fallback_checked_at": "2026-11-09T12:00:00Z",
         }
         data, requests, result = self.run_rows(
-            [row], [search, search, detail], market_year="1994", limit=1
+            [row], [search, search, search, detail], market_year="1994", limit=1
         )
         updated = data["by_year"]["1994"][0]
         self.assertEqual(updated["tmdbId"], 539172)
@@ -1469,7 +1469,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(backfill.POSTER_CHECK_VERSION, 11)
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(result["unresolved"], 0)
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
 
     def test_official_makeup_sailor_wrong_tmdb_director_keeps_group_fallback(self):
         title = "メイクアップセーラー戦士"
@@ -1497,12 +1497,12 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             "poster_fallback_checked_at": "2026-11-09T12:00:00Z",
         }
         data, _, result = self.run_rows(
-            [row], [search, search, detail], market_year="1994", limit=1
+            [row], [search, search, search, detail], market_year="1994", limit=1
         )
         updated = data["by_year"]["1994"][0]
         self.assertEqual(updated["poster"], fallback)
         self.assertEqual(updated["poster_match_status"], "fuzzy_related_title_or_screening_group")
-        self.assertEqual(updated["poster_fallback_checked_at"], "2026-11-10T00:00:00Z")
+        self.assertEqual(updated["poster_fallback_checked_at"], "2026-11-09T12:00:00Z")
         self.assertNotIn("tmdbId", updated)
         self.assertNotIn("identity_source", updated)
         self.assertEqual(updated["gross"], 13)

@@ -347,8 +347,13 @@
       image.dispatchEvent(new Event("error"));
   }
   function decorateMovieMetadata(card, m) {
+    if (!card) return;
+    if (card.matches?.(".streamMovie,.tvMovie")) {
+      card.querySelector(".cinelvaMovieMetadata")?.remove();
+      return;
+    }
     const facts = movieMetadata(m);
-    if (!card || !facts) return;
+    if (!facts) return;
     const title = card.querySelector?.(".title,.streamMovieTitle,.tvMovieTitle,.presetCardTitle,.filmCandidateBody b,.rankTitle,strong,b");
     if (!title) return;
     let metadata = card.querySelector(".cinelvaMovieMetadata");
@@ -359,7 +364,7 @@
     if (!container || !m) return;
     const card = container.closest?.(".card,.filmCandidate,.presetCard,.rankCard,.streamMovie,.tvMovie,.want-watch-item,.filmCard") || container.parentElement;
     decorateMovieMetadata(card, m);
-    const facts = movieMetadata(m);
+    const facts = card?.matches?.(".streamMovie,.tvMovie") ? "" : movieMetadata(m);
     if (card && facts) {
       const title = card.querySelector?.(".title,.streamMovieTitle,.tvMovieTitle,.presetCardTitle,.filmCandidateBody b,.rankTitle,strong,b");
       if (title) {

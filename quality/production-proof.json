@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "cdaaffa0dd1907109ad85eb01646c6eca463169b",
-  "verified_at": "2026-11-15T01:58:19Z",
-  "note": "Exact-source CI receipt for PR #849. Tested source head cdaaffa0dd1907109ad85eb01646c6eca463169b was merged to main as b5ba506984cbca1c306c944ca791e5071eb3bd2c; executable source tree is the tested source. All four required pull_request workflows passed on the exact tested source head: Autonomous quality gate run 43664420985; CINELVA smoke tests run 43664420967; Validate frontend run 43664420997; Reproducible backend build run 43664420978. Additional full Python contract, mobile layout, completeness scorecard, and continuous visual QA workflows also passed. This receipt records exact-source CI only; it does not claim the official poster recheck, public JSON improvement, DB sync, or production poster rendering has succeeded."
+  "head_sha": "9008eb42f97e2add8adb6a9d6148fe3fa9aabf11",
+  "verified_at": "2026-11-15T02:52:05Z",
+  "note": "Exact-source CI receipt for PR #851. Tested source head 9008eb42f97e2add8adb6a9d6148fe3fa9aabf11 passed the exact-head required GitHub Actions workflows: Autonomous quality gate run 43668398844; CINELVA smoke tests run 43668398803; Validate frontend run 43668398817 (attempt 2, all browser shards and reported-regression checks passed); Reproducible backend build run 43668398875. Additional full Python contract suite 43668398790, mobile layout run 43668398793, completeness scorecard run 43668398840, and continuous visual QA run 43668398773 passed. This is a receipt-only update; it does not claim the Vercel backend PR deployment check passed (it was blocked by the Hobby api-deployments-free-per-day 24-hour limit), that live TMDB lookups enriched the grouped rows, that Neon synchronization succeeded, or that production image rendering acceptance passed."
 }

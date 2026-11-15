@@ -138,12 +138,16 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             try:
                 result = detail_cache.get(reviewed_id)
                 if result is None:
+                    wait = delay - (time.monotonic() - last_request)
+                    if wait > 0:
+                        time.sleep(wait)
                     request = urllib.request.Request(
                         DETAILS.format(reviewed_id) + "?" + urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"}),
                         headers={"Accept": "application/json"},
                     )
                     with opener(request, timeout=15) as response:
                         result = json.load(response)
+                    last_request = time.monotonic()
                     detail_cache[reviewed_id] = result
                 if result.get("id") != reviewed_id:
                     unresolved += 1
@@ -214,12 +218,20 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         }
         if len(exact) == 1:
             identity = next(iter(exact.values()))
-            movie["poster"] = identity["poster"]
+            if needs_poster:
+                movie["poster"] = identity["poster"]
+            identity_runtime = identity.get("runtime")
+            if needs_runtime and isinstance(identity_runtime, (int, float)) and identity_runtime > 0:
+                movie["runtime"] = int(identity_runtime)
+                runtime_enriched += 1
             movie["id"] = identity["id"]
             movie["tmdb"] = identity.get("tmdb") or "https://www.themoviedb.org/movie/" + str(identity["id"])
             if identity.get("release_year") or identity.get("year"):
                 movie["release_year"] = identity.get("release_year") or identity.get("year")
-            enriched += 1
+            if (not needs_poster or movie.get("poster")) and (not needs_runtime or movie.get("runtime")):
+                enriched += 1
+            else:
+                unresolved += 1
             continue
         if len(exact) > 1:
             ambiguous += 1
@@ -328,7 +340,10 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                 movie["poster"] = IMAGE_BASE + fuzzy["poster_path"]
                 movie["poster_match_status"] = "fuzzy_search_fallback"
                 movie["poster_match_query"] = title
-                enriched += 1
+                if needs_runtime and not movie.get("runtime"):
+                    unresolved += 1
+                else:
+                    enriched += 1
             else:
                 unresolved += 1
             candidate_review.append({

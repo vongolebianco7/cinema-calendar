@@ -447,7 +447,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
 
     if candidate_review:
         print(
-            "Streaming poster candidate review (unapproved; no IDs or posters assigned): "
+            "Streaming poster candidate review (fuzzy fallback keeps movie identity unchanged): "
             + json.dumps(candidate_review, ensure_ascii=False, sort_keys=True),
             flush=True,
         )

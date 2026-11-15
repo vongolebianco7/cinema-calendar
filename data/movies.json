@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T08:44:43.762972+00:00",
+  "generated_at": "2026-11-15T08:48:57.077672+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
     {
@@ -22434,7 +22434,10 @@
       "checked_at": "2026-10-26",
       "poster_source_url": "https://ameblo.jp/asukagirara/entry-12961392458.html",
       "poster_match_status": "fuzzy_search_fallback",
-      "poster_checked_at": "2026-11-15"
+      "poster_checked_at": "2026-11-15",
+      "runtime": 30,
+      "runtime_source_url": "https://www.video.unext.jp/title/SID0170581",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "id": 956793,
@@ -33741,7 +33744,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "poster": "https://image.tmdb.org/t/p/w500/VXGoa9AmlCGNBY7M5CDwjGS8VJ.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/VXGoa9AmlCGNBY7M5CDwjGS8VJ.jpg",
+      "runtime": 93,
+      "runtime_source_url": "https://tv.apple.com/jp/movie/%E3%83%95%E3%83%AC%E3%82%B9/umc.cmc.3ojfrsf63j307xdaudespe228",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "鬼哭 忌まわしき地",
@@ -34577,7 +34583,10 @@
       "checked_at": "2026-11-08",
       "poster_source_url": "https://inter-film.com/post-1202/",
       "poster_match_status": "exact_title_match",
-      "poster_checked_at": "2026-11-15"
+      "poster_checked_at": "2026-11-15",
+      "runtime": 87,
+      "runtime_source_url": "https://www.video.unext.jp/title/SID0322277",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "日本人の忘れもの フィリピンと中国の残留邦人",

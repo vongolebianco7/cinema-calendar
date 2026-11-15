@@ -40,6 +40,12 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     # Toei official premiere dates
     (2000, "onepiece"): "2000-03-04",
     (2001, "onepieceねじまき島の冒険"): "2001-03-03",
+    # Media Arts Database confirms Jango's separate short, Japanese premiere,
+    # and director; the grouped gross stays on this individual film row.
+    (2001, "ジャンゴのダンスカーニバル"): "2001-03-03",
+    # MADB confirms the Hamtaro feature's separate title, Japanese premiere,
+    # and director within the 2003 shared screening group.
+    (2003, "ハムハムハムージャ!幻のプリンセス"): "2002-12-14",
     # Toei Animation's official lineup confirms the Japanese premiere dates.
     (2000, "おジャ魔女どれみ"): "2000-07-08",
     (2001, "デジモンティマース"): "2001-07-14",
@@ -68,6 +74,14 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
 # a small set of known false-positive-prone titles. TMDB's own movie credits
 # are checked before any of these records can receive artwork.
 REVIEWED_JAPANESE_DIRECTORS = {
+    (2001, "ジャンゴのダンスカーニバル"): {
+        "names": ("西尾大介",),
+        "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C411104",
+    },
+    (2003, "ハムハムハムージャ!幻のプリンセス"): {
+        "names": ("出崎統",),
+        "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C411222",
+    },
     (1994, "メイクアップセーラー戦士"): {
         "names": ("小坂春女",),
         "source_url": "https://www.themoviedb.org/movie/539172",

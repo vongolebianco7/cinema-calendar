@@ -246,7 +246,9 @@ REVIEWED_TITLE_ALIASES = {
         "特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ！",
     ],
 }
-POSTER_CHECK_VERSION = 11
+# Version 12 retries the 46 currently unverified fallback rows against newly reviewed title, release-date, and director evidence.
+# This remains below MAX_DAILY_LOOKUPS=100; the daily limit and 1-day cooldown are unchanged.
+POSTER_CHECK_VERSION = 12
 RECHECK_DAYS = 1
 
 

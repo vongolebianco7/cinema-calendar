@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "bb0646e4b95260ca52935bdc3aa132e889dad868",
-  "verified_at": "2026-11-15T05:55:08.463Z",
-  "note": "Exact-source CI receipt for PR #852. This exact head passed required pull-request workflows: Autonomous quality gate run 43680424187, CINELVA smoke tests run 43680424290, Validate frontend run 43680424208, and Reproducible backend build run 43680424223. Other relevant exact-head checks also passed. Vercel preview deployment remains blocked by the Hobby daily build limit; this receipt makes no claim of production Vercel deployment."
+  "head_sha": "235f8679b6eb3d6fb1f37702052fa9739ba6333c",
+  "verified_at": "2026-11-15T06:13:59.145Z",
+  "note": "Exact-source CI receipt for PR #855. Tested head 235f8679b6eb3d6fb1f37702052fa9739ba6333c contains the shared Specials header and its drawer-coverage assertion, on top of latest main e5db275d587652a6472128bf6dbce643c66a0915. All four required pull_request workflows passed on the exact tested head: Autonomous quality gate run 43683928005; CINELVA smoke tests run 43683927981; Validate frontend run 43683928025; Reproducible backend build run 43683928024. CINELVA mobile layout smoke test run 43683927995 and the iPhone-size Chromium/WebKit smoke check also passed. This receipt records exact-source CI validation, not production deployment."
 }

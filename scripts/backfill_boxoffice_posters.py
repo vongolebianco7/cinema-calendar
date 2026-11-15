@@ -397,6 +397,31 @@ EXPLICIT_SOURCE_GROUP_SPLITS = {
 # second film. The official Media Arts Database lists each full Dai title as a
 # single movie. Merge only this exact, complete child set; preserve the already
 # identified Dragon Ball row and never divide the package gross.
+# Attach the truncated Jirachi prefix to its already verified exact TMDB film row.
+# JFDB and MADB publish the combined canonical title, date and director; this is
+# the same work, not a sibling poster reuse. Require the exact verified target.
+EXPLICIT_SOURCE_GROUP_IDENTITY_ATTACHMENTS = {
+    normalize(
+        "ポケットモンスター アドバンスジェネレーション / "
+        "七夜の願い星ジラーチ / おどるポケモンひみつ基地"
+    ): {
+        "source_child_titles": (
+            "ポケットモンスター アドバンスジェネレーション",
+            "七夜の願い星ジラーチ",
+            "おどるポケモンひみつ基地",
+        ),
+        "fragment_title": "ポケットモンスター アドバンスジェネレーション",
+        "identity_title": "七夜の願い星ジラーチ",
+        "other_film_title": "おどるポケモンひみつ基地",
+        "canonical_title": "ポケットモンスター アドバンスジェネレーション/七夜の願い星ジラーチ",
+        "expected_tmdb_id": 36218,
+        "expected_original_title": "劇場版ポケットモンスター アドバンスジェネレーション 七夜の願い星 ジラーチ",
+        "expected_release_date": "2003-07-19",
+        "expected_identity_source": "https://www.themoviedb.org/movie/36218",
+        "other_film_tmdb_id": 351802,
+    },
+}
+
 EXPLICIT_SOURCE_GROUP_MERGES = {
     # Eiren's 2003 group lists the Abaranger feature as series name + subtitle.
     # Toei Video identifies these fragments as the single 2003 theatrical film.
@@ -757,6 +782,68 @@ def expand_grouped_rows(data):
             })
             replacements[merge_indices[0]] = [merged]
             consumed.update(merge_indices[1:])
+            expanded += 1
+
+        # Consolidate only the exact verified canonical TMDB row with its
+        # truncated Eiren fragment. Preserve the independently matched short.
+        for group_key, spec in EXPLICIT_SOURCE_GROUP_IDENTITY_ATTACHMENTS.items():
+            matching = [
+                index for index, row in enumerate(rows)
+                if isinstance(row, dict)
+                and normalize(row.get("source_group_title")) == group_key
+            ]
+            expected = {normalize(title) for title in spec["source_child_titles"]}
+            actual = {normalize(rows[index].get("title")) for index in matching}
+            if len(matching) != len(expected) or actual != expected:
+                continue
+            source_rows = [rows[index] for index in matching]
+            if any(row.get("gross") != source_rows[0].get("gross")
+                   for row in source_rows[1:]):
+                continue
+            by_title = {normalize(rows[index].get("title")): index for index in matching}
+            fragment_index = by_title[normalize(spec["fragment_title"])]
+            identity_index = by_title[normalize(spec["identity_title"])]
+            other_index = by_title[normalize(spec["other_film_title"])]
+            fragment, identity, other = rows[fragment_index], rows[identity_index], rows[other_index]
+            if (fragment.get("tmdbId") or fragment.get("tmdb_id")
+                    or fragment.get("poster_match_status")
+                       != "fuzzy_related_title_or_screening_group"):
+                continue
+            if (identity.get("tmdbId") != spec["expected_tmdb_id"]
+                    or normalize(identity.get("original_title"))
+                       != normalize(spec["expected_original_title"])
+                    or str(identity.get("tmdb_release_date") or "")[:10]
+                       != spec["expected_release_date"]
+                    or identity.get("identity_source") != spec["expected_identity_source"]
+                    or identity.get("poster_match_status") != "matched"
+                    or not str(identity.get("poster") or "").startswith(IMAGE_BASE)
+                    or identity.get("poster") == other.get("poster")):
+                continue
+            if (other.get("tmdbId") != spec["other_film_tmdb_id"]
+                    or other.get("poster_match_status") != "matched"
+                    or not str(other.get("poster") or "").startswith(IMAGE_BASE)):
+                continue
+
+            source_group_title = identity.get("source_group_title")
+            group_id = f"{market_year}:{normalize(source_group_title)}"
+            canonical = dict(identity)
+            canonical.update({
+                "title": spec["canonical_title"],
+                "source_title": spec["canonical_title"],
+                "source_group_id": group_id,
+                "source_group_index": 1,
+                "source_group_size": 2,
+            })
+            separate = dict(other)
+            separate.update({
+                "source_title": spec["canonical_title"],
+                "source_group_id": group_id,
+                "source_group_index": 2,
+                "source_group_size": 2,
+            })
+            first_index = min(matching)
+            replacements[first_index] = [canonical, separate]
+            consumed.update(index for index in matching if index != first_index)
             expanded += 1
 
         for group_key, spec in EXPLICIT_SOURCE_GROUP_SPLITS.items():

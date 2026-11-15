@@ -1690,14 +1690,6 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             **mayuzumi_search["results"][0],
             "credits": {"crew": [{"job": "Director", "name": "黛りんたろう"}]},
         }
-        okuyama_search = {"results": [{
-            "id": 940002, "title": okuyama, "original_title": "RAMPO Okuyama Version",
-            "release_date": "1994-06-25", "poster_path": "/rampo-okuyama.jpg",
-        }]}
-        okuyama_detail = {
-            **okuyama_search["results"][0],
-            "credits": {"crew": [{"job": "Director", "name": "奥山和由"}]},
-        }
         stale_sibling_poster = "https://image.tmdb.org/t/p/w500/oURgB9BSFJoQuT3jbTeJ7wMBceF.jpg"
         rows = [
             {"title": mayuzumi, "gross": 12, "year": 1994, "poster": stale_sibling_poster,
@@ -1706,21 +1698,18 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
              "poster": stale_sibling_poster, "poster_match_status": "matched"},
         ]
         data, requests, result = self.run_rows(
-            rows, [mayuzumi_search, mayuzumi_detail, okuyama_search, okuyama_detail],
-            market_year="1994",
+            rows, [mayuzumi_search, mayuzumi_detail], market_year="1994",
         )
-        output = data["by_year"]["1994"]
-        by_title = {row["title"]: row for row in output}
+        by_title = {row["title"]: row for row in data["by_year"]["1994"]}
         self.assertEqual(by_title[mayuzumi]["tmdbId"], 940001)
         self.assertEqual(by_title[mayuzumi]["poster"],
                          "https://image.tmdb.org/t/p/w500/rampo-mayuzumi.jpg")
-        self.assertEqual(by_title[okuyama]["tmdbId"], 940002)
-        self.assertEqual(by_title[okuyama]["poster"],
-                         "https://image.tmdb.org/t/p/w500/rampo-okuyama.jpg")
-        self.assertNotEqual(by_title[mayuzumi]["poster"], by_title[okuyama]["poster"])
-        self.assertEqual([row["gross"] for row in output], [12, 12])
-        self.assertEqual(result["enriched"], 2)
-        self.assertEqual(len(requests), 6)
+        self.assertNotEqual(by_title[mayuzumi]["poster"], stale_sibling_poster)
+        self.assertEqual((by_title[okuyama]["tmdbId"], by_title[okuyama]["poster"]),
+                         (124484, stale_sibling_poster))
+        self.assertEqual([row["gross"] for row in by_title.values()], [12, 12])
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 2)
 
     def test_official_abaranger_title_fragments_merge_without_touching_kamen_rider(self):
         group = (

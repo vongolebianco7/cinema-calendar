@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T14:59:36.263417+00:00",
+  "generated_at": "2026-11-15T05:24:35.324394+00:00",
   "movies": [
     {
       "title": "Outcome",
@@ -1320,7 +1320,9 @@
       "tmdb": "https://www.themoviedb.org/movie/1600421",
       "release_year": 2026,
       "original_title": "스트레이 키즈: 더 도미네이트 익스피리언스",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "runtime": 146,
+      "id": 1600421
     },
     {
       "title": "スター・ウォーズ／マンダロリアン・アンド・グローグー",
@@ -1978,7 +1980,8 @@
       "source_url": "https://www.unext.co.jp/ja/press-room/2026-09-unext-lineup",
       "id": 858017,
       "tmdb": "https://www.themoviedb.org/movie/858017",
-      "tmdbId": 858017
+      "tmdbId": 858017,
+      "runtime": 100
     },
     {
       "title": "愛はステロイド",
@@ -2081,7 +2084,9 @@
       "tmdb": "https://www.themoviedb.org/movie/552524",
       "release_year": 2025,
       "original_title": "Lilo & Stitch",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "id": 552524,
+      "runtime": 108
     },
     {
       "title": "スマッシング・マシーン",
@@ -2421,7 +2426,10 @@
       "original_title": "Ryuichi Sakamoto: Diaries",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1536538,
+      "tmdb": "https://www.themoviedb.org/movie/1536538",
+      "runtime": 96
     },
     {
       "title": "Sappy",
@@ -2459,7 +2467,10 @@
       "original_title": "あたしの！",
       "year": 2024,
       "release_year": 2024,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 102,
+      "id": 1300774,
+      "tmdb": "https://www.themoviedb.org/movie/1300774"
     },
     {
       "title": "オリックス・バファローズ 2025 DETA！ WAO！ OKADA THE MOVIE",
@@ -2483,11 +2494,13 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w500/qCDPKUMX5xrxxQY8XhGVCKO3fks.jpg",
       "source": "FOD INFO公式配信一覧（2026-10-27確認）",
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
-      "checked_at": "2026-10-26"
+      "checked_at": "2026-10-26",
+      "poster_match_status": "fuzzy_search_fallback",
+      "poster_match_query": "カウントダウン"
     },
     {
       "title": "ゲイラン",
@@ -2524,7 +2537,10 @@
       "original_title": "ザ・カース",
       "year": 2026,
       "release_year": 2026,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1395839,
+      "tmdb": "https://www.themoviedb.org/movie/1395839",
+      "runtime": 95
     },
     {
       "title": "シャドウズ",
@@ -2580,7 +2596,10 @@
       "original_title": "ハードボイルド・レシピ",
       "year": 2024,
       "release_year": 2024,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 71,
+      "id": 1280237,
+      "tmdb": "https://www.themoviedb.org/movie/1280237"
     },
     {
       "title": "フィクティシャス・ポイント",
@@ -2598,7 +2617,10 @@
       "original_title": "フィクティシャス・ポイント",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 68,
+      "id": 1356042,
+      "tmdb": "https://www.themoviedb.org/movie/1356042"
     },
     {
       "title": "むこうぶちRAW 高レート裏麻雀列伝6 裏プロ",
@@ -2630,7 +2652,10 @@
       "original_title": "Megalopolis",
       "year": 2024,
       "release_year": 2024,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 592831,
+      "tmdb": "https://www.themoviedb.org/movie/592831",
+      "runtime": 138
     },
     {
       "title": "めぐみへの誓い",
@@ -2648,7 +2673,10 @@
       "original_title": "めぐみへの誓い",
       "year": 2021,
       "release_year": 2021,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 102,
+      "id": 798926,
+      "tmdb": "https://www.themoviedb.org/movie/798926"
     },
     {
       "title": "リンウー 靈語 ─超常捜査─",
@@ -2732,11 +2760,13 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w500/jc1SybJxwSqZMATFghslCk011Wp.jpg",
       "source": "FOD INFO公式配信一覧（2026-10-27確認）",
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
-      "checked_at": "2026-10-26"
+      "checked_at": "2026-10-26",
+      "poster_match_status": "fuzzy_search_fallback",
+      "poster_match_query": "女"
     },
     {
       "title": "悪魔のいけにえ 公開50周年記念版",
@@ -2754,7 +2784,10 @@
       "original_title": "The Texas Chain Saw Massacre",
       "year": 1974,
       "release_year": 1974,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 84,
+      "id": 30497,
+      "tmdb": "https://www.themoviedb.org/movie/30497"
     },
     {
       "title": "新宿鸚哥",
@@ -2772,7 +2805,9 @@
       "original_title": "新宿鸚哥",
       "year": 2024,
       "release_year": 2024,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1328347,
+      "tmdb": "https://www.themoviedb.org/movie/1328347"
     },
     {
       "title": "日本統一74",
@@ -2790,7 +2825,9 @@
       "original_title": "日本統一７４",
       "year": 2026,
       "release_year": 2026,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1647891,
+      "tmdb": "https://www.themoviedb.org/movie/1647891"
     },
     {
       "title": "鬼卍",
@@ -2808,7 +2845,10 @@
       "original_title": "鬼卍",
       "year": 2023,
       "release_year": 2023,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 116,
+      "id": 1106491,
+      "tmdb": "https://www.themoviedb.org/movie/1106491"
     },
     {
       "title": "アルゴ",
@@ -3056,7 +3096,10 @@
       "original_title": "Skyfall",
       "year": 2012,
       "release_year": 2012,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 37724,
+      "tmdb": "https://www.themoviedb.org/movie/37724",
+      "runtime": 143
     },
     {
       "title": "007 スペクター",
@@ -3075,7 +3118,10 @@
       "original_title": "Spectre",
       "year": 2015,
       "release_year": 2015,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 206647,
+      "tmdb": "https://www.themoviedb.org/movie/206647",
+      "runtime": 148
     },
     {
       "title": "007／オクトパシー",
@@ -3094,7 +3140,10 @@
       "original_title": "Octopussy",
       "year": 1983,
       "release_year": 1983,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 130,
+      "id": 700,
+      "tmdb": "https://www.themoviedb.org/movie/700"
     },
     {
       "title": "007／カジノ・ロワイヤル（1967）",
@@ -3113,7 +3162,10 @@
       "original_title": "Casino Royale",
       "year": 1967,
       "release_year": 1967,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 134,
+      "id": 12208,
+      "tmdb": "https://www.themoviedb.org/movie/12208"
     },
     {
       "title": "007／カジノ・ロワイヤル（2006）",
@@ -3132,7 +3184,10 @@
       "original_title": "Casino Royale",
       "year": 2006,
       "release_year": 2006,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 114,
+      "id": 36557,
+      "tmdb": "https://www.themoviedb.org/movie/36557"
     },
     {
       "title": "007／ゴールデンアイ",
@@ -3151,7 +3206,10 @@
       "original_title": "GoldenEye",
       "year": 1995,
       "release_year": 1995,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 130,
+      "id": 710,
+      "tmdb": "https://www.themoviedb.org/movie/710"
     },
     {
       "title": "007／ゴールドフィンガー",
@@ -3170,7 +3228,10 @@
       "original_title": "Goldfinger",
       "year": 1965,
       "release_year": 1965,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 109,
+      "id": 658,
+      "tmdb": "https://www.themoviedb.org/movie/658"
     },
     {
       "title": "007／サンダーボール作戦",
@@ -3189,7 +3250,10 @@
       "original_title": "Thunderball",
       "year": 1965,
       "release_year": 1965,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 129,
+      "id": 660,
+      "tmdb": "https://www.themoviedb.org/movie/660"
     },
     {
       "title": "007／ダイ・アナザー・デイ",
@@ -3208,7 +3272,10 @@
       "original_title": "Die Another Day",
       "year": 2003,
       "release_year": 2003,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 133,
+      "id": 36669,
+      "tmdb": "https://www.themoviedb.org/movie/36669"
     },
     {
       "title": "007／ダイヤモンドは永遠に",
@@ -3227,7 +3294,10 @@
       "original_title": "Diamonds Are Forever",
       "year": 1971,
       "release_year": 1971,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 125,
+      "id": 681,
+      "tmdb": "https://www.themoviedb.org/movie/681"
     },
     {
       "title": "007／トゥモロー・ネバー・ダイ",
@@ -3246,7 +3316,10 @@
       "original_title": "Tomorrow Never Dies",
       "year": 1997,
       "release_year": 1997,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 119,
+      "id": 714,
+      "tmdb": "https://www.themoviedb.org/movie/714"
     },
     {
       "title": "007／ドクター・ノオ",
@@ -3265,7 +3338,10 @@
       "original_title": "Dr. No",
       "year": 1963,
       "release_year": 1963,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 105,
+      "id": 646,
+      "tmdb": "https://www.themoviedb.org/movie/646"
     },
     {
       "title": "007／ノー・タイム・トゥ・ダイ",
@@ -3284,7 +3360,10 @@
       "original_title": "No Time to Die",
       "year": 2021,
       "release_year": 2021,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 163,
+      "id": 370172,
+      "tmdb": "https://www.themoviedb.org/movie/370172"
     },
     {
       "title": "007／ムーンレイカー",
@@ -3303,7 +3382,10 @@
       "original_title": "Moonraker",
       "year": 1979,
       "release_year": 1979,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 126,
+      "id": 698,
+      "tmdb": "https://www.themoviedb.org/movie/698"
     },
     {
       "title": "007／ユア・アイズ・オンリー",
@@ -3322,7 +3404,10 @@
       "original_title": "For Your Eyes Only",
       "year": 1981,
       "release_year": 1981,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 128,
+      "id": 699,
+      "tmdb": "https://www.themoviedb.org/movie/699"
     },
     {
       "title": "007／リビング・デイライツ",
@@ -3341,7 +3426,10 @@
       "original_title": "The Living Daylights",
       "year": 1987,
       "release_year": 1987,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 132,
+      "id": 708,
+      "tmdb": "https://www.themoviedb.org/movie/708"
     },
     {
       "title": "007／ロシアより愛をこめて",
@@ -3360,7 +3448,10 @@
       "original_title": "From Russia with Love",
       "year": 1964,
       "release_year": 1964,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 115,
+      "id": 657,
+      "tmdb": "https://www.themoviedb.org/movie/657"
     },
     {
       "title": "007／ワールド・イズ・ノット・イナフ",
@@ -3379,7 +3470,10 @@
       "original_title": "The World Is Not Enough",
       "year": 2000,
       "release_year": 2000,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 127,
+      "id": 36643,
+      "tmdb": "https://www.themoviedb.org/movie/36643"
     },
     {
       "title": "007／慰めの報酬",
@@ -3398,7 +3492,10 @@
       "original_title": "Quantum of Solace",
       "year": 2009,
       "release_year": 2009,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 106,
+      "id": 10764,
+      "tmdb": "https://www.themoviedb.org/movie/10764"
     },
     {
       "title": "007／死ぬのは奴らだ",
@@ -3417,7 +3514,10 @@
       "original_title": "Live and Let Die",
       "year": 1973,
       "release_year": 1973,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 121,
+      "id": 253,
+      "tmdb": "https://www.themoviedb.org/movie/253"
     },
     {
       "title": "007／消されたライセンス",
@@ -3436,7 +3536,10 @@
       "original_title": "Licence to Kill",
       "year": 1989,
       "release_year": 1989,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 133,
+      "id": 709,
+      "tmdb": "https://www.themoviedb.org/movie/709"
     },
     {
       "title": "007／私を愛したスパイ",
@@ -3455,7 +3558,10 @@
       "original_title": "The Spy Who Loved Me",
       "year": 1977,
       "release_year": 1977,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 125,
+      "id": 691,
+      "tmdb": "https://www.themoviedb.org/movie/691"
     },
     {
       "title": "007／美しき獲物たち",
@@ -3474,7 +3580,10 @@
       "original_title": "A View to a Kill",
       "year": 1985,
       "release_year": 1985,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 122,
+      "id": 707,
+      "tmdb": "https://www.themoviedb.org/movie/707"
     },
     {
       "title": "007／黄金銃を持つ男",
@@ -3493,7 +3602,10 @@
       "original_title": "The Man with the Golden Gun",
       "year": 1974,
       "release_year": 1974,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 124,
+      "id": 682,
+      "tmdb": "https://www.themoviedb.org/movie/682"
     },
     {
       "title": "007は二度死ぬ",
@@ -3512,7 +3624,10 @@
       "original_title": "You Only Live Twice",
       "year": 1967,
       "release_year": 1967,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 117,
+      "id": 667,
+      "tmdb": "https://www.themoviedb.org/movie/667"
     },
     {
       "title": "48時間Part2/帰ってきたふたり",
@@ -3531,7 +3646,10 @@
       "original_title": "Another 48 Hrs.",
       "year": 1990,
       "release_year": 1990,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 95,
+      "id": 11595,
+      "tmdb": "https://www.themoviedb.org/movie/11595"
     },
     {
       "title": "THE WITCH／魔女 ―増殖―",
@@ -3550,7 +3668,10 @@
       "original_title": "마녀 2",
       "year": 2023,
       "release_year": 2023,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 137,
+      "id": 615173,
+      "tmdb": "https://www.themoviedb.org/movie/615173"
     },
     {
       "title": "アナベル 死霊人形の誕生",
@@ -3569,7 +3690,10 @@
       "original_title": "Annabelle: Creation",
       "year": 2017,
       "release_year": 2017,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 110,
+      "id": 396422,
+      "tmdb": "https://www.themoviedb.org/movie/396422"
     },
     {
       "title": "アナベル 死霊博物館",
@@ -3588,7 +3712,10 @@
       "original_title": "Annabelle Comes Home",
       "year": 2019,
       "release_year": 2019,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 106,
+      "id": 521029,
+      "tmdb": "https://www.themoviedb.org/movie/521029"
     },
     {
       "title": "アナベル 死霊館の人形",
@@ -3607,7 +3734,10 @@
       "original_title": "Annabelle",
       "year": 2015,
       "release_year": 2015,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 99,
+      "id": 250546,
+      "tmdb": "https://www.themoviedb.org/movie/250546"
     },
     {
       "title": "イット・カムズ・アット・ナイト",
@@ -3626,7 +3756,10 @@
       "original_title": "It Comes at Night",
       "year": 2018,
       "release_year": 2018,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 91,
+      "id": 418078,
+      "tmdb": "https://www.themoviedb.org/movie/418078"
     },
     {
       "title": "ウォッチメン",
@@ -3645,7 +3778,10 @@
       "original_title": "Watchmen",
       "year": 2009,
       "release_year": 2009,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 163,
+      "id": 13183,
+      "tmdb": "https://www.themoviedb.org/movie/13183"
     },
     {
       "title": "グッド・ウィル・ハンティング／旅立ち",
@@ -3664,7 +3800,10 @@
       "original_title": "Good Will Hunting",
       "year": 2002,
       "release_year": 2002,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 127,
+      "id": 489,
+      "tmdb": "https://www.themoviedb.org/movie/489"
     },
     {
       "title": "クリード チャンプを継ぐ男",
@@ -3683,7 +3822,10 @@
       "original_title": "Creed",
       "year": 2015,
       "release_year": 2015,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 312221,
+      "tmdb": "https://www.themoviedb.org/movie/312221",
+      "runtime": 133
     },
     {
       "title": "クリード 炎の宿敵",
@@ -3702,7 +3844,10 @@
       "original_title": "Creed II",
       "year": 2019,
       "release_year": 2019,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 130,
+      "id": 480530,
+      "tmdb": "https://www.themoviedb.org/movie/480530"
     },
     {
       "title": "クリード 過去の逆襲",
@@ -3721,7 +3866,10 @@
       "original_title": "Creed III",
       "year": 2023,
       "release_year": 2023,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 116,
+      "id": 677179,
+      "tmdb": "https://www.themoviedb.org/movie/677179"
     },
     {
       "title": "シカゴ",
@@ -3740,7 +3888,10 @@
       "original_title": "Chicago",
       "year": 2002,
       "release_year": 2002,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 113,
+      "id": 1574,
+      "tmdb": "https://www.themoviedb.org/movie/1574"
     },
     {
       "title": "シャザム!",
@@ -3759,7 +3910,10 @@
       "original_title": "Shazam!",
       "year": 2019,
       "release_year": 2019,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 131,
+      "id": 287947,
+      "tmdb": "https://www.themoviedb.org/movie/287947"
     },
     {
       "title": "ジャッカス・ザ・ムービー",
@@ -3778,7 +3932,10 @@
       "original_title": "Jackass: The Movie",
       "year": 2004,
       "release_year": 2004,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 85,
+      "id": 9012,
+      "tmdb": "https://www.themoviedb.org/movie/9012"
     },
     {
       "title": "ジャッカス／クソジジイのアメリカ横断チン道中",
@@ -3797,7 +3954,10 @@
       "original_title": "Jackass Presents: Bad Grandpa",
       "year": 2013,
       "release_year": 2013,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 92,
+      "id": 208134,
+      "tmdb": "https://www.themoviedb.org/movie/208134"
     },
     {
       "title": "スーパーエイト",
@@ -3816,7 +3976,10 @@
       "original_title": "Super 8",
       "year": 2011,
       "release_year": 2011,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 37686,
+      "tmdb": "https://www.themoviedb.org/movie/37686",
+      "runtime": 111
     },
     {
       "title": "スター・トレックVII　ジェネレーションズ",
@@ -3835,7 +3998,10 @@
       "original_title": "Star Trek: Generations",
       "year": 1994,
       "release_year": 1994,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 118,
+      "id": 193,
+      "tmdb": "https://www.themoviedb.org/movie/193"
     },
     {
       "title": "スパイの妻",
@@ -3854,7 +4020,10 @@
       "original_title": "スパイの妻",
       "year": 2020,
       "release_year": 2020,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 114,
+      "id": 688301,
+      "tmdb": "https://www.themoviedb.org/movie/688301"
     },
     {
       "title": "ダブル・ジョパディー",
@@ -3873,7 +4042,10 @@
       "original_title": "Double Jeopardy",
       "year": 2000,
       "release_year": 2000,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 105,
+      "id": 10398,
+      "tmdb": "https://www.themoviedb.org/movie/10398"
     },
     {
       "title": "ドミノ",
@@ -3893,7 +4065,10 @@
       "year": 2023,
       "release_year": 2023,
       "identity_verified_at": "2026-10-25",
-      "title_url": "https://www.primevideo.com/-/ja/detail/0OQHJHGC5OGLH27184CXHVYYCF"
+      "title_url": "https://www.primevideo.com/-/ja/detail/0OQHJHGC5OGLH27184CXHVYYCF",
+      "runtime": 94,
+      "id": 536437,
+      "tmdb": "https://www.themoviedb.org/movie/536437"
     },
     {
       "title": "ネバーセイ・ネバーアゲイン",
@@ -3912,7 +4087,10 @@
       "original_title": "Never Say Never Again",
       "year": 1983,
       "release_year": 1983,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 133,
+      "id": 36670,
+      "tmdb": "https://www.themoviedb.org/movie/36670"
     },
     {
       "title": "ビートルジュース",
@@ -3931,7 +4109,10 @@
       "original_title": "Beetlejuice",
       "year": 1988,
       "release_year": 1988,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 92,
+      "id": 4011,
+      "tmdb": "https://www.themoviedb.org/movie/4011"
     },
     {
       "title": "ひとよ",
@@ -3950,7 +4131,10 @@
       "original_title": "ひとよ",
       "year": 2019,
       "release_year": 2019,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 595112,
+      "tmdb": "https://www.themoviedb.org/movie/595112",
+      "runtime": 123
     },
     {
       "title": "ファースト・ワイフ・クラブ",
@@ -3969,7 +4153,10 @@
       "original_title": "The First Wives Club",
       "year": 1996,
       "release_year": 1996,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 102,
+      "id": 2925,
+      "tmdb": "https://www.themoviedb.org/movie/2925"
     },
     {
       "title": "フライト",
@@ -3988,7 +4175,10 @@
       "original_title": "Flight",
       "year": 2013,
       "release_year": 2013,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 87502,
+      "tmdb": "https://www.themoviedb.org/movie/87502",
+      "runtime": 139
     },
     {
       "title": "ホビット 思いがけない冒険",
@@ -4007,7 +4197,10 @@
       "original_title": "The Hobbit: An Unexpected Journey",
       "year": 2012,
       "release_year": 2012,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 49051,
+      "tmdb": "https://www.themoviedb.org/movie/49051",
+      "runtime": 170
     },
     {
       "title": "ホビット 決戦のゆくえ",
@@ -4026,7 +4219,10 @@
       "original_title": "The Hobbit: The Battle of the Five Armies",
       "year": 2014,
       "release_year": 2014,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 122917,
+      "tmdb": "https://www.themoviedb.org/movie/122917",
+      "runtime": 144
     },
     {
       "title": "ホビット 竜に奪われた王国",
@@ -4045,7 +4241,10 @@
       "original_title": "The Hobbit: The Desolation of Smaug",
       "year": 2013,
       "release_year": 2013,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 57158,
+      "tmdb": "https://www.themoviedb.org/movie/57158",
+      "runtime": 161
     },
     {
       "title": "マインクラフト／ザ・ムービー",
@@ -4064,7 +4263,10 @@
       "original_title": "A Minecraft Movie",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 101,
+      "id": 950387,
+      "tmdb": "https://www.themoviedb.org/movie/950387"
     },
     {
       "title": "メガロポリス",
@@ -4083,7 +4285,10 @@
       "original_title": "Megalopolis",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 592831,
+      "tmdb": "https://www.themoviedb.org/movie/592831",
+      "runtime": 138
     },
     {
       "title": "やがて海へと届く",
@@ -4102,7 +4307,10 @@
       "original_title": "やがて海へと届く",
       "year": 2022,
       "release_year": 2022,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 923837,
+      "tmdb": "https://www.themoviedb.org/movie/923837",
+      "runtime": 126
     },
     {
       "title": "ラ・ヨローナ ～泣く女～",
@@ -4121,7 +4329,10 @@
       "original_title": "The Curse of La Llorona",
       "year": 2019,
       "release_year": 2019,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 480414,
+      "tmdb": "https://www.themoviedb.org/movie/480414",
+      "runtime": 93
     },
     {
       "title": "ラグラッツ　ムービー",
@@ -4140,7 +4351,10 @@
       "original_title": "The Rugrats Movie",
       "year": 1999,
       "release_year": 1999,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 80,
+      "id": 14444,
+      "tmdb": "https://www.themoviedb.org/movie/14444"
     },
     {
       "title": "レッド・オクトーバーを追え！",
@@ -4159,7 +4373,10 @@
       "original_title": "The Hunt for Red October",
       "year": 1990,
       "release_year": 1990,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 135,
+      "id": 1669,
+      "tmdb": "https://www.themoviedb.org/movie/1669"
     },
     {
       "title": "ロード・オブ・ザ・リング/ローハンの戦い",
@@ -4178,7 +4395,10 @@
       "original_title": "The Lord of the Rings: The War of the Rohirrim",
       "year": 2024,
       "release_year": 2024,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 134,
+      "id": 839033,
+      "tmdb": "https://www.themoviedb.org/movie/839033"
     },
     {
       "title": "ロストケア",
@@ -4197,7 +4417,10 @@
       "original_title": "ロストケア",
       "year": 2023,
       "release_year": 2023,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1044171,
+      "tmdb": "https://www.themoviedb.org/movie/1044171",
+      "runtime": 114
     },
     {
       "title": "ロッキー",
@@ -4216,7 +4439,10 @@
       "original_title": "Rocky",
       "year": 1976,
       "release_year": 1976,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 119,
+      "id": 1366,
+      "tmdb": "https://www.themoviedb.org/movie/1366"
     },
     {
       "title": "ロッキー・ザ・ファイナル",
@@ -4235,7 +4461,10 @@
       "original_title": "Rocky Balboa",
       "year": 2007,
       "release_year": 2007,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 103,
+      "id": 1246,
+      "tmdb": "https://www.themoviedb.org/movie/1246"
     },
     {
       "title": "ロッキー2",
@@ -4254,7 +4483,10 @@
       "original_title": "Rocky II",
       "year": 1979,
       "release_year": 1979,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 119,
+      "id": 1367,
+      "tmdb": "https://www.themoviedb.org/movie/1367"
     },
     {
       "title": "ロッキー3",
@@ -4273,7 +4505,10 @@
       "original_title": "Rocky III",
       "year": 1982,
       "release_year": 1982,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 99,
+      "id": 1371,
+      "tmdb": "https://www.themoviedb.org/movie/1371"
     },
     {
       "title": "ロッキー4／炎の友情",
@@ -4292,7 +4527,10 @@
       "original_title": "Rocky IV",
       "year": 1986,
       "release_year": 1986,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 91,
+      "id": 1374,
+      "tmdb": "https://www.themoviedb.org/movie/1374"
     },
     {
       "title": "ロッキー5／最後のドラマ",
@@ -4311,7 +4549,10 @@
       "original_title": "Rocky V",
       "year": 1990,
       "release_year": 1990,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 105,
+      "id": 1375,
+      "tmdb": "https://www.themoviedb.org/movie/1375"
     },
     {
       "title": "劇場版「メイドインアビス 深き魂の黎明」",
@@ -4330,7 +4571,10 @@
       "original_title": "劇場版メイドインアビス 深き魂の黎明",
       "year": 2020,
       "release_year": 2020,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 573730,
+      "tmdb": "https://www.themoviedb.org/movie/573730",
+      "runtime": 105
     },
     {
       "title": "劇場版総集編メイドインアビス 【前編】旅立ちの夜明け",
@@ -4349,7 +4593,10 @@
       "original_title": "劇場版総集編【前編】メイドインアビス 旅立ちの夜明け",
       "year": 2019,
       "release_year": 2019,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 119,
+      "id": 526426,
+      "tmdb": "https://www.themoviedb.org/movie/526426"
     },
     {
       "title": "劇場版総集編メイドインアビス 【後編】放浪する黄昏",
@@ -4368,7 +4615,10 @@
       "original_title": "劇場版総集編【後編】メイドインアビス 放浪する黄昏",
       "year": 2019,
       "release_year": 2019,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 105,
+      "id": 526429,
+      "tmdb": "https://www.themoviedb.org/movie/526429"
     },
     {
       "title": "女王陛下の007",
@@ -4387,7 +4637,10 @@
       "original_title": "On Her Majesty's Secret Service",
       "year": 1969,
       "release_year": 1969,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 130,
+      "id": 668,
+      "tmdb": "https://www.themoviedb.org/movie/668"
     },
     {
       "title": "最'新'絶叫計画",
@@ -4406,7 +4659,10 @@
       "original_title": "Scary Movie 2",
       "year": 2002,
       "release_year": 2002,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 82,
+      "id": 4248,
+      "tmdb": "https://www.themoviedb.org/movie/4248"
     },
     {
       "title": "最'狂'絶叫計画",
@@ -4425,7 +4681,10 @@
       "original_title": "Scary Movie 3",
       "year": 2004,
       "release_year": 2004,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 84,
+      "id": 4256,
+      "tmdb": "https://www.themoviedb.org/movie/4256"
     },
     {
       "title": "最終絶叫計画",
@@ -4444,7 +4703,10 @@
       "original_title": "Scary Movie",
       "year": 2000,
       "release_year": 2000,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 88,
+      "id": 4247,
+      "tmdb": "https://www.themoviedb.org/movie/4247"
     },
     {
       "title": "死霊館",
@@ -4463,7 +4725,10 @@
       "original_title": "The Conjuring",
       "year": 2013,
       "release_year": 2013,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 138843,
+      "tmdb": "https://www.themoviedb.org/movie/138843",
+      "runtime": 112
     },
     {
       "title": "死霊館 エンフィールド事件",
@@ -4482,7 +4747,10 @@
       "original_title": "The Conjuring 2",
       "year": 2016,
       "release_year": 2016,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 259693,
+      "tmdb": "https://www.themoviedb.org/movie/259693",
+      "runtime": 134
     },
     {
       "title": "死霊館　悪魔のせいなら、無罪。",
@@ -4501,7 +4769,10 @@
       "original_title": "The Conjuring: The Devil Made Me Do It",
       "year": 2021,
       "release_year": 2021,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 423108,
+      "tmdb": "https://www.themoviedb.org/movie/423108",
+      "runtime": 112
     },
     {
       "title": "死霊館のシスター",
@@ -4520,7 +4791,10 @@
       "original_title": "The Nun",
       "year": 2018,
       "release_year": 2018,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 96,
+      "id": 439079,
+      "tmdb": "https://www.themoviedb.org/movie/439079"
     },
     {
       "title": "生きてこそ",
@@ -4539,7 +4813,10 @@
       "original_title": "Alive",
       "year": 1993,
       "release_year": 1993,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 127,
+      "id": 7305,
+      "tmdb": "https://www.themoviedb.org/movie/7305"
     },
     {
       "title": "Ryuichi Sakamoto: Diaries",
@@ -4593,7 +4870,9 @@
       "original_title": "Trouble Every Day",
       "release_year": 2001,
       "year": 2001,
-      "id": 40723
+      "id": 40723,
+      "runtime": 101,
+      "tmdb": "https://www.themoviedb.org/movie/40723"
     },
     {
       "title": "パディントン 消えた黄金郷の秘密",
@@ -4804,7 +5083,9 @@
       "tmdb": "https://www.themoviedb.org/movie/1493400",
       "release_year": 2026,
       "original_title": "Camp Rock 3",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "runtime": 93,
+      "id": 1493400
     },
     {
       "title": "90メートル",
@@ -4822,7 +5103,10 @@
       "original_title": "90メートル",
       "year": 2026,
       "release_year": 2026,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1598671,
+      "tmdb": "https://www.themoviedb.org/movie/1598671",
+      "runtime": 116
     },
     {
       "title": "NOT BEER",
@@ -4840,7 +5124,10 @@
       "original_title": "NOT BEER",
       "year": 2022,
       "release_year": 2022,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 72,
+      "id": 1137219,
+      "tmdb": "https://www.themoviedb.org/movie/1137219"
     },
     {
       "id": 685916,
@@ -4964,7 +5251,10 @@
       "original_title": "Invitation to a Murder",
       "year": 2023,
       "release_year": 2023,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 93,
+      "id": 989473,
+      "tmdb": "https://www.themoviedb.org/movie/989473"
     },
     {
       "title": "名探偵ミランダ 大富豪殺人の招待状",
@@ -4983,7 +5273,9 @@
       "tmdb": "https://www.themoviedb.org/movie/989473",
       "release_year": 2023,
       "original_title": "Invitation to a Murder",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "runtime": 93,
+      "id": 989473
     },
     {
       "id": 1752355,
@@ -5093,7 +5385,10 @@
       "original_title": "８番出口",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 95,
+      "id": 1408208,
+      "tmdb": "https://www.themoviedb.org/movie/1408208"
     },
     {
       "title": "マテリアリスト 結婚の条件",
@@ -5112,7 +5407,10 @@
       "original_title": "Materialists",
       "year": null,
       "release_year": null,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1136867,
+      "tmdb": "https://www.themoviedb.org/movie/1136867",
+      "runtime": 116
     },
     {
       "title": "I AM JAM ピザの惑星危機一髪！（活弁吹込版）",
@@ -5144,7 +5442,10 @@
       "original_title": "Ghostlight",
       "year": 2024,
       "release_year": 2024,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 115,
+      "id": 1214469,
+      "tmdb": "https://www.themoviedb.org/movie/1214469"
     },
     {
       "title": "サイレンサー",
@@ -5162,7 +5463,10 @@
       "original_title": "Fast Charlie",
       "year": 2023,
       "release_year": 2023,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 90,
+      "id": 945937,
+      "tmdb": "https://www.themoviedb.org/movie/945937"
     },
     {
       "title": "ハイ・ローラーズ",
@@ -5180,7 +5484,10 @@
       "original_title": "High Rollers",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 101,
+      "id": 1149167,
+      "tmdb": "https://www.themoviedb.org/movie/1149167"
     },
     {
       "title": "ほなまた明日",
@@ -5198,7 +5505,10 @@
       "original_title": "ほなまた明日",
       "year": 2024,
       "release_year": 2024,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 99,
+      "id": 1263089,
+      "tmdb": "https://www.themoviedb.org/movie/1263089"
     },
     {
       "title": "映画ラストマン -FIRST LOVE-",
@@ -5216,7 +5526,10 @@
       "original_title": "映画ラストマン -FIRST LOVE-",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1437156,
+      "tmdb": "https://www.themoviedb.org/movie/1437156",
+      "runtime": 127
     },
     {
       "title": "アクアマン/失われた王国",
@@ -5235,7 +5548,10 @@
       "original_title": "Aquaman and the Lost Kingdom",
       "year": 2024,
       "release_year": 2024,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 572802,
+      "tmdb": "https://www.themoviedb.org/movie/572802",
+      "runtime": 124
     },
     {
       "title": "ノー・アザー・ランド　故郷は他にない",
@@ -5254,7 +5570,10 @@
       "original_title": "لا أرض أخرى",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1232493,
+      "tmdb": "https://www.themoviedb.org/movie/1232493",
+      "runtime": 92
     },
     {
       "title": "ラブ≠コメディ",
@@ -5270,7 +5589,9 @@
       "type": "レンタル",
       "checked_at": "2026-10-22",
       "tmdbId": 1701409,
-      "tmdb": "https://www.themoviedb.org/movie/1701409"
+      "tmdb": "https://www.themoviedb.org/movie/1701409",
+      "id": 1701409,
+      "runtime": 134
     },
     {
       "title": "ウィキッド 永遠の約束",
@@ -5288,7 +5609,9 @@
       "score": 6.568,
       "votes": 1193,
       "checked_at": "2026-10-22",
-      "time": "20:00"
+      "time": "20:00",
+      "id": 967941,
+      "runtime": 137
     },
     {
       "title": "ゲッベルス ヒトラーをプロデュースした男",
@@ -5325,7 +5648,10 @@
       "original_title": "父と僕の終わらない歌",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 93,
+      "id": 1444463,
+      "tmdb": "https://www.themoviedb.org/movie/1444463"
     },
     {
       "title": "愛されなくても別に",
@@ -5382,7 +5708,10 @@
       "original_title": "Weapons",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1078605,
+      "tmdb": "https://www.themoviedb.org/movie/1078605",
+      "runtime": 128
     },
     {
       "title": "山口くんはワルくない",
@@ -5399,7 +5728,9 @@
       "checked_at": "2026-10-22",
       "tmdbId": 1654395,
       "tmdb": "https://www.themoviedb.org/movie/1654395",
-      "release_year": 2026
+      "release_year": 2026,
+      "id": 1654395,
+      "runtime": 96
     },
     {
       "title": "スパイダーマン：ブランド・ニュー・デイ",
@@ -5416,7 +5747,9 @@
       "checked_at": "2026-10-22",
       "tmdbId": 969681,
       "tmdb": "https://www.themoviedb.org/movie/969681",
-      "release_year": 2026
+      "release_year": 2026,
+      "id": 969681,
+      "runtime": 145
     },
     {
       "title": "わたしの幸せな結婚",
@@ -5433,7 +5766,9 @@
       "checked_at": "2026-10-22",
       "tmdbId": 1037348,
       "tmdb": "https://www.themoviedb.org/movie/1037348",
-      "release_year": 2023
+      "release_year": 2023,
+      "id": 1037348,
+      "runtime": 115
     },
     {
       "title": "ジョン・クランコ バレエの革命児",
@@ -5452,7 +5787,9 @@
       "tmdb": "https://www.themoviedb.org/movie/1182881",
       "release_year": 2024,
       "original_title": "Cranko",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "runtime": 128,
+      "id": 1182881
     },
     {
       "id": 1756138,
@@ -5563,7 +5900,10 @@
       "original_title": "廃用身",
       "year": null,
       "release_year": null,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1630435,
+      "tmdb": "https://www.themoviedb.org/movie/1630435",
+      "runtime": 125
     },
     {
       "title": "おさるのベン",
@@ -5582,7 +5922,10 @@
       "original_title": "Primate",
       "year": null,
       "release_year": null,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1315303,
+      "tmdb": "https://www.themoviedb.org/movie/1315303",
+      "runtime": 89
     },
     {
       "title": "罪人たち",
@@ -5601,7 +5944,10 @@
       "original_title": "Sinners",
       "year": 2025,
       "release_year": 2025,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1233413,
+      "tmdb": "https://www.themoviedb.org/movie/1233413",
+      "runtime": 137
     },
     {
       "title": "映画 この素晴らしい世界に祝福を！紅伝説",
@@ -5621,7 +5967,9 @@
       "release_year": 2019,
       "original_title": "映画 この素晴らしい世界に祝福を！紅伝説",
       "identity_verified_at": "2026-10-22",
-      "poster": "https://image.tmdb.org/t/p/w500/t37cFbjqWzcteiA3XrkNOUswPLa.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/t37cFbjqWzcteiA3XrkNOUswPLa.jpg",
+      "id": 532067,
+      "runtime": 90
     },
     {
       "title": "Matchbox The Movie",
@@ -5667,7 +6015,9 @@
       "checked_at": "2026-10-22",
       "tmdbId": 1447853,
       "tmdb": "https://www.themoviedb.org/movie/1447853",
-      "release_year": 2026
+      "release_year": 2026,
+      "id": 1447853,
+      "runtime": 123
     },
     {
       "title": "アニマルズ",
@@ -5705,7 +6055,9 @@
       "type": "見放題",
       "checked_at": "2026-10-22",
       "tmdbId": 402431,
-      "tmdb": "https://www.themoviedb.org/movie/402431"
+      "tmdb": "https://www.themoviedb.org/movie/402431",
+      "id": 402431,
+      "runtime": 162
     },
     {
       "title": "ブラック・ショーマン",
@@ -5875,7 +6227,9 @@
       "tmdb": "https://www.themoviedb.org/movie/1061474",
       "release_year": 2025,
       "original_title": "Superman",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "id": 1061474,
+      "runtime": 130
     },
     {
       "title": "KATSEYE: WILD HEARTS",
@@ -5894,7 +6248,10 @@
       "original_title": "KATSEYE: Wild Hearts",
       "year": 2026,
       "release_year": 2026,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "runtime": 80,
+      "id": 1728113,
+      "tmdb": "https://www.themoviedb.org/movie/1728113"
     },
     {
       "title": "マスタープラン",
@@ -5944,7 +6301,8 @@
       "year": 2021,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/617653",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 153
     },
     {
       "original_title": "清須会議",
@@ -5963,7 +6321,8 @@
       "year": 2013,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/229113",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 138
     },
     {
       "title": "さよなら僕の英雄",
@@ -6063,7 +6422,8 @@
       "year": 2023,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/1119114",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 116
     },
     {
       "title": "GOOD BOY／グッド・ボーイ",
@@ -6170,7 +6530,8 @@
       "year": 2024,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/437342",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 119
     },
     {
       "original_title": "山田くんとLv999の恋をする",
@@ -6190,7 +6551,8 @@
       "year": 2025,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/1420410",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 118
     },
     {
       "title": "消滅世界",
@@ -6289,7 +6651,9 @@
       "countries": [
         "Japan"
       ],
-      "identity_verified_at": "2026-10-20"
+      "identity_verified_at": "2026-10-20",
+      "id": 1768182,
+      "runtime": 114
     },
     {
       "original_title": "Dogman",
@@ -6308,7 +6672,8 @@
       "year": 2023,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/944401",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 115
     },
     {
       "original_title": "望み",
@@ -6475,7 +6840,9 @@
       "score": 10,
       "votes": 1,
       "checked_at": "2026-10-22",
-      "time": "20:00"
+      "time": "20:00",
+      "id": 1532481,
+      "runtime": 130
     },
     {
       "title": "ビューティフル・ジャーニー ふたりの時空旅行",
@@ -6526,7 +6893,9 @@
       "tmdb": "https://www.themoviedb.org/movie/4960",
       "release_year": 2008,
       "original_title": "Synecdoche, New York",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "id": 4960,
+      "runtime": 124
     },
     {
       "title": "ロード・オブ・ザ・リング",
@@ -6641,7 +7010,8 @@
       "year": 2023,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/717930",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 119
     },
     {
       "original_title": "泣くな赤鬼",
@@ -6661,7 +7031,8 @@
       "year": 2019,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/593562",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 111
     },
     {
       "title": "トイ・ストーリー５",
@@ -6680,7 +7051,10 @@
       "original_title": "Toy Story 5",
       "year": 2026,
       "release_year": 2026,
-      "identity_verified_at": "2026-10-25"
+      "identity_verified_at": "2026-10-25",
+      "id": 1084244,
+      "tmdb": "https://www.themoviedb.org/movie/1084244",
+      "runtime": 102
     },
     {
       "title": "アギトー超能力戦争ー",
@@ -6730,7 +7104,9 @@
       "tmdb": "https://www.themoviedb.org/movie/1596275",
       "release_year": 2026,
       "original_title": "Drive - The Pretenders",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "runtime": 103,
+      "id": 1596275
     },
     {
       "original_title": "劇場版 牙狼〈GARO〉‐DIVINE FLAME‐",
@@ -6749,7 +7125,8 @@
       "year": 2016,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/374195",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 78
     },
     {
       "original_title": "劇場版 銀魂 新訳紅桜篇",
@@ -6769,7 +7146,8 @@
       "year": 2010,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/71172",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 96
     },
     {
       "original_title": "銀魂 THE FINAL",
@@ -6789,7 +7167,8 @@
       "year": 2021,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/732203",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 104
     },
     {
       "title": "PEACOCK／ピーコック",
@@ -6808,7 +7187,9 @@
       "tmdb": "https://www.themoviedb.org/movie/1245728",
       "release_year": 2025,
       "original_title": "Pfau - Bin ich echt?",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "runtime": 102,
+      "id": 1245728
     },
     {
       "title": "パンダのすごい世界",
@@ -6911,7 +7292,9 @@
       "tmdb": "https://www.themoviedb.org/movie/1507696",
       "release_year": 2026,
       "original_title": "Apocalipsis Z: Nuevo mundo",
-      "identity_verified_at": "2026-10-22"
+      "identity_verified_at": "2026-10-22",
+      "id": 1507696,
+      "runtime": 96
     },
     {
       "original_title": "GTO",
@@ -6931,7 +7314,8 @@
       "year": 1999,
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/36184",
-      "checked_at": "2026-10-26T08:48:50.008240+00:00"
+      "checked_at": "2026-10-26T08:48:50.008240+00:00",
+      "runtime": 109
     },
     {
       "title": "愛人／ラ・マン",
@@ -6949,7 +7333,8 @@
       "tmdb": "https://www.themoviedb.org/movie/10995",
       "tmdb_id": 10995,
       "release_year": 1992,
-      "year": 1992
+      "year": 1992,
+      "runtime": 115
     },
     {
       "title": "罪の声",
@@ -6966,7 +7351,8 @@
       "id": 718497,
       "tmdb": "https://www.themoviedb.org/movie/718497",
       "release_year": 2020,
-      "tmdb_id": 718497
+      "tmdb_id": 718497,
+      "runtime": 142
     },
     {
       "title": "BLUE／ブルー",
@@ -6983,7 +7369,8 @@
       "id": 826704,
       "tmdb": "https://www.themoviedb.org/movie/826704",
       "release_year": 2021,
-      "tmdb_id": 826704
+      "tmdb_id": 826704,
+      "runtime": 107
     },
     {
       "title": "X-ファイル ザ･ムービー",
@@ -7000,7 +7387,8 @@
       "id": 846,
       "tmdb": "https://www.themoviedb.org/movie/846",
       "release_year": 1998,
-      "tmdb_id": 846
+      "tmdb_id": 846,
+      "runtime": 121
     },
     {
       "title": "X-ファイル：真実を求めて",
@@ -7017,7 +7405,8 @@
       "id": 8836,
       "tmdb": "https://www.themoviedb.org/movie/8836",
       "release_year": 2008,
-      "tmdb_id": 8836
+      "tmdb_id": 8836,
+      "runtime": 104
     },
     {
       "title": "あの頃。",
@@ -7034,7 +7423,8 @@
       "id": 794708,
       "tmdb": "https://www.themoviedb.org/movie/794708",
       "release_year": 2021,
-      "tmdb_id": 794708
+      "tmdb_id": 794708,
+      "runtime": 117
     },
     {
       "title": "カラーパープル",
@@ -7046,7 +7436,8 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "checked_at": "2026-11-05"
+      "checked_at": "2026-11-05",
+      "poster": "https://image.tmdb.org/t/p/w500/8KIVOzvc78E6pcOPC31xp8KFolS.jpg"
     },
     {
       "title": "グーニーズ",
@@ -7063,7 +7454,8 @@
       "id": 9340,
       "tmdb": "https://www.themoviedb.org/movie/9340",
       "release_year": 1985,
-      "tmdb_id": 9340
+      "tmdb_id": 9340,
+      "runtime": 114
     },
     {
       "title": "グレムリン",
@@ -7080,7 +7472,8 @@
       "id": 927,
       "tmdb": "https://www.themoviedb.org/movie/927",
       "release_year": 1984,
-      "tmdb_id": 927
+      "tmdb_id": 927,
+      "runtime": 107
     },
     {
       "title": "グレムリン2　－新・種・誕・生－",
@@ -7097,7 +7490,8 @@
       "id": 928,
       "tmdb": "https://www.themoviedb.org/movie/928",
       "release_year": 1990,
-      "tmdb_id": 928
+      "tmdb_id": 928,
+      "runtime": 108
     },
     {
       "title": "サニー/32",
@@ -7114,7 +7508,8 @@
       "id": 505209,
       "tmdb": "https://www.themoviedb.org/movie/505209",
       "release_year": 2018,
-      "tmdb_id": 505209
+      "tmdb_id": 505209,
+      "runtime": 110
     },
     {
       "title": "トワイライトゾーン／超次元の体験",
@@ -7131,7 +7526,8 @@
       "id": 15301,
       "tmdb": "https://www.themoviedb.org/movie/15301",
       "release_year": 1984,
-      "tmdb_id": 15301
+      "tmdb_id": 15301,
+      "runtime": 101
     },
     {
       "title": "プラクティカル・マジック",
@@ -7148,7 +7544,8 @@
       "id": 6435,
       "tmdb": "https://www.themoviedb.org/movie/6435",
       "release_year": 1999,
-      "tmdb_id": 6435
+      "tmdb_id": 6435,
+      "runtime": 104
     },
     {
       "title": "ポルターガイスト",
@@ -7160,7 +7557,8 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "checked_at": "2026-11-05"
+      "checked_at": "2026-11-05",
+      "poster": "https://image.tmdb.org/t/p/w500/4eMN3GANH5GG4kXdHkrTZEUuQ9M.jpg"
     },
     {
       "title": "マイ・バック・ページ",
@@ -7177,7 +7575,8 @@
       "id": 186470,
       "tmdb": "https://www.themoviedb.org/movie/186470",
       "release_year": 2011,
-      "tmdb_id": 186470
+      "tmdb_id": 186470,
+      "runtime": 141
     },
     {
       "title": "ミニオンズ",
@@ -7194,7 +7593,8 @@
       "id": 211672,
       "tmdb": "https://www.themoviedb.org/movie/211672",
       "release_year": 2015,
-      "tmdb_id": 211672
+      "tmdb_id": 211672,
+      "runtime": 91
     },
     {
       "title": "入国審査",
@@ -7211,7 +7611,8 @@
       "id": 1051547,
       "tmdb": "https://www.themoviedb.org/movie/1051547",
       "release_year": 2025,
-      "tmdb_id": 1051547
+      "tmdb_id": 1051547,
+      "runtime": 77
     },
     {
       "title": "太陽の帝国",
@@ -7228,7 +7629,8 @@
       "id": 10110,
       "tmdb": "https://www.themoviedb.org/movie/10110",
       "release_year": 1988,
-      "tmdb_id": 10110
+      "tmdb_id": 10110,
+      "runtime": 153
     },
     {
       "title": "奈落のマイホーム",
@@ -7245,7 +7647,8 @@
       "id": 623135,
       "tmdb": "https://www.themoviedb.org/movie/623135",
       "release_year": 2021,
-      "tmdb_id": 623135
+      "tmdb_id": 623135,
+      "runtime": 113
     },
     {
       "title": "怪盗グルーのミニオン危機一発",
@@ -7262,7 +7665,8 @@
       "id": 93456,
       "tmdb": "https://www.themoviedb.org/movie/93456",
       "release_year": 2013,
-      "tmdb_id": 93456
+      "tmdb_id": 93456,
+      "runtime": 98
     },
     {
       "title": "怪盗グルーのミニオン大脱走",
@@ -7279,7 +7683,8 @@
       "id": 324852,
       "tmdb": "https://www.themoviedb.org/movie/324852",
       "release_year": 2017,
-      "tmdb_id": 324852
+      "tmdb_id": 324852,
+      "runtime": 90
     },
     {
       "title": "怪盗グルーのミニオン超変身",
@@ -7296,7 +7701,8 @@
       "id": 519182,
       "tmdb": "https://www.themoviedb.org/movie/519182",
       "release_year": 2024,
-      "tmdb_id": 519182
+      "tmdb_id": 519182,
+      "runtime": 95
     },
     {
       "title": "犯罪都市 NO WAY OUT",
@@ -7313,7 +7719,8 @@
       "id": 955555,
       "tmdb": "https://www.themoviedb.org/movie/955555",
       "release_year": 2024,
-      "tmdb_id": 955555
+      "tmdb_id": 955555,
+      "runtime": 105
     },
     {
       "title": "シンシン アンド ザ マウス／SINSIN AND THE MOUSE",
@@ -7329,7 +7736,8 @@
       "checked_at": "2026-11-05",
       "id": 1370545,
       "tmdb": "https://www.themoviedb.org/movie/1370545",
-      "tmdb_id": 1370545
+      "tmdb_id": 1370545,
+      "runtime": 108
     },
     {
       "title": "入国審査",
@@ -7346,7 +7754,8 @@
       "id": 1051547,
       "tmdb": "https://www.themoviedb.org/movie/1051547",
       "release_year": 2025,
-      "tmdb_id": 1051547
+      "tmdb_id": 1051547,
+      "runtime": 77
     },
     {
       "title": "四月の余白",
@@ -7362,7 +7771,8 @@
       "checked_at": "2026-11-05",
       "id": 1637635,
       "tmdb": "https://www.themoviedb.org/movie/1637635",
-      "tmdb_id": 1637635
+      "tmdb_id": 1637635,
+      "runtime": 106
     },
     {
       "title": "犯罪都市 NO WAY OUT",
@@ -7379,7 +7789,8 @@
       "id": 955555,
       "tmdb": "https://www.themoviedb.org/movie/955555",
       "release_year": 2024,
-      "tmdb_id": 955555
+      "tmdb_id": 955555,
+      "runtime": 105
     },
     {
       "title": "おとななじみ",
@@ -7396,7 +7807,8 @@
       "id": 1120461,
       "tmdb": "https://www.themoviedb.org/movie/1120461",
       "release_year": 2023,
-      "tmdb_id": 1120461
+      "tmdb_id": 1120461,
+      "runtime": 113
     },
     {
       "title": "48時間",
@@ -7413,7 +7825,8 @@
       "id": 150,
       "tmdb": "https://www.themoviedb.org/movie/150",
       "release_year": 1983,
-      "tmdb_id": 150
+      "tmdb_id": 150,
+      "runtime": 96
     },
     {
       "title": "DUNE/デューン 砂の惑星",
@@ -7430,7 +7843,8 @@
       "id": 438631,
       "tmdb": "https://www.themoviedb.org/movie/438631",
       "release_year": 2021,
-      "tmdb_id": 438631
+      "tmdb_id": 438631,
+      "runtime": 155
     },
     {
       "title": "DUNE/デューン 砂の惑星PART2",
@@ -7446,7 +7860,8 @@
       "tmdb_id": 693134,
       "poster": "https://image.tmdb.org/t/p/w500/uKaLrrf2pjunXroqHFO80Bzg8jx.jpg",
       "id": 693134,
-      "tmdb": "https://www.themoviedb.org/movie/693134"
+      "tmdb": "https://www.themoviedb.org/movie/693134",
+      "runtime": 166
     },
     {
       "title": "G.I. ジョー 漆黒のスネークアイズ",
@@ -7463,7 +7878,8 @@
       "id": 568620,
       "tmdb": "https://www.themoviedb.org/movie/568620",
       "release_year": 2021,
-      "tmdb_id": 568620
+      "tmdb_id": 568620,
+      "runtime": 122
     },
     {
       "title": "イーグル・アイ",
@@ -7480,7 +7896,8 @@
       "id": 13027,
       "tmdb": "https://www.themoviedb.org/movie/13027",
       "release_year": 2008,
-      "tmdb_id": 13027
+      "tmdb_id": 13027,
+      "runtime": 118
     },
     {
       "title": "インディ・ジョーンズ最後の聖戦",
@@ -7497,7 +7914,8 @@
       "id": 89,
       "tmdb": "https://www.themoviedb.org/movie/89",
       "release_year": 1989,
-      "tmdb_id": 89
+      "tmdb_id": 89,
+      "runtime": 127
     },
     {
       "title": "エアベンダー",
@@ -7514,7 +7932,8 @@
       "id": 10196,
       "tmdb": "https://www.themoviedb.org/movie/10196",
       "release_year": 2010,
-      "tmdb_id": 10196
+      "tmdb_id": 10196,
+      "runtime": 103
     },
     {
       "title": "ザ・ロストシティ",
@@ -7531,7 +7950,8 @@
       "id": 752623,
       "tmdb": "https://www.themoviedb.org/movie/752623",
       "release_year": 2022,
-      "tmdb_id": 752623
+      "tmdb_id": 752623,
+      "runtime": 112
     },
     {
       "title": "スター・トレック",
@@ -7547,7 +7967,8 @@
       "tmdb_id": 13475,
       "poster": "https://image.tmdb.org/t/p/w500/z6IinWYgAG6LJSHXwNFJ7Hnl0qH.jpg",
       "id": 13475,
-      "tmdb": "https://www.themoviedb.org/movie/13475"
+      "tmdb": "https://www.themoviedb.org/movie/13475",
+      "runtime": 127
     },
     {
       "title": "スター・トレック イントゥ・ダークネス",
@@ -7564,7 +7985,8 @@
       "id": 54138,
       "tmdb": "https://www.themoviedb.org/movie/54138",
       "release_year": 2013,
-      "tmdb_id": 54138
+      "tmdb_id": 54138,
+      "runtime": 133
     },
     {
       "title": "スター・トレックV　新たなる未知へ",
@@ -7581,7 +8003,8 @@
       "id": 172,
       "tmdb": "https://www.themoviedb.org/movie/172",
       "release_year": 1989,
-      "tmdb_id": 172
+      "tmdb_id": 172,
+      "runtime": 106
     },
     {
       "title": "スター・トレックVI　未知の世界",
@@ -7598,7 +8021,8 @@
       "id": 174,
       "tmdb": "https://www.themoviedb.org/movie/174",
       "release_year": 1991,
-      "tmdb_id": 174
+      "tmdb_id": 174,
+      "runtime": 110
     },
     {
       "title": "スター・トレックVIII　ファースト・コンタクト",
@@ -7614,7 +8038,8 @@
       "tmdb_id": 199,
       "poster": "https://image.tmdb.org/t/p/w500/96x7OQAtGEF9EvZfSkcUrb22li0.jpg",
       "id": 199,
-      "tmdb": "https://www.themoviedb.org/movie/199"
+      "tmdb": "https://www.themoviedb.org/movie/199",
+      "runtime": 111
     },
     {
       "title": "スポンジ・ボブ / スクエアパンツ ザ・ムービー",
@@ -7631,7 +8056,8 @@
       "id": 11836,
       "tmdb": "https://www.themoviedb.org/movie/11836",
       "release_year": 2006,
-      "tmdb_id": 11836
+      "tmdb_id": 11836,
+      "runtime": 87
     },
     {
       "title": "スポンジ・ボブ／海のみんなが世界を救WOO!",
@@ -7648,7 +8074,8 @@
       "id": 228165,
       "tmdb": "https://www.themoviedb.org/movie/228165",
       "release_year": 2015,
-      "tmdb_id": 228165
+      "tmdb_id": 228165,
+      "runtime": 93
     },
     {
       "title": "トゥルー･グリット",
@@ -7665,7 +8092,8 @@
       "id": 44264,
       "tmdb": "https://www.themoviedb.org/movie/44264",
       "release_year": 2011,
-      "tmdb_id": 44264
+      "tmdb_id": 44264,
+      "runtime": 110
     },
     {
       "title": "トゥルーマン・ショー",
@@ -7682,7 +8110,8 @@
       "id": 37165,
       "tmdb": "https://www.themoviedb.org/movie/37165",
       "release_year": 1998,
-      "tmdb_id": 37165
+      "tmdb_id": 37165,
+      "runtime": 103
     },
     {
       "title": "トップガン",
@@ -7699,7 +8128,8 @@
       "id": 744,
       "tmdb": "https://www.themoviedb.org/movie/744",
       "release_year": 1986,
-      "tmdb_id": 744
+      "tmdb_id": 744,
+      "runtime": 110
     },
     {
       "title": "トップガン マーヴェリック",
@@ -7716,7 +8146,8 @@
       "id": 361743,
       "tmdb": "https://www.themoviedb.org/movie/361743",
       "release_year": 2022,
-      "tmdb_id": 361743
+      "tmdb_id": 361743,
+      "runtime": 131
     },
     {
       "title": "トロピック・サンダー/史上最低の作戦",
@@ -7733,7 +8164,8 @@
       "id": 7446,
       "tmdb": "https://www.themoviedb.org/movie/7446",
       "release_year": 2008,
-      "tmdb_id": 7446
+      "tmdb_id": 7446,
+      "runtime": 107
     },
     {
       "title": "ミート・ザ・ペアレンツ",
@@ -7750,7 +8182,8 @@
       "id": 1597,
       "tmdb": "https://www.themoviedb.org/movie/1597",
       "release_year": 2001,
-      "tmdb_id": 1597
+      "tmdb_id": 1597,
+      "runtime": 108
     },
     {
       "title": "レモニー・スニケットの世にも不幸せな物語",
@@ -7767,7 +8200,8 @@
       "id": 11774,
       "tmdb": "https://www.themoviedb.org/movie/11774",
       "release_year": 2005,
-      "tmdb_id": 11774
+      "tmdb_id": 11774,
+      "runtime": 108
     },
     {
       "title": "危険な情事",
@@ -7784,7 +8218,8 @@
       "id": 10998,
       "tmdb": "https://www.themoviedb.org/movie/10998",
       "release_year": 1988,
-      "tmdb_id": 10998
+      "tmdb_id": 10998,
+      "runtime": 119
     },
     {
       "title": "幸福の条件",
@@ -7801,7 +8236,8 @@
       "id": 4478,
       "tmdb": "https://www.themoviedb.org/movie/4478",
       "release_year": 1993,
-      "tmdb_id": 4478
+      "tmdb_id": 4478,
+      "runtime": 117
     },
     {
       "title": "劇場版 弱虫ペダル",
@@ -7818,7 +8254,8 @@
       "id": 334372,
       "tmdb": "https://www.themoviedb.org/movie/334372",
       "release_year": 2015,
-      "tmdb_id": 334372
+      "tmdb_id": 334372,
+      "runtime": 90
     },
     {
       "title": "弱虫ペダル Re:GENERATION",
@@ -7835,7 +8272,8 @@
       "id": 786085,
       "tmdb": "https://www.themoviedb.org/movie/786085",
       "release_year": 2017,
-      "tmdb_id": 786085
+      "tmdb_id": 786085,
+      "runtime": 89
     },
     {
       "title": "弱虫ペダル Re：RIDE",
@@ -7852,7 +8290,8 @@
       "id": 292740,
       "tmdb": "https://www.themoviedb.org/movie/292740",
       "release_year": 2014,
-      "tmdb_id": 292740
+      "tmdb_id": 292740,
+      "runtime": 88
     },
     {
       "title": "弱虫ペダル Re：ROAD",
@@ -7869,7 +8308,8 @@
       "id": 387931,
       "tmdb": "https://www.themoviedb.org/movie/387931",
       "release_year": 2015,
-      "tmdb_id": 387931
+      "tmdb_id": 387931,
+      "runtime": 89
     },
     {
       "title": "弱虫ペダル SPARE BIKE",
@@ -7886,7 +8326,8 @@
       "id": 403895,
       "tmdb": "https://www.themoviedb.org/movie/403895",
       "release_year": 2016,
-      "tmdb_id": 403895
+      "tmdb_id": 403895,
+      "runtime": 60
     },
     {
       "title": "死ねばいいのに",
@@ -7902,7 +8343,8 @@
       "checked_at": "2026-11-05",
       "id": 1651166,
       "tmdb": "https://www.themoviedb.org/movie/1651166",
-      "tmdb_id": 1651166
+      "tmdb_id": 1651166,
+      "runtime": 95
     },
     {
       "title": "口に関するアンケート",
@@ -7918,7 +8360,8 @@
       "checked_at": "2026-11-05",
       "id": 1587473,
       "tmdb": "https://www.themoviedb.org/movie/1587473",
-      "tmdb_id": 1587473
+      "tmdb_id": 1587473,
+      "runtime": 89
     },
     {
       "title": "糸",
@@ -7936,7 +8379,8 @@
       "tmdb": "https://www.themoviedb.org/movie/612511",
       "tmdb_id": 612511,
       "release_year": 2020,
-      "year": 2020
+      "year": 2020,
+      "runtime": 130
     },
     {
       "title": "ダーティ･マネー",
@@ -7953,7 +8397,8 @@
       "id": 572195,
       "tmdb": "https://www.themoviedb.org/movie/572195",
       "release_year": 2025,
-      "tmdb_id": 572195
+      "tmdb_id": 572195,
+      "runtime": 120
     },
     {
       "title": "ディープ･ウォーター",
@@ -7970,7 +8415,8 @@
       "id": 1232933,
       "tmdb": "https://www.themoviedb.org/movie/1232933",
       "release_year": 2025,
-      "tmdb_id": 1232933
+      "tmdb_id": 1232933,
+      "runtime": 85
     },
     {
       "title": "デビルズ･バス",
@@ -7987,7 +8433,8 @@
       "id": 931944,
       "tmdb": "https://www.themoviedb.org/movie/931944",
       "release_year": 2025,
-      "tmdb_id": 931944
+      "tmdb_id": 931944,
+      "runtime": 121
     },
     {
       "title": "ラスト･エージェント 最高機密プロトコル",
@@ -8004,7 +8451,8 @@
       "id": 1124641,
       "tmdb": "https://www.themoviedb.org/movie/1124641",
       "release_year": 2024,
-      "tmdb_id": 1124641
+      "tmdb_id": 1124641,
+      "runtime": 105
     },
     {
       "title": "余命一年、男をかう",
@@ -8036,7 +8484,8 @@
       ],
       "identity_verified_at": "2026-10-20",
       "id": 1654940,
-      "tmdb_id": 1654940
+      "tmdb_id": 1654940,
+      "runtime": 109
     },
     {
       "title": "サスカッチ・サンセット",
@@ -8053,7 +8502,8 @@
       "id": 1015634,
       "tmdb": "https://www.themoviedb.org/movie/1015634",
       "release_year": 2025,
-      "tmdb_id": 1015634
+      "tmdb_id": 1015634,
+      "runtime": 89
     },
     {
       "title": "アプレンティス：ドナルド･トランプの創り方",
@@ -8070,7 +8520,8 @@
       "id": 1182047,
       "tmdb": "https://www.themoviedb.org/movie/1182047",
       "release_year": 2025,
-      "tmdb_id": 1182047
+      "tmdb_id": 1182047,
+      "runtime": 122
     },
     {
       "title": "優しき罪人 (つみびと)",
@@ -8143,7 +8594,8 @@
       "tmdb_id": 9659,
       "poster": "https://image.tmdb.org/t/p/w500/altY9ce7kPqZcc02xldlYceIkXm.jpg",
       "id": 9659,
-      "tmdb": "https://www.themoviedb.org/movie/9659"
+      "tmdb": "https://www.themoviedb.org/movie/9659",
+      "runtime": 94
     },
     {
       "title": "マッド・マックス２",
@@ -8159,7 +8611,8 @@
       "tmdb_id": 8810,
       "poster": "https://image.tmdb.org/t/p/w500/wCNe2dJ9cCi8r3pktfxwRaMY4DA.jpg",
       "id": 8810,
-      "tmdb": "https://www.themoviedb.org/movie/8810"
+      "tmdb": "https://www.themoviedb.org/movie/8810",
+      "runtime": 96
     },
     {
       "title": "マッドマックス　怒りのデス・ロード",
@@ -8176,7 +8629,8 @@
       "id": 76341,
       "tmdb": "https://www.themoviedb.org/movie/76341",
       "release_year": 2015,
-      "tmdb_id": 76341
+      "tmdb_id": 76341,
+      "runtime": 120
     },
     {
       "title": "マッドマックス：フュリオサ",
@@ -8193,7 +8647,8 @@
       "id": 786892,
       "tmdb": "https://www.themoviedb.org/movie/786892",
       "release_year": 2024,
-      "tmdb_id": 786892
+      "tmdb_id": 786892,
+      "runtime": 149
     },
     {
       "title": "マッドマックス／サンダードーム",
@@ -8210,7 +8665,8 @@
       "id": 9355,
       "tmdb": "https://www.themoviedb.org/movie/9355",
       "release_year": 1985,
-      "tmdb_id": 9355
+      "tmdb_id": 9355,
+      "runtime": 107
     },
     {
       "title": "黒牢城",
@@ -8226,7 +8682,8 @@
       "checked_at": "2026-11-05",
       "id": 1620313,
       "tmdb": "https://www.themoviedb.org/movie/1620313",
-      "tmdb_id": 1620313
+      "tmdb_id": 1620313,
+      "runtime": 147
     },
     {
       "title": "PARTY7",
@@ -8243,7 +8700,8 @@
       "id": 31140,
       "tmdb": "https://www.themoviedb.org/movie/31140",
       "release_year": 2000,
-      "tmdb_id": 31140
+      "tmdb_id": 31140,
+      "runtime": 104
     },
     {
       "title": "スカイ・フォース",
@@ -8284,7 +8742,8 @@
       "id": 8010,
       "tmdb": "https://www.themoviedb.org/movie/8010",
       "release_year": 1991,
-      "tmdb_id": 8010
+      "tmdb_id": 8010,
+      "runtime": 100
     },
     {
       "title": "ハイランダー3 超戦士大決戦",
@@ -8301,7 +8760,8 @@
       "id": 8011,
       "tmdb": "https://www.themoviedb.org/movie/8011",
       "release_year": 1994,
-      "tmdb_id": 8011
+      "tmdb_id": 8011,
+      "runtime": 99
     },
     {
       "title": "ヒットマン・ボディガード",
@@ -8330,7 +8790,8 @@
       "id": 36867,
       "tmdb": "https://www.themoviedb.org/movie/36867",
       "release_year": 1999,
-      "tmdb_id": 36867
+      "tmdb_id": 36867,
+      "runtime": 108
     },
     {
       "title": "アメリカン･アサシン",
@@ -8347,7 +8808,8 @@
       "id": 415842,
       "tmdb": "https://www.themoviedb.org/movie/415842",
       "release_year": 2018,
-      "tmdb_id": 415842
+      "tmdb_id": 415842,
+      "runtime": 112
     },
     {
       "title": "アンジーのBARで逢いましょう",
@@ -8422,7 +8884,8 @@
       "id": 631385,
       "tmdb": "https://www.themoviedb.org/movie/631385",
       "release_year": 2021,
-      "tmdb_id": 631385
+      "tmdb_id": 631385,
+      "runtime": 123
     },
     {
       "title": "劇場版 ソードアート・オンライン -オーディナル・スケール-",
@@ -8439,7 +8902,8 @@
       "id": 413594,
       "tmdb": "https://www.themoviedb.org/movie/413594",
       "release_year": 2017,
-      "tmdb_id": 413594
+      "tmdb_id": 413594,
+      "runtime": 119
     },
     {
       "title": "劇場版 ソードアート・オンライン -プログレッシブ- 冥き夕闇のスケルツォ",
@@ -8456,7 +8920,8 @@
       "id": 893712,
       "tmdb": "https://www.themoviedb.org/movie/893712",
       "release_year": 2022,
-      "tmdb_id": 893712
+      "tmdb_id": 893712,
+      "runtime": 100
     },
     {
       "title": "劇場版 ソードアート・オンライン プログレッシブ 星なき夜のアリア",
@@ -8473,7 +8938,8 @@
       "id": 761898,
       "tmdb": "https://www.themoviedb.org/movie/761898",
       "release_year": 2021,
-      "tmdb_id": 761898
+      "tmdb_id": 761898,
+      "runtime": 97
     },
     {
       "title": "アンダードッグ／二人の男",
@@ -8490,7 +8956,8 @@
       "id": 428639,
       "tmdb": "https://www.themoviedb.org/movie/428639",
       "release_year": 2018,
-      "tmdb_id": 428639
+      "tmdb_id": 428639,
+      "runtime": 91
     },
     {
       "title": "ツイスターズ",
@@ -8507,7 +8974,8 @@
       "id": 718821,
       "tmdb": "https://www.themoviedb.org/movie/718821",
       "release_year": 2024,
-      "tmdb_id": 718821
+      "tmdb_id": 718821,
+      "runtime": 123
     },
     {
       "title": "こんにちは、私のお母さん",
@@ -8524,7 +8992,8 @@
       "id": 758891,
       "tmdb": "https://www.themoviedb.org/movie/758891",
       "release_year": 2022,
-      "tmdb_id": 758891
+      "tmdb_id": 758891,
+      "runtime": 128
     },
     {
       "title": "大統領のケーキ",
@@ -8540,7 +9009,8 @@
       "checked_at": "2026-11-05",
       "id": 1464883,
       "tmdb": "https://www.themoviedb.org/movie/1464883",
-      "tmdb_id": 1464883
+      "tmdb_id": 1464883,
+      "runtime": 106
     },
     {
       "title": "U-31",
@@ -8557,7 +9027,8 @@
       "id": 528345,
       "tmdb": "https://www.themoviedb.org/movie/528345",
       "release_year": 2016,
-      "tmdb_id": 528345
+      "tmdb_id": 528345,
+      "runtime": 86
     },
     {
       "title": "オーバーフェンス",
@@ -8575,7 +9046,8 @@
       "tmdb": "https://www.themoviedb.org/movie/424995",
       "tmdb_id": 424995,
       "release_year": 2016,
-      "year": 2016
+      "year": 2016,
+      "runtime": 112
     },
     {
       "title": "ポエトリーエンジェル",
@@ -8592,7 +9064,8 @@
       "id": 474854,
       "tmdb": "https://www.themoviedb.org/movie/474854",
       "release_year": 2017,
-      "tmdb_id": 474854
+      "tmdb_id": 474854,
+      "runtime": 95
     },
     {
       "title": "武曲 MUKOKU",
@@ -8609,7 +9082,8 @@
       "id": 452706,
       "tmdb": "https://www.themoviedb.org/movie/452706",
       "release_year": 2017,
-      "tmdb_id": 452706
+      "tmdb_id": 452706,
+      "runtime": 127
     },
     {
       "title": "物置のピアノ",
@@ -8626,7 +9100,8 @@
       "id": 567907,
       "tmdb": "https://www.themoviedb.org/movie/567907",
       "release_year": 2014,
-      "tmdb_id": 567907
+      "tmdb_id": 567907,
+      "runtime": 115
     },
     {
       "title": "室井慎次　敗れざる者",
@@ -8643,7 +9118,8 @@
       "id": 1285372,
       "tmdb": "https://www.themoviedb.org/movie/1285372",
       "release_year": 2024,
-      "tmdb_id": 1285372
+      "tmdb_id": 1285372,
+      "runtime": 115
     },
     {
       "title": "search／#サーチ2",
@@ -8660,7 +9136,8 @@
       "id": 768362,
       "tmdb": "https://www.themoviedb.org/movie/768362",
       "release_year": 2023,
-      "tmdb_id": 768362
+      "tmdb_id": 768362,
+      "runtime": 111
     },
     {
       "title": "スティール･レイン",
@@ -8672,7 +9149,8 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "checked_at": "2026-11-05"
+      "checked_at": "2026-11-05",
+      "poster": "https://image.tmdb.org/t/p/w500/m3FXK2mE6Z7JDOrkPCB7xmd77Hf.jpg"
     },
     {
       "title": "ファイト",
@@ -8684,7 +9162,8 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "checked_at": "2026-11-05"
+      "checked_at": "2026-11-05",
+      "poster": "https://image.tmdb.org/t/p/w500/7rNgfppzQsU7Gl6yV3eFxsXOga0.jpg"
     },
     {
       "title": "ブラック･ロータス 誓いの刻印",
@@ -8708,7 +9187,8 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "checked_at": "2026-11-05"
+      "checked_at": "2026-11-05",
+      "poster": "https://image.tmdb.org/t/p/w500/VXGoa9AmlCGNBY7M5CDwjGS8VJ.jpg"
     },
     {
       "title": "鬼哭 忌まわしき地",
@@ -8766,7 +9246,8 @@
       "checked_at": "2026-11-05",
       "id": 1266127,
       "tmdb": "https://www.themoviedb.org/movie/1266127",
-      "tmdb_id": 1266127
+      "tmdb_id": 1266127,
+      "runtime": 108
     },
     {
       "title": "ジョーカー",
@@ -8783,7 +9264,8 @@
       "id": 475557,
       "tmdb": "https://www.themoviedb.org/movie/475557",
       "release_year": 2019,
-      "tmdb_id": 475557
+      "tmdb_id": 475557,
+      "runtime": 122
     },
     {
       "title": "ジョーカー：フォリ・ア・ドゥ",
@@ -8800,7 +9282,8 @@
       "id": 889737,
       "tmdb": "https://www.themoviedb.org/movie/889737",
       "release_year": 2024,
-      "tmdb_id": 889737
+      "tmdb_id": 889737,
+      "runtime": 138
     },
     {
       "title": "劇場版 STEINS;GATE 負荷領域のデジャヴ",
@@ -8817,7 +9300,8 @@
       "id": 225745,
       "tmdb": "https://www.themoviedb.org/movie/225745",
       "release_year": 2013,
-      "tmdb_id": 225745
+      "tmdb_id": 225745,
+      "runtime": 90
     },
     {
       "title": "ハムネット",
@@ -8833,7 +9317,8 @@
       "checked_at": "2026-11-05",
       "id": 858024,
       "tmdb": "https://www.themoviedb.org/movie/858024",
-      "tmdb_id": 858024
+      "tmdb_id": 858024,
+      "runtime": 125
     },
     {
       "title": "ババンババンバンバンパイア",
@@ -8850,7 +9335,8 @@
       "id": 1373310,
       "tmdb": "https://www.themoviedb.org/movie/1373310",
       "release_year": 2025,
-      "tmdb_id": 1373310
+      "tmdb_id": 1373310,
+      "runtime": 106
     },
     {
       "title": "ホテル・ルワンダ",
@@ -8867,7 +9353,8 @@
       "id": 205,
       "tmdb": "https://www.themoviedb.org/movie/205",
       "release_year": 2006,
-      "tmdb_id": 205
+      "tmdb_id": 205,
+      "runtime": 122
     },
     {
       "title": "トラップ",
@@ -8887,7 +9374,8 @@
       "year": 2024,
       "original_title": "Trap",
       "identity_source_url": "https://www.primevideo.com/-/ja/detail/0I2TZOL3OM4GTUKUTFSHC02Z5S",
-      "poster": "https://image.tmdb.org/t/p/w500/ynN2SyseYIwrcLfxYMfpva42oUU.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/ynN2SyseYIwrcLfxYMfpva42oUU.jpg",
+      "runtime": 105
     },
     {
       "title": "モアナと伝説の海",
@@ -8903,7 +9391,8 @@
       "poster": "https://image.tmdb.org/t/p/w500/vqv4shUzZ4rk4rtqXNifAD8yevx.jpg",
       "id": 1108427,
       "tmdb": "https://www.themoviedb.org/movie/1108427",
-      "tmdb_id": 1108427
+      "tmdb_id": 1108427,
+      "runtime": 115
     },
     {
       "title": "シェルター",
@@ -8919,7 +9408,8 @@
       "poster": "https://image.tmdb.org/t/p/w500/bEgOHa6XrRTzgm9TCqyACqI2VSn.jpg",
       "id": 1290821,
       "tmdb": "https://www.themoviedb.org/movie/1290821",
-      "tmdb_id": 1290821
+      "tmdb_id": 1290821,
+      "runtime": 107
     },
     {
       "title": "マッデン",
@@ -8936,7 +9426,8 @@
       "id": 1131943,
       "tmdb": "https://www.themoviedb.org/movie/1131943",
       "release_year": 2026,
-      "tmdb_id": 1131943
+      "tmdb_id": 1131943,
+      "runtime": 110
     },
     {
       "title": "バレリーナ：The World of John Wick",
@@ -8953,7 +9444,8 @@
       "id": 541671,
       "tmdb": "https://www.themoviedb.org/movie/541671",
       "release_year": 2025,
-      "tmdb_id": 541671
+      "tmdb_id": 541671,
+      "runtime": 125
     },
     {
       "title": "君は映画",
@@ -8969,7 +9461,8 @@
       "checked_at": "2026-11-05",
       "id": 1631314,
       "tmdb": "https://www.themoviedb.org/movie/1631314",
-      "tmdb_id": 1631314
+      "tmdb_id": 1631314,
+      "runtime": 68
     },
     {
       "title": "箱の中の羊",
@@ -8985,7 +9478,8 @@
       "checked_at": "2026-11-05",
       "id": 1553969,
       "tmdb": "https://www.themoviedb.org/movie/1553969",
-      "tmdb_id": 1553969
+      "tmdb_id": 1553969,
+      "runtime": 126
     },
     {
       "title": "劇場版「Fate/stay night [Heaven’s Feel]」Ⅰ.presage flower",
@@ -9002,7 +9496,8 @@
       "id": 283984,
       "tmdb": "https://www.themoviedb.org/movie/283984",
       "release_year": 2017,
-      "tmdb_id": 283984
+      "tmdb_id": 283984,
+      "runtime": 120
     },
     {
       "title": "劇場版「Fate/stay night [Heaven’s Feel]」Ⅱ.lost butterfly",
@@ -9019,7 +9514,8 @@
       "id": 390634,
       "tmdb": "https://www.themoviedb.org/movie/390634",
       "release_year": 2019,
-      "tmdb_id": 390634
+      "tmdb_id": 390634,
+      "runtime": 118
     },
     {
       "title": "劇場版「Fate/stay night [Heaven’s Feel]」Ⅲ.spring song",
@@ -9036,7 +9532,8 @@
       "id": 390635,
       "tmdb": "https://www.themoviedb.org/movie/390635",
       "release_year": 2020,
-      "tmdb_id": 390635
+      "tmdb_id": 390635,
+      "runtime": 122
     },
     {
       "title": "リリスとシンデレラのおとぎの王国",
@@ -9053,7 +9550,8 @@
       "id": 1595124,
       "tmdb": "https://www.themoviedb.org/movie/1595124",
       "release_year": 2026,
-      "tmdb_id": 1595124
+      "tmdb_id": 1595124,
+      "runtime": 102
     },
     {
       "title": "マジカル・シークレット・ツアー",
@@ -9069,7 +9567,8 @@
       "checked_at": "2026-11-05",
       "id": 1624812,
       "tmdb": "https://www.themoviedb.org/movie/1624812",
-      "tmdb_id": 1624812
+      "tmdb_id": 1624812,
+      "runtime": 116
     },
     {
       "title": "劇場版「Fate/stay night [Heaven's Feel]」Ⅰ.presage flower",
@@ -9086,7 +9585,8 @@
       "id": 283984,
       "tmdb": "https://www.themoviedb.org/movie/283984",
       "release_year": 2017,
-      "tmdb_id": 283984
+      "tmdb_id": 283984,
+      "runtime": 120
     },
     {
       "title": "劇場版「Fate/stay night [Heaven's Feel]」Ⅱ.lost butterfly",
@@ -9103,7 +9603,8 @@
       "id": 390634,
       "tmdb": "https://www.themoviedb.org/movie/390634",
       "release_year": 2019,
-      "tmdb_id": 390634
+      "tmdb_id": 390634,
+      "runtime": 118
     },
     {
       "title": "劇場版「Fate/stay night [Heaven's Feel]」Ⅲ.spring song",
@@ -9120,7 +9621,8 @@
       "id": 390635,
       "tmdb": "https://www.themoviedb.org/movie/390635",
       "release_year": 2020,
-      "tmdb_id": 390635
+      "tmdb_id": 390635,
+      "runtime": 122
     },
     {
       "title": "劇場版「空の境界」未来福音",
@@ -9137,7 +9639,8 @@
       "id": 212156,
       "tmdb": "https://www.themoviedb.org/movie/212156",
       "release_year": 2013,
-      "tmdb_id": 212156
+      "tmdb_id": 212156,
+      "runtime": 123
     },
     {
       "title": "劇場版「空の境界」未来福音 extra chorus",
@@ -9154,7 +9657,8 @@
       "id": 253987,
       "tmdb": "https://www.themoviedb.org/movie/253987",
       "release_year": 2013,
-      "tmdb_id": 253987
+      "tmdb_id": 253987,
+      "runtime": 35
     },
     {
       "title": "劇場版「空の境界」第一章 俯瞰風景",
@@ -9171,7 +9675,8 @@
       "id": 23150,
       "tmdb": "https://www.themoviedb.org/movie/23150",
       "release_year": 2007,
-      "tmdb_id": 23150
+      "tmdb_id": 23150,
+      "runtime": 52
     },
     {
       "title": "劇場版「空の境界」第七章 殺人考察(後)",
@@ -9188,7 +9693,8 @@
       "id": 23167,
       "tmdb": "https://www.themoviedb.org/movie/23167",
       "release_year": 2009,
-      "tmdb_id": 23167
+      "tmdb_id": 23167,
+      "runtime": 123
     },
     {
       "title": "劇場版「空の境界」第三章 痛覚残留",
@@ -9205,7 +9711,8 @@
       "id": 23153,
       "tmdb": "https://www.themoviedb.org/movie/23153",
       "release_year": 2008,
-      "tmdb_id": 23153
+      "tmdb_id": 23153,
+      "runtime": 60
     },
     {
       "title": "劇場版「空の境界」第二章 殺人考察(前)",
@@ -9222,7 +9729,8 @@
       "id": 23151,
       "tmdb": "https://www.themoviedb.org/movie/23151",
       "release_year": 2007,
-      "tmdb_id": 23151
+      "tmdb_id": 23151,
+      "runtime": 62
     },
     {
       "title": "劇場版「空の境界」第五章 矛盾螺旋",
@@ -9239,7 +9747,8 @@
       "id": 23155,
       "tmdb": "https://www.themoviedb.org/movie/23155",
       "release_year": 2008,
-      "tmdb_id": 23155
+      "tmdb_id": 23155,
+      "runtime": 116
     },
     {
       "title": "劇場版「空の境界」第六章 忘却録音",
@@ -9256,7 +9765,8 @@
       "id": 23166,
       "tmdb": "https://www.themoviedb.org/movie/23166",
       "release_year": 2008,
-      "tmdb_id": 23166
+      "tmdb_id": 23166,
+      "runtime": 62
     },
     {
       "title": "劇場版「空の境界」第四章 伽藍の洞",
@@ -9273,7 +9783,8 @@
       "id": 23154,
       "tmdb": "https://www.themoviedb.org/movie/23154",
       "release_year": 2008,
-      "tmdb_id": 23154
+      "tmdb_id": 23154,
+      "runtime": 48
     },
     {
       "title": "劇場版「空の境界」終章",
@@ -9290,7 +9801,8 @@
       "id": 47747,
       "tmdb": "https://www.themoviedb.org/movie/47747",
       "release_year": 2010,
-      "tmdb_id": 47747
+      "tmdb_id": 47747,
+      "runtime": 34
     },
     {
       "title": "劇場版スポンジ・ボブ 呪われた海賊と大冒険だワワワワワ!",
@@ -9306,7 +9818,8 @@
       "checked_at": "2026-11-05",
       "id": 991494,
       "tmdb": "https://www.themoviedb.org/movie/991494",
-      "tmdb_id": 991494
+      "tmdb_id": 991494,
+      "runtime": 88
     },
     {
       "title": "28年後... 白骨の神殿",
@@ -9322,7 +9835,8 @@
       "checked_at": "2026-11-05",
       "id": 1272837,
       "tmdb": "https://www.themoviedb.org/movie/1272837",
-      "tmdb_id": 1272837
+      "tmdb_id": 1272837,
+      "runtime": 109
     },
     {
       "title": "ソング・サング・ブルー",
@@ -9338,7 +9852,8 @@
       "checked_at": "2026-11-05",
       "id": 1371185,
       "tmdb": "https://www.themoviedb.org/movie/1371185",
-      "tmdb_id": 1371185
+      "tmdb_id": 1371185,
+      "runtime": 133
     },
     {
       "title": "青春ブタ野郎はおでかけシスターの夢を見ない",
@@ -9355,7 +9870,8 @@
       "id": 1056803,
       "tmdb": "https://www.themoviedb.org/movie/1056803",
       "release_year": 2023,
-      "tmdb_id": 1056803
+      "tmdb_id": 1056803,
+      "runtime": 74
     },
     {
       "title": "青春ブタ野郎はゆめみる少女の夢を見ない",
@@ -9372,7 +9888,8 @@
       "id": 572154,
       "tmdb": "https://www.themoviedb.org/movie/572154",
       "release_year": 2019,
-      "tmdb_id": 572154
+      "tmdb_id": 572154,
+      "runtime": 90
     },
     {
       "title": "青春ブタ野郎はランドセルガールの夢を見ない",
@@ -9389,7 +9906,8 @@
       "id": 1086591,
       "tmdb": "https://www.themoviedb.org/movie/1086591",
       "release_year": 2023,
-      "tmdb_id": 1086591
+      "tmdb_id": 1086591,
+      "runtime": 75
     },
     {
       "title": "嵐が丘",
@@ -9405,7 +9923,8 @@
       "poster": "https://image.tmdb.org/t/p/w500/9Rmhua58sWR3RrjhNmH2ky6etQg.jpg",
       "id": 1316092,
       "tmdb": "https://www.themoviedb.org/movie/1316092",
-      "tmdb_id": 1316092
+      "tmdb_id": 1316092,
+      "runtime": 136
     },
     {
       "title": "#拡散",
@@ -9461,7 +9980,8 @@
       "poster": "https://image.tmdb.org/t/p/w500/xVaaL0RG2AkGYcfxXTMoTTDKOXR.jpg",
       "id": 1659696,
       "tmdb": "https://www.themoviedb.org/movie/1659696",
-      "tmdb_id": 1659696
+      "tmdb_id": 1659696,
+      "runtime": 62
     },
     {
       "title": "盤上の向日葵",
@@ -9478,7 +9998,8 @@
       "id": 1418217,
       "tmdb": "https://www.themoviedb.org/movie/1418217",
       "release_year": 2025,
-      "tmdb_id": 1418217
+      "tmdb_id": 1418217,
+      "runtime": 123
     },
     {
       "title": "新劇場版 銀魂 -吉原大炎上-",
@@ -9494,7 +10015,8 @@
       "checked_at": "2026-11-05",
       "id": 1530941,
       "tmdb": "https://www.themoviedb.org/movie/1530941",
-      "tmdb_id": 1530941
+      "tmdb_id": 1530941,
+      "runtime": 124
     },
     {
       "title": "僕の狂ったフェミ彼女",
@@ -9526,7 +10048,8 @@
       "identity_verified_at": "2026-10-20",
       "artwork_type": "backdrop",
       "artwork_source": "TMDB movie-detail API: same-work backdrop used because poster is unavailable",
-      "artwork_verified_at": "2026-10-23"
+      "artwork_verified_at": "2026-10-23",
+      "id": 1591961
     },
     {
       "title": "室井慎次　敗れざる者",
@@ -9543,7 +10066,8 @@
       "id": 1285372,
       "tmdb": "https://www.themoviedb.org/movie/1285372",
       "release_year": 2024,
-      "tmdb_id": 1285372
+      "tmdb_id": 1285372,
+      "runtime": 115
     },
     {
       "title": "ゴス家のワン! ダフル・クリスマス",
@@ -9560,7 +10084,8 @@
       "id": 1570488,
       "tmdb": "https://www.themoviedb.org/movie/1570488",
       "tmdb_id": 1570488,
-      "release_year": 2026
+      "release_year": 2026,
+      "runtime": 102
     },
     {
       "title": "グッド・ロイヤー",
@@ -9570,7 +10095,7 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w500/aoXmmkjKxsMZTNgrVq35d32w3Mg.jpg",
       "source": "Netflix Tudum November 2026 schedule; Japan title page verified",
       "source_url": "https://www.netflix.com/tudum/articles/new-on-netflix?inapp=true-65",
       "checked_at": "2026-11-08",
@@ -9592,7 +10117,8 @@
       "tmdb": "https://www.themoviedb.org/movie/313093",
       "tmdb_id": 313093,
       "release_year": 2014,
-      "original_title": "The Christmas Switch"
+      "original_title": "The Christmas Switch",
+      "runtime": 97
     },
     {
       "title": "ハートランド",
@@ -9611,7 +10137,8 @@
       "tmdb_id": 1543469,
       "tmdb": "https://www.themoviedb.org/movie/1543469",
       "release_year": 2026,
-      "year": 2026
+      "year": 2026,
+      "runtime": 114
     },
     {
       "title": "モスキートボウル",
@@ -9629,7 +10156,8 @@
       "tmdb": "https://www.themoviedb.org/movie/1458300",
       "tmdb_id": 1458300,
       "release_year": 2026,
-      "original_title": "The Mosquito Bowl"
+      "original_title": "The Mosquito Bowl",
+      "runtime": 128
     },
     {
       "title": "夜が明けたら、いちばんに君に会いにいく",
@@ -9646,7 +10174,8 @@
       "id": 1120459,
       "tmdb": "https://www.themoviedb.org/movie/1120459",
       "tmdb_id": 1120459,
-      "release_year": 2023
+      "release_year": 2023,
+      "runtime": 100
     },
     {
       "title": "秒速5センチメートル",
@@ -9666,7 +10195,8 @@
       "release_year": 2025,
       "year": 2025,
       "original_title": "秒速5センチメートル",
-      "identity_source_url": "https://www.netflix.com/jp/title/82758559"
+      "identity_source_url": "https://www.netflix.com/jp/title/82758559",
+      "runtime": 121
     },
     {
       "title": "大統領のケーキ",
@@ -9682,7 +10212,8 @@
       "checked_at": "2026-11-08",
       "id": 1464883,
       "tmdb": "https://www.themoviedb.org/movie/1464883",
-      "tmdb_id": 1464883
+      "tmdb_id": 1464883,
+      "runtime": 106
     },
     {
       "title": "アレン",
@@ -9692,7 +10223,7 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w500/gK11RUXspxqty0Wq6KoV8J0crKO.jpg",
       "source": "Netflix公式の日本向け11月新作ラインアップ・公式作品ページ",
       "source_url": "https://www.netflix.com/jp/title/81382720",
       "checked_at": "2026-11-08"
@@ -9712,7 +10243,8 @@
       "id": 1737338,
       "tmdb": "https://www.themoviedb.org/movie/1737338",
       "tmdb_id": 1737338,
-      "release_year": 2025
+      "release_year": 2025,
+      "runtime": 86
     },
     {
       "title": "ガーディング・スター",
@@ -9742,7 +10274,8 @@
       "id": 726139,
       "tmdb": "https://www.themoviedb.org/movie/726139",
       "tmdb_id": 726139,
-      "release_year": 2025
+      "release_year": 2025,
+      "runtime": 96
     },
     {
       "title": "君がトクベツ",
@@ -9759,7 +10292,8 @@
       "id": 1469230,
       "tmdb": "https://www.themoviedb.org/movie/1469230",
       "tmdb_id": 1469230,
-      "release_year": 2025
+      "release_year": 2025,
+      "runtime": 102
     },
     {
       "title": "search／サーチ",
@@ -9776,7 +10310,8 @@
       "id": 489999,
       "tmdb": "https://www.themoviedb.org/movie/489999",
       "release_year": 2018,
-      "tmdb_id": 489999
+      "tmdb_id": 489999,
+      "runtime": 102
     },
     {
       "title": "室井慎次 敗れざる者",
@@ -9793,7 +10328,8 @@
       "id": 1285372,
       "tmdb": "https://www.themoviedb.org/movie/1285372",
       "tmdb_id": 1285372,
-      "release_year": 2024
+      "release_year": 2024,
+      "runtime": 115
     },
     {
       "title": "ごはん",
@@ -9810,7 +10346,8 @@
       "id": 1287843,
       "tmdb": "https://www.themoviedb.org/movie/1287843",
       "tmdb_id": 1287843,
-      "release_year": 2017
+      "release_year": 2017,
+      "runtime": 116
     },
     {
       "title": "拳銃と目玉焼",
@@ -9827,7 +10364,8 @@
       "id": 883094,
       "tmdb": "https://www.themoviedb.org/movie/883094",
       "tmdb_id": 883094,
-      "release_year": 2014
+      "release_year": 2014,
+      "runtime": 113
     },
     {
       "title": "モーリタニアン 黒塗りの記録",
@@ -9844,7 +10382,8 @@
       "id": 644583,
       "tmdb": "https://www.themoviedb.org/movie/644583",
       "tmdb_id": 644583,
-      "release_year": 2021
+      "release_year": 2021,
+      "runtime": 129
     },
     {
       "title": "劇場版 怪談百物語",
@@ -9861,7 +10400,8 @@
       "id": 751394,
       "tmdb": "https://www.themoviedb.org/movie/751394",
       "tmdb_id": 751394,
-      "release_year": 2020
+      "release_year": 2020,
+      "runtime": 100
     },
     {
       "title": "オールドカー〜てんとう虫のプロポーズ〜",
@@ -9878,7 +10418,8 @@
       "id": 1413151,
       "tmdb": "https://www.themoviedb.org/movie/1413151",
       "tmdb_id": 1413151,
-      "release_year": 2024
+      "release_year": 2024,
+      "runtime": 88
     },
     {
       "title": "THE FINAL：スキル･オブ･ファイト",
@@ -9908,7 +10449,8 @@
       "id": 1640514,
       "tmdb": "https://www.themoviedb.org/movie/1640514",
       "tmdb_id": 1640514,
-      "release_year": 2020
+      "release_year": 2020,
+      "runtime": 99
     },
     {
       "title": "5パーセントの奇跡 ～嘘から始まる素敵な人生～",
@@ -9925,7 +10467,8 @@
       "id": 379019,
       "tmdb": "https://www.themoviedb.org/movie/379019",
       "tmdb_id": 379019,
-      "release_year": 2018
+      "release_year": 2018,
+      "runtime": 111
     },
     {
       "title": "幻滅",
@@ -9942,7 +10485,8 @@
       "id": 660000,
       "tmdb": "https://www.themoviedb.org/movie/660000",
       "tmdb_id": 660000,
-      "release_year": 2023
+      "release_year": 2023,
+      "runtime": 149
     },
     {
       "title": "ファイティン!",
@@ -9959,7 +10503,8 @@
       "id": 520358,
       "tmdb": "https://www.themoviedb.org/movie/520358",
       "tmdb_id": 520358,
-      "release_year": 2018
+      "release_year": 2018,
+      "runtime": 108
     },
     {
       "title": "笑えない世界でも",
@@ -9976,7 +10521,8 @@
       "id": 1737338,
       "tmdb": "https://www.themoviedb.org/movie/1737338",
       "tmdb_id": 1737338,
-      "release_year": 2025
+      "release_year": 2025,
+      "runtime": 86
     },
     {
       "title": "放送局に届いたある映像 (放送版)",
@@ -10017,6 +10563,6 @@
     }
   ],
   "poster_enrichment": {
-    "source": "local catalog or TMDB Search API; unique exact-title matches only"
+    "source": "TMDB identity matches; optional workflow-approved fuzzy posters are explicitly marked"
   }
 }

@@ -280,7 +280,7 @@ def enrich_catalog_posters(rows, catalog):
             enriched.append(row)
             continue
 
-        raw_year = updated.get("release_year") or updated.get("year") or updated.get("date") or ""
+        raw_year = updated.get("release_year") or updated.get("year") or ""
         year_match = re.match(r"(\d{4})", str(raw_year))
         title = unicodedata.normalize("NFKC", str(updated.get("title") or "")).casefold()
         title = re.sub(r"[^\w]+", "", title)

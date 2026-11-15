@@ -381,7 +381,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                     unresolved += 1
                 else:
                     enriched += 1
-            else:
+            elif needs_runtime and not movie.get("runtime"):
                 unresolved += 1
             candidate_review.append({
                 "query": title,

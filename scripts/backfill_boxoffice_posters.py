@@ -388,7 +388,7 @@ EXPLICIT_SOURCE_GROUP_MERGES = {
             "ハムハムハムージャ!幻のプリンセス",
         ),
         "merge_titles": ("とっとこハム太郎", "ハムハムハムージャ!幻のプリンセス"),
-        "film_title": "劇場版 とっとこハム太郎 ハムハムハム～ジャ! 幻のプリンセス",
+        "film_title": "劇場版 とっとこハム太郎 ハムハムハム～ジャ!幻のプリンセス",
         "allow_fuzzy_group_fallback": True,
     },
     normalize(

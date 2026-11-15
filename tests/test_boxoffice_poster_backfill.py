@@ -359,7 +359,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(row["identity_match"], "exact_cleaned_title_and_release_year_window")
         self.assertEqual((row["gross"], row["year"], row["metric"]), (7.2, 1992, "配給収入"))
         self.assertEqual(result["enriched"], 1)
-        self.assertEqual(len(requests), 3)
+        self.assertEqual(len(requests), 4)
         from urllib.parse import parse_qs, urlparse
         self.assertEqual(
             parse_qs(urlparse(requests[3][0].full_url).query)["query"][0],

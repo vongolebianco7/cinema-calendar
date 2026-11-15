@@ -46,6 +46,13 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     # MADB confirms the Hamtaro feature's separate title, Japanese premiere,
     # and director within the 2003 shared screening group.
     (2003, "ハムハムハムージャ幻のプリンセス"): "2002-12-14",
+    # TMS and MADB identify the two Eiren fragments as one 2002 feature.
+    (2003, "劇場版とっとこハム太郎ハムハムハムジャ幻のプリンセス"): "2002-12-14",
+    # TMS confirms the 2004 market-row fragments are its 2003 feature.
+    (2004, "劇場版とっとこハム太郎ハムハムグランプリンオーロラ谷の奇跡リボンちゃん危機一髪"): "2003-12-13",
+    # Shochiku identifies the two RAMPO versions as separate films with a shared date.
+    (1994, "rampo黛バージョン"): "1994-06-25",
+    (1994, "rampo奥山バージョン"): "1994-06-25",
     # Toei Animation's official lineup confirms the Japanese premiere dates.
     (2000, "おジャ魔女どれみ"): "2000-07-08",
     (2001, "デジモンティマース"): "2001-07-14",
@@ -97,6 +104,26 @@ REVIEWED_JAPANESE_DIRECTORS = {
     (2003, "ハムハムハムージャ幻のプリンセス"): {
         "names": ("出崎統",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C411222",
+    },
+    (2003, "劇場版とっとこハム太郎ハムハムハムジャ幻のプリンセス"): {
+        "names": ("出崎統", "出﨑統"),
+        "source_url": "https://www.tms-e.co.jp/alltitles/2000s/593302.html",
+    },
+    (2004, "劇場版とっとこハム太郎ハムハムグランプリンオーロラ谷の奇跡リボンちゃん危機一髪"): {
+        "names": ("出崎統", "出﨑統"),
+        "source_url": "https://www.tms-e.co.jp/alltitles/2000s/593303.html",
+    },
+    (2003, "爆竜戦隊アバレンジャーdeluxeアバレサマーはキンキン中"): {
+        "names": ("諸田敏", "Satoshi Morota"),
+        "source_url": "https://shop.toei-video.co.jp/products/dstd02306",
+    },
+    (1994, "rampo黛バージョン"): {
+        "names": ("黛りんたろう", "Rintaro Mayuzumi"),
+        "source_url": "https://www.shochiku.co.jp/cinema/database/04403/",
+    },
+    (1994, "rampo奥山バージョン"): {
+        "names": ("奥山和由", "Kazuyoshi Okuyama"),
+        "source_url": "https://www.shochiku.co.jp/cinema/database/04402/",
     },
     (1994, "メイクアップセーラー戦士"): {
         "names": ("小坂春女",),
@@ -219,7 +246,9 @@ REVIEWED_TITLE_ALIASES = {
         "特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ！",
     ],
 }
-POSTER_CHECK_VERSION = 11
+# Version 12 retries the 46 currently unverified fallback rows against newly reviewed title, release-date, and director evidence.
+# This remains below MAX_DAILY_LOOKUPS=100; the daily limit and 1-day cooldown are unchanged.
+POSTER_CHECK_VERSION = 12
 RECHECK_DAYS = 1
 
 
@@ -368,7 +397,86 @@ EXPLICIT_SOURCE_GROUP_SPLITS = {
 # second film. The official Media Arts Database lists each full Dai title as a
 # single movie. Merge only this exact, complete child set; preserve the already
 # identified Dragon Ball row and never divide the package gross.
+# Attach the truncated Jirachi prefix to its already verified exact TMDB film row.
+# JFDB and MADB publish the combined canonical title, date and director; this is
+# the same work, not a sibling poster reuse. Require the exact verified target.
+EXPLICIT_SOURCE_GROUP_IDENTITY_ATTACHMENTS = {
+    normalize(
+        "ポケットモンスター アドバンスジェネレーション / "
+        "七夜の願い星ジラーチ / おどるポケモンひみつ基地"
+    ): {
+        "source_child_titles": (
+            "ポケットモンスター アドバンスジェネレーション",
+            "七夜の願い星ジラーチ",
+            "おどるポケモンひみつ基地",
+        ),
+        "fragment_title": "ポケットモンスター アドバンスジェネレーション",
+        "identity_title": "七夜の願い星ジラーチ",
+        "other_film_title": "おどるポケモンひみつ基地",
+        "canonical_title": "ポケットモンスター アドバンスジェネレーション/七夜の願い星ジラーチ",
+        "expected_tmdb_id": 36218,
+        "expected_original_title": "劇場版ポケットモンスター アドバンスジェネレーション 七夜の願い星 ジラーチ",
+        "expected_release_date": "2003-07-19",
+        "expected_identity_source": "https://www.themoviedb.org/movie/36218",
+        "other_film_tmdb_id": 351802,
+    },
+}
+
 EXPLICIT_SOURCE_GROUP_MERGES = {
+    # Eiren's 2003 group lists the Abaranger feature as series name + subtitle.
+    # Toei Video identifies these fragments as the single 2003 theatrical film.
+    # Preserve the other Kamen Rider feature rows, and preserve gross 15 on each.
+    normalize(
+        "仮面ライダー555(ファイズ ) / パラダイス・ロスト / "
+        "爆竜戦隊アバレンジャー DELUXE / アバレサマーはキンキン中!"
+    ): {
+        "source_child_titles": (
+            "仮面ライダー555(ファイズ )",
+            "パラダイス・ロスト",
+            "爆竜戦隊アバレンジャー DELUXE",
+            "アバレサマーはキンキン中!",
+        ),
+        "merge_titles": (
+            "爆竜戦隊アバレンジャー DELUXE",
+            "アバレサマーはキンキン中!",
+        ),
+        "film_title": "爆竜戦隊アバレンジャー DELUXE アバレサマーはキンキン中!",
+        "allow_fuzzy_group_fallback": True,
+    },
+    # Eiren's 2003 entry splits one TMS feature title across two child rows.
+    # Merge only this exact, complete set; keep Godzilla as a distinct sibling.
+    # The shared gross remains 19.1 on each film, without assigning either
+    # fragment the other film's poster.
+    normalize(
+        "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
+    ): {
+        "source_child_titles": (
+            "ゴジラ×メカゴジラ",
+            "とっとこハム太郎",
+            "ハムハムハムージャ!幻のプリンセス",
+        ),
+        "merge_titles": ("とっとこハム太郎", "ハムハムハムージャ!幻のプリンセス"),
+        "film_title": "劇場版 とっとこハム太郎 ハムハムハム～ジャ!幻のプリンセス",
+        "allow_fuzzy_group_fallback": True,
+    },
+    # The 2004 Eiren row likewise split one TMS film at its subtitle.
+    normalize(
+        "・ゴジラ×モスラ×メカゴジラ 東京SOS / "
+        "・劇場版とっとこハム太郎 ハムハムグランプリン / "
+        "オーロラ谷の奇跡 リボンちゃん危機一髪!"
+    ): {
+        "source_child_titles": (
+            "・ゴジラ×モスラ×メカゴジラ 東京SOS",
+            "・劇場版とっとこハム太郎 ハムハムグランプリン",
+            "オーロラ谷の奇跡 リボンちゃん危機一髪!",
+        ),
+        "merge_titles": (
+            "・劇場版とっとこハム太郎 ハムハムグランプリン",
+            "オーロラ谷の奇跡 リボンちゃん危機一髪!",
+        ),
+        "film_title": "劇場版 とっとこハム太郎 ハムハムグランプリン オーロラ谷の奇跡 リボンちゃん危機一髪!",
+        "allow_fuzzy_group_fallback": True,
+    },
     normalize(
         "ドラゴンボールZ / 激突!!100億円パワーの戦士たち / "
         "ドラゴンクエストダイの大冒険 / 起ちあがれ!!アバンの使徒 他"
@@ -652,8 +760,16 @@ def expand_grouped_rows(data):
             ]
             if len(merge_indices) != len(spec["merge_titles"]):
                 continue
-            if any(rows[index].get("poster") or rows[index].get("tmdbId")
-                   or rows[index].get("tmdb_id") for index in merge_indices):
+            if any(rows[index].get("tmdbId") or rows[index].get("tmdb_id")
+                   for index in merge_indices):
+                continue
+            if any(
+                rows[index].get("poster")
+                and not (spec.get("allow_fuzzy_group_fallback")
+                         and rows[index].get("poster_match_status")
+                         == "fuzzy_related_title_or_screening_group")
+                for index in merge_indices
+            ):
                 continue
 
             merged = dict(rows[merge_indices[0]])
@@ -666,6 +782,68 @@ def expand_grouped_rows(data):
             })
             replacements[merge_indices[0]] = [merged]
             consumed.update(merge_indices[1:])
+            expanded += 1
+
+        # Consolidate only the exact verified canonical TMDB row with its
+        # truncated Eiren fragment. Preserve the independently matched short.
+        for group_key, spec in EXPLICIT_SOURCE_GROUP_IDENTITY_ATTACHMENTS.items():
+            matching = [
+                index for index, row in enumerate(rows)
+                if isinstance(row, dict)
+                and normalize(row.get("source_group_title")) == group_key
+            ]
+            expected = {normalize(title) for title in spec["source_child_titles"]}
+            actual = {normalize(rows[index].get("title")) for index in matching}
+            if len(matching) != len(expected) or actual != expected:
+                continue
+            source_rows = [rows[index] for index in matching]
+            if any(row.get("gross") != source_rows[0].get("gross")
+                   for row in source_rows[1:]):
+                continue
+            by_title = {normalize(rows[index].get("title")): index for index in matching}
+            fragment_index = by_title[normalize(spec["fragment_title"])]
+            identity_index = by_title[normalize(spec["identity_title"])]
+            other_index = by_title[normalize(spec["other_film_title"])]
+            fragment, identity, other = rows[fragment_index], rows[identity_index], rows[other_index]
+            if (fragment.get("tmdbId") or fragment.get("tmdb_id")
+                    or fragment.get("poster_match_status")
+                       != "fuzzy_related_title_or_screening_group"):
+                continue
+            if (identity.get("tmdbId") != spec["expected_tmdb_id"]
+                    or normalize(identity.get("original_title"))
+                       != normalize(spec["expected_original_title"])
+                    or str(identity.get("tmdb_release_date") or "")[:10]
+                       != spec["expected_release_date"]
+                    or identity.get("identity_source") != spec["expected_identity_source"]
+                    or identity.get("poster_match_status") != "matched"
+                    or not str(identity.get("poster") or "").startswith(IMAGE_BASE)
+                    or identity.get("poster") == other.get("poster")):
+                continue
+            if (other.get("tmdbId") != spec["other_film_tmdb_id"]
+                    or other.get("poster_match_status") != "matched"
+                    or not str(other.get("poster") or "").startswith(IMAGE_BASE)):
+                continue
+
+            source_group_title = identity.get("source_group_title")
+            group_id = f"{market_year}:{normalize(source_group_title)}"
+            canonical = dict(identity)
+            canonical.update({
+                "title": spec["canonical_title"],
+                "source_title": spec["canonical_title"],
+                "source_group_id": group_id,
+                "source_group_index": 1,
+                "source_group_size": 2,
+            })
+            separate = dict(other)
+            separate.update({
+                "source_title": spec["canonical_title"],
+                "source_group_id": group_id,
+                "source_group_index": 2,
+                "source_group_size": 2,
+            })
+            first_index = min(matching)
+            replacements[first_index] = [canonical, separate]
+            consumed.update(index for index in matching if index != first_index)
             expanded += 1
 
         for group_key, spec in EXPLICIT_SOURCE_GROUP_SPLITS.items():

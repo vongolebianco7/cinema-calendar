@@ -1587,6 +1587,269 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["unresolved"], 0)
         self.assertEqual(len(requests), 2)
 
+    def test_official_hamtaro_fragments_merge_to_one_distinct_film(self):
+        group = "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
+        godzilla = {
+            "title": "ゴジラ×メカゴジラ", "gross": 19.1, "year": 2003,
+            "source_group_title": group, "tmdbId": 12636,
+            "poster": "https://image.tmdb.org/t/p/w342/godzilla.jpg",
+            "poster_match_status": "matched",
+        }
+        fallback = "https://image.tmdb.org/t/p/w342/unverified-hamtaro-group.jpg"
+        fragments = [
+            {"title": title, "gross": 19.1, "year": 2003,
+             "source_group_title": group, "poster": fallback,
+             "poster_match_status": "fuzzy_related_title_or_screening_group"}
+            for title in ("とっとこハム太郎", "ハムハムハムージャ!幻のプリンセス")
+        ]
+        data = {"by_year": {"2003": [godzilla, *fragments]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 1)
+        rows = data["by_year"]["2003"]
+        self.assertEqual(len(rows), 2)
+        merged = next(row for row in rows if "とっとこハム太郎" in row["title"])
+        self.assertEqual(merged["title"],
+                         "劇場版 とっとこハム太郎 ハムハムハム～ジャ!幻のプリンセス")
+        self.assertEqual((merged["gross"], merged["year"]), (19.1, 2003))
+        self.assertEqual(merged["source_group_title"], group)
+        self.assertEqual(merged["source_group_size"], 2)
+        self.assertNotIn("poster", merged)
+        self.assertNotIn("tmdbId", merged)
+        self.assertEqual((rows[0]["title"], rows[0]["tmdbId"], rows[0]["poster"]),
+                         ("ゴジラ×メカゴジラ", 12636,
+                          "https://image.tmdb.org/t/p/w342/godzilla.jpg"))
+        self.assertEqual([row["gross"] for row in rows], [19.1, 19.1])
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            merged["title"], 2003, "2002-12-14"))
+        director = backfill.reviewed_director(merged["title"], 2003)
+        self.assertIn("出﨑統", director["names"])
+        self.assertEqual(director["source_url"],
+                         "https://www.tms-e.co.jp/alltitles/2000s/593302.html")
+
+    def test_official_hamtaro_grand_prin_merge_preserves_2004_shared_gross(self):
+        group = (
+            "・ゴジラ×モスラ×メカゴジラ 東京SOS / "
+            "・劇場版とっとこハム太郎 ハムハムグランプリン / "
+            "オーロラ谷の奇跡 リボンちゃん危機一髪!"
+        )
+        godzilla = {
+            "title": "・ゴジラ×モスラ×メカゴジラ 東京SOS", "gross": 13,
+            "year": 2004, "source_group_title": group, "tmdbId": 39469,
+            "poster": "https://image.tmdb.org/t/p/w342/godzilla-tokyo-sos.jpg",
+            "poster_match_status": "matched",
+        }
+        fallback = "https://image.tmdb.org/t/p/w342/unverified-2004-hamtaro-group.jpg"
+        fragments = [
+            {"title": title, "gross": 13, "year": 2004,
+             "source_group_title": group, "poster": fallback,
+             "poster_match_status": "fuzzy_related_title_or_screening_group"}
+            for title in (
+                "・劇場版とっとこハム太郎 ハムハムグランプリン",
+                "オーロラ谷の奇跡 リボンちゃん危機一髪!",
+            )
+        ]
+        data = {"by_year": {"2004": [godzilla, *fragments]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 1)
+        rows = data["by_year"]["2004"]
+        self.assertEqual(len(rows), 2)
+        merged = next(row for row in rows if "ハム太郎" in row["title"])
+        self.assertEqual(merged["title"],
+                         "劇場版 とっとこハム太郎 ハムハムグランプリン オーロラ谷の奇跡 リボンちゃん危機一髪!")
+        self.assertEqual((merged["gross"], merged["year"]), (13, 2004))
+        self.assertNotIn("poster", merged)
+        self.assertNotIn("tmdbId", merged)
+        self.assertEqual((rows[0]["tmdbId"], rows[0]["poster"]),
+                         (39469, "https://image.tmdb.org/t/p/w342/godzilla-tokyo-sos.jpg"))
+        self.assertEqual([row["gross"] for row in rows], [13, 13])
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            merged["title"], 2004, "2003-12-13"))
+        self.assertIn("出﨑統", backfill.reviewed_director(merged["title"], 2004)["names"])
+
+    def test_official_jirachi_title_fragment_attaches_only_to_its_verified_tmdb_identity(self):
+        group = (
+            "ポケットモンスター アドバンスジェネレーション / "
+            "七夜の願い星ジラーチ / おどるポケモンひみつ基地"
+        )
+        fragment = {
+            "title": "ポケットモンスター アドバンスジェネレーション",
+            "gross": 45, "year": 2003, "source_group_title": group,
+            "poster": "https://image.tmdb.org/t/p/w500/unverified-group-fallback.jpg",
+            "poster_match_status": "fuzzy_related_title_or_screening_group",
+        }
+        jirachi = {
+            "title": "七夜の願い星ジラーチ", "gross": 45, "year": 2003,
+            "source_group_title": group, "tmdbId": 36218,
+            "original_title": "劇場版ポケットモンスター アドバンスジェネレーション 七夜の願い星 ジラーチ",
+            "tmdb_release_date": "2003-07-19",
+            "identity_source": "https://www.themoviedb.org/movie/36218",
+            "identity_match": "exact_cleaned_title_and_release_year_window",
+            "poster": "https://image.tmdb.org/t/p/w500/jirachi-own-poster.jpg",
+            "poster_match_status": "matched",
+        }
+        short = {
+            "title": "おどるポケモンひみつ基地", "gross": 45, "year": 2003,
+            "source_group_title": group, "tmdbId": 351802,
+            "identity_source": "https://www.themoviedb.org/movie/351802",
+            "poster": "https://image.tmdb.org/t/p/w500/pokemon-short-own-poster.jpg",
+            "poster_match_status": "matched",
+        }
+        data = {"by_year": {"2003": [fragment, jirachi, short]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 1)
+        rows = data["by_year"]["2003"]
+        self.assertEqual(len(rows), 2)
+        canonical = next(row for row in rows if "ジラーチ" in row["title"])
+        separate_short = next(row for row in rows if row["tmdbId"] == 351802)
+        self.assertEqual(canonical["title"],
+                         "ポケットモンスター アドバンスジェネレーション/七夜の願い星ジラーチ")
+        self.assertEqual((canonical["tmdbId"], canonical["poster"]),
+                         (36218, "https://image.tmdb.org/t/p/w500/jirachi-own-poster.jpg"))
+        self.assertEqual((separate_short["tmdbId"], separate_short["poster"]),
+                         (351802, "https://image.tmdb.org/t/p/w500/pokemon-short-own-poster.jpg"))
+        self.assertNotEqual(canonical["poster"], separate_short["poster"])
+        self.assertEqual([row["gross"] for row in rows], [45, 45])
+        self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
+
+    def test_jirachi_fragment_attachment_rejects_unverified_or_different_tmdb_identity(self):
+        group = (
+            "ポケットモンスター アドバンスジェネレーション / "
+            "七夜の願い星ジラーチ / おどるポケモンひみつ基地"
+        )
+        rows = [
+            {"title": "ポケットモンスター アドバンスジェネレーション",
+             "gross": 45, "year": 2003, "source_group_title": group,
+             "poster": "https://image.tmdb.org/t/p/w500/fallback.jpg",
+             "poster_match_status": "fuzzy_related_title_or_screening_group"},
+            {"title": "七夜の願い星ジラーチ", "gross": 45, "year": 2003,
+             "source_group_title": group, "tmdbId": 36218,
+             "original_title": "Wrong original title", "tmdb_release_date": "2003-07-19",
+             "identity_source": "https://www.themoviedb.org/movie/36218",
+             "poster": "https://image.tmdb.org/t/p/w500/jirachi.jpg",
+             "poster_match_status": "matched"},
+            {"title": "おどるポケモンひみつ基地", "gross": 45, "year": 2003,
+             "source_group_title": group, "tmdbId": 351802,
+             "identity_source": "https://www.themoviedb.org/movie/351802",
+             "poster": "https://image.tmdb.org/t/p/w500/short.jpg",
+             "poster_match_status": "matched"},
+        ]
+        data = {"by_year": {"2003": rows}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        self.assertEqual(data["by_year"]["2003"], rows)
+
+    def test_official_shochiku_rampo_versions_keep_distinct_directors_and_posters(self):
+        mayuzumi = "ＲＡＭＰＯ（黛バージョン）"
+        okuyama = "ＲＡＭＰＯ（奥山バージョン）"
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            mayuzumi, 1994, "1994-06-25"))
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            okuyama, 1994, "1994-06-25"))
+        self.assertEqual(backfill.reviewed_director(mayuzumi, 1994)["names"],
+                         ("黛りんたろう", "Rintaro Mayuzumi"))
+        self.assertEqual(backfill.reviewed_director(okuyama, 1994)["names"],
+                         ("奥山和由", "Kazuyoshi Okuyama"))
+        self.assertEqual(backfill.reviewed_director(mayuzumi, 1994)["source_url"],
+                         "https://www.shochiku.co.jp/cinema/database/04403/")
+        self.assertEqual(backfill.reviewed_director(okuyama, 1994)["source_url"],
+                         "https://www.shochiku.co.jp/cinema/database/04402/")
+
+        mayuzumi_search = {"results": [{
+            "id": 940001, "title": mayuzumi, "original_title": "RAMPO Mayuzumi Version",
+            "release_date": "1994-06-25", "poster_path": "/rampo-mayuzumi.jpg",
+        }]}
+        mayuzumi_detail = {
+            **mayuzumi_search["results"][0],
+            "credits": {"crew": [{"job": "Director", "name": "黛りんたろう"}]},
+        }
+        stale_sibling_poster = "https://image.tmdb.org/t/p/w500/oURgB9BSFJoQuT3jbTeJ7wMBceF.jpg"
+        rows = [
+            {"title": mayuzumi, "gross": 12, "year": 1994, "poster": stale_sibling_poster,
+             "poster_match_status": "fuzzy_related_title_or_screening_group"},
+            {"title": okuyama, "gross": 12, "year": 1994, "tmdbId": 124484,
+             "poster": stale_sibling_poster, "poster_match_status": "matched"},
+        ]
+        data, requests, result = self.run_rows(
+            rows, [mayuzumi_search, mayuzumi_detail], market_year="1994",
+        )
+        by_title = {row["title"]: row for row in data["by_year"]["1994"]}
+        self.assertEqual(by_title[mayuzumi]["tmdbId"], 940001)
+        self.assertEqual(by_title[mayuzumi]["poster"],
+                         "https://image.tmdb.org/t/p/w500/rampo-mayuzumi.jpg")
+        self.assertNotEqual(by_title[mayuzumi]["poster"], stale_sibling_poster)
+        self.assertEqual((by_title[okuyama]["tmdbId"], by_title[okuyama]["poster"]),
+                         (124484, stale_sibling_poster))
+        self.assertEqual([row["gross"] for row in by_title.values()], [12, 12])
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(len(requests), 2)
+
+    def test_official_abaranger_title_fragments_merge_without_touching_kamen_rider(self):
+        group = (
+            "仮面ライダー555(ファイズ ) / パラダイス・ロスト / "
+            "爆竜戦隊アバレンジャー DELUXE / アバレサマーはキンキン中!"
+        )
+        rider = {
+            "title": "仮面ライダー555(ファイズ )", "gross": 15, "year": 2003,
+            "source_group_title": group, "tmdbId": 784689,
+            "poster": "https://image.tmdb.org/t/p/w342/kamen-rider.jpg",
+            "poster_match_status": "matched",
+        }
+        rider_subtitle = {
+            "title": "パラダイス・ロスト", "gross": 15, "year": 2003,
+            "source_group_title": group, "tmdbId": 1206391,
+            "poster": "https://image.tmdb.org/t/p/w342/other-rider.jpg",
+            "poster_match_status": "matched",
+        }
+        fallback = "https://image.tmdb.org/t/p/w342/unverified-rider-group.jpg"
+        fragments = [
+            {"title": title, "gross": 15, "year": 2003,
+             "source_group_title": group, "poster": fallback,
+             "poster_match_status": "fuzzy_related_title_or_screening_group"}
+            for title in (
+                "爆竜戦隊アバレンジャー DELUXE",
+                "アバレサマーはキンキン中!",
+            )
+        ]
+        data = {"by_year": {"2003": [rider, rider_subtitle, *fragments]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 1)
+        rows = data["by_year"]["2003"]
+        self.assertEqual(len(rows), 3)
+        merged = next(row for row in rows if "アバレンジャー" in row["title"])
+        self.assertEqual(merged["title"],
+                         "爆竜戦隊アバレンジャー DELUXE アバレサマーはキンキン中!")
+        self.assertEqual(merged["gross"], 15)
+        self.assertNotIn("poster", merged)
+        self.assertNotIn("tmdbId", merged)
+        self.assertEqual([row["gross"] for row in rows], [15, 15, 15])
+        self.assertEqual([(row["title"], row["tmdbId"], row["poster"])
+                          for row in rows[:2]],
+                         [(rider["title"], rider["tmdbId"], rider["poster"]),
+                          (rider_subtitle["title"], rider_subtitle["tmdbId"],
+                           rider_subtitle["poster"])])
+        director = backfill.reviewed_director(merged["title"], 2003)
+        self.assertIn("諸田敏", director["names"])
+        self.assertEqual(director["source_url"],
+                         "https://shop.toei-video.co.jp/products/dstd02306")
+
+    def test_hamtaro_merge_requires_exact_complete_unresolved_fragments(self):
+        group = "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
+        rows = [
+            {"title": "ゴジラ×メカゴジラ", "gross": 19.1, "year": 2003,
+             "source_group_title": group, "tmdbId": 12636,
+             "poster": "https://image.tmdb.org/t/p/w342/godzilla.jpg"},
+            {"title": "とっとこハム太郎", "gross": 19.1, "year": 2003,
+             "source_group_title": group, "poster": "https://image.tmdb.org/t/p/w342/hamtaro.jpg",
+             "tmdbId": 992002, "poster_match_status": "matched"},
+            {"title": "ハムハムハムージャ!幻のプリンセス", "gross": 19.1, "year": 2003,
+             "source_group_title": group, "poster": "https://image.tmdb.org/t/p/w342/fallback.jpg",
+             "poster_match_status": "fuzzy_related_title_or_screening_group"},
+        ]
+        data = {"by_year": {"2003": rows}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        self.assertEqual(data["by_year"]["2003"], rows)
+
     def test_official_makeup_sailor_warriors_uses_own_poster_and_preserves_shared_gross(self):
         title = "メイクアップセーラー戦士"
         self.assertIn("メイクアップ！セーラー戦士", backfill.exact_title_aliases(title, 1994))
@@ -1626,7 +1889,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual((updated["gross"], updated["year"], updated["metric"]), (13, 1994, "配給収入"))
         self.assertEqual(updated["source_group_title"], row["source_group_title"])
         self.assertEqual(updated["poster_match_status"], "matched")
-        self.assertEqual(backfill.POSTER_CHECK_VERSION, 11)
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 12)
         self.assertEqual(result["enriched"], 1)
         self.assertEqual(result["unresolved"], 0)
         self.assertEqual(len(requests), 4)
@@ -1676,7 +1939,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertTrue(backfill.matches_reviewed_release_window(title, 1993, "1993-07-10"))
         self.assertFalse(backfill.matches_reviewed_release_window(title, 1993, "1992-07-10"))
         self.assertEqual(backfill.reviewed_director(title, 1993)["names"], ("上田芳裕",))
-        self.assertEqual(backfill.POSTER_CHECK_VERSION, 11)
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 12)
 
 
     def test_official_sailor_moon_s_identity_is_scoped_by_japan_date_and_director(self):
@@ -1686,7 +1949,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(backfill.reviewed_director(title, 1995)["names"], ("芝田浩樹",))
         self.assertEqual(backfill.reviewed_director(title, 1995)["source_url"],
                          "https://mediaarts-db.artmuseums.go.jp/id/C410641")
-        self.assertEqual(backfill.POSTER_CHECK_VERSION, 11)
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 12)
 
 
 if __name__ == "__main__":

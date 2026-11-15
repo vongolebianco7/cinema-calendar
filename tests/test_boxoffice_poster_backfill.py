@@ -1587,6 +1587,45 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["unresolved"], 0)
         self.assertEqual(len(requests), 2)
 
+    def test_official_hamtaro_fragments_merge_to_one_distinct_film(self):
+        group = "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
+        godzilla = {
+            "title": "ゴジラ×メカゴジラ", "gross": 19.1, "year": 2003,
+            "source_group_title": group, "tmdbId": 12636,
+            "poster": "https://image.tmdb.org/t/p/w342/godzilla.jpg",
+            "poster_match_status": "matched",
+        }
+        fallback = "https://image.tmdb.org/t/p/w342/unverified-hamtaro-group.jpg"
+        fragments = [
+            {"title": title, "gross": 19.1, "year": 2003,
+             "source_group_title": group, "poster": fallback,
+             "poster_match_status": "fuzzy_related_title_or_screening_group"}
+            for title in ("とっとこハム太郎", "ハムハムハムージャ!幻のプリンセス")
+        ]
+        data = {"by_year": {"2003": [godzilla, *fragments]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 1)
+        rows = data["by_year"]["2003"]
+        self.assertEqual(len(rows), 2)
+        merged = next(row for row in rows if "とっとこハム太郎" in row["title"])
+        self.assertEqual(merged["title"],
+                         "劇場版 とっとこハム太郎 ハムハムハム～ジャ! 幻のプリンセス")
+        self.assertEqual((merged["gross"], merged["year"]), (19.1, 2003))
+        self.assertEqual(merged["source_group_title"], group)
+        self.assertEqual(merged["source_group_size"], 2)
+        self.assertNotIn("poster", merged)
+        self.assertNotIn("tmdbId", merged)
+        self.assertEqual((rows[0]["title"], rows[0]["tmdbId"], rows[0]["poster"]),
+                         ("ゴジラ×メカゴジラ", 12636,
+                          "https://image.tmdb.org/t/p/w342/godzilla.jpg"))
+        self.assertEqual([row["gross"] for row in rows], [19.1, 19.1])
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            merged["title"], 2003, "2002-12-14"))
+        director = backfill.reviewed_director(merged["title"], 2003)
+        self.assertIn("出﨑統", director["names"])
+        self.assertEqual(director["source_url"],
+                         "https://www.tms-e.co.jp/alltitles/2000s/593302.html")
+
     def test_official_makeup_sailor_warriors_uses_own_poster_and_preserves_shared_gross(self):
         title = "メイクアップセーラー戦士"
         self.assertIn("メイクアップ！セーラー戦士", backfill.exact_title_aliases(title, 1994))

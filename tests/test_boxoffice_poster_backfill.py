@@ -1427,6 +1427,89 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["enriched"], 1)
 
 
+    def test_official_jango_identity_uses_madb_date_director_and_its_own_poster(self):
+        title = "ジャンゴのダンスカーニバル"
+        self.assertIn("Jango's Dance Carnival", backfill.exact_title_aliases(title, 2001))
+        self.assertTrue(backfill.matches_reviewed_release_window(title, 2001, "2001-03-03"))
+        self.assertEqual(backfill.reviewed_director(title, 2001)["names"], ("西尾大介",))
+        self.assertEqual(backfill.reviewed_director(title, 2001)["source_url"],
+                         "https://mediaarts-db.artmuseums.go.jp/id/C411104")
+        search = {"results": [{
+            "id": 992001,
+            "title": "Jango's Dance Carnival",
+            "original_title": "Jango's Dance Carnival",
+            "release_date": "2001-03-03",
+            "poster_path": "/fixture-jango-poster.jpg",
+        }]}
+        detail = {
+            **search["results"][0],
+            "credits": {"crew": [{"job": "Director", "name": "西尾大介"}]},
+        }
+        fallback = "https://image.tmdb.org/t/p/w342/unverified-group-poster.jpg"
+        group = "ONE PIECE / デジモン アドベンチャー02 / ジャンゴのダンスカーニバル"
+        data, requests, result = self.run_rows(
+            [{
+                "title": title, "gross": 30, "year": 2001, "metric": "配給収入",
+                "source_group_title": group, "poster": fallback,
+                "poster_match_status": "fuzzy_related_title_or_screening_group",
+            }],
+            [{"results": []}, search, detail],
+            market_year="2001",
+            limit=1,
+        )
+        row = data["by_year"]["2001"][0]
+        self.assertEqual(row["tmdbId"], 992001)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/fixture-jango-poster.jpg")
+        self.assertEqual(row["identity_source"], "https://www.themoviedb.org/movie/992001")
+        self.assertEqual(row["identity_match"], "tmdb_title_jp_release_window_and_director_verified")
+        self.assertEqual(row["identity_director"], ["西尾大介"])
+        self.assertEqual((row["gross"], row["year"], row["metric"]), (30, 2001, "配給収入"))
+        self.assertEqual(row["source_group_title"], group)
+        self.assertEqual(row["poster_match_status"], "matched")
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(result["unresolved"], 0)
+        self.assertEqual(len(requests), 3)
+
+    def test_official_hamtaro_identity_uses_madb_date_director_and_its_own_poster(self):
+        title = "ハムハムハムージャ!幻のプリンセス"
+        self.assertTrue(backfill.matches_reviewed_release_window(title, 2003, "2002-12-14"))
+        self.assertEqual(backfill.reviewed_director(title, 2003)["names"], ("出崎統",))
+        self.assertEqual(backfill.reviewed_director(title, 2003)["source_url"],
+                         "https://mediaarts-db.artmuseums.go.jp/id/C411222")
+        search = {"results": [{
+            "id": 992002,
+            "title": title,
+            "original_title": title,
+            "release_date": "2002-12-14",
+            "poster_path": "/fixture-hamtaro-2-poster.jpg",
+        }]}
+        detail = {
+            **search["results"][0],
+            "credits": {"crew": [{"job": "Director", "name": "出崎統"}]},
+        }
+        fallback = "https://image.tmdb.org/t/p/w342/unverified-hamtaro-group-poster.jpg"
+        group = "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
+        data, requests, result = self.run_rows(
+            [{
+                "title": title, "gross": 19.1, "year": 2003, "metric": "配給収入",
+                "source_group_title": group, "poster": fallback,
+                "poster_match_status": "fuzzy_related_title_or_screening_group",
+            }],
+            [search, detail],
+            market_year="2003",
+            limit=1,
+        )
+        row = data["by_year"]["2003"][0]
+        self.assertEqual(row["tmdbId"], 992002)
+        self.assertEqual(row["poster"], "https://image.tmdb.org/t/p/w500/fixture-hamtaro-2-poster.jpg")
+        self.assertEqual(row["identity_match"], "tmdb_title_jp_release_window_and_director_verified")
+        self.assertEqual((row["gross"], row["year"], row["metric"]), (19.1, 2003, "配給収入"))
+        self.assertEqual(row["source_group_title"], group)
+        self.assertEqual(row["poster_match_status"], "matched")
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(result["unresolved"], 0)
+        self.assertEqual(len(requests), 2)
+
     def test_official_makeup_sailor_warriors_uses_own_poster_and_preserves_shared_gross(self):
         title = "メイクアップセーラー戦士"
         self.assertIn("メイクアップ！セーラー戦士", backfill.exact_title_aliases(title, 1994))

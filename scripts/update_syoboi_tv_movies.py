@@ -160,8 +160,56 @@ def _catalog_identity(row):
     return movie_id, poster, identities
 
 
+def _tmdb_broadcast_metadata(row, cache):
+    """Use TMDB search for poster-only fallback and exact-match runtime data."""
+    api_key = os.environ.get("TMDB_API_KEY", "")
+    title = str(row.get("title") or "").strip()
+    if not api_key or not title:
+        return None
+    raw_year = row.get("release_year") or row.get("year") or ""
+    year_match = re.match(r"(\d{4})", str(raw_year))
+    year = year_match.group(1) if year_match else ""
+    cache_key = (unicodedata.normalize("NFKC", title).casefold(), year)
+    if cache_key in cache:
+        return cache[cache_key]
+    params = {"api_key": api_key, "query": title, "language": "ja-JP", "region": "JP", "include_adult": "false"}
+    if year:
+        params["year"] = year
+    request = urllib.request.Request(
+        "https://api.themoviedb.org/3/search/movie?" + urllib.parse.urlencode(params),
+        headers={"Accept": "application/json", "User-Agent": USER_AGENT},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=15) as response:
+            results = json.load(response).get("results", [])
+        norm = lambda value: re.sub(r"[^\w]+", "", unicodedata.normalize("NFKC", str(value or "")).casefold())
+        wanted = norm(title)
+        candidates = [item for item in results if item.get("poster_path")]
+        exact = [item for item in candidates if wanted in {norm(item.get("title")), norm(item.get("original_title"))}
+                 and (not year or str(item.get("release_date") or "").startswith(year + "-"))]
+        chosen = (exact or candidates or [None])[0]
+        metadata = {"poster": "https://image.tmdb.org/t/p/w500" + chosen["poster_path"],
+                    "exact": chosen in exact if chosen else False, "id": chosen.get("id") if chosen else None}
+        if chosen and metadata["exact"] and chosen.get("id"):
+            detail_params = urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"})
+            detail_request = urllib.request.Request(
+                "https://api.themoviedb.org/3/movie/" + str(chosen["id"]) + "?" + detail_params,
+                headers={"Accept": "application/json", "User-Agent": USER_AGENT},
+            )
+            with urllib.request.urlopen(detail_request, timeout=15) as response:
+                detail = json.load(response)
+            if isinstance(detail.get("runtime"), int) and detail["runtime"] > 0:
+                metadata["runtime"] = detail["runtime"]
+        cache[cache_key] = metadata if chosen else None
+        time.sleep(0.35)
+        return cache[cache_key]
+    except Exception:
+        cache[cache_key] = None
+        return None
+
+
 def enrich_catalog_posters(rows, catalog):
-    """Reuse artwork only for one exact normalized title/year/TMDB identity."""
+    """Prefer exact local identity, then use explicitly marked TMDB poster fallback."""
     candidates = {}
     for item in catalog:
         if not isinstance(item, dict):
@@ -173,6 +221,7 @@ def enrich_catalog_posters(rows, catalog):
         for key in keys:
             candidates.setdefault(key, {}).setdefault(movie_id, set()).add(poster)
     enriched = []
+    remote_cache = {}
     for row in rows:
         if row.get("poster"):
             enriched.append(row)
@@ -183,7 +232,14 @@ def enrich_catalog_posters(rows, catalog):
         title = re.sub(r"[^\w]+", "", title)
         matches = candidates.get((title, year_match.group(1)), {}) if title and year_match else {}
         if len(matches) != 1:
-            enriched.append(row)
+            fallback = _tmdb_broadcast_metadata(row, remote_cache)
+            if fallback:
+                updated = {**row, "poster": fallback["poster"], "poster_match_status": "fuzzy_tmdb_search_fallback"}
+                if fallback.get("exact") and fallback.get("runtime"):
+                    updated["runtime"] = fallback["runtime"]
+                enriched.append(updated)
+            else:
+                enriched.append(row)
             continue
         movie_id, posters = next(iter(matches.items()))
         existing_id = str(row.get("tmdb_id") or row.get("tmdbId") or row.get("id") or "")

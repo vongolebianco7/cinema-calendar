@@ -30,15 +30,19 @@ jobs:
           python-version: '3.12'
       - name: Validate and refresh verified release subset
         run: python scripts/refresh_streaming_official.py
-      - name: Add TMDB posters only for unique exact-title matches
+      - name: Enrich approved posters and runtimes
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          CINELVA_ALLOW_FUZZY_POSTER_FALLBACK: "1"
+          CINELVA_ENRICH_RUNTIME: "1"
         run: python scripts/enrich_streaming_posters.py
       - name: Merge verified dated titles into the user-facing streaming catalog
         run: python scripts/import_official_streaming_snapshot.py
-      - name: Recheck existing streaming posters against the refreshed movie catalog
+      - name: Backfill missing streaming posters and runtimes
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          CINELVA_ALLOW_FUZZY_POSTER_FALLBACK: "1"
+          CINELVA_ENRICH_RUNTIME: "1"
         run: python scripts/enrich_streaming_posters.py --input data/streaming.json
       - name: Discover official announcement candidates
         run: python scripts/discover_streaming_announcements.py

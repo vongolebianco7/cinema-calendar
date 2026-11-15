@@ -8,8 +8,8 @@ test('official CINELVA URL and legacy-preserving routing',()=>{
  assert.match(page,/href="my-cinelva\/" class="heroAction ghost"/);
  assert.match(read('README.md'),/Legacy frontend origin/);
 });
-test('three movie columns and balanced action layout on iPhone',()=>{
- assert.match(page,/\.streamingWeekMovies\{grid-template-columns:repeat\(3/);
+test('larger calendar posters and balanced action layout on iPhone',()=>{
+ assert.match(page,/streamingWeekMovies\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)!important/);
  assert.match(page,/\.heroActions\{display:grid!important;grid-template-columns:repeat\(2/);
 });
 test('ranking deduplicates normalized identity after gross sorting',()=>{
@@ -26,7 +26,8 @@ test('Interstellar receives explicit IMAX recommendation evidence',()=>{
  assert.match(experience,/www\.imax\.com\/movie\/interstellar/);
 });
 test('cast links and poster fallback are present',()=>{
- assert.match(search,/www\.themoviedb\.org\/search\/person/);
+ assert.match(search,/URLSearchParams\(\/\^\\d\+\$\/\.test\(String\(id\)\)\?/);
+ assert.match(search,/type:"person"/);
  assert.match(page,/function cinelvaCastLinks/);
  assert.match(page,/posterMissing/);
  assert.match(ranking,/img\.onerror=/);

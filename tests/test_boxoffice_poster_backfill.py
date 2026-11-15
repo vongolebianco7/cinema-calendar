@@ -1453,7 +1453,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             "source_group_title": "美少女戦士セーラームーンR / メイクアップセーラー戦士 / ツヨシしっかりしなさい",
             "poster": "https://image.tmdb.org/t/p/w342/sBDDdvvuUcuC6ccI2ePOv3I3w1g.jpg",
             "poster_match_status": "fuzzy_related_title_or_screening_group",
-            "poster_fallback_checked_at": "2026-11-15T01:14:16Z",
+            "poster_fallback_checked_at": "2026-11-09T12:00:00Z",
         }
         data, requests, result = self.run_rows(
             [row], [search, search, detail], market_year="1994", limit=1
@@ -1494,7 +1494,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             "source_group_title": "美少女戦士セーラームーンR / メイクアップセーラー戦士 / ツヨシしっかりしなさい",
             "poster": fallback,
             "poster_match_status": "fuzzy_related_title_or_screening_group",
-            "poster_fallback_checked_at": "2026-11-15T01:14:16Z",
+            "poster_fallback_checked_at": "2026-11-09T12:00:00Z",
         }
         data, _, result = self.run_rows(
             [row], [search, search, detail], market_year="1994", limit=1
@@ -1502,7 +1502,9 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         updated = data["by_year"]["1994"][0]
         self.assertEqual(updated["poster"], fallback)
         self.assertEqual(updated["poster_match_status"], "fuzzy_related_title_or_screening_group")
-        self.assertEqual(updated["tmdb_fallback_checked_at"] if "tmdb_fallback_checked_at" in updated else None, None)
+        self.assertEqual(updated["poster_fallback_checked_at"], "2026-11-09T12:00:00Z")
+        self.assertNotIn("tmdbId", updated)
+        self.assertNotIn("identity_source", updated)
         self.assertEqual(updated["gross"], 13)
         self.assertEqual(result["enriched"], 0)
         self.assertEqual(result["unresolved"], 1)

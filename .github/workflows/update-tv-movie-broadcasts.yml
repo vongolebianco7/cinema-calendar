@@ -32,6 +32,8 @@ jobs:
           python scripts/check_sources.py
           node scripts/verify-production-release.cjs --require
       - name: Collect the documented seven-day movie-category feed
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python scripts/update_syoboi_tv_movies.py
       - name: Validate the source parser and complete data quality gate
         run: |

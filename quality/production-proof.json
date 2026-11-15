@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "5630ebdd4574ec2613aaa54ca1898fdcf5887c8b",
-  "verified_at": "2026-11-15T09:03:44.222Z",
-  "note": "Exact-source CI receipt for current executable source, tested on PR #862 head 5630ebdd4574ec2613aaa54ca1898fdcf5887c8b. Required workflows passed: Autonomous quality gate run 43696910970; CINELVA smoke tests run 43696910878; Validate frontend run 43696910947; Reproducible backend build run 43696910877. Chromium/WebKit reported-regression journeys, iPhone-size smoke, and continuous visual QA passed. This receipt records CI validation; production status is verified separately."
+  "head_sha": "85e0376894c58f684b6404300e93ae753e3b9e98",
+  "verified_at": "2026-11-15T13:49:23.000Z",
+  "note": "Exact-source CI receipt for executable source head 85e0376894c58f684b6404300e93ae753e3b9e98, tested on PR #864. Required workflows passed on this exact head: Autonomous quality gate run 43720389518; CINELVA smoke tests run 43720389538; Validate frontend run 43720389527; Reproducible backend build run 43720389506. Mobile Chromium/WebKit regression journeys, iPhone-size smoke, and continuous visual QA passed. This receipt records CI validation only. The production JSON still has 41 unresolved fuzzy/group fallback rows; no production data change is included."
 }

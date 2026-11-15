@@ -8,8 +8,8 @@ test('official CINELVA URL and legacy-preserving routing',()=>{
  assert.match(page,/href="my-cinelva\/" class="heroAction ghost"/);
  assert.match(read('README.md'),/Legacy frontend origin/);
 });
-test('larger calendar posters and balanced action layout on iPhone',()=>{
- assert.match(page,/streamingWeekMovies\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)!important/);
+test('three-column calendar posters and balanced action layout on iPhone',()=>{
+ assert.match(page,/streamingWeekMovies\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)!important/);
  assert.match(page,/\.heroActions\{display:grid!important;grid-template-columns:repeat\(2/);
 });
 test('ranking deduplicates normalized identity after gross sorting',()=>{

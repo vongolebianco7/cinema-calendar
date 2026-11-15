@@ -1609,7 +1609,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(len(rows), 2)
         merged = next(row for row in rows if "とっとこハム太郎" in row["title"])
         self.assertEqual(merged["title"],
-                         "劇場版 とっとこハム太郎 ハムハムハム～ジャ! 幻のプリンセス")
+                         "劇場版 とっとこハム太郎 ハムハムハム～ジャ!幻のプリンセス")
         self.assertEqual((merged["gross"], merged["year"]), (19.1, 2003))
         self.assertEqual(merged["source_group_title"], group)
         self.assertEqual(merged["source_group_size"], 2)

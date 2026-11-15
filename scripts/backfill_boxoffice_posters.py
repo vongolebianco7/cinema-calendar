@@ -59,12 +59,19 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (2005, "劇場版仮面ライダーヒビキと7人の戦鬼"): "2005-09-03",
     (2005, "魔法戦隊マジレンジャーthemovieインフェルシアの花嫁"): "2005-09-03",
     (2009, "ドロップ"): "2009-03-20",
+    # TMDB 539172 confirms the title, Japan release date, and own poster.
+    # Eiren reports the shared screening group in the 1994 market-year list.
+    (1994, "メイクアップセーラー戦士"): "1993-12-05",
 }
 
 # Official source pages provide Japanese release date and director credits for
 # a small set of known false-positive-prone titles. TMDB's own movie credits
 # are checked before any of these records can receive artwork.
 REVIEWED_JAPANESE_DIRECTORS = {
+    (1994, "メイクアップセーラー戦士"): {
+        "names": ("小坂春女",),
+        "source_url": "https://www.themoviedb.org/movie/539172",
+    },
     (1995, "美少女戦士セーラームーンs"): {
         "names": ("芝田浩樹",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C410641",
@@ -93,6 +100,7 @@ REVIEWED_JAPANESE_DIRECTORS = {
 MIN_DIRECTOR_FUZZY_TITLE_RATIO = 0.5
 
 REVIEWED_TITLE_ALIASES = {
+    (1994, "メイクアップセーラー戦士"): ["メイクアップ！セーラー戦士"],
     (2001, "ONE PIECE ねじまき島の冒険"): [
         "One Piece: Clockwork Island Adventure",
         "ONE PIECE: Nejimaki-jima no Daibōken",
@@ -179,7 +187,7 @@ REVIEWED_TITLE_ALIASES = {
         "特命戦隊ゴーバスターズ THE MOVIE 東京エネタワーを守れ！",
     ],
 }
-POSTER_CHECK_VERSION = 10
+POSTER_CHECK_VERSION = 11
 RECHECK_DAYS = 1
 
 

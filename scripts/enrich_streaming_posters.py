@@ -82,10 +82,11 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
     last_request = 0.0
     enriched = ambiguous = unresolved = runtime_enriched = 0
     detail_cache = {}
+    allow_fuzzy_posters = os.environ.get("CINELVA_ALLOW_FUZZY_POSTER_FALLBACK") == "1"
     candidate_review = []
     for movie in rows:
         needs_poster = not movie.get("poster")
-        needs_runtime = not (isinstance(movie.get("runtime"), (int, float)) and movie.get("runtime") > 0)
+        needs_runtime = os.environ.get("CINELVA_ENRICH_RUNTIME") == "1" and not (isinstance(movie.get("runtime"), (int, float)) and movie.get("runtime") > 0)
         if not needs_poster and not needs_runtime:
             continue
         # Preserve existing canonical identities, regardless of alias.
@@ -315,7 +316,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             release_year = (identity.get("release_date") or "")[:4]
             if release_year.isdigit() and 1888 <= int(release_year) <= 2100:
                 movie.setdefault("release_year", int(release_year))
-            if needs_runtime:
+            if needs_runtime and expected_year:
                 wait = delay - (time.monotonic() - last_request)
                 if wait > 0:
                     time.sleep(wait)
@@ -359,7 +360,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             # User-approved poster-only fuzzy fallback: keep the existing identity
             # untouched and mark the artwork so it is never mistaken for a verified match.
             fuzzy = next((item for item in result.get("results", []) if item.get("poster_path")), None)
-            if needs_poster and fuzzy:
+            if needs_poster and fuzzy and allow_fuzzy_posters:
                 movie["poster"] = IMAGE_BASE + fuzzy["poster_path"]
                 movie["poster_match_status"] = "fuzzy_search_fallback"
                 movie["poster_match_query"] = title
@@ -371,7 +372,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                 unresolved += 1
             candidate_review.append({
                 "query": title,
-                "reason": "poster assigned from first fuzzy TMDB result without changing movie identity" if needs_poster and fuzzy else "no usable poster candidate",
+                "reason": "user-approved poster-only fuzzy fallback; movie identity remains unchanged" if needs_poster and fuzzy and allow_fuzzy_posters else "no unique exact-title candidate; poster left unresolved",
                 "candidates": search_candidates,
             })
 
@@ -383,7 +384,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         )
 
     data["poster_enrichment"] = {
-        "source": "TMDB identity matches plus user-approved poster-only fuzzy fallback; fuzzy posters are explicitly marked",
+        "source": "TMDB identity matches; optional workflow-approved fuzzy posters are explicitly marked",
     }
     content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
     if path.read_text(encoding="utf-8") == content:

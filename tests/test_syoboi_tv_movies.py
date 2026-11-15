@@ -106,8 +106,31 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
         ]
         self.assertEqual(update_syoboi_tv_movies.enrich_catalog_posters(tv, catalog), [
             {**tv[0], "id": 9323, "tmdb": "https://www.themoviedb.org/movie/9323",
-             "poster": "https://image.tmdb.org/t/p/w500/ghost.jpg"}
+             "poster": "https://image.tmdb.org/t/p/w500/ghost.jpg", "poster_match_status": "matched"}
         ])
+
+    def test_reviewed_tmdb_id_fills_missing_runtime_without_changing_identity(self):
+        class JsonResponse:
+            def __enter__(self):
+                return self
+            def __exit__(self, *_):
+                return False
+            def read(self):
+                return b'{"id":123,"runtime":110,"poster_path":"/reviewed.jpg"}'
+
+        row = {
+            "title": "作品", "date": "2026-11-15", "id": 123,
+            "tmdb": "https://www.themoviedb.org/movie/123",
+            "poster": "https://image.tmdb.org/t/p/w500/reviewed.jpg",
+        }
+        with mock.patch.dict(update_syoboi_tv_movies.os.environ, {"TMDB_API_KEY": "fixture"}), \
+             mock.patch.object(update_syoboi_tv_movies.urllib.request, "urlopen", return_value=JsonResponse()) as opener:
+            result = update_syoboi_tv_movies.enrich_catalog_posters([row], [])
+        self.assertEqual(result[0]["runtime"], 110)
+        self.assertEqual(result[0]["id"], 123)
+        self.assertEqual(result[0]["tmdb"], row["tmdb"])
+        self.assertEqual(result[0]["poster"], row["poster"])
+        self.assertIn("/movie/123?", opener.call_args.args[0].full_url)
 
     def test_catalog_poster_match_refuses_ambiguous_ids_and_untrusted_urls(self):
         tv = [{"title": "作品", "year": 2020}]

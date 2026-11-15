@@ -1,4 +1,5 @@
 import json
+import os
 import tempfile
 from contextlib import redirect_stdout
 from io import StringIO
@@ -24,7 +25,7 @@ class Response:
 
 
 class StreamingPosterEnrichmentTests(unittest.TestCase):
-    def run_fixture(self, movies, result, catalog=None, api_key="fixture-secret"):
+    def run_fixture(self, movies, result, catalog=None, api_key="fixture-secret", allow_fuzzy=False):
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
         path = Path(tmp.name) / "streaming.json"
@@ -37,7 +38,13 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
             requests.append((request, timeout))
             return Response(result)
 
-        counts = enrichment.enrich(path, api_key=api_key, opener=opener, delay=0, catalog_path=catalog_path)
+        key = "CINELVA_ALLOW_FUZZY_POSTER_FALLBACK"
+        env = dict(os.environ)
+        env.pop(key, None)
+        if allow_fuzzy:
+            env[key] = "1"
+        with patch.dict(enrichment.os.environ, env, clear=True):
+            counts = enrichment.enrich(path, api_key=api_key, opener=opener, delay=0, catalog_path=catalog_path)
         return json.loads(path.read_text(encoding="utf-8")), requests, counts
 
     def test_unique_exact_title_adds_tmdb_poster_and_movie_identity(self):
@@ -149,6 +156,56 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertNotIn("id", data["movies"][0])
         self.assertEqual(len(requests), 1)
         self.assertEqual(counts, (0, 1, 0))
+
+    def test_ambiguous_match_uses_poster_only_when_explicitly_enabled(self):
+        data, _, counts = self.run_fixture(
+            [{"title": "The Example", "release_year": 2024}],
+            {"results": [
+                {"id": 1, "title": "The Example", "release_date": "2024-01-01", "poster_path": "/one.jpg"},
+                {"id": 2, "title": "The Example", "release_date": "2024-02-01", "poster_path": "/two.jpg"},
+            ]},
+            allow_fuzzy=True,
+        )
+        movie = data["movies"][0]
+        self.assertIn(movie["poster"], {
+            "https://image.tmdb.org/t/p/w500/one.jpg",
+            "https://image.tmdb.org/t/p/w500/two.jpg",
+        })
+        self.assertEqual(movie["poster_match_status"], "fuzzy_search_fallback")
+        self.assertNotIn("id", movie)
+        self.assertNotIn("tmdb", movie)
+        self.assertEqual(counts, (1, 1, 0))
+
+    def test_unique_exact_title_can_fill_runtime_without_assigning_identity(self):
+        data, requests, counts = self.run_fixture(
+            [{"title": "Unique Film", "event": "streaming"}],
+            {"id": 77, "runtime": 108, "results": [
+                {"id": 77, "title": "Unique Film", "original_title": "Unique Film",
+                 "release_date": "2025-01-01", "poster_path": "/unique.jpg"},
+            ]},
+            allow_fuzzy=True,
+        )
+        movie = data["movies"][0]
+        self.assertEqual(movie["runtime"], 108)
+        self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w500/unique.jpg")
+        self.assertEqual(movie["poster_match_status"], "fuzzy_search_fallback")
+        self.assertNotIn("id", movie)
+        self.assertNotIn("tmdb", movie)
+        self.assertEqual(len(requests), 2)
+        self.assertEqual(counts, (1, 0, 0))
+
+    def test_poster_search_alias_is_not_saved_as_a_movie_identity(self):
+        data, requests, _ = self.run_fixture(
+            [{"title": "ヒットマン リサージェンス", "event": "streaming"}],
+            {"results": [{"id": 88, "title": "Hitman 2", "original_title": "Hitman 2",
+                          "poster_path": "/hitman.jpg"}]},
+            allow_fuzzy=True,
+        )
+        movie = data["movies"][0]
+        self.assertEqual(requests[0][0].full_url.split("query=", 1)[1].split("&", 1)[0], "Hitman+2")
+        self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w500/hitman.jpg")
+        self.assertNotIn("id", movie)
+        self.assertNotIn("tmdb", movie)
 
     def test_missing_api_key_leaves_unmatched_entries_without_posters(self):
         with tempfile.TemporaryDirectory() as tmp:

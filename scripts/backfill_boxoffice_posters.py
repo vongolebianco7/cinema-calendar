@@ -851,7 +851,11 @@ def atomic_write(path, data):
 def poster_checked_recently(row, now):
     if row.get("poster_check_version") != POSTER_CHECK_VERSION:
         return False
-    checked = row.get("poster_checked_at")
+    is_unverified_fallback = (
+        row.get("poster_match_status") == "fuzzy_related_title_or_screening_group"
+        and not (row.get("tmdbId") or row.get("tmdb_id"))
+    )
+    checked = row.get("poster_fallback_checked_at") if is_unverified_fallback else row.get("poster_checked_at")
     if not checked:
         return False
     try:
@@ -870,7 +874,13 @@ def candidate_rows(data, now, limit, ignore_cooldown=False):
         if not isinstance(entries, list):
             continue
         for index, row in enumerate(entries):
-            if not isinstance(row, dict) or row.get("poster") or grouped_title(row.get("title")):
+            if not isinstance(row, dict) or grouped_title(row.get("title")):
+                continue
+            is_unverified_fallback = (
+                row.get("poster_match_status") == "fuzzy_related_title_or_screening_group"
+                and not (row.get("tmdbId") or row.get("tmdb_id"))
+            )
+            if row.get("poster") and not is_unverified_fallback:
                 continue
             if not ignore_cooldown and poster_checked_recently(row, now):
                 continue
@@ -971,8 +981,18 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
         for row in rows:
             if not isinstance(row, dict):
                 continue
-            row["poster_match_status"] = "matched" if row.get("poster") else "unexamined"
-            row["poster_check_skip_reason"] = None if row.get("poster") else "pending"
+            is_unverified_fallback = (
+                row.get("poster_match_status") == "fuzzy_related_title_or_screening_group"
+                and bool(row.get("poster"))
+                and not (row.get("tmdbId") or row.get("tmdb_id"))
+            )
+            if not is_unverified_fallback:
+                row["poster_match_status"] = "matched" if row.get("poster") else "unexamined"
+                row["poster_check_skip_reason"] = None if row.get("poster") else "pending"
+            else:
+                # A visual fallback is not an identity lookup. Recheck it once
+                # against the official API without clearing the visible image.
+                pass
     force_recheck = os.environ.get("FORCE_BOXOFFICE_POSTER_RECHECK", "").lower() == "true"
     try:
         requested_limit = int(os.environ.get("BOXOFFICE_POSTER_LOOKUP_LIMIT", limit))
@@ -1165,7 +1185,8 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
         except Exception as exc:
             print("TMDB box-office poster lookup skipped:", title, type(exc).__name__)
             # A transient API failure must remain retryable on the next run.
-            row["poster_match_status"] = "retryable_error"
+            if row.get("poster_match_status") != "fuzzy_related_title_or_screening_group":
+                row["poster_match_status"] = "retryable_error"
             unresolved += 1
             continue
 
@@ -1176,7 +1197,12 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
             if not valid_poster_path(path_value):
                 row["poster_checked_at"] = checked_at
                 row["poster_check_version"] = POSTER_CHECK_VERSION
-                row["poster_match_status"] = "matched_without_poster"
+                if row.get("poster_match_status") == "fuzzy_related_title_or_screening_group":
+                    # A TMDB identity without its own image does not validate fallback art.
+                    row["poster_fallback_checked_at"] = checked_at
+                    row["poster_check_skip_reason"] = "verified_identity_without_poster"
+                else:
+                    row["poster_match_status"] = "matched_without_poster"
                 unresolved += 1
                 continue
             mid = int(movie["id"])
@@ -1197,10 +1223,22 @@ def backfill(path=BOXOFFICE, api_key=None, opener=urllib.request.urlopen, delay=
                 "poster_match_status": "matched",
                 "poster_check_skip_reason": None,
             })
+            row.pop("poster_fallback_checked_at", None)
             enriched += 1
         else:
             row["poster_checked_at"] = checked_at
             row["poster_check_version"] = POSTER_CHECK_VERSION
+            if row.get("poster_match_status") == "fuzzy_related_title_or_screening_group":
+                # Keep the currently visible fallback only as last-known-good
+                # display. It remains explicitly unverified and is retried
+                # after the normal recheck window.
+                row["poster_fallback_checked_at"] = checked_at
+                row["poster_check_skip_reason"] = (
+                    "ambiguous_exact_identity" if len(unique) > 1 or too_many_alias_candidates
+                    else "no_verified_exact_identity"
+                )
+                unresolved += 1
+                continue
             if len(unique) > 1 or too_many_alias_candidates:
                 row["poster_match_status"] = "ambiguous"
                 ambiguous += 1

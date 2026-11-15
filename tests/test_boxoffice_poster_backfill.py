@@ -1666,6 +1666,55 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             merged["title"], 2004, "2003-12-13"))
         self.assertIn("出﨑統", backfill.reviewed_director(merged["title"], 2004)["names"])
 
+    def test_official_abaranger_title_fragments_merge_without_touching_kamen_rider(self):
+        group = (
+            "仮面ライダー555(ファイズ ) / パラダイス・ロスト / "
+            "爆竜戦隊アバレンジャー DELUXE / アバレサマーはキンキン中!"
+        )
+        rider = {
+            "title": "仮面ライダー555(ファイズ )", "gross": 15, "year": 2003,
+            "source_group_title": group, "tmdbId": 784689,
+            "poster": "https://image.tmdb.org/t/p/w342/kamen-rider.jpg",
+            "poster_match_status": "matched",
+        }
+        rider_subtitle = {
+            "title": "パラダイス・ロスト", "gross": 15, "year": 2003,
+            "source_group_title": group, "tmdbId": 1206391,
+            "poster": "https://image.tmdb.org/t/p/w342/other-rider.jpg",
+            "poster_match_status": "matched",
+        }
+        fallback = "https://image.tmdb.org/t/p/w342/unverified-rider-group.jpg"
+        fragments = [
+            {"title": title, "gross": 15, "year": 2003,
+             "source_group_title": group, "poster": fallback,
+             "poster_match_status": "fuzzy_related_title_or_screening_group"}
+            for title in (
+                "爆竜戦隊アバレンジャー DELUXE",
+                "アバレサマーはキンキン中!",
+            )
+        ]
+        data = {"by_year": {"2003": [rider, rider_subtitle, *fragments]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 1)
+        rows = data["by_year"]["2003"]
+        self.assertEqual(len(rows), 3)
+        merged = next(row for row in rows if "アバレンジャー" in row["title"])
+        self.assertEqual(merged["title"],
+                         "爆竜戦隊アバレンジャー DELUXE アバレサマーはキンキン中!")
+        self.assertEqual(merged["gross"], 15)
+        self.assertNotIn("poster", merged)
+        self.assertNotIn("tmdbId", merged)
+        self.assertEqual([row["gross"] for row in rows], [15, 15, 15])
+        self.assertEqual([(row["title"], row["tmdbId"], row["poster"])
+                          for row in rows[:2]],
+                         [(rider["title"], rider["tmdbId"], rider["poster"]),
+                          (rider_subtitle["title"], rider_subtitle["tmdbId"],
+                           rider_subtitle["poster"])])
+        director = backfill.reviewed_director(merged["title"], 2003)
+        self.assertIn("諸田敏", director["names"])
+        self.assertEqual(director["source_url"],
+                         "https://shop.toei-video.co.jp/products/dstd02306")
+
     def test_hamtaro_merge_requires_exact_complete_unresolved_fragments(self):
         group = "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
         rows = [

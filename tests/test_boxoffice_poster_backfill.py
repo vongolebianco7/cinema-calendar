@@ -1502,7 +1502,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         updated = data["by_year"]["1994"][0]
         self.assertEqual(updated["poster"], fallback)
         self.assertEqual(updated["poster_match_status"], "fuzzy_related_title_or_screening_group")
-        self.assertEqual(updated["poster_fallback_checked_at"], "2026-11-09T12:00:00Z")
+        self.assertEqual(updated["poster_fallback_checked_at"], "2026-11-10T00:00:00Z")
         self.assertNotIn("tmdbId", updated)
         self.assertNotIn("identity_source", updated)
         self.assertEqual(updated["gross"], 13)

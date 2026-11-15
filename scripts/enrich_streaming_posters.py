@@ -23,6 +23,21 @@ DIRECTOR_CATALOG = ROOT / "data/directors-mobile.json"
 BASE = "https://api.themoviedb.org/3/search/movie"
 DETAILS = "https://api.themoviedb.org/3/movie/{}"
 IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
+POSTER_SEARCH_ALIASES = {
+    # Alternate titles used only to find artwork; these never set a TMDB identity.
+    "スカイ・フォース": "Sky Force",
+    "デッドウォーカー・インフェルノ": "Deadwalker: Inferno",
+    "ヒットマン・ボディガード": "The Hitman's Bodyguard",
+    "ヒットマン リサージェンス": "Hitman 2",
+    "大海原のソングライン": "Songlines",
+    "ブラック･ロータス 誓いの刻印": "Black Lotus",
+    "ブラック・ロータス 誓いの刻印": "Black Lotus",
+    "鬼哭 忌まわしき地": "The Cursed Land",
+    "トレンケ・ラウケン Part1": "Trenque Lauquen",
+    "トレンケ・ラウケン Part2": "Trenque Lauquen",
+    "ガーディング・スター": "Guarding Stars",
+}
+
 LOCAL_TITLE_ALIASES = {
     # U-NEXT adds the descriptive "映画" prefix to its official title.
     "映画 仮面ライダーゼッツ さよならのミッション": "仮面ライダーゼッツ さよならのミッション",
@@ -263,7 +278,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         if not api_key:
             unresolved += 1
             continue
-        title = movie.get("original_title") or movie.get("title")
+        title = movie.get("original_title") or POSTER_SEARCH_ALIASES.get(movie.get("title")) or movie.get("title")
         needle = normalize(title)
         if not needle:
             unresolved += 1
@@ -289,6 +304,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             continue
         last_request = time.monotonic()
         matches = {}
+        exact_candidates = []
         search_candidates = []
         for candidate in result.get("results", [])[:10]:
             if not candidate.get("id"):
@@ -313,6 +329,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             release_date = candidate.get("release_date") or ""
             if expected_year and (not release_date.startswith(str(expected_year) + "-")):
                 continue
+            exact_candidates.append(candidate)
             matches[int(candidate["id"])] = candidate
         if not expected_year:
             matches = {}
@@ -350,9 +367,25 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                 unresolved += 1
         elif len(matches) > 1:
             ambiguous += 1
+            # The user approved approximate artwork for low-priority entries.
+            # Keep the source title, year, TMDB ID, and runtime unchanged.
+            poster_candidates = [item for item in result.get("results", []) if item.get("poster_path")]
+            fuzzy = next((item for item in poster_candidates
+                          if any(int(item.get("id", 0)) == int(exact.get("id", 0)) for exact in exact_candidates)), None)
+            fuzzy = fuzzy or (poster_candidates[0] if poster_candidates else None)
+            if needs_poster and fuzzy and allow_fuzzy_posters:
+                movie["poster"] = IMAGE_BASE + fuzzy["poster_path"]
+                movie["poster_match_status"] = "fuzzy_search_fallback"
+                movie["poster_match_query"] = title
+                if needs_runtime and not movie.get("runtime"):
+                    unresolved += 1
+                else:
+                    enriched += 1
+            else:
+                unresolved += 1
             candidate_review.append({
                 "query": title,
-                "reason": "multiple exact-title candidates; no identity assigned",
+                "reason": "ambiguous exact titles; poster-only fallback applied" if needs_poster and fuzzy and allow_fuzzy_posters else "multiple exact-title candidates; no identity assigned",
                 "candidates": [
                     {
                         "id": int(candidate["id"]),
@@ -367,19 +400,45 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                 ],
             })
         else:
-            # User-approved poster-only fuzzy fallback: keep the existing identity
-            # untouched and mark the artwork so it is never mistaken for a verified match.
-            fuzzy = next((item for item in result.get("results", []) if item.get("poster_path")), None)
+            # A unique title match without a verified release year may supply a
+            # runtime, but never an ID. A poster may use any search hit when the
+            # low-priority fallback is explicitly enabled.
+            if needs_runtime and not movie.get("runtime") and api_key and len(exact_candidates) == 1:
+                candidate = exact_candidates[0]
+                movie_id = int(candidate["id"])
+                try:
+                    wait = delay - (time.monotonic() - last_request)
+                    if wait > 0:
+                        time.sleep(wait)
+                    request = urllib.request.Request(
+                        DETAILS.format(movie_id) + "?" + urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"}),
+                        headers={"Accept": "application/json"},
+                    )
+                    with opener(request, timeout=15) as response:
+                        detail = json.load(response)
+                    last_request = time.monotonic()
+                    runtime = detail.get("runtime")
+                    if detail.get("id") == movie_id and isinstance(runtime, (int, float)) and runtime > 0:
+                        movie["runtime"] = int(runtime)
+                        runtime_enriched += 1
+                except Exception:
+                    pass
+            poster_candidates = [item for item in result.get("results", []) if item.get("poster_path")]
+            fuzzy = next((item for item in poster_candidates
+                          if any(int(item.get("id", 0)) == int(exact.get("id", 0)) for exact in exact_candidates)), None)
+            fuzzy = fuzzy or (poster_candidates[0] if poster_candidates else None)
             if needs_poster and fuzzy and allow_fuzzy_posters:
                 movie["poster"] = IMAGE_BASE + fuzzy["poster_path"]
                 movie["poster_match_status"] = "fuzzy_search_fallback"
                 movie["poster_match_query"] = title
-                if needs_runtime and not movie.get("runtime"):
-                    unresolved += 1
-                else:
-                    enriched += 1
-            else:
+            if needs_runtime and not movie.get("runtime"):
                 unresolved += 1
+            elif needs_poster and not movie.get("poster"):
+                unresolved += 1
+            elif needs_poster and not allow_fuzzy_posters and not exact_candidates:
+                unresolved += 1
+            else:
+                enriched += 1
             candidate_review.append({
                 "query": title,
                 "reason": "user-approved poster-only fuzzy fallback; movie identity remains unchanged" if needs_poster and fuzzy and allow_fuzzy_posters else "no unique exact-title candidate; poster left unresolved",

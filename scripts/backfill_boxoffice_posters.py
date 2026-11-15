@@ -50,6 +50,9 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (2003, "劇場版とっとこハム太郎ハムハムハムジャ幻のプリンセス"): "2002-12-14",
     # TMS confirms the 2004 market-row fragments are its 2003 feature.
     (2004, "劇場版とっとこハム太郎ハムハムグランプリンオーロラ谷の奇跡リボンちゃん危機一髪"): "2003-12-13",
+    # Shochiku identifies the two RAMPO versions as separate films with a shared date.
+    (1994, "rampo黛バージョン"): "1994-06-25",
+    (1994, "rampo奥山バージョン"): "1994-06-25",
     # Toei Animation's official lineup confirms the Japanese premiere dates.
     (2000, "おジャ魔女どれみ"): "2000-07-08",
     (2001, "デジモンティマース"): "2001-07-14",
@@ -113,6 +116,14 @@ REVIEWED_JAPANESE_DIRECTORS = {
     (2003, "爆竜戦隊アバレンジャーdeluxeアバレサマーはキンキン中"): {
         "names": ("諸田敏", "Satoshi Morota"),
         "source_url": "https://shop.toei-video.co.jp/products/dstd02306",
+    },
+    (1994, "rampo黛バージョン"): {
+        "names": ("黛りんたろう", "Rintaro Mayuzumi"),
+        "source_url": "https://www.shochiku.co.jp/cinema/database/04403/",
+    },
+    (1994, "rampo奥山バージョン"): {
+        "names": ("奥山和由", "Kazuyoshi Okuyama"),
+        "source_url": "https://www.shochiku.co.jp/cinema/database/04402/",
     },
     (1994, "メイクアップセーラー戦士"): {
         "names": ("小坂春女",),

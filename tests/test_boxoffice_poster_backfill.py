@@ -1626,6 +1626,46 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(director["source_url"],
                          "https://www.tms-e.co.jp/alltitles/2000s/593302.html")
 
+    def test_official_hamtaro_grand_prin_merge_preserves_2004_shared_gross(self):
+        group = (
+            "・ゴジラ×モスラ×メカゴジラ 東京SOS / "
+            "・劇場版とっとこハム太郎 ハムハムグランプリン / "
+            "オーロラ谷の奇跡 リボンちゃん危機一髪!"
+        )
+        godzilla = {
+            "title": "・ゴジラ×モスラ×メカゴジラ 東京SOS", "gross": 13,
+            "year": 2004, "source_group_title": group, "tmdbId": 39469,
+            "poster": "https://image.tmdb.org/t/p/w342/godzilla-tokyo-sos.jpg",
+            "poster_match_status": "matched",
+        }
+        fallback = "https://image.tmdb.org/t/p/w342/unverified-2004-hamtaro-group.jpg"
+        fragments = [
+            {"title": title, "gross": 13, "year": 2004,
+             "source_group_title": group, "poster": fallback,
+             "poster_match_status": "fuzzy_related_title_or_screening_group"}
+            for title in (
+                "・劇場版とっとこハム太郎 ハムハムグランプリン",
+                "オーロラ谷の奇跡 リボンちゃん危機一髪!",
+            )
+        ]
+        data = {"by_year": {"2004": [godzilla, *fragments]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 1)
+        rows = data["by_year"]["2004"]
+        self.assertEqual(len(rows), 2)
+        merged = next(row for row in rows if "ハム太郎" in row["title"])
+        self.assertEqual(merged["title"],
+                         "劇場版 とっとこハム太郎 ハムハムグランプリン オーロラ谷の奇跡 リボンちゃん危機一髪!")
+        self.assertEqual((merged["gross"], merged["year"]), (13, 2004))
+        self.assertNotIn("poster", merged)
+        self.assertNotIn("tmdbId", merged)
+        self.assertEqual((rows[0]["tmdbId"], rows[0]["poster"]),
+                         (39469, "https://image.tmdb.org/t/p/w342/godzilla-tokyo-sos.jpg"))
+        self.assertEqual([row["gross"] for row in rows], [13, 13])
+        self.assertTrue(backfill.matches_reviewed_release_window(
+            merged["title"], 2004, "2003-12-13"))
+        self.assertIn("出﨑統", backfill.reviewed_director(merged["title"], 2004)["names"])
+
     def test_hamtaro_merge_requires_exact_complete_unresolved_fragments(self):
         group = "ゴジラ×メカゴジラ / とっとこハム太郎 / ハムハムハムージャ!幻のプリンセス"
         rows = [

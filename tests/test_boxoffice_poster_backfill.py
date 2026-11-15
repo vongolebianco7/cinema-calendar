@@ -1427,6 +1427,86 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(result["enriched"], 1)
 
 
+    def test_official_makeup_sailor_warriors_uses_own_poster_and_preserves_shared_gross(self):
+        title = "メイクアップセーラー戦士"
+        self.assertIn("メイクアップ！セーラー戦士", backfill.exact_title_aliases(title, 1994))
+        self.assertTrue(backfill.matches_reviewed_release_window(title, 1994, "1993-12-05"))
+        self.assertFalse(backfill.matches_reviewed_release_window(title, 1994, "1994-12-05"))
+        self.assertEqual(backfill.reviewed_director(title, 1994)["names"], ("小坂春女",))
+        search = {"results": [{
+            "id": 539172,
+            "title": "メイクアップ！セーラー戦士",
+            "original_title": "メイクアップ！セーラー戦士",
+            "release_date": "1993-12-05",
+            "poster_path": "/1IaNyskMoEXwMo0GyUDGDM8TRpW.jpg",
+        }]}
+        detail = {
+            "id": 539172,
+            "title": "メイクアップ！セーラー戦士",
+            "original_title": "メイクアップ！セーラー戦士",
+            "release_date": "1993-12-05",
+            "poster_path": "/1IaNyskMoEXwMo0GyUDGDM8TRpW.jpg",
+            "credits": {"crew": [{"job": "Director", "name": "小坂春女"}]},
+        }
+        row = {
+            "title": title, "gross": 13, "year": 1994, "metric": "配給収入",
+            "source_group_title": "美少女戦士セーラームーンR / メイクアップセーラー戦士 / ツヨシしっかりしなさい",
+            "poster": "https://image.tmdb.org/t/p/w342/sBDDdvvuUcuC6ccI2ePOv3I3w1g.jpg",
+            "poster_match_status": "fuzzy_related_title_or_screening_group",
+            "poster_fallback_checked_at": "2026-11-15T01:14:16Z",
+        }
+        data, requests, result = self.run_rows(
+            [row], [search, search, detail], market_year="1994", limit=1
+        )
+        updated = data["by_year"]["1994"][0]
+        self.assertEqual(updated["tmdbId"], 539172)
+        self.assertEqual(updated["poster"], "https://image.tmdb.org/t/p/w500/1IaNyskMoEXwMo0GyUDGDM8TRpW.jpg")
+        self.assertEqual(updated["identity_source"], "https://www.themoviedb.org/movie/539172")
+        self.assertEqual(updated["identity_match"], "tmdb_title_jp_release_window_and_director_verified")
+        self.assertEqual((updated["gross"], updated["year"], updated["metric"]), (13, 1994, "配給収入"))
+        self.assertEqual(updated["source_group_title"], row["source_group_title"])
+        self.assertEqual(updated["poster_match_status"], "matched")
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 11)
+        self.assertEqual(result["enriched"], 1)
+        self.assertEqual(result["unresolved"], 0)
+        self.assertEqual(len(requests), 3)
+
+    def test_official_makeup_sailor_wrong_tmdb_director_keeps_group_fallback(self):
+        title = "メイクアップセーラー戦士"
+        search = {"results": [{
+            "id": 539172,
+            "title": "メイクアップ！セーラー戦士",
+            "original_title": "メイクアップ！セーラー戦士",
+            "release_date": "1993-12-05",
+            "poster_path": "/1IaNyskMoEXwMo0GyUDGDM8TRpW.jpg",
+        }]}
+        detail = {
+            "id": 539172,
+            "title": "メイクアップ！セーラー戦士",
+            "original_title": "メイクアップ！セーラー戦士",
+            "release_date": "1993-12-05",
+            "poster_path": "/1IaNyskMoEXwMo0GyUDGDM8TRpW.jpg",
+            "credits": {"crew": [{"job": "Director", "name": "別監督"}]},
+        }
+        fallback = "https://image.tmdb.org/t/p/w342/sBDDdvvuUcuC6ccI2ePOv3I3w1g.jpg"
+        row = {
+            "title": title, "gross": 13, "year": 1994, "metric": "配給収入",
+            "source_group_title": "美少女戦士セーラームーンR / メイクアップセーラー戦士 / ツヨシしっかりしなさい",
+            "poster": fallback,
+            "poster_match_status": "fuzzy_related_title_or_screening_group",
+            "poster_fallback_checked_at": "2026-11-15T01:14:16Z",
+        }
+        data, _, result = self.run_rows(
+            [row], [search, search, detail], market_year="1994", limit=1
+        )
+        updated = data["by_year"]["1994"][0]
+        self.assertEqual(updated["poster"], fallback)
+        self.assertEqual(updated["poster_match_status"], "fuzzy_related_title_or_screening_group")
+        self.assertEqual(updated["tmdb_fallback_checked_at"] if "tmdb_fallback_checked_at" in updated else None, None)
+        self.assertEqual(updated["gross"], 13)
+        self.assertEqual(result["enriched"], 0)
+        self.assertEqual(result["unresolved"], 1)
+
     def test_official_bojack_tmdb_alias_is_scoped_by_japan_date_and_director(self):
         title = "銀河ギリギリ!ぶっち切りの凄い奴"
         aliases = backfill.exact_title_aliases(title, 1993)
@@ -1434,7 +1514,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertTrue(backfill.matches_reviewed_release_window(title, 1993, "1993-07-10"))
         self.assertFalse(backfill.matches_reviewed_release_window(title, 1993, "1992-07-10"))
         self.assertEqual(backfill.reviewed_director(title, 1993)["names"], ("上田芳裕",))
-        self.assertEqual(backfill.POSTER_CHECK_VERSION, 10)
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 11)
 
 
     def test_official_sailor_moon_s_identity_is_scoped_by_japan_date_and_director(self):
@@ -1444,7 +1524,7 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         self.assertEqual(backfill.reviewed_director(title, 1995)["names"], ("芝田浩樹",))
         self.assertEqual(backfill.reviewed_director(title, 1995)["source_url"],
                          "https://mediaarts-db.artmuseums.go.jp/id/C410641")
-        self.assertEqual(backfill.POSTER_CHECK_VERSION, 10)
+        self.assertEqual(backfill.POSTER_CHECK_VERSION, 11)
 
 
 if __name__ == "__main__":

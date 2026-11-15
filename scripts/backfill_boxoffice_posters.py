@@ -48,6 +48,8 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (2003, "ハムハムハムージャ幻のプリンセス"): "2002-12-14",
     # TMS and MADB identify the two Eiren fragments as one 2002 feature.
     (2003, "劇場版とっとこハム太郎ハムハムハムジャ幻のプリンセス"): "2002-12-14",
+    # TMS confirms the 2004 market-row fragments are its 2003 feature.
+    (2004, "劇場版とっとこハム太郎ハムハムグランプリンオーロラ谷の奇跡リボンちゃん危機一髪"): "2003-12-13",
     # Toei Animation's official lineup confirms the Japanese premiere dates.
     (2000, "おジャ魔女どれみ"): "2000-07-08",
     (2001, "デジモンティマース"): "2001-07-14",
@@ -103,6 +105,10 @@ REVIEWED_JAPANESE_DIRECTORS = {
     (2003, "劇場版とっとこハム太郎ハムハムハムジャ幻のプリンセス"): {
         "names": ("出崎統", "出﨑統"),
         "source_url": "https://www.tms-e.co.jp/alltitles/2000s/593302.html",
+    },
+    (2004, "劇場版とっとこハム太郎ハムハムグランプリンオーロラ谷の奇跡リボンちゃん危機一髪"): {
+        "names": ("出崎統", "出﨑統"),
+        "source_url": "https://www.tms-e.co.jp/alltitles/2000s/593303.html",
     },
     (1994, "メイクアップセーラー戦士"): {
         "names": ("小坂春女",),
@@ -389,6 +395,24 @@ EXPLICIT_SOURCE_GROUP_MERGES = {
         ),
         "merge_titles": ("とっとこハム太郎", "ハムハムハムージャ!幻のプリンセス"),
         "film_title": "劇場版 とっとこハム太郎 ハムハムハム～ジャ!幻のプリンセス",
+        "allow_fuzzy_group_fallback": True,
+    },
+    # The 2004 Eiren row likewise split one TMS film at its subtitle.
+    normalize(
+        "・ゴジラ×モスラ×メカゴジラ 東京SOS / "
+        "・劇場版とっとこハム太郎 ハムハムグランプリン / "
+        "オーロラ谷の奇跡 リボンちゃん危機一髪!"
+    ): {
+        "source_child_titles": (
+            "・ゴジラ×モスラ×メカゴジラ 東京SOS",
+            "・劇場版とっとこハム太郎 ハムハムグランプリン",
+            "オーロラ谷の奇跡 リボンちゃん危機一髪!",
+        ),
+        "merge_titles": (
+            "・劇場版とっとこハム太郎 ハムハムグランプリン",
+            "オーロラ谷の奇跡 リボンちゃん危機一髪!",
+        ),
+        "film_title": "劇場版 とっとこハム太郎 ハムハムグランプリン オーロラ谷の奇跡 リボンちゃん危機一髪!",
         "allow_fuzzy_group_fallback": True,
     },
     normalize(

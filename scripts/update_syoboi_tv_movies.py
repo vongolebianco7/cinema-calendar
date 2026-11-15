@@ -167,7 +167,7 @@ def _tmdb_broadcast_metadata(row, cache):
     if not api_key or not title:
         return None
     raw_year = row.get("release_year") or row.get("year") or ""
-    year_match = re.match(r"(\\d{4})", str(raw_year))
+    year_match = re.match(r"(\d{4})", str(raw_year))
     year = year_match.group(1) if year_match else ""
     cache_key = (unicodedata.normalize("NFKC", title).casefold(), year)
     if cache_key in cache:
@@ -182,7 +182,7 @@ def _tmdb_broadcast_metadata(row, cache):
     try:
         with urllib.request.urlopen(request, timeout=15) as response:
             results = json.load(response).get("results", [])
-        norm = lambda value: re.sub(r"[^\\w]+", "", unicodedata.normalize("NFKC", str(value or "")).casefold())
+        norm = lambda value: re.sub(r"[^\w]+", "", unicodedata.normalize("NFKC", str(value or "")).casefold())
         wanted = norm(title)
         candidates = [item for item in results if item.get("poster_path")]
         exact = [item for item in candidates if wanted in {norm(item.get("title")), norm(item.get("original_title"))}

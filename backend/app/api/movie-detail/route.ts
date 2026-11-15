@@ -16,7 +16,7 @@ export async function GET(request:Request){const limited=rateLimited(request,60)
   const m:any=await r.json();
   if(posterOnly)return json({movie:{
    id:m.id,tmdbId:m.id,title:m.title,original_title:m.original_title,
-   release_date:m.release_date,score:m.vote_average,votes:m.vote_count,
+   release_date:m.release_date,year:(m.release_date||"").slice(0,4),runtime:m.runtime||null,score:m.vote_average,votes:m.vote_count,
    poster:m.poster_path?`https://image.tmdb.org/t/p/w500${m.poster_path}`:null,
   }});
   const jp=m["watch/providers"]?.results?.JP||{},crew=m.credits?.crew||[],cast=m.credits?.cast||[];

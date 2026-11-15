@@ -47,7 +47,7 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     # and director within the 2003 shared screening group.
     (2003, "ハムハムハムージャ幻のプリンセス"): "2002-12-14",
     # TMS and MADB identify the two Eiren fragments as one 2002 feature.
-    (2003, "劇場版とっとこハム太郎ハムハムハムージャ幻のプリンセス"): "2002-12-14",
+    (2003, "劇場版とっとこハム太郎ハムハムハムジャ幻のプリンセス"): "2002-12-14",
     # Toei Animation's official lineup confirms the Japanese premiere dates.
     (2000, "おジャ魔女どれみ"): "2000-07-08",
     (2001, "デジモンティマース"): "2001-07-14",
@@ -100,7 +100,7 @@ REVIEWED_JAPANESE_DIRECTORS = {
         "names": ("出崎統",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C411222",
     },
-    (2003, "劇場版とっとこハム太郎ハムハムハムージャ幻のプリンセス"): {
+    (2003, "劇場版とっとこハム太郎ハムハムハムジャ幻のプリンセス"): {
         "names": ("出崎統", "出﨑統"),
         "source_url": "https://www.tms-e.co.jp/alltitles/2000s/593302.html",
     },

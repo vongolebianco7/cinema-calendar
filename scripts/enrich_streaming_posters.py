@@ -314,6 +314,8 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             if expected_year and (not release_date.startswith(str(expected_year) + "-")):
                 continue
             matches[int(candidate["id"])] = candidate
+        if not expected_year:
+            matches = {}
         if len(matches) == 1:
             identity = next(iter(matches.values()))
             if needs_poster:

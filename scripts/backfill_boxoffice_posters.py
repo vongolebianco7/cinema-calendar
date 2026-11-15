@@ -110,6 +110,10 @@ REVIEWED_JAPANESE_DIRECTORS = {
         "names": ("出崎統", "出﨑統"),
         "source_url": "https://www.tms-e.co.jp/alltitles/2000s/593303.html",
     },
+    (2003, "爆竜戦隊アバレンジャーdeluxeアバレサマーはキンキン中"): {
+        "names": ("諸田敏", "Satoshi Morota"),
+        "source_url": "https://shop.toei-video.co.jp/products/dstd02306",
+    },
     (1994, "メイクアップセーラー戦士"): {
         "names": ("小坂春女",),
         "source_url": "https://www.themoviedb.org/movie/539172",
@@ -381,6 +385,26 @@ EXPLICIT_SOURCE_GROUP_SPLITS = {
 # single movie. Merge only this exact, complete child set; preserve the already
 # identified Dragon Ball row and never divide the package gross.
 EXPLICIT_SOURCE_GROUP_MERGES = {
+    # Eiren's 2003 group lists the Abaranger feature as series name + subtitle.
+    # Toei Video identifies these fragments as the single 2003 theatrical film.
+    # Preserve the other Kamen Rider feature rows, and preserve gross 15 on each.
+    normalize(
+        "仮面ライダー555(ファイズ ) / パラダイス・ロスト / "
+        "爆竜戦隊アバレンジャー DELUXE / アバレサマーはキンキン中!"
+    ): {
+        "source_child_titles": (
+            "仮面ライダー555(ファイズ )",
+            "パラダイス・ロスト",
+            "爆竜戦隊アバレンジャー DELUXE",
+            "アバレサマーはキンキン中!",
+        ),
+        "merge_titles": (
+            "爆竜戦隊アバレンジャー DELUXE",
+            "アバレサマーはキンキン中!",
+        ),
+        "film_title": "爆竜戦隊アバレンジャー DELUXE アバレサマーはキンキン中!",
+        "allow_fuzzy_group_fallback": True,
+    },
     # Eiren's 2003 entry splits one TMS feature title across two child rows.
     # Merge only this exact, complete set; keep Godzilla as a distinct sibling.
     # The shared gross remains 19.1 on each film, without assigning either

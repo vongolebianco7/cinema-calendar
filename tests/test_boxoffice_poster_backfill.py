@@ -440,9 +440,25 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         path.write_text(json.dumps(data), encoding="utf-8")
         requested = []
 
+        directors = {7001: "金田治", 7002: "舞原賢三", 7003: "柴崎貴行"}
+
         def opener(request, timeout):
             from urllib.parse import parse_qs, urlparse
-            title = parse_qs(urlparse(request.full_url).query).get("query", [""])[0]
+            parsed = urlparse(request.full_url)
+            if "/movie/" in parsed.path and "/search/movie" not in parsed.path:
+                identifier = int(parsed.path.rsplit("/", 1)[-1])
+                title, identity = next(
+                    (candidate_title, candidate_identity)
+                    for candidate_title, candidate_identity in identities.items()
+                    if candidate_identity[0] == identifier
+                )
+                _, release, poster = identity
+                return Response({
+                    "id": identifier, "title": title, "original_title": title,
+                    "release_date": release, "poster_path": poster,
+                    "credits": {"crew": [{"job": "Director", "name": directors[identifier]}]},
+                })
+            title = parse_qs(parsed.query).get("query", [""])[0]
             requested.append(title)
             identity = identities.get(title)
             if identity is None:
@@ -474,6 +490,67 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
         ) for row in rows))
         self.assertEqual(result["expanded_grouped_films"], 3)
         self.assertEqual(result["enriched"], 3)
+
+
+    def test_official_cho_deno_trilogy_keeps_shared_gross_but_verifies_each_film(self):
+        cases = (
+            (
+                "超・電王トリロジー EPISODE RED ゼロのスタートウィンクル",
+                "2010-05-22", "金田治",
+                993001, "/fixture-deno-red.jpg",
+            ),
+            (
+                "超・電王トリロジー EPISODE BLUE 派遣イマジンはNEWトラル",
+                "2010-06-05", "舞原賢三",
+                993002, "/fixture-deno-blue.jpg",
+            ),
+            (
+                "超・電王トリロジー EPISODE YELLOW お宝 DE エンド・パイレーツ",
+                "2010-06-19", "柴崎貴行",
+                993003, "/fixture-deno-yellow.jpg",
+            ),
+        )
+        group = "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"
+        for title, release_date, director, tmdb_id, poster_path in cases:
+            with self.subTest(title=title):
+                self.assertTrue(backfill.matches_reviewed_release_window(title, 2010, release_date))
+                reviewed = backfill.reviewed_director(title, 2010)
+                self.assertIn(director, reviewed["names"])
+                self.assertTrue(reviewed["source_url"].startswith("https://jfdb.jp/title/"))
+                search = {"results": [{
+                    "id": tmdb_id,
+                    "title": title,
+                    "original_title": title,
+                    "release_date": release_date,
+                    "poster_path": poster_path,
+                }]}
+                detail = {
+                    **search["results"][0],
+                    "credits": {"crew": [{"job": "Director", "name": director}]},
+                }
+                row = {
+                    "title": title, "gross": 13.1, "year": 2010, "metric": "興行収入",
+                    "source_group_title": group,
+                    "poster": "https://image.tmdb.org/t/p/w500/unverified-deno-group.jpg",
+                    "poster_match_status": "fuzzy_related_title_or_screening_group",
+                }
+                data, _, result = self.run_rows(
+                    [row], [search, detail], market_year="2010", limit=1
+                )
+                updated = data["by_year"]["2010"][0]
+                self.assertEqual(updated["tmdbId"], tmdb_id)
+                self.assertEqual(updated["poster"], backfill.IMAGE_BASE + poster_path)
+                self.assertEqual(
+                    updated["identity_match"],
+                    "tmdb_title_jp_release_window_and_director_verified",
+                )
+                self.assertEqual((updated["gross"], updated["year"], updated["metric"]),
+                                 (13.1, 2010, "興行収入"))
+                self.assertEqual(updated["source_group_title"], group)
+                self.assertEqual(updated["poster_match_status"], "matched")
+                self.assertEqual(result["enriched"], 1)
+                self.assertEqual(result["unresolved"], 0)
+
 
     def test_eiren_group_sibling_with_existing_poster_is_not_discarded(self):
         source_group = "仮面ライダー×仮面ライダー×仮面ライダー / 超・電王トリロジー"

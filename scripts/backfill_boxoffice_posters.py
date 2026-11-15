@@ -60,6 +60,10 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (1994, "ウメ星デンカ宇宙の果てからパンパロパン"): "1994-03-12",
     # Shin-Ei official filmography and TMDB identify the 1992 short film.
     (1992, "21エモン宇宙行け裸足のプリンセス"): "1992-03-07",
+    # JFDB confirms each Cho Den-O Trilogy chapter had its own Japanese release date.
+    (2010, "超電王トリロジーepisoderedゼロのスタートウィンクル"): "2010-05-22",
+    (2010, "超電王トリロジーepisodeblue派遣イマジンはnewトラル"): "2010-06-05",
+    (2010, "超電王トリロジーepisodeyellowお宝deエンドパイレーツ"): "2010-06-19",
     # Toei's official Rider history and Toei Video catalog confirm the
     # separately billed 2005 features and their shared Japanese premiere.
     (2005, "劇場版仮面ライダーヒビキと7人の戦鬼"): "2005-09-03",
@@ -74,6 +78,18 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
 # a small set of known false-positive-prone titles. TMDB's own movie credits
 # are checked before any of these records can receive artwork.
 REVIEWED_JAPANESE_DIRECTORS = {
+    (2010, "超電王トリロジーepisoderedゼロのスタートウィンクル"): {
+        "names": ("金田治", "Osamu Kaneda"),
+        "source_url": "https://jfdb.jp/title/2310",
+    },
+    (2010, "超電王トリロジーepisodeblue派遣イマジンはnewトラル"): {
+        "names": ("舞原賢三", "Kenzo Maihara"),
+        "source_url": "https://jfdb.jp/title/2312",
+    },
+    (2010, "超電王トリロジーepisodeyellowお宝deエンドパイレーツ"): {
+        "names": ("柴崎貴行", "柴﨑貴行", "Takayuki Shibasaki"),
+        "source_url": "https://jfdb.jp/title/2315",
+    },
     (2001, "ジャンゴのダンスカーニバル"): {
         "names": ("西尾大介",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C411104",

@@ -45,7 +45,7 @@ REVIEWED_JAPANESE_RELEASE_DATES = {
     (2001, "ジャンゴのダンスカーニバル"): "2001-03-03",
     # MADB confirms the Hamtaro feature's separate title, Japanese premiere,
     # and director within the 2003 shared screening group.
-    (2003, "ハムハムハムージャ!幻のプリンセス"): "2002-12-14",
+    (2003, "ハムハムハムージャ幻のプリンセス"): "2002-12-14",
     # Toei Animation's official lineup confirms the Japanese premiere dates.
     (2000, "おジャ魔女どれみ"): "2000-07-08",
     (2001, "デジモンティマース"): "2001-07-14",
@@ -78,7 +78,7 @@ REVIEWED_JAPANESE_DIRECTORS = {
         "names": ("西尾大介",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C411104",
     },
-    (2003, "ハムハムハムージャ!幻のプリンセス"): {
+    (2003, "ハムハムハムージャ幻のプリンセス"): {
         "names": ("出崎統",),
         "source_url": "https://mediaarts-db.artmuseums.go.jp/id/C411222",
     },

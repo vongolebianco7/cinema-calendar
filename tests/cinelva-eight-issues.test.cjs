@@ -26,7 +26,8 @@ test('Interstellar receives explicit IMAX recommendation evidence',()=>{
  assert.match(experience,/www\.imax\.com\/movie\/interstellar/);
 });
 test('cast links and poster fallback are present',()=>{
- assert.match(search,/www\.themoviedb\.org\/search\/person/);
+ assert.match(search,/search\.html\?person=/);
+ assert.match(search,/type=person/);
  assert.match(page,/function cinelvaCastLinks/);
  assert.match(page,/posterMissing/);
  assert.match(ranking,/img\.onerror=/);

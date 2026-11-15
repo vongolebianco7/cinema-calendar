@@ -100,7 +100,10 @@ REVIEWED_JAPANESE_DIRECTORS = {
 MIN_DIRECTOR_FUZZY_TITLE_RATIO = 0.5
 
 REVIEWED_TITLE_ALIASES = {
-    (1994, "メイクアップセーラー戦士"): ["メイクアップ！セーラー戦士"],
+    (1994, "メイクアップセーラー戦士"): [
+        "メイクアップ！セーラー戦士",
+        "Make Up! Sailor Soldiers",
+    ],
     (2001, "ONE PIECE ねじまき島の冒険"): [
         "One Piece: Clockwork Island Adventure",
         "ONE PIECE: Nejimaki-jima no Daibōken",
@@ -137,7 +140,6 @@ REVIEWED_TITLE_ALIASES = {
         "ドラゴンボールZ 銀河ギリギリ!! ぶっちぎりの凄い奴",
     ],
     (1994, "ドラえもん のび太と夢幻三銃士"): ["Doraemon: Nobita's Three Visionary Swordsmen"],
-    (1994, "メイクアップセーラー戦士"): ["Make Up! Sailor Soldiers"],
     (1993, "ドラえもん のび太とブリキの迷宮"): ["Doraemon: Nobita and the Tin Labyrinth"],
     (1993, "ドラミちゃん ハロー恐竜キッズ!!"): ["Dorami-chan: Hello Dinosaur Kids"],
     (1995, "スラムダンク"): ["Slam Dunk"],

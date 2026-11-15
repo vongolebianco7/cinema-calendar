@@ -1,329 +1,17 @@
 {
-  "generated_at": "2026-11-14T23:41:54.587636+00:00",
+  "generated_at": "2026-11-15T01:12:24.029050+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-10-15",
-      "2027-03-14"
+      "2026-10-16",
+      "2027-03-15"
     ],
     "background_slice": [
-      "2025-11-14",
-      "2026-01-12"
+      "2026-01-14",
+      "2026-03-14"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 81210,
-      "title": "アニキ・ボボ",
-      "original_title": "Aniki-Bóbó",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/jr0MIlTmYViTjpLbidKOozIpG7Z.jpg",
-      "score": 7.6,
-      "votes": 48,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/81210",
-      "director": "マノエル・ド・オリヴェイラ",
-      "director_id": 81749,
-      "cast": [
-        "Horácio Silva",
-        "Fernanda Matos",
-        "António Santos",
-        "Nascimento Fernandes"
-      ],
-      "countries": [
-        "Portugal"
-      ],
-      "runtime": 71,
-      "genres": [
-        "ドラマ",
-        "ファミリー"
-      ]
-    },
-    {
-      "id": 15137,
-      "title": "ヱヴァンゲリヲン新劇場版：序",
-      "original_title": "ヱヴァンゲリヲン新劇場版：序",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/xzYLUve9n4Q3oSntwunNfU1D2s1.jpg",
-      "score": 7.602,
-      "votes": 1133,
-      "overview": "世界を壊滅状態へと導いた「セカンド・インパクト」から15年後。14歳の碇シンジは、特務機関NERV（ネルフ）の最高司令官で父親でもある碇ゲンドウから、謎の巨大生物“使徒”と戦う人造人間エヴァンゲリオンのパイロットに任命される。使徒との戦いが困難を極める中、地球存続のための任務を背負う彼らは、ある国家規模の作戦を実行に移すことになる。",
-      "tmdb": "https://www.themoviedb.org/movie/15137",
-      "director": "摩砂雪",
-      "director_id": 77926,
-      "cast": [
-        "緒方恵美",
-        "林原めぐみ",
-        "三石琴乃",
-        "山口由里子"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 101,
-      "genres": [
-        "アニメーション",
-        "サイエンスフィクション",
-        "アクション",
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 972435,
-      "title": "君と私",
-      "original_title": "너와 나",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/7fJaLxIeKWDcdIcnWJFDC19mMxU.jpg",
-      "score": 7.818,
-      "votes": 12,
-      "overview": "高校生のセミは修学旅行の前日に教室で不思議な夢を見る。不吉な胸騒ぎを覚えた彼女は、同級生のハウンに対してずっと心に秘めてきた思いを伝えようと、足を骨折し入院中のハウンのもとへ向かう。どうしても一緒に修学旅行に行きたいセミと、どこか煮え切らない態度のハウン。些細なケンカをきっかけに、2人はお互いの気持ちを伝えられないまま、すれ違ってしまう。",
-      "tmdb": "https://www.themoviedb.org/movie/972435",
-      "director": "チョ・ヒョンチョル",
-      "director_id": 1750380,
-      "cast": [
-        "박혜수",
-        "김시은",
-        "이도은",
-        "박서경"
-      ],
-      "countries": [
-        "South Korea"
-      ],
-      "runtime": 118,
-      "genres": [
-        "ドラマ",
-        "ロマンス"
-      ]
-    },
-    {
-      "id": 1230368,
-      "title": "スプリングスティーン 孤独のハイウェイ",
-      "original_title": "Springsteen: Deliver Me from Nowhere",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/4jZwKegB2KiGVpyk0mvgry2PKq2.jpg",
-      "score": 6.6,
-      "votes": 353,
-      "overview": "アメリカの魂 ロックの英雄“ The Boss ”ブルース・スプリングスティーン。「Born in the U.S.A.」で世界が振り向く前夜、誰にも頼らず、わずか4トラックの録音機で吹き込んだアルバム『ネブラスカ』。父との確執、その苦悩と創造の情熱を描いた、音楽映画の枠を超え、観る者の心を震わせる感動ドラマ。",
-      "tmdb": "https://www.themoviedb.org/movie/1230368",
-      "director": "スコット・クーパー",
-      "director_id": 65167,
-      "cast": [
-        "ジェレミー・アレン・ホワイト",
-        "ジェレミー・ストロング",
-        "ポール・ウォルター・ハウザー",
-        "スティーヴン・グレアム"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 120,
-      "genres": [
-        "ドラマ",
-        "音楽"
-      ]
-    },
-    {
-      "id": 1584762,
-      "title": "はだしのゲンはまだ怒っている",
-      "original_title": "はだしのゲンはまだ怒っている",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/s97zsXnfHjraLqKETbElbv9pxcG.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1584762",
-      "director": "Masanori Komiyama",
-      "director_id": 5829722,
-      "cast": [],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 90,
-      "genres": [
-        "ドキュメンタリー"
-      ]
-    },
-    {
-      "id": 1576338,
-      "title": "阪神タイガース THE OFFICIAL MOVIE 2025 ―栄光の虎道（こどう）―",
-      "original_title": "阪神タイガース THE OFFICIAL MOVIE 2025 ―栄光の虎道（こどう）―",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/5R07QVqPBhHZFvgAKLv1v4kMBVt.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "前任の岡田彰布監督が2023年にリーグ優勝と日本一を達成してから2年。球団創設90周年というメモリアルイヤーを迎えた2025年、現役時代に「火の玉ストレート」と呼ばれた剛速球で知られる藤川球児が新監督に就任した。藤川監督のもと、村上頌樹をはじめとする強力な投手陣、そして佐藤輝明を中心に、若手を積極的に起用した打撃陣が一体となって隙のない戦いを展開。2025年9月7日、NPB史上最速（2リーグ制となった1950年以降）でリーグ優勝を決めた。監督就任1年目での優勝は、球団90年の歴史でも史上初の快挙であった。",
-      "tmdb": "https://www.themoviedb.org/movie/1576338",
-      "director": "今村圭佑",
-      "director_id": 2094078,
-      "cast": [
-        "佐藤隆太",
-        "Kyuji Fujikawa"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 120,
-      "genres": [
-        "ドキュメンタリー"
-      ]
-    },
-    {
-      "id": 1545317,
-      "title": "ブルーボーイ事件",
-      "original_title": "ブルーボーイ事件",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/rvayLkxT2H08B6Kl9QqsszWdDib.jpg",
-      "score": 7.0,
-      "votes": 1,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1545317",
-      "director": "飯塚花笑",
-      "director_id": 2315849,
-      "cast": [
-        "Miyu Nakagawa",
-        "前原滉",
-        "中村中",
-        "Izumi Sexy"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 106,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1545264,
-      "title": "港のひかり",
-      "original_title": "港のひかり",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/7kLvFMbipxcDYgD1A8dmfqIIzEo.jpg",
-      "score": 7.3,
-      "votes": 3,
-      "overview": "漁師として細々と生活する元ヤクザの三浦は、白い杖をついて歩く少年の幸太を見かける。両親をヤクザ絡みの交通事故で亡くした幸太は、彼を引き取った叔母やその交際相手からも虐待を受けていた。孤独な幸太にどこか自身の姿を重ねた三浦は、自身の船に幸太を誘う。どこにも居場所がなかった者同⼠、2人は年の差を超えた特別な友情を築いていく。幸太に視力回復の手術を受けさせるため、ヤクザから金を奪った三浦は、幸太に一通の手紙を残して自首する。12年後、突如として⾏⽅がわからなくなった三浦を捜していくうちに、幸太はある秘密を知る。",
-      "tmdb": "https://www.themoviedb.org/movie/1545264",
-      "director": "藤井道人",
-      "director_id": 1360022,
-      "cast": [
-        "舘ひろし",
-        "眞栄田郷敦",
-        "黒島結菜",
-        "斎藤工"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 118,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1501239,
-      "title": "君の顔では泣けない",
-      "original_title": "君の顔では泣けない",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/egVUNTtHHDEckBYGEF6kAxDislI.jpg",
-      "score": 7.0,
-      "votes": 1,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1501239",
-      "director": "坂下雄一郎",
-      "director_id": 1421873,
-      "cast": [
-        "芳根京子",
-        "髙橋海人",
-        "Airi Nishikawa",
-        "中沢元紀"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 123,
-      "genres": [
-        "ドラマ",
-        "ファンタジー"
-      ]
-    },
-    {
-      "id": 1431089,
-      "title": "劇場版総集編 ガールズバンドクライ 【後編】 なぁ、未来。",
-      "original_title": "劇場版総集編 ガールズバンドクライ 【後編】 なぁ、未来。",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/1QICZgrMkYL3yOh5CE2XCEFymrm.jpg",
-      "score": 8.0,
-      "votes": 1,
-      "overview": "トゲナシトゲアリを結成した仁菜は捨ててきた故郷と向き合う。桃香は捨ててきたバンド「ダイヤモンドダスト」と向き合う。それぞれ過去を克服した2人に触発された一同は過去を乗り越えプロを目指すが、大人社会の論理になじめずプロを脱退。インディーズバンドとして生きていくことを決意する。",
-      "tmdb": "https://www.themoviedb.org/movie/1431089",
-      "director": "酒井和男",
-      "director_id": 1498114,
-      "cast": [
-        "理名",
-        "夕莉",
-        "凪都",
-        "美怜"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 110,
-      "genres": [
-        "アニメーション",
-        "ドラマ",
-        "コメディ",
-        "音楽"
-      ]
-    },
-    {
-      "id": 1392396,
-      "title": "平場の月",
-      "original_title": "平場の月",
-      "date": "2025-11-14",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/7gwacmedcrAP56pbRObDUSrJ3yT.jpg",
-      "score": 7.7,
-      "votes": 10,
-      "overview": "須藤が死んだと聞かされたのは、小学校中学校と同窓の安西からだ。須藤と同じパート先だったウミちゃんから聞いたのだという。青砥は離婚して戻った地元で、再会したときのことを思い出す。検査で行った病院のコンビニに彼女はいた。中学時代、「太い」感じのする女子だった。五十年生き、二人は再会し、これからの人生にお互いが存在することを感じていた。",
-      "tmdb": "https://www.themoviedb.org/movie/1392396",
-      "director": "土井裕泰",
-      "director_id": 130646,
-      "cast": [
-        "堺雅人",
-        "井川遥",
-        "坂元愛登",
-        "一色香澄"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 119,
-      "genres": [
-        "ドラマ",
-        "ロマンス"
-      ]
-    },
     {
       "id": 1638241,
       "title": "話したりない夜の果て  Days gone by",
@@ -5028,6 +4716,31 @@
       ]
     },
     {
+      "id": 1822540,
+      "title": "白蛇：浮生 ～巡りめぐる運命の赤い糸～",
+      "original_title": "白蛇：浮生 ～巡りめぐる運命の赤い糸～",
+      "date": "2026-01-30",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/8NiGMtJ8Rkh9jUJeSfkKj0SqiD1.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "前作の舞台から500年後の南宋の都・臨安（りんあん）が舞台です。  1000年の修練を経て人間の姿になった白蛇の妖怪・白（ハク）は、前作の主人公・宣（セン）の生まれ変わりである医者の青年・仙（セン）とついに再会を果たします。  運命に導かれるように惹かれ合い、永遠の愛を誓って幸せな日々を送るふたりでしたが、妖怪退治を担う高僧・法海（ほうかい）が現れ、白と青（セイ）が蛇の妖怪であることを見抜いたことから、過酷な運命の試練が訪れます。",
+      "tmdb": "https://www.themoviedb.org/movie/1822540",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "三森すずこ",
+        "佐久間大介",
+        "佐倉綾音",
+        "杉田智和"
+      ],
+      "countries": [],
+      "runtime": 135,
+      "genres": [],
+      "checked_at": "2026-11-15T01:12:24.029050+00:00"
+    },
+    {
       "id": 1630719,
       "title": "時のおと",
       "original_title": "時のおと",
@@ -7088,6 +6801,31 @@
       ]
     },
     {
+      "id": 1815799,
+      "title": "GEMNIBUS vol.2",
+      "original_title": "GEMNIBUS vol.2",
+      "date": "2026-03-06",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/6QTxQjXWHKtlOhb8GxG2PXvYpid.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "本作のラインナップは、圧倒的な映像美の中で\"幸福\"の意味を問いかける問題作『青い鳥』（監督・脚本・撮影：増田彩来）、スタイリッシュな映像美で現代の闇を切り裂くクリーチャーホラー『インフルエンサーゴースト』（監督・脚本・編集：西山将貴）、アイデンティティの商品化をテーマに近未来のディストピアを描いたSFサイコロジカルホラー『顔のない街』（監督・脚本：村上リ子）、プレッシャーを疾走感で突き抜ける青春映画『ソニックビート』（監督・脚本：関駿太）。さらに、予期せぬ妊娠をきっかけに、キャリアや生き方と向き合うことになる女性の葛藤をリアルに描く『You Cannot Be Serious!』（監督・脚本：大川五月）、そして、生命の尊さを幻想的な世界観で描くアニメーション作品『もし、これから生まれるのなら』（監督・脚本：土海明日香）と、バラエティ豊かな6作品が揃います。",
+      "tmdb": "https://www.themoviedb.org/movie/1815799",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "森七菜",
+        "黒川想矢",
+        "黒島結菜",
+        "吉田美月喜"
+      ],
+      "countries": [],
+      "runtime": 131,
+      "genres": [],
+      "checked_at": "2026-11-15T01:12:24.029050+00:00"
+    },
+    {
       "id": 956733,
       "title": "ギョンアの娘",
       "original_title": "경아의 딸",
@@ -7114,6 +6852,30 @@
       "genres": [
         "ドラマ"
       ]
+    },
+    {
+      "id": 1729917,
+      "title": "波美はるか 確変",
+      "original_title": "波美はるか 確変",
+      "date": "2026-03-10",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/qdLnay1kItDZoUjSGla4bfe3YD0.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "パチンコライターでもある波美はるかのイメージ映像。勝負強さと色気を兼ね備えた大人の艶技が、ただいま確変モードに突入！〈プロフィール〉生年月日:6月20日 サイズ:T161 B90 W60 H90 血液型:B型",
+      "tmdb": "https://www.themoviedb.org/movie/1729917",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "波美はるか"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 162,
+      "genres": [],
+      "checked_at": "2026-11-15T01:12:24.029050+00:00"
     },
     {
       "id": 1271895,

@@ -209,6 +209,14 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                 continue
         if expected_year:
             expected_year = str(expected_year)
+        elif not allow_fuzzy_posters:
+            unresolved += 1
+            candidate_review.append({
+                "query": movie.get("title") or movie.get("original_title"),
+                "reason": "release year missing; identity assignment skipped",
+                "candidates": [],
+            })
+            continue
         exact = {}
         for name in (movie.get("title"), movie.get("original_title"), LOCAL_TITLE_ALIASES.get(movie.get("title"))):
             exact.update(by_title.get(normalize(name), {}))

@@ -161,11 +161,49 @@ def _catalog_identity(row):
 
 
 def _tmdb_broadcast_metadata(row, cache):
-    """Use TMDB search for poster-only fallback and exact-match runtime data."""
+    """Use reviewed IDs for runtime details; exact title/year for identity-free enrichment."""
     api_key = os.environ.get("TMDB_API_KEY", "")
     title = str(row.get("title") or "").strip()
-    if not api_key or not title:
+    raw_id = row.get("tmdb_id") or row.get("tmdbId") or row.get("id")
+    tmdb_url = str(row.get("tmdb") or "")
+    url_match = re.fullmatch(r"https://www\.themoviedb\.org/movie/([1-9][0-9]*)/?", tmdb_url)
+    if not raw_id and url_match:
+        raw_id = url_match.group(1)
+    if isinstance(raw_id, str) and raw_id.isdigit():
+        reviewed_id = int(raw_id)
+    else:
+        reviewed_id = raw_id if isinstance(raw_id, int) and raw_id > 0 else None
+    if not api_key or (not title and not reviewed_id):
         return None
+
+    if reviewed_id:
+        cache_key = ("id", str(reviewed_id))
+        if cache_key in cache:
+            return cache[cache_key]
+        params = urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"})
+        request = urllib.request.Request(
+            "https://api.themoviedb.org/3/movie/" + str(reviewed_id) + "?" + params,
+            headers={"Accept": "application/json", "User-Agent": USER_AGENT},
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=15) as response:
+                detail = json.load(response)
+            if detail.get("id") != reviewed_id:
+                cache[cache_key] = None
+                return None
+            metadata = {"id": reviewed_id, "exact": True}
+            if detail.get("poster_path"):
+                metadata["poster"] = "https://image.tmdb.org/t/p/w500" + detail["poster_path"]
+            runtime = detail.get("runtime")
+            if isinstance(runtime, int) and runtime > 0:
+                metadata["runtime"] = runtime
+            cache[cache_key] = metadata
+            time.sleep(0.35)
+            return metadata
+        except Exception:
+            cache[cache_key] = None
+            return None
+
     raw_year = row.get("release_year") or row.get("year") or ""
     year_match = re.match(r"(\d{4})", str(raw_year))
     year = year_match.group(1) if year_match else ""
@@ -188,9 +226,14 @@ def _tmdb_broadcast_metadata(row, cache):
         exact = [item for item in candidates if wanted in {norm(item.get("title")), norm(item.get("original_title"))}
                  and (not year or str(item.get("release_date") or "").startswith(year + "-"))]
         chosen = (exact or candidates or [None])[0]
-        metadata = {"poster": "https://image.tmdb.org/t/p/w500" + chosen["poster_path"],
-                    "exact": chosen in exact if chosen else False, "id": chosen.get("id") if chosen else None}
-        if chosen and metadata["exact"] and chosen.get("id"):
+        metadata = None
+        if chosen:
+            metadata = {
+                "poster": "https://image.tmdb.org/t/p/w500" + chosen["poster_path"],
+                "exact": len(exact) == 1 and chosen in exact,
+                "id": chosen.get("id"),
+            }
+        if metadata and metadata["exact"] and chosen.get("id"):
             detail_params = urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"})
             detail_request = urllib.request.Request(
                 "https://api.themoviedb.org/3/movie/" + str(chosen["id"]) + "?" + detail_params,
@@ -198,19 +241,22 @@ def _tmdb_broadcast_metadata(row, cache):
             )
             with urllib.request.urlopen(detail_request, timeout=15) as response:
                 detail = json.load(response)
-            if isinstance(detail.get("runtime"), int) and detail["runtime"] > 0:
-                metadata["runtime"] = detail["runtime"]
-        cache[cache_key] = metadata if chosen else None
+            if detail.get("id") == chosen["id"]:
+                runtime = detail.get("runtime")
+                if isinstance(runtime, int) and runtime > 0:
+                    metadata["runtime"] = runtime
+        cache[cache_key] = metadata
         time.sleep(0.35)
-        return cache[cache_key]
+        return metadata
     except Exception:
         cache[cache_key] = None
         return None
 
 
 def enrich_catalog_posters(rows, catalog):
-    """Prefer exact local identity, then use explicitly marked TMDB poster fallback."""
+    """Fill missing posters and runtimes without changing unverified movie identity."""
     candidates = {}
+    runtime_by_id = {}
     for item in catalog:
         if not isinstance(item, dict):
             continue
@@ -220,42 +266,55 @@ def enrich_catalog_posters(rows, catalog):
         movie_id, poster, keys = identity
         for key in keys:
             candidates.setdefault(key, {}).setdefault(movie_id, set()).add(poster)
+        runtime = item.get("runtime")
+        if isinstance(runtime, (int, float)) and runtime > 0:
+            runtime_by_id[movie_id] = int(runtime)
+
     enriched = []
     remote_cache = {}
     for row in rows:
-        if row.get("poster"):
+        updated = dict(row)
+        needs_poster = not updated.get("poster")
+        needs_runtime = not (isinstance(updated.get("runtime"), (int, float)) and updated.get("runtime") > 0)
+        if not needs_poster and not needs_runtime:
             enriched.append(row)
             continue
-        raw_year = row.get("release_year") or row.get("year") or row.get("date") or ""
+
+        raw_year = updated.get("release_year") or updated.get("year") or updated.get("date") or ""
         year_match = re.match(r"(\d{4})", str(raw_year))
-        title = unicodedata.normalize("NFKC", str(row.get("title") or "")).casefold()
+        title = unicodedata.normalize("NFKC", str(updated.get("title") or "")).casefold()
         title = re.sub(r"[^\w]+", "", title)
         matches = candidates.get((title, year_match.group(1)), {}) if title and year_match else {}
-        if len(matches) != 1:
-            fallback = _tmdb_broadcast_metadata(row, remote_cache)
-            if fallback:
-                updated = {**row, "poster": fallback["poster"], "poster_match_status": "fuzzy_tmdb_search_fallback"}
-                if fallback.get("exact") and fallback.get("runtime"):
-                    updated["runtime"] = fallback["runtime"]
-                enriched.append(updated)
-            else:
-                enriched.append(row)
-            continue
-        movie_id, posters = next(iter(matches.items()))
-        existing_id = str(row.get("tmdb_id") or row.get("tmdbId") or row.get("id") or "")
-        existing_link = str(row.get("tmdb") or "")
-        if existing_id and existing_id != movie_id:
-            enriched.append(row)
-            continue
-        if existing_link and existing_link != f"https://www.themoviedb.org/movie/{movie_id}":
-            enriched.append(row)
-            continue
-        poster = max(posters, key=lambda value: int(re.search(r"/w(\d+)/", value).group(1)))
-        enriched.append({**row, "id": int(movie_id),
-                         "tmdb": f"https://www.themoviedb.org/movie/{movie_id}",
-                         "poster": poster})
-    return enriched
+        if len(matches) == 1:
+            movie_id, posters = next(iter(matches.items()))
+            existing_id = str(updated.get("tmdb_id") or updated.get("tmdbId") or updated.get("id") or "")
+            existing_link = str(updated.get("tmdb") or "")
+            if (not existing_id or existing_id == movie_id) and (
+                    not existing_link or existing_link == f"https://www.themoviedb.org/movie/{movie_id}"):
+                if needs_poster:
+                    poster = max(posters, key=lambda value: int(re.search(r"/w(\d+)/", value).group(1)))
+                    updated.update({"id": int(movie_id), "tmdb": f"https://www.themoviedb.org/movie/{movie_id}", "poster": poster})
+                    updated["poster_match_status"] = "matched"
+                if needs_runtime and movie_id in runtime_by_id:
+                    updated["runtime"] = runtime_by_id[movie_id]
+                elif needs_runtime and not existing_id:
+                    detail = _tmdb_broadcast_metadata({**updated, "id": int(movie_id)}, remote_cache)
+                    if detail and detail.get("runtime"):
+                        updated["runtime"] = detail["runtime"]
 
+        if needs_runtime and not updated.get("runtime"):
+            detail = _tmdb_broadcast_metadata(updated, remote_cache)
+            if detail and detail.get("runtime"):
+                updated["runtime"] = detail["runtime"]
+        if needs_poster and not updated.get("poster"):
+            detail = _tmdb_broadcast_metadata(updated, remote_cache)
+            if detail and detail.get("poster"):
+                updated["poster"] = detail["poster"]
+                updated["poster_match_status"] = (
+                    "matched" if detail.get("exact") else "fuzzy_tmdb_search_fallback"
+                )
+        enriched.append(updated)
+    return enriched
 
 def _poster_catalog(root=ROOT):
     """Read only existing, reviewed local movie catalogs; never discover remotely."""
@@ -389,10 +448,9 @@ def merge_tv_snapshot(current, automated, *, generated_at=None, allow_empty=Fals
     manual = [row for row in current["movies"] if row.get("source_id") != "syoboi_calendar"]
     manual_keys = {_key(row) for row in manual if isinstance(row, dict)}
     fresh = list(_preserve_artwork(current["movies"], (row for row in automated if _key(row) not in manual_keys)))
-    fresh = enrich_catalog_posters(fresh, catalog)
     result = dict(current)
-    result["movies"] = manual + fresh
-    result["automated_movies"] = fresh
+    result["movies"] = enrich_catalog_posters(manual + fresh, catalog)
+    result["automated_movies"] = [row for row in result["movies"] if row.get("source_id") == "syoboi_calendar"]
     result["automation_generated_at"] = generated_at or dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z")
     result["automation_source"] = "syoboi_calendar"
     return result

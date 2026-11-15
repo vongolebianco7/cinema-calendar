@@ -307,13 +307,36 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             matches[int(candidate["id"])] = candidate
         if len(matches) == 1:
             identity = next(iter(matches.values()))
-            movie["poster"] = IMAGE_BASE + identity["poster_path"]
-            movie["id"] = int(identity["id"])
-            movie["tmdb"] = "https://www.themoviedb.org/movie/" + str(identity["id"])
+            if needs_poster:
+                movie["poster"] = IMAGE_BASE + identity["poster_path"]
+            movie_id = int(identity["id"])
+            movie["id"] = movie_id
+            movie["tmdb"] = "https://www.themoviedb.org/movie/" + str(movie_id)
             release_year = (identity.get("release_date") or "")[:4]
             if release_year.isdigit() and 1888 <= int(release_year) <= 2100:
                 movie.setdefault("release_year", int(release_year))
-            enriched += 1
+            if needs_runtime:
+                wait = delay - (time.monotonic() - last_request)
+                if wait > 0:
+                    time.sleep(wait)
+                request = urllib.request.Request(
+                    DETAILS.format(movie_id) + "?" + urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"}),
+                    headers={"Accept": "application/json"},
+                )
+                try:
+                    with opener(request, timeout=15) as response:
+                        result = json.load(response)
+                    last_request = time.monotonic()
+                    runtime = result.get("runtime")
+                    if result.get("id") == movie_id and isinstance(runtime, (int, float)) and runtime > 0:
+                        movie["runtime"] = int(runtime)
+                        runtime_enriched += 1
+                except Exception:
+                    unresolved += 1
+            if (not needs_runtime or movie.get("runtime")) and (not needs_poster or movie.get("poster")):
+                enriched += 1
+            else:
+                unresolved += 1
         elif len(matches) > 1:
             ambiguous += 1
             candidate_review.append({

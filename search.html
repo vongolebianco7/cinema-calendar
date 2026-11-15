@@ -369,7 +369,7 @@ function movieRuntimeLabel(m){const raw=m.runtime??m.runtime_minutes??m.duration
 function renderMovieInformation(m){
  const dna=m.dna||{}, related=m.related||[];
  const unique=items=>[...new Map((items||[]).filter(Boolean).map(x=>[String(x.id||'').trim()||String(x.name||'').trim().toLocaleLowerCase(),x])).values()];
- const people=(items,role)=>unique(items).map(x=>{const id=x.id||x.person_id||x.tmdb_id||'',personRole=role==="監督"?"director":"cast",params=new URLSearchParams(id?{person:String(id),role:personRole,search:x.name||""}:{search:x.name||"",type:"person"});return '<a class="infoPerson" href="search.html?'+params.toString()+'">'+E(x.name||'')+'</a>'}).join('、');
+ const people=(items,role)=>unique(items).map(x=>{const id=x.id||x.person_id||x.tmdb_id||'',personRole=role==="監督"?"director":"cast",params=new URLSearchParams(/^\d+$/.test(String(id))?{person:String(id),role:personRole,search:x.name||""}:{search:x.name||"",type:"person"});return '<a class="infoPerson" href="search.html?'+params.toString()+'">'+E(x.name||'')+'</a>'}).join('、');
  const row=(label,value)=>value?'<div class="infoRow"><dt>'+E(label)+'</dt><dd>'+value+'</dd></div>':'';
  const group=(title,rows)=>'<div class="infoGroup"><h4>'+title+'</h4>'+rows+'</div>';
  const join=items=>[...new Set((items||[]).filter(Boolean))].map(E).join(' / ');

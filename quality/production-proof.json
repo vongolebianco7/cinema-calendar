@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "9008eb42f97e2add8adb6a9d6148fe3fa9aabf11",
-  "verified_at": "2026-11-15T02:52:05Z",
-  "note": "Exact-source CI receipt for PR #851. Tested source head 9008eb42f97e2add8adb6a9d6148fe3fa9aabf11 passed the exact-head required GitHub Actions workflows: Autonomous quality gate run 43668398844; CINELVA smoke tests run 43668398803; Validate frontend run 43668398817 (attempt 2, all browser shards and reported-regression checks passed); Reproducible backend build run 43668398875. Additional full Python contract suite 43668398790, mobile layout run 43668398793, completeness scorecard run 43668398840, and continuous visual QA run 43668398773 passed. This is a receipt-only update; it does not claim the Vercel backend PR deployment check passed (it was blocked by the Hobby api-deployments-free-per-day 24-hour limit), that live TMDB lookups enriched the grouped rows, that Neon synchronization succeeded, or that production image rendering acceptance passed."
+  "head_sha": "bb0646e4b95260ca52935bdc3aa132e889dad868",
+  "verified_at": "2026-11-15T05:55:08.463Z",
+  "note": "Exact-source CI receipt for PR #852. This exact head passed required pull-request workflows: Autonomous quality gate run 43680424187, CINELVA smoke tests run 43680424290, Validate frontend run 43680424208, and Reproducible backend build run 43680424223. Other relevant exact-head checks also passed. Vercel preview deployment remains blocked by the Hobby daily build limit; this receipt makes no claim of production Vercel deployment."
 }

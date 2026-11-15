@@ -1892,7 +1892,7 @@
       "tmdb": "https://www.themoviedb.org/movie/1063020",
       "director": "常廣丈太",
       "director_id": 1634746,
-      "runtime": 0,
+      "runtime": 121,
       "genres": [
         "犯罪"
       ],
@@ -1905,7 +1905,9 @@
         "小日向文世",
         "速水もこみち"
       ],
-      "tmdbId": 1063020
+      "tmdbId": 1063020,
+      "runtime_source_url": "https://www.kinenote.com/sp/public/cinema/detail.aspx?cinema_id=98106",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "ストロベリームーン 余命半年の恋",
@@ -1953,7 +1955,7 @@
       "tmdb": "https://www.themoviedb.org/movie/1682421",
       "director": "犬童一心",
       "director_id": 99245,
-      "runtime": 0,
+      "runtime": 82,
       "genres": [
         "ドキュメンタリー"
       ],
@@ -1965,7 +1967,9 @@
         "二世野村萬斎",
         "野村裕基"
       ],
-      "tmdbId": 1682421
+      "tmdbId": 1682421,
+      "runtime_source_url": "https://www.kinenote.com/main/public/cinema/detail.aspx?cinema_id=101640",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "テレビの中に入りたい",
@@ -2484,7 +2488,10 @@
       "source": "FOD INFO公式配信一覧（2026-10-27確認）",
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
-      "checked_at": "2026-10-26"
+      "checked_at": "2026-10-26",
+      "runtime": 108,
+      "runtime_source_url": "https://www.kinenote.com/main/public/cinema/detail.aspx?cinema_id=102298",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "カウントダウン",
@@ -2500,7 +2507,10 @@
       "type": "配信",
       "checked_at": "2026-10-26",
       "poster_match_status": "fuzzy_search_fallback",
-      "poster_match_query": "カウントダウン"
+      "poster_match_query": "カウントダウン",
+      "runtime": 136,
+      "runtime_source_url": "https://www.kinenote.com/main/public/cinema/detail.aspx?cinema_id=101321",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "ゲイラン",
@@ -2634,7 +2644,10 @@
       "source": "FOD INFO公式配信一覧（2026-10-27確認）",
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
-      "checked_at": "2026-10-26"
+      "checked_at": "2026-10-26",
+      "runtime": 73,
+      "runtime_source_url": "https://filmarks.com/movies/130899",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "メガロポリス",
@@ -2807,7 +2820,10 @@
       "release_year": 2024,
       "identity_verified_at": "2026-10-25",
       "id": 1328347,
-      "tmdb": "https://www.themoviedb.org/movie/1328347"
+      "tmdb": "https://www.themoviedb.org/movie/1328347",
+      "runtime": 93,
+      "runtime_source_url": "https://eiga.com/movie/101835/",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "日本統一74",
@@ -2827,7 +2843,10 @@
       "release_year": 2026,
       "identity_verified_at": "2026-10-25",
       "id": 1647891,
-      "tmdb": "https://www.themoviedb.org/movie/1647891"
+      "tmdb": "https://www.themoviedb.org/movie/1647891",
+      "runtime": 71,
+      "runtime_source_url": "https://www.skyperfectv.co.jp/program/detail/?uid=c32078076",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "鬼卍",
@@ -5424,7 +5443,10 @@
       "source": "FOD INFO公式配信一覧（2026-10-27確認）",
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
-      "checked_at": "2026-10-26"
+      "checked_at": "2026-10-26",
+      "runtime": 82,
+      "runtime_source_url": "https://lp.p.pia.jp/event/movie/170201/index.html",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "カーテンコールの灯",
@@ -7437,7 +7459,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "poster": "https://image.tmdb.org/t/p/w500/8KIVOzvc78E6pcOPC31xp8KFolS.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/8KIVOzvc78E6pcOPC31xp8KFolS.jpg",
+      "runtime": 141,
+      "runtime_source_url": "https://lp.p.pia.jp/event/movie/313840/index.html",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "グーニーズ",
@@ -7558,7 +7583,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "poster": "https://image.tmdb.org/t/p/w500/4eMN3GANH5GG4kXdHkrTZEUuQ9M.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/4eMN3GANH5GG4kXdHkrTZEUuQ9M.jpg",
+      "runtime": 93,
+      "runtime_source_url": "https://filmarks.com/movies/61369",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "マイ・バック・ページ",
@@ -8829,7 +8857,10 @@
       "id": 1458162,
       "tmdb": "https://www.themoviedb.org/movie/1458162",
       "release_year": 2025,
-      "tmdb_id": 1458162
+      "tmdb_id": 1458162,
+      "runtime": 88,
+      "runtime_source_url": "https://movie.jorudan.co.jp/film/100993/",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "ヒットマン リサージェンス",
@@ -8873,7 +8904,10 @@
       "id": 1468104,
       "tmdb": "https://www.themoviedb.org/movie/1468104",
       "release_year": 2025,
-      "tmdb_id": 1468104
+      "tmdb_id": 1468104,
+      "runtime": 88,
+      "runtime_source_url": "https://www.kinenote.com/main/public/cinema/detail.aspx?cinema_id=101391",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "デュー あの時の君とボク",
@@ -9209,7 +9243,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "poster": "https://image.tmdb.org/t/p/w500/b48mSL143bJw20Y44jNoaRDl8yb.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/b48mSL143bJw20Y44jNoaRDl8yb.jpg",
+      "runtime": 83,
+      "runtime_source_url": "https://filmarks.com/movies/124993",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "Being Heumann",
@@ -9949,7 +9986,10 @@
       "checked_at": "2026-11-05",
       "id": 1610884,
       "tmdb": "https://www.themoviedb.org/movie/1610884",
-      "tmdb_id": 1610884
+      "tmdb_id": 1610884,
+      "runtime": 105,
+      "runtime_source_url": "https://movie.jorudan.co.jp/film/102153/",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "トレンケ・ラウケン Part1",
@@ -9962,7 +10002,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "poster": "https://image.tmdb.org/t/p/w500/faFeOkbujO5zIqiBWAEjr1xdS3l.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/faFeOkbujO5zIqiBWAEjr1xdS3l.jpg",
+      "runtime": 128,
+      "runtime_source_url": "https://cinemarine.co.jp/trenquelauquen/",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "トレンケ・ラウケン Part2",
@@ -9975,7 +10018,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "poster": "https://image.tmdb.org/t/p/w500/faFeOkbujO5zIqiBWAEjr1xdS3l.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/faFeOkbujO5zIqiBWAEjr1xdS3l.jpg",
+      "runtime": 132,
+      "runtime_source_url": "https://cinemarine.co.jp/trenquelauquen/",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "映画 仮面ライダーゼッツ さよならのミッション",
@@ -10110,7 +10156,10 @@
       "source": "Netflix Tudum November 2026 schedule; Japan title page verified",
       "source_url": "https://www.netflix.com/tudum/articles/new-on-netflix?inapp=true-65",
       "checked_at": "2026-11-08",
-      "original_title": "The Good Lawyer"
+      "original_title": "The Good Lawyer",
+      "runtime": 115,
+      "runtime_source_url": "https://filmarks.com/movies/131530",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "クリスマス・スイッチ",
@@ -10237,7 +10286,10 @@
       "poster": "https://image.tmdb.org/t/p/w500/gK11RUXspxqty0Wq6KoV8J0crKO.jpg",
       "source": "Netflix公式の日本向け11月新作ラインアップ・公式作品ページ",
       "source_url": "https://www.netflix.com/jp/title/81382720",
-      "checked_at": "2026-11-08"
+      "checked_at": "2026-11-08",
+      "runtime": 105,
+      "runtime_source_url": "https://filmarks.com/movies/131533",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "笑えない世界でも",

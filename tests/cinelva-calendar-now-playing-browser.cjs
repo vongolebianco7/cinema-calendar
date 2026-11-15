@@ -37,7 +37,9 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
     await page.locator('#close').click();
    }
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-   await page.locator('.calendar').screenshot({path:`artifacts/now-playing/calendar-label-${process.env.CINELVA_BROWSER||'chromium'}-${theme}-${route.replace('/','-')}.png`});
+   const screenshotPath=`artifacts/now-playing/calendar-label-${process.env.CINELVA_BROWSER||'chromium'}-${theme}-${route.replace('/','-')}.png`;
+   const calendarHeight=await page.locator('.calendar').evaluate(el=>el.scrollHeight);
+   if(calendarHeight*3<=30000)await page.locator('.calendar').screenshot({path:screenshotPath});else await page.screenshot({path:screenshotPath,fullPage:false});
    await page.clock.fastForward(37*3600000);assert.equal(await page.locator('.cinelva-now-playing-label').count(),0,'open pages expire current status');
    assert.deepEqual(errors,[]);await context.close();
   }

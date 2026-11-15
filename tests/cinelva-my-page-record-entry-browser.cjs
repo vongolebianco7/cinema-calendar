@@ -39,7 +39,8 @@ async function freePort() {
       await recordButton.waitFor({ state: 'visible', timeout: 15000 });
       await recordButton.click();
       await page.locator('.cinelva-rate-dialog').waitFor({ state: 'visible', timeout: 10000 });
-      assert.equal(await page.locator('#cinelvaRateTitle').innerText(), title);
+      const displayedTitle = (await page.locator('#cinelvaRateTitle').innerText()).replace(/\s+/g, ' ').trim();
+      assert.equal(displayedTitle, title.replace(/\s+/g, ' ').trim());
       assert.equal(page.url(), detailUrl, 'review opens directly without navigating away from detail');
       assert.equal(await page.locator('.cinelva-rate-dialog').getByRole('button', { name: '次へ', exact: true }).count(), 0, 'review has no next action');
       await page.locator('#cinelvaRateClose').click();

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T08:40:24.130912+00:00",
+  "generated_at": "2026-11-15T08:44:43.762972+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
     {
@@ -22044,14 +22044,17 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.pmgstatic.com/cache/resized/w936/files/images/film/posters/170/918/170918413_ae9caa.jpg",
       "source": "FOD INFO公式配信一覧（2026-10-27確認）",
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
       "checked_at": "2026-10-26",
       "runtime": 108,
       "runtime_source_url": "https://www.kinenote.com/main/public/cinema/detail.aspx?cinema_id=102298",
-      "runtime_checked_at": "2026-11-15"
+      "runtime_checked_at": "2026-11-15",
+      "poster_source_url": "https://www.csfd.cz/film/1795761-orix-buffaloes-2025-deta-wao-okada-the-movie/prehled/",
+      "poster_match_status": "exact_title_match",
+      "poster_checked_at": "2026-11-15"
     },
     {
       "title": "カウントダウン",
@@ -22299,14 +22302,17 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://awsimgsrc.dmm.com/dig/dmmtv/video/bdzyyiaxyqqnero974oc2w1b3/keylogo_1.jpg?f=jpg&h=630&w=1200",
       "source": "FOD INFO公式配信一覧（2026-10-27確認）",
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
       "checked_at": "2026-10-26",
       "runtime": 73,
       "runtime_source_url": "https://filmarks.com/movies/130899",
-      "runtime_checked_at": "2026-11-15"
+      "runtime_checked_at": "2026-11-15",
+      "poster_source_url": "https://tv.dmm.com/vod/detail/?season=bdzyyiaxyqqnero974oc2w1b3",
+      "poster_match_status": "fuzzy_search_fallback",
+      "poster_checked_at": "2026-11-15"
     },
     {
       "title": "メガロポリス",
@@ -22421,11 +22427,14 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://stat.ameba.jp/user_images/20260330/15/asukagirara/f0/5a/j/o0452064015766005437.jpg",
       "source": "FOD INFO公式配信一覧（2026-10-27確認）",
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
-      "checked_at": "2026-10-26"
+      "checked_at": "2026-10-26",
+      "poster_source_url": "https://ameblo.jp/asukagirara/entry-12961392458.html",
+      "poster_match_status": "fuzzy_search_fallback",
+      "poster_checked_at": "2026-11-15"
     },
     {
       "id": 956793,
@@ -26645,11 +26654,17 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://kimigairudakede.com/img/main.jpg",
       "source": "FOD INFO公式配信一覧（2026-10-27確認）",
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
-      "checked_at": "2026-10-26"
+      "checked_at": "2026-10-26",
+      "poster_source_url": "https://kimigairudakede.com/",
+      "poster_match_status": "exact_title_match",
+      "runtime": 78,
+      "runtime_source_url": "https://tv.apple.com/jp/movie/%E3%81%8D%E3%81%BF%E3%81%8B%E3%81%84%E3%82%8B%E3%81%9F%E3%81%91%E3%81%A7/umc.cmc.1lrvz9oliypxk192p4yi07ot8",
+      "runtime_checked_at": "2026-11-15",
+      "poster_checked_at": "2026-11-15"
     },
     {
       "title": "名探偵ミランダ 大富豪殺人の招待状",
@@ -27105,14 +27120,17 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://www.crank-in.net/img/db/227108193199018_1200.jpg",
       "source": "FOD INFO公式配信一覧（2026-10-27確認）",
       "source_url": "https://news.fod.fujitv.co.jp/article/14842",
       "type": "配信",
       "checked_at": "2026-10-26",
       "runtime": 82,
       "runtime_source_url": "https://lp.p.pia.jp/event/movie/170201/index.html",
-      "runtime_checked_at": "2026-11-15"
+      "runtime_checked_at": "2026-11-15",
+      "poster_source_url": "https://www.crank-in.net/news/116150/1",
+      "poster_match_status": "exact_title_match",
+      "poster_checked_at": "2026-11-15"
     },
     {
       "title": "カーテンコールの灯",
@@ -30419,8 +30437,8 @@
     {
       "original_title": "泣くな赤鬼",
       "overview": "城南工業野球部監督・小渕隆（堤 真一）。陽に焼けた赤い顔と、鬼のような熱血指導でかつては「赤鬼」と呼ばれていた。その厳しさで、甲子園出場一歩手前までいきながらも、その夢は一度として叶わぬまま、10年の月日が流れた。今では、野球への情熱は随分と衰え、身体のあちこちにガタもきている50代の疲れた中年になっていた。ある日、診察を受けた病院でかつての教え子、斎藤智之＜愛称ゴルゴ＞（柳楽優弥）と偶然再会する。ゴルゴは非凡な野球センスがありながら、堪え性のない性格ゆえに努力もせず、途中で挫折し、高校を中退した生徒である。今では、20代半ばを越え、妻・雪乃（川栄李奈）と息子・集と幸せな家庭を築き、立派な大人に変貌していた。そのゴルゴが末期がんで余命半年であることを知らされる。赤鬼はゴルゴのために、かつて彼が挑むはずだった甲子園出場を賭けた決勝戦の再現試合を企画する。10年という歳月を経て、それぞれの秘めた思いを胸に、ゴルゴにとって最後の試合が行われるのであった―。",
-      "poster": "https://image.tmdb.org/t/p/w342/dtzQqiVWWUZOObINawFxj7oPNSZ.jpg",
-      "score": 8,
+      "poster": "https://image.tmdb.org/t/p/w500/dtzQqiVWWUZOObINawFxj7oPNSZ.jpg",
+      "score": 8.0,
       "votes": 1,
       "title": "泣くな赤鬼",
       "release_year": 2019,
@@ -30435,7 +30453,22 @@
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/593562",
       "checked_at": "2026-10-26T08:48:50.008240+00:00",
-      "runtime": 111
+      "runtime": 111,
+      "director": "兼重淳",
+      "director_id": 224409,
+      "cast": [
+        "堤真一",
+        "柳楽優弥",
+        "川栄李奈",
+        "キムラ緑子"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "genres": [
+        "ドラマ",
+        "ファミリー"
+      ]
     },
     {
       "title": "トイ・ストーリー５",
@@ -32831,7 +32864,11 @@
       "checked_at": "2026-11-05",
       "runtime": 100,
       "runtime_source_url": "https://lp.p.pia.jp/event/movie/218616/index.html",
-      "runtime_checked_at": "2026-11-15"
+      "runtime_checked_at": "2026-11-15",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYWI2ZjBjN2MtNTFjNS00ZjhlLWE0N2MtNjA5ZTZlNWFkYzc5XkEyXkFqcGc%40._V1_.jpg",
+      "poster_source_url": "https://www.imdb.com/title/tt10467460/",
+      "poster_match_status": "exact_title_match",
+      "poster_checked_at": "2026-11-15"
     },
     {
       "id": 1483525,
@@ -33088,7 +33125,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "poster": "https://image.tmdb.org/t/p/w500/szccoIaJZywnRtcTWdAJLlE5bUq.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/szccoIaJZywnRtcTWdAJLlE5bUq.jpg",
+      "runtime": 81,
+      "runtime_source_url": "https://www.allcinema.net/cinema/348018",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "デッドウォーカー・インフェルノ",
@@ -33103,7 +33143,11 @@
       "checked_at": "2026-11-05",
       "runtime": 89,
       "runtime_source_url": "https://www.kinenote.com/main/public/cinema/detail.aspx?cinema_id=88538",
-      "runtime_checked_at": "2026-11-15"
+      "runtime_checked_at": "2026-11-15",
+      "poster": "https://iv1.lisimg.com/image/13712363/740full-deadman-inferno-poster.jpg",
+      "poster_source_url": "https://www.kinenote.com/main/public/cinema/detail.aspx?cinema_id=88538",
+      "poster_match_status": "exact_title_match",
+      "poster_checked_at": "2026-11-15"
     },
     {
       "title": "ハイランダー2 甦る戦士",
@@ -33222,7 +33266,10 @@
       "votes": 0,
       "overview": "",
       "checked_at": "2026-11-05",
-      "poster": "https://image.tmdb.org/t/p/w500/xCsQkAn2f7Z4t0ElOzIDAcVUoOb.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/xCsQkAn2f7Z4t0ElOzIDAcVUoOb.jpg",
+      "runtime": 118,
+      "runtime_source_url": "https://www.video.unext.jp/title/SID0228246",
+      "runtime_checked_at": "2026-11-15"
     },
     {
       "title": "大海原のソングライン",
@@ -34524,10 +34571,13 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://inter-film.com/wp-content/uploads/2024/03/ed1c9facc14a52da2c8c9b083a53b03c.jpg",
       "source": "Hulu公式 まもなく配信（2026年11月）",
       "source_url": "https://www.hulu.jp/features/comingsoon",
-      "checked_at": "2026-11-08"
+      "checked_at": "2026-11-08",
+      "poster_source_url": "https://inter-film.com/post-1202/",
+      "poster_match_status": "exact_title_match",
+      "poster_checked_at": "2026-11-15"
     },
     {
       "title": "日本人の忘れもの フィリピンと中国の残留邦人",
@@ -34836,10 +34886,13 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://www.meitelenext.com/wp-content/uploads/program/kyokuaru/thumbnail.jpg",
       "source": "Hulu公式 まもなく配信（2026年11月）",
       "source_url": "https://www.hulu.jp/features/comingsoon",
-      "checked_at": "2026-11-08"
+      "checked_at": "2026-11-08",
+      "poster_source_url": "https://www.meitelenext.com/horror/kyokuaru",
+      "poster_match_status": "exact_title_match",
+      "poster_checked_at": "2026-11-15"
     },
     {
       "id": 1159206,

@@ -349,7 +349,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
     }
     content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
     if path.read_text(encoding="utf-8") == content:
-        return enriched, ambiguous, unresolved + runtime_enriched
+        return enriched, ambiguous, unresolved
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as tmp:
         tmp.write(content)
         temp_path = tmp.name
@@ -367,4 +367,4 @@ if __name__ == "__main__":
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"Streaming poster enrichment failed: {exc}", flush=True)
         raise SystemExit(1)
-    print("Streaming metadata enrichment: poster_or_record_updates=%d ambiguous=%d unresolved_plus_runtime=%d" % counts)
+    print("Streaming poster and runtime enrichment: enriched=%d ambiguous=%d unresolved=%d" % counts)

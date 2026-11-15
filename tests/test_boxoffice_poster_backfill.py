@@ -1666,6 +1666,78 @@ class BoxofficePosterBackfillTests(unittest.TestCase):
             merged["title"], 2004, "2003-12-13"))
         self.assertIn("出﨑統", backfill.reviewed_director(merged["title"], 2004)["names"])
 
+    def test_official_jirachi_title_fragment_attaches_only_to_its_verified_tmdb_identity(self):
+        group = (
+            "ポケットモンスター アドバンスジェネレーション / "
+            "七夜の願い星ジラーチ / おどるポケモンひみつ基地"
+        )
+        fragment = {
+            "title": "ポケットモンスター アドバンスジェネレーション",
+            "gross": 45, "year": 2003, "source_group_title": group,
+            "poster": "https://image.tmdb.org/t/p/w500/unverified-group-fallback.jpg",
+            "poster_match_status": "fuzzy_related_title_or_screening_group",
+        }
+        jirachi = {
+            "title": "七夜の願い星ジラーチ", "gross": 45, "year": 2003,
+            "source_group_title": group, "tmdbId": 36218,
+            "original_title": "劇場版ポケットモンスター アドバンスジェネレーション 七夜の願い星 ジラーチ",
+            "tmdb_release_date": "2003-07-19",
+            "identity_source": "https://www.themoviedb.org/movie/36218",
+            "identity_match": "exact_cleaned_title_and_release_year_window",
+            "poster": "https://image.tmdb.org/t/p/w500/jirachi-own-poster.jpg",
+            "poster_match_status": "matched",
+        }
+        short = {
+            "title": "おどるポケモンひみつ基地", "gross": 45, "year": 2003,
+            "source_group_title": group, "tmdbId": 351802,
+            "identity_source": "https://www.themoviedb.org/movie/351802",
+            "poster": "https://image.tmdb.org/t/p/w500/pokemon-short-own-poster.jpg",
+            "poster_match_status": "matched",
+        }
+        data = {"by_year": {"2003": [fragment, jirachi, short]}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 1)
+        rows = data["by_year"]["2003"]
+        self.assertEqual(len(rows), 2)
+        canonical = next(row for row in rows if "ジラーチ" in row["title"])
+        separate_short = next(row for row in rows if row["tmdbId"] == 351802)
+        self.assertEqual(canonical["title"],
+                         "ポケットモンスター アドバンスジェネレーション/七夜の願い星ジラーチ")
+        self.assertEqual((canonical["tmdbId"], canonical["poster"]),
+                         (36218, "https://image.tmdb.org/t/p/w500/jirachi-own-poster.jpg"))
+        self.assertEqual((separate_short["tmdbId"], separate_short["poster"]),
+                         (351802, "https://image.tmdb.org/t/p/w500/pokemon-short-own-poster.jpg"))
+        self.assertNotEqual(canonical["poster"], separate_short["poster"])
+        self.assertEqual([row["gross"] for row in rows], [45, 45])
+        self.assertEqual([row["source_group_size"] for row in rows], [2, 2])
+
+    def test_jirachi_fragment_attachment_rejects_unverified_or_different_tmdb_identity(self):
+        group = (
+            "ポケットモンスター アドバンスジェネレーション / "
+            "七夜の願い星ジラーチ / おどるポケモンひみつ基地"
+        )
+        rows = [
+            {"title": "ポケットモンスター アドバンスジェネレーション",
+             "gross": 45, "year": 2003, "source_group_title": group,
+             "poster": "https://image.tmdb.org/t/p/w500/fallback.jpg",
+             "poster_match_status": "fuzzy_related_title_or_screening_group"},
+            {"title": "七夜の願い星ジラーチ", "gross": 45, "year": 2003,
+             "source_group_title": group, "tmdbId": 36218,
+             "original_title": "Wrong original title", "tmdb_release_date": "2003-07-19",
+             "identity_source": "https://www.themoviedb.org/movie/36218",
+             "poster": "https://image.tmdb.org/t/p/w500/jirachi.jpg",
+             "poster_match_status": "matched"},
+            {"title": "おどるポケモンひみつ基地", "gross": 45, "year": 2003,
+             "source_group_title": group, "tmdbId": 351802,
+             "identity_source": "https://www.themoviedb.org/movie/351802",
+             "poster": "https://image.tmdb.org/t/p/w500/short.jpg",
+             "poster_match_status": "matched"},
+        ]
+        data = {"by_year": {"2003": rows}}
+
+        self.assertEqual(backfill.expand_grouped_rows(data), 0)
+        self.assertEqual(data["by_year"]["2003"], rows)
+
     def test_official_shochiku_rampo_versions_keep_distinct_directors_and_posters(self):
         mayuzumi = "ＲＡＭＰＯ（黛バージョン）"
         okuyama = "ＲＡＭＰＯ（奥山バージョン）"

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "cd48afc80c7770ce0ceaf77c2cb07095d8c240ce",
-  "verified_at": "2026-11-15T08:26:00Z",
-  "note": "Exact-source CI receipt for PR #857 poster/runtime enrichment. All four required pull_request workflows passed on this exact head: Autonomous quality gate run 43693190281; CINELVA smoke tests run 43693190308; Validate frontend run 43693190266; Reproducible backend build run 43693190262. The reported UI/data regression checks and frontend Chromium/WebKit journeys also passed. This receipt records exact-source CI validation, not production deployment."
+  "head_sha": "25ee604ebb0c9f7c3b84bd73033192e672f4b049",
+  "verified_at": "2026-11-15T08:51:00Z",
+  "note": "Staged production-proof refresh. Required exact-head pull_request checks are pending on this PR; this receipt must be finalized to that tested PR head only after all required checks pass."
 }

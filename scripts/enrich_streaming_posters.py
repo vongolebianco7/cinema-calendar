@@ -80,10 +80,13 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                     by_title.setdefault(key, {})[str(item["id"])] = item
 
     last_request = 0.0
-    enriched = ambiguous = unresolved = 0
+    enriched = ambiguous = unresolved = runtime_enriched = 0
+    detail_cache = {}
     candidate_review = []
     for movie in rows:
-        if movie.get("poster"):
+        needs_poster = not movie.get("poster")
+        needs_runtime = not (isinstance(movie.get("runtime"), (int, float)) and movie.get("runtime") > 0)
+        if not needs_poster and not needs_runtime:
             continue
         # Preserve existing canonical identities, regardless of alias.
         # A title search must never override a reviewed movie ID.
@@ -116,30 +119,47 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             # offline; never replace it with a same-title different movie.
             reviewed_catalog = by_id.get(str(reviewed_id))
             if reviewed_catalog is not None:
-                movie["poster"] = reviewed_catalog["poster"]
+                if needs_poster and reviewed_catalog.get("poster"):
+                    movie["poster"] = reviewed_catalog["poster"]
+                local_runtime = reviewed_catalog.get("runtime")
+                if needs_runtime and isinstance(local_runtime, (int, float)) and local_runtime > 0:
+                    movie["runtime"] = int(local_runtime)
+                    runtime_enriched += 1
                 movie["id"] = reviewed_id
                 movie["tmdb"] = reviewed_catalog.get("tmdb") or (
                     "https://www.themoviedb.org/movie/" + str(reviewed_id)
                 )
-                enriched += 1
-                continue
+                if (not needs_poster or movie.get("poster")) and (not needs_runtime or movie.get("runtime")):
+                    enriched += 1
+                    continue
             if not api_key:
                 unresolved += 1
                 continue
-            request = urllib.request.Request(
-                DETAILS.format(reviewed_id) + "?" + urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"}),
-                headers={"Accept": "application/json"},
-            )
             try:
-                with opener(request, timeout=15) as response:
-                    result = json.load(response)
-                if result.get("id") != reviewed_id or not result.get("poster_path"):
+                result = detail_cache.get(reviewed_id)
+                if result is None:
+                    request = urllib.request.Request(
+                        DETAILS.format(reviewed_id) + "?" + urllib.parse.urlencode({"api_key": api_key, "language": "ja-JP"}),
+                        headers={"Accept": "application/json"},
+                    )
+                    with opener(request, timeout=15) as response:
+                        result = json.load(response)
+                    detail_cache[reviewed_id] = result
+                if result.get("id") != reviewed_id:
                     unresolved += 1
                     continue
-                movie["poster"] = IMAGE_BASE + result["poster_path"]
+                if needs_poster and result.get("poster_path"):
+                    movie["poster"] = IMAGE_BASE + result["poster_path"]
+                runtime = result.get("runtime")
+                if needs_runtime and isinstance(runtime, (int, float)) and runtime > 0:
+                    movie["runtime"] = int(runtime)
+                    runtime_enriched += 1
                 movie["id"] = reviewed_id
                 movie["tmdb"] = "https://www.themoviedb.org/movie/" + str(reviewed_id)
-                enriched += 1
+                if (not needs_poster or movie.get("poster")) and (not needs_runtime or movie.get("runtime")):
+                    enriched += 1
+                else:
+                    unresolved += 1
             except Exception:
                 unresolved += 1
             continue
@@ -184,14 +204,6 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                 continue
         if expected_year:
             expected_year = str(expected_year)
-        else:
-            unresolved += 1
-            candidate_review.append({
-                "query": movie.get("title") or movie.get("original_title"),
-                "reason": "release year missing; strict title/year matching skipped",
-                "candidates": [],
-            })
-            continue
         exact = {}
         for name in (movie.get("title"), movie.get("original_title"), LOCAL_TITLE_ALIASES.get(movie.get("title"))):
             exact.update(by_title.get(normalize(name), {}))
@@ -309,10 +321,19 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                 ],
             })
         else:
-            unresolved += 1
+            # User-approved poster-only fuzzy fallback: keep the existing identity
+            # untouched and mark the artwork so it is never mistaken for a verified match.
+            fuzzy = next((item for item in result.get("results", []) if item.get("poster_path")), None)
+            if needs_poster and fuzzy:
+                movie["poster"] = IMAGE_BASE + fuzzy["poster_path"]
+                movie["poster_match_status"] = "fuzzy_search_fallback"
+                movie["poster_match_query"] = title
+                enriched += 1
+            else:
+                unresolved += 1
             candidate_review.append({
                 "query": title,
-                "reason": "no unique exact-title candidate; no identity assigned",
+                "reason": "poster assigned from first fuzzy TMDB result without changing movie identity" if needs_poster and fuzzy else "no usable poster candidate",
                 "candidates": search_candidates,
             })
 
@@ -324,11 +345,11 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         )
 
     data["poster_enrichment"] = {
-        "source": "local catalog or TMDB Search API; unique exact-title matches only",
+        "source": "TMDB identity matches plus user-approved poster-only fuzzy fallback; fuzzy posters are explicitly marked",
     }
     content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
     if path.read_text(encoding="utf-8") == content:
-        return enriched, ambiguous, unresolved
+        return enriched, ambiguous, unresolved + runtime_enriched
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as tmp:
         tmp.write(content)
         temp_path = tmp.name
@@ -346,4 +367,4 @@ if __name__ == "__main__":
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"Streaming poster enrichment failed: {exc}", flush=True)
         raise SystemExit(1)
-    print("Streaming poster enrichment: enriched=%d ambiguous=%d unresolved=%d" % counts)
+    print("Streaming metadata enrichment: poster_or_record_updates=%d ambiguous=%d unresolved_plus_runtime=%d" % counts)

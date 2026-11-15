@@ -25,7 +25,7 @@ class Response:
 
 
 class StreamingPosterEnrichmentTests(unittest.TestCase):
-    def run_fixture(self, movies, result, catalog=None, api_key="fixture-secret", allow_fuzzy=False):
+    def run_fixture(self, movies, result, catalog=None, api_key="fixture-secret", allow_fuzzy=False, allow_runtime=False):
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
         path = Path(tmp.name) / "streaming.json"
@@ -39,10 +39,14 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
             return Response(result)
 
         key = "CINELVA_ALLOW_FUZZY_POSTER_FALLBACK"
+        runtime_key = "CINELVA_ENRICH_RUNTIME"
         env = dict(os.environ)
         env.pop(key, None)
+        env.pop(runtime_key, None)
         if allow_fuzzy:
             env[key] = "1"
+        if allow_runtime:
+            env[runtime_key] = "1"
         with patch.dict(enrichment.os.environ, env, clear=True):
             counts = enrichment.enrich(path, api_key=api_key, opener=opener, delay=0, catalog_path=catalog_path)
         return json.loads(path.read_text(encoding="utf-8")), requests, counts
@@ -184,6 +188,7 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
                  "release_date": "2025-01-01", "poster_path": "/unique.jpg"},
             ]},
             allow_fuzzy=True,
+            allow_runtime=True,
         )
         movie = data["movies"][0]
         self.assertEqual(movie["runtime"], 108)

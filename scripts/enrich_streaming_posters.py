@@ -110,12 +110,6 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
     for movie in rows:
         needs_poster = not movie.get("poster")
         needs_runtime = os.environ.get("CINELVA_ENRICH_RUNTIME") == "1" and not (isinstance(movie.get("runtime"), (int, float)) and movie.get("runtime") > 0)
-        existing_tmdb_url = movie.get("tmdb")
-        has_tmdb_url_identity = bool(
-            isinstance(existing_tmdb_url, str) and
-            re.fullmatch(r"https://www\.themoviedb\.org/movie/([1-9][0-9]*)/?", existing_tmdb_url)
-        )
-        has_tmdb_id = any(movie.get(field) is not None for field in ("tmdb_id", "tmdbId", "id"))
         needs_identity_recheck = (
             movie.get("poster_match_status") == "fuzzy_search_fallback"
             and movie.get("title") in OFFICIAL_IDENTITY_ALIASES

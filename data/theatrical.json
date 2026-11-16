@@ -1,57 +1,17 @@
 {
-  "generated_at": "2026-11-15T22:47:38.261758+00:00",
+  "generated_at": "2026-11-16T02:37:40.767649+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-10-16",
-      "2027-03-15"
+      "2026-10-17",
+      "2027-03-16"
     ],
     "background_slice": [
-      "2026-01-14",
-      "2026-03-14"
+      "2026-03-16",
+      "2026-05-14"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 1638241,
-      "title": "話したりない夜の果て  Days gone by",
-      "original_title": "話したりない夜の果て  Days gone by",
-      "date": "2025-11-15",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/fOXk4P6SsAnur17MIbryQGdxJVB.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1638241",
-      "director": "上村奈帆",
-      "director_id": 1644823,
-      "cast": [
-        "Risa Yajima"
-      ],
-      "countries": [],
-      "runtime": 79,
-      "genres": []
-    },
-    {
-      "id": 1596686,
-      "title": "Snow Man Dome Tour 2025 ON",
-      "original_title": "Snow Man Dome Tour 2025 ON",
-      "date": "2025-11-15",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/zOkE7lM1028rIBKbiqf8irnA5DO.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "Snow Manのドームツアー「Snow Man Dome Tour 2025-2026 ON」は、2025年11月から2026年1月にかけて全国5都市で開催",
-      "tmdb": "https://www.themoviedb.org/movie/1596686",
-      "director": null,
-      "director_id": null,
-      "cast": [],
-      "countries": [],
-      "runtime": 0,
-      "genres": []
-    },
     {
       "id": 1584194,
       "title": "明白歌——白い歴史、終わらない記憶と未来を歌い歩く",
@@ -10377,6 +10337,31 @@
         "ファンタジー",
         "アドベンチャー"
       ]
+    },
+    {
+      "id": 1797058,
+      "title": "ミュージカル『最強のふたり』",
+      "original_title": "ミュージカル『最強のふたり』",
+      "date": "2026-05-10",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/liJSuqaj3aK91VkqbEfLxJTH3H7.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1797058",
+      "director": "Kyōichi Itagaki",
+      "director_id": 6548194,
+      "cast": [
+        "浦井健治",
+        "川平慈英",
+        "紅ゆずる",
+        "小野塚勇人"
+      ],
+      "countries": [],
+      "runtime": 120,
+      "genres": [],
+      "checked_at": "2026-11-16T02:37:40.767649+00:00"
     },
     {
       "id": 1716018,
@@ -24887,8 +24872,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/xthXNYltOOm80vW5Kxjzxx5gvQ6.jpg",
-      "score": 7.607,
-      "votes": 1433,
+      "score": 7.592,
+      "votes": 1554,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1214931",
       "director": "ジェームズ・ヴァンダービルト",
@@ -24907,7 +24892,8 @@
       "genres": [
         "履歴",
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-11-16T02:37:40.767649+00:00"
     },
     {
       "id": 1753605,
@@ -24929,10 +24915,11 @@
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
+      "runtime": 130,
       "genres": [
         "ドラマ"
-      ]
+      ],
+      "checked_at": "2026-11-16T02:37:40.767649+00:00"
     },
     {
       "id": 1440769,
@@ -24941,7 +24928,7 @@
       "date": "2027-01-15",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/10jGGKeNxY4j6pvJpWLmBzcMeMH.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/xlutnD8qZkrZmaDVyzIRCJlrUPp.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "",
@@ -24964,7 +24951,7 @@
         "犯罪",
         "スリラー"
       ],
-      "checked_at": "2026-10-01T18:33:59.121809+00:00"
+      "checked_at": "2026-11-16T02:37:40.767649+00:00"
     },
     {
       "id": 1695893,
@@ -24996,7 +24983,7 @@
         "アクション",
         "ドラマ"
       ],
-      "checked_at": "2026-10-09T18:32:15.592420+00:00"
+      "checked_at": "2026-11-16T02:37:40.767649+00:00"
     },
     {
       "id": 1257420,

@@ -1132,7 +1132,8 @@
       "tmdb_id": 1458162,
       "tmdb": "https://www.themoviedb.org/movie/1458162",
       "poster": "https://image.tmdb.org/t/p/w500/4EEqMMhKiEurKxWA4UPkJ3zs3Oy.jpg",
-      "release_year": 2025
+      "release_year": 2025,
+      "runtime": 88
     },
     {
       "title": "ヒットマン リサージェンス",
@@ -1168,7 +1169,8 @@
       "tmdb_id": 1468104,
       "tmdb": "https://www.themoviedb.org/movie/1468104",
       "poster": "https://image.tmdb.org/t/p/w500/l3RQkjKmyXYygOhxGR53rlzQJyw.jpg",
-      "release_year": 2025
+      "release_year": 2025,
+      "runtime": 88
     },
     {
       "title": "デュー あの時の君とボク",
@@ -1432,7 +1434,7 @@
       "service": "Hulu",
       "source": "Hulu まもなく配信（2026年11月）",
       "source_url": "https://www.hulu.jp/features/comingsoon",
-      "poster": "https://image.tmdb.org/t/p/w500/b48mSL143bJw20Y44jNoaRDl8yb.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/fhKkr22UpULWNemcgCjppTkHXgf.jpg",
       "poster_match_status": "fuzzy_search_fallback",
       "poster_match_query": "The Cursed Land"
     },
@@ -2173,7 +2175,8 @@
       "id": 1610884,
       "tmdb_id": 1610884,
       "tmdb": "https://www.themoviedb.org/movie/1610884",
-      "poster": "https://image.tmdb.org/t/p/w500/iM7W3xZGjAewbp4UF9KJtb8N3zQ.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/iM7W3xZGjAewbp4UF9KJtb8N3zQ.jpg",
+      "runtime": 105
     },
     {
       "title": "トレンケ・ラウケン Part1",
@@ -2392,7 +2395,8 @@
       "source_url": "https://www.netflix.com/jp/title/81382720",
       "checked_at": "2026-11-08",
       "type": "見放題",
-      "poster": "https://image.tmdb.org/t/p/w500/gK11RUXspxqty0Wq6KoV8J0crKO.jpg",
+      "runtime": 107,
+      "poster": "https://image.tmdb.org/t/p/w500/alhhrpj1PSAn5bfz4Os1k7Bweoj.jpg",
       "poster_match_status": "fuzzy_search_fallback",
       "poster_match_query": "アレン"
     },

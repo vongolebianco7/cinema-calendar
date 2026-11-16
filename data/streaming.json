@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T02:37:34.045085+00:00",
+  "generated_at": "2026-11-16T08:05:29.780681+00:00",
   "movies": [
     {
       "title": "Outcome",
@@ -9389,7 +9389,8 @@
       "year": 2026,
       "title_url": "https://video.unext.jp/title/SID0318942",
       "id": 1315772,
-      "tmdb": "https://www.themoviedb.org/movie/1315772"
+      "tmdb": "https://www.themoviedb.org/movie/1315772",
+      "runtime": 90
     },
     {
       "title": "search／#サーチ2",
@@ -10138,7 +10139,9 @@
       "release_year": 2026,
       "year": 2026,
       "id": 1595124,
-      "tmdb": "https://www.themoviedb.org/movie/1595124"
+      "tmdb": "https://www.themoviedb.org/movie/1595124",
+      "tmdb_id": 1595124,
+      "runtime": 102
     },
     {
       "title": "プロジェクト・サイレンス",
@@ -10706,7 +10709,8 @@
       "release_year": 2026,
       "year": 2026,
       "id": 1616675,
-      "tmdb": "https://www.themoviedb.org/movie/1616675"
+      "tmdb": "https://www.themoviedb.org/movie/1616675",
+      "runtime": 129
     },
     {
       "title": "僕の狂ったフェミ彼女",
@@ -10758,7 +10762,8 @@
       "release_year": 2026,
       "year": 2026,
       "id": 947502,
-      "tmdb": "https://www.themoviedb.org/movie/947502"
+      "tmdb": "https://www.themoviedb.org/movie/947502",
+      "runtime": 91
     },
     {
       "title": "Proxies",
@@ -10768,14 +10773,16 @@
       "score": 0,
       "votes": 0,
       "overview": "",
-      "poster": null,
+      "poster": "https://image.tmdb.org/t/p/w500/eNcY1ooRQjX8xhNVRwJPlcFgwfr.jpg",
       "source": "Netflix official global film announcement (2026-11-04; reverified 2026-11-16)",
       "source_url": "https://about.netflix.com/en/news/proxies-is-coming-to-netflix-on-december-11",
       "type": "見放題",
       "checked_at": "2026-11-16",
       "original_title": "Proxies",
       "release_year": 2026,
-      "year": 2026
+      "year": 2026,
+      "poster_match_status": "fuzzy_search_fallback",
+      "poster_match_query": "Proxies"
     },
     {
       "title": "Ray Gunn",
@@ -10794,7 +10801,8 @@
       "release_year": "2026",
       "year": 2026,
       "id": 940009,
-      "tmdb": "https://www.themoviedb.org/movie/940009"
+      "tmdb": "https://www.themoviedb.org/movie/940009",
+      "runtime": 119
     }
   ],
   "poster_enrichment": {

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T01:40:00Z",
+  "updated_at": "2026-11-16T01:50:00Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392",
-  "branch": "data/revalidate-official-streaming-announcements-20261116",
-  "head_sha": "0b24ab006e343b08b4cd9e7af6ee16c71a562e9e",
-  "pull_request": 869,
+  "base_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+  "branch": "fix/trigger-update-after-source-proof-20261116",
+  "head_sha": "f29ab8b8e1df1646cd1df57f50a085bc4b5d2b2d",
+  "pull_request": 871,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -4007,5 +4007,65 @@
       "details": "investigate failed publish step separately; does not overlap the update-movies write workflow"
     },
     "user_data": "watch/rating/review/bookmark/backups unchanged"
+  },
+  "latest_live_checkpoint_20261116_0150": {
+    "main_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+    "issue_239": "open",
+    "issue_244": "open/reopened",
+    "issue_593": "closed/completed",
+    "public_data": {
+      "boxoffice_last_verified": {
+        "by_year": "1808/1808 posters",
+        "all_time": "100/100 posters"
+      },
+      "streaming_last_verified": {
+        "rows": 457,
+        "missing_official_verified_titles": 6,
+        "generated_at": "2026-11-15T08:42:39.808Z"
+      }
+    },
+    "prs": [
+      {
+        "number": 870,
+        "head": "36cd606b2f2bb431c7e4274dbc1aaa5bcd8119af",
+        "title": "test: keep Syoboi poster unit tests offline",
+        "status": "exact-head CI in progress; full Python suite green"
+      },
+      {
+        "number": 871,
+        "head": "f29ab8b8e1df1646cd1df57f50a085bc4b5d2b2d",
+        "title": "ci: trigger updater after source proof refresh",
+        "status": "created; exact-head CI starting"
+      }
+    ],
+    "latest_update_movie_run": {
+      "id": 43788084251,
+      "sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+      "status": "failed",
+      "failure_stage": "Verify approved source and exact-source CI before collection",
+      "collection_steps": "skipped",
+      "snapshot_write": "skipped",
+      "neon_sync": "skipped"
+    },
+    "root_cause": {
+      "receipt_head": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86",
+      "receipt_verified_source_digest": "a7906e3a1c1535fb598fe0130363480ec35f24a2d2db25c8dadfb7d9dd1df658",
+      "current_executable_source_digest": "1bc680222fa88b960dba567b78174ce490f1d896b348fbfb144753c7eef52be8",
+      "why": "PR #869 changed data/streaming_announcements.json, which the verifier treats as relevant source input. #869's 20 exact-head checks passed, but production proof still attested the prior digest."
+    },
+    "vercel_latest": {
+      "deployment_id": "dpl_H232E4fdgLcL6TyCwyRzdpYHH8XY",
+      "sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+      "state": "ERROR",
+      "error": "BUILD_UTILS_SPAWN_1: production verifier refused stale source digest; no new build published",
+      "prior_ready": "dpl_F81ij6fXoJut4du6dN8oLgDrxbf9 on 0877129eaa1b84fafb01f4d0d99369a35a8ab392"
+    },
+    "fix": {
+      "pr": "871",
+      "change": "include quality/production-proof.json in existing update-movies push path; source proof refresh then invokes the normal gated updater exactly once",
+      "manual_dispatch": "not available; no bypass"
+    },
+    "next": "Run required exact-head CI for PR #871, after its first verified executable commit record the new digest in proof receipt, rerun exact-head checks, merge only green; normal push update-movies run; production acceptance.",
+    "user_data": "watch history, ratings, reviews, bookmarks and backups untouched"
   }
 }

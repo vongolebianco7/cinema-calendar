@@ -97,6 +97,54 @@
       ]
     },
     {
+      "id": "netflix_official_rss",
+      "name": "Netflix Newsroom official RSS",
+      "mode": "approved",
+      "purpose": [
+        "streaming_premiere_feed"
+      ],
+      "basis": "Netflix Newsroom advertises this RSS endpoint in its official page metadata. CINELVA reads the feed only to create review candidates; it does not scrape HTML or publish an entry automatically.",
+      "terms_url": "https://about.netflix.com/ja/feed.xml",
+      "requirements": [
+        "Fetch only the advertised official RSS endpoint; no HTML scraping",
+        "Treat film and series announcements as unverified candidates until content type and Japanese premiere date are checked",
+        "Require an unambiguous TMDB movie identity before catalog publication",
+        "Preserve the last-known-good catalog when the feed is unavailable or invalid"
+      ]
+    },
+    {
+      "id": "amazon_japan_official_rss",
+      "name": "About Amazon Japan official RSS",
+      "mode": "approved",
+      "purpose": [
+        "streaming_premiere_feed"
+      ],
+      "basis": "About Amazon Japan advertises this RSS endpoint in its official page metadata. CINELVA uses it only for candidate discovery and keeps non-entertainment and ambiguous entries out of the published catalog.",
+      "terms_url": "https://www.aboutamazon.jp/rss/feed.rss",
+      "requirements": [
+        "Fetch only the advertised official RSS endpoint; no HTML scraping",
+        "Review category, Prime Video service, movie content type and Japanese premiere date before publication",
+        "Require an unambiguous TMDB movie identity before catalog publication",
+        "Preserve the last-known-good catalog when the feed is unavailable or invalid"
+      ]
+    },
+    {
+      "id": "apple_tv_press_atom",
+      "name": "Apple TV Press official Atom feed",
+      "mode": "approved",
+      "purpose": [
+        "streaming_premiere_feed"
+      ],
+      "basis": "Apple TV Press advertises this Atom endpoint in its official page metadata. CINELVA uses it only for candidate discovery; films, series and regional dates are reviewed before any catalog change.",
+      "terms_url": "https://www.apple.com/tv-pr/news-feed.xml",
+      "requirements": [
+        "Fetch only the advertised official Atom endpoint; no HTML scraping",
+        "Verify that the announcement is a film and that its date applies to Japan before publication",
+        "Require an unambiguous TMDB movie identity before catalog publication",
+        "Preserve the last-known-good catalog when the feed is unavailable or invalid"
+      ]
+    },
+    {
       "id": "netflix_web",
       "name": "Netflix public web pages",
       "mode": "disabled",

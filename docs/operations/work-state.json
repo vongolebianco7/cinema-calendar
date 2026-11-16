@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T05:06:45 UTCZ",
+  "updated_at": "2026-11-16T05:07:58Z",
   "status": "deployment_pending",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
   "branch": "docs/live-checkpoint-20261116-0248",
-  "head_sha": "1b7142e530f1bab7e2aa89c238c95c71bcc05c3c",
+  "head_sha": "a22e33a4ac78850355a9b0ef73e14dde9e46caa1",
   "pull_request": 872,
   "work_items": [
     {
@@ -1256,8 +1256,8 @@
       "result": "Main 8229b678b9c0730a5d412305fd4138a3d844d2e4; #593 closed. Canonical production boxoffice HTTP 200: by-year 1,808 rows/0 missing; all-time 100/0 missing. Main streaming 463/462 posters; production streaming 457/457 posters, generated 2026-11-15T08:42:39.808Z, with none of six new official records present. PR #872 head 55db68fc114ce54b6d9e9c849b4dfffe3420b5fb has 8/8 Actions green after one targeted frontend-job retry. Vercel daily build limit and Neon P1001 block production JSON acceptance; neither retried. No user data changed."
     },
     {
-      "check": "Live streaming/P0-593 and exact-head checkpoint 2026-11-16T05:04Z",
-      "result": "Main 8229b678b9c0730a5d412305fd4138a3d844d2e4. Issue #593 closed; production boxoffice JSON HTTP 200, 1,808 by-year rows and 100 all-time rows, missing posters 0 in both. #244 remains open. PR #872 source head 1b7142e530f1bab7e2aa89c238c95c71bcc05c3c has all 8 required GitHub Actions successful (43805855435, 43805855531, 43805855445, 43805855462, 43805855491, 43805855476, 43805855466, 43805855478). Vercel main frontend/backend status and PR backend status remain failure due build-rate-limit; canonical READY deployment is old f7c964a. Main streaming 463 rows / 462 posters; public 457 / 457; six reviewed official rows absent in production. No user data changes, manual dispatch, Neon retry, or quota bypass."
+      "check": "Live streaming/P0-593 and exact-head checkpoint 2026-11-16T05:07:58Z",
+      "result": "Main 8229b678b9c0730a5d412305fd4138a3d844d2e4. #593 closed, production boxoffice 1,808 by-year +100 all-time rows, zero missing posters. #244 open. Main streaming 463/462, production 457/457; exact row-level comparison shows six official main records absent from production (Minions & Monsters, Steps, Secrets, In Waves, Proxies, Ray Gunn). PR #872 source SHA 1b7142e has all 8 Actions green; Vercel main frontend/backend and PR backend statuses remain failure for build-rate-limit. Canonical READY deployment remains f7c964a. Docs checkpoint appended; require fresh CI on its resulting head. Proxies TMDB identity unresolved; no guessed ID/poster. Last updater run 43793292311 had one Neon P1001 sync failure; no retry. User data unchanged."
     }
   ],
   "deployment": {
@@ -5348,7 +5348,7 @@
     "next": "Complete the one in-progress exact-head Validate frontend run; keep PR #872 open while Vercel Hobby release cap blocks new deployment. When normal release access is restored, use the standard release once and the existing scheduled updater; verify Proxies official identity, public JSON and rendered calendar card/poster. Keep #244 open until production acceptance passes."
   },
   "latest_live_checkpoint_20261116_0504": {
-    "checked_at": "2026-11-16T05:06:45 UTCZ",
+    "checked_at": "2026-11-16T05:07:58Z",
     "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
     "issues": {
       "239": "open",
@@ -5445,7 +5445,8 @@
         43805855476,
         43805855466,
         43805855478
-      ]
+      ],
+      "note": "These are green on the Proxies source head. The documentation-only checkpoint commits on top require their own fresh exact-head checks."
     },
     "vercel": {
       "production": "READY",
@@ -5464,13 +5465,15 @@
         }
       ],
       "pr_backend_status": "failure",
-      "blocker": "Vercel Hobby deployment/build-rate-limit; status target https://vercel.com/vongole1?upgradeToPro=build-rate-limit. Prior bot report at 2026-11-16T02:53Z identified api-deployments-free-per-day (>100/day). No paid upgrade, manual deployment, bypass, or quota workaround."
+      "blocker": "Vercel Hobby deployment/build-rate-limit; status target https://vercel.com/vongole1?upgradeToPro=build-rate-limit. Prior bot report at 2026-11-16T02:53Z identified api-deployments-free-per-day (>100/day). No paid upgrade, manual deployment, bypass, or quota workaround.",
+      "last_checked_at": "2026-11-16T05:07:58Z"
     },
     "updater": {
       "latest_run": 43793292311,
       "last_known_active_runs": 0,
       "next_schedule": "17 18 * * * UTC",
-      "result": "Validated JSON snapshot committed; one final Neon direct sync failed with Prisma P1001. No retry or manual dispatch."
+      "result": "Validated JSON snapshot committed; one final Neon direct sync failed with Prisma P1001. No retry or manual dispatch.",
+      "active_runs_status": "Last recorded idle at 2026-11-16T04:46:00Z; no dispatch issued."
     },
     "source_rights": {
       "confirmed_public_approved_rss_atom_feeds": 0,
@@ -5494,6 +5497,8 @@
       "interpretation": "The current production UI did not show the new title; negative acceptance, not a release pass."
     },
     "user_data": "Watch history, ratings, reviews, bookmarks and backups unchanged.",
-    "next_action": "Keep #872 and #244 open. Do not merge or deploy while Vercel release status is failing. Once the normal Hobby limit clears, perform one standard release; then let the existing scheduled update-movies run, do not dispatch manually, and verify public streaming JSON plus actual cards/posters. Resolve Proxies only if the official TMDB API returns a unique exact title/year identity. Do not retry Neon until endpoint state changes."
-  }
+    "next_action": "Keep #872 and #244 open. Do not merge or deploy while Vercel release status is failing. Once the normal Hobby limit clears, perform one standard release; then let the existing scheduled update-movies run, do not dispatch manually, and verify public streaming JSON plus actual cards/posters. Resolve Proxies only if the official TMDB API returns a unique exact title/year identity. Do not retry Neon until endpoint state changes.",
+    "current_branch_head_before_final_checkpoint": "a22e33a4ac78850355a9b0ef73e14dde9e46caa1"
+  },
+  "current_branch_head_before_final_checkpoint": "a22e33a4ac78850355a9b0ef73e14dde9e46caa1"
 }

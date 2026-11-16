@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T11:00:00Z",
+  "updated_at": "2026-11-16T11:10:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
   "branch": "fix/recheck-curated-fuzzy-streaming-id-20261116",
-  "head_sha": "49721b02eeb8dd2a7773ac5a41f8b5d9fcb5907a",
+  "head_sha": "70aad988920dfed261766bed5af26f9a7939f287",
   "pull_request": 874,
   "work_items": [
     {
@@ -835,12 +835,12 @@
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/874",
         "head_sha": "9fd4bfd3e490a0e46fd3f17f37ba0e039350b628"
       },
-      "acceptance": "For the explicitly reviewed Proxies / En nombre de otro alias, revisit only an existing fuzzy_search_fallback row with no saved identity; replace the fallback poster and assign an ID only for one exact title plus 2026 TMDB result. Ambiguous, wrong-year, failed, or unavailable lookups must preserve the existing row.",
+      "acceptance": "Recheck the reviewed Proxies / En nombre de otro alias for fuzzy fallback rows with or without a candidate TMDB identity. Only accept one exact normalized title + reviewed 2026 release year + poster result; if an ID already exists, require the result ID to match. On ambiguity, mismatch, missing data, API failure, or no key, preserve the row.",
       "implementation": "scripts/enrich_streaming_posters.py and tests/test_streaming_poster_enrichment.py; no public dataset or user storage mutation.",
-      "verification": "Three deterministic regression cases added. Exact-head GitHub Actions pending. Current official updater already ran successfully but skips populated posters; normal scheduled run after safe release is required for data acceptance.",
-      "blocker": "Vercel Hobby build rate limit on preview; main production-proof receipt is stale. Do not merge/deploy or bypass.",
-      "ci": "Code head 9fd4bfd3: all 8 Actions passed. Latest checkpoint head 49721b02: 4 completed successfully and 4 still in progress at 11:00 UTC. Vercel backend status is build-rate-limit.",
-      "next_action": "Wait for normal Vercel reset; refresh exact-source proof only after required CI evidence is verified for the executable source, then run normal release/production acceptance. Do not merge until release gate passes."
+      "verification": "PR #874 head 70aad988920dfed261766bed5af26f9a7939f287. Regression tests cover alias result, ambiguity/year mismatch, existing same-ID verification, and conflicting-ID preservation. Exact-head Actions currently 5/8 successful, 3 in progress; Vercel backend status success. Production boxoffice 0 poster gaps; production streaming 463 rows / 0 missing poster URLs. Proxies remains fuzzy and lacks an ID in production; main carries candidate 1623160 but not verified.",
+      "blocker": "No verified TMDB identity yet; normal scheduled secret-backed workflow is the only allowed API path. Production card rendering not verified due Vercel login wall. No source/feed or quota bypass.",
+      "ci": "At 2026-11-16 11:10 UTC, exact head 70aad988920dfed261766bed5af26f9a7939f287 has 5/8 Actions green and 3 running; Vercel backend check success.",
+      "next_action": "Fetch exact-head Actions after completion. Then use normal release path if green and let existing scheduled enrichment run; verify production JSON identity and card display. No manual dispatch, Neon retry, or Vercel bypass."
     }
   ],
   "verification": [
@@ -1337,7 +1337,7 @@
     "The earlier update-movies run 43793292311 had one final Neon Prisma P1001 failure. Do not retry without a changed endpoint state.",
     "PR #874 exact-head CI is pending. Existing release gate blocks publication: latest main Vercel build reports source-proof digest mismatch; PR #873 separately reports 24-hour deployment rate limit. Never bypass."
   ],
-  "next_action": "Inspect exact-head Actions for PR #874. If CI passes, do not merge/deploy while the production proof mismatch and Vercel rate limit remain. Diagnose and repair the exact-source proof only through the normal required-check path, then let the existing scheduled updater run once and verify Proxies receives a unique official TMDB ID/poster with the fuzzy marker cleared. Keep #244 open until public UI acceptance; #593 remains closed while public boxoffice has zero missing posters.",
+  "next_action": "Wait for remaining exact-head Actions on PR #874. If all pass, follow the ordinary merge/release gate; do not merge/deploy if any required check fails. Allow only the existing scheduled TMDB enrichment to recheck Proxies. Verify unique official title+2026 identity and poster, then inspect production JSON and actual card when browser access is authorized. Keep #244 open until data/source/freshness/production-render criteria are met; #593 remains closed while posterless count is zero.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -5850,44 +5850,75 @@
     "safety": "No scraping, paid actions, manual dispatch, Neon retry, manual deploy, or user-storage edits."
   },
   "live_snapshot": {
-    "observed_at": "2026-11-16T11:00:00Z",
+    "observed_at": "2026-11-16T11:10:00Z",
     "main_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
     "open_issues": {
       "239": "open",
       "244": "open",
       "593": "closed"
     },
-    "open_prs": [
-      873,
-      874
+    "open_pull_requests": [
+      {
+        "number": 873,
+        "head_sha": "ca277758491a5ea28f1fcfd2132fd57e1c1aed7d",
+        "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+        "state": "open",
+        "mergeable": false,
+        "release_gate": "Vercel backend build-rate-limit; stale base"
+      },
+      {
+        "number": 874,
+        "head_sha": "70aad988920dfed261766bed5af26f9a7939f287",
+        "base_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
+        "state": "open",
+        "mergeable": true,
+        "exact_head_actions": "5/8 success; 3 in progress",
+        "vercel_backend": "success"
+      }
     ],
-    "public_boxoffice": {
-      "http": 200,
-      "generated_at": "2026-09-27",
-      "by_year_rows": 1808,
-      "by_year_missing_posters": 0,
-      "all_time_rows": 100,
-      "all_time_missing_posters": 0
+    "production": {
+      "deployment_id": "dpl_3zN7iLYSBC59aFCsksxSk1keKmDM",
+      "state": "READY",
+      "sha": "1717965d5e6a000e1a97948e64237c6366076764",
+      "boxoffice": {
+        "http": 200,
+        "generated_at": "2026-09-27",
+        "by_year_rows": 1808,
+        "by_year_missing_posters": 0,
+        "all_time_rows": 100,
+        "all_time_missing_posters": 0
+      },
+      "streaming": {
+        "http": 200,
+        "generated_at": "2026-11-16T08:05:29.780681+00:00",
+        "rows": 463,
+        "poster_rows": 463,
+        "missing_posters": 0
+      },
+      "streaming_proxies": {
+        "poster_match_status": "fuzzy_search_fallback",
+        "poster_present": true,
+        "tmdb_id_in_public_snapshot": false,
+        "identity_verified": false
+      },
+      "rendered_card_acceptance": "not verified; prior direct Chrome access was stopped at Vercel login"
     },
-    "public_streaming": {
-      "http": 200,
+    "main_streaming": {
       "generated_at": "2026-11-16T08:05:29.780681+00:00",
       "rows": 463,
+      "poster_rows": 463,
       "missing_posters": 0,
       "proxies": {
-        "date": "2026-12-11",
+        "candidate_tmdb_id": 1623160,
+        "candidate_tmdb_url": "https://www.themoviedb.org/movie/1623160",
         "poster_match_status": "fuzzy_search_fallback",
-        "verified_tmdb_id": false
+        "identity_verified": false
       }
     },
-    "pr874_exact_head": "9fd4bfd3e490a0e46fd3f17f37ba0e039350b628",
-    "pr874_required_actions": "8/8 success",
-    "pr874_vercel": "failure: build-rate-limit; no deploy",
-    "canonical_production": {
-      "state": "READY",
-      "sha": "1717965d5e6a000e1a97948e64237c6366076764"
-    }
+    "approved_official_streaming_feeds": 0,
+    "services_with_premiere_discovery_disabled": 12,
+    "safety": "No user storage or backup changes; no scraping, billing, manual updater dispatch, Neon retry, or Vercel quota bypass."
   },
   "code_head_sha": "9fd4bfd3e490a0e46fd3f17f37ba0e039350b628",
-  "pr_head_status": "documentation checkpoint commit followed; exact-head Actions are running on 49721b02eeb8dd2a7773ac5a41f8b5d9fcb5907a"
+  "pr_head_status": "PR #874 exact head 70aad988920dfed261766bed5af26f9a7939f287: 5/8 Actions successful, 3 in progress; Vercel backend success. Re-fetch before release decision."
 }

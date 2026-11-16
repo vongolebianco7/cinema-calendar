@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T01:50:00Z",
+  "updated_at": "2026-11-16T01:55:00Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
   "branch": "fix/trigger-update-after-source-proof-20261116",
-  "head_sha": "f29ab8b8e1df1646cd1df57f50a085bc4b5d2b2d",
+  "head_sha": "c5db137a082062d4687cb4ed55ba7f299964b40a",
   "pull_request": 871,
   "work_items": [
     {
@@ -4067,5 +4067,63 @@
     },
     "next": "Run required exact-head CI for PR #871, after its first verified executable commit record the new digest in proof receipt, rerun exact-head checks, merge only green; normal push update-movies run; production acceptance.",
     "user_data": "watch history, ratings, reviews, bookmarks and backups untouched"
+  },
+  "latest_live_checkpoint_20261116_0155": {
+    "main_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+    "issue_239": "open",
+    "issue_244": "open/reopened",
+    "issue_593": "closed/completed",
+    "pr_869": {
+      "state": "merged",
+      "merge_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+      "exact_head_checks": "20/20 success"
+    },
+    "pr_870": {
+      "state": "closed",
+      "reason": "test change consolidated into #871",
+      "exact_head_python_contract": "success"
+    },
+    "pr_871": {
+      "state": "open",
+      "branch": "fix/trigger-update-after-source-proof-20261116",
+      "source_commit": "c5db137a082062d4687cb4ed55ba7f299964b40a",
+      "change": "workflow path includes production-proof; three deterministic Syoboi unit test stubs; operational checkpoints",
+      "exact_head_ci": "running on final docs head; must pass before receipt update and again after"
+    },
+    "production": {
+      "last_ready_sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392",
+      "deployment_id": "dpl_F81ij6fXoJut4du6dN8oLgDrxbf9",
+      "attempt_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+      "attempt_state": "ERROR",
+      "cause": "stale production proof: current digest 1bc680222fa88b960dba567b78174ce490f1d896b348fbfb144753c7eef52be8, receipt verified a7906e3a1c1535fb598fe0130363480ec35f24a2d2db25c8dadfb7d9dd1df658"
+    },
+    "updater_run": {
+      "id": 43788084251,
+      "result": "failed before collection at exact-source proof gate",
+      "import": "skipped",
+      "tmdb": "skipped",
+      "json_write": "skipped",
+      "neon": "skipped",
+      "retry": "no duplicate run; proof fix is required first"
+    },
+    "streaming": {
+      "public_http": 200,
+      "rows": 457,
+      "missing": [
+        "Steps",
+        "In Waves",
+        "Ray Gunn",
+        "Proxies",
+        "Secrets",
+        "Minions & Monsters"
+      ],
+      "confirmed_rss_atom": 0
+    },
+    "boxoffice": {
+      "yearly": "1808/1808 posters",
+      "all_time": "100/100 posters"
+    },
+    "next_action": "Require exact-head CI on PR #871. Once source commit c5db137 is verified, set production proof to that source SHA and digest. Run final-head CI again; merge only green. The proof file path will trigger one normal update-movies run. Verify public streaming JSON, resolver result, production READY/UI; keep #244 open until acceptance.",
+    "user_data": "watch/rating/review/bookmark/backups unchanged"
   }
 }

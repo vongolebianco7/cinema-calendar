@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T02:48:38Z",
-  "status": "pr_created",
+  "updated_at": "2026-11-16T03:06:17Z",
+  "status": "deployment_pending",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
@@ -1208,6 +1208,10 @@
     {
       "check": "Production/update blocker 2026-11-16",
       "result": "Updater 43788084251 and Vercel deployment dpl_H232... were refused before publication by stale exact-source receipt. No data collection, snapshot write, Neon connection, or deploy occurred. Prior READY deployment remains live."
+    },
+    {
+      "check": "Live #593/#244, production and exact-head checkpoint 2026-11-16 03:06 UTC",
+      "result": "main 8229b678b9c0730a5d412305fd4138a3d844d2e4; #593 closed and public production boxoffice is 1,908/1,908 postered. Main streaming 463 rows/462 posters; all 71 official announcement intake records match main. Public Vercel streaming remains 457 rows and predates the six-item import. Chrome canonical streaming page showed 90 theatrical and 3,047 streaming-provider entries; none of the six new titles; 17/122 images complete, 0 broken, 105 pending/lazy (partial acceptance only). PR #872 exact-head GitHub Actions 4/4 green at 401e4f94d2c399dc3efc66182b3c9b1baf5e8870; separate Vercel backend status rate-limited for 24h. Updater 43793292311 used 180/180 TMDB requests and failed final Neon P1001. No user data changes, scrape, manual deploy, manual updater dispatch, or paid action."
     }
   ],
   "deployment": {
@@ -1222,12 +1226,13 @@
     "blocker": "Do not manually deploy. Inspect project release/proof behavior and Hobby usage before one planned production release. No blind retry."
   },
   "blockers": [
-    "Vercel production alias https://cinelva.vercel.app serves HTTP 200 but streaming JSON is still generated_at 2026-11-15T08:42:39.808Z (457 rows); latest main has 463 rows generated 2026-11-16T02:37:34.045085+00:00. New rows have not been production-verified.",
-    "Official announcement 'Proxies' remains unresolved because TMDB returned multiple title candidates; do not assign an ID/poster absent unique corroboration.",
-    "Update-movies run 43793292311 imported JSON successfully but final Neon direct sync failed Prisma P1001. Do not repeat connection attempts; user records were not modified.",
-    "Official RSS/Atom feed registry is empty and 12 streaming services have no approved automatic premiere discovery source; new records are source-reviewed manual additions, not full automation."
+    "Canonical Vercel production remains READY on dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn / source f7c964a72b605693bc08bc24c4f855bc9463e566. Its public streaming JSON is stale at 457 rows (generated 2026-11-15T08:42:39.808Z); main is 463 rows from 2026-11-16T02:37:34.045085+00:00. Six reviewed announcements are not yet production-visible.",
+    "PR #872 exact-head GitHub Actions passed 4/4 on 401e4f94d2c399dc3efc66182b3c9b1baf5e8870. Separate Vercel – backend status is failure: “Deployment rate limited — retry in 24 hours” (reported 2026-11-16T02:53:22Z). No paid upgrade, bypass, or retry before the limit clears.",
+    "Main streaming dataset has one missing poster: Proxies (Netflix, 2026-12-11). Netflix’s official source confirms date, director Oriol Paulo and cast, but official TMDB search/API could not be accessed in this environment; updater request budget reached 180/180. Do not assign an ID or poster without unique official TMDB evidence.",
+    "Neon direct sync failed once with Prisma P1001 at ep-snowy-wave-b4gwato2.c-6.us-east-2.aws.neon.tech:5432. No retry; static JSON import completed and no user data was changed.",
+    "No approved RSS/Atom feed is currently registered; all 12 provider automatic-premiere-discovery flags remain false. Targeted search of official Netflix, Amazon Japan, U-NEXT and Hulu pressrooms confirmed no new approved endpoint in reviewed results; this is not proof that no feeds exist."
   ],
-  "next_action": "Wait for and inspect all required exact-head checks for documentation PR #872. Merge only if they pass and the main SHA remains 8229b678b9c0730a5d412305fd4138a3d844d2e4. Do not deploy from this docs-only PR. Then independently resolve production-origin ambiguity, official-feed coverage, and the Vercel stale-data release gate; keep #244 open.",
+  "next_action": "Keep #872 open and do not trigger another Vercel build while its 24-hour build-rate limit is active. Continue source-only audit without scraping: review remaining official-provider announcement pages for a clearly licensed RSS/Atom endpoint; leave registry unchanged unless terms and endpoint are confirmed. For Proxies, resolve only through existing official TMDB workflow on its next scheduled allowed run (no manual dispatch and no ID guess). After Vercel reports the limit cleared, verify PR status before the single normal main release, then re-fetch production streaming JSON and verify six title cards and poster loads on the canonical calendar. Keep #244 open until production acceptance passes.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -4705,7 +4710,19 @@
     "imported_announcements": 6,
     "tmdb_poster_resolved": 5,
     "tmdb_unresolved": 1,
-    "tmdb_requests": "180/180"
+    "tmdb_requests": "180/180 in updater run",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "announcements": 71,
+    "announcements_matched": 71,
+    "main_streaming_rows": 463,
+    "main_rows_with_poster": 462,
+    "unresolved": [
+      "Proxies"
+    ],
+    "production_streaming_rows": 457,
+    "production_streaming_generated_at": "2026-11-15T08:42:39.808Z",
+    "six_new_titles_visible": false,
+    "neon": "P1001; one attempt; no retry"
   },
   "streaming_production_acceptance_20261116": {
     "vercel": {
@@ -4725,6 +4742,144 @@
       "head_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
       "conclusion": "success",
       "direct_public_json_acceptance": "not verified in this run"
+    },
+    "latest_browser_observation": {
+      "checked_at": "2026-11-16T03:06:17Z",
+      "url": "https://cinelva.vercel.app/streaming.html",
+      "browser": "Chrome",
+      "theatrical_entries": 90,
+      "provider_entries": 3047,
+      "source_status_text": "2026/11/16 7:50:37",
+      "image_count": 122,
+      "images_complete": 17,
+      "images_broken": 0,
+      "images_pending_or_lazy": 105,
+      "acceptance": "partial only; no full image acceptance"
+    },
+    "pr_872": {
+      "head_sha": "401e4f94d2c399dc3efc66182b3c9b1baf5e8870",
+      "github_actions": "4/4 success",
+      "vercel_backend_status": "failure: deployment rate limited — retry in 24 hours"
+    }
+  },
+  "latest_live_checkpoint_20261116_0306": {
+    "checked_at": "2026-11-16T03:06:17Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      683
+    ],
+    "open_pull_requests": [
+      {
+        "number": 872,
+        "branch": "docs/live-checkpoint-20261116-0248",
+        "observed_head_sha": "401e4f94d2c399dc3efc66182b3c9b1baf5e8870",
+        "state": "open"
+      }
+    ],
+    "issue_593": {
+      "state": "closed",
+      "closed_at": "2026-11-15T14:53:26Z"
+    },
+    "boxoffice": {
+      "main": {
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27"
+      },
+      "production": {
+        "http_status": 200,
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27"
+      }
+    },
+    "issue_244": {
+      "state": "open",
+      "main_streaming": {
+        "rows": 463,
+        "missing_posters": 1,
+        "generated_at": "2026-11-16T02:37:34.045085+00:00"
+      },
+      "announcement_rows": 71,
+      "announcement_rows_matched_in_main": 71,
+      "missing_poster_titles": [
+        "Proxies"
+      ],
+      "production_streaming": {
+        "http_status": 200,
+        "rows": 457,
+        "missing_posters": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z",
+        "six_new_titles_visible": false
+      }
+    },
+    "source_audit": {
+      "confirmed_official_rss_atom_feeds": 0,
+      "provider_count": 12,
+      "auto_premiere_discovery_enabled": 0,
+      "search_results": "Targeted search of official Netflix, Amazon Japan, U-NEXT and Hulu newsroom/pressroom results returned no confirmed RSS/Atom endpoint; registry unchanged."
+    },
+    "updater": {
+      "run_id": 43793292311,
+      "status": "JSON committed; Neon final sync failed",
+      "official_announcements_imported": 6,
+      "tmdb_ids_and_posters_resolved": 5,
+      "ambiguous_unresolved": 1,
+      "tmdb_daily_budget": "180/180",
+      "neon_error": "Prisma P1001"
+    },
+    "production": {
+      "canonical_url": "https://cinelva.vercel.app/",
+      "status": "READY",
+      "deployment_id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+      "deployment_sha": "f7c964a72b605693bc08bc24c4f855bc9463e566",
+      "streaming_page_observation": {
+        "url": "https://cinelva.vercel.app/streaming.html",
+        "browser": "Chrome",
+        "theatrical_entries": 90,
+        "provider_streaming_entries": 3047,
+        "source_status_text": "2026/11/16 7:50:37",
+        "images": {
+          "present": 122,
+          "complete": 17,
+          "broken": 0,
+          "pending_or_lazy": 105
+        },
+        "acceptance": "partial; image loading not complete; six new titles absent"
+      }
+    },
+    "checks": {
+      "pr": 872,
+      "head_sha": "401e4f94d2c399dc3efc66182b3c9b1baf5e8870",
+      "github_actions": {
+        "passed": 4,
+        "total": 4,
+        "run_ids": [
+          43794843140,
+          43794843095,
+          43794843071,
+          43794843044
+        ]
+      },
+      "vercel_backend_status": "failure",
+      "vercel_message": "Deployment rate limited — retry in 24 hours",
+      "vercel_status_at": "2026-11-16T02:53:22Z"
+    },
+    "data_safety": {
+      "watch_history_changed": false,
+      "ratings_changed": false,
+      "reviews_changed": false,
+      "bookmarks_changed": false,
+      "backups_changed": false,
+      "paid_upgrade": false,
+      "scraping": false,
+      "manual_dispatch": false,
+      "manual_deploy": false
     }
   }
 }

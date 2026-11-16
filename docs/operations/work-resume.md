@@ -275,3 +275,19 @@ Next: establish which published origin is the actual canonical user-facing site 
 ## Documentation checkpoint PR
 
 The live-state documentation update is in [PR #872](https://github.com/vongolebianco7/cinema-calendar/pull/872). It refreshes the current main/production comparison and records the post-import Neon blocker. Check the PR page for its latest head SHA, require exact-head CI, merge only if all required checks pass, and do not trigger an application deployment from this documentation-only PR.
+
+
+## Live checkpoint — 2026-11-16 03:06 UTC
+
+- Current main is `8229b678b9c0730a5d412305fd4138a3d844d2e4`. Open issues are #239, #242, #243, #244, #585 and #683; #593 is closed after public production JSON reached 0 missing posters.
+- Box-office proof was freshly re-fetched: main and canonical Vercel production each return HTTP 200 with 1,908 rows across all-time/by-year and 0 missing posters (generated 2026-09-27).
+- #244 data import is in main: 71 official-announcement intake records are all represented in the 463-row main streaming catalog. Five of the six newly imported announcements have distinct TMDB IDs and posters; Proxies has no poster because identity is unresolved. Main has 462/463 posters.
+- The canonical Vercel streaming JSON is still 457 rows (generated 2026-11-15T08:42:39.808Z) and does not show the six new titles. On `https://cinelva.vercel.app/streaming.html`, Chrome displayed 90 theatrical and 3,047 streaming-provider entries; none of the six new announcements appeared. The page update label read 2026/11/16 7:50:37. Image sample: 122 present, 17 complete, 0 broken, 105 pending/lazy. This is partial observation, not complete image acceptance.
+- Existing update-movies run [43793292311](https://github.com/vongolebianco7/cinema-calendar/actions/runs/43793292311) committed the six entries but exhausted its TMDB request budget (180/180) and failed once at final Neon sync with Prisma P1001. No retry, no manual dispatch, and no user data was changed.
+- Official feed inventory remains 0 confirmed RSS/Atom feeds; 12 services have auto-premiere discovery disabled. Targeted newsroom search of Netflix, Amazon Japan, U-NEXT and Hulu found no confirmed approved feed endpoint; this does not establish that no such feeds exist. No source was enabled.
+- Documentation PR [#872](https://github.com/vongolebianco7/cinema-calendar/pull/872), exact head `401e4f94d2c399dc3efc66182b3c9b1baf5e8870`: four GitHub Actions passed (runs 43794843140, 43794843095, 43794843071, 43794843044). Separate Vercel backend status failed with “Deployment rate limited — retry in 24 hours” at 2026-11-16T02:53:22Z. Canonical production remains READY on old source `f7c964a72b605693bc08bc24c4f855bc9463e566` / deployment `dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn`. No paid upgrade, bypass, or retry.
+- Netflix’s official announcement confirms Proxies date 2026-12-11, director Oriol Paulo and cast, but the official TMDB search was blocked/unavailable and the updater budget is spent. Do not guess the TMDB identity/poster.
+
+### Next action
+
+Keep #872 open. Continue reviewing official-provider source pages for a permitted feed without scraping; leave the registry unchanged until a documented endpoint and terms are confirmed. Resolve Proxies only through the existing official TMDB workflow at its next scheduled allowed run. Wait until Vercel reports the rate limit cleared before rechecking its status; then make one planned normal release and verify the public JSON plus rendered cards/images. Keep #244 open until canonical production data and full browser image acceptance pass. Watch history, ratings, reviews, bookmarks and backups remain untouched.

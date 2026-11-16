@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T05:07:58Z",
+  "updated_at": "2026-11-16T06:15:13Z",
   "status": "deployment_pending",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
   "branch": "docs/live-checkpoint-20261116-0248",
-  "head_sha": "a22e33a4ac78850355a9b0ef73e14dde9e46caa1",
+  "head_sha": "759652a234efcfa8be9119d13a5f7532b0ef8ef3",
   "pull_request": 872,
   "work_items": [
     {
@@ -688,7 +688,8 @@
       "title": "Discover streaming premiere dates from rights-approved official feeds",
       "status": "blocked",
       "issue": 244,
-      "acceptance": "Enable only terms-approved zero-cost official premiere feeds, validate candidates and publish with citations. Current availability observations remain separate."
+      "acceptance": "Enable only terms-approved zero-cost official premiere feeds, validate candidates and publish with citations. Current availability observations remain separate.",
+      "ci": "0 approved public catalog RSS/Atom feeds confirmed; 12 provider discovery flags remain false. Official announcement intake remains manually reviewed."
     },
     {
       "id": "P0-244-PUSH-RACE",
@@ -780,7 +781,8 @@
         "merge_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
         "head_sha": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86"
       },
-      "acceptance": "Run the existing update-movies importer once after the release proof is repaired; confirm all six reviewed official facts enter the public streaming JSON, attach only unique verified TMDB movie identities/posters, and render correctly in production calendar. Keep #244 open until the broader issue acceptance is complete."
+      "acceptance": "Run the existing update-movies importer once after the release proof is repaired; confirm all six reviewed official facts enter the public streaming JSON, attach only unique verified TMDB movie identities/posters, and render correctly in production calendar. Keep #244 open until the broader issue acceptance is complete.",
+      "ci": "PR #872 exact head 759652a: all eight Actions passed. Fresh live main streaming JSON 463/462 posters; canonical production 457/457. Five of six reviewed official additions have verified TMDB posters; Proxies remains unresolved. Vercel new-build status is build-rate-limit; canonical deployment is READY on older SHA f7c964a. Updater 43793292311 committed the data snapshot but final Neon sync failed once with Prisma P1001; no retry."
     },
     {
       "id": "P0-RELEASE-PROOF-REFRESH-20261116",

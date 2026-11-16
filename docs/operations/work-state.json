@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T01:15:05Z",
+  "updated_at": "2026-11-16T01:40:00Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
-  "branch": "fix/refresh-production-proof-after-streaming-20261116",
-  "head_sha": "a9fb4a679f0f4965bf91d67206bfd641b7b7ba12",
-  "pull_request": 868,
+  "base_sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392",
+  "branch": "data/revalidate-official-streaming-announcements-20261116",
+  "head_sha": "0b24ab006e343b08b4cd9e7af6ee16c71a562e9e",
+  "pull_request": 869,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -3923,5 +3923,89 @@
     "new_pr": 868,
     "status": "pr_created",
     "next_action": "Exact-head CI then safe merge; one existing updater run only after release gate passes."
+  },
+  "latest_live_checkpoint_20261116_0140": {
+    "main_sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392",
+    "issue_239": "open",
+    "issue_244": {
+      "state": "open",
+      "state_reason": "reopened",
+      "updated_at": "2026-11-16T01:28:22Z",
+      "note": "reopened because production evidence for new streaming records/display remains unmet"
+    },
+    "issue_593": {
+      "state": "closed",
+      "state_reason": "completed",
+      "closed_at": "2026-11-15T14:53:26Z",
+      "production_boxoffice": {
+        "http_status": 200,
+        "by_year_rows": 1808,
+        "by_year_missing_posters": 0,
+        "all_time_rows": 100,
+        "all_time_missing_posters": 0
+      }
+    },
+    "open_pull_requests": [
+      869
+    ],
+    "pr_869": {
+      "head_sha": "0b24ab006e343b08b4cd9e7af6ee16c71a562e9e",
+      "base_sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392",
+      "mergeable": true,
+      "change": "six official source re-verification dates in streaming_announcements only"
+    },
+    "exact_head_ci": {
+      "sha": "0b24ab006e343b08b4cd9e7af6ee16c71a562e9e",
+      "status": "in_progress",
+      "success": [
+        "CINELVA smoke tests",
+        "mobile layout smoke test",
+        "Cinemap completeness scorecard",
+        "Reproducible backend build"
+      ],
+      "active": [
+        "Validate frontend",
+        "CINELVA continuous visual QA",
+        "Autonomous quality gate"
+      ]
+    },
+    "production": {
+      "deployment_id": "dpl_F81ij6fXoJut4du6dN8oLgDrxbf9",
+      "sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392",
+      "state": "READY",
+      "url": "cinema-calendar-three.vercel.app"
+    },
+    "streaming_public": {
+      "http_status": 200,
+      "generated_at": "2026-11-15T08:42:39.808Z",
+      "rows": 457,
+      "verified_announcement_titles_missing": [
+        "Steps",
+        "In Waves",
+        "Ray Gunn",
+        "Proxies",
+        "Secrets",
+        "ミニオンズ＆モンスターズ"
+      ],
+      "authorized_rss_atom_feed_count": 0
+    },
+    "updater": {
+      "workflow": "update-movies.yml",
+      "latest_failed_run": 43784784850,
+      "failure_stage": "pre-collection exact-source proof gate; no import or JSON snapshot publication",
+      "active_run": false,
+      "next": "merge #869 only after exact-head CI passes; let its single normal push-triggered run execute; no manual dispatch/retry"
+    },
+    "latest_main_ci": {
+      "pages_build_deployment_run": 43786485191,
+      "conclusion": "success"
+    },
+    "latest_independent_failure": {
+      "workflow": "Refresh nationwide now-playing snapshot",
+      "run": 43786347481,
+      "conclusion": "failure",
+      "details": "investigate failed publish step separately; does not overlap the update-movies write workflow"
+    },
+    "user_data": "watch/rating/review/bookmark/backups unchanged"
   }
 }

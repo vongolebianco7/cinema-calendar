@@ -70,7 +70,8 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
         self.assertEqual(updated["automated_movies"], [incoming])
         self.assertEqual(updated["automation_generated_at"], "2026-11-05T00:00:00Z")
 
-    def test_rescheduled_broadcast_retains_only_verified_artwork_for_the_same_film(self):
+    @mock.patch.object(update_syoboi_tv_movies, "_tmdb_broadcast_metadata", return_value=None)
+    def test_rescheduled_broadcast_retains_only_verified_artwork_for_the_same_film(self, _tmdb_metadata):
         previous = {
             "title": "作品", "source_id": "syoboi_calendar", "source_title_id": "12",
             "source_program_id": "100", "release_year": 2020, "date": "2026-11-02",
@@ -94,7 +95,8 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
         ambiguous = merge_tv_snapshot({"movies": [previous, conflicting]}, [moved])
         self.assertEqual(ambiguous["automated_movies"], [moved])
 
-    def test_missing_tv_artwork_uses_only_unique_same_title_and_year_catalog_match(self):
+    @mock.patch.object(update_syoboi_tv_movies, "_tmdb_broadcast_metadata", return_value=None)
+    def test_missing_tv_artwork_uses_only_unique_same_title_and_year_catalog_match(self, _tmdb_metadata):
         tv = [{"title": "GHOST IN THE SHELL 攻殻機動隊", "year": 1995, "service": "BS局"}]
         catalog = [
             {"id": 9323, "title": "GHOST IN THE SHELL / 攻殻機動隊", "date": "1995-11-18",
@@ -132,7 +134,8 @@ class SyoboiMovieBroadcastTests(unittest.TestCase):
         self.assertEqual(result[0]["poster"], row["poster"])
         self.assertIn("/movie/123?", opener.call_args.args[0].full_url)
 
-    def test_catalog_poster_match_refuses_ambiguous_ids_and_untrusted_urls(self):
+    @mock.patch.object(update_syoboi_tv_movies, "_tmdb_broadcast_metadata", return_value=None)
+    def test_catalog_poster_match_refuses_ambiguous_ids_and_untrusted_urls(self, _tmdb_metadata):
         tv = [{"title": "作品", "year": 2020}]
         ambiguous = [
             {"id": 1, "title": "作品", "date": "2020-01-01", "poster": "https://image.tmdb.org/t/p/w500/one.jpg"},

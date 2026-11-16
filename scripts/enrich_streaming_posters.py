@@ -36,9 +36,15 @@ POSTER_SEARCH_ALIASES = {
     "トレンケ・ラウケン Part1": "Trenque Lauquen",
     "トレンケ・ラウケン Part2": "Trenque Lauquen",
     "ガーディング・スター": "Guarding Stars",
-    # Netflix Spain’s official title for Proxies; this is a search query only.
+}
+
+OFFICIAL_IDENTITY_ALIASES = {
+    # Netflix's official Spain announcement names Proxies as En nombre de otro.
+    # Recheck only rows carrying a fuzzy poster marker; require one exact TMDB
+    # title/year result before replacing the fallback poster or assigning an ID.
     "Proxies": "En nombre de otro",
 }
+
 
 LOCAL_TITLE_ALIASES = {
     # U-NEXT adds the descriptive "映画" prefix to its official title.
@@ -104,7 +110,19 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
     for movie in rows:
         needs_poster = not movie.get("poster")
         needs_runtime = os.environ.get("CINELVA_ENRICH_RUNTIME") == "1" and not (isinstance(movie.get("runtime"), (int, float)) and movie.get("runtime") > 0)
-        if not needs_poster and not needs_runtime:
+        existing_tmdb_url = movie.get("tmdb")
+        has_tmdb_url_identity = bool(
+            isinstance(existing_tmdb_url, str) and
+            re.fullmatch(r"https://www\\.themoviedb\\.org/movie/([1-9][0-9]*)/?", existing_tmdb_url)
+        )
+        has_tmdb_id = any(movie.get(field) is not None for field in ("tmdb_id", "tmdbId", "id"))
+        needs_identity_recheck = (
+            movie.get("poster_match_status") == "fuzzy_search_fallback"
+            and movie.get("title") in OFFICIAL_IDENTITY_ALIASES
+            and not has_tmdb_id
+            and not has_tmdb_url_identity
+        )
+        if not needs_poster and not needs_runtime and not needs_identity_recheck:
             continue
         # Preserve existing canonical identities, regardless of alias.
         # A title search must never override a reviewed movie ID.
@@ -235,7 +253,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             })
             continue
         exact = {}
-        for name in (movie.get("title"), movie.get("original_title"), LOCAL_TITLE_ALIASES.get(movie.get("title"))):
+        for name in (movie.get("title"), movie.get("original_title"), LOCAL_TITLE_ALIASES.get(movie.get("title")), OFFICIAL_IDENTITY_ALIASES.get(movie.get("title"))):
             exact.update(by_title.get(normalize(name), {}))
         exact = {
             movie_id: identity for movie_id, identity in exact.items()
@@ -244,7 +262,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         }
         if len(exact) == 1:
             identity = next(iter(exact.values()))
-            if needs_poster:
+            if needs_poster or needs_identity_recheck:
                 movie["poster"] = identity["poster"]
             identity_runtime = identity.get("runtime")
             if needs_runtime and isinstance(identity_runtime, (int, float)) and identity_runtime > 0:
@@ -252,6 +270,9 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                 runtime_enriched += 1
             movie["id"] = identity["id"]
             movie["tmdb"] = identity.get("tmdb") or "https://www.themoviedb.org/movie/" + str(identity["id"])
+            if needs_identity_recheck:
+                movie.pop("poster_match_status", None)
+                movie.pop("poster_match_query", None)
             if identity.get("release_year") or identity.get("year"):
                 movie["release_year"] = identity.get("release_year") or identity.get("year")
             if (not needs_poster or movie.get("poster")) and (not needs_runtime or movie.get("runtime")):
@@ -280,7 +301,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         if not api_key:
             unresolved += 1
             continue
-        title = POSTER_SEARCH_ALIASES.get(movie.get("title")) or movie.get("original_title") or movie.get("title")
+        title = OFFICIAL_IDENTITY_ALIASES.get(movie.get("title")) or POSTER_SEARCH_ALIASES.get(movie.get("title")) or movie.get("original_title") or movie.get("title")
         needle = normalize(title)
         if not needle:
             unresolved += 1
@@ -337,11 +358,14 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             matches = {}
         if len(matches) == 1:
             identity = next(iter(matches.values()))
-            if needs_poster:
+            if needs_poster or needs_identity_recheck:
                 movie["poster"] = IMAGE_BASE + identity["poster_path"]
             movie_id = int(identity["id"])
             movie["id"] = movie_id
             movie["tmdb"] = "https://www.themoviedb.org/movie/" + str(movie_id)
+            if needs_identity_recheck:
+                movie.pop("poster_match_status", None)
+                movie.pop("poster_match_query", None)
             release_year = (identity.get("release_date") or "")[:4]
             if release_year.isdigit() and 1888 <= int(release_year) <= 2100:
                 movie.setdefault("release_year", int(release_year))
@@ -375,7 +399,9 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             fuzzy = next((item for item in poster_candidates
                           if any(int(item.get("id", 0)) == int(exact.get("id", 0)) for exact in exact_candidates)), None)
             fuzzy = fuzzy or (poster_candidates[0] if poster_candidates else None)
-            if needs_poster and fuzzy and allow_fuzzy_posters:
+            if needs_identity_recheck:
+                unresolved += 1
+            elif needs_poster and fuzzy and allow_fuzzy_posters:
                 movie["poster"] = IMAGE_BASE + fuzzy["poster_path"]
                 movie["poster_match_status"] = "fuzzy_search_fallback"
                 movie["poster_match_query"] = title
@@ -433,7 +459,9 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
                 movie["poster"] = IMAGE_BASE + fuzzy["poster_path"]
                 movie["poster_match_status"] = "fuzzy_search_fallback"
                 movie["poster_match_query"] = title
-            if needs_runtime and not movie.get("runtime"):
+            if needs_identity_recheck:
+                unresolved += 1
+            elif needs_runtime and not movie.get("runtime"):
                 unresolved += 1
             elif needs_poster and not movie.get("poster"):
                 unresolved += 1

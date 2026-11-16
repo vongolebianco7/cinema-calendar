@@ -20,25 +20,31 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    await context.route('https://**/*',r=>r.fulfill({status:503,headers:{'access-control-allow-origin':'*'},json:{}}));
    let release;const gate=new Promise(r=>release=r);
    const providers=Array.from({length:40},(_,i)=>({provider_id:i+1,provider_name:i===7?'Netflix':i===39?'新しいサービス'+'長い名前'.repeat(40):'Service '+i}));
-   await context.route('**/api/watch-providers',async r=>{await gate;await r.fulfill({headers:{'access-control-allow-origin':'*'},json:{providers}});});
+   let providerRequests=0,offline=false;
+   await context.route('**/api/watch-providers',async r=>{
+    providerRequests++;
+    if(offline)return r.fulfill({status:503,headers:{'access-control-allow-origin':'*'},json:{error:'unavailable'}});
+    await gate;return r.fulfill({headers:{'access-control-allow-origin':'*'},json:{providers}});
+   });
    const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
    await page.goto(`http://127.0.0.1:${port}/${path}`,{waitUntil:'domcontentloaded'});
    await page.locator('#providerChecks input[value="8"]').check();release();
-   await page.waitForFunction(()=>document.querySelectorAll('#providerChecks input').length===40);
+   await page.waitForFunction(()=>document.querySelectorAll('#providerChecks input').length===40);assert.equal(providerRequests,1,'provider metadata should load once after the control enters view');
    assert.equal(await page.locator('#providerChecks input[value="8"]').isChecked(),true);
    assert.equal(await page.evaluate(()=>document.activeElement?.value),'8','metadata refresh must preserve keyboard focus');
    await page.locator('#providerChecks input[value="40"]').check();
    assert.deepEqual(await page.evaluate(()=>build().get('provider').split('|').map(Number).sort((a,b)=>a-b)),[8,40]);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
    assert.equal(await page.locator('#providerChecks').evaluate(e=>e.scrollHeight>e.clientHeight),true);
-   await context.route('**/api/watch-providers',r=>r.fulfill({status:503,headers:{'access-control-allow-origin':'*'},json:{error:'unavailable'}}));
+   offline=true;
    await page.reload({waitUntil:'domcontentloaded'});
-   // The provider fetch is intentionally lazy. Ensure the observer is attached before
-   // scrolling; otherwise the reload can race the offscreen IntersectionObserver.
+   // Reuse one route handler and switch its response mode before reload. A second matching
+   // route is ordered differently by browser engines and can leave a deferred route ahead.
    await page.waitForFunction(()=>typeof window.CinelvaWatchProviders?.mount==='function');
-   await page.locator('#providerChecks input[value="8"]').scrollIntoViewIfNeeded();
+   await page.locator('#providerChecks').scrollIntoViewIfNeeded();
    const failureStatus=page.locator('#providerChecks + .status');
    await page.waitForFunction(()=>document.querySelector('#providerChecks + .status')?.textContent==='サービス一覧を更新できませんでした。表示中のサービスは検索できます。',null,{timeout:15000});
+   assert.equal(providerRequests,2,'offline reload should make exactly one second provider request');
    await failureStatus.scrollIntoViewIfNeeded();
    assert.equal(await failureStatus.isVisible(),true,'offline provider status remains visible in the browser');
    assert.equal(await page.locator('#providerChecks input').count(),6);

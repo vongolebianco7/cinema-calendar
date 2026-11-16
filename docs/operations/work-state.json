@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T04:20:00Z",
+  "updated_at": "2026-11-16T04:34:30Z",
   "status": "deployment_pending",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
   "branch": "docs/live-checkpoint-20261116-0248",
-  "head_sha": "72707f632ed294c6baad4167911608bd0ddc2e3f",
+  "head_sha": "55db68fc114ce54b6d9e9c849b4dfffe3420b5fb",
   "pull_request": 872,
   "work_items": [
     {
@@ -796,7 +796,7 @@
     {
       "id": "P0-244-PROXIES-ALIAS-20261116",
       "title": "Use Netflix's verified Spanish film title as a strict TMDB poster-search alias",
-      "status": "in_progress",
+      "status": "deployment_pending",
       "issue": 244,
       "pull_request": {
         "number": 872,
@@ -808,8 +808,8 @@
       "evidence": [
         "https://about.netflix.com/es_es/news/oriol-paulo-returns-to-netflix-with-proxies-premiering-on-11-december"
       ],
-      "ci": "Exact PR head 23f48d7f67e59e618a27b0a3b593f806acdbe341 passed all eight required GitHub Actions: Validate frontend 43798855957, visual QA 43798855956, Autonomous quality gate 43798855949, Full Python 43798855947, completeness 43798855883, smoke 43798855881, reproducible backend 43798855820, and mobile layout 43798855819. Vercel backend status remains failure build-rate-limit; production release pending.",
-      "latest_ci": "Current documentation head 72707f63: seven Actions either passed or were still running; Python contract failed because the checkpoint used unsupported status `ci_pending`. Fixed to the validator's allowed `in_progress`; re-run exact-head validation."
+      "ci": "Exact source commit 23f48d7f67e59e618a27b0a3b593f806acdbe341 passed all eight required Actions. Final PR head 55db68fc114ce54b6d9e9c849b4dfffe3420b5fb also passed all eight after one targeted Validate frontend retry: run 43803389009 attempt 1 timed out in the unchanged offline provider-list test (line 46); attempt 2 passed. Vercel remains production-pending due Hobby api-deployments-free-per-day cap; no merge/deploy around it.",
+      "latest_ci": "2026-11-16T04:28:50Z targeted failed-job retry started; attempt 2 succeeded at 04:33:35Z. All 8 Actions green on exact branch head 55db68fc114ce54b6d9e9c849b4dfffe3420b5fb."
     }
   ],
   "verification": [
@@ -1250,29 +1250,47 @@
     {
       "check": "Checkpoint validator correction 2026-11-16 04:20 UTC",
       "result": "Exact head 72707f632ed294c6baad4167911608bd0ddc2e3f failed test_checkpoint_is_valid because the newly recorded work-item status `ci_pending` is outside scripts/check_work_state.py's allowed vocabulary (planned, in_progress, pr_created, ci_passed, merged, deployment_pending, production_verified, blocked). Corrected the item status to `in_progress`; rerun on next docs head."
+    },
+    {
+      "check": "Live #593/#244 and exact PR head 2026-11-16 04:34 UTC",
+      "result": "Main 8229b678b9c0730a5d412305fd4138a3d844d2e4; #593 closed. Canonical production boxoffice HTTP 200: by-year 1,808 rows/0 missing; all-time 100/0 missing. Main streaming 463/462 posters; production streaming 457/457 posters, generated 2026-11-15T08:42:39.808Z, with none of six new official records present. PR #872 head 55db68fc114ce54b6d9e9c849b4dfffe3420b5fb has 8/8 Actions green after one targeted frontend-job retry. Vercel daily build limit and Neon P1001 block production JSON acceptance; neither retried. No user data changed."
     }
   ],
   "deployment": {
     "status": "deployment_pending",
-    "canonical_url": "https://cinelva.vercel.app",
+    "canonical_url": "https://cinelva.vercel.app/",
     "ready_deployment_id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
     "ready_sha": "f7c964a72b605693bc08bc24c4f855bc9463e566",
-    "public_streaming_rows": 457,
-    "public_streaming_missing_posters": 0,
-    "main_streaming_rows": 463,
-    "main_streaming_missing_posters": 1,
-    "note": "Public JSON was re-fetched HTTP 200: 457 rows/457 posters. Main is 463 rows/462 posters. Both main Vercel status checks fail with build-rate-limit; no PR deployment is available and the existing READY deployment remains on f7c964a. No manual deployment attempted."
+    "public_boxoffice": {
+      "http": 200,
+      "by_year_rows": 1808,
+      "by_year_missing_posters": 0,
+      "all_time_rows": 100,
+      "all_time_missing_posters": 0,
+      "generated_at": "2026-09-27"
+    },
+    "public_streaming": {
+      "http": 200,
+      "rows": 457,
+      "poster_rows": 457,
+      "missing_posters": 0,
+      "generated_at": "2026-11-15T08:42:39.808Z"
+    },
+    "main_streaming": {
+      "rows": 463,
+      "poster_rows": 462,
+      "missing_posters": 1
+    },
+    "production_verified": false,
+    "blocker": "Vercel Hobby daily build cap; public data and new streaming-card rendering not yet updated. Existing READY source is f7c964a."
   },
   "blockers": [
-    "Vercel status on main and PR #872 is failing with provider target upgradeToPro=build-rate-limit. The current production deployment is still READY on f7c964a but serves stale streaming JSON. Do not manually deploy, upgrade, or retry around the limit.",
-    "The latest official update-movies run 43793292311 committed the validated JSON snapshot, then its one final Neon direct sync failed with Prisma P1001. No repeat attempt until endpoint state changes.",
-    "Proxies has no TMDB ID/poster yet. Netflix's official Spanish title is a reviewed query alias only; identity can be assigned only by a unique exact-title/year result from the existing official TMDB API workflow.",
-    "GitHub branch-protection endpoint returned 403 Resource not accessible by integration, so whether the Vercel status is a required merge gate cannot be confirmed through the connected GitHub integration.",
-    "Vercel deployment API hit the Hobby cap: GitHub bot reported `api-deployments-free-per-day` / more than 100 deployments, retry in 1 day at 2026-11-16 02:53 UTC. Do not deploy/upgrade/work around it; canonical production remains the older READY source and excludes the six latest official announcements.",
-    "Exact-head Validate frontend run 43802185130 attempt 1 failed after all browser checks passed because its comparative performance step `git fetch` received GitHub HTTP 503. The targeted failed-job retry (attempt 2) is still running; no product-test failure is reported.",
-    "The latest official update-movies run 43793292311 committed the validated JSON snapshot, then failed once at final Neon direct sync with Prisma P1001. No retry until endpoint state changes."
+    "Vercel main/PR deployment is capped by api-deployments-free-per-day (>100/day); canonical production remains READY on f7c964a and is stale for the six-record batch. No manual deploy, upgrade, or bypass.",
+    "Latest update-movies run 43793292311 committed the validated JSON snapshot but its one final Neon direct sync failed with Prisma P1001. Do not retry until endpoint state changes.",
+    "Proxies still has no TMDB identity/poster. The Netflix Spain alias is a reviewed query hint only; TMDB must return one exact normalized title/year through the existing official API flow.",
+    "Canonical production streaming JSON is 457/457 postered but omits six official rows present in main. Browser observation remains partial for image completion; no production acceptance claim."
   ],
-  "next_action": "Finish the one targeted Validate frontend retry for PR #872 head 81efe523. If it passes, record its exact result and retain the PR until Vercel's normal Hobby rate limit clears; do not merge/deploy around the failing Vercel release gate. Then use only the existing scheduled update-movies pathway for TMDB alias resolution and verify canonical production JSON plus actual calendar cards/posters. Continue provider-source audit without scraping; keep #244 open until real production data and rendered-card acceptance are evidenced.",
+  "next_action": "Wait for the documented Vercel Hobby daily build limit to clear; do not retry or bypass. Require all exact-head checks on the new checkpoint commit, then use the normal release flow once. After release, allow the existing scheduled update-movies workflow to run once (no manual dispatch), inspect per-title TMDB resolution and Neon result, then re-fetch public JSON and visually verify the new real streaming cards/posters. Keep #244 open until production acceptance is complete.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -5174,5 +5192,81 @@
     "validation_failure": "Python test_checkpoint_is_valid rejected unsupported state status ci_pending; corrected to in_progress.",
     "production_blocker": "Vercel api-deployments-free-per-day (>100) blocks new release; no bypass.",
     "next": "Wait for the new exact-head checks; inspect only any remaining real failures."
+  },
+  "latest_live_checkpoint_20261116_0434": {
+    "checked_at": "2026-11-16T04:34:30Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issue_239": "open",
+    "issue_244": "open",
+    "issue_593": {
+      "state": "closed",
+      "production_boxoffice": {
+        "http": 200,
+        "by_year_rows": 1808,
+        "by_year_missing_posters": 0,
+        "all_time_rows": 100,
+        "all_time_missing_posters": 0,
+        "generated_at": "2026-09-27"
+      }
+    },
+    "open_prs": [
+      {
+        "number": 872,
+        "head_sha": "55db68fc114ce54b6d9e9c849b4dfffe3420b5fb",
+        "title": "fix: resolve Proxies poster through verified Spanish alias"
+      }
+    ],
+    "exact_head_ci": {
+      "head_sha": "55db68fc114ce54b6d9e9c849b4dfffe3420b5fb",
+      "workflows": 8,
+      "success": 8,
+      "details": "Validate frontend run 43803389009 attempt 1 failed only on pre-existing tests/cinelva-provider-list-browser.cjs:46 offline-status wait timeout (15s); targeted attempt 2 passed. Seven other workflows passed."
+    },
+    "main_streaming": {
+      "rows": 463,
+      "with_posters": 462,
+      "missing": 1,
+      "unresolved": [
+        "Proxies"
+      ],
+      "official_announcement_rows": [
+        "Minions & Monsters",
+        "Steps",
+        "Secrets",
+        "In Waves",
+        "Proxies",
+        "Ray Gunn"
+      ],
+      "resolved_posters": 5
+    },
+    "production_streaming": {
+      "url": "https://cinelva.vercel.app/data/streaming.json",
+      "http": 200,
+      "rows": 457,
+      "with_posters": 457,
+      "missing_posters": 0,
+      "generated_at": "2026-11-15T08:42:39.808Z",
+      "new_official_batch_present": false
+    },
+    "update_movies": {
+      "latest_run": 43793292311,
+      "active_runs": 0,
+      "schedule": "17 18 * * * UTC",
+      "result": "validated JSON committed to main; final Neon direct sync failed once with Prisma P1001; no retry"
+    },
+    "production": {
+      "canonical_url": "https://cinelva.vercel.app/",
+      "status": "READY",
+      "deployment_id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+      "sha": "f7c964a72b605693bc08bc24c4f855bc9463e566",
+      "latest_attempt": "Vercel rejected new deployment with api-deployments-free-per-day (>100/day; retry in one day as of 2026-11-16T02:53Z). Do not manually deploy, upgrade, or bypass."
+    },
+    "source_review": {
+      "official_alias": "Netflix Spain confirms the title En nombre de otro and global Netflix date 2026-12-11; https://about.netflix.com/es_es/news/proxies-is-coming-to-netflix-on-december-11",
+      "tmdb": "Official TMDB site/API search is blocked in this environment; alias is query-only; no TMDB id/poster guessed.",
+      "approved_public_feeds": 0
+    },
+    "user_data": "Viewing records, ratings, reviews, bookmarks and backups unchanged.",
+    "next": "Keep PR #872 open. Require exact-head CI on the checkpoint commit. Do not merge/deploy while Vercel rate-limit gate is failing. When normal release access is available, make one standard release, then let the existing scheduled updater run once. Confirm Proxies official TMDB identity if unique; re-fetch production JSON and verify the actual streaming card/poster. Keep #244 open until this acceptance passes."
   }
 }

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T01:15:05Z",
+  "updated_at": "2026-11-16T01:45:00Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
-  "branch": "fix/refresh-production-proof-after-streaming-20261116",
-  "head_sha": "a9fb4a679f0f4965bf91d67206bfd641b7b7ba12",
-  "pull_request": 868,
+  "base_sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392",
+  "branch": "test/isolate-tmdb-enrichment-unit-tests-20261116",
+  "head_sha": "333073259cf7719c791076ef4ffd7c1c65d15660",
+  "pull_request": 870,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -3923,5 +3923,57 @@
     "new_pr": 868,
     "status": "pr_created",
     "next_action": "Exact-head CI then safe merge; one existing updater run only after release gate passes."
+  },
+  "latest_live_checkpoint_20261116_0145": {
+    "main_sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392",
+    "issue_239": "open",
+    "issue_244": "open/reopened; production streaming evidence unmet",
+    "issue_593": "closed/completed; public JSON zero poster gaps: 1808/1808 by_year and 100/100 all_time",
+    "production": {
+      "status": "READY",
+      "deployment_id": "dpl_F81ij6fXoJut4du6dN8oLgDrxbf9",
+      "sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392"
+    },
+    "open_prs": [
+      {
+        "number": 869,
+        "title": "data: revalidate six official streaming announcement sources",
+        "head": "7bf88ce6eb4b1a98fa2511090b2d0d2f98b42f94",
+        "ci": "18 checks; 11 success, 7 in progress"
+      },
+      {
+        "number": 870,
+        "title": "test: keep Syoboi poster unit tests offline",
+        "head": "333073259cf7719c791076ef4ffd7c1c65d15660",
+        "ci": "15 checks; 5 success, 9 in progress, 1 skipped"
+      }
+    ],
+    "public_streaming": {
+      "http_status": 200,
+      "generated_at": "2026-11-15T08:42:39.808Z",
+      "rows": 457,
+      "missing_official_announcements": [
+        "Steps",
+        "In Waves",
+        "Ray Gunn",
+        "Proxies",
+        "Secrets",
+        "Minions & Monsters"
+      ],
+      "confirmed_official_rss_atom_feed_count": 0
+    },
+    "test_failure": {
+      "run_id": 43786347481,
+      "job_id": 133034732324,
+      "failed_step": "publish validated nationwide now-playing snapshot",
+      "cause": "Autonomous quality gate ran remote TMDB metadata enrichment during three local-only unit assertions; exact assertion mismatch added poster/runtime fields. Tests now mock the TMDB enrichment boundary; production updater unchanged."
+    },
+    "update_movies": {
+      "latest_previous_run": 43784784850,
+      "result": "failed before collection at stale exact-source proof; no rows imported or snapshot updated",
+      "overlap": false,
+      "next": "only after final exact-head CI green, merge #869 and let one normal push-triggered run execute; no manual dispatch/retry"
+    },
+    "user_data": "untouched: watch history, rating, reviews, bookmarks, backups"
   }
 }

@@ -223,6 +223,70 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w500/proxies-fixture.jpg")
         self.assertEqual(counts, (1, 0, 0))
 
+    def test_fuzzy_poster_is_replaced_only_after_unique_official_alias_and_year_match(self):
+        data, requests, counts = self.run_fixture(
+            [{
+                "title": "Proxies", "original_title": "Proxies", "release_year": 2026,
+                "year": 2026, "poster": "https://image.tmdb.org/t/p/w500/fuzzy.jpg",
+                "poster_match_status": "fuzzy_search_fallback", "poster_match_query": "Proxies",
+            }],
+            {"results": [{
+                "id": 1623160, "title": "En nombre de otro",
+                "original_title": "En nombre de otro", "release_date": "2026-12-11",
+                "poster_path": "/verified-proxies.jpg",
+            }]},
+        )
+        movie = data["movies"][0]
+        self.assertIn("query=En+nombre+de+otro", requests[0][0].full_url)
+        self.assertEqual(movie["id"], 1623160)
+        self.assertEqual(movie["tmdb"], "https://www.themoviedb.org/movie/1623160")
+        self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w500/verified-proxies.jpg")
+        self.assertNotIn("poster_match_status", movie)
+        self.assertNotIn("poster_match_query", movie)
+        self.assertEqual(counts, (1, 0, 0))
+
+    def test_fuzzy_poster_and_identity_stay_unchanged_when_alias_is_ambiguous(self):
+        original_poster = "https://image.tmdb.org/t/p/w500/fuzzy.jpg"
+        data, requests, counts = self.run_fixture(
+            [{
+                "title": "Proxies", "original_title": "Proxies", "release_year": 2026,
+                "poster": original_poster, "poster_match_status": "fuzzy_search_fallback",
+                "poster_match_query": "Proxies",
+            }],
+            {"results": [
+                {"id": 1, "title": "En nombre de otro", "release_date": "2026-01-01", "poster_path": "/a.jpg"},
+                {"id": 2, "title": "En nombre de otro", "release_date": "2026-12-11", "poster_path": "/b.jpg"},
+            ]},
+        )
+        movie = data["movies"][0]
+        self.assertEqual(len(requests), 1)
+        self.assertEqual(movie["poster"], original_poster)
+        self.assertEqual(movie["poster_match_status"], "fuzzy_search_fallback")
+        self.assertEqual(movie["poster_match_query"], "Proxies")
+        self.assertNotIn("id", movie)
+        self.assertNotIn("tmdb", movie)
+        self.assertEqual(counts, (0, 1, 1))
+
+    def test_fuzzy_poster_and_identity_stay_unchanged_when_alias_year_does_not_match(self):
+        original_poster = "https://image.tmdb.org/t/p/w500/fuzzy.jpg"
+        data, requests, counts = self.run_fixture(
+            [{
+                "title": "Proxies", "original_title": "Proxies", "release_year": 2026,
+                "poster": original_poster, "poster_match_status": "fuzzy_search_fallback",
+            }],
+            {"results": [{
+                "id": 1, "title": "En nombre de otro", "release_date": "2024-01-01",
+                "poster_path": "/wrong-year.jpg",
+            }]},
+        )
+        movie = data["movies"][0]
+        self.assertEqual(len(requests), 1)
+        self.assertEqual(movie["poster"], original_poster)
+        self.assertEqual(movie["poster_match_status"], "fuzzy_search_fallback")
+        self.assertNotIn("id", movie)
+        self.assertNotIn("tmdb", movie)
+        self.assertEqual(counts, (0, 0, 1))
+
     def test_poster_search_alias_is_not_saved_as_a_movie_identity(self):
         data, requests, _ = self.run_fixture(
             [{"title": "ヒットマン リサージェンス", "event": "streaming"}],

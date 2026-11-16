@@ -428,3 +428,20 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 1. Keep #244 open. Recheck the normal Vercel release gate and do not deploy while build-rate-limit is reported.
 2. Refresh PR #872 against live main; require final exact-head checks. Allow only the existing scheduled updater to attempt Proxies alias resolution. Trust the poster only after a unique TMDB ID is stored.
 3. Visually verify the production cards when an authorized browser-accessible route is available without expanding access. Do not claim this acceptance is complete until then.
+
+
+## Live continuation checkpoint — 2026-11-16 10:50 UTC
+
+- Latest main: `66b04cc44140346e5865c5fdd4679bacf42aaac7`. #239 and #244 are open; #593 is closed/completed.
+- Public canonical production JSON: boxoffice HTTP 200, 1,808/1,808 by-year and 100/100 all-time rows postered. Streaming HTTP 200, 463/463 rows postered; generated `2026-11-16T08:05:29.780681+00:00`. Proxies has a poster marked `fuzzy_search_fallback` and no TMDB identity.
+- Official Netflix Spain title evidence: Proxies / En nombre de otro, release date 2026-12-11. The TMDB API identity must still be resolved by the existing secret-backed workflow; do not adopt a guessed ID.
+- PR #874 (`fix/recheck-curated-fuzzy-streaming-id-20261116`) implements a narrow recheck for only a curated official alias on an existing fuzzy poster with no saved TMDB identity. It replaces the poster/assigns an ID only after a unique exact-title and 2026 result. Ambiguous, wrong-year, API failure or missing-key paths preserve the existing row. Three regressions cover these outcomes. Source/test SHA at PR creation: `c909bbce2759df78a59ae53b4a02deeefc0d849c`; exact-head CI pending.
+- Current release blocker: Vercel main deployment for `66b04cc` failed `verify-production-release.cjs`: receipt source `aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea`, current digest `3965f6aa23fead1d7faae1ac6bd4d65989e86d9c9fa7f46d6780466a66c27656`, verified digest `616cfe9735e0af4a2ebcfdb994bb39f14b7be06d8ef9eda1fc2219fd6288b028`. PR #873 separately has a 24-hour Vercel deployment rate limit. Existing READY deployment remains on SHA `1717965d5e6a000e1a97948e64237c6366076764`; no manual deployment or quota workaround.
+- Official-source audit: zero confirmed RSS/Atom feeds; 12 service flags remain `auto_premiere_discovery=false`. No scraping or paid source added.
+- No viewing history, ratings, reviews, bookmarks, backups, Neon, or unrelated user data touched. No manual updater dispatch/retry.
+
+### Next concrete actions
+
+1. Fetch PR #874 exact-head Actions and required status checks; use the final resulting head only.
+2. Diagnose the exact-source production receipt mismatch under required checks. Do not merge or deploy while the gate fails or Vercel blocks a build.
+3. After a safe release, let the existing scheduled updater run once; verify the public row has a unique TMDB ID, canonical poster, and no fuzzy marker, then check the deployed streaming cards and image responses. Keep #244 open until production acceptance; leave #593 closed unless missing posters recur.

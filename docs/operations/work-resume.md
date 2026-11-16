@@ -236,3 +236,14 @@ This makes six reviewed candidates on PR #867: Steps, In Waves, Ray Gunn, Proxie
 - To create the new receipt safely: pass exact-head CI for the workflow-path commit, set the receipt head to that commit with its verified source digest, then require a new full exact-head CI on the final PR head. On merge, the receipt path triggers one normal workflow run. No manual dispatch, secret exposure, quota workaround, scrape, or DB retry.
 - PR #870's test-only offline mock fix is independent; exact Python suite passed. Wait for all exact-head checks on its current revision before merge.
 - No user watch/rating/review/bookmark/backup data changed. No official RSS/Atom provider feed is registered (0 confirmed); we continue only with manually verified official announcements.
+
+
+## Live checkpoint — 2026-11-16 01:55 UTC
+
+- Main `bf502c0e5e474d32f5e15e406f223cc942ca093b`; #593 closed/completed with latest public boxoffice 1,808/1,808 yearly plus 100/100 all-time poster rows. #244 is open/reopened and is not complete.
+- #869 merged with all 20 exact-head checks. Its ordinary updater run 43788084251 stopped at the pre-collection exact-source gate: receipt digest `a7906e3a...` vs current digest `1bc68022...`; no import, enrichment, JSON update, or Neon call occurred. Vercel's bf502 production build was refused by the same proof mismatch; last READY release is dpl_F81... on main 0877129e. Do not retry deployment.
+- Public streaming JSON remains HTTP 200 / 457 rows; six officially announced titles are still missing. Confirmed official RSS/Atom registry count is zero. Continue the approved manual-official-announcement pathway; do not assert automatic feed discovery.
+- #870's test-only patch passed its Python suite and was consolidated into #871 so its source digest is covered with the workflow change. #870 is closed as superseded. #871 source commit before this checkpoint: `c5db137a082062d4687cb4ed55ba7f299964b40a`. It adds the proof file as an existing updater push trigger and mocks TMDB only in three local tests. Production TMDB behavior is unchanged.
+- #871's exact CI is running on the latest docs head. First require it green; then write proof receipt `head_sha` = tested source commit c5db137 with the digest printed by the exact gate; run all required checks again on the final PR head. Merge only after all current-head checks pass. On merge, the proof path triggers one normal update-movies run; no manual dispatch or retry loop.
+- After that one run, verify per-title resolver results, public JSON count, backend sync outcome, READY deployment and real calendar card/image rendering. Keep #244 open until all pass.
+- Watch history, ratings, reviews, bookmarks and backups are untouched. No paid service, scrape, deployment bypass, or quota workaround.

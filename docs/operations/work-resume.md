@@ -307,3 +307,13 @@ Keep #872 open. Continue reviewing official-provider source pages for a permitte
 1. Run exact-head checks for the updated checkpoint and merge only if they are green.
 2. Implement a focused resolver regression for the verified Spanish title, preserving exact-title/year identity gates. Use the next existing update-movies schedule; no manual dispatch and no guessed TMDB identity.
 3. Keep #244 open until a proof-valid main release is READY, production JSON contains the new items, and browser acceptance sees the real cards/posters. Do not retry Neon or start a manual Vercel deployment.
+
+
+## 2026-11-16 03:29 UTC — Proxies alias regression and live acceptance
+
+- Re-read live main `8229b678b9c0730a5d412305fd4138a3d844d2e4`, #239, #244, #593, open PRs, latest Actions, workflow schedule, and current public JSON. #593 remains closed; main and canonical production box-office JSON are 1,908 rows with 0 poster gaps.
+- Main streaming JSON: 463 rows, 462 posters; only `Proxies` has no poster/TMDB identity. Canonical `https://cinelva.vercel.app/data/streaming.json` was fetched again (HTTP 200): 457 rows, 457 posters, generated 2026-11-15. The six official announcements present in main remain absent from production.
+- Netflix’s official Spain newsroom identifies `En nombre de otro` as the Spanish title and confirms the 2026-12-11 release. Added it as a search alias only. The resolver now prefers the reviewed alias over literal `original_title: Proxies`; it still writes identity/artwork only for one exact normalized TMDB movie title with release year 2026. Added a mocked regression with a same-year literal-title decoy. No ID/poster is assigned from title intuition.
+- Code and regression are in the already-open PR #872; no duplicate PR. Exact-head checks for the new source are pending. The branch’s previous docs-only head passed smoke, mobile and visual QA; quality gate was still running when this update began.
+- Vercel main status presently includes `build-rate-limit`; canonical production remains on an older READY deployment. Keep Hobby and do not manually deploy. Update-movies run 43793292311 committed validated JSON but failed once at final Neon sync with P1001; no retry. Official feed registry still has no approved automatic feeds.
+- Next: let exact-head Actions finish; the scheduled update-movies cron is `17 18 * * *` UTC (18:17 UTC daily). After exact-head code passes and normal release proof permits publication, verify the new items in public JSON and their actual calendar cards/posters. Keep #244 open until those production checks pass and source-coverage acceptance is complete; user data and backups remain untouched.

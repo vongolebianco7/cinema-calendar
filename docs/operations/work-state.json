@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T03:23:01Z",
-  "status": "deployment_pending",
+  "updated_at": "2026-11-16T03:29:12Z",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
   "branch": "docs/live-checkpoint-20261116-0248",
-  "head_sha": "193bae2b9417edd6a705c40f52f4cb342fd2ddd0",
+  "head_sha": "d88d523556cee295c41cd342f970deca97ddd5d5",
   "pull_request": 872,
   "work_items": [
     {
@@ -792,6 +792,23 @@
         "head_sha": "a9fb4a679f0f4965bf91d67206bfd641b7b7ba12"
       },
       "acceptance": "Pass the exact-head checks and safely merge the refreshed receipt to make the identical CI-tested executable source eligible for the existing Vercel and Pages publication gates; then verify production READY without bypassing the guard."
+    },
+    {
+      "id": "P0-244-PROXIES-ALIAS-20261116",
+      "title": "Use Netflix's verified Spanish film title as a strict TMDB poster-search alias",
+      "status": "pr_created",
+      "issue": 244,
+      "pull_request": {
+        "number": 872,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/872",
+        "branch": "docs/live-checkpoint-20261116-0248",
+        "head_sha": "d88d523556cee295c41cd342f970deca97ddd5d5"
+      },
+      "acceptance": "The resolver prefers the source-reviewed alias `En nombre de otro` over literal original_title `Proxies` for the TMDB search, but saves an ID/poster only for one exact normalized title with release year 2026. A mocked regression includes a same-year `Proxies` decoy and asserts the wrong candidate is not selected. Production ID/poster remains unassigned until the existing official API updater yields the unique match.",
+      "evidence": [
+        "https://about.netflix.com/es_es/news/oriol-paulo-returns-to-netflix-with-proxies-premiering-on-11-december"
+      ],
+      "ci": "Code and regression added to existing PR #872; exact-head workflows pending on the new source."
     }
   ],
   "verification": [
@@ -1216,6 +1233,10 @@
     {
       "check": "Live production/data audit 2026-11-16T03:23:01Z",
       "result": "Main 8229b678b9c0730a5d412305fd4138a3d844d2e4; #593 closed; boxoffice JSON 1908 rows / 0 gaps in main and production. Streaming main 463/462 postered; canonical production 457/457 postered. Main-only official set: Minions & Monsters (1315772), Steps (1595124), Secrets (1616675), In Waves (947502), Proxies (unresolved), Ray Gunn (940009). Issue #244 remains open."
+    },
+    {
+      "check": "Live #244 production and resolver checkpoint 2026-11-16 03:29 UTC",
+      "result": "Main 8229b678: streaming JSON 463 rows/462 posters (Proxies unresolved). Canonical Vercel public JSON independently fetched HTTP 200: 457 rows/457 posters, generated 2026-11-15T08:42:39.808Z; it contains none of the six main-only announcements. Netflix official Spanish newsroom identifies the Proxies project as En nombre de otro and confirms 2026-12-11; no TMDB identity was assigned. PR #872 adds alias-first search and an exact-title/year mocked decoy regression. Vercel CI on main reports build-rate-limit; current READY origin remains stale. No user records/backups changed."
     }
   ],
   "deployment": {
@@ -1230,13 +1251,11 @@
     "note": "Canonical JSON is older than main; docs-only PR check does not publish generated data. No manual deploy attempted."
   },
   "blockers": [
-    "Canonical Vercel production is READY on dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn (source f7c964a72b605693bc08bc24c4f855bc9463e566). Public streaming JSON is 457/457 postered at 2026-11-15T08:42:39.808Z; main is 463 rows / 462 postered at 2026-11-16T02:37:34.045085+00:00. The six main-only official entries have not reached canonical production.",
-    "The latest exact PR #872 head 193bae2b9417edd6a705c40f52f4cb342fd2ddd0 has successful Autonomous quality gate, smoke, mobile-layout and visual-QA runs (43796396608, 43796396566, 43796396563, 43796396569). Vercel backend status is success for this docs-only head; it did not publish the newer main data.",
-    "Update movie data run 43793292311 completed source collection, identity enrichment, JSON validation and snapshot commit, then failed once at direct Neon PostgreSQL sync: Prisma P1001 for ep-snowy-wave-b4gwato2.c-6.us-east-2.aws.neon.tech:5432. Do not retry the DB sync.",
-    "Five of six new official titles have unique TMDB IDs and posters; Proxies remains without a verified TMDB identity. Netflix's official Spanish announcement names it En nombre de otro, but this is only an alias-search lead, not proof of a TMDB ID. Official TMDB search is robot-blocked and the updater consumed its 180/180 request budget.",
-    "No confirmed public RSS/Atom provider feed is registered; all 12 providers remain auto_premiere_discovery=false. Apple TV Feed exists but API authorization requires Apple Services Performance Partners Program membership; CINELVA has no approved access. Do not enable it or add unsupported automation."
+    "Vercel production deploys for the current release path are failing with the provider status target containing upgradeToPro=build-rate-limit; keep Hobby, do not manually deploy or retry.",
+    "The latest official update-movies run 43793292311 committed the JSON snapshot, then one final Neon direct sync failed with Prisma P1001; do not repeat the DB call until endpoint availability changes.",
+    "Proxies still lacks a verified TMDB identity/poster in main; the official Netflix Spanish title is now a reviewed search alias only, and official TMDB API resolution must come from the existing secret-backed updater."
   ],
-  "next_action": "Keep #244 open. First run exact-head checks on the refreshed docs PR and merge only if all required checks remain green. For the next source PR, add the Netflix-verified search alias “En nombre de otro” to the existing poster resolver, with a regression test proving the title/year must exactly match before assigning a TMDB identity; do not guess or persist an ID. Do not manually dispatch update-movies or retry Neon. The daily update-movies cron is 17:00 UTC (03:00 JST next day); inspect its run after completion. Production streaming acceptance remains blocked until a source-changing, proof-valid release reaches READY and the public JSON includes the six main-only records; no manual deployment or quota bypass.",
+  "next_action": "Let required exact-head Actions finish on PR #872's alias regression, then use only the next scheduled update-movies run (cron 18:17 UTC) to resolve Proxies through official TMDB results; after a source-proof-valid normal release, verify production JSON and rendered calendar cards. No manual dispatch, Neon retry, or Vercel deployment.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -1324,7 +1343,8 @@
         "apple_tv_feed": "partner-program-gated; no access"
       },
       "next": "add official Spanish alias as resolver query only after exact regression; query TMDB official on next existing scheduled run; prove public production sync and card rendering before closing #244"
-    }
+    },
+    "2026-11-16T03:29:12Z: Live production JSON re-fetched: 457 rows, 457 posters, 0 current gaps; main is 463/462 with only Proxies unresolved and six main-only official announcements. Added a strict Netflix Spanish-title search alias and a mock decoy regression to existing PR #872. No TMDB ID/poster guessed. Main Vercel deployment status reports build-rate-limit; Neon P1001 was not retried. #593 remains closed; #244 stays open until new records reach production and cards are verified."
   ],
   "progress_metrics": {
     "total_tasks": 32,
@@ -5008,5 +5028,61 @@
       "result": "main JSON snapshot committed; final DB sync failed P1001; no retry"
     },
     "next_action": "exact-head checks, merge docs checkpoint if green, then prepare official Spanish alias resolver regression without assigning an ID; do not manual-dispatch updater, retry Neon, deploy manually, or close #244"
+  },
+  "latest_live_checkpoint_20261116_0329": {
+    "checked_at": "2026-11-16T03:29:12Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      683
+    ],
+    "open_prs": [
+      872
+    ],
+    "issue_593": {
+      "state": "closed",
+      "production_boxoffice_rows": 1908,
+      "missing_posters": 0
+    },
+    "streaming": {
+      "main": {
+        "rows": 463,
+        "with_posters": 462,
+        "missing": 1,
+        "title": "Proxies",
+        "tmdb_id": null,
+        "generated_at": "2026-11-16T02:37:34.045085+00:00"
+      },
+      "production": {
+        "http_status": 200,
+        "rows": 457,
+        "with_posters": 457,
+        "missing": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z"
+      },
+      "main_only_rows": 6,
+      "production_contains_main_only_rows": false
+    },
+    "update_movies": {
+      "run": 43793292311,
+      "result": "JSON snapshot committed; final Neon direct sync failed once with Prisma P1001; no retry"
+    },
+    "official_proxies_title": {
+      "title": "En nombre de otro",
+      "source": "Netflix Spain newsroom; search-alias lead only; no TMDB identity"
+    },
+    "pr_872": {
+      "head_before_checkpoint": "d88d523556cee295c41cd342f970deca97ddd5d5",
+      "new_code": "scripts/enrich_streaming_posters.py + tests/test_streaming_poster_enrichment.py; checks pending"
+    },
+    "vercel": {
+      "main_commit_status": "failure with build-rate-limit target",
+      "production_deployment": "older READY deployment; production JSON stale; no manual deployment"
+    },
+    "next_action": "Wait for exact-head required Actions on PR #872; then let the next scheduled updater (18:17 UTC daily) query the official alias. Only accept one exact TMDB title+2026 result; verify public JSON/card after normal production release."
   }
 }

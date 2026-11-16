@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T00:27:00Z",
-  "status": "pr_updated",
+  "updated_at": "2026-11-16T00:34:00Z",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
   "branch": "data/netflix-in-waves-premiere-20261116",
-  "head_sha": "1097ee98417c24955dca9ac26c8b5bddb250f604",
+  "head_sha": "3865442d534dad6deda7feda08c236235105a650",
   "pull_request": 867,
   "work_items": [
     {
@@ -1118,7 +1118,8 @@
     {
       "check": "PR #806 deterministic isolated fixture acceptance merged",
       "result": "Exact-head 2646cb2e3ed4c42bc9382f698744e747465f9e23: quality 43163691108, smoke 43163691158, frontend 43163691151, backend 43163691034 and additional checks passed; production render skipped for PR event as expected. Merged as 881d66e9b3de200654fc6b325e52d52a76ea971e; real Chromium/WebKit production rerun remains necessary."
-    }
+    },
+    "Backend build at exact prior head 3865442d534dad6deda7feda08c236235105a650 failed only at check_work_state.py: top-level status pr_updated was not allowed. Corrected to schema-approved pr_created; prior-head failure is not accepted as final-head pass."
   ],
   "deployment": {
     "status": "deployment_pending",
@@ -1135,7 +1136,7 @@
     "PR #805 fixed the Neon pooler/direct-host mismatch; the next scheduled update must prove Neon sync succeeds.",
     "Vercel Hobby usage meter is not available through the connected tools. Latest main-only deployments were canceled by Ignored Build Step; previous READY production remains."
   ],
-  "next_action": "Check exact-head CI for PR #867 at 1097ee98417c24955dca9ac26c8b5bddb250f604. If all required checks pass, merge safely; the existing update-movies push trigger will import/enrich once. Verify public production JSON and calendar rendering. #593 remains closed while boxoffice poster misses stay zero.",
+  "next_action": "A backend exact-head CI run failed because this checkpoint used unsupported status pr_updated; corrected to allowed pr_created in this commit. Recheck every required workflow on the new head. If green, merge safely and verify one automatic updater plus production JSON and calendar.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",

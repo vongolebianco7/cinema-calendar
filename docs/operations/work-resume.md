@@ -270,3 +270,8 @@ This makes six reviewed candidates on PR #867: Steps, In Waves, Ray Gunn, Proxie
 - Source audit still records 0 confirmed official RSS/Atom feeds and 0 of 12 services with approved automatic premiere discovery. These six were manually curated from official provider announcements; no scraping or unsupported automation is claimed.
 
 Next: establish which published origin is the actual canonical user-facing site and confirm its public JSON/UI; inspect the Vercel proof gate and observable Hobby usage before considering one planned release; review permitted official feed sources and pursue `Proxies` only with a unique TMDB identity. Do not repeat the updater or Neon call. Keep #244 open until production JSON and calendar cards/images are verified. Watch history, ratings, reviews, bookmarks and backups remain untouched.
+
+
+## Documentation checkpoint PR
+
+The live-state documentation update is in [PR #872](https://github.com/vongolebianco7/cinema-calendar/pull/872). It refreshes the current main/production comparison and records the post-import Neon blocker. Check the PR page for its latest head SHA, require exact-head CI, merge only if all required checks pass, and do not trigger an application deployment from this documentation-only PR.

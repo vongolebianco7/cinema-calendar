@@ -462,3 +462,20 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - Main and production streaming rows both contain candidate ID `1623160` and a TMDB URL for Proxies, but retain `poster_match_status=fuzzy_search_fallback`; this is not identity acceptance.
 - PR #874 was amended to recheck the official Netflix alias even when a fuzzy ID is already present. It may replace the poster and clear the marker only when exactly one TMDB result has the official title, expected 2026 release year, poster path, and the same ID as the existing candidate. If the API returns a different ID or multiple/no valid results, the row’s existing poster and ID remain unchanged.
 - Regression tests now cover same-ID verification and conflicting-ID preservation. Latest exact-head CI is pending on the changed PR head; do not treat older green runs as current.
+
+
+## Live continuation checkpoint — 2026-11-16 11:10 UTC
+
+- Latest main is `66b04cc44140346e5865c5fdd4679bacf42aaac7`. #239 and #244 are open; #593 is closed. Open PRs confirmed: #873 and #874. #873 is stale against main and its Vercel backend gate is rate-limited; do not merge it around that status.
+- Public production boxoffice JSON: HTTP 200, generated 2026-09-27, 1,808 yearly rows + 100 all-time rows, zero posterless. #593 has not regressed.
+- Public production streaming JSON: HTTP 200, 463 rows, 463 poster URLs, generated `2026-11-16T08:05:29.780681+00:00`. The Proxies row has a fallback poster and `fuzzy_search_fallback`, but no TMDB ID in this production snapshot. Main's current streaming JSON has candidate TMDB ID `1623160` and the same fuzzy marker; neither the candidate ID nor its poster is verified identity. Keep the row unchanged unless the official TMDB API proves the exact official alias, 2026 release year, poster path, and—when present—the same candidate ID.
+- PR #874 (`fix/recheck-curated-fuzzy-streaming-id-20261116`) current code head before this checkpoint was `70aad988920dfed261766bed5af26f9a7939f287`; it adds strict alias/year/ID verification and preserves existing values on mismatch, ambiguity, API failure, missing key, or missing poster. Exact-head Actions at 11:10 UTC: 5/8 green, 3 in progress; the Vercel backend check is success. This checkpoint updates the work-state file in commit `9e014a62e9b795ee76b53e9e0eb8e3e7a4cb5e7d`; the new resulting PR head requires fresh exact-head checks.
+- Canonical production remains READY at `dpl_3zN7iLYSBC59aFCsksxSk1keKmDM`, SHA `1717965d5e6a000e1a97948e64237c6366076764`. Actual card/image browser acceptance is still unverified because direct browser access previously reached Vercel login; do not claim the 463 JSON rows are rendered as 463 cards.
+- Source registry has 0 confirmed public RSS/Atom catalogs; all 12 provider premiere auto-discovery flags remain false. The current PR is a bounded verification improvement using the existing official TMDB API job and Netflix's official announcement, not a claim of automated discovery coverage.
+- No viewing history, ratings, reviews, bookmarks, or backups were changed. No manual updater dispatch, Neon retry, scraping, paid service, Vercel deployment, or quota bypass.
+
+### Next concrete actions
+
+1. Fetch all Actions for the resulting exact PR #874 head; continue only when required checks finish. If any fail, inspect the failing job/log and fix the cause without reducing assertions.
+2. If required checks are green, use only the ordinary release path. Let the existing scheduled updater recheck Proxies; verify the final production identity and public JSON, then the actual card/image in an authorized browser session.
+3. Keep #244 open until source coverage, LKG behavior, freshness, and rendered production acceptance are evidenced. Keep #593 closed while production posterless count remains zero.

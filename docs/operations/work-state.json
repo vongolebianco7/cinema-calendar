@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T04:02:30Z",
+  "updated_at": "2026-11-16T04:16:40Z",
   "status": "deployment_pending",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
   "branch": "docs/live-checkpoint-20261116-0248",
-  "head_sha": "23f48d7f67e59e618a27b0a3b593f806acdbe341",
+  "head_sha": "81efe523286a590027aea4c867c9f306787689b6",
   "pull_request": 872,
   "work_items": [
     {
@@ -796,7 +796,7 @@
     {
       "id": "P0-244-PROXIES-ALIAS-20261116",
       "title": "Use Netflix's verified Spanish film title as a strict TMDB poster-search alias",
-      "status": "ci_passed",
+      "status": "ci_pending",
       "issue": 244,
       "pull_request": {
         "number": 872,
@@ -808,7 +808,8 @@
       "evidence": [
         "https://about.netflix.com/es_es/news/oriol-paulo-returns-to-netflix-with-proxies-premiering-on-11-december"
       ],
-      "ci": "Exact PR head 23f48d7f67e59e618a27b0a3b593f806acdbe341 passed all eight required GitHub Actions: Validate frontend 43798855957, visual QA 43798855956, Autonomous quality gate 43798855949, Full Python 43798855947, completeness 43798855883, smoke 43798855881, reproducible backend 43798855820, and mobile layout 43798855819. Vercel backend status remains failure build-rate-limit; production release pending."
+      "ci": "Exact PR head 23f48d7f67e59e618a27b0a3b593f806acdbe341 passed all eight required GitHub Actions: Validate frontend 43798855957, visual QA 43798855956, Autonomous quality gate 43798855949, Full Python 43798855947, completeness 43798855883, smoke 43798855881, reproducible backend 43798855820, and mobile layout 43798855819. Vercel backend status remains failure build-rate-limit; production release pending.",
+      "latest_ci": "Seven workflows succeeded on docs head 81efe523; Validate frontend first attempt failed only at git fetch HTTP 503 after browser assertions passed; targeted retry in progress. Vercel preview was rate limited (api-deployments-free-per-day)."
     }
   ],
   "verification": [
@@ -1241,6 +1242,10 @@
     {
       "check": "Live exact-head and production refresh 2026-11-16 04:02 UTC",
       "result": "Main remains 8229b678b9c0730a5d412305fd4138a3d844d2e4. Issue #593 closed. Exact PR #872 head 23f48d7f67e59e618a27b0a3b593f806acdbe341 has all eight GitHub Actions successful, including the Python regression suite. Canonical Vercel streaming JSON HTTP 200 is 457 rows/457 posters (0 poster gaps), generated 2026-11-15; it still lacks the six main-only announcements. Main streaming JSON is 463/462 (Proxies unresolved). Canonical boxoffice JSON is 1,908/1,908 postered. Vercel main frontend/backend statuses remain build-rate-limit failures; existing READY deployment is f7c964a. Neon P1001 was not retried."
+    },
+    {
+      "check": "Live #244/P0 update 2026-11-16 04:16 UTC",
+      "result": "Main 8229b678; #593 closed and production boxoffice JSON HTTP 200 with 1,908 rows, zero posterless. #244 remains open. Main streaming 463/462; public Vercel 457/457, generated 2026-11-15; Proxies is unresolved only in main. Open PR #872; seven exact-head checks succeeded on 81efe523; Validate frontend attempt 1's browser checks passed but comparative performance git fetch failed with GitHub HTTP 503. Targeted retry attempt 2 in progress. Canonical Vercel READY remains f7c964a; GitHub bot said api-deployments-free-per-day (>100) and retry in one day; no deploy. Official-source audit found no approved public catalogue feed: Prime mRSS is partner content delivery and Prime APIs are managed-partner-only; U-NEXT help only documents its user catalog. Update-movies run 43793292311 committed JSON then had one final Neon P1001; no retry. User records/backups untouched."
     }
   ],
   "deployment": {
@@ -1258,9 +1263,12 @@
     "Vercel status on main and PR #872 is failing with provider target upgradeToPro=build-rate-limit. The current production deployment is still READY on f7c964a but serves stale streaming JSON. Do not manually deploy, upgrade, or retry around the limit.",
     "The latest official update-movies run 43793292311 committed the validated JSON snapshot, then its one final Neon direct sync failed with Prisma P1001. No repeat attempt until endpoint state changes.",
     "Proxies has no TMDB ID/poster yet. Netflix's official Spanish title is a reviewed query alias only; identity can be assigned only by a unique exact-title/year result from the existing official TMDB API workflow.",
-    "GitHub branch-protection endpoint returned 403 Resource not accessible by integration, so whether the Vercel status is a required merge gate cannot be confirmed through the connected GitHub integration."
+    "GitHub branch-protection endpoint returned 403 Resource not accessible by integration, so whether the Vercel status is a required merge gate cannot be confirmed through the connected GitHub integration.",
+    "Vercel deployment API hit the Hobby cap: GitHub bot reported `api-deployments-free-per-day` / more than 100 deployments, retry in 1 day at 2026-11-16 02:53 UTC. Do not deploy/upgrade/work around it; canonical production remains the older READY source and excludes the six latest official announcements.",
+    "Exact-head Validate frontend run 43802185130 attempt 1 failed after all browser checks passed because its comparative performance step `git fetch` received GitHub HTTP 503. The targeted failed-job retry (attempt 2) is still running; no product-test failure is reported.",
+    "The latest official update-movies run 43793292311 committed the validated JSON snapshot, then failed once at final Neon direct sync with Prisma P1001. No retry until endpoint state changes."
   ],
-  "next_action": "Keep PR #872 open while the Vercel build-rate-limit status remains failing; do not bypass or merge around it. Recheck provider status and canonical production JSON on the next run. If the normal release gate clears, merge only through the protected standard path, then let the next scheduled update-movies run resolve the reviewed alias via TMDB and verify production JSON plus rendered calendar cards. Meanwhile continue the official-source permissions audit without scraping or guessed identities.",
+  "next_action": "Finish the one targeted Validate frontend retry for PR #872 head 81efe523. If it passes, record its exact result and retain the PR until Vercel's normal Hobby rate limit clears; do not merge/deploy around the failing Vercel release gate. Then use only the existing scheduled update-movies pathway for TMDB alias resolution and verify canonical production JSON plus actual calendar cards/posters. Continue provider-source audit without scraping; keep #244 open until real production data and rendered-card acceptance are evidenced.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -3827,86 +3835,15 @@
     "next_action": "After final-head CI is green, merge PR #807; allow one scheduled update-movies run, then verify JSON recovery, Neon sync and production browser metrics."
   },
   "latest_live_state_20261116": {
-    "checked_at": "2026-11-16T01:15:05Z",
-    "main_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
-    "open_prs": [
-      868
-    ],
-    "open_issues": [
-      239,
-      242,
-      243,
-      244,
-      585,
-      683
-    ],
-    "issue_593": {
-      "state": "closed",
-      "state_reason": "completed"
-    },
-    "production": {
-      "latest_main_deployment_state": "ERROR",
-      "latest_main_deployment_id": "dpl_8pdAnVFbUgdxkgJKh7vEuBGEw6Tj",
-      "latest_main_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
-      "previous_ready_state": "READY",
-      "previous_ready_id": "dpl_Djs8HEw8PLbDY6RJEy8sdprxF5K1",
-      "previous_ready_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
-      "blocker": "Production source-proof digest mismatch; no manual deployment or bypass."
-    },
-    "boxoffice": {
-      "http_status": 200,
-      "source": "previous READY production deployment",
-      "by_year_rows": 1808,
-      "by_year_poster_rows": 1808,
-      "by_year_missing_poster_rows": 0,
-      "all_time_rows": 100,
-      "all_time_missing_poster_rows": 0
-    },
-    "streaming": {
-      "http_status": 200,
-      "source": "previous READY production deployment",
-      "generated_at": "2026-11-15T08:42:39.808Z",
-      "rows": 457,
-      "missing_new_official_titles": [
-        "Steps",
-        "In Waves",
-        "Ray Gunn",
-        "Proxies",
-        "Secrets",
-        "ミニオンズ＆モンスターズ"
-      ],
-      "announcement_intake_rows": 71,
-      "approved_rss_atom_feeds": 0,
-      "auto_discovery_services": 0
-    },
-    "pr_867": {
-      "state": "merged",
-      "merge_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
-      "verified_source_head": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86",
-      "exact_head_workflows": "7/7 success; 20/20 check runs"
-    },
-    "update_movies_run": {
-      "id": 43784784850,
-      "state": "failure",
-      "failed_at": "Verify approved source and exact-source CI before collection",
-      "import_skipped": true,
-      "enrichment_skipped": true,
-      "snapshot_commit_skipped": true,
-      "neon_sync_skipped": true,
-      "reason": "receipt points to source digest 191d8991..., current and exact-tested source digest a7906e3a..."
-    },
-    "pages_run": {
-      "id": 43784785028,
-      "state": "failure",
-      "failed_at": "Verify source CI and quality before creating publication output",
-      "deploy_skipped": true,
-      "reason": "same stale production-proof receipt"
-    },
-    "approved_feeds": {
-      "rss_atom_count": 0,
-      "provider_service_count": 12,
-      "automatic_discovery_enabled": 0
-    }
+    "current_main": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issue_593": "closed; 0/1908 production boxoffice poster gaps",
+    "issue_244": "open; six source-reviewed records from main remain unpublished in current Vercel JSON",
+    "active_pr": 872,
+    "current_pr_head": "81efe523286a590027aea4c867c9f306787689b6",
+    "exact_head_action_status": "7 green; Validate frontend targeted retry running after external GitHub 503 during comparative fetch",
+    "production_deploy_status": "old READY deployment; Vercel Hobby daily cap reached; no deployment around the limit",
+    "neon_status": "P1001 once on final sync; no retry",
+    "next_action": "Finish the one targeted Validate frontend retry for PR #872 head 81efe523. If it passes, record its exact result and retain the PR until Vercel's normal Hobby rate limit clears; do not merge/deploy around the failing Vercel release gate. Then use only the existing scheduled update-movies pathway for TMDB alias resolution and verify canonical production JSON plus actual calendar cards/posters. Continue provider-source audit without scraping; keep #244 open until real production data and rendered-card acceptance are evidenced."
   },
   "latest_streaming_in_waves_20261116": {
     "checked_at": "2026-11-16T01:04:00Z",
@@ -5152,5 +5089,75 @@
     "validated_code_sha": "d88d523556cee295c41cd342f970deca97ddd5d5",
     "ci_tested_pr_head": "23f48d7f67e59e618a27b0a3b593f806acdbe341",
     "next_action": "Keep #872 open while provider build-rate-limit check fails; recheck next run; after normal release gate clears, use the standard merge and scheduled official updater, then verify production JSON/cards."
+  },
+  "latest_live_checkpoint_20261116_0416": {
+    "checked_at": "2026-11-16T04:16:40Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed"
+    },
+    "open_prs": [
+      872
+    ],
+    "pr_872": {
+      "current_head": "81efe523286a590027aea4c867c9f306787689b6",
+      "tested_code_head": "23f48d7f67e59e618a27b0a3b593f806acdbe341",
+      "mergeable_state": "unstable",
+      "status": "open"
+    },
+    "exact_head_ci": {
+      "successful": 7,
+      "pending_retry": [
+        "Validate frontend run 43802185130 attempt 2"
+      ],
+      "first_attempt_failure": "Comparative performance `git fetch` received HTTP 503; browser regression tests themselves passed."
+    },
+    "production": {
+      "boxoffice": {
+        "http": 200,
+        "rows": 1908,
+        "posterless": 0,
+        "generated_at": "2026-09-27"
+      },
+      "streaming": {
+        "http": 200,
+        "rows": 457,
+        "posterless": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z"
+      },
+      "main_streaming": {
+        "rows": 463,
+        "posterless": 1,
+        "unresolved": [
+          "Proxies"
+        ]
+      },
+      "ready_deployment": {
+        "id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+        "sha": "f7c964a72b605693bc08bc24c4f855bc9463e566"
+      }
+    },
+    "blockers": {
+      "vercel": "api-deployments-free-per-day >100, provider says retry in one day (bot report 2026-11-16T02:53:21Z).",
+      "neon": "One final sync failure: Prisma P1001 in update-movies run 43793292311; no retry.",
+      "tmdb": "No credential/API search result in this session; exact ID/poster for Proxies remains unassigned pending official workflow."
+    },
+    "source_audit": {
+      "approved_feeds_found": 0,
+      "findings": [
+        "Netflix newsroom is a per-announcement official source; no public catalog feed endpoint/terms were established in this audit.",
+        "Prime Video official mRSS is a content-delivery route for partner submissions, not a public availability catalog; Prime Video APIs are restricted to managed partners.",
+        "U-NEXT help confirms consumer-facing catalog browsing and monthly recommendations, not an authorized API/feed for ingestion."
+      ],
+      "refs": [
+        "https://videocentral.amazon.com/support/mrss-delivery?language=en_US",
+        "https://videocentral.amazon.com/support/prime-video-apis?language=en_US",
+        "https://help.unext.jp/guide/detail/content-being-delivered-of-vod",
+        "https://developer.apple.com/jp/documentation/appletvfeed"
+      ]
+    },
+    "user_data": "Viewing records, ratings, reviews, bookmarks and backups unchanged."
   }
 }

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T12:24:21Z",
+  "updated_at": "2026-11-16T13:11:49Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
   "branch": "fix/recheck-curated-fuzzy-streaming-id-20261116",
-  "head_sha": "a2be4de393a9d6d3d5d640ddfc4d364cca195f86",
+  "head_sha": "a843b1c5cc18d556f92298fdacf6174fd726d9de",
   "pull_request": 874,
   "work_items": [
     {
@@ -827,20 +827,17 @@
     },
     {
       "id": "P0-244-PROXIES-IDENTITY-RECHECK-20261116",
-      "title": "Recheck curated fuzzy-poster rows for strict TMDB identity",
+      "title": "Verify the official Proxies alias against one TMDB movie and publish through the standard release path",
       "status": "deployment_pending",
       "issue": 244,
       "pull_request": {
         "number": 874,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/874",
-        "head_sha": "a2be4de393a9d6d3d5d640ddfc4d364cca195f86"
+        "branch": "fix/recheck-curated-fuzzy-streaming-id-20261116",
+        "head_sha": "a843b1c5cc18d556f92298fdacf6174fd726d9de"
       },
-      "acceptance": "Recheck the reviewed Proxies / En nombre de otro alias for fuzzy fallback rows with or without a candidate TMDB identity. Only accept one exact normalized title + reviewed 2026 release year + poster result; if an ID already exists, require the result ID to match. On ambiguity, mismatch, missing data, API failure, or no key, preserve the row.",
-      "implementation": "scripts/enrich_streaming_posters.py and tests/test_streaming_poster_enrichment.py; no public dataset or user storage mutation.",
-      "verification": "At 2026-11-16 12:24 UTC, all 8 GitHub Actions succeeded on exact source head a2be4de393a9d6d3d5d640ddfc4d364cca195f86. Tests cover unique official alias match, decoy/ambiguous result rejection, 2026 year, same candidate-ID verification, and conflict preservation. Production boxoffice HTTP 200: 1,808 by-year rows + 100 all-time rows, posterless=0. Production streaming HTTP 200: 463 rows, posterless=0. Main Proxies candidate ID 1623160 remains fuzzy_search_fallback; production has poster but no TMDB identity.",
-      "blocker": "PR Vercel backend check is failure with build-rate-limit. Latest main production build dpl_FhuB6mS4dVCfo6JiJMC4C1jqmMsD failed the existing release verifier: receipt head aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea / verified digest 616cfe9735e0af4a2ebcfdb994bb39f14b7be06d8ef9eda1fc2219fd6288b028 does not match current executable source digest 3965f6aa23fead1d7faae1ac6bd4d65989e86d9c9fa7f46d6780466a66c27656. Production remains READY on SHA 1717965d5e6a000e1a97948e64237c6366076764. No merge, manual deploy, proof bypass, or quota workaround.",
-      "ci": "Exact head a2be4de393a9d6d3d5d640ddfc4d364cca195f86: 8/8 Actions succeeded: Validate frontend run 43855629549; Autonomous quality gate 43855629526; CINELVA smoke 43855629552; full Python contract suite 43855629561; mobile layout 43855629502; visual QA 43855629512; reproducible backend build 43855629532; completeness scorecard 43855629536. Vercel backend check failure: build-rate-limit.",
-      "next_action": "Keep #874 open. Resolve the existing production-proof mismatch through the established exact-source receipt process after the current tested source is final; do not hand-edit/bypass the receipt. Wait for Vercel's normal free-tier limit to clear, then use one standard release. Allow the scheduled update-movies workflow at 18:17 UTC to attempt the strict alias recheck; no manual dispatch or Neon retry. Verify TMDB identity, public JSON, and rendered Proxies card before closing #244."
+      "acceptance": "The official alias is mapped only when the existing secret-backed TMDB lookup returns one exact normalized movie title for the reviewed 2026 release year with a poster path; after standard release and updater, verify the canonical public JSON and actual streaming card. Preserve the row unchanged on ambiguity, API failure, missing key, or missing poster.",
+      "ci": "Exact tested source a843b1c5: 8/8 Actions passed (Autonomous 43866914679, smoke 43866914574, frontend 43866914636, backend 43866914645, visual 43866914643, mobile 43866914629, scorecard 43866914661, Python 43866914525). Receipt/checkpoint commit triggers fresh exact-head Actions; release remains pending the new head and normal Vercel gate."
     }
   ],
   "verification": [

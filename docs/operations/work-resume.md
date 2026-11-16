@@ -491,3 +491,20 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - Existing updater schedule: `17 18 * * * UTC`; next run is `2026-11-16 18:17 UTC`. No manual dispatch was issued. Prior Neon P1001 remains unretried.
 - No viewing history, ratings, reviews, bookmarks, or backups changed. No paid plan, scraping, quota workaround, manual deploy, or CI bypass.
 - Next: keep #874 and #244 open; reconcile the production CI receipt only via the repository's established exact-source process, then use one ordinary Vercel release after its gate permits it. Let the scheduled updater run and confirm whether the alias returns one exact 2026 movie/ID; re-fetch production JSON and verify the actual Proxies card/image before marking #244 complete. Rendered-card acceptance is currently unverified.
+
+
+## Live checkpoint — 2026-11-16T13:11:49Z UTC
+
+- Re-fetched live state. Main is `66b04cc44140346e5865c5fdd4679bacf42aaac7`; #239/#244 are open, #593 is closed. Open PRs are #873 and #874; #874 remains based on current main and its verified source head is `a843b1c5cc18d556f92298fdacf6174fd726d9de`.
+- Production boxoffice JSON re-fetch: HTTP 200, generated 2026-09-27; 1,808 by-year rows and 100 all-time rows, 0 posterless in either set. #593 has not regressed.
+- Production streaming JSON re-fetch: HTTP 200, generated `2026-11-16T08:05:29.780681+00:00`; 463 rows, 0 missing poster URLs. These are the announcement supplement, not the 2,833 availability-observed title count.
+- PR #874's exact source `a843b1c5cc18d556f92298fdacf6174fd726d9de` has all 8 observed GitHub Actions successful (Autonomous 43866914679; smoke 43866914574; frontend 43866914636; backend 43866914645; visual QA 43866914643; mobile 43866914629; scorecard 43866914661; Python contract 43866914525). The source receipt is being refreshed to the exact tested executable tree `e1acb67e8a2cfaa6a4f45e5ed3e8f728adfd02b7`, digest `15b626893271be537de20d7cc32b8c4445a619479f03d8b21b41ebe984e7c899` across 1,399 relevant files. This is a proof/checkpoint-only commit; its new exact-head checks must pass before merge.
+- The last main deployment `dpl_FhuB6mS4dVCfo6JiJMC4C1jqmMsD` for `66b04cc` failed before publish because its old source receipt/digest was stale. Canonical production remains READY at `dpl_3zN7iLYSBC59aFCsksxSk1keKmDM` on SHA `1717965d5e6a000e1a97948e64237c6366076764`. No manual deploy or quota workaround.
+- Issue #244 remains open. Proxies has an official Netflix alias but still no verified TMDB identity; the fallback artwork is not accepted as identity evidence. Existing scheduled updater is the only permitted secret-backed lookup path. No manual dispatch; no Neon retry after P1001.
+- Viewing history, ratings, reviews, bookmarks and backups remain untouched. No scraping, paid feeds, or changes to disabled auto-discovery flags.
+
+### Next actions
+
+1. Wait for fresh Actions on the receipt/checkpoint PR tip; don't merge on the prior head's success alone.
+2. If final exact-head required checks and the normal release status are green, use the standard merge/release path once; otherwise record the precise blocker and leave #244 open.
+3. After the next existing scheduled updater run, verify whether Proxies has a unique exact alias/year TMDB identity; then verify production JSON and the rendered streaming card/image. Keep #244 open until this evidence is complete.

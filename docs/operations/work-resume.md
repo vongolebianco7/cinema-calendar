@@ -392,3 +392,21 @@ Finish the exact-head Validate job, leave #872 open while deployment quota block
 ### Next action
 
 Keep #872 and #244 open. Require fresh exact-head CI after this documentation checkpoint; leave the release blocked until the normal Vercel Hobby limit clears. Then make one standard release only, allow the existing scheduled updater to run normally, and verify the production JSON and actual streaming cards/images. Do not retry Neon or dispatch the updater manually.
+
+
+## Live checkpoint — 2026-11-16T06:15:37Z UTC
+
+- Live main: `8229b678b9c0730a5d412305fd4138a3d844d2e4`. Issue #593 remains closed. Canonical Vercel box-office JSON HTTP 200: 1,808/1,808 by-year rows and 100/100 all-time rows have posters (0 missing).
+- Issue #244 remains open. Main `data/streaming.json` is generated at `2026-11-16T02:37:34.045085+00:00`, 463 rows / 462 posters. All six manually reviewed official announcements are in main; five have verified TMDB identities/posters. Proxies remains without a verified TMDB identity/poster. Canonical production streaming JSON is HTTP 200, generated `2026-11-15T08:42:39.808Z`, 457 rows / 457 posters; the six additions have not reached production.
+- PR #872 remains open. Exact head `759652a234efcfa8be9119d13a5f7532b0ef8ef3` passed all eight Actions (43808248743, 43808248752, 43808248785, 43808248806, 43808248859, 43808248866, 43808248807, 43808248881). The branch has since received an operations checkpoint commit; re-fetch exact-head Actions before any merge. Combined Vercel statuses still fail with `build-rate-limit`. Canonical production stays READY on old SHA `f7c964a72b605693bc08bc24c4f855bc9463e566` / `dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn`.
+- Existing updater run `43793292311` imported/validated official announcements, resolved unique TMDB identities, validated and committed the JSON snapshot to main. Only the final Neon direct sync failed with Prisma P1001; no retry or manual dispatch.
+- Official Netflix announcement verifies Proxies / `En nombre de otro`, director Oriol Paulo and 2026-12-11. The official TMDB identity remains unavailable here; no ID/poster was invented. The provider registry has 0 confirmed public catalog RSS/Atom feeds and all 12 provider auto-discovery flags remain disabled.
+- A documentation tree commit briefly created a deletion-heavy diff on PR #872 due a missing base-tree parameter. It was inspected before merge and reverted with a force-with-lease to the verified parent `759652a`; main, production and user data were untouched. Subsequent docs are being updated through the GitHub Contents API, which preserves the full repository tree.
+- Watch history, ratings, reviews, bookmarks and backups remain untouched. No scraping, paid service, Vercel quota workaround, manual updater dispatch, or repeated Neon attempt.
+
+### Next concrete actions
+
+1. Fetch PR #872's new exact-head Actions after the checkpoint updates; do not merge while Vercel's release check fails.
+2. Recheck the Vercel Hobby build limit on a later run and release only through the normal path after all exact-head checks are green.
+3. Let the existing scheduled updater run normally once after release, then verify all six canonical production JSON entries, the Proxies identity/poster result, calendar cards and image requests. Do not dispatch manually or repeat Neon sync.
+4. Keep #244 open until permitted source coverage, freshness, error retention, public data and production rendering all meet the issue's completion criteria.

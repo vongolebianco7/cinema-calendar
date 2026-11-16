@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T04:16:40Z",
+  "updated_at": "2026-11-16T04:20:00Z",
   "status": "deployment_pending",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
   "branch": "docs/live-checkpoint-20261116-0248",
-  "head_sha": "81efe523286a590027aea4c867c9f306787689b6",
+  "head_sha": "72707f632ed294c6baad4167911608bd0ddc2e3f",
   "pull_request": 872,
   "work_items": [
     {
@@ -796,7 +796,7 @@
     {
       "id": "P0-244-PROXIES-ALIAS-20261116",
       "title": "Use Netflix's verified Spanish film title as a strict TMDB poster-search alias",
-      "status": "ci_pending",
+      "status": "in_progress",
       "issue": 244,
       "pull_request": {
         "number": 872,
@@ -809,7 +809,7 @@
         "https://about.netflix.com/es_es/news/oriol-paulo-returns-to-netflix-with-proxies-premiering-on-11-december"
       ],
       "ci": "Exact PR head 23f48d7f67e59e618a27b0a3b593f806acdbe341 passed all eight required GitHub Actions: Validate frontend 43798855957, visual QA 43798855956, Autonomous quality gate 43798855949, Full Python 43798855947, completeness 43798855883, smoke 43798855881, reproducible backend 43798855820, and mobile layout 43798855819. Vercel backend status remains failure build-rate-limit; production release pending.",
-      "latest_ci": "Seven workflows succeeded on docs head 81efe523; Validate frontend first attempt failed only at git fetch HTTP 503 after browser assertions passed; targeted retry in progress. Vercel preview was rate limited (api-deployments-free-per-day)."
+      "latest_ci": "Current documentation head 72707f63: seven Actions either passed or were still running; Python contract failed because the checkpoint used unsupported status `ci_pending`. Fixed to the validator's allowed `in_progress`; re-run exact-head validation."
     }
   ],
   "verification": [
@@ -1246,6 +1246,10 @@
     {
       "check": "Live #244/P0 update 2026-11-16 04:16 UTC",
       "result": "Main 8229b678; #593 closed and production boxoffice JSON HTTP 200 with 1,908 rows, zero posterless. #244 remains open. Main streaming 463/462; public Vercel 457/457, generated 2026-11-15; Proxies is unresolved only in main. Open PR #872; seven exact-head checks succeeded on 81efe523; Validate frontend attempt 1's browser checks passed but comparative performance git fetch failed with GitHub HTTP 503. Targeted retry attempt 2 in progress. Canonical Vercel READY remains f7c964a; GitHub bot said api-deployments-free-per-day (>100) and retry in one day; no deploy. Official-source audit found no approved public catalogue feed: Prime mRSS is partner content delivery and Prime APIs are managed-partner-only; U-NEXT help only documents its user catalog. Update-movies run 43793292311 committed JSON then had one final Neon P1001; no retry. User records/backups untouched."
+    },
+    {
+      "check": "Checkpoint validator correction 2026-11-16 04:20 UTC",
+      "result": "Exact head 72707f632ed294c6baad4167911608bd0ddc2e3f failed test_checkpoint_is_valid because the newly recorded work-item status `ci_pending` is outside scripts/check_work_state.py's allowed vocabulary (planned, in_progress, pr_created, ci_passed, merged, deployment_pending, production_verified, blocked). Corrected the item status to `in_progress`; rerun on next docs head."
     }
   ],
   "deployment": {
@@ -5159,5 +5163,16 @@
       ]
     },
     "user_data": "Viewing records, ratings, reviews, bookmarks and backups unchanged."
+  },
+  "latest_live_checkpoint_20261116_0420": {
+    "checked_at": "2026-11-16T04:20:00Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "current_pr": 872,
+    "tested_head": "72707f632ed294c6baad4167911608bd0ddc2e3f",
+    "issue_593": "closed; production 1,908 rows, 0 posterless",
+    "issue_244": "open",
+    "validation_failure": "Python test_checkpoint_is_valid rejected unsupported state status ci_pending; corrected to in_progress.",
+    "production_blocker": "Vercel api-deployments-free-per-day (>100) blocks new release; no bypass.",
+    "next": "Wait for the new exact-head checks; inspect only any remaining real failures."
   }
 }

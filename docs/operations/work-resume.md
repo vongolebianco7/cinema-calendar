@@ -410,3 +410,21 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 2. Recheck the Vercel Hobby build limit on a later run and release only through the normal path after all exact-head checks are green.
 3. Let the existing scheduled updater run normally once after release, then verify all six canonical production JSON entries, the Proxies identity/poster result, calendar cards and image requests. Do not dispatch manually or repeat Neon sync.
 4. Keep #244 open until permitted source coverage, freshness, error retention, public data and production rendering all meet the issue's completion criteria.
+
+
+## Live checkpoint — 2026-11-16 09:23 UTC (authoritative)
+
+- Current main is `1717965d5e6a000e1a97948e64237c6366076764`. Issue #593 is closed/completed. Production boxoffice JSON is HTTP 200: 1,808 by-year and 100 all-time rows, with no posterless rows.
+- Issue #244 remains open. Streaming production moved from 457/457 posters (2026-11-15) to 463/463 (2026-11-16), six added rows and no removals; generated at `2026-11-16T08:05:29.780681+00:00`. Existing scheduled refresh run `43828393897` succeeded, and latest production deployment `dpl_3zN7iLYSBC59aFCsksxSk1keKmDM` is READY on main.
+- The six live rows are Minions & Monsters (U-NEXT), Steps, Secrets, In Waves, Proxies, and Ray Gunn (Netflix). All have poster URLs; five have explicit TMDB IDs. Proxies has `fuzzy_search_fallback` and no TMDB ID; do not treat the image as an identity match. PR #872 adds an official Spanish-title alias with strict exact-title/year/unique-result checks, but the API result still needs the normal scheduled run.
+- U-NEXT’s official November lineup was audited: listed films are present. Ballerina (Nov 18) has TMDB ID 541671 and a poster. Trenque Lauquen Part 1/2 have posters but no explicit TMDB IDs; do not infer identity. Source: https://www.unext.co.jp/ja/press-room/2026-11-unext-lineup.
+- Source registry remains 0 confirmed public RSS/Atom feeds; all 12 service auto-premiere flags are false. Manual official-announcement intake is not automated discovery.
+- PR #872 old exact head `96a31be3a7646f3f6d1d137b44a8f8636fded89f`: 8/8 Actions and Vercel backend status success. PR #873 exact head `ca277758491a5ea28f1fcfd2132fd57e1c1aed7d`: 9/9 Actions but Vercel backend status `build-rate-limit`; source-link UI is not production-deployed. Current main deployment is READY, but do not bypass the failing PR gate.
+- Vercel authenticated fetch returns HTTP 200 for production JSON and `streaming.html`. Direct Chrome navigation redirected to Vercel login, so actual rendered cards/image loads remain unverified. No temporary share access or quota workaround was created.
+- Prior updater run `43793292311` had one final Neon Prisma P1001 failure. No retry. Viewing history, ratings, reviews, bookmarks and backups were not touched. No manual update dispatch, deployment, scraping, or paid upgrade.
+
+### Next actions
+
+1. Keep #244 open. Recheck the normal Vercel release gate and do not deploy while build-rate-limit is reported.
+2. Refresh PR #872 against live main; require final exact-head checks. Allow only the existing scheduled updater to attempt Proxies alias resolution. Trust the poster only after a unique TMDB ID is stored.
+3. Visually verify the production cards when an authorized browser-accessible route is available without expanding access. Do not claim this acceptance is complete until then.

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T03:29:12Z",
-  "status": "pr_created",
+  "updated_at": "2026-11-16T04:02:30Z",
+  "status": "deployment_pending",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
   "branch": "docs/live-checkpoint-20261116-0248",
-  "head_sha": "d88d523556cee295c41cd342f970deca97ddd5d5",
+  "head_sha": "23f48d7f67e59e618a27b0a3b593f806acdbe341",
   "pull_request": 872,
   "work_items": [
     {
@@ -796,19 +796,19 @@
     {
       "id": "P0-244-PROXIES-ALIAS-20261116",
       "title": "Use Netflix's verified Spanish film title as a strict TMDB poster-search alias",
-      "status": "pr_created",
+      "status": "ci_passed",
       "issue": 244,
       "pull_request": {
         "number": 872,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/872",
         "branch": "docs/live-checkpoint-20261116-0248",
-        "head_sha": "d88d523556cee295c41cd342f970deca97ddd5d5"
+        "head_sha": "23f48d7f67e59e618a27b0a3b593f806acdbe341"
       },
       "acceptance": "The resolver prefers the source-reviewed alias `En nombre de otro` over literal original_title `Proxies` for the TMDB search, but saves an ID/poster only for one exact normalized title with release year 2026. A mocked regression includes a same-year `Proxies` decoy and asserts the wrong candidate is not selected. Production ID/poster remains unassigned until the existing official API updater yields the unique match.",
       "evidence": [
         "https://about.netflix.com/es_es/news/oriol-paulo-returns-to-netflix-with-proxies-premiering-on-11-december"
       ],
-      "ci": "Code and regression added to existing PR #872; exact-head workflows pending on the new source."
+      "ci": "Exact PR head 23f48d7f67e59e618a27b0a3b593f806acdbe341 passed all eight required GitHub Actions: Validate frontend 43798855957, visual QA 43798855956, Autonomous quality gate 43798855949, Full Python 43798855947, completeness 43798855883, smoke 43798855881, reproducible backend 43798855820, and mobile layout 43798855819. Vercel backend status remains failure build-rate-limit; production release pending."
     }
   ],
   "verification": [
@@ -1237,6 +1237,10 @@
     {
       "check": "Live #244 production and resolver checkpoint 2026-11-16 03:29 UTC",
       "result": "Main 8229b678: streaming JSON 463 rows/462 posters (Proxies unresolved). Canonical Vercel public JSON independently fetched HTTP 200: 457 rows/457 posters, generated 2026-11-15T08:42:39.808Z; it contains none of the six main-only announcements. Netflix official Spanish newsroom identifies the Proxies project as En nombre de otro and confirms 2026-12-11; no TMDB identity was assigned. PR #872 adds alias-first search and an exact-title/year mocked decoy regression. Vercel CI on main reports build-rate-limit; current READY origin remains stale. No user records/backups changed."
+    },
+    {
+      "check": "Live exact-head and production refresh 2026-11-16 04:02 UTC",
+      "result": "Main remains 8229b678b9c0730a5d412305fd4138a3d844d2e4. Issue #593 closed. Exact PR #872 head 23f48d7f67e59e618a27b0a3b593f806acdbe341 has all eight GitHub Actions successful, including the Python regression suite. Canonical Vercel streaming JSON HTTP 200 is 457 rows/457 posters (0 poster gaps), generated 2026-11-15; it still lacks the six main-only announcements. Main streaming JSON is 463/462 (Proxies unresolved). Canonical boxoffice JSON is 1,908/1,908 postered. Vercel main frontend/backend statuses remain build-rate-limit failures; existing READY deployment is f7c964a. Neon P1001 was not retried."
     }
   ],
   "deployment": {
@@ -1248,14 +1252,15 @@
     "public_streaming_missing_posters": 0,
     "main_streaming_rows": 463,
     "main_streaming_missing_posters": 1,
-    "note": "Canonical JSON is older than main; docs-only PR check does not publish generated data. No manual deploy attempted."
+    "note": "Public JSON was re-fetched HTTP 200: 457 rows/457 posters. Main is 463 rows/462 posters. Both main Vercel status checks fail with build-rate-limit; no PR deployment is available and the existing READY deployment remains on f7c964a. No manual deployment attempted."
   },
   "blockers": [
-    "Vercel production deploys for the current release path are failing with the provider status target containing upgradeToPro=build-rate-limit; keep Hobby, do not manually deploy or retry.",
-    "The latest official update-movies run 43793292311 committed the JSON snapshot, then one final Neon direct sync failed with Prisma P1001; do not repeat the DB call until endpoint availability changes.",
-    "Proxies still lacks a verified TMDB identity/poster in main; the official Netflix Spanish title is now a reviewed search alias only, and official TMDB API resolution must come from the existing secret-backed updater."
+    "Vercel status on main and PR #872 is failing with provider target upgradeToPro=build-rate-limit. The current production deployment is still READY on f7c964a but serves stale streaming JSON. Do not manually deploy, upgrade, or retry around the limit.",
+    "The latest official update-movies run 43793292311 committed the validated JSON snapshot, then its one final Neon direct sync failed with Prisma P1001. No repeat attempt until endpoint state changes.",
+    "Proxies has no TMDB ID/poster yet. Netflix's official Spanish title is a reviewed query alias only; identity can be assigned only by a unique exact-title/year result from the existing official TMDB API workflow.",
+    "GitHub branch-protection endpoint returned 403 Resource not accessible by integration, so whether the Vercel status is a required merge gate cannot be confirmed through the connected GitHub integration."
   ],
-  "next_action": "Let required exact-head Actions finish on PR #872's alias regression, then use only the next scheduled update-movies run (cron 18:17 UTC) to resolve Proxies through official TMDB results; after a source-proof-valid normal release, verify production JSON and rendered calendar cards. No manual dispatch, Neon retry, or Vercel deployment.",
+  "next_action": "Keep PR #872 open while the Vercel build-rate-limit status remains failing; do not bypass or merge around it. Recheck provider status and canonical production JSON on the next run. If the normal release gate clears, merge only through the protected standard path, then let the next scheduled update-movies run resolve the reviewed alias via TMDB and verify production JSON plus rendered calendar cards. Meanwhile continue the official-source permissions audit without scraping or guessed identities.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -1344,7 +1349,8 @@
       },
       "next": "add official Spanish alias as resolver query only after exact regression; query TMDB official on next existing scheduled run; prove public production sync and card rendering before closing #244"
     },
-    "2026-11-16T03:29:12Z: Live production JSON re-fetched: 457 rows, 457 posters, 0 current gaps; main is 463/462 with only Proxies unresolved and six main-only official announcements. Added a strict Netflix Spanish-title search alias and a mock decoy regression to existing PR #872. No TMDB ID/poster guessed. Main Vercel deployment status reports build-rate-limit; Neon P1001 was not retried. #593 remains closed; #244 stays open until new records reach production and cards are verified."
+    "2026-11-16T03:29:12Z: Live production JSON re-fetched: 457 rows, 457 posters, 0 current gaps; main is 463/462 with only Proxies unresolved and six main-only official announcements. Added a strict Netflix Spanish-title search alias and a mock decoy regression to existing PR #872. No TMDB ID/poster guessed. Main Vercel deployment status reports build-rate-limit; Neon P1001 was not retried. #593 remains closed; #244 stays open until new records reach production and cards are verified.",
+    "2026-11-16T04:02:30Z: Exact PR #872 head 23f48d7 passed all eight required GitHub Actions, including the Proxies alias regression. Live production was re-fetched: boxoffice 1,908/1,908 postered; streaming 457/457 postered, generated 2026-11-15, still missing all six main-only announcements. Main streaming remains 463/462. Vercel main frontend/backend checks remain build-rate-limit failures; canonical existing deployment READY on f7c964a. Branch-protection endpoint inaccessible (403), so no merge/bypass; Neon P1001 not retried. #593 stays closed, #244 open."
   ],
   "progress_metrics": {
     "total_tasks": 32,
@@ -5084,5 +5090,67 @@
       "production_deployment": "older READY deployment; production JSON stale; no manual deployment"
     },
     "next_action": "Wait for exact-head required Actions on PR #872; then let the next scheduled updater (18:17 UTC daily) query the official alias. Only accept one exact TMDB title+2026 result; verify public JSON/card after normal production release."
+  },
+  "latest_live_checkpoint_20261116_0402": {
+    "checked_at": "2026-11-16T04:02:30Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issues": {
+      "593": "closed",
+      "open": [
+        239,
+        242,
+        243,
+        244,
+        585,
+        683
+      ]
+    },
+    "open_prs": [
+      872
+    ],
+    "exact_head": {
+      "pr": 872,
+      "ci_head": "23f48d7f67e59e618a27b0a3b593f806acdbe341",
+      "github_actions": "8/8 success",
+      "vercel_backend_status": "failure build-rate-limit"
+    },
+    "boxoffice_production": {
+      "http": 200,
+      "rows": 1908,
+      "with_posters": 1908,
+      "missing": 0,
+      "generated_at": "2026-09-27"
+    },
+    "streaming": {
+      "main": {
+        "rows": 463,
+        "with_posters": 462,
+        "missing": 1,
+        "title": "Proxies",
+        "tmdb_id": null,
+        "generated_at": "2026-11-16T02:37:34.045085+00:00"
+      },
+      "production": {
+        "http": 200,
+        "rows": 457,
+        "with_posters": 457,
+        "missing": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z"
+      },
+      "main_only_rows": 6
+    },
+    "production_deployment": {
+      "id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+      "state": "READY",
+      "sha": "f7c964a72b605693bc08bc24c4f855bc9463e566"
+    },
+    "update_movies": {
+      "latest_run": 43793292311,
+      "status": "failed after JSON snapshot commit at final Neon P1001; no retry"
+    },
+    "merge_gate": "Vercel check is failing; GitHub branch-protection endpoint returned 403, so requiredness cannot be verified. No blind merge.",
+    "validated_code_sha": "d88d523556cee295c41cd342f970deca97ddd5d5",
+    "ci_tested_pr_head": "23f48d7f67e59e618a27b0a3b593f806acdbe341",
+    "next_action": "Keep #872 open while provider build-rate-limit check fails; recheck next run; after normal release gate clears, use the standard merge and scheduled official updater, then verify production JSON/cards."
   }
 }

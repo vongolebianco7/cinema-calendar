@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T07:08:06Z",
+  "updated_at": "2026-11-16T00:16:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
-  "branch": "docs/refresh-p593-production-proof-20261112",
-  "head_sha": "a3b0ae15a0d8071b339f7e73bdc69a9cd180ded5",
-  "pull_request": 807,
+  "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
+  "branch": "data/netflix-in-waves-premiere-20261116",
+  "head_sha": "953453a972c07e41c38e57553f951ac2ffbd8fae",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -719,7 +719,7 @@
     {
       "id": "P0-593-SCHEDULED-RECOVERY-20261112",
       "title": "Resume the existing official poster backfill without duplicate dispatch",
-      "status": "in_progress",
+      "status": "production_verified",
       "issue": 593,
       "acceptance": "The next scheduled update reuses pending candidates through the existing official workflow, publishes only identity-verified unique films, preserves user records, and its JSON/Neon result is checked against production.",
       "pull_request": {
@@ -730,16 +730,25 @@
       },
       "ci": "All four required exact-head workflows passed on source head a3b0ae15: Autonomous 43171876316, smoke 43171876253, frontend 43171876288, backend 43171876270. Additional scorecard, visual, mobile and poster acceptance contract passed.",
       "latest_production_measurement": {
-        "rows": 1647,
-        "posters": 1405,
-        "missing": 242,
-        "missing_rate_percent": 14.69,
-        "grouped_excluded": 113,
-        "recently_checked_singles": 78,
-        "unqueried_candidates": 51,
-        "additional_production_recoveries_this_run": 0
+        "rows": 1808,
+        "poster_rows": 1808,
+        "missing_poster_rows": 0,
+        "checked_at": "2026-11-16T00:14:29Z",
+        "production_sha": "93bff91f15268d1888af61aa38c209cb32b7650f"
       },
-      "next_action": "Merge the verified proof-refresh PR after final-head CI succeeds, then validate the next scheduled updater and main-push production browser artifact."
+      "next_action": "Keep zero-poster-missing production data under the reopening guard; resume #593 first if count rises above zero or issue reopens."
+    },
+    {
+      "id": "P0-244-NETFLIX-IN-WAVES-20261116",
+      "title": "Register official Netflix In Waves premiere and resolve identity through the existing TMDB path",
+      "status": "in_progress",
+      "issue": 244,
+      "acceptance": "Netflix official source confirms the 2026-12-11 global release excluding France. Import the film through the reviewed-announcement path; assign TMDB identity/poster only if the existing official resolver finds exactly one matching 2026 movie with a poster. Verify production JSON and calendar page after the scheduled update/deploy.",
+      "evidence": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond",
+      "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
+      "data_commit_sha": "953453a972c07e41c38e57553f951ac2ffbd8fae",
+      "tmdb_resolution": "pending existing secret-backed official workflow",
+      "next_action": "Create PR, wait for exact-head checks, then verify post-merge update-movies run and production JSON/rendering."
     }
   ],
   "verification": [
@@ -1116,7 +1125,7 @@
     "PR #805 fixed the Neon pooler/direct-host mismatch; the next scheduled update must prove Neon sync succeeds.",
     "Vercel Hobby usage meter is not available through the connected tools. Latest main-only deployments were canceled by Ignored Build Step; previous READY production remains."
   ],
-  "next_action": "Verify all exact-head checks on the updated PR #807 head, safely merge it, and let the existing 2026-11-12 18:17 UTC update-movies schedule run once. Compare the updated data snapshot and Neon result, then fetch public JSON and the main-push Chromium/WebKit acceptance artifact.",
+  "next_action": "Validate the new official Netflix In Waves entry, open one reviewable PR, require exact-head CI, and verify the scheduled official TMDB enrichment plus production streaming JSON and calendar rendering. Keep the row unresolved if TMDB cannot prove a unique 2026 movie identity with a poster.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -3644,5 +3653,49 @@
     },
     "next_schedule_utc": "2026-11-12T18:17:00Z",
     "next_action": "After final-head CI is green, merge PR #807; allow one scheduled update-movies run, then verify JSON recovery, Neon sync and production browser metrics."
+  },
+  "latest_live_state_20261116": {
+    "checked_at": "2026-11-16T00:14:29Z",
+    "main_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
+    "open_prs": 0,
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      683
+    ],
+    "issue_593": {
+      "state": "closed",
+      "state_reason": "completed"
+    },
+    "production": {
+      "deployment": "READY",
+      "sha": "93bff91f15268d1888af61aa38c209cb32b7650f"
+    },
+    "boxoffice": {
+      "http_status": 200,
+      "generated_at": "2026-09-27",
+      "rows": 1808,
+      "poster_rows": 1808,
+      "missing_poster_rows": 0
+    },
+    "streaming": {
+      "http_status": 200,
+      "generated_at": "2026-11-15T08:42:39.808Z",
+      "rows": 457,
+      "in_waves_present": false
+    },
+    "backend_sync": {
+      "run_id": 43773321430,
+      "conclusion": "failure",
+      "reason": "Neon P1001; direct connection unavailable; no retry"
+    },
+    "issue_244": {
+      "state": "open",
+      "active_streaming_premiere_discovery_services": 0,
+      "approved_rss_atom_feeds": 0
+    }
   }
 }

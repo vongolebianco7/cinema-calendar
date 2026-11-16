@@ -338,3 +338,10 @@ Keep #872 open. Continue reviewing official-provider source pages for a permitte
 - Official source check: Netflix newsroom supplies individual announcement pages, not a verified public catalog feed; Prime Video mRSS is for partner content delivery into Prime Video and its APIs are managed-partner-only; U-NEXT help documents its customer-facing catalog and does not grant ingestion API/feed access. Approved public feeds remain 0. Sources: https://videocentral.amazon.com/support/mrss-delivery?language=en_US ; https://videocentral.amazon.com/support/prime-video-apis?language=en_US ; https://help.unext.jp/guide/detail/content-being-delivered-of-vod ; https://developer.apple.com/jp/documentation/appletvfeed
 - Updater run `43793292311` committed validated JSON, then failed once at the final Neon sync with Prisma P1001; no retry. Viewing history, ratings, reviews, bookmarks and backups were not modified.
 - Next: finish the targeted Validate retry. Keep #872 open while the Vercel rate limit is active. After normal release access resumes, follow the standard release and scheduled updater path, then verify new IDs/posters in public JSON and actual calendar cards. Keep #244 open until production data and rendered-card acceptance pass.
+
+
+## Checkpoint validation correction — 2026-11-16 04:20 UTC
+
+- The documentation refresh initially marked the PR work item `ci_pending`, which the repository's durable-state validator does not permit. Exact-head Python test `test_checkpoint_is_valid` correctly failed on that schema mismatch.
+- Corrected the item to allowed status `in_progress` in the following checkpoint commit. Re-run the exact-head suite and confirm `test_checkpoint_is_valid` passes before considering the receipt current.
+- No application or user data changed. Vercel remains blocked by the documented daily deployment limit; do not deploy/merge around it.

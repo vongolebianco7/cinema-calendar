@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T00:40:54Z",
+  "updated_at": "2026-11-16T00:55:30Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
   "branch": "data/netflix-in-waves-premiere-20261116",
-  "head_sha": "2bb3efb0dcec67e314b416833835e73ba636b4dc",
+  "head_sha": "e6e3a0d8b088eea46e811660598ac319090375f7",
   "pull_request": 867,
   "work_items": [
     {
@@ -740,14 +740,15 @@
     },
     {
       "id": "P0-244-NETFLIX-IN-WAVES-20261116",
-      "title": "Register four officially announced Netflix films for December 2026",
+      "title": "Register five officially announced Netflix November–December 2026 film premieres",
       "status": "pr_created",
       "issue": 244,
-      "acceptance": "Official sources support four absent Netflix 2026 film premieres. Strict existing resolver only attaches a unique same-year TMDB movie with poster. Exact-head CI passed on 2bb3efb; this checkpoint doc commit advances branch and needs fresh exact-head CI. Verify public JSON and calendar after the normal updater.",
+      "acceptance": "Netflix official sources confirm five absent films: Steps (2026-11-20), In Waves (2026-12-11, global excluding France), Ray Gunn (2026-12-18), Proxies (2026-12-11), and Secrets (2026-12-03). No TMDB identity or poster is guessed; the existing official resolver attaches only one unique same-year movie with a poster. Public JSON before merge remains 457 rows with all five absent; verify post-import identities and calendar rendering.",
       "evidence": [
         "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond",
         "https://about.netflix.com/en/news/proxies-is-coming-to-netflix-on-december-11",
-        "https://about.netflix.com/en/news/netflix-unveils-teaser-for-secrets-ravi-bharwanis-first-film-in-eight-years-premiering-december-3"
+        "https://about.netflix.com/en/news/netflix-unveils-teaser-for-secrets-ravi-bharwanis-first-film-in-eight-years-premiering-december-3",
+        "https://github.com/vongolebianco7/cinema-calendar/pull/867"
       ],
       "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
       "data_commit_sha": "1097ee98417c24955dca9ac26c8b5bddb250f604",
@@ -757,14 +758,15 @@
         "number": 867,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/867",
         "branch": "data/netflix-in-waves-premiere-20261116",
-        "head_sha": "1097ee98417c24955dca9ac26c8b5bddb250f604"
+        "head_sha": "e6e3a0d8b088eea46e811660598ac319090375f7"
       },
       "pr": {
         "number": 867,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/867",
         "branch": "data/netflix-in-waves-premiere-20261116",
         "head_sha": "2bb3efb0dcec67e314b416833835e73ba636b4dc"
-      }
+      },
+      "ci": "Exact-head SHA e6e3a0d: all seven required Actions passed. Validate frontend passed on attempt 2 after the first run's provider-list offline-status wait timed out at 15 seconds; no code change was made for that transient result. This checkpoint adds Steps and advances the branch, so all seven exact-head checks must run again."
     }
   ],
   "verification": [
@@ -1141,7 +1143,7 @@
     "Vercel Hobby usage meter is unavailable through connected tools; do not manually deploy or change plans.",
     "Previous updater's direct Neon sync failed P1001; JSON snapshot was committed, and Neon must not be retried without an independent recovery."
   ],
-  "next_action": "Fetch the live PR #867 head after this checkpoint commit. Recheck every required exact-head workflow. If green and no blocking review, merge safely; then verify one normal update-movies run, public streaming rows, unique TMDB posters, Vercel READY and calendar rendering. Do not retry the prior Neon P1001.",
+  "next_action": "This checkpoint adds the fifth reviewed Netflix title, Steps. Fetch the new live PR head and require all seven exact-head Actions to pass. If green and there is no blocking review, merge PR #867 safely; then verify the single normal update-movies run, the five public streaming records and only uniquely resolved TMDB posters, READY production, and calendar rendering. Do not manually dispatch or retry Neon P1001.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -1194,7 +1196,8 @@
       "main_sha": "8bde86dc8ab7dd0f64de0e4206f9e14476d6b5b0",
       "pr": 779,
       "summary": "Durable poster metadata fix merged; CI 8/8 green. 457 streaming rows, 28 posterless in merged dataset. Public production remains at 391da7d; quota block."
-    }
+    },
+    "2026-11-16T00:55:30Z: Validate frontend targeted failed-job rerun passed on exact head e6e3a0d; all seven required Actions are green. Its first attempt timed out at the provider-list offline-status wait (15s), and passed on attempt 2 without code change. Added the fifth official Netflix title Steps (2026-11-20) from Netflix's animation slate; no TMDB ID/poster guessed. Scheduled updater #43771219437 completed data stage but final Neon direct sync failed P1001; no retry/manual dispatch. This checkpoint advances the branch and requires fresh exact-head CI."
   ],
   "progress_metrics": {
     "total_tasks": 32,
@@ -3671,7 +3674,7 @@
     "next_action": "After final-head CI is green, merge PR #807; allow one scheduled update-movies run, then verify JSON recovery, Neon sync and production browser metrics."
   },
   "latest_live_state_20261116": {
-    "checked_at": "2026-11-16T00:40:54Z",
+    "checked_at": "2026-11-16T00:55:30Z",
     "main_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
     "open_prs": [
       867
@@ -3715,25 +3718,40 @@
       "approved_rss_atom_feeds": 0
     },
     "prior_backend_sync": {
-      "run_id": 43773321430,
+      "run_id": 43771219437,
       "conclusion": "failure",
-      "reason": "Neon P1001 on final direct sync; snapshot still committed; no retry"
+      "reason": "JSON/data processing completed; final Neon direct sync failed P1001 at ep-snowy-wave-b4gwato2.c-6.us-east-2.aws.neon.tech:5432. No retry."
     },
     "pr_867": {
-      "last_fully_checked_source_head": "2bb3efb0dcec67e314b416833835e73ba636b4dc",
-      "all_seven_actions": "success",
-      "checkpoint_doc_commit_requires_new_head_recheck": true
+      "previous_head_sha": "e6e3a0d8b088eea46e811660598ac319090375f7",
+      "previous_exact_head_actions": "7/7 success; Validate frontend succeeded on run 43781899342 attempt 2",
+      "first_validate_issue": "Attempt 1 timed out waiting for provider-list offline status in tests/cinelva-provider-list-browser.cjs:41 after 15s; same job passed on attempt 2",
+      "new_candidate": "Steps",
+      "new_candidate_date": "2026-11-20",
+      "new_candidate_source": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond",
+      "candidates_total": 5,
+      "new_commit_requires_exact_head_ci": true
     }
   },
   "latest_streaming_in_waves_20261116": {
-    "candidate_count": 4,
+    "checked_at": "2026-11-16T00:55:30Z",
+    "candidate_count": 5,
     "candidates": [
+      {
+        "title": "Steps",
+        "service": "Netflix",
+        "date": "2026-11-20",
+        "original_title": "Steps",
+        "release_year": 2026,
+        "official_source": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond"
+      },
       {
         "title": "In Waves",
         "service": "Netflix",
         "date": "2026-12-11",
         "original_title": "In Waves",
         "release_year": 2026,
+        "territory_note": "Global excluding France",
         "official_source": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond"
       },
       {
@@ -3761,17 +3779,23 @@
         "official_source": "https://about.netflix.com/en/news/netflix-unveils-teaser-for-secrets-ravi-bharwanis-first-film-in-eight-years-premiering-december-3"
       }
     ],
-    "tmdb_resolution": "pending existing secret-backed official workflow",
-    "exact_ci_passed_source_sha": "2bb3efb0dcec67e314b416833835e73ba636b4dc",
-    "exact_ci_runs": {
-      "autonomous_quality_gate": 43780906056,
-      "mobile_layout": 43780905893,
-      "smoke": 43780905885,
-      "reproducible_backend_build": 43780905910,
-      "completeness_scorecard": 43780905888,
-      "visual_qa": 43780905940,
-      "validate_frontend": 43780905939
+    "tmdb_resolution": "pending normal secret-backed official import after merge; no IDs/posters guessed",
+    "production_before": {
+      "http_status": 200,
+      "rows": 457,
+      "all_five_titles_absent": true
     },
-    "exact_ci_result": "all seven passed; branch checkpoint docs then advanced; recheck live new head"
+    "exact_ci_before_new_commit": {
+      "sha": "e6e3a0d8b088eea46e811660598ac319090375f7",
+      "required_actions": "7/7 success",
+      "validate_frontend_attempt": 2
+    },
+    "scheduled_update_run": {
+      "id": 43771219437,
+      "conclusion": "failure",
+      "failure_stage": "final Neon sync P1001 after data snapshot stage",
+      "retry": "none"
+    },
+    "next_action": "Run all required exact-head workflows on the new commit; merge only if green. Then verify the normal updater and production records/rendering."
   }
 }

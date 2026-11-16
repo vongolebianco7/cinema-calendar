@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T09:23:23Z",
+  "updated_at": "2026-11-16T10:50:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "1717965d5e6a000e1a97948e64237c6366076764",
-  "branch": "docs/live-checkpoint-20261116-0248",
-  "head_sha": "96a31be3a7646f3f6d1d137b44a8f8636fded89f",
-  "pull_request": 872,
+  "base_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
+  "branch": "fix/recheck-curated-fuzzy-streaming-id-20261116",
+  "head_sha": "c909bbce2759df78a59ae53b4a02deeefc0d849c",
+  "pull_request": 874,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -824,6 +824,22 @@
         "head_sha": "ca277758491a5ea28f1fcfd2132fd57e1c1aed7d"
       },
       "ci": "Exact head ca277758491a5ea28f1fcfd2132fd57e1c1aed7d has 9/9 Actions success; Vercel backend failed build-rate-limit. Not deployed."
+    },
+    {
+      "id": "P0-244-PROXIES-IDENTITY-RECHECK-20261116",
+      "title": "Recheck curated fuzzy-poster rows for strict TMDB identity",
+      "status": "in_progress",
+      "issue": 244,
+      "pull_request": {
+        "number": 874,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/874",
+        "branch": "fix/recheck-curated-fuzzy-streaming-id-20261116",
+        "head_sha": "c909bbce2759df78a59ae53b4a02deeefc0d849c"
+      },
+      "acceptance": "For the explicitly reviewed Proxies / En nombre de otro alias, revisit only an existing fuzzy_search_fallback row with no saved identity; replace the fallback poster and assign an ID only for one exact title plus 2026 TMDB result. Ambiguous, wrong-year, failed, or unavailable lookups must preserve the existing row.",
+      "implementation": "scripts/enrich_streaming_posters.py and tests/test_streaming_poster_enrichment.py; no public dataset or user storage mutation.",
+      "verification": "Three deterministic regression cases added. Exact-head GitHub Actions pending. Current official updater already ran successfully but skips populated posters; normal scheduled run after safe release is required for data acceptance.",
+      "blocker": "Main Vercel publication attempt for 66b04cc failed its production source-proof gate (receipt source aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea; current digest 3965f6aa23fead1d7faae1ac6bd4d65989e86d9c9fa7f46d6780466a66c27656 vs verified digest 616cfe9735e0af4a2ebcfdb994bb39f14b7be06d8ef9eda1fc2219fd6288b028). Separate PR #873 Vercel backend is rate-limited for 24h. No bypass or manual deploy."
     }
   ],
   "verification": [
@@ -1276,6 +1292,14 @@
     {
       "check": "Live P0/data/source audit 2026-11-16T09:23:23Z",
       "result": "Main 1717965d5e6a000e1a97948e64237c6366076764; #593 closed and public boxoffice 1,808/1,808 by-year plus 100/100 all-time postered. Production streaming 457/457 -> 463/463 with six official announcements, no removals; refresh run 43828393897 succeeded. Five new IDs verified; Proxies image is fuzzy fallback with no ID. U-NEXT official November titles reviewed; Ballerina ID541671 present, Trenque Lauquen part IDs absent. Production dpl_3zN7iLYSBC59aFCsksxSk1keKmDM READY on main. Public JSON and HTML fetch HTTP 200. Chrome direct navigation reached Vercel login, so visual acceptance is not verified. PR872 exact source passed 8/8 Actions/backend; PR873 9/9 Actions but backend build-rate-limit. No user data, Neon retry, dispatch, or manual deployment."
+    },
+    {
+      "check": "Live P0/data/source audit 2026-11-16T10:45Z",
+      "result": "Main 66b04cc44140346e5865c5fdd4679bacf42aaac7. Issue #593 closed; canonical production boxoffice JSON HTTP 200 has 1,808/1,808 by-year and 100/100 all-time poster rows. Canonical production streaming JSON HTTP 200 has 463/463 posters (generated 2026-11-16T08:05:29.780681+00:00); Proxies retains a fuzzy_search_fallback poster but no TMDB identity. Official source registry still contains zero confirmed feeds; all 12 premiere-discovery flags remain disabled. No user history/rating/review/bookmark/backup changes."
+    },
+    {
+      "check": "PR #874 implementation 2026-11-16T10:50Z",
+      "result": "Branch fix/recheck-curated-fuzzy-streaming-id-20261116, source/test head c909bbce2759df78a59ae53b4a02deeefc0d849c. Exact unique-title/year match updates only the curated fuzzy row; ambiguous/wrong-year/failure keeps the original fallback and leaves ID absent. Three regression tests added. PR #874 open; exact-head CI pending."
     }
   ],
   "deployment": {
@@ -1309,9 +1333,10 @@
     "Proxies has an official Netflix announcement and poster URL but no verified TMDB movie ID; current poster_match_status is fuzzy_search_fallback. PR #872 adds alias-first exact-title/year/unique-result matching; final exact-head CI is required after this checkpoint.",
     "PR #873 source-link UI is not in production. Its nine GitHub Actions passed, but Vercel backend status is build-rate-limit. Do not deploy or bypass the Hobby limit.",
     "Direct Chrome navigation to the deployment-specific production URL reaches Vercel login; actual rendered-card visual acceptance could not be completed. Authenticated Vercel fetch confirmed HTTP 200 HTML and JSON only.",
-    "The earlier update-movies run 43793292311 had one final Neon Prisma P1001 failure. Do not retry without a changed endpoint state."
+    "The earlier update-movies run 43793292311 had one final Neon Prisma P1001 failure. Do not retry without a changed endpoint state.",
+    "PR #874 exact-head CI is pending. Existing release gate blocks publication: latest main Vercel build reports source-proof digest mismatch; PR #873 separately reports 24-hour deployment rate limit. Never bypass."
   ],
-  "next_action": "Keep #244 open. Recheck Vercel status; do not deploy while build-rate-limit is reported. Refresh PR #872 against current main and rerun final exact-head checks once the normal release gate permits. Then let only the existing scheduled updater resolve Proxies by the official alias; require a unique TMDB ID before trusting its poster. Verify actual rendered cards when a browser-accessible production route is available without a new access grant. Never manual-dispatch update-movies or retry Neon P1001.",
+  "next_action": "Inspect exact-head Actions for PR #874. If CI passes, do not merge/deploy while the production proof mismatch and Vercel rate limit remain. Diagnose and repair the exact-source proof only through the normal required-check path, then let the existing scheduled updater run once and verify Proxies receives a unique official TMDB ID/poster with the fuzzy marker cleared. Keep #244 open until public UI acceptance; #593 remains closed while public boxoffice has zero missing posters.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -1429,7 +1454,12 @@
     "cloud_browser": "not used",
     "github": "available",
     "vercel_scope": "existing canonical release verification authorized by all remaining tasks request",
-    "note": "Neon connected and read-only diagnosis performed; no paid changes. Local compiled backend smoke passed5 APIs; Python162/162; focused review no blockers."
+    "note": "Neon connected and read-only diagnosis performed; no paid changes. Local compiled backend smoke passed5 APIs; Python162/162; focused review no blockers.",
+    "latest_main_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
+    "open_prs": [
+      873,
+      874
+    ]
   },
   "calendar_regression_repair": {
     "scope": "13 reported calendar and cross-screen acceptance tasks; verified main/source fixes only, not global product completeness or a Vercel release.",
@@ -5750,5 +5780,72 @@
       "result": "one final Prisma P1001; not retried"
     },
     "safety": "No viewing history/rating/review/bookmark/backup changes; no manual dispatch, deployment, quota bypass or paid action."
+  },
+  "latest_live_checkpoint_20261116_1050": {
+    "observed_at": "2026-11-16T10:50:00Z",
+    "main_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed/completed"
+    },
+    "open_prs": [
+      {
+        "number": 873,
+        "head_sha": "ca277758491a5ea28f1fcfd2132fd57e1c1aed7d",
+        "status": "9 Actions success; Vercel backend build rate limit; mergeable dirty"
+      },
+      {
+        "number": 874,
+        "head_sha": "c909bbce2759df78a59ae53b4a02deeefc0d849c",
+        "status": "opened; exact-head Actions pending"
+      }
+    ],
+    "public_data": {
+      "boxoffice": {
+        "http": 200,
+        "by_year_rows": 1808,
+        "posterless": 0,
+        "all_time_rows": 100,
+        "all_time_posterless": 0,
+        "generated_at": "2026-09-27"
+      },
+      "streaming": {
+        "http": 200,
+        "rows": 463,
+        "poster_rows": 463,
+        "posterless": 0,
+        "generated_at": "2026-11-16T08:05:29.780681+00:00"
+      },
+      "proxies": {
+        "poster": "present; fuzzy_search_fallback",
+        "tmdb_identity": "missing",
+        "official_announcement_title": "Proxies / En nombre de otro",
+        "official_release_date": "2026-12-11",
+        "release_year": 2026
+      }
+    },
+    "production": {
+      "canonical_ready_deployment_sha": "1717965d5e6a000e1a97948e64237c6366076764",
+      "latest_main_attempt_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
+      "latest_main_attempt": "ERROR: production release source digest mismatch; see Vercel build log",
+      "pr873_vercel": "deployment rate limited for 24 hours; do not retry/bypass"
+    },
+    "sources": {
+      "confirmed_rss_atom_feeds": 0,
+      "premiere_discovery_enabled_services": 0,
+      "total_services": 12
+    },
+    "code_change": {
+      "branch": "fix/recheck-curated-fuzzy-streaming-id-20261116",
+      "implementation_sha": "c909bbce2759df78a59ae53b4a02deeefc0d849c",
+      "pr": 874,
+      "changes": [
+        "scripts/enrich_streaming_posters.py",
+        "tests/test_streaming_poster_enrichment.py"
+      ],
+      "focus": "strictly recheck only curated fuzzy fallback identity"
+    },
+    "safety": "No scraping, paid actions, manual dispatch, Neon retry, manual deploy, or user-storage edits."
   }
 }

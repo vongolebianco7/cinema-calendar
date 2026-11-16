@@ -113,7 +113,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         existing_tmdb_url = movie.get("tmdb")
         has_tmdb_url_identity = bool(
             isinstance(existing_tmdb_url, str) and
-            re.fullmatch(r"https://www\\.themoviedb\\.org/movie/([1-9][0-9]*)/?", existing_tmdb_url)
+            re.fullmatch(r"https://www\.themoviedb\.org/movie/([1-9][0-9]*)/?", existing_tmdb_url)
         )
         has_tmdb_id = any(movie.get(field) is not None for field in ("tmdb_id", "tmdbId", "id"))
         needs_identity_recheck = (

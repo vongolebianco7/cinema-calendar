@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "85e0376894c58f684b6404300e93ae753e3b9e98",
-  "verified_at": "2026-11-15T13:49:23.000Z",
-  "note": "Exact-source CI receipt for executable source head 85e0376894c58f684b6404300e93ae753e3b9e98, tested on PR #864. Required workflows passed on this exact head: Autonomous quality gate run 43720389518; CINELVA smoke tests run 43720389538; Validate frontend run 43720389527; Reproducible backend build run 43720389506. Mobile Chromium/WebKit regression journeys, iPhone-size smoke, and continuous visual QA passed. This receipt records CI validation only. The production JSON still has 41 unresolved fuzzy/group fallback rows; no production data change is included."
+  "head_sha": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86",
+  "verified_at": "2026-11-16T01:10:10Z",
+  "note": "Exact-source CI receipt for executable source head 7179d04dbe2f66626ffc10ebcdbaca24a161ab86 after the six source-reviewed streaming announcements in PR #867. The PR’s executable tree is identical to merged main fd48f9c347af3f9234f5c579b500a79d86ef90ea (both Git tree 79dd3c914ceafc870ffbb516a0e0a9fcfc792ced; 1,399 relevant executable entries). The production verifier logged the current source digest as a7906e3a1c1535fb598fe0130363480ec35f24a2d2db25c8dadfb7d9dd1df658; the old receipt for 85e0376894c58f684b6404300e93ae753e3b9e98 referenced digest 191d8991c24e04685ce218c8b23212b39a67753fe8c3026e87a324a66e3e0d65 and correctly blocked publication. On the exact verified head, all seven required PR workflows passed: Autonomous quality gate 43784115560; CINELVA smoke tests 43784115495; Validate frontend 43784115507; Reproducible backend build 43784115591; Cinemap completeness scorecard 43784115649; CINELVA continuous visual QA 43784115513; CINELVA mobile layout smoke test 43784115511. All 20 check runs on that SHA concluded success. This receipt records CI validation only; it does not claim production data import or release."
 }

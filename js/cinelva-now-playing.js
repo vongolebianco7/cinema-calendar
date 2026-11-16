@@ -30,15 +30,14 @@
   try{const data=await readSnapshot(),state=snapshotState(data);if(state==='unavailable')return null;return data.movies.find(m=>String(m.id)===String(identity))||null;}catch{return null;}
  }
  async function mount(section){
-  const doc=section.ownerDocument,status=section.querySelector('[data-now-status]'),grid=section.querySelector('[data-now-grid]'),controls=section.querySelector('[data-now-controls]'),search=section.querySelector('[data-now-search]'),sort=section.querySelector('[data-now-sort]'),more=section.querySelector('[data-now-more]'),observed=section.querySelector('[data-now-observed]');
+  const doc=section.ownerDocument,status=section.querySelector('[data-now-status]'),grid=section.querySelector('[data-now-grid]'),controls=section.querySelector('[data-now-controls]'),search=section.querySelector('[data-now-search]'),sort=section.querySelector('[data-now-sort]'),more=section.querySelector('[data-now-more]');
   let data,expanded=false;
   const unavailable=(message)=>{status.textContent=message;grid.replaceChildren();controls.hidden=true;more.hidden=true;};
   try{
    data=await readSnapshot();const state=snapshotState(data);
-   if(state!=='unavailable'){observed.dateTime=data.generated_at;observed.textContent='情報確認：'+new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',dateStyle:'medium',timeStyle:'short'}).format(new Date(data.generated_at))+'（日本時間）';}
-   if(state==='stale'){unavailable('上映中情報の更新が必要です。最新の上映状況は映画館の公式サイトでご確認ください。');return;}
-   if(state==='unavailable'){unavailable('上映中情報を取得できませんでした。更新後にもう一度ご確認ください。');return;}
-   if(state==='empty'){unavailable('現在、情報提供元で確認できる上映中作品はありません。');return;}
+   if(state==='stale'){unavailable('上映情報はありません');return;}
+   if(state==='unavailable'){unavailable('上映情報を取得できません');return;}
+   if(state==='empty'){unavailable('上映中の作品はありません');return;}
    controls.hidden=false;
    const render=()=>{
     const all=selectMovies(data.movies,search.value,sort.value),shown=expanded?all:all.slice(0,12);
@@ -64,7 +63,7 @@
     more.hidden=all.length<=12;more.textContent=expanded?'閉じる':'すべて表示（'+all.length+'作品）';more.setAttribute('aria-expanded',String(expanded));
    };
    search.addEventListener('input',()=>{expanded=false;render();});sort.addEventListener('change',render);more.addEventListener('click',()=>{expanded=!expanded;render();});render();
-  }catch{unavailable('上映中情報を取得できませんでした。時間をおいて再度お試しください。');}
+  }catch{unavailable('上映情報を取得できません');}
  }
  return {snapshotState,selectMovies,detailFallback,isCurrentlyPlaying,mount};
 });

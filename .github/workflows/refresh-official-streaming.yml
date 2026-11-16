@@ -6,6 +6,9 @@ on:
       - data/streaming-*-official-supplement.json
       - .github/workflows/refresh-official-streaming.yml
       - data/streaming_sources.json
+      - data/streaming-official-feeds.json
+      - data/source_registry.json
+      - scripts/discover_streaming_announcements.py
       - scripts/refresh_streaming_official.py
       - scripts/enrich_streaming_posters.py
       - scripts/import_official_streaming_snapshot.py

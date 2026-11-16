@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T00:18:30Z",
+  "updated_at": "2026-11-16T00:20:30Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
   "branch": "data/netflix-in-waves-premiere-20261116",
-  "head_sha": "447af7f8a78793110ef32be0485b346de55b2409",
+  "head_sha": "3c441eac26233f1db28f0969d7df67c7bbf9fe71",
   "pull_request": 867,
   "work_items": [
     {
@@ -740,20 +740,20 @@
     },
     {
       "id": "P0-244-NETFLIX-IN-WAVES-20261116",
-      "title": "Register official Netflix In Waves premiere and resolve identity through the existing TMDB path",
+      "title": "Register officially announced Netflix animation films In Waves and Ray Gunn",
       "status": "pr_created",
       "issue": 244,
-      "acceptance": "Netflix official source confirms the 2026-12-11 global release excluding France. Import the film through the reviewed-announcement path; assign TMDB identity/poster only if the existing official resolver finds exactly one matching 2026 movie with a poster. Verify production JSON and calendar page after the scheduled update/deploy.",
+      "acceptance": "Official Netflix slate confirms In Waves global (excluding France) on 2026-12-11 and Ray Gunn globally on 2026-12-18. Import both reviewed announcements; assign TMDB identity/poster only if the existing official resolver finds exactly one matching 2026 movie with a poster for each. Verify production JSON and calendar pages after the scheduled update.",
       "evidence": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond",
       "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
-      "data_commit_sha": "953453a972c07e41c38e57553f951ac2ffbd8fae",
+      "data_commit_sha": "3c441eac26233f1db28f0969d7df67c7bbf9fe71",
       "tmdb_resolution": "pending existing secret-backed official workflow",
-      "next_action": "Required exact-head CI, safe merge, scheduled enrichment, production acceptance.",
+      "next_action": "Required exact-head CI, safe merge, scheduled enrichment, production acceptance for both rows.",
       "pull_request": {
         "number": 867,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/867",
         "branch": "data/netflix-in-waves-premiere-20261116",
-        "head_sha": "447af7f8a78793110ef32be0485b346de55b2409"
+        "head_sha": "3c441eac26233f1db28f0969d7df67c7bbf9fe71"
       }
     }
   ],
@@ -3703,5 +3703,27 @@
       "active_streaming_premiere_discovery_services": 0,
       "approved_rss_atom_feeds": 0
     }
+  },
+  "latest_streaming_in_waves_20261116": {
+    "candidate_count": 2,
+    "candidates": [
+      {
+        "title": "In Waves",
+        "service": "Netflix",
+        "date": "2026-12-11",
+        "original_title": "In Waves",
+        "release_year": 2026,
+        "official_source": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond"
+      },
+      {
+        "title": "Ray Gunn",
+        "service": "Netflix",
+        "date": "2026-12-18",
+        "original_title": "Ray Gunn",
+        "release_year": 2026,
+        "official_source": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond"
+      }
+    ],
+    "tmdb_resolution": "pending existing secret-backed official workflow"
   }
 }

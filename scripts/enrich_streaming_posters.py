@@ -119,8 +119,6 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         needs_identity_recheck = (
             movie.get("poster_match_status") == "fuzzy_search_fallback"
             and movie.get("title") in OFFICIAL_IDENTITY_ALIASES
-            and not has_tmdb_id
-            and not has_tmdb_url_identity
         )
         if not needs_poster and not needs_runtime and not needs_identity_recheck:
             continue
@@ -149,6 +147,65 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
             reviewed_id = int(reviewed_id)
         if reviewed_id is not None and (not isinstance(reviewed_id, int) or reviewed_id <= 0):
             unresolved += 1
+            continue
+        if needs_identity_recheck and reviewed_id is not None:
+            # An upstream fuzzy search may already have stored a candidate ID.
+            # Re-verify that candidate against the officially announced alias,
+            # release year, and one exact TMDB result before replacing its art.
+            expected_year = movie.get("release_year") or movie.get("year")
+            if not api_key or not expected_year:
+                unresolved += 1
+                continue
+            alias = OFFICIAL_IDENTITY_ALIASES[movie.get("title")]
+            needle = normalize(alias)
+            params = urllib.parse.urlencode({
+                "api_key": api_key,
+                "query": alias,
+                "language": "ja-JP",
+                "region": "JP",
+                "include_adult": "false",
+                "page": 1,
+            })
+            wait = delay - (time.monotonic() - last_request)
+            if wait > 0:
+                time.sleep(wait)
+            request = urllib.request.Request(BASE + "?" + params, headers={"Accept": "application/json"})
+            try:
+                with opener(request, timeout=15) as response:
+                    result = json.load(response)
+                last_request = time.monotonic()
+            except Exception:
+                unresolved += 1
+                continue
+            exact = {}
+            for candidate in result.get("results", []):
+                release_date = candidate.get("release_date") or ""
+                if (candidate.get("id") and candidate.get("poster_path")
+                        and needle in {normalize(candidate.get("title")), normalize(candidate.get("original_title"))}
+                        and release_date.startswith(str(expected_year) + "-")):
+                    exact[int(candidate["id"])] = candidate
+            if len(exact) == 1 and next(iter(exact)) == reviewed_id:
+                identity = next(iter(exact.values()))
+                movie["poster"] = IMAGE_BASE + identity["poster_path"]
+                movie["tmdb"] = "https://www.themoviedb.org/movie/" + str(reviewed_id)
+                movie.pop("poster_match_status", None)
+                movie.pop("poster_match_query", None)
+                enriched += 1
+            elif exact:
+                ambiguous += 1
+                candidate_review.append({
+                    "query": alias,
+                    "reason": "official alias/year result conflicts with existing fuzzy identity; row preserved",
+                    "candidates": [
+                        {"id": movie_id, "title": value.get("title") or "",
+                         "original_title": value.get("original_title") or "",
+                         "release_date": value.get("release_date") or "",
+                         "tmdb_url": "https://www.themoviedb.org/movie/" + str(movie_id)}
+                        for movie_id, value in sorted(exact.items())
+                    ],
+                })
+            else:
+                unresolved += 1
             continue
         if isinstance(reviewed_id, int) and reviewed_id > 0:
             # An exact reviewed ID in the local catalog is safe to reuse

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T00:16:00Z",
-  "status": "in_progress",
+  "updated_at": "2026-11-16T00:18:30Z",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
   "branch": "data/netflix-in-waves-premiere-20261116",
-  "head_sha": "953453a972c07e41c38e57553f951ac2ffbd8fae",
-  "pull_request": null,
+  "head_sha": "447af7f8a78793110ef32be0485b346de55b2409",
+  "pull_request": 867,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -741,14 +741,20 @@
     {
       "id": "P0-244-NETFLIX-IN-WAVES-20261116",
       "title": "Register official Netflix In Waves premiere and resolve identity through the existing TMDB path",
-      "status": "in_progress",
+      "status": "pr_created",
       "issue": 244,
       "acceptance": "Netflix official source confirms the 2026-12-11 global release excluding France. Import the film through the reviewed-announcement path; assign TMDB identity/poster only if the existing official resolver finds exactly one matching 2026 movie with a poster. Verify production JSON and calendar page after the scheduled update/deploy.",
       "evidence": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond",
       "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
       "data_commit_sha": "953453a972c07e41c38e57553f951ac2ffbd8fae",
       "tmdb_resolution": "pending existing secret-backed official workflow",
-      "next_action": "Create PR, wait for exact-head checks, then verify post-merge update-movies run and production JSON/rendering."
+      "next_action": "Required exact-head CI, safe merge, scheduled enrichment, production acceptance.",
+      "pull_request": {
+        "number": 867,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/867",
+        "branch": "data/netflix-in-waves-premiere-20261116",
+        "head_sha": "447af7f8a78793110ef32be0485b346de55b2409"
+      }
     }
   ],
   "verification": [
@@ -1125,7 +1131,7 @@
     "PR #805 fixed the Neon pooler/direct-host mismatch; the next scheduled update must prove Neon sync succeeds.",
     "Vercel Hobby usage meter is not available through the connected tools. Latest main-only deployments were canceled by Ignored Build Step; previous READY production remains."
   ],
-  "next_action": "Validate the new official Netflix In Waves entry, open one reviewable PR, require exact-head CI, and verify the scheduled official TMDB enrichment plus production streaming JSON and calendar rendering. Keep the row unresolved if TMDB cannot prove a unique 2026 movie identity with a poster.",
+  "next_action": "Wait for all required checks on the final PR #867 head. If green, merge safely, then verify exactly one post-merge official update-movies run, its TMDB identity/poster result, public streaming JSON and calendar rendering. Do not retry Neon P1001.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",

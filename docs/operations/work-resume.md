@@ -445,3 +445,13 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 1. Fetch PR #874 exact-head Actions and required status checks; use the final resulting head only.
 2. Diagnose the exact-source production receipt mismatch under required checks. Do not merge or deploy while the gate fails or Vercel blocks a build.
 3. After a safe release, let the existing scheduled updater run once; verify the public row has a unique TMDB ID, canonical poster, and no fuzzy marker, then check the deployed streaming cards and image responses. Keep #244 open until production acceptance; leave #593 closed unless missing posters recur.
+
+
+## Live checkpoint — 2026-11-16 10:57 UTC
+
+- Live main is `66b04cc44140346e5865c5fdd4679bacf42aaac7`. Issues #239/#244 are open; #593 is closed and production poster acceptance remains 0 missing: public JSON HTTP 200, 1,808 yearly rows / 0 missing and 100 all-time rows / 0 missing (generated 2026-09-27).
+- Public streaming snapshot is HTTP 200, 463 rows / 0 missing posters, generated `2026-11-16T08:05:29.780681+00:00`. The Proxies candidate is dated 2026-12-11 and uses a fuzzy fallback with no verified TMDB identity. Netflix's official announcement confirms the title/date; PR #874 adds a guarded alias recheck and never overwrites the fallback on ambiguity, year mismatch, API failure, or absent key.
+- PR #874 exact head `9fd4bfd3e490a0e46fd3f17f37ba0e039350b628`: all eight observed Actions succeeded (run IDs 43852552692, 43852552757, 43852552699, 43852552526, 43852552595, 43852552729, 43852552697, 43852552779). Vercel backend remains failed with `build-rate-limit`; no merge/deploy.
+- Canonical production remains READY at SHA `1717965d5e6a000e1a97948e64237c6366076764`. Main's production-proof is stale: receipt source head `aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea`, digest `616cfe9735e0af4a2ebcfdb994bb39f14b7be06d8ef9eda1fc2219fd6288b028`; current executable source digest was reported as `3965f6aa23fead1d7faae1ac6bd4d65989e86d9c9fa7f46d6780466a66c27656`. Do not bypass or repeat deployment attempts.
+- Streaming screen rendered at the canonical URL and exposes shared MY rating/review/bookmark controls. It reports 2,833 availability-observed titles, a separate data set from the 463 premiere supplement; it must not be reported as a 463-card rendering acceptance. No visual claim is made for Proxies specifically.
+- Next: allow normal Vercel rate limit reset; then reconcile exact-source receipt against the successfully tested executable source and perform one normal release path. Keep #244 open until a live candidate identity and production card are actually verified. No user storage or backup changes.

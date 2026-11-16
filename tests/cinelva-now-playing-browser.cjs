@@ -24,7 +24,7 @@ const engine=process.env.CINELVA_BROWSER||'chromium';
    assert.match(await section.locator('[data-now-status]').innerText(),/17作品/);
    assert.equal(await section.locator('[data-now-observed]').count(),0);
    assert.equal(await section.locator('.now-playing-note,.now-playing-source').count(),0);
-   assert.equal(await section.locator('[data-now-status]').evaluate(el=>el.getClientRects().length),0,'status remains available to assistive technology without visual helper copy');
+   assert.equal(await section.locator('[data-now-status]').evaluate(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return r.width<=1&&r.height<=1&&s.position==='absolute'&&s.clip!=='auto';}),true,'status remains available to assistive technology without visual helper copy');
    await cards.first().scrollIntoViewIfNeeded();
    await page.waitForFunction(()=>document.querySelector('#nowPlaying img')?.naturalWidth>0);
    assert.equal(await section.locator('[data-now-grid]').evaluate(g=>getComputedStyle(g).gridTemplateColumns.split(' ').length),3);

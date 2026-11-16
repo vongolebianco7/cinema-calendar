@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T04:34:30Z",
+  "updated_at": "2026-11-16T04:46:00Z",
   "status": "deployment_pending",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
   "branch": "docs/live-checkpoint-20261116-0248",
-  "head_sha": "55db68fc114ce54b6d9e9c849b4dfffe3420b5fb",
+  "head_sha": "6486cff7e420bf2a25ad90cb5254558d8eb832ed",
   "pull_request": 872,
   "work_items": [
     {
@@ -808,7 +808,7 @@
       "evidence": [
         "https://about.netflix.com/es_es/news/oriol-paulo-returns-to-netflix-with-proxies-premiering-on-11-december"
       ],
-      "ci": "Exact source commit 23f48d7f67e59e618a27b0a3b593f806acdbe341 passed all eight required Actions. Final PR head 55db68fc114ce54b6d9e9c849b4dfffe3420b5fb also passed all eight after one targeted Validate frontend retry: run 43803389009 attempt 1 timed out in the unchanged offline provider-list test (line 46); attempt 2 passed. Vercel remains production-pending due Hobby api-deployments-free-per-day cap; no merge/deploy around it.",
+      "ci": "PR #872 exact head 6486cff7e420bf2a25ad90cb5254558d8eb832ed: seven of eight required workflows passed; Validate frontend reported-regression Chromium/WebKit subjob is still in progress. Production streaming page was searched for Proxies and returned 0 results; public JSON remains 457/457 postered, six official announcements absent.",
       "latest_ci": "2026-11-16T04:28:50Z targeted failed-job retry started; attempt 2 succeeded at 04:33:35Z. All 8 Actions green on exact branch head 55db68fc114ce54b6d9e9c849b4dfffe3420b5fb."
     }
   ],
@@ -5268,5 +5268,79 @@
     },
     "user_data": "Viewing records, ratings, reviews, bookmarks and backups unchanged.",
     "next": "Keep PR #872 open. Require exact-head CI on the checkpoint commit. Do not merge/deploy while Vercel rate-limit gate is failing. When normal release access is available, make one standard release, then let the existing scheduled updater run once. Confirm Proxies official TMDB identity if unique; re-fetch production JSON and verify the actual streaming card/poster. Keep #244 open until this acceptance passes."
+  },
+  "latest_live_checkpoint_20261116_0446": {
+    "checked_at": "2026-11-16T04:46:00Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed"
+    },
+    "open_prs": [
+      {
+        "number": 872,
+        "head_sha": "6486cff7e420bf2a25ad90cb5254558d8eb832ed",
+        "title": "fix: resolve Proxies poster through verified Spanish alias",
+        "state": "open"
+      }
+    ],
+    "boxoffice": {
+      "public_http": 200,
+      "by_year_rows": 1808,
+      "by_year_missing_posters": 0,
+      "all_time_rows": 100,
+      "all_time_missing_posters": 0,
+      "generated_at": "2026-09-27"
+    },
+    "streaming": {
+      "main": {
+        "rows": 463,
+        "with_posters": 462,
+        "missing": 1,
+        "unresolved": [
+          "Proxies"
+        ]
+      },
+      "production_json": {
+        "http": 200,
+        "rows": 457,
+        "with_posters": 457,
+        "missing": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z",
+        "six_official_announcements_present": false
+      },
+      "production_page": {
+        "url": "https://cinelva.vercel.app/streaming.html",
+        "browser": "Chrome",
+        "search": "Proxies",
+        "result_count": 0,
+        "visible_page_summary": "The production search returned 0 results for Proxies. This is a negative acceptance result, not a successful publication. Page reported 90 theatrical works and 2,783 currently available streaming works."
+      }
+    },
+    "exact_head_ci": {
+      "head_sha": "6486cff7e420bf2a25ad90cb5254558d8eb832ed",
+      "workflows": 8,
+      "success": 7,
+      "in_progress": 1,
+      "details": "Visual QA, Python contract, smoke, mobile layout, reproducible backend build, completeness scorecard, and autonomous quality gate succeeded. Validate frontend has one in-progress Chromium/WebKit reported-regression job; other jobs succeeded or skipped."
+    },
+    "production": {
+      "status": "READY",
+      "deployment_id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+      "sha": "f7c964a72b605693bc08bc24c4f855bc9463e566",
+      "blocker": "New deployment attempts are blocked by Vercel Hobby daily cap api-deployments-free-per-day (>100/day) reported 2026-11-16T02:53Z. No manual deploy, upgrade or bypass."
+    },
+    "updater": {
+      "latest_run": 43793292311,
+      "active_runs": 0,
+      "schedule": "17 18 * * * UTC",
+      "result": "Validated JSON snapshot committed to main; final Neon direct sync failed once with Prisma P1001. No retry or manual dispatch."
+    },
+    "identity": {
+      "proxies": "Netflix Spain official title En nombre de otro; strict TMDB title/year identity not yet confirmed in runtime. TMDB search unavailable; no ID/poster guessed."
+    },
+    "user_data": "Viewing records, ratings, reviews, bookmarks and backups unchanged.",
+    "next": "Complete the one in-progress exact-head Validate frontend run; keep PR #872 open while Vercel Hobby release cap blocks new deployment. When normal release access is restored, use the standard release once and the existing scheduled updater; verify Proxies official identity, public JSON and rendered calendar card/poster. Keep #244 open until production acceptance passes."
   }
 }

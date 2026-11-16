@@ -363,3 +363,17 @@ Keep #872 open. Continue reviewing official-provider source pages for a permitte
 1. Require exact-head CI for this checkpoint update; leave #872 open while Vercel's normal Hobby rate limit blocks release.
 2. After the normal release gate clears, make only one standard release and let the existing scheduled updater run once on the approved path. Do not repeat the Neon sync.
 3. Confirm Proxies only if the official API returns one exact title/year identity; then re-fetch production JSON and verify the actual streaming calendar cards and images. Keep #244 open until this production acceptance is complete.
+
+
+## Live production acceptance checkpoint — 2026-11-16 04:46 UTC
+
+- Live main: `8229b678b9c0730a5d412305fd4138a3d844d2e4`. #593 remains closed: production boxoffice HTTP 200, 1,808 by-year rows + 100 all-time rows, 0 missing posters. #244 remains open; only open PR is #872 at `6486cff7e420bf2a25ad90cb5254558d8eb832ed`.
+- Public streaming JSON: HTTP 200, 457 rows / 457 posters, generated `2026-11-15T08:42:39.808Z`; six reviewed official announcements remain absent. Main streaming JSON: 463 rows / 462 posters; only unresolved poster is Proxies.
+- Inspected the live production streaming page in Chrome. Searching `Proxies` returned 0 works. The page itself reports 90 theatrical and 2,783 current streaming-provider items. This confirms the new announcement is not yet presented in the user-facing current-streaming search; it is not a passing acceptance.
+- PR #872 exact head `6486cff7e420bf2a25ad90cb5254558d8eb832ed`: seven workflows passed; Validate frontend still has its reported-regression Chromium/WebKit subjob running. Do not merge until all required checks on the final head are green.
+- Canonical Vercel production stays READY on `f7c964a72b605693bc08bc24c4f855bc9463e566`; new deployment is blocked by Hobby's daily cap. Existing update-movies run `43793292311` committed main JSON but failed once at final Neon sync with Prisma P1001. No retry or manual dispatch.
+- No guessed TMDB ID/poster. No user history, rating, review, bookmark, or backup mutation. No paid service, scraper, or quota workaround.
+
+### Next action
+
+Finish the exact-head Validate job, leave #872 open while deployment quota blocks a normal release, and after the cap clears use one standard release plus the existing scheduled update workflow. Re-fetch public data and verify the actual card/poster before advancing #244.

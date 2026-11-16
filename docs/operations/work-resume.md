@@ -377,3 +377,18 @@ Keep #872 open. Continue reviewing official-provider source pages for a permitte
 ### Next action
 
 Finish the exact-head Validate job, leave #872 open while deployment quota blocks a normal release, and after the cap clears use one standard release plus the existing scheduled update workflow. Re-fetch public data and verify the actual card/poster before advancing #244.
+
+
+## Live checkpoint — 2026-11-16 05:07:58 UTC
+
+- Live main is `8229b678b9c0730a5d412305fd4138a3d844d2e4`. Open issues: #239, #242, #243, #244, #585, #683. #593 remains closed.
+- Canonical boxoffice JSON was fetched again: HTTP 200, generated `2026-09-27`; 1,808 by-year rows and 100 all-time rows, zero missing posters in either set.
+- Streaming JSON comparison by title + service + TMDB identity: main 463 rows / 462 posters; production 457 / 457 posters, generated `2026-11-15T08:42:39.808Z`. These six main rows are absent from production: `ミニオンズ＆モンスターズ` (U-NEXT), `Steps`, `Secrets`, `In Waves`, `Proxies`, `Ray Gunn` (Netflix). Five have their verified TMDB ID/poster in main; Proxies still lacks an ID/poster.
+- PR #872 source head `1b7142e530f1bab7e2aa89c238c95c71bcc05c3c` has all eight GitHub Actions successful (runs 43805855435, 43805855531, 43805855445, 43805855462, 43805855491, 43805855476, 43805855466, 43805855478). Its Vercel backend check is still failing; main frontend/backend statuses also fail with `build-rate-limit`. Canonical production remains READY on old SHA `f7c964a72b605693bc08bc24c4f855bc9463e566` / deployment `dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn`. Do not merge/deploy around the failed release gate.
+- Netflix’s official source confirms Proxies’ alias `En nombre de otro`, director Oriol Paulo and global release date 2026-12-11: https://about.netflix.com/es_es/news/proxies-is-coming-to-netflix-on-december-11 . TMDB movie pages are blocked by robots in this environment; the official API identity remains unverified, so no ID/poster is invented.
+- Latest official update-movies run `43793292311` committed its JSON snapshot but failed once at the final Neon sync (Prisma P1001). No retry or manual dispatch. Last recorded updater state was idle; next cron is `17 18 * * * UTC`.
+- No user watch history, ratings, reviews, bookmarks or backups changed. No paid source, scraper, or quota workaround was used. The prior approved-feed inventory recorded zero confirmed public RSS/Atom catalogs and discovery disabled for 12 services.
+
+### Next action
+
+Keep #872 and #244 open. Require fresh exact-head CI after this documentation checkpoint; leave the release blocked until the normal Vercel Hobby limit clears. Then make one standard release only, allow the existing scheduled updater to run normally, and verify the production JSON and actual streaming cards/images. Do not retry Neon or dispatch the updater manually.

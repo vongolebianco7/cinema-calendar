@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T00:34:00Z",
+  "updated_at": "2026-11-16T00:40:54Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
   "branch": "data/netflix-in-waves-premiere-20261116",
-  "head_sha": "3865442d534dad6deda7feda08c236235105a650",
+  "head_sha": "2bb3efb0dcec67e314b416833835e73ba636b4dc",
   "pull_request": 867,
   "work_items": [
     {
@@ -743,7 +743,7 @@
       "title": "Register four officially announced Netflix films for December 2026",
       "status": "pr_created",
       "issue": 244,
-      "acceptance": "Netflix official sources confirm In Waves (2026-12-11 global excluding France), Ray Gunn (2026-12-18 global), Proxies (2026-12-11 global), and Secrets (2026-12-03 global). Add only verified release facts; IDs/posters are assigned only by the existing strict official resolver when it returns one exact same-year movie with poster. Verify public JSON and production rendering after the existing update workflow.",
+      "acceptance": "Official sources support four absent Netflix 2026 film premieres. Strict existing resolver only attaches a unique same-year TMDB movie with poster. Exact-head CI passed on 2bb3efb; this checkpoint doc commit advances branch and needs fresh exact-head CI. Verify public JSON and calendar after the normal updater.",
       "evidence": [
         "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond",
         "https://about.netflix.com/en/news/proxies-is-coming-to-netflix-on-december-11",
@@ -758,6 +758,12 @@
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/867",
         "branch": "data/netflix-in-waves-premiere-20261116",
         "head_sha": "1097ee98417c24955dca9ac26c8b5bddb250f604"
+      },
+      "pr": {
+        "number": 867,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/867",
+        "branch": "data/netflix-in-waves-premiere-20261116",
+        "head_sha": "2bb3efb0dcec67e314b416833835e73ba636b4dc"
       }
     }
   ],
@@ -1124,19 +1130,18 @@
   "deployment": {
     "status": "deployment_pending",
     "url": "https://cinelva.vercel.app/",
-    "latest_main_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
-    "latest_deployment_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
+    "latest_main_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
+    "latest_deployment_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
     "production_verified": false,
-    "reason": "Vercel Ignored Build Step canceled the main deployments for test/workflow-only changes; previous READY main deployment 38be06f55b62d9abb8b5435695f92fae474070e remains. Public boxoffice JSON is HTTP 200 and matches main at 1,405/1,647 posters, 242 missing.",
-    "blocker": "The connected Vercel project tools do not expose the Hobby usage meter. Do not manually deploy; recheck quota and deployments only for a source/data change that is approved to publish."
+    "reason": "Live Vercel production is READY on main 93bff91. PR #867 is not merged; the four reviewed Netflix announcements are absent from the public JSON pending the existing updater.",
+    "blocker": "Hobby usage meter is unavailable; no manual deploy is authorized. Recheck only after merge and normal workflow."
   },
   "blockers": [
-    "Production data still has 242/1,647 historical box-office rows without posters (14.69%); #593 remains open.",
-    "The current exact-source proof refresh is committed on PR #807; final-head required CI and merge are still required before the scheduled updater can pass production preflight.",
-    "PR #805 fixed the Neon pooler/direct-host mismatch; the next scheduled update must prove Neon sync succeeds.",
-    "Vercel Hobby usage meter is not available through the connected tools. Latest main-only deployments were canceled by Ignored Build Step; previous READY production remains."
+    "Automatic streaming-premiere discovery is not established: 0 approved RSS/Atom feeds and 0 of 12 services with auto_premiere_discovery enabled; only reviewed official announcements are currently usable.",
+    "Vercel Hobby usage meter is unavailable through connected tools; do not manually deploy or change plans.",
+    "Previous updater's direct Neon sync failed P1001; JSON snapshot was committed, and Neon must not be retried without an independent recovery."
   ],
-  "next_action": "A backend exact-head CI run failed because this checkpoint used unsupported status pr_updated; corrected to allowed pr_created in this commit. Recheck every required workflow on the new head. If green, merge safely and verify one automatic updater plus production JSON and calendar.",
+  "next_action": "Fetch the live PR #867 head after this checkpoint commit. Recheck every required exact-head workflow. If green and no blocking review, merge safely; then verify one normal update-movies run, public streaming rows, unique TMDB posters, Vercel READY and calendar rendering. Do not retry the prior Neon P1001.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -3666,9 +3671,11 @@
     "next_action": "After final-head CI is green, merge PR #807; allow one scheduled update-movies run, then verify JSON recovery, Neon sync and production browser metrics."
   },
   "latest_live_state_20261116": {
-    "checked_at": "2026-11-16T00:27:00Z",
+    "checked_at": "2026-11-16T00:40:54Z",
     "main_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
-    "open_prs": 0,
+    "open_prs": [
+      867
+    ],
     "open_issues": [
       239,
       242,
@@ -3688,37 +3695,34 @@
     "boxoffice": {
       "http_status": 200,
       "generated_at": "2026-09-27",
-      "rows": 1808,
-      "poster_rows": 1808,
-      "missing_poster_rows": 0
+      "by_year_rows": 1808,
+      "by_year_poster_rows": 1808,
+      "by_year_missing_poster_rows": 0,
+      "all_time_rows": 100,
+      "all_time_missing_poster_rows": 0
     },
     "streaming": {
       "http_status": 200,
       "generated_at": "2026-11-15T08:42:39.808Z",
       "rows": 457,
-      "in_waves_present": false
+      "added_by_pr_867": [
+        "In Waves",
+        "Ray Gunn",
+        "Proxies",
+        "Secrets"
+      ],
+      "auto_discovery_services": 0,
+      "approved_rss_atom_feeds": 0
     },
-    "backend_sync": {
+    "prior_backend_sync": {
       "run_id": 43773321430,
       "conclusion": "failure",
-      "reason": "Neon P1001; direct connection unavailable; no retry"
+      "reason": "Neon P1001 on final direct sync; snapshot still committed; no retry"
     },
-    "issue_244": {
-      "state": "open",
-      "active_streaming_premiere_discovery_services": 0,
-      "approved_rss_atom_feeds": 0,
-      "reviewed_official_announcements": {
-        "reviewed": 4,
-        "registered_in_pr": 4,
-        "production_absent_before_change": [
-          "In Waves",
-          "Ray Gunn",
-          "Proxies",
-          "Secrets"
-        ],
-        "official_feeds_confirmed": 0,
-        "auto_premiere_discovery_enabled_services": 0
-      }
+    "pr_867": {
+      "last_fully_checked_source_head": "2bb3efb0dcec67e314b416833835e73ba636b4dc",
+      "all_seven_actions": "success",
+      "checkpoint_doc_commit_requires_new_head_recheck": true
     }
   },
   "latest_streaming_in_waves_20261116": {
@@ -3757,6 +3761,17 @@
         "official_source": "https://about.netflix.com/en/news/netflix-unveils-teaser-for-secrets-ravi-bharwanis-first-film-in-eight-years-premiering-december-3"
       }
     ],
-    "tmdb_resolution": "pending existing secret-backed official workflow"
+    "tmdb_resolution": "pending existing secret-backed official workflow",
+    "exact_ci_passed_source_sha": "2bb3efb0dcec67e314b416833835e73ba636b4dc",
+    "exact_ci_runs": {
+      "autonomous_quality_gate": 43780906056,
+      "mobile_layout": 43780905893,
+      "smoke": 43780905885,
+      "reproducible_backend_build": 43780905910,
+      "completeness_scorecard": 43780905888,
+      "visual_qa": 43780905940,
+      "validate_frontend": 43780905939
+    },
+    "exact_ci_result": "all seven passed; branch checkpoint docs then advanced; recheck live new head"
   }
 }

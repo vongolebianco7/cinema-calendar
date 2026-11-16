@@ -36,6 +36,8 @@ POSTER_SEARCH_ALIASES = {
     "トレンケ・ラウケン Part1": "Trenque Lauquen",
     "トレンケ・ラウケン Part2": "Trenque Lauquen",
     "ガーディング・スター": "Guarding Stars",
+    # Netflix Spain’s official title for Proxies; this is a search query only.
+    "Proxies": "En nombre de otro",
 }
 
 LOCAL_TITLE_ALIASES = {
@@ -278,7 +280,7 @@ def enrich(path=INPUT, api_key=None, opener=urllib.request.urlopen, delay=0.35, 
         if not api_key:
             unresolved += 1
             continue
-        title = movie.get("original_title") or POSTER_SEARCH_ALIASES.get(movie.get("title")) or movie.get("title")
+        title = POSTER_SEARCH_ALIASES.get(movie.get("title")) or movie.get("original_title") or movie.get("title")
         needle = normalize(title)
         if not needle:
             unresolved += 1

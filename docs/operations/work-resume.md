@@ -258,3 +258,173 @@ This makes six reviewed candidates on PR #867: Steps, In Waves, Ray Gunn, Proxie
 - The normal updater run 43788084251 stopped at the exact-source proof gate before collection; import, TMDB resolution, JSON write, and Neon sync were skipped. Vercel production attempt dpl_H232... on bf502 is ERROR for the same proof mismatch. Previous READY production dpl_F81... on SHA 0877129e remains the public source. No manual dispatch/deploy or repeated DB attempt.
 - After #871’s final exact-head CI passes, merge only if main is still bf502c0. The proof receipt path then triggers exactly one existing push-based update-movies run. Inspect each title’s identity result, public streaming JSON delta, Neon sync, Vercel READY deployment and actual calendar card/poster. Keep #244 open until these gates pass.
 - User watch history, rating, review, bookmark and backup data are unchanged.
+
+
+## 2026-11-16 02:48 UTC — Official streaming import checkpoint
+
+- Latest main data commit: `8229b678b9c0730a5d412305fd4138a3d844d2e4` (official update-movies snapshot). PR #871 and its exact-source release receipt are already merged; open PRs: 0. Exact-source receipt still describes executable head `aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea`; all seven release-required workflows and full contract suite passed there. Main since then has data-only commits.
+- #593 remains closed. Main and canonical Vercel box-office JSON each contain 1,908 rows across `all_time` + `by_year`; all 1,908 have posters. Vercel returns HTTP 200 and its generated date is 2026-09-27.
+- #244 remains open. The existing official updater run [43793292311](https://github.com/vongolebianco7/cinema-calendar/actions/runs/43793292311) added six verified announcements to the main catalog. Five resolved to distinct TMDB IDs with posters. `Proxies` remains without an ID/poster because TMDB title candidates are ambiguous. Main streaming JSON is 463 rows / 1 missing poster; canonical Vercel is still 457 rows (generated 2026-11-15) and does not include the six-item batch.
+- The updater’s official import, provenance/compliance gates, TMDB enrichment, data validation and JSON snapshot completed. The final Neon sync failed once with Prisma P1001 at `ep-snowy-wave-b4gwato2.c-6.us-east-2.aws.neon.tech:5432`; do not retry until the endpoint state changes. No user records were modified.
+- GitHub Pages build/deploy [43793646553](https://github.com/vongolebianco7/cinema-calendar/actions/runs/43793646553) succeeded on `8229b678`. Its direct public URL/JSON was not independently confirmed in this run. Vercel’s canonical alias `https://cinelva.vercel.app/` remains READY on `f7c964a72b605693bc08bc24c4f855bc9463e566`, but the JSON is stale; no manual deploy was attempted, preserving Hobby limits.
+- Source audit still records 0 confirmed official RSS/Atom feeds and 0 of 12 services with approved automatic premiere discovery. These six were manually curated from official provider announcements; no scraping or unsupported automation is claimed.
+
+Next: establish which published origin is the actual canonical user-facing site and confirm its public JSON/UI; inspect the Vercel proof gate and observable Hobby usage before considering one planned release; review permitted official feed sources and pursue `Proxies` only with a unique TMDB identity. Do not repeat the updater or Neon call. Keep #244 open until production JSON and calendar cards/images are verified. Watch history, ratings, reviews, bookmarks and backups remain untouched.
+
+
+## Documentation checkpoint PR
+
+The live-state documentation update is in [PR #872](https://github.com/vongolebianco7/cinema-calendar/pull/872). It refreshes the current main/production comparison and records the post-import Neon blocker. Check the PR page for its latest head SHA, require exact-head CI, merge only if all required checks pass, and do not trigger an application deployment from this documentation-only PR.
+
+
+## Live checkpoint — 2026-11-16 03:06 UTC
+
+- Current main is `8229b678b9c0730a5d412305fd4138a3d844d2e4`. Open issues are #239, #242, #243, #244, #585 and #683; #593 is closed after public production JSON reached 0 missing posters.
+- Box-office proof was freshly re-fetched: main and canonical Vercel production each return HTTP 200 with 1,908 rows across all-time/by-year and 0 missing posters (generated 2026-09-27).
+- #244 data import is in main: 71 official-announcement intake records are all represented in the 463-row main streaming catalog. Five of the six newly imported announcements have distinct TMDB IDs and posters; Proxies has no poster because identity is unresolved. Main has 462/463 posters.
+- The canonical Vercel streaming JSON is still 457 rows (generated 2026-11-15T08:42:39.808Z) and does not show the six new titles. On `https://cinelva.vercel.app/streaming.html`, Chrome displayed 90 theatrical and 3,047 streaming-provider entries; none of the six new announcements appeared. The page update label read 2026/11/16 7:50:37. Image sample: 122 present, 17 complete, 0 broken, 105 pending/lazy. This is partial observation, not complete image acceptance.
+- Existing update-movies run [43793292311](https://github.com/vongolebianco7/cinema-calendar/actions/runs/43793292311) committed the six entries but exhausted its TMDB request budget (180/180) and failed once at final Neon sync with Prisma P1001. No retry, no manual dispatch, and no user data was changed.
+- Official feed inventory remains 0 confirmed RSS/Atom feeds; 12 services have auto-premiere discovery disabled. Targeted newsroom search of Netflix, Amazon Japan, U-NEXT and Hulu found no confirmed approved feed endpoint; this does not establish that no such feeds exist. No source was enabled.
+- Documentation PR [#872](https://github.com/vongolebianco7/cinema-calendar/pull/872), exact head `401e4f94d2c399dc3efc66182b3c9b1baf5e8870`: four GitHub Actions passed (runs 43794843140, 43794843095, 43794843071, 43794843044). Separate Vercel backend status failed with “Deployment rate limited — retry in 24 hours” at 2026-11-16T02:53:22Z. Canonical production remains READY on old source `f7c964a72b605693bc08bc24c4f855bc9463e566` / deployment `dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn`. No paid upgrade, bypass, or retry.
+- Netflix’s official announcement confirms Proxies date 2026-12-11, director Oriol Paulo and cast, but the official TMDB search was blocked/unavailable and the updater budget is spent. Do not guess the TMDB identity/poster.
+
+### Next action
+
+Keep #872 open. Continue reviewing official-provider source pages for a permitted feed without scraping; leave the registry unchanged until a documented endpoint and terms are confirmed. Resolve Proxies only through the existing official TMDB workflow at its next scheduled allowed run. Wait until Vercel reports the rate limit cleared before rechecking its status; then make one planned normal release and verify the public JSON plus rendered cards/images. Keep #244 open until canonical production data and full browser image acceptance pass. Watch history, ratings, reviews, bookmarks and backups remain untouched.
+
+
+### Live checkpoint — 2026-11-16 03:23 UTC
+
+- Live main remains `8229b678b9c0730a5d412305fd4138a3d844d2e4`. Issue #593 is closed and has not regressed: main and canonical production box-office JSON are HTTP 200, 1,908 rows, 0 missing posters. #244 remains open. The only open PR is #872; its parent head is `193bae2b9417edd6a705c40f52f4cb342fd2ddd0`.
+- Main streaming JSON is HTTP 200 with 463 rows, 462 posters, generated `2026-11-16T02:37:34.045085+00:00`. Canonical production is HTTP 200 with 457 rows, all postered, generated `2026-11-15T08:42:39.808Z`. Six official records are in main but absent in production; five have unique TMDB IDs/posters: ミニオンズ＆モンスターズ 1315772, Steps 1595124, Secrets 1616675, In Waves 947502 and Ray Gunn 940009. Proxies remains unresolved. This is a real main-data improvement, not production acceptance.
+- Update-movies run [43793292311](https://github.com/vongolebianco7/cinema-calendar/actions/runs/43793292311) committed its validated JSON snapshot after importing six source-reviewed announcements, then failed only at the final Neon sync with Prisma P1001 at `ep-snowy-wave-b4gwato2.c-6.us-east-2.aws.neon.tech:5432`. No retry; user data and backups were not changed.
+- Netflix’s own Spanish newsroom calls Proxies **En nombre de otro** and confirms the 2026-12-11 premiere. This is a safe search-alias lead only. The current resolver prefers `original_title: Proxies` over its alias table; a small follow-up should prioritize the reviewed Spanish alias for the API search and keep the exact title + 2026 release-year check. Official TMDB search was blocked by robots; no ID/poster is assigned. Source: https://about.netflix.com/es_es/news/oriol-paulo-returns-to-netflix-with-proxies-premiering-on-11-december
+- Official-feed audit: `data/streaming-official-feeds.json` remains empty and all 12 services keep automatic discovery disabled. Apple TV Feed is a real bulk catalog feed but its official docs require Apple Services Performance Partners Program membership; CINELVA has no approved access. Do not enable it. Official docs: https://developer.apple.com/jp/documentation/appletvfeed/
+- Exact #872 head `193bae2b9417edd6a705c40f52f4cb342fd2ddd0` has successful latest quality, smoke, mobile-layout and visual-QA workflows (43796396608, 43796396566, 43796396563, 43796396569). The Vercel backend status is success on this docs-only head; it did not publish the newer main JSON. Current canonical READY remains `dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn` on source `f7c964a72b605693bc08bc24c4f855bc9463e566`.
+
+### Next actions
+
+1. Run exact-head checks for the updated checkpoint and merge only if they are green.
+2. Implement a focused resolver regression for the verified Spanish title, preserving exact-title/year identity gates. Use the next existing update-movies schedule; no manual dispatch and no guessed TMDB identity.
+3. Keep #244 open until a proof-valid main release is READY, production JSON contains the new items, and browser acceptance sees the real cards/posters. Do not retry Neon or start a manual Vercel deployment.
+
+
+## 2026-11-16 03:29 UTC — Proxies alias regression and live acceptance
+
+- Re-read live main `8229b678b9c0730a5d412305fd4138a3d844d2e4`, #239, #244, #593, open PRs, latest Actions, workflow schedule, and current public JSON. #593 remains closed; main and canonical production box-office JSON are 1,908 rows with 0 poster gaps.
+- Main streaming JSON: 463 rows, 462 posters; only `Proxies` has no poster/TMDB identity. Canonical `https://cinelva.vercel.app/data/streaming.json` was fetched again (HTTP 200): 457 rows, 457 posters, generated 2026-11-15. The six official announcements present in main remain absent from production.
+- Netflix’s official Spain newsroom identifies `En nombre de otro` as the Spanish title and confirms the 2026-12-11 release. Added it as a search alias only. The resolver now prefers the reviewed alias over literal `original_title: Proxies`; it still writes identity/artwork only for one exact normalized TMDB movie title with release year 2026. Added a mocked regression with a same-year literal-title decoy. No ID/poster is assigned from title intuition.
+- Code and regression are in the already-open PR #872; no duplicate PR. Exact-head checks for the new source are pending. The branch’s previous docs-only head passed smoke, mobile and visual QA; quality gate was still running when this update began.
+- Vercel main status presently includes `build-rate-limit`; canonical production remains on an older READY deployment. Keep Hobby and do not manually deploy. Update-movies run 43793292311 committed validated JSON but failed once at final Neon sync with P1001; no retry. Official feed registry still has no approved automatic feeds.
+- Next: let exact-head Actions finish; the scheduled update-movies cron is `17 18 * * *` UTC (18:17 UTC daily). After exact-head code passes and normal release proof permits publication, verify the new items in public JSON and their actual calendar cards/posters. Keep #244 open until those production checks pass and source-coverage acceptance is complete; user data and backups remain untouched.
+
+
+## 2026-11-16 04:02 UTC — Exact checks green; production gate still blocked
+
+- Latest main is `8229b678b9c0730a5d412305fd4138a3d844d2e4`; Issues #239/#244 are open, #593 remains closed. The only open PR is #872.
+- Exact PR source `23f48d7f67e59e618a27b0a3b593f806acdbe341` passed all eight GitHub Actions: Validate frontend `43798855957`, visual QA `43798855956`, Autonomous quality `43798855949`, Full Python `43798855947`, completeness `43798855883`, smoke `43798855881`, reproducible backend `43798855820`, and mobile layout `43798855819`. The mocked same-year decoy regression was included in the Python suite.
+- Production JSON re-fetch: boxoffice HTTP 200, 1,908/1,908 posters; streaming HTTP 200, 457/457 posters (0 gaps), generated 2026-11-15. Main streaming is 463/462; the only unposterized record is Proxies. The six reviewed official announcements in main remain absent from production.
+- Current canonical READY deployment is `dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn` on `f7c964a72b605693bc08bc24c4f855bc9463e566`. Main Vercel frontend/backend statuses still fail with `build-rate-limit`; no manual deployment or quota workaround. Existing update run `43793292311` has the JSON snapshot but one final Neon P1001 failure; no repeat attempt.
+- PR #872 remains open. GitHub branch-protection API returned 403 to the connected integration, so the Vercel status's requiredness cannot be checked; do not merge around a failing release status. Code source `d88d523` passed exact-head GitHub Actions on PR head `23f48d7`.
+- Next: recheck the Vercel status and public JSON after the provider limit clears. Use only the standard merge/release path, then the next scheduled update-movies run for the official TMDB alias and verify actual production calendar cards. No TMDB identity is guessed; user data/backups remain untouched.
+
+
+## Live checkpoint — 2026-11-16 04:16 UTC
+
+- Re-fetched main `8229b678b9c0730a5d412305fd4138a3d844d2e4`, issues #239/#244/#593, open PRs, Actions, Vercel and public JSON. #593 is closed; production boxoffice is HTTP 200, 1,908 rows, 0 posterless. #244 remains open. Only PR #872 is open.
+- Public streaming JSON is HTTP 200 with 457 rows / 457 posters (generated `2026-11-15T08:42:39.808Z`). Main streaming has 463 rows / 462 posters; the single unresolved row is Proxies. Six official announcements in main remain absent in production.
+- On exact PR head `81efe523286a590027aea4c867c9f306787689b6`, seven checks passed. Validate frontend attempt 1's Chromium/WebKit and product checks passed, but the comparative performance step failed on `git fetch` HTTP 503 from GitHub. A single targeted job retry is running as attempt 2; do not start another full rerun.
+- Vercel's latest bot result is `api-deployments-free-per-day` (>100 deployments), with “try again in 1 day” at 2026-11-16 02:53 UTC. Canonical production remains READY on older SHA `f7c964a72b605693bc08bc24c4f855bc9463e566`. No manual deploy, paid plan, quota workaround, or merge around the release blocker.
+- Official source check: Netflix newsroom supplies individual announcement pages, not a verified public catalog feed; Prime Video mRSS is for partner content delivery into Prime Video and its APIs are managed-partner-only; U-NEXT help documents its customer-facing catalog and does not grant ingestion API/feed access. Approved public feeds remain 0. Sources: https://videocentral.amazon.com/support/mrss-delivery?language=en_US ; https://videocentral.amazon.com/support/prime-video-apis?language=en_US ; https://help.unext.jp/guide/detail/content-being-delivered-of-vod ; https://developer.apple.com/jp/documentation/appletvfeed
+- Updater run `43793292311` committed validated JSON, then failed once at the final Neon sync with Prisma P1001; no retry. Viewing history, ratings, reviews, bookmarks and backups were not modified.
+- Next: finish the targeted Validate retry. Keep #872 open while the Vercel rate limit is active. After normal release access resumes, follow the standard release and scheduled updater path, then verify new IDs/posters in public JSON and actual calendar cards. Keep #244 open until production data and rendered-card acceptance pass.
+
+
+## Checkpoint validation correction — 2026-11-16 04:20 UTC
+
+- The documentation refresh initially marked the PR work item `ci_pending`, which the repository's durable-state validator does not permit. Exact-head Python test `test_checkpoint_is_valid` correctly failed on that schema mismatch.
+- Corrected the item to allowed status `in_progress` in the following checkpoint commit. Re-run the exact-head suite and confirm `test_checkpoint_is_valid` passes before considering the receipt current.
+- No application or user data changed. Vercel remains blocked by the documented daily deployment limit; do not deploy/merge around it.
+
+
+## Live continuation checkpoint — 2026-11-16 04:34 UTC
+
+- Re-read live main `8229b678b9c0730a5d412305fd4138a3d844d2e4`, Issues #239/#244/#593, the only open PR, exact-head Actions, updater workflow schedule, Vercel production, public JSON, and both operation checkpoint files. #593 is still closed.
+- Public production boxoffice JSON is HTTP 200: by-year 1,808 rows with 0 missing posters; all-time 100 rows with 0 missing posters (generated 2026-09-27). Main boxoffice has the same counts.
+- Main streaming JSON: 463 rows, 462 with posters. Only Proxies is unresolved. The six official announcement records in main are Minions & Monsters, Steps, Secrets, In Waves, Proxies, and Ray Gunn; five have distinct TMDB IDs/posters. Public production streaming JSON remains HTTP 200 at 457/457 postered, generated 2026-11-15T08:42:39.808Z, and contains none of those six. This remains a production data gap; no new card is accepted as live.
+- PR #872 at exact head `55db68fc114ce54b6d9e9c849b4dfffe3420b5fb` adds Netflix Spain's official alias `En nombre de otro` for Proxies, prioritized over the literal title in poster lookup, while preserving strict exact normalized TMDB title + 2026 release-year matching. Regression includes a same-year literal-title decoy. Netflix official announcement: https://about.netflix.com/es_es/news/proxies-is-coming-to-netflix-on-december-11 . TMDB official search is blocked in this environment; no ID/poster was guessed.
+- Exact-head Actions are 8/8 green. Validate frontend run 43803389009 attempt 1 timed out at the unchanged provider-list offline test line 46; one targeted retry (attempt 2) passed. Seven other workflows passed.
+- Canonical Vercel remains READY at `dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn`, SHA `f7c964a72b605693bc08bc24c4f855bc9463e566`. New deployments hit Hobby's `api-deployments-free-per-day` limit (>100/day; error at 2026-11-16 02:53 UTC). No manual deployment, upgrade, bypass, or merge around the failing release gate.
+- Existing update-movies run 43793292311 committed the validated six-entry JSON snapshot to main; its final Neon direct sync failed once with Prisma P1001. No retry. No update-movies run is active; the existing cron is `17 18 * * *` UTC. Do not dispatch manually.
+- User viewing records, ratings, reviews, bookmarks and backups remain untouched. No scraping or paid sources enabled; official public RSS/Atom catalog feeds confirmed: 0.
+
+### Next concrete actions
+
+1. Require exact-head CI for this checkpoint update; leave #872 open while Vercel's normal Hobby rate limit blocks release.
+2. After the normal release gate clears, make only one standard release and let the existing scheduled updater run once on the approved path. Do not repeat the Neon sync.
+3. Confirm Proxies only if the official API returns one exact title/year identity; then re-fetch production JSON and verify the actual streaming calendar cards and images. Keep #244 open until this production acceptance is complete.
+
+
+## Live production acceptance checkpoint — 2026-11-16 04:46 UTC
+
+- Live main: `8229b678b9c0730a5d412305fd4138a3d844d2e4`. #593 remains closed: production boxoffice HTTP 200, 1,808 by-year rows + 100 all-time rows, 0 missing posters. #244 remains open; only open PR is #872 at `6486cff7e420bf2a25ad90cb5254558d8eb832ed`.
+- Public streaming JSON: HTTP 200, 457 rows / 457 posters, generated `2026-11-15T08:42:39.808Z`; six reviewed official announcements remain absent. Main streaming JSON: 463 rows / 462 posters; only unresolved poster is Proxies.
+- Inspected the live production streaming page in Chrome. Searching `Proxies` returned 0 works. The page itself reports 90 theatrical and 2,783 current streaming-provider items. This confirms the new announcement is not yet presented in the user-facing current-streaming search; it is not a passing acceptance.
+- PR #872 exact head `6486cff7e420bf2a25ad90cb5254558d8eb832ed`: seven workflows passed; Validate frontend still has its reported-regression Chromium/WebKit subjob running. Do not merge until all required checks on the final head are green.
+- Canonical Vercel production stays READY on `f7c964a72b605693bc08bc24c4f855bc9463e566`; new deployment is blocked by Hobby's daily cap. Existing update-movies run `43793292311` committed main JSON but failed once at final Neon sync with Prisma P1001. No retry or manual dispatch.
+- No guessed TMDB ID/poster. No user history, rating, review, bookmark, or backup mutation. No paid service, scraper, or quota workaround.
+
+### Next action
+
+Finish the exact-head Validate job, leave #872 open while deployment quota blocks a normal release, and after the cap clears use one standard release plus the existing scheduled update workflow. Re-fetch public data and verify the actual card/poster before advancing #244.
+
+
+## Live checkpoint — 2026-11-16 05:07:58 UTC
+
+- Live main is `8229b678b9c0730a5d412305fd4138a3d844d2e4`. Open issues: #239, #242, #243, #244, #585, #683. #593 remains closed.
+- Canonical boxoffice JSON was fetched again: HTTP 200, generated `2026-09-27`; 1,808 by-year rows and 100 all-time rows, zero missing posters in either set.
+- Streaming JSON comparison by title + service + TMDB identity: main 463 rows / 462 posters; production 457 / 457 posters, generated `2026-11-15T08:42:39.808Z`. These six main rows are absent from production: `ミニオンズ＆モンスターズ` (U-NEXT), `Steps`, `Secrets`, `In Waves`, `Proxies`, `Ray Gunn` (Netflix). Five have their verified TMDB ID/poster in main; Proxies still lacks an ID/poster.
+- PR #872 source head `1b7142e530f1bab7e2aa89c238c95c71bcc05c3c` has all eight GitHub Actions successful (runs 43805855435, 43805855531, 43805855445, 43805855462, 43805855491, 43805855476, 43805855466, 43805855478). Its Vercel backend check is still failing; main frontend/backend statuses also fail with `build-rate-limit`. Canonical production remains READY on old SHA `f7c964a72b605693bc08bc24c4f855bc9463e566` / deployment `dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn`. Do not merge/deploy around the failed release gate.
+- Netflix’s official source confirms Proxies’ alias `En nombre de otro`, director Oriol Paulo and global release date 2026-12-11: https://about.netflix.com/es_es/news/proxies-is-coming-to-netflix-on-december-11 . TMDB movie pages are blocked by robots in this environment; the official API identity remains unverified, so no ID/poster is invented.
+- Latest official update-movies run `43793292311` committed its JSON snapshot but failed once at the final Neon sync (Prisma P1001). No retry or manual dispatch. Last recorded updater state was idle; next cron is `17 18 * * * UTC`.
+- No user watch history, ratings, reviews, bookmarks or backups changed. No paid source, scraper, or quota workaround was used. The prior approved-feed inventory recorded zero confirmed public RSS/Atom catalogs and discovery disabled for 12 services.
+
+### Next action
+
+Keep #872 and #244 open. Require fresh exact-head CI after this documentation checkpoint; leave the release blocked until the normal Vercel Hobby limit clears. Then make one standard release only, allow the existing scheduled updater to run normally, and verify the production JSON and actual streaming cards/images. Do not retry Neon or dispatch the updater manually.
+
+
+## Live checkpoint — 2026-11-16T06:15:37Z UTC
+
+- Live main: `8229b678b9c0730a5d412305fd4138a3d844d2e4`. Issue #593 remains closed. Canonical Vercel box-office JSON HTTP 200: 1,808/1,808 by-year rows and 100/100 all-time rows have posters (0 missing).
+- Issue #244 remains open. Main `data/streaming.json` is generated at `2026-11-16T02:37:34.045085+00:00`, 463 rows / 462 posters. All six manually reviewed official announcements are in main; five have verified TMDB identities/posters. Proxies remains without a verified TMDB identity/poster. Canonical production streaming JSON is HTTP 200, generated `2026-11-15T08:42:39.808Z`, 457 rows / 457 posters; the six additions have not reached production.
+- PR #872 remains open. Exact head `759652a234efcfa8be9119d13a5f7532b0ef8ef3` passed all eight Actions (43808248743, 43808248752, 43808248785, 43808248806, 43808248859, 43808248866, 43808248807, 43808248881). The branch has since received an operations checkpoint commit; re-fetch exact-head Actions before any merge. Combined Vercel statuses still fail with `build-rate-limit`. Canonical production stays READY on old SHA `f7c964a72b605693bc08bc24c4f855bc9463e566` / `dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn`.
+- Existing updater run `43793292311` imported/validated official announcements, resolved unique TMDB identities, validated and committed the JSON snapshot to main. Only the final Neon direct sync failed with Prisma P1001; no retry or manual dispatch.
+- Official Netflix announcement verifies Proxies / `En nombre de otro`, director Oriol Paulo and 2026-12-11. The official TMDB identity remains unavailable here; no ID/poster was invented. The provider registry has 0 confirmed public catalog RSS/Atom feeds and all 12 provider auto-discovery flags remain disabled.
+- A documentation tree commit briefly created a deletion-heavy diff on PR #872 due a missing base-tree parameter. It was inspected before merge and reverted with a force-with-lease to the verified parent `759652a`; main, production and user data were untouched. Subsequent docs are being updated through the GitHub Contents API, which preserves the full repository tree.
+- Watch history, ratings, reviews, bookmarks and backups remain untouched. No scraping, paid service, Vercel quota workaround, manual updater dispatch, or repeated Neon attempt.
+
+### Next concrete actions
+
+1. Fetch PR #872's new exact-head Actions after the checkpoint updates; do not merge while Vercel's release check fails.
+2. Recheck the Vercel Hobby build limit on a later run and release only through the normal path after all exact-head checks are green.
+3. Let the existing scheduled updater run normally once after release, then verify all six canonical production JSON entries, the Proxies identity/poster result, calendar cards and image requests. Do not dispatch manually or repeat Neon sync.
+4. Keep #244 open until permitted source coverage, freshness, error retention, public data and production rendering all meet the issue's completion criteria.
+
+
+## Live checkpoint — 2026-11-16 09:23 UTC (authoritative)
+
+- Current main is `1717965d5e6a000e1a97948e64237c6366076764`. Issue #593 is closed/completed. Production boxoffice JSON is HTTP 200: 1,808 by-year and 100 all-time rows, with no posterless rows.
+- Issue #244 remains open. Streaming production moved from 457/457 posters (2026-11-15) to 463/463 (2026-11-16), six added rows and no removals; generated at `2026-11-16T08:05:29.780681+00:00`. Existing scheduled refresh run `43828393897` succeeded, and latest production deployment `dpl_3zN7iLYSBC59aFCsksxSk1keKmDM` is READY on main.
+- The six live rows are Minions & Monsters (U-NEXT), Steps, Secrets, In Waves, Proxies, and Ray Gunn (Netflix). All have poster URLs; five have explicit TMDB IDs. Proxies has `fuzzy_search_fallback` and no TMDB ID; do not treat the image as an identity match. PR #872 adds an official Spanish-title alias with strict exact-title/year/unique-result checks, but the API result still needs the normal scheduled run.
+- U-NEXT’s official November lineup was audited: listed films are present. Ballerina (Nov 18) has TMDB ID 541671 and a poster. Trenque Lauquen Part 1/2 have posters but no explicit TMDB IDs; do not infer identity. Source: https://www.unext.co.jp/ja/press-room/2026-11-unext-lineup.
+- Source registry remains 0 confirmed public RSS/Atom feeds; all 12 service auto-premiere flags are false. Manual official-announcement intake is not automated discovery.
+- PR #872 old exact head `96a31be3a7646f3f6d1d137b44a8f8636fded89f`: 8/8 Actions and Vercel backend status success. PR #873 exact head `ca277758491a5ea28f1fcfd2132fd57e1c1aed7d`: 9/9 Actions but Vercel backend status `build-rate-limit`; source-link UI is not production-deployed. Current main deployment is READY, but do not bypass the failing PR gate.
+- Vercel authenticated fetch returns HTTP 200 for production JSON and `streaming.html`. Direct Chrome navigation redirected to Vercel login, so actual rendered cards/image loads remain unverified. No temporary share access or quota workaround was created.
+- Prior updater run `43793292311` had one final Neon Prisma P1001 failure. No retry. Viewing history, ratings, reviews, bookmarks and backups were not touched. No manual update dispatch, deployment, scraping, or paid upgrade.
+
+### Next actions
+
+1. Keep #244 open. Recheck the normal Vercel release gate and do not deploy while build-rate-limit is reported.
+2. Refresh PR #872 against live main; require final exact-head checks. Allow only the existing scheduled updater to attempt Proxies alias resolution. Trust the poster only after a unique TMDB ID is stored.
+3. Visually verify the production cards when an authorized browser-accessible route is available without expanding access. Do not claim this acceptance is complete until then.

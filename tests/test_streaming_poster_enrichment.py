@@ -199,6 +199,30 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         self.assertEqual(len(requests), 2)
         self.assertEqual(counts, (1, 0, 0))
 
+    def test_reviewed_alias_precedes_literal_original_title_and_keeps_exact_year_identity(self):
+        data, requests, counts = self.run_fixture(
+            [{
+                "title": "Proxies",
+                "original_title": "Proxies",
+                "release_year": 2026,
+                "date": "2026-12-11",
+                "event": "streaming",
+                "service": "Netflix",
+            }],
+            {"results": [
+                {"id": 900001, "title": "En nombre de otro",
+                 "original_title": "En nombre de otro", "release_date": "2026-12-11",
+                 "poster_path": "/proxies-fixture.jpg"},
+                {"id": 900002, "title": "Proxies", "original_title": "Proxies",
+                 "release_date": "2026-12-11", "poster_path": "/wrong-title-fixture.jpg"},
+            ]},
+        )
+        movie = data["movies"][0]
+        self.assertIn("query=En+nombre+de+otro", requests[0][0].full_url)
+        self.assertEqual(movie["id"], 900001)
+        self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w500/proxies-fixture.jpg")
+        self.assertEqual(counts, (1, 0, 0))
+
     def test_poster_search_alias_is_not_saved_as_a_movie_identity(self):
         data, requests, _ = self.run_fixture(
             [{"title": "ヒットマン リサージェンス", "event": "streaming"}],

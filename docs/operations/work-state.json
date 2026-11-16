@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T02:21:56Z",
-  "status": "pr_created",
+  "updated_at": "2026-11-16T09:23:23Z",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
-  "branch": "fix/trigger-update-after-source-proof-20261116",
-  "head_sha": "aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea",
-  "pull_request": 871,
+  "base_sha": "1717965d5e6a000e1a97948e64237c6366076764",
+  "branch": "docs/live-checkpoint-20261116-0248",
+  "head_sha": "96a31be3a7646f3f6d1d137b44a8f8636fded89f",
+  "pull_request": 872,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -688,7 +688,8 @@
       "title": "Discover streaming premiere dates from rights-approved official feeds",
       "status": "blocked",
       "issue": 244,
-      "acceptance": "Enable only terms-approved zero-cost official premiere feeds, validate candidates and publish with citations. Current availability observations remain separate."
+      "acceptance": "Enable only terms-approved zero-cost official premiere feeds, validate candidates and publish with citations. Current availability observations remain separate.",
+      "ci": "0 approved public catalog RSS/Atom feeds confirmed; 12 provider discovery flags remain false. Official announcement intake remains manually reviewed."
     },
     {
       "id": "P0-244-PUSH-RACE",
@@ -741,7 +742,7 @@
     {
       "id": "P0-244-NETFLIX-IN-WAVES-20261116",
       "title": "Register six verified official streaming film premieres",
-      "status": "pr_created",
+      "status": "merged",
       "issue": 244,
       "acceptance": "Record six absent film premieres confirmed by official provider announcements: five Netflix (Steps, In Waves, Ray Gunn, Proxies, Secrets) and U-NEXT rental Minions & Monsters (2026-11-11; film year 2026 verified by Illumination). Attach no guessed TMDB IDs/posters; existing official unique-match resolver only. Before merge: production streaming JSON HTTP 200/457 rows and all six absent. After merge: verify imported events, unique TMDB poster identities where available, production READY and calendar rendering.",
       "evidence": [
@@ -768,19 +769,20 @@
         "branch": "data/netflix-in-waves-premiere-20261116",
         "head_sha": "2bb3efb0dcec67e314b416833835e73ba636b4dc"
       },
-      "ci": "Exact head b07e2df: all seven required Actions succeeded. This checkpoint adds one absent U-NEXT November film announcement and advances branch; all seven exact-head workflows must run again."
+      "ci": "PR #867 merged as fd48f9c347af3f9234f5c579b500a79d86ef90ea. Six official source-reviewed records are now production-visible, 463/463 rows have poster URLs, five have explicit TMDB IDs; Proxies remains unverified."
     },
     {
       "id": "P0-244-OFFICIAL-STREAMING-SIX-20261116",
       "title": "Import six verified official streaming premiere announcements",
-      "status": "deployment_pending",
+      "status": "in_progress",
       "issue": 244,
       "pull_request": {
         "number": 867,
         "merge_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
         "head_sha": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86"
       },
-      "acceptance": "Run the existing update-movies importer once after the release proof is repaired; confirm all six reviewed official facts enter the public streaming JSON, attach only unique verified TMDB movie identities/posters, and render correctly in production calendar. Keep #244 open until the broader issue acceptance is complete."
+      "acceptance": "Run the existing update-movies importer once after the release proof is repaired; confirm all six reviewed official facts enter the public streaming JSON, attach only unique verified TMDB movie identities/posters, and render correctly in production calendar. Keep #244 open until the broader issue acceptance is complete.",
+      "ci": "Live production changed from 457/457 on 2026-11-15 to 463/463 on 2026-11-16: six official rows added, no removals. Five have explicit TMDB IDs; Proxies has a fuzzy fallback poster but no verified ID. Data is public; actual rendered-card acceptance remains unverified due Vercel login wall. #244 remains open."
     },
     {
       "id": "P0-RELEASE-PROOF-REFRESH-20261116",
@@ -792,6 +794,36 @@
         "head_sha": "a9fb4a679f0f4965bf91d67206bfd641b7b7ba12"
       },
       "acceptance": "Pass the exact-head checks and safely merge the refreshed receipt to make the identical CI-tested executable source eligible for the existing Vercel and Pages publication gates; then verify production READY without bypassing the guard."
+    },
+    {
+      "id": "P0-244-PROXIES-ALIAS-20261116",
+      "title": "Use Netflix's verified Spanish film title as a strict TMDB poster-search alias",
+      "status": "pr_created",
+      "issue": 244,
+      "pull_request": {
+        "number": 872,
+        "url": "https://github.com/vongolebianco7/cinema-calendar/pull/872",
+        "branch": "docs/live-checkpoint-20261116-0248",
+        "head_sha": "23f48d7f67e59e618a27b0a3b593f806acdbe341"
+      },
+      "acceptance": "The resolver prefers the source-reviewed alias `En nombre de otro` over literal original_title `Proxies` for the TMDB search, but saves an ID/poster only for one exact normalized title with release year 2026. A mocked regression includes a same-year `Proxies` decoy and asserts the wrong candidate is not selected. Production ID/poster remains unassigned until the existing official API updater yields the unique match.",
+      "evidence": [
+        "https://about.netflix.com/es_es/news/oriol-paulo-returns-to-netflix-with-proxies-premiering-on-11-december"
+      ],
+      "ci": "PR #872 exact head 6486cff7e420bf2a25ad90cb5254558d8eb832ed: seven of eight required workflows passed; Validate frontend reported-regression Chromium/WebKit subjob is still in progress. Production streaming page was searched for Proxies and returned 0 results; public JSON remains 457/457 postered, six official announcements absent.",
+      "latest_ci": "Prior exact head 96a31be3a7646f3f6d1d137b44a8f8636fded89f: 8/8 GitHub Actions and Vercel backend success. This docs checkpoint changes the PR head; rerun exact-head checks after push. Production still lacks the TMDB ID."
+    },
+    {
+      "id": "P0-244-SOURCE-LINK-PR-873-20261116",
+      "title": "Show verified TMDB availability source on streaming cards",
+      "status": "deployment_pending",
+      "issue": 244,
+      "acceptance": "Official movie-specific TMDB availability source is linked on catalog cards; invalid/cross-film links are rejected and mobile/desktop production cards are visually verified.",
+      "pull_request": {
+        "number": 873,
+        "head_sha": "ca277758491a5ea28f1fcfd2132fd57e1c1aed7d"
+      },
+      "ci": "Exact head ca277758491a5ea28f1fcfd2132fd57e1c1aed7d has 9/9 Actions success; Vercel backend failed build-rate-limit. Not deployed."
     }
   ],
   "verification": [
@@ -1208,25 +1240,78 @@
     {
       "check": "Production/update blocker 2026-11-16",
       "result": "Updater 43788084251 and Vercel deployment dpl_H232... were refused before publication by stale exact-source receipt. No data collection, snapshot write, Neon connection, or deploy occurred. Prior READY deployment remains live."
+    },
+    {
+      "check": "Live #593/#244, production and exact-head checkpoint 2026-11-16 03:06 UTC",
+      "result": "main 8229b678b9c0730a5d412305fd4138a3d844d2e4; #593 closed and public production boxoffice is 1,908/1,908 postered. Main streaming 463 rows/462 posters; all 71 official announcement intake records match main. Public Vercel streaming remains 457 rows and predates the six-item import. Chrome canonical streaming page showed 90 theatrical and 3,047 streaming-provider entries; none of the six new titles; 17/122 images complete, 0 broken, 105 pending/lazy (partial acceptance only). PR #872 exact-head GitHub Actions 4/4 green at 401e4f94d2c399dc3efc66182b3c9b1baf5e8870; separate Vercel backend status rate-limited for 24h. Updater 43793292311 used 180/180 TMDB requests and failed final Neon P1001. No user data changes, scrape, manual deploy, manual updater dispatch, or paid action."
+    },
+    {
+      "check": "Live production/data audit 2026-11-16T03:23:01Z",
+      "result": "Main 8229b678b9c0730a5d412305fd4138a3d844d2e4; #593 closed; boxoffice JSON 1908 rows / 0 gaps in main and production. Streaming main 463/462 postered; canonical production 457/457 postered. Main-only official set: Minions & Monsters (1315772), Steps (1595124), Secrets (1616675), In Waves (947502), Proxies (unresolved), Ray Gunn (940009). Issue #244 remains open."
+    },
+    {
+      "check": "Live #244 production and resolver checkpoint 2026-11-16 03:29 UTC",
+      "result": "Main 8229b678: streaming JSON 463 rows/462 posters (Proxies unresolved). Canonical Vercel public JSON independently fetched HTTP 200: 457 rows/457 posters, generated 2026-11-15T08:42:39.808Z; it contains none of the six main-only announcements. Netflix official Spanish newsroom identifies the Proxies project as En nombre de otro and confirms 2026-12-11; no TMDB identity was assigned. PR #872 adds alias-first search and an exact-title/year mocked decoy regression. Vercel CI on main reports build-rate-limit; current READY origin remains stale. No user records/backups changed."
+    },
+    {
+      "check": "Live exact-head and production refresh 2026-11-16 04:02 UTC",
+      "result": "Main remains 8229b678b9c0730a5d412305fd4138a3d844d2e4. Issue #593 closed. Exact PR #872 head 23f48d7f67e59e618a27b0a3b593f806acdbe341 has all eight GitHub Actions successful, including the Python regression suite. Canonical Vercel streaming JSON HTTP 200 is 457 rows/457 posters (0 poster gaps), generated 2026-11-15; it still lacks the six main-only announcements. Main streaming JSON is 463/462 (Proxies unresolved). Canonical boxoffice JSON is 1,908/1,908 postered. Vercel main frontend/backend statuses remain build-rate-limit failures; existing READY deployment is f7c964a. Neon P1001 was not retried."
+    },
+    {
+      "check": "Live #244/P0 update 2026-11-16 04:16 UTC",
+      "result": "Main 8229b678; #593 closed and production boxoffice JSON HTTP 200 with 1,908 rows, zero posterless. #244 remains open. Main streaming 463/462; public Vercel 457/457, generated 2026-11-15; Proxies is unresolved only in main. Open PR #872; seven exact-head checks succeeded on 81efe523; Validate frontend attempt 1's browser checks passed but comparative performance git fetch failed with GitHub HTTP 503. Targeted retry attempt 2 in progress. Canonical Vercel READY remains f7c964a; GitHub bot said api-deployments-free-per-day (>100) and retry in one day; no deploy. Official-source audit found no approved public catalogue feed: Prime mRSS is partner content delivery and Prime APIs are managed-partner-only; U-NEXT help only documents its user catalog. Update-movies run 43793292311 committed JSON then had one final Neon P1001; no retry. User records/backups untouched."
+    },
+    {
+      "check": "Checkpoint validator correction 2026-11-16 04:20 UTC",
+      "result": "Exact head 72707f632ed294c6baad4167911608bd0ddc2e3f failed test_checkpoint_is_valid because the newly recorded work-item status `ci_pending` is outside scripts/check_work_state.py's allowed vocabulary (planned, in_progress, pr_created, ci_passed, merged, deployment_pending, production_verified, blocked). Corrected the item status to `in_progress`; rerun on next docs head."
+    },
+    {
+      "check": "Live #593/#244 and exact PR head 2026-11-16 04:34 UTC",
+      "result": "Main 8229b678b9c0730a5d412305fd4138a3d844d2e4; #593 closed. Canonical production boxoffice HTTP 200: by-year 1,808 rows/0 missing; all-time 100/0 missing. Main streaming 463/462 posters; production streaming 457/457 posters, generated 2026-11-15T08:42:39.808Z, with none of six new official records present. PR #872 head 55db68fc114ce54b6d9e9c849b4dfffe3420b5fb has 8/8 Actions green after one targeted frontend-job retry. Vercel daily build limit and Neon P1001 block production JSON acceptance; neither retried. No user data changed."
+    },
+    {
+      "check": "Live streaming/P0-593 and exact-head checkpoint 2026-11-16T05:07:58Z",
+      "result": "Main 8229b678b9c0730a5d412305fd4138a3d844d2e4. #593 closed, production boxoffice 1,808 by-year +100 all-time rows, zero missing posters. #244 open. Main streaming 463/462, production 457/457; exact row-level comparison shows six official main records absent from production (Minions & Monsters, Steps, Secrets, In Waves, Proxies, Ray Gunn). PR #872 source SHA 1b7142e has all 8 Actions green; Vercel main frontend/backend and PR backend statuses remain failure for build-rate-limit. Canonical READY deployment remains f7c964a. Docs checkpoint appended; require fresh CI on its resulting head. Proxies TMDB identity unresolved; no guessed ID/poster. Last updater run 43793292311 had one Neon P1001 sync failure; no retry. User data unchanged."
+    },
+    {
+      "check": "Live P0/data/source audit 2026-11-16T09:23:23Z",
+      "result": "Main 1717965d5e6a000e1a97948e64237c6366076764; #593 closed and public boxoffice 1,808/1,808 by-year plus 100/100 all-time postered. Production streaming 457/457 -> 463/463 with six official announcements, no removals; refresh run 43828393897 succeeded. Five new IDs verified; Proxies image is fuzzy fallback with no ID. U-NEXT official November titles reviewed; Ballerina ID541671 present, Trenque Lauquen part IDs absent. Production dpl_3zN7iLYSBC59aFCsksxSk1keKmDM READY on main. Public JSON and HTML fetch HTTP 200. Chrome direct navigation reached Vercel login, so visual acceptance is not verified. PR872 exact source passed 8/8 Actions/backend; PR873 9/9 Actions but backend build-rate-limit. No user data, Neon retry, dispatch, or manual deployment."
     }
   ],
   "deployment": {
-    "status": "blocked",
-    "url": "https://cinelva.vercel.app/",
-    "latest_main_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
-    "latest_deployment_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
-    "latest_deployment_id": "dpl_8pdAnVFbUgdxkgJKh7vEuBGEw6Tj",
-    "latest_deployment_state": "ERROR",
-    "production_verified": false,
-    "reason": "The strict production release gate rejected the stale CI receipt; current Vercel build ended BUILD_UTILS_SPAWN_1 at scripts/build-static.cjs. The previous READY deployment on 93bff91 remains serving.",
-    "blocker": "PR #868 must pass exact-head checks and safely merge the receipt for the identical tested executable tree. Do not manually deploy or bypass."
+    "status": "production_verified",
+    "canonical_url": "https://cinelva.vercel.app/",
+    "ready_deployment_id": "dpl_3zN7iLYSBC59aFCsksxSk1keKmDM",
+    "ready_sha": "1717965d5e6a000e1a97948e64237c6366076764",
+    "deployment_url": "https://cinema-calendar-5j7ivm0g6-vongole1.vercel.app",
+    "public_boxoffice": {
+      "http": 200,
+      "by_year_rows": 1808,
+      "by_year_missing_posters": 0,
+      "all_time_rows": 100,
+      "all_time_missing_posters": 0,
+      "generated_at": "2026-09-27"
+    },
+    "public_streaming": {
+      "http": 200,
+      "rows": 463,
+      "poster_rows": 463,
+      "missing_posters": 0,
+      "generated_at": "2026-11-16T08:05:29.780681+00:00"
+    },
+    "production_verified": true,
+    "visual_acceptance_verified": false,
+    "blocker": "Production JSON/static HTML are on latest main and HTTP 200; visual browser acceptance is unverified because Chrome redirected to Vercel login. PR #873 still has a build-rate-limit status.",
+    "latest_production_url": "https://cinema-calendar-5j7ivm0g6-vongole1.vercel.app",
+    "visual_acceptance_reason": "Direct Chrome navigation redirected to Vercel login; authenticated fetch verified static HTML/JSON HTTP 200 but not rendered cards/images."
   },
   "blockers": [
-    "Production proof on main still attests the old digest a7906e3a..., while the current source input after #869 is 1bc68022...; the last updater 43788084251 stopped at the pre-collection gate. No collection, import, JSON write, or Neon request occurred.",
-    "Latest Vercel production build for bf502c0 is ERROR because the stale proof gate refused publication. Previous READY deployment dpl_F81... on 0877129e remains live; no manual deployment attempted.",
-    "Public streaming JSON is 457 rows and six official announcement titles remain absent. The confirmed official feed registry is empty; 12 services still have automatic premiere discovery disabled. The six announcements are verified manual inputs; identity resolution must use the existing official/TMDB path."
+    "Proxies has an official Netflix announcement and poster URL but no verified TMDB movie ID; current poster_match_status is fuzzy_search_fallback. PR #872 adds alias-first exact-title/year/unique-result matching; final exact-head CI is required after this checkpoint.",
+    "PR #873 source-link UI is not in production. Its nine GitHub Actions passed, but Vercel backend status is build-rate-limit. Do not deploy or bypass the Hobby limit.",
+    "Direct Chrome navigation to the deployment-specific production URL reaches Vercel login; actual rendered-card visual acceptance could not be completed. Authenticated Vercel fetch confirmed HTTP 200 HTML and JSON only.",
+    "The earlier update-movies run 43793292311 had one final Neon Prisma P1001 failure. Do not retry without a changed endpoint state."
   ],
-  "next_action": "Commit the exact-source receipt plus current work-state/resume checkpoint on the existing #871 branch as a documentation/proof-only follow-up. Require fresh exact-head CI on that final commit, then merge only with all checks green. The production-proof path will trigger the existing update-movies workflow once on main. Do not manually dispatch or deploy. After the normal run, verify six per-title resolutions, public JSON count, Neon outcome, Vercel READY, and rendered streaming calendar cards/images. Keep #244 open until production acceptance.",
+  "next_action": "Keep #244 open. Recheck Vercel status; do not deploy while build-rate-limit is reported. Refresh PR #872 against current main and rerun final exact-head checks once the normal release gate permits. Then let only the existing scheduled updater resolve Proxies by the official alias; require a unique TMDB ID before trusting its poster. Verify actual rendered cards when a browser-accessible production route is available without a new access grant. Never manual-dispatch update-movies or retry Neon P1001.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -1281,7 +1366,43 @@
       "summary": "Durable poster metadata fix merged; CI 8/8 green. 457 streaming rows, 28 posterless in merged dataset. Public production remains at 391da7d; quota block."
     },
     "2026-11-16T00:55:30Z: Validate frontend targeted failed-job rerun passed on exact head e6e3a0d; all seven required Actions are green. Its first attempt timed out at the provider-list offline-status wait (15s), and passed on attempt 2 without code change. Added the fifth official Netflix title Steps (2026-11-20) from Netflix's animation slate; no TMDB ID/poster guessed. Scheduled updater #43771219437 completed data stage but final Neon direct sync failed P1001; no retry/manual dispatch. This checkpoint advances the branch and requires fresh exact-head CI.",
-    "2026-11-16T01:04:00Z: All seven required Actions passed on exact head b07e2df. Audited U-NEXT's official November lineup and found Minions & Monsters missing from both its existing announcement intake and the 457-row production streaming snapshot. U-NEXT confirms rental begins 2026-11-11; Illumination confirms 2026 film identity. Added the single reviewed record with no guessed TMDB ID/poster. Source registry has 0 approved RSS/Atom feeds and all 12 services remain editorial-only; no scraping. New checkpoint head needs fresh seven exact-head workflows."
+    "2026-11-16T01:04:00Z: All seven required Actions passed on exact head b07e2df. Audited U-NEXT's official November lineup and found Minions & Monsters missing from both its existing announcement intake and the 457-row production streaming snapshot. U-NEXT confirms rental begins 2026-11-11; Illumination confirms 2026 film identity. Added the single reviewed record with no guessed TMDB ID/poster. Source registry has 0 approved RSS/Atom feeds and all 12 services remain editorial-only; no scraping. New checkpoint head needs fresh seven exact-head workflows.",
+    "2026-11-16T02:48:38Z: Official update-movies run 43793292311 imported six individually source-verified announcements; 5 received distinct TMDB identities/posters, Proxies remains unassigned because title matching is ambiguous. Main is 8229b678b9c0730a5d412305fd4138a3d844d2e4; Pages build/deploy 43793646553 succeeded. Vercel remains READY on older f7c964a with production JSON 457 rows vs main 463; no deploy attempted. All 1,908 box-office rows across all_time/by_year have posters and #593 is closed. Final Neon direct sync failed P1001; no retry. Checkpoint docs PR is documentation-only.",
+    {
+      "checked_at": "2026-11-16T03:23:01Z",
+      "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+      "pr": 872,
+      "pr_head_before_checkpoint": "193bae2b9417edd6a705c40f52f4cb342fd2ddd0",
+      "issue_593": "closed; main+production box office 1908 rows, zero missing",
+      "streaming": {
+        "main_rows": 463,
+        "main_with_posters": 462,
+        "production_rows": 457,
+        "production_with_posters": 457,
+        "production_generated_at": "2026-11-15T08:42:39.808Z",
+        "main_generated_at": "2026-11-16T02:37:34.045085+00:00",
+        "new_main_only_rows": 6,
+        "poster_resolved": 5,
+        "unresolved": [
+          "Proxies"
+        ]
+      },
+      "update_run": {
+        "id": 43793292311,
+        "conclusion": "failure_after_snapshot_commit",
+        "neon": "P1001; one attempt; no retry"
+      },
+      "providers": {
+        "registered_feeds": 0,
+        "auto_discovery_enabled": 0,
+        "total": 12,
+        "apple_tv_feed": "partner-program-gated; no access"
+      },
+      "next": "add official Spanish alias as resolver query only after exact regression; query TMDB official on next existing scheduled run; prove public production sync and card rendering before closing #244"
+    },
+    "2026-11-16T03:29:12Z: Live production JSON re-fetched: 457 rows, 457 posters, 0 current gaps; main is 463/462 with only Proxies unresolved and six main-only official announcements. Added a strict Netflix Spanish-title search alias and a mock decoy regression to existing PR #872. No TMDB ID/poster guessed. Main Vercel deployment status reports build-rate-limit; Neon P1001 was not retried. #593 remains closed; #244 stays open until new records reach production and cards are verified.",
+    "2026-11-16T04:02:30Z: Exact PR #872 head 23f48d7 passed all eight required GitHub Actions, including the Proxies alias regression. Live production was re-fetched: boxoffice 1,908/1,908 postered; streaming 457/457 postered, generated 2026-11-15, still missing all six main-only announcements. Main streaming remains 463/462. Vercel main frontend/backend checks remain build-rate-limit failures; canonical existing deployment READY on f7c964a. Branch-protection endpoint inaccessible (403), so no merge/bypass; Neon P1001 not retried. #593 stays closed, #244 open.",
+    "2026-11-16T09:23:23Z: main 1717965d5e6a000e1a97948e64237c6366076764; #593 closed, production boxoffice posterless=0. Public streaming 457/457 -> 463/463, six verified source rows added; five explicit IDs, Proxies unresolved; update run 43828393897 success. READY deployment and HTTP200 production JSON/HTML verified. U-NEXT November audit completed; Ballerina 541671 is present; Trenque Lauquen part rows lack explicit IDs. Direct Chrome blocked by Vercel login. PR872 old exact head 8/8 Actions/backend green; PR873 9/9 Actions but build-rate-limit. No saved data changed."
   ],
   "progress_metrics": {
     "total_tasks": 32,
@@ -3155,13 +3276,8 @@
     ]
   },
   "open_pull_requests": [
-    {
-      "number": 871,
-      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/871",
-      "title": "ci: trigger updater after source proof refresh",
-      "head_sha": "aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea",
-      "status": "source exact-head CI passed; final proof/checkpoint commit follows"
-    }
+    872,
+    873
   ],
   "closed_pull_requests": [
     {
@@ -3185,11 +3301,10 @@
     }
   ],
   "next_concrete_actions": [
-    "Commit the exact-source production receipt and current live checkpoint/runbook updates together on the existing #871 branch.",
-    "Require and inspect exact-head CI for the final PR commit; merge only with all required checks green and main unchanged.",
-    "Allow the single normal push-triggered update-movies run; no manual dispatch or repeated run.",
-    "Inspect resolver outcomes for each of the six official streaming announcements, public streaming JSON delta, Neon sync result, READY production deployment, and calendar image rendering.",
-    "Keep #593 closed while published poster gaps remain zero; keep #244 open until real production acceptance is complete."
+    "Inspect exact-head checks on docs PR #872; merge only when all required checks pass and base main remains unchanged.",
+    "Confirm canonical user-facing origin and fetch its JSON/UI; Vercel alias is READY but six newer records are not present there.",
+    "Assess official/free terms-compliant feed discovery and Proxies identity; do not scrape or guess.",
+    "No repeat update-movies dispatch or Neon P1001 retry; no manual Vercel deployment."
   ],
   "continuation_checkpoint_20261106_0002": {
     "recorded_at": "2026-11-06T00:02:30Z",
@@ -3765,86 +3880,15 @@
     "next_action": "After final-head CI is green, merge PR #807; allow one scheduled update-movies run, then verify JSON recovery, Neon sync and production browser metrics."
   },
   "latest_live_state_20261116": {
-    "checked_at": "2026-11-16T01:15:05Z",
-    "main_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
-    "open_prs": [
-      868
-    ],
-    "open_issues": [
-      239,
-      242,
-      243,
-      244,
-      585,
-      683
-    ],
-    "issue_593": {
-      "state": "closed",
-      "state_reason": "completed"
-    },
-    "production": {
-      "latest_main_deployment_state": "ERROR",
-      "latest_main_deployment_id": "dpl_8pdAnVFbUgdxkgJKh7vEuBGEw6Tj",
-      "latest_main_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
-      "previous_ready_state": "READY",
-      "previous_ready_id": "dpl_Djs8HEw8PLbDY6RJEy8sdprxF5K1",
-      "previous_ready_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
-      "blocker": "Production source-proof digest mismatch; no manual deployment or bypass."
-    },
-    "boxoffice": {
-      "http_status": 200,
-      "source": "previous READY production deployment",
-      "by_year_rows": 1808,
-      "by_year_poster_rows": 1808,
-      "by_year_missing_poster_rows": 0,
-      "all_time_rows": 100,
-      "all_time_missing_poster_rows": 0
-    },
-    "streaming": {
-      "http_status": 200,
-      "source": "previous READY production deployment",
-      "generated_at": "2026-11-15T08:42:39.808Z",
-      "rows": 457,
-      "missing_new_official_titles": [
-        "Steps",
-        "In Waves",
-        "Ray Gunn",
-        "Proxies",
-        "Secrets",
-        "ミニオンズ＆モンスターズ"
-      ],
-      "announcement_intake_rows": 71,
-      "approved_rss_atom_feeds": 0,
-      "auto_discovery_services": 0
-    },
-    "pr_867": {
-      "state": "merged",
-      "merge_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
-      "verified_source_head": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86",
-      "exact_head_workflows": "7/7 success; 20/20 check runs"
-    },
-    "update_movies_run": {
-      "id": 43784784850,
-      "state": "failure",
-      "failed_at": "Verify approved source and exact-source CI before collection",
-      "import_skipped": true,
-      "enrichment_skipped": true,
-      "snapshot_commit_skipped": true,
-      "neon_sync_skipped": true,
-      "reason": "receipt points to source digest 191d8991..., current and exact-tested source digest a7906e3a..."
-    },
-    "pages_run": {
-      "id": 43784785028,
-      "state": "failure",
-      "failed_at": "Verify source CI and quality before creating publication output",
-      "deploy_skipped": true,
-      "reason": "same stale production-proof receipt"
-    },
-    "approved_feeds": {
-      "rss_atom_count": 0,
-      "provider_service_count": 12,
-      "automatic_discovery_enabled": 0
-    }
+    "current_main": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issue_593": "closed; 0/1908 production boxoffice poster gaps",
+    "issue_244": "open; six source-reviewed records from main remain unpublished in current Vercel JSON",
+    "active_pr": 872,
+    "current_pr_head": "81efe523286a590027aea4c867c9f306787689b6",
+    "exact_head_action_status": "7 green; Validate frontend targeted retry running after external GitHub 503 during comparative fetch",
+    "production_deploy_status": "old READY deployment; Vercel Hobby daily cap reached; no deployment around the limit",
+    "neon_status": "P1001 once on final sync; no retry",
+    "next_action": "Finish the one targeted Validate frontend retry for PR #872 head 81efe523. If it passes, record its exact result and retain the PR until Vercel's normal Hobby rate limit clears; do not merge/deploy around the failing Vercel release gate. Then use only the existing scheduled update-movies pathway for TMDB alias resolution and verify canonical production JSON plus actual calendar cards/posters. Continue provider-source audit without scraping; keep #244 open until real production data and rendered-card acceptance are evidenced."
   },
   "latest_streaming_in_waves_20261116": {
     "checked_at": "2026-11-16T01:04:00Z",
@@ -4369,5 +4413,1342 @@
     },
     "user_data": "watch history, ratings, reviews, bookmarks, and backups unchanged.",
     "next_action": "Commit the exact-source receipt plus current work-state/resume checkpoint on the existing #871 branch as a documentation/proof-only follow-up. Require fresh exact-head CI on that final commit, then merge only with all checks green. The production-proof path will trigger the existing update-movies workflow once on main. Do not manually dispatch or deploy. After the normal run, verify six per-title resolutions, public JSON count, Neon outcome, Vercel READY, and rendered streaming calendar cards/images. Keep #244 open until production acceptance."
+  },
+  "open_issues": [
+    239,
+    242,
+    243,
+    244,
+    585,
+    683
+  ],
+  "latest_live_state_20261116_0248": {
+    "checked_at": "2026-11-16T02:48:38Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issue_239": "open",
+    "issue_593": {
+      "state": "closed",
+      "state_reason": "completed",
+      "public_boxoffice": {
+        "http_status": 200,
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27",
+        "scope": "all_time + by_year"
+      }
+    },
+    "issue_244": {
+      "state": "open",
+      "state_reason": "reopened",
+      "completion": "not met: new official streaming rows are in main/Pages but not Vercel production; no calendar rendering verification"
+    },
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      683
+    ],
+    "open_pull_requests": [
+      872
+    ],
+    "exact_source_receipt": {
+      "head_sha": "aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea",
+      "verified_at": "2026-11-16T02:21:56Z",
+      "digest": "616cfe9735e0af4a2ebcfdb994bb39f14b7be06d8ef9eda1fc2219fd6288b028",
+      "relevant_executable_entries": 1399,
+      "required_workflows": "7 release-required workflows, all green; full Python contract suite passed; 19 jobs across 8 runs passed"
+    },
+    "latest_main_update": {
+      "sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+      "run": 43793292311,
+      "conclusion": "failure_after_json_commit",
+      "imported_announcements": 6,
+      "tmdb_poster_resolved": 5,
+      "tmdb_unresolved": 1,
+      "tmdb_requests": "180/180"
+    },
+    "main_public_data": {
+      "boxoffice": {
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27",
+        "http_status": 200,
+        "source": "raw main JSON verified"
+      },
+      "streaming": {
+        "rows": 463,
+        "poster_missing": 1,
+        "generated_at": "2026-11-16T02:37:34.045085+00:00",
+        "missing_title": "Proxies",
+        "http_status": 200,
+        "source": "raw main JSON verified"
+      }
+    },
+    "official_imports": [
+      {
+        "title": "ミニオンズ＆モンスターズ",
+        "original_title": "Minions & Monsters",
+        "date": "2026-11-11",
+        "service": "U-NEXT",
+        "tmdb_id": 1315772,
+        "poster": true,
+        "source_url": "https://www.unext.co.jp/ja/press-room/2026-11-unext-lineup"
+      },
+      {
+        "title": "Steps",
+        "date": "2026-11-20",
+        "service": "Netflix",
+        "tmdb_id": 1595124,
+        "poster": true,
+        "source_url": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond"
+      },
+      {
+        "title": "Secrets",
+        "date": "2026-12-03",
+        "service": "Netflix",
+        "tmdb_id": 1616675,
+        "poster": true,
+        "source_url": "https://about.netflix.com/en/news/netflix-unveils-teaser-for-secrets-ravi-bharwanis-first-film-in-eight-years-premiering-december-3"
+      },
+      {
+        "title": "In Waves",
+        "date": "2026-12-11",
+        "service": "Netflix",
+        "tmdb_id": 947502,
+        "poster": true,
+        "source_url": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond"
+      },
+      {
+        "title": "Proxies",
+        "date": "2026-12-11",
+        "service": "Netflix",
+        "tmdb_id": null,
+        "poster": false,
+        "identity_status": "ambiguous; do not assign",
+        "source_url": "https://about.netflix.com/en/news/proxies-is-coming-to-netflix-on-december-11"
+      },
+      {
+        "title": "Ray Gunn",
+        "date": "2026-12-18",
+        "service": "Netflix",
+        "tmdb_id": 940009,
+        "poster": true,
+        "source_url": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond"
+      }
+    ],
+    "workflows": {
+      "update_movies": {
+        "run_id": 43793292311,
+        "steps": "proof/import/provenance/compliance/TMDB/enrichment/backfill/validation/backup succeeded; final Neon sync failed P1001",
+        "log": "Imported 6 verified film announcements; future verified premieres 51; TMDB requests 180/180; poster resolution enriched=5 ambiguous=0 unresolved=1"
+      },
+      "pages": {
+        "run_id": 43793646553,
+        "head_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+        "conclusion": "success"
+      },
+      "neon": {
+        "status": "blocked",
+        "error": "Prisma P1001; ep-snowy-wave-b4gwato2.c-6.us-east-2.aws.neon.tech:5432; no retry"
+      }
+    },
+    "production": {
+      "vercel": {
+        "status": "READY",
+        "deployment_id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+        "sha": "f7c964a72b605693bc08bc24c4f855bc9463e566",
+        "domain": "https://cinelva.vercel.app",
+        "http_status": 200,
+        "streaming_rows": 457,
+        "missing_posters": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z",
+        "new_batch_present": false,
+        "manual_deploy": "not attempted"
+      },
+      "github_pages": {
+        "run_id": 43793646553,
+        "head_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+        "conclusion": "success",
+        "direct_public_json_acceptance": "not verified in this run"
+      }
+    },
+    "source_audit": {
+      "confirmed_rss_atom_feeds": 0,
+      "service_catalog": 12,
+      "automatic_premiere_discovery_enabled": 0,
+      "announcement_import_type": "official-source-reviewed manual records; not automated discovery"
+    },
+    "user_data": "No watch history, ratings, reviews, bookmarks, localStorage keys or backups modified.",
+    "documentation_pr": {
+      "number": 872,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/872",
+      "status": "open; exact-head checks pending"
+    }
+  },
+  "latest_live_checkpoint_20261116_0248": {
+    "checked_at": "2026-11-16T02:48:38Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issue_239": "open",
+    "issue_593": {
+      "state": "closed",
+      "state_reason": "completed",
+      "public_boxoffice": {
+        "http_status": 200,
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27",
+        "scope": "all_time + by_year"
+      }
+    },
+    "issue_244": {
+      "state": "open",
+      "state_reason": "reopened",
+      "completion": "not met: new official streaming rows are in main/Pages but not Vercel production; no calendar rendering verification"
+    },
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      683
+    ],
+    "open_pull_requests": [
+      872
+    ],
+    "exact_source_receipt": {
+      "head_sha": "aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea",
+      "verified_at": "2026-11-16T02:21:56Z",
+      "digest": "616cfe9735e0af4a2ebcfdb994bb39f14b7be06d8ef9eda1fc2219fd6288b028",
+      "relevant_executable_entries": 1399,
+      "required_workflows": "7 release-required workflows, all green; full Python contract suite passed; 19 jobs across 8 runs passed"
+    },
+    "latest_main_update": {
+      "sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+      "run": 43793292311,
+      "conclusion": "failure_after_json_commit",
+      "imported_announcements": 6,
+      "tmdb_poster_resolved": 5,
+      "tmdb_unresolved": 1,
+      "tmdb_requests": "180/180"
+    },
+    "main_public_data": {
+      "boxoffice": {
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27",
+        "http_status": 200,
+        "source": "raw main JSON verified"
+      },
+      "streaming": {
+        "rows": 463,
+        "poster_missing": 1,
+        "generated_at": "2026-11-16T02:37:34.045085+00:00",
+        "missing_title": "Proxies",
+        "http_status": 200,
+        "source": "raw main JSON verified"
+      }
+    },
+    "official_imports": [
+      {
+        "title": "ミニオンズ＆モンスターズ",
+        "original_title": "Minions & Monsters",
+        "date": "2026-11-11",
+        "service": "U-NEXT",
+        "tmdb_id": 1315772,
+        "poster": true,
+        "source_url": "https://www.unext.co.jp/ja/press-room/2026-11-unext-lineup"
+      },
+      {
+        "title": "Steps",
+        "date": "2026-11-20",
+        "service": "Netflix",
+        "tmdb_id": 1595124,
+        "poster": true,
+        "source_url": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond"
+      },
+      {
+        "title": "Secrets",
+        "date": "2026-12-03",
+        "service": "Netflix",
+        "tmdb_id": 1616675,
+        "poster": true,
+        "source_url": "https://about.netflix.com/en/news/netflix-unveils-teaser-for-secrets-ravi-bharwanis-first-film-in-eight-years-premiering-december-3"
+      },
+      {
+        "title": "In Waves",
+        "date": "2026-12-11",
+        "service": "Netflix",
+        "tmdb_id": 947502,
+        "poster": true,
+        "source_url": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond"
+      },
+      {
+        "title": "Proxies",
+        "date": "2026-12-11",
+        "service": "Netflix",
+        "tmdb_id": null,
+        "poster": false,
+        "identity_status": "ambiguous; do not assign",
+        "source_url": "https://about.netflix.com/en/news/proxies-is-coming-to-netflix-on-december-11"
+      },
+      {
+        "title": "Ray Gunn",
+        "date": "2026-12-18",
+        "service": "Netflix",
+        "tmdb_id": 940009,
+        "poster": true,
+        "source_url": "https://about.netflix.com/en/news/netflix-previews-its-animation-slate-for-2026-and-beyond"
+      }
+    ],
+    "workflows": {
+      "update_movies": {
+        "run_id": 43793292311,
+        "steps": "proof/import/provenance/compliance/TMDB/enrichment/backfill/validation/backup succeeded; final Neon sync failed P1001",
+        "log": "Imported 6 verified film announcements; future verified premieres 51; TMDB requests 180/180; poster resolution enriched=5 ambiguous=0 unresolved=1"
+      },
+      "pages": {
+        "run_id": 43793646553,
+        "head_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+        "conclusion": "success"
+      },
+      "neon": {
+        "status": "blocked",
+        "error": "Prisma P1001; ep-snowy-wave-b4gwato2.c-6.us-east-2.aws.neon.tech:5432; no retry"
+      }
+    },
+    "production": {
+      "vercel": {
+        "status": "READY",
+        "deployment_id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+        "sha": "f7c964a72b605693bc08bc24c4f855bc9463e566",
+        "domain": "https://cinelva.vercel.app",
+        "http_status": 200,
+        "streaming_rows": 457,
+        "missing_posters": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z",
+        "new_batch_present": false,
+        "manual_deploy": "not attempted"
+      },
+      "github_pages": {
+        "run_id": 43793646553,
+        "head_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+        "conclusion": "success",
+        "direct_public_json_acceptance": "not verified in this run"
+      }
+    },
+    "source_audit": {
+      "confirmed_rss_atom_feeds": 0,
+      "service_catalog": 12,
+      "automatic_premiere_discovery_enabled": 0,
+      "announcement_import_type": "official-source-reviewed manual records; not automated discovery"
+    },
+    "user_data": "No watch history, ratings, reviews, bookmarks, localStorage keys or backups modified."
+  },
+  "current_streaming_import_20261116": {
+    "main_sha": "1717965d5e6a000e1a97948e64237c6366076764",
+    "previous_production": {
+      "rows": 457,
+      "poster_rows": 457,
+      "missing_posters": 0,
+      "generated_at": "2026-11-15T08:42:39.808Z"
+    },
+    "current_production": {
+      "rows": 463,
+      "poster_rows": 463,
+      "missing_posters": 0,
+      "generated_at": "2026-11-16T08:05:29.780681+00:00"
+    },
+    "added_rows": 6,
+    "removed_rows": 0,
+    "official_sources_verified": 6,
+    "tmdb_id_verified": 5,
+    "poster_missing": 0,
+    "identity_unresolved": [
+      "Proxies"
+    ],
+    "added_titles": [
+      {
+        "title": "ミニオンズ＆モンスターズ",
+        "date": "2026-11-11",
+        "service": "U-NEXT",
+        "tmdb_id": 1315772,
+        "poster": true
+      },
+      {
+        "title": "Steps",
+        "date": "2026-11-20",
+        "service": "Netflix",
+        "tmdb_id": 1595124,
+        "poster": true
+      },
+      {
+        "title": "Secrets",
+        "date": "2026-12-03",
+        "service": "Netflix",
+        "tmdb_id": 1616675,
+        "poster": true
+      },
+      {
+        "title": "In Waves",
+        "date": "2026-12-11",
+        "service": "Netflix",
+        "tmdb_id": 947502,
+        "poster": true
+      },
+      {
+        "title": "Proxies",
+        "date": "2026-12-11",
+        "service": "Netflix",
+        "tmdb_id": null,
+        "poster": true,
+        "identity_status": "unverified fuzzy_search_fallback"
+      },
+      {
+        "title": "Ray Gunn",
+        "date": "2026-12-18",
+        "service": "Netflix",
+        "tmdb_id": 940009,
+        "poster": true
+      }
+    ],
+    "update_run": {
+      "id": 43828393897,
+      "name": "Refresh official streaming calendar",
+      "event": "schedule",
+      "status": "completed",
+      "conclusion": "success",
+      "commit": "1717965d5e6a000e1a97948e64237c6366076764"
+    },
+    "neon": "No sync in refresh run; prior P1001 on 43793292311 was not retried.",
+    "user_data": "watch history, rating, review, bookmark and backups untouched."
+  },
+  "streaming_production_acceptance_20261116": {
+    "status": "in_progress",
+    "boxoffice": {
+      "http": 200,
+      "by_year_rows": 1808,
+      "missing_posters": 0,
+      "all_time_rows": 100
+    },
+    "streaming": {
+      "http": 200,
+      "previous": {
+        "rows": 457,
+        "posters": 457,
+        "missing": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z"
+      },
+      "current": {
+        "rows": 463,
+        "posters": 463,
+        "missing": 0,
+        "generated_at": "2026-11-16T08:05:29.780681+00:00"
+      },
+      "delta": "6 rows added; no removals; 0 posterless"
+    },
+    "added_titles": [
+      {
+        "title": "ミニオンズ＆モンスターズ",
+        "date": "2026-11-11",
+        "service": "U-NEXT",
+        "tmdb_id": 1315772,
+        "poster": true
+      },
+      {
+        "title": "Steps",
+        "date": "2026-11-20",
+        "service": "Netflix",
+        "tmdb_id": 1595124,
+        "poster": true
+      },
+      {
+        "title": "Secrets",
+        "date": "2026-12-03",
+        "service": "Netflix",
+        "tmdb_id": 1616675,
+        "poster": true
+      },
+      {
+        "title": "In Waves",
+        "date": "2026-12-11",
+        "service": "Netflix",
+        "tmdb_id": 947502,
+        "poster": true
+      },
+      {
+        "title": "Proxies",
+        "date": "2026-12-11",
+        "service": "Netflix",
+        "tmdb_id": null,
+        "poster": true,
+        "identity_status": "unverified fuzzy_search_fallback"
+      },
+      {
+        "title": "Ray Gunn",
+        "date": "2026-12-18",
+        "service": "Netflix",
+        "tmdb_id": 940009,
+        "poster": true
+      }
+    ],
+    "official_unext_audit": {
+      "source": "https://www.unext.co.jp/ja/press-room/2026-11-unext-lineup",
+      "result": "all checked November film announcements represented; Ballerina 2026-11-18 has TMDB 541671 and poster. Trenque Lauquen parts 1/2 have poster URLs but no explicit TMDB IDs; no identity inferred."
+    },
+    "browser": {
+      "status": "blocked",
+      "observation": "Authenticated fetch returned HTTP 200 for /streaming.html and data; direct Chrome redirected to Vercel login, so rendered cards/image requests are not verified."
+    },
+    "user_data": "No viewing history, rating, review, bookmark, localStorage or backup changed."
+  },
+  "latest_live_checkpoint_20261116_0306": {
+    "checked_at": "2026-11-16T03:06:17Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      683
+    ],
+    "open_pull_requests": [
+      {
+        "number": 872,
+        "branch": "docs/live-checkpoint-20261116-0248",
+        "observed_head_sha": "401e4f94d2c399dc3efc66182b3c9b1baf5e8870",
+        "state": "open"
+      }
+    ],
+    "issue_593": {
+      "state": "closed",
+      "closed_at": "2026-11-15T14:53:26Z"
+    },
+    "boxoffice": {
+      "main": {
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27"
+      },
+      "production": {
+        "http_status": 200,
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27"
+      }
+    },
+    "issue_244": {
+      "state": "open",
+      "main_streaming": {
+        "rows": 463,
+        "missing_posters": 1,
+        "generated_at": "2026-11-16T02:37:34.045085+00:00"
+      },
+      "announcement_rows": 71,
+      "announcement_rows_matched_in_main": 71,
+      "missing_poster_titles": [
+        "Proxies"
+      ],
+      "production_streaming": {
+        "http_status": 200,
+        "rows": 457,
+        "missing_posters": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z",
+        "six_new_titles_visible": false
+      }
+    },
+    "source_audit": {
+      "confirmed_official_rss_atom_feeds": 0,
+      "provider_count": 12,
+      "auto_premiere_discovery_enabled": 0,
+      "search_results": "Targeted search of official Netflix, Amazon Japan, U-NEXT and Hulu newsroom/pressroom results returned no confirmed RSS/Atom endpoint; registry unchanged."
+    },
+    "updater": {
+      "run_id": 43793292311,
+      "status": "JSON committed; Neon final sync failed",
+      "official_announcements_imported": 6,
+      "tmdb_ids_and_posters_resolved": 5,
+      "ambiguous_unresolved": 1,
+      "tmdb_daily_budget": "180/180",
+      "neon_error": "Prisma P1001"
+    },
+    "production": {
+      "canonical_url": "https://cinelva.vercel.app/",
+      "status": "READY",
+      "deployment_id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+      "deployment_sha": "f7c964a72b605693bc08bc24c4f855bc9463e566",
+      "streaming_page_observation": {
+        "url": "https://cinelva.vercel.app/streaming.html",
+        "browser": "Chrome",
+        "theatrical_entries": 90,
+        "provider_streaming_entries": 3047,
+        "source_status_text": "2026/11/16 7:50:37",
+        "images": {
+          "present": 122,
+          "complete": 17,
+          "broken": 0,
+          "pending_or_lazy": 105
+        },
+        "acceptance": "partial; image loading not complete; six new titles absent"
+      }
+    },
+    "checks": {
+      "pr": 872,
+      "head_sha": "401e4f94d2c399dc3efc66182b3c9b1baf5e8870",
+      "github_actions": {
+        "passed": 4,
+        "total": 4,
+        "run_ids": [
+          43794843140,
+          43794843095,
+          43794843071,
+          43794843044
+        ]
+      },
+      "vercel_backend_status": "failure",
+      "vercel_message": "Deployment rate limited — retry in 24 hours",
+      "vercel_status_at": "2026-11-16T02:53:22Z"
+    },
+    "data_safety": {
+      "watch_history_changed": false,
+      "ratings_changed": false,
+      "reviews_changed": false,
+      "bookmarks_changed": false,
+      "backups_changed": false,
+      "paid_upgrade": false,
+      "scraping": false,
+      "manual_dispatch": false,
+      "manual_deploy": false
+    }
+  },
+  "latest_live_checkpoint_20261116_0323": {
+    "checked_at": "2026-11-16T03:23:01Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      683
+    ],
+    "open_prs": [
+      872
+    ],
+    "issue_593": {
+      "state": "closed",
+      "production_boxoffice_rows": 1908,
+      "missing_posters": 0
+    },
+    "exact_head": {
+      "pr": 872,
+      "sha": "193bae2b9417edd6a705c40f52f4cb342fd2ddd0",
+      "github_actions": "all four latest required workflows successful",
+      "vercel_backend_status": "success; docs-only ignored/no data publication"
+    },
+    "boxoffice": {
+      "main": {
+        "rows": 1908,
+        "missing": 0,
+        "generated_at": "2026-09-27"
+      },
+      "production": {
+        "rows": 1908,
+        "missing": 0,
+        "generated_at": "2026-09-27"
+      }
+    },
+    "streaming": {
+      "main": {
+        "rows": 463,
+        "with_posters": 462,
+        "missing": 1,
+        "missing_title": "Proxies",
+        "generated_at": "2026-11-16T02:37:34.045085+00:00"
+      },
+      "production": {
+        "rows": 457,
+        "with_posters": 457,
+        "missing": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z"
+      },
+      "main_only": [
+        {
+          "title": "ミニオンズ＆モンスターズ",
+          "tmdbId": 1315772
+        },
+        {
+          "title": "Steps",
+          "tmdbId": 1595124
+        },
+        {
+          "title": "Secrets",
+          "tmdbId": 1616675
+        },
+        {
+          "title": "In Waves",
+          "tmdbId": 947502
+        },
+        {
+          "title": "Proxies",
+          "tmdbId": null
+        },
+        {
+          "title": "Ray Gunn",
+          "tmdbId": 940009
+        }
+      ]
+    },
+    "official_feeds": {
+      "registered_rss_atom": 0,
+      "providers": 12,
+      "auto_premiere_discovery_enabled": 0,
+      "apple_tv_feed": "requires Apple Services Performance Partners Program; no approved CINELVA access"
+    },
+    "workflow": {
+      "name": "Update movie data",
+      "run": 43793292311,
+      "result": "main JSON snapshot committed; final DB sync failed P1001; no retry"
+    },
+    "next_action": "exact-head checks, merge docs checkpoint if green, then prepare official Spanish alias resolver regression without assigning an ID; do not manual-dispatch updater, retry Neon, deploy manually, or close #244"
+  },
+  "latest_live_checkpoint_20261116_0329": {
+    "checked_at": "2026-11-16T03:29:12Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "open_issues": [
+      239,
+      242,
+      243,
+      244,
+      585,
+      683
+    ],
+    "open_prs": [
+      872
+    ],
+    "issue_593": {
+      "state": "closed",
+      "production_boxoffice_rows": 1908,
+      "missing_posters": 0
+    },
+    "streaming": {
+      "main": {
+        "rows": 463,
+        "with_posters": 462,
+        "missing": 1,
+        "title": "Proxies",
+        "tmdb_id": null,
+        "generated_at": "2026-11-16T02:37:34.045085+00:00"
+      },
+      "production": {
+        "http_status": 200,
+        "rows": 457,
+        "with_posters": 457,
+        "missing": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z"
+      },
+      "main_only_rows": 6,
+      "production_contains_main_only_rows": false
+    },
+    "update_movies": {
+      "run": 43793292311,
+      "result": "JSON snapshot committed; final Neon direct sync failed once with Prisma P1001; no retry"
+    },
+    "official_proxies_title": {
+      "title": "En nombre de otro",
+      "source": "Netflix Spain newsroom; search-alias lead only; no TMDB identity"
+    },
+    "pr_872": {
+      "head_before_checkpoint": "d88d523556cee295c41cd342f970deca97ddd5d5",
+      "new_code": "scripts/enrich_streaming_posters.py + tests/test_streaming_poster_enrichment.py; checks pending"
+    },
+    "vercel": {
+      "main_commit_status": "failure with build-rate-limit target",
+      "production_deployment": "older READY deployment; production JSON stale; no manual deployment"
+    },
+    "next_action": "Wait for exact-head required Actions on PR #872; then let the next scheduled updater (18:17 UTC daily) query the official alias. Only accept one exact TMDB title+2026 result; verify public JSON/card after normal production release."
+  },
+  "latest_live_checkpoint_20261116_0402": {
+    "checked_at": "2026-11-16T04:02:30Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issues": {
+      "593": "closed",
+      "open": [
+        239,
+        242,
+        243,
+        244,
+        585,
+        683
+      ]
+    },
+    "open_prs": [
+      872
+    ],
+    "exact_head": {
+      "pr": 872,
+      "ci_head": "23f48d7f67e59e618a27b0a3b593f806acdbe341",
+      "github_actions": "8/8 success",
+      "vercel_backend_status": "failure build-rate-limit"
+    },
+    "boxoffice_production": {
+      "http": 200,
+      "rows": 1908,
+      "with_posters": 1908,
+      "missing": 0,
+      "generated_at": "2026-09-27"
+    },
+    "streaming": {
+      "main": {
+        "rows": 463,
+        "with_posters": 462,
+        "missing": 1,
+        "title": "Proxies",
+        "tmdb_id": null,
+        "generated_at": "2026-11-16T02:37:34.045085+00:00"
+      },
+      "production": {
+        "http": 200,
+        "rows": 457,
+        "with_posters": 457,
+        "missing": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z"
+      },
+      "main_only_rows": 6
+    },
+    "production_deployment": {
+      "id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+      "state": "READY",
+      "sha": "f7c964a72b605693bc08bc24c4f855bc9463e566"
+    },
+    "update_movies": {
+      "latest_run": 43793292311,
+      "status": "failed after JSON snapshot commit at final Neon P1001; no retry"
+    },
+    "merge_gate": "Vercel check is failing; GitHub branch-protection endpoint returned 403, so requiredness cannot be verified. No blind merge.",
+    "validated_code_sha": "d88d523556cee295c41cd342f970deca97ddd5d5",
+    "ci_tested_pr_head": "23f48d7f67e59e618a27b0a3b593f806acdbe341",
+    "next_action": "Keep #872 open while provider build-rate-limit check fails; recheck next run; after normal release gate clears, use the standard merge and scheduled official updater, then verify production JSON/cards."
+  },
+  "latest_live_checkpoint_20261116_0416": {
+    "checked_at": "2026-11-16T04:16:40Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed"
+    },
+    "open_prs": [
+      872
+    ],
+    "pr_872": {
+      "current_head": "81efe523286a590027aea4c867c9f306787689b6",
+      "tested_code_head": "23f48d7f67e59e618a27b0a3b593f806acdbe341",
+      "mergeable_state": "unstable",
+      "status": "open"
+    },
+    "exact_head_ci": {
+      "successful": 7,
+      "pending_retry": [
+        "Validate frontend run 43802185130 attempt 2"
+      ],
+      "first_attempt_failure": "Comparative performance `git fetch` received HTTP 503; browser regression tests themselves passed."
+    },
+    "production": {
+      "boxoffice": {
+        "http": 200,
+        "rows": 1908,
+        "posterless": 0,
+        "generated_at": "2026-09-27"
+      },
+      "streaming": {
+        "http": 200,
+        "rows": 457,
+        "posterless": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z"
+      },
+      "main_streaming": {
+        "rows": 463,
+        "posterless": 1,
+        "unresolved": [
+          "Proxies"
+        ]
+      },
+      "ready_deployment": {
+        "id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+        "sha": "f7c964a72b605693bc08bc24c4f855bc9463e566"
+      }
+    },
+    "blockers": {
+      "vercel": "api-deployments-free-per-day >100, provider says retry in one day (bot report 2026-11-16T02:53:21Z).",
+      "neon": "One final sync failure: Prisma P1001 in update-movies run 43793292311; no retry.",
+      "tmdb": "No credential/API search result in this session; exact ID/poster for Proxies remains unassigned pending official workflow."
+    },
+    "source_audit": {
+      "approved_feeds_found": 0,
+      "findings": [
+        "Netflix newsroom is a per-announcement official source; no public catalog feed endpoint/terms were established in this audit.",
+        "Prime Video official mRSS is a content-delivery route for partner submissions, not a public availability catalog; Prime Video APIs are restricted to managed partners.",
+        "U-NEXT help confirms consumer-facing catalog browsing and monthly recommendations, not an authorized API/feed for ingestion."
+      ],
+      "refs": [
+        "https://videocentral.amazon.com/support/mrss-delivery?language=en_US",
+        "https://videocentral.amazon.com/support/prime-video-apis?language=en_US",
+        "https://help.unext.jp/guide/detail/content-being-delivered-of-vod",
+        "https://developer.apple.com/jp/documentation/appletvfeed"
+      ]
+    },
+    "user_data": "Viewing records, ratings, reviews, bookmarks and backups unchanged."
+  },
+  "latest_live_checkpoint_20261116_0420": {
+    "checked_at": "2026-11-16T04:20:00Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "current_pr": 872,
+    "tested_head": "72707f632ed294c6baad4167911608bd0ddc2e3f",
+    "issue_593": "closed; production 1,908 rows, 0 posterless",
+    "issue_244": "open",
+    "validation_failure": "Python test_checkpoint_is_valid rejected unsupported state status ci_pending; corrected to in_progress.",
+    "production_blocker": "Vercel api-deployments-free-per-day (>100) blocks new release; no bypass.",
+    "next": "Wait for the new exact-head checks; inspect only any remaining real failures."
+  },
+  "latest_live_checkpoint_20261116_0434": {
+    "checked_at": "2026-11-16T04:34:30Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issue_239": "open",
+    "issue_244": "open",
+    "issue_593": {
+      "state": "closed",
+      "production_boxoffice": {
+        "http": 200,
+        "by_year_rows": 1808,
+        "by_year_missing_posters": 0,
+        "all_time_rows": 100,
+        "all_time_missing_posters": 0,
+        "generated_at": "2026-09-27"
+      }
+    },
+    "open_prs": [
+      {
+        "number": 872,
+        "head_sha": "55db68fc114ce54b6d9e9c849b4dfffe3420b5fb",
+        "title": "fix: resolve Proxies poster through verified Spanish alias"
+      }
+    ],
+    "exact_head_ci": {
+      "head_sha": "55db68fc114ce54b6d9e9c849b4dfffe3420b5fb",
+      "workflows": 8,
+      "success": 8,
+      "details": "Validate frontend run 43803389009 attempt 1 failed only on pre-existing tests/cinelva-provider-list-browser.cjs:46 offline-status wait timeout (15s); targeted attempt 2 passed. Seven other workflows passed."
+    },
+    "main_streaming": {
+      "rows": 463,
+      "with_posters": 462,
+      "missing": 1,
+      "unresolved": [
+        "Proxies"
+      ],
+      "official_announcement_rows": [
+        "Minions & Monsters",
+        "Steps",
+        "Secrets",
+        "In Waves",
+        "Proxies",
+        "Ray Gunn"
+      ],
+      "resolved_posters": 5
+    },
+    "production_streaming": {
+      "url": "https://cinelva.vercel.app/data/streaming.json",
+      "http": 200,
+      "rows": 457,
+      "with_posters": 457,
+      "missing_posters": 0,
+      "generated_at": "2026-11-15T08:42:39.808Z",
+      "new_official_batch_present": false
+    },
+    "update_movies": {
+      "latest_run": 43793292311,
+      "active_runs": 0,
+      "schedule": "17 18 * * * UTC",
+      "result": "validated JSON committed to main; final Neon direct sync failed once with Prisma P1001; no retry"
+    },
+    "production": {
+      "canonical_url": "https://cinelva.vercel.app/",
+      "status": "READY",
+      "deployment_id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+      "sha": "f7c964a72b605693bc08bc24c4f855bc9463e566",
+      "latest_attempt": "Vercel rejected new deployment with api-deployments-free-per-day (>100/day; retry in one day as of 2026-11-16T02:53Z). Do not manually deploy, upgrade, or bypass."
+    },
+    "source_review": {
+      "official_alias": "Netflix Spain confirms the title En nombre de otro and global Netflix date 2026-12-11; https://about.netflix.com/es_es/news/proxies-is-coming-to-netflix-on-december-11",
+      "tmdb": "Official TMDB site/API search is blocked in this environment; alias is query-only; no TMDB id/poster guessed.",
+      "approved_public_feeds": 0
+    },
+    "user_data": "Viewing records, ratings, reviews, bookmarks and backups unchanged.",
+    "next": "Keep PR #872 open. Require exact-head CI on the checkpoint commit. Do not merge/deploy while Vercel rate-limit gate is failing. When normal release access is available, make one standard release, then let the existing scheduled updater run once. Confirm Proxies official TMDB identity if unique; re-fetch production JSON and verify the actual streaming card/poster. Keep #244 open until this acceptance passes."
+  },
+  "latest_live_checkpoint_20261116_0446": {
+    "checked_at": "2026-11-16T04:46:00Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed"
+    },
+    "open_prs": [
+      {
+        "number": 872,
+        "head_sha": "6486cff7e420bf2a25ad90cb5254558d8eb832ed",
+        "title": "fix: resolve Proxies poster through verified Spanish alias",
+        "state": "open"
+      }
+    ],
+    "boxoffice": {
+      "public_http": 200,
+      "by_year_rows": 1808,
+      "by_year_missing_posters": 0,
+      "all_time_rows": 100,
+      "all_time_missing_posters": 0,
+      "generated_at": "2026-09-27"
+    },
+    "streaming": {
+      "main": {
+        "rows": 463,
+        "with_posters": 462,
+        "missing": 1,
+        "unresolved": [
+          "Proxies"
+        ]
+      },
+      "production_json": {
+        "http": 200,
+        "rows": 457,
+        "with_posters": 457,
+        "missing": 0,
+        "generated_at": "2026-11-15T08:42:39.808Z",
+        "six_official_announcements_present": false
+      },
+      "production_page": {
+        "url": "https://cinelva.vercel.app/streaming.html",
+        "browser": "Chrome",
+        "search": "Proxies",
+        "result_count": 0,
+        "visible_page_summary": "The production search returned 0 results for Proxies. This is a negative acceptance result, not a successful publication. Page reported 90 theatrical works and 2,783 currently available streaming works."
+      }
+    },
+    "exact_head_ci": {
+      "head_sha": "6486cff7e420bf2a25ad90cb5254558d8eb832ed",
+      "workflows": 8,
+      "success": 7,
+      "in_progress": 1,
+      "details": "Visual QA, Python contract, smoke, mobile layout, reproducible backend build, completeness scorecard, and autonomous quality gate succeeded. Validate frontend has one in-progress Chromium/WebKit reported-regression job; other jobs succeeded or skipped."
+    },
+    "production": {
+      "status": "READY",
+      "deployment_id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+      "sha": "f7c964a72b605693bc08bc24c4f855bc9463e566",
+      "blocker": "New deployment attempts are blocked by Vercel Hobby daily cap api-deployments-free-per-day (>100/day) reported 2026-11-16T02:53Z. No manual deploy, upgrade or bypass."
+    },
+    "updater": {
+      "latest_run": 43793292311,
+      "active_runs": 0,
+      "schedule": "17 18 * * * UTC",
+      "result": "Validated JSON snapshot committed to main; final Neon direct sync failed once with Prisma P1001. No retry or manual dispatch."
+    },
+    "identity": {
+      "proxies": "Netflix Spain official title En nombre de otro; strict TMDB title/year identity not yet confirmed in runtime. TMDB search unavailable; no ID/poster guessed."
+    },
+    "user_data": "Viewing records, ratings, reviews, bookmarks and backups unchanged.",
+    "next": "Complete the one in-progress exact-head Validate frontend run; keep PR #872 open while Vercel Hobby release cap blocks new deployment. When normal release access is restored, use the standard release once and the existing scheduled updater; verify Proxies official identity, public JSON and rendered calendar card/poster. Keep #244 open until production acceptance passes."
+  },
+  "latest_live_checkpoint_20261116_0504": {
+    "checked_at": "2026-11-16T05:07:58Z",
+    "main_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4",
+    "issues": {
+      "239": "open",
+      "242": "open",
+      "243": "open",
+      "244": "open",
+      "585": "open",
+      "593": "closed",
+      "683": "open"
+    },
+    "open_prs": [
+      {
+        "number": 872,
+        "head_sha": "1b7142e530f1bab7e2aa89c238c95c71bcc05c3c",
+        "title": "fix: resolve Proxies poster through verified Spanish alias",
+        "state": "open"
+      }
+    ],
+    "boxoffice": {
+      "public_http": 200,
+      "generated_at": "2026-09-27",
+      "by_year_rows": 1808,
+      "by_year_missing_posters": 0,
+      "all_time_rows": 100,
+      "all_time_missing_posters": 0
+    },
+    "streaming": {
+      "main": {
+        "generated_at": "2026-11-16T02:37:34.045085+00:00",
+        "rows": 463,
+        "with_posters": 462,
+        "missing": [
+          "Proxies"
+        ]
+      },
+      "production_json": {
+        "http": 200,
+        "generated_at": "2026-11-15T08:42:39.808Z",
+        "rows": 457,
+        "with_posters": 457,
+        "missing": 0,
+        "main_only_official_rows": [
+          {
+            "title": "ミニオンズ＆モンスターズ",
+            "id": 1315772,
+            "service": "U-NEXT",
+            "poster": true
+          },
+          {
+            "title": "Steps",
+            "id": 1595124,
+            "service": "Netflix",
+            "poster": true
+          },
+          {
+            "title": "Secrets",
+            "id": 1616675,
+            "service": "Netflix",
+            "poster": true
+          },
+          {
+            "title": "In Waves",
+            "id": 947502,
+            "service": "Netflix",
+            "poster": true
+          },
+          {
+            "title": "Proxies",
+            "id": null,
+            "service": "Netflix",
+            "poster": false
+          },
+          {
+            "title": "Ray Gunn",
+            "id": 940009,
+            "service": "Netflix",
+            "poster": true
+          }
+        ]
+      }
+    },
+    "exact_head_ci": {
+      "tested_source_sha": "1b7142e530f1bab7e2aa89c238c95c71bcc05c3c",
+      "workflows": 8,
+      "success": 8,
+      "failed": 0,
+      "in_progress": 0,
+      "run_ids": [
+        43805855435,
+        43805855531,
+        43805855445,
+        43805855462,
+        43805855491,
+        43805855476,
+        43805855466,
+        43805855478
+      ],
+      "note": "These are green on the Proxies source head. The documentation-only checkpoint commits on top require their own fresh exact-head checks."
+    },
+    "vercel": {
+      "production": "READY",
+      "deployment_id": "dpl_8C9oBim8Cvnuiu33gTnjGB6XEpDn",
+      "deployed_sha": "f7c964a72b605693bc08bc24c4f855bc9463e566",
+      "main_statuses": [
+        {
+          "context": "Vercel – cinema-calendar",
+          "state": "failure",
+          "target_url": "https://vercel.com/vongole1?upgradeToPro=build-rate-limit"
+        },
+        {
+          "context": "Vercel – backend",
+          "state": "failure",
+          "target_url": "https://vercel.com/vongole1?upgradeToPro=build-rate-limit"
+        }
+      ],
+      "pr_backend_status": "failure",
+      "blocker": "Vercel Hobby deployment/build-rate-limit; status target https://vercel.com/vongole1?upgradeToPro=build-rate-limit. Prior bot report at 2026-11-16T02:53Z identified api-deployments-free-per-day (>100/day). No paid upgrade, manual deployment, bypass, or quota workaround.",
+      "last_checked_at": "2026-11-16T05:07:58Z"
+    },
+    "updater": {
+      "latest_run": 43793292311,
+      "last_known_active_runs": 0,
+      "next_schedule": "17 18 * * * UTC",
+      "result": "Validated JSON snapshot committed; one final Neon direct sync failed with Prisma P1001. No retry or manual dispatch.",
+      "active_runs_status": "Last recorded idle at 2026-11-16T04:46:00Z; no dispatch issued."
+    },
+    "source_rights": {
+      "confirmed_public_approved_rss_atom_feeds": 0,
+      "streaming_services_automatic_discovery_enabled": 0,
+      "services_reviewed": 12
+    },
+    "proxies": {
+      "official_alt_title": "En nombre de otro",
+      "official_source": "https://about.netflix.com/es_es/news/proxies-is-coming-to-netflix-on-december-11",
+      "announced_release_date": "2026-12-11",
+      "director": "Oriol Paulo",
+      "tmdb_identity": "unconfirmed",
+      "reason": "TMDB movie pages are blocked by robots.txt in this environment; official API requires existing secret-backed updater. No TMDB ID/poster guessed."
+    },
+    "production_ui_observation": {
+      "observed_at": "2026-11-16T04:46:00Z",
+      "url": "https://cinelva.vercel.app/streaming.html",
+      "browser": "Chrome",
+      "query": "Proxies",
+      "result_count": 0,
+      "interpretation": "The current production UI did not show the new title; negative acceptance, not a release pass."
+    },
+    "user_data": "Watch history, ratings, reviews, bookmarks and backups unchanged.",
+    "next_action": "Keep #872 and #244 open. Do not merge or deploy while Vercel release status is failing. Once the normal Hobby limit clears, perform one standard release; then let the existing scheduled update-movies run, do not dispatch manually, and verify public streaming JSON plus actual cards/posters. Resolve Proxies only if the official TMDB API returns a unique exact title/year identity. Do not retry Neon until endpoint state changes.",
+    "current_branch_head_before_final_checkpoint": "a22e33a4ac78850355a9b0ef73e14dde9e46caa1"
+  },
+  "current_branch_head_before_final_checkpoint": "a22e33a4ac78850355a9b0ef73e14dde9e46caa1",
+  "latest_live_checkpoint_20261116_0923": {
+    "checked_at": "2026-11-16T09:23:23Z",
+    "main_sha": "1717965d5e6a000e1a97948e64237c6366076764",
+    "issue_239": "open",
+    "issue_593": {
+      "state": "closed",
+      "state_reason": "completed",
+      "production_boxoffice": {
+        "http": 200,
+        "by_year_rows": 1808,
+        "missing_posters": 0,
+        "all_time_rows": 100
+      }
+    },
+    "issue_244": {
+      "state": "open",
+      "completion": "not met: six source-reviewed streaming rows are live, but Proxies identity and rendered-card visual acceptance remain unverified; source-coverage criteria remain open"
+    },
+    "open_prs": [
+      {
+        "number": 872,
+        "state": "open",
+        "head_sha": "96a31be3a7646f3f6d1d137b44a8f8636fded89f",
+        "github_actions": "8/8 success",
+        "vercel_backend": "success",
+        "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4"
+      },
+      {
+        "number": 873,
+        "state": "open",
+        "head_sha": "ca277758491a5ea28f1fcfd2132fd57e1c1aed7d",
+        "github_actions": "9/9 success",
+        "vercel_backend": "failure: build-rate-limit",
+        "base_sha": "8229b678b9c0730a5d412305fd4138a3d844d2e4"
+      }
+    ],
+    "production": {
+      "deployment_id": "dpl_3zN7iLYSBC59aFCsksxSk1keKmDM",
+      "state": "READY",
+      "sha": "1717965d5e6a000e1a97948e64237c6366076764",
+      "boxoffice_rows": 1808,
+      "boxoffice_missing": 0,
+      "all_time_rows": 100,
+      "all_time_missing": 0,
+      "streaming_rows": 463,
+      "streaming_posters": 463,
+      "streaming_missing": 0,
+      "streaming_generated_at": "2026-11-16T08:05:29.780681+00:00"
+    },
+    "streaming_delta": {
+      "from_rows": 457,
+      "to_rows": 463,
+      "added_rows": 6,
+      "removed_rows": 0,
+      "added_titles": [
+        {
+          "title": "ミニオンズ＆モンスターズ",
+          "date": "2026-11-11",
+          "service": "U-NEXT",
+          "tmdb_id": 1315772,
+          "poster": true
+        },
+        {
+          "title": "Steps",
+          "date": "2026-11-20",
+          "service": "Netflix",
+          "tmdb_id": 1595124,
+          "poster": true
+        },
+        {
+          "title": "Secrets",
+          "date": "2026-12-03",
+          "service": "Netflix",
+          "tmdb_id": 1616675,
+          "poster": true
+        },
+        {
+          "title": "In Waves",
+          "date": "2026-12-11",
+          "service": "Netflix",
+          "tmdb_id": 947502,
+          "poster": true
+        },
+        {
+          "title": "Proxies",
+          "date": "2026-12-11",
+          "service": "Netflix",
+          "tmdb_id": null,
+          "poster": true,
+          "identity_status": "unverified fuzzy_search_fallback"
+        },
+        {
+          "title": "Ray Gunn",
+          "date": "2026-12-18",
+          "service": "Netflix",
+          "tmdb_id": 940009,
+          "poster": true
+        }
+      ]
+    },
+    "latest_update_run": {
+      "id": 43828393897,
+      "conclusion": "success",
+      "name": "Refresh official streaming calendar"
+    },
+    "source_registry": {
+      "confirmed_rss_atom": 0,
+      "provider_services": 12,
+      "premiere_discovery_enabled": 0
+    },
+    "official_unext_audit": {
+      "source": "https://www.unext.co.jp/ja/press-room/2026-11-unext-lineup",
+      "films_represented": true,
+      "ballerina": {
+        "date": "2026-11-18",
+        "tmdb_id": 541671,
+        "poster": true
+      },
+      "trenque_lauquen_parts": {
+        "poster": true,
+        "tmdb_ids_missing": true
+      }
+    },
+    "browser_visual": {
+      "status": "not_verified",
+      "reason": "Chrome direct deployment navigation redirected to Vercel login; authenticated server fetch returned HTTP 200 HTML/JSON only"
+    },
+    "neon": {
+      "prior_run": 43793292311,
+      "result": "one final Prisma P1001; not retried"
+    },
+    "safety": "No viewing history/rating/review/bookmark/backup changes; no manual dispatch, deployment, quota bypass or paid action."
   }
 }

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T10:50:00Z",
+  "updated_at": "2026-11-16T10:57:37Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
   "branch": "fix/recheck-curated-fuzzy-streaming-id-20261116",
-  "head_sha": "c909bbce2759df78a59ae53b4a02deeefc0d849c",
+  "head_sha": "9fd4bfd3e490a0e46fd3f17f37ba0e039350b628",
   "pull_request": 874,
   "work_items": [
     {
@@ -828,18 +828,19 @@
     {
       "id": "P0-244-PROXIES-IDENTITY-RECHECK-20261116",
       "title": "Recheck curated fuzzy-poster rows for strict TMDB identity",
-      "status": "in_progress",
+      "status": "blocked",
       "issue": 244,
       "pull_request": {
         "number": 874,
         "url": "https://github.com/vongolebianco7/cinema-calendar/pull/874",
-        "branch": "fix/recheck-curated-fuzzy-streaming-id-20261116",
-        "head_sha": "c909bbce2759df78a59ae53b4a02deeefc0d849c"
+        "head_sha": "9fd4bfd3e490a0e46fd3f17f37ba0e039350b628"
       },
       "acceptance": "For the explicitly reviewed Proxies / En nombre de otro alias, revisit only an existing fuzzy_search_fallback row with no saved identity; replace the fallback poster and assign an ID only for one exact title plus 2026 TMDB result. Ambiguous, wrong-year, failed, or unavailable lookups must preserve the existing row.",
       "implementation": "scripts/enrich_streaming_posters.py and tests/test_streaming_poster_enrichment.py; no public dataset or user storage mutation.",
       "verification": "Three deterministic regression cases added. Exact-head GitHub Actions pending. Current official updater already ran successfully but skips populated posters; normal scheduled run after safe release is required for data acceptance.",
-      "blocker": "Main Vercel publication attempt for 66b04cc failed its production source-proof gate (receipt source aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea; current digest 3965f6aa23fead1d7faae1ac6bd4d65989e86d9c9fa7f46d6780466a66c27656 vs verified digest 616cfe9735e0af4a2ebcfdb994bb39f14b7be06d8ef9eda1fc2219fd6288b028). Separate PR #873 Vercel backend is rate-limited for 24h. No bypass or manual deploy."
+      "blocker": "Vercel Hobby build rate limit on PR previews and stale main production-proof receipt (head aaa160a2..., digest 616cfe97...); no deployment or bypass.",
+      "ci": "All 8 exact-head PR Actions succeeded: runs 43852552692, 43852552757, 43852552699, 43852552526, 43852552595, 43852552729, 43852552697, 43852552779. Vercel backend check fails with build-rate-limit.",
+      "next_action": "Wait for normal Vercel reset; refresh exact-source proof only after required CI evidence is verified for the executable source, then run normal release/production acceptance. Do not merge until release gate passes."
     }
   ],
   "verification": [
@@ -5847,5 +5848,44 @@
       "focus": "strictly recheck only curated fuzzy fallback identity"
     },
     "safety": "No scraping, paid actions, manual dispatch, Neon retry, manual deploy, or user-storage edits."
+  },
+  "live_snapshot": {
+    "observed_at": "2026-11-16T10:57:37Z",
+    "main_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
+    "open_issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed"
+    },
+    "open_prs": [
+      873,
+      874
+    ],
+    "public_boxoffice": {
+      "http": 200,
+      "generated_at": "2026-09-27",
+      "by_year_rows": 1808,
+      "by_year_missing_posters": 0,
+      "all_time_rows": 100,
+      "all_time_missing_posters": 0
+    },
+    "public_streaming": {
+      "http": 200,
+      "generated_at": "2026-11-16T08:05:29.780681+00:00",
+      "rows": 463,
+      "missing_posters": 0,
+      "proxies": {
+        "date": "2026-12-11",
+        "poster_match_status": "fuzzy_search_fallback",
+        "verified_tmdb_id": false
+      }
+    },
+    "pr874_exact_head": "9fd4bfd3e490a0e46fd3f17f37ba0e039350b628",
+    "pr874_required_actions": "8/8 success",
+    "pr874_vercel": "failure: build-rate-limit; no deploy",
+    "canonical_production": {
+      "state": "READY",
+      "sha": "1717965d5e6a000e1a97948e64237c6366076764"
+    }
   }
 }

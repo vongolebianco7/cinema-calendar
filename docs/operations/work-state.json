@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T01:55:00Z",
+  "updated_at": "2026-11-16T02:21:56Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
   "branch": "fix/trigger-update-after-source-proof-20261116",
-  "head_sha": "c5db137a082062d4687cb4ed55ba7f299964b40a",
+  "head_sha": "aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea",
   "pull_request": 871,
   "work_items": [
     {
@@ -1184,6 +1184,30 @@
     {
       "check": "PR #868 proof recovery",
       "result": "Receipt now points to exact CI-tested head 7179d04dbe2f66626ffc10ebcdbaca24a161ab86; new PR #868 updates runbook and live checkpoint. Exact-head CI pending."
+    },
+    {
+      "check": "PR #871 source exact-head CI",
+      "result": "All seven required workflows succeeded on exact source head aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea; the additional Python contract suite passed. Eight workflow runs contained 19 jobs, all successful. The WebKit offline-provider test race was fixed in the existing PR with deterministic single-route state, without weakening assertions.",
+      "run_ids": [
+        43790546117,
+        43790545949,
+        43790546037,
+        43790545998,
+        43790545903,
+        43790545948,
+        43790545955,
+        43790546151
+      ],
+      "source_digest": "616cfe9735e0af4a2ebcfdb994bb39f14b7be06d8ef9eda1fc2219fd6288b028",
+      "source_tree_sha": "9cf1e0ff5d103dbdb42cdf1627a8dd40a85745b6"
+    },
+    {
+      "check": "Live public data and streaming source audit 2026-11-16",
+      "result": "On the prior READY production alias, boxoffice is HTTP 200 with 1,808/1,808 by-year rows and 100/100 all-time rows carrying posters. Streaming is HTTP 200 with 457 rows; six official source-reviewed announcements remain absent. Source registry: 71 announcements, zero confirmed RSS/Atom feeds, 12 services with automatic premiere discovery disabled."
+    },
+    {
+      "check": "Production/update blocker 2026-11-16",
+      "result": "Updater 43788084251 and Vercel deployment dpl_H232... were refused before publication by stale exact-source receipt. No data collection, snapshot write, Neon connection, or deploy occurred. Prior READY deployment remains live."
     }
   ],
   "deployment": {
@@ -1198,11 +1222,11 @@
     "blocker": "PR #868 must pass exact-head checks and safely merge the receipt for the identical tested executable tree. Do not manually deploy or bypass."
   },
   "blockers": [
-    "Current source-bound CI receipt is stale: exact-tested PR #867 source head is 7179d04dbe2f66626ffc10ebcdbaca24a161ab86 (digest a7906e3a...), but main receipt still pointed to 85e0376894c58f684b6404300e93ae753e3b9e98 (digest 191d8991...). PR #868 proposes refreshing the receipt; no gate bypass.",
-    "Latest Vercel production attempt on main fd48f9c failed BUILD_UTILS_SPAWN_1 at scripts/verify-production-release.cjs because of that mismatch; previous READY deployment remains on 93bff91. Project-specific Hobby usage meter unavailable; no manual retry.",
-    "Previously scheduled update-movies run 43771219437 had a final Neon P1001 after snapshot processing; current run 43784784850 failed before Neon sync. Do not retry prior DB sync independently."
+    "Production proof on main still attests the old digest a7906e3a..., while the current source input after #869 is 1bc68022...; the last updater 43788084251 stopped at the pre-collection gate. No collection, import, JSON write, or Neon request occurred.",
+    "Latest Vercel production build for bf502c0 is ERROR because the stale proof gate refused publication. Previous READY deployment dpl_F81... on 0877129e remains live; no manual deployment attempted.",
+    "Public streaming JSON is 457 rows and six official announcement titles remain absent. The confirmed official feed registry is empty; 12 services still have automatic premiere discovery disabled. The six announcements are verified manual inputs; identity resolution must use the existing official/TMDB path."
   ],
-  "next_action": "Run exact-head checks on PR #868 (proof receipt + resume checkpoint). Merge only when all required checks are successful and main remains unchanged. Then verify Vercel production READY and Pages gate; confirm no active update-movies run; dispatch the existing update-movies workflow exactly once because push run 43784784850 failed before collection. Verify public streaming JSON and production calendar cards/images for the six reviewed official records; leave #244 open until full production acceptance.",
+  "next_action": "Commit the exact-source receipt plus current work-state/resume checkpoint on the existing #871 branch as a documentation/proof-only follow-up. Require fresh exact-head CI on that final commit, then merge only with all checks green. The production-proof path will trigger the existing update-movies workflow once on main. Do not manually dispatch or deploy. After the normal run, verify six per-title resolutions, public JSON count, Neon outcome, Vercel READY, and rendered streaming calendar cards/images. Keep #244 open until production acceptance.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -3132,10 +3156,11 @@
   },
   "open_pull_requests": [
     {
-      "number": 868,
-      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/868",
-      "title": "ci: refresh production proof after approved streaming data",
-      "head_sha": "a9fb4a679f0f4965bf91d67206bfd641b7b7ba12"
+      "number": 871,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/871",
+      "title": "ci: trigger updater after source proof refresh",
+      "head_sha": "aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea",
+      "status": "source exact-head CI passed; final proof/checkpoint commit follows"
     }
   ],
   "closed_pull_requests": [
@@ -3160,12 +3185,11 @@
     }
   ],
   "next_concrete_actions": [
-    "Read current #868 head and exact-head required Actions; do not merge until all succeed.",
-    "Recheck #593 and public boxoffice JSON; if poster gaps reappear, stop #244 and repair #593.",
-    "After merging #868, verify the new production deployment's READY state and the source-proof/Pages checks.",
-    "Check Actions for no overlapping update-movies writer; then trigger the existing workflow once, because run 43784784850 failed before importing.",
-    "Verify six official streaming entries in public data, identities/posters only where unique TMDB evidence exists, and real calendar rendering on production; do not guess unresolved identities.",
-    "Record actual post-import counts, Neon result, Vercel and production acceptance in #239 and this checkpoint; keep #244 open."
+    "Commit the exact-source production receipt and current live checkpoint/runbook updates together on the existing #871 branch.",
+    "Require and inspect exact-head CI for the final PR commit; merge only with all required checks green and main unchanged.",
+    "Allow the single normal push-triggered update-movies run; no manual dispatch or repeated run.",
+    "Inspect resolver outcomes for each of the six official streaming announcements, public streaming JSON delta, Neon sync result, READY production deployment, and calendar image rendering.",
+    "Keep #593 closed while published poster gaps remain zero; keep #244 open until real production acceptance is complete."
   ],
   "continuation_checkpoint_20261106_0002": {
     "recorded_at": "2026-11-06T00:02:30Z",
@@ -4125,5 +4149,225 @@
     },
     "next_action": "Require exact-head CI on PR #871. Once source commit c5db137 is verified, set production proof to that source SHA and digest. Run final-head CI again; merge only green. The proof file path will trigger one normal update-movies run. Verify public streaming JSON, resolver result, production READY/UI; keep #244 open until acceptance.",
     "user_data": "watch/rating/review/bookmark/backups unchanged"
+  },
+  "latest_live_checkpoint_20261116_0221": {
+    "checked_at": "2026-11-16T02:21:56Z",
+    "main_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+    "issue_239": "open",
+    "issue_593": {
+      "state": "closed",
+      "state_reason": "completed",
+      "public_boxoffice": {
+        "http_status": 200,
+        "by_year_rows": 1808,
+        "by_year_missing_posters": 0,
+        "all_time_rows": 100,
+        "all_time_missing_posters": 0
+      }
+    },
+    "issue_244": {
+      "state": "open",
+      "state_reason": "reopened",
+      "completion": "not met: new official entries are not in public production JSON/calendar"
+    },
+    "open_pull_requests": [
+      871
+    ],
+    "pr_871": {
+      "state": "open",
+      "branch": "fix/trigger-update-after-source-proof-20261116",
+      "head_sha": "aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea",
+      "base_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+      "source_digest": "616cfe9735e0af4a2ebcfdb994bb39f14b7be06d8ef9eda1fc2219fd6288b028",
+      "source_tree_sha": "9cf1e0ff5d103dbdb42cdf1627a8dd40a85745b6",
+      "relevant_source_entries": 1399,
+      "required_workflows": {
+        "autonomous_quality_gate": 43790546117,
+        "smoke": 43790545949,
+        "frontend": 43790546037,
+        "backend": 43790545998
+      },
+      "additional_workflows": {
+        "visual": 43790545903,
+        "mobile": 43790545948,
+        "completeness": 43790545955,
+        "python_contract": 43790546151
+      },
+      "workflow_runs": 8,
+      "jobs": 19,
+      "all_success": true,
+      "review_submissions": 0,
+      "branch_mergeable": true
+    },
+    "public_data": {
+      "boxoffice": {
+        "http_status": 200,
+        "source": "previous READY production alias https://cinema-calendar-three.vercel.app",
+        "by_year_rows": 1808,
+        "by_year_missing_posters": 0,
+        "all_time_rows": 100,
+        "all_time_missing_posters": 0,
+        "generated_at": "2026-09-27"
+      },
+      "streaming": {
+        "http_status": 200,
+        "source": "previous READY production alias https://cinema-calendar-three.vercel.app",
+        "rows": 457,
+        "generated_at": "2026-11-15T08:42:39.808Z",
+        "official_announcement_titles_missing": [
+          "Steps",
+          "In Waves",
+          "Ray Gunn",
+          "Proxies",
+          "Secrets",
+          "ミニオンズ＆モンスターズ"
+        ]
+      }
+    },
+    "source_audit": {
+      "official_announcement_intake_rows": 71,
+      "tracked_official_announcements": 6,
+      "confirmed_rss_atom_feeds": 0,
+      "provider_services": 12,
+      "auto_premiere_discovery_services": 0,
+      "identity_resolution": "Use the existing official/TMDB resolver; no synthetic IDs or poster paths."
+    },
+    "update_movies": {
+      "latest_run": 43788084251,
+      "status": "failed_before_collection",
+      "failure_stage": "exact-source proof gate",
+      "import": "skipped",
+      "tmdb_resolution": "skipped",
+      "json_snapshot_write": "skipped",
+      "neon_sync": "skipped",
+      "duplicate_run": "none"
+    },
+    "production": {
+      "latest_deployment": {
+        "id": "dpl_H232E4fdgLcL6TyCwyRzdpYHH8XY",
+        "sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+        "state": "ERROR",
+        "cause": "stale exact-source receipt; build rejected before release"
+      },
+      "prior_ready": {
+        "id": "dpl_F81ij6fXoJut4du6dN8oLgDrxbf9",
+        "sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392",
+        "url": "https://cinema-calendar-three.vercel.app",
+        "state": "READY"
+      },
+      "manual_deploy": "not attempted"
+    },
+    "user_data": "watch history, ratings, reviews, bookmarks, and backups unchanged.",
+    "next_action": "Commit the exact-source receipt plus current work-state/resume checkpoint on the existing #871 branch as a documentation/proof-only follow-up. Require fresh exact-head CI on that final commit, then merge only with all checks green. The production-proof path will trigger the existing update-movies workflow once on main. Do not manually dispatch or deploy. After the normal run, verify six per-title resolutions, public JSON count, Neon outcome, Vercel READY, and rendered streaming calendar cards/images. Keep #244 open until production acceptance."
+  },
+  "latest_live_state_20261116_0221": {
+    "checked_at": "2026-11-16T02:21:56Z",
+    "main_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+    "issue_239": "open",
+    "issue_593": {
+      "state": "closed",
+      "state_reason": "completed",
+      "public_boxoffice": {
+        "http_status": 200,
+        "by_year_rows": 1808,
+        "by_year_missing_posters": 0,
+        "all_time_rows": 100,
+        "all_time_missing_posters": 0
+      }
+    },
+    "issue_244": {
+      "state": "open",
+      "state_reason": "reopened",
+      "completion": "not met: new official entries are not in public production JSON/calendar"
+    },
+    "open_pull_requests": [
+      871
+    ],
+    "pr_871": {
+      "state": "open",
+      "branch": "fix/trigger-update-after-source-proof-20261116",
+      "head_sha": "aaa160a2b79c8e62e363f3d5432e2fd8fb3736ea",
+      "base_sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+      "source_digest": "616cfe9735e0af4a2ebcfdb994bb39f14b7be06d8ef9eda1fc2219fd6288b028",
+      "source_tree_sha": "9cf1e0ff5d103dbdb42cdf1627a8dd40a85745b6",
+      "relevant_source_entries": 1399,
+      "required_workflows": {
+        "autonomous_quality_gate": 43790546117,
+        "smoke": 43790545949,
+        "frontend": 43790546037,
+        "backend": 43790545998
+      },
+      "additional_workflows": {
+        "visual": 43790545903,
+        "mobile": 43790545948,
+        "completeness": 43790545955,
+        "python_contract": 43790546151
+      },
+      "workflow_runs": 8,
+      "jobs": 19,
+      "all_success": true,
+      "review_submissions": 0,
+      "branch_mergeable": true
+    },
+    "public_data": {
+      "boxoffice": {
+        "http_status": 200,
+        "source": "previous READY production alias https://cinema-calendar-three.vercel.app",
+        "by_year_rows": 1808,
+        "by_year_missing_posters": 0,
+        "all_time_rows": 100,
+        "all_time_missing_posters": 0,
+        "generated_at": "2026-09-27"
+      },
+      "streaming": {
+        "http_status": 200,
+        "source": "previous READY production alias https://cinema-calendar-three.vercel.app",
+        "rows": 457,
+        "generated_at": "2026-11-15T08:42:39.808Z",
+        "official_announcement_titles_missing": [
+          "Steps",
+          "In Waves",
+          "Ray Gunn",
+          "Proxies",
+          "Secrets",
+          "ミニオンズ＆モンスターズ"
+        ]
+      }
+    },
+    "source_audit": {
+      "official_announcement_intake_rows": 71,
+      "tracked_official_announcements": 6,
+      "confirmed_rss_atom_feeds": 0,
+      "provider_services": 12,
+      "auto_premiere_discovery_services": 0,
+      "identity_resolution": "Use the existing official/TMDB resolver; no synthetic IDs or poster paths."
+    },
+    "update_movies": {
+      "latest_run": 43788084251,
+      "status": "failed_before_collection",
+      "failure_stage": "exact-source proof gate",
+      "import": "skipped",
+      "tmdb_resolution": "skipped",
+      "json_snapshot_write": "skipped",
+      "neon_sync": "skipped",
+      "duplicate_run": "none"
+    },
+    "production": {
+      "latest_deployment": {
+        "id": "dpl_H232E4fdgLcL6TyCwyRzdpYHH8XY",
+        "sha": "bf502c0e5e474d32f5e15e406f223cc942ca093b",
+        "state": "ERROR",
+        "cause": "stale exact-source receipt; build rejected before release"
+      },
+      "prior_ready": {
+        "id": "dpl_F81ij6fXoJut4du6dN8oLgDrxbf9",
+        "sha": "0877129eaa1b84fafb01f4d0d99369a35a8ab392",
+        "url": "https://cinema-calendar-three.vercel.app",
+        "state": "READY"
+      },
+      "manual_deploy": "not attempted"
+    },
+    "user_data": "watch history, ratings, reviews, bookmarks, and backups unchanged.",
+    "next_action": "Commit the exact-source receipt plus current work-state/resume checkpoint on the existing #871 branch as a documentation/proof-only follow-up. Require fresh exact-head CI on that final commit, then merge only with all checks green. The production-proof path will trigger the existing update-movies workflow once on main. Do not manually dispatch or deploy. After the normal run, verify six per-title resolutions, public JSON count, Neon outcome, Vercel READY, and rendered streaming calendar cards/images. Keep #244 open until production acceptance."
   }
 }

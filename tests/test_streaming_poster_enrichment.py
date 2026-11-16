@@ -231,15 +231,15 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
                 "poster_match_status": "fuzzy_search_fallback", "poster_match_query": "Proxies",
             }],
             {"results": [{
-                "id": 1623160, "title": "En nombre de otro",
+                "id": 900001, "title": "En nombre de otro",
                 "original_title": "En nombre de otro", "release_date": "2026-12-11",
                 "poster_path": "/verified-proxies.jpg",
             }]},
         )
         movie = data["movies"][0]
         self.assertIn("query=En+nombre+de+otro", requests[0][0].full_url)
-        self.assertEqual(movie["id"], 1623160)
-        self.assertEqual(movie["tmdb"], "https://www.themoviedb.org/movie/1623160")
+        self.assertEqual(movie["id"], 900001)
+        self.assertEqual(movie["tmdb"], "https://www.themoviedb.org/movie/900001")
         self.assertEqual(movie["poster"], "https://image.tmdb.org/t/p/w500/verified-proxies.jpg")
         self.assertNotIn("poster_match_status", movie)
         self.assertNotIn("poster_match_query", movie)

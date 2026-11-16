@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T13:11:49Z",
-  "status": "in_progress",
+  "updated_at": "2026-11-16T18:40:03Z",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
-  "branch": "fix/recheck-curated-fuzzy-streaming-id-20261116",
-  "head_sha": "a843b1c5cc18d556f92298fdacf6174fd726d9de",
-  "pull_request": 874,
+  "base_sha": "4a19f628ddbf5b228e5518fd0ddfc9525db51ea7",
+  "branch": "ops/refresh-proof-after-copy-trim-20261116",
+  "head_sha": "0aeeac274d48f572e27246602a500cb5812cbe79",
+  "pull_request": null,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -838,6 +838,26 @@
       },
       "acceptance": "The official alias is mapped only when the existing secret-backed TMDB lookup returns one exact normalized movie title for the reviewed 2026 release year with a poster path; after standard release and updater, verify the canonical public JSON and actual streaming card. Preserve the row unchanged on ambiguity, API failure, missing key, or missing poster.",
       "ci": "Exact tested source a843b1c5: 8/8 Actions passed (Autonomous 43866914679, smoke 43866914574, frontend 43866914636, backend 43866914645, visual 43866914643, mobile 43866914629, scorecard 43866914661, Python 43866914525). Receipt/checkpoint commit triggers fresh exact-head Actions; release remains pending the new head and normal Vercel gate."
+    },
+    {
+      "id": "P0-UI-COPY-TRIM-20261116",
+      "title": "Remove redundant explanatory copy highlighted on mobile pages",
+      "status": "merged",
+      "issue": 239,
+      "pull_request": {
+        "number": 875,
+        "head_sha": "0aeeac274d48f572e27246602a500cb5812cbe79",
+        "merge_sha": "4a19f628ddbf5b228e5518fd0ddfc9525db51ea7"
+      },
+      "acceptance": "The circled redundant helper text is absent while navigation, controls, source attribution, accessibility status and saved user data remain unchanged.",
+      "ci": "All four release-gating workflows and supplemental Actions passed on exact head 0aeeac274d48f572e27246602a500cb5812cbe79. Automatic Vercel deployment was blocked by stale source receipt; production acceptance remains pending."
+    },
+    {
+      "id": "P0-RELEASE-PROOF-AFTER-UI-875-20261116",
+      "title": "Refresh exact-source receipt for merged UI copy cleanup",
+      "status": "pr_created",
+      "issue": 239,
+      "acceptance": "Receipt-only update references the exact CI-tested source tree; normal Vercel release gate accepts it and the canonical production pages reflect the removed copy."
     }
   ],
   "verification": [
@@ -1305,7 +1325,7 @@
     }
   ],
   "deployment": {
-    "status": "production_verified",
+    "status": "deployment_pending",
     "canonical_url": "https://cinelva.vercel.app/",
     "ready_deployment_id": "dpl_3zN7iLYSBC59aFCsksxSk1keKmDM",
     "ready_sha": "1717965d5e6a000e1a97948e64237c6366076764",
@@ -1325,20 +1345,16 @@
       "missing_posters": 0,
       "generated_at": "2026-11-16T08:05:29.780681+00:00"
     },
-    "production_verified": true,
+    "production_verified": false,
     "visual_acceptance_verified": false,
-    "blocker": "Production JSON/static HTML are on latest main and HTTP 200; visual browser acceptance is unverified because Chrome redirected to Vercel login. PR #873 still has a build-rate-limit status.",
+    "blocker": "The merged UI copy cleanup is not yet live. Automatic Vercel build was blocked by stale exact-source receipt; the prior READY deployment remains active. Proof refresh is being reviewed on a receipt-only PR.",
     "latest_production_url": "https://cinema-calendar-5j7ivm0g6-vongole1.vercel.app",
     "visual_acceptance_reason": "Direct Chrome navigation redirected to Vercel login; authenticated fetch verified static HTML/JSON HTTP 200 but not rendered cards/images."
   },
   "blockers": [
-    "Proxies has an official Netflix announcement and poster URL but no verified TMDB movie ID; current poster_match_status is fuzzy_search_fallback. PR #872 adds alias-first exact-title/year/unique-result matching; final exact-head CI is required after this checkpoint.",
-    "PR #873 source-link UI is not in production. Its nine GitHub Actions passed, but Vercel backend status is build-rate-limit. Do not deploy or bypass the Hobby limit.",
-    "Direct Chrome navigation to the deployment-specific production URL reaches Vercel login; actual rendered-card visual acceptance could not be completed. Authenticated Vercel fetch confirmed HTTP 200 HTML and JSON only.",
-    "The earlier update-movies run 43793292311 had one final Neon Prisma P1001 failure. Do not retry without a changed endpoint state.",
-    "PR #874 exact-head CI is pending. Existing release gate blocks publication: latest main Vercel build reports source-proof digest mismatch; PR #873 separately reports 24-hour deployment rate limit. Never bypass."
+    "Vercel production deployment dpl_ET4MJ2daxx6vcwUVTYRHAQRyNMCy for merge 4a19f628ddbf5b228e5518fd0ddfc9525db51ea7 failed before publication because production-proof.json still referred to a843b1c5 and digest 15b62689..., while current exact-CI-tested source is digest ddd9459c... . This is a source-proof mismatch, not a quota failure. Prior READY production at dpl_CPZGWBYFcfR2UkNxnab9P6zocoCP / 86a43264... remains live."
   ],
-  "next_action": "Wait for remaining exact-head Actions on PR #874. If all pass, follow the ordinary merge/release gate; do not merge/deploy if any required check fails. Allow only the existing scheduled TMDB enrichment to recheck Proxies. Verify unique official title+2026 identity and poster, then inspect production JSON and actual card when browser access is authorized. Keep #244 open until data/source/freshness/production-render criteria are met; #593 remains closed while posterless count is zero.",
+  "next_action": "Wait for exact-head required checks on the proof-only receipt PR. If green, merge once through the normal path; allow automatic Vercel to verify the receipt. Only mark production_verified after READY and canonical pages no longer contain the removed helper copy. Do not manually deploy or bypass the gate.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -5945,5 +5961,44 @@
     "safety": "No viewing history, ratings, reviews, bookmarks, or backups were changed. No scraping, paid plan, manual dispatch, Neon retry, Vercel manual deployment, quota bypass, or CI bypass."
   },
   "code_head_sha": "9fd4bfd3e490a0e46fd3f17f37ba0e039350b628",
-  "pr_head_status": "PR #874 exact head 70aad988920dfed261766bed5af26f9a7939f287: 5/8 Actions successful, 3 in progress; Vercel backend success. Re-fetch before release decision."
+  "pr_head_status": "PR #874 exact head 70aad988920dfed261766bed5af26f9a7939f287: 5/8 Actions successful, 3 in progress; Vercel backend success. Re-fetch before release decision.",
+  "latest_live_checkpoint_20261116_copy_cleanup": {
+    "checked_at": "2026-11-16T18:40:03Z",
+    "main_sha": "4a19f628ddbf5b228e5518fd0ddfc9525db51ea7",
+    "issue_593": "closed; no regression reported",
+    "issue_244": "open; not touched",
+    "merged_pr": 875,
+    "merge_sha": "4a19f628ddbf5b228e5518fd0ddfc9525db51ea7",
+    "tested_source_head": "0aeeac274d48f572e27246602a500cb5812cbe79",
+    "tested_tree_sha": "03d5a71e2e85c0b79fb73b0b19f6d10304a51930",
+    "executable_digest": "ddd9459c1790fb81b4e698405b9b2a9180634d5c3c034d2ed55561fe1ce81d63",
+    "relevant_entries": 1400,
+    "exact_head_required_actions": {
+      "autonomous_quality": 43928544188,
+      "smoke": 43928544484,
+      "frontend": 43928544207,
+      "backend_build": 43928544618
+    },
+    "supplemental_actions": [
+      43928544302,
+      43928544385,
+      43928544288,
+      43928544356,
+      43928544271,
+      43928544222,
+      43928544391
+    ],
+    "changes": [
+      "Removed redundant explanatory helper paragraphs from Discover, Calendar, Theater search/discounts, Ranking, Specials, and My Best 10 pages.",
+      "Kept controls, source attribution, and screen-reader-only live status; hid the empty Best 10 candidate shelf.",
+      "No saved movie data or backups changed."
+    ],
+    "deployment": {
+      "failed": "dpl_ET4MJ2daxx6vcwUVTYRHAQRyNMCy",
+      "reason": "stale exact-source receipt",
+      "live_ready": "dpl_CPZGWBYFcfR2UkNxnab9P6zocoCP",
+      "live_sha": "86a43264371c0e6b77a6980419f415ce7f3456d7"
+    },
+    "next": "Refresh only quality/production-proof.json to source head 0aeeac2 after its exact required CI; merge that receipt-only PR only after its own checks pass; verify automatic production READY and affected pages."
+  }
 }

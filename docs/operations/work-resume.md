@@ -508,3 +508,12 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 1. Wait for fresh Actions on the receipt/checkpoint PR tip; don't merge on the prior head's success alone.
 2. If final exact-head required checks and the normal release status are green, use the standard merge/release path once; otherwise record the precise blocker and leave #244 open.
 3. After the next existing scheduled updater run, verify whether Proxies has a unique exact alias/year TMDB identity; then verify production JSON and the rendered streaming card/image. Keep #244 open until this evidence is complete.
+
+
+## Live checkpoint — 2026-11-16T18:40:03Z UTC — CINELVA helper-copy cleanup
+
+- Latest main is `4a19f628ddbf5b228e5518fd0ddfc9525db51ea7`. #593 remains closed and was not touched; #244 remains open and was not started in this UI-copy task. Open PRs before proof refresh: #873 only.
+- PR #875 merged as `4a19f628ddbf5b228e5518fd0ddfc9525db51ea7`; exact tested source head `0aeeac274d48f572e27246602a500cb5812cbe79` has Git tree `03d5a71e2e85c0b79fb73b0b19f6d10304a51930` and executable digest `ddd9459c1790fb81b4e698405b9b2a9180634d5c3c034d2ed55561fe1ce81d63` across 1,400 relevant entries.
+- Exact-head required Actions passed: Autonomous quality 43928544188, CINELVA smoke 43928544484, Validate frontend 43928544207, Reproducible backend build 43928544618. Supplemental backup, visual, mobile, scorecard, brand, Python-contract and isolated Pages checks also passed.
+- Automatic production deployment `dpl_ET4MJ2daxx6vcwUVTYRHAQRyNMCy` failed before publishing. Exact log: old receipt head a843b1c5 had digest 15b626893271be537de20d7cc32b8c4445a619479f03d8b21b41ebe984e7c899; current tested source digest is ddd9459c1790fb81b4e698405b9b2a9180634d5c3c034d2ed55561fe1ce81d63. This is the release proof gate, not deployment quota. Old production remains READY at `dpl_CPZGWBYFcfR2UkNxnab9P6zocoCP` on `86a43264371c0e6b77a6980419f415ce7`.
+- A receipt-only proof refresh is being prepared for already-tested PR #875 source head. Do not bypass the guard, manually deploy, or change saved viewing/rating/review/bookmark/backup data. After the proof PR’s exact-head checks pass and it is merged, let the normal Vercel integration build once; verify READY and affected public routes before marking this task production-verified.

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T01:04:00Z",
+  "updated_at": "2026-11-16T01:15:05Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
-  "branch": "data/netflix-in-waves-premiere-20261116",
-  "head_sha": "b07e2df82f2f629470d2b0800ba7a99698295932",
-  "pull_request": 867,
+  "base_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+  "branch": "fix/refresh-production-proof-after-streaming-20261116",
+  "head_sha": "a9fb4a679f0f4965bf91d67206bfd641b7b7ba12",
+  "pull_request": 868,
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -769,6 +769,29 @@
         "head_sha": "2bb3efb0dcec67e314b416833835e73ba636b4dc"
       },
       "ci": "Exact head b07e2df: all seven required Actions succeeded. This checkpoint adds one absent U-NEXT November film announcement and advances branch; all seven exact-head workflows must run again."
+    },
+    {
+      "id": "P0-244-OFFICIAL-STREAMING-SIX-20261116",
+      "title": "Import six verified official streaming premiere announcements",
+      "status": "deployment_pending",
+      "issue": 244,
+      "pull_request": {
+        "number": 867,
+        "merge_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+        "head_sha": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86"
+      },
+      "acceptance": "Run the existing update-movies importer once after the release proof is repaired; confirm all six reviewed official facts enter the public streaming JSON, attach only unique verified TMDB movie identities/posters, and render correctly in production calendar. Keep #244 open until the broader issue acceptance is complete."
+    },
+    {
+      "id": "P0-RELEASE-PROOF-REFRESH-20261116",
+      "title": "Refresh exact-source production release receipt",
+      "status": "pr_created",
+      "issue": 239,
+      "pull_request": {
+        "number": 868,
+        "head_sha": "a9fb4a679f0f4965bf91d67206bfd641b7b7ba12"
+      },
+      "acceptance": "Pass the exact-head checks and safely merge the refreshed receipt to make the identical CI-tested executable source eligible for the existing Vercel and Pages publication gates; then verify production READY without bypassing the guard."
     }
   ],
   "verification": [
@@ -1129,23 +1152,57 @@
       "check": "PR #806 deterministic isolated fixture acceptance merged",
       "result": "Exact-head 2646cb2e3ed4c42bc9382f698744e747465f9e23: quality 43163691108, smoke 43163691158, frontend 43163691151, backend 43163691034 and additional checks passed; production render skipped for PR event as expected. Merged as 881d66e9b3de200654fc6b325e52d52a76ea971e; real Chromium/WebKit production rerun remains necessary."
     },
-    "Backend build at exact prior head 3865442d534dad6deda7feda08c236235105a650 failed only at check_work_state.py: top-level status pr_updated was not allowed. Corrected to schema-approved pr_created; prior-head failure is not accepted as final-head pass."
+    "Backend build at exact prior head 3865442d534dad6deda7feda08c236235105a650 failed only at check_work_state.py: top-level status pr_updated was not allowed. Corrected to schema-approved pr_created; prior-head failure is not accepted as final-head pass.",
+    {
+      "check": "PR #867 merged",
+      "result": "Squash merge commit fd48f9c347af3f9234f5c579b500a79d86ef90ea. Added six reviewed official entries to data/streaming_announcements.json; user data and backups not touched."
+    },
+    {
+      "check": "PR #867 exact-head CI",
+      "result": "Exact tested head 7179d04dbe2f66626ffc10ebcdbaca24a161ab86: 20/20 check runs and all seven required workflows success; the merged main tree has identical tree SHA 79dd3c914ceafc870ffbb516a0e0a9fcfc792ced and 1,399 source entries."
+    },
+    {
+      "check": "Issue #593 recheck",
+      "result": "Issue remains closed/completed. READY production JSON HTTP 200 on previous production SHA 93bff91: boxoffice yearly 1,808 rows/0 missing posters; all-time 100/0 missing."
+    },
+    {
+      "check": "Streaming before updater",
+      "result": "Previous READY deployment's public streaming JSON HTTP 200, generated_at 2026-11-15T08:42:39.808Z, 457 rows; Steps, In Waves, Ray Gunn, Proxies, Secrets, and ミニオンズ＆モンスターズ all absent. The six verified announcements are present in source-reviewed intake but not yet imported."
+    },
+    {
+      "check": "Push-triggered update-movies run 43784784850",
+      "result": "Failed at pre-collection source-proof gate. Log: receipt head 85e0376894c58f684b6404300e93ae753e3b9e98; current digest a7906e3a1c1535fb598fe0130363480ec35f24a2d2db25c8dadfb7d9dd1df658; verified digest 191d8991c24e04685ce218c8b23212b39a67753fe8c3026e87a324a66e3e0d65. Import, enrichment, snapshot commit, and Neon sync all skipped."
+    },
+    {
+      "check": "Main Vercel deployment on fd48f9c",
+      "result": "Deployment dpl_8pdAnVFbUgdxkgJKh7vEuBGEw6Tj ERROR (BUILD_UTILS_SPAWN_1); scripts/build-static.cjs exited 1 because the same production-proof mismatch blocked build. Previous deployment dpl_Djs8HEw8PLbDY6RJEy8sdprxF5K1 remains READY on SHA 93bff91. No manual retry."
+    },
+    {
+      "check": "Legacy Pages run 43784785028",
+      "result": "Failed at Verify source CI and quality preflight; deploy step skipped due the same stale receipt. No bypass."
+    },
+    {
+      "check": "PR #868 proof recovery",
+      "result": "Receipt now points to exact CI-tested head 7179d04dbe2f66626ffc10ebcdbaca24a161ab86; new PR #868 updates runbook and live checkpoint. Exact-head CI pending."
+    }
   ],
   "deployment": {
-    "status": "deployment_pending",
+    "status": "blocked",
     "url": "https://cinelva.vercel.app/",
-    "latest_main_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
-    "latest_deployment_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
+    "latest_main_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+    "latest_deployment_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+    "latest_deployment_id": "dpl_8pdAnVFbUgdxkgJKh7vEuBGEw6Tj",
+    "latest_deployment_state": "ERROR",
     "production_verified": false,
-    "reason": "Live Vercel production is READY on main 93bff91. PR #867 is not merged; the four reviewed Netflix announcements are absent from the public JSON pending the existing updater.",
-    "blocker": "Hobby usage meter is unavailable; no manual deploy is authorized. Recheck only after merge and normal workflow."
+    "reason": "The strict production release gate rejected the stale CI receipt; current Vercel build ended BUILD_UTILS_SPAWN_1 at scripts/build-static.cjs. The previous READY deployment on 93bff91 remains serving.",
+    "blocker": "PR #868 must pass exact-head checks and safely merge the receipt for the identical tested executable tree. Do not manually deploy or bypass."
   },
   "blockers": [
-    "Automatic streaming-premiere discovery is not established: 0 approved RSS/Atom feeds and 0 of 12 services with auto_premiere_discovery enabled; only reviewed official announcements are currently usable.",
-    "Vercel Hobby usage meter is unavailable through connected tools; do not manually deploy or change plans.",
-    "Previous updater's direct Neon sync failed P1001; JSON snapshot was committed, and Neon must not be retried without an independent recovery."
+    "Current source-bound CI receipt is stale: exact-tested PR #867 source head is 7179d04dbe2f66626ffc10ebcdbaca24a161ab86 (digest a7906e3a...), but main receipt still pointed to 85e0376894c58f684b6404300e93ae753e3b9e98 (digest 191d8991...). PR #868 proposes refreshing the receipt; no gate bypass.",
+    "Latest Vercel production attempt on main fd48f9c failed BUILD_UTILS_SPAWN_1 at scripts/verify-production-release.cjs because of that mismatch; previous READY deployment remains on 93bff91. Project-specific Hobby usage meter unavailable; no manual retry.",
+    "Previously scheduled update-movies run 43771219437 had a final Neon P1001 after snapshot processing; current run 43784784850 failed before Neon sync. Do not retry prior DB sync independently."
   ],
-  "next_action": "The six reviewed official film announcements are committed on PR #867. Fetch its live head and check all seven required exact-head workflows. If green with no blocking review, merge safely and let the push-triggered update-movies workflow run once. Verify all six public streaming events and unique TMDB poster matches, Vercel READY, and calendar cards; do not manually dispatch or retry Neon P1001.",
+  "next_action": "Run exact-head checks on PR #868 (proof receipt + resume checkpoint). Merge only when all required checks are successful and main remains unchanged. Then verify Vercel production READY and Pages gate; confirm no active update-movies run; dispatch the existing update-movies workflow exactly once because push run 43784784850 failed before collection. Verify public streaming JSON and production calendar cards/images for the six reviewed official records; leave #244 open until full production acceptance.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -1210,10 +1267,10 @@
     "confirmed_additional_fixes": 30
   },
   "last_merged_pull_request": {
-    "number": 806,
-    "merge_sha": "881d66e9b3de200654fc6b325e52d52a76ea971e",
-    "head_sha": "2646cb2e3ed4c42bc9382f698744e747465f9e23",
-    "source_sha": "2646cb2e3ed4c42bc9382f698744e747465f9e23"
+    "number": 867,
+    "merge_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+    "head_sha": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86",
+    "source_sha": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86"
   },
   "ui_audit": {
     "report": "docs/operations/ui-audit-20261022.json",
@@ -3075,10 +3132,10 @@
   },
   "open_pull_requests": [
     {
-      "number": 807,
-      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/807",
-      "title": "test(p593): report source-level poster coverage",
-      "head_sha": "a3b0ae15a0d8071b339f7e73bdc69a9cd180ded5"
+      "number": 868,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/868",
+      "title": "ci: refresh production proof after approved streaming data",
+      "head_sha": "a9fb4a679f0f4965bf91d67206bfd641b7b7ba12"
     }
   ],
   "closed_pull_requests": [
@@ -3094,14 +3151,21 @@
       "number": 779,
       "result": "merged durable streaming poster identity fix",
       "merge_sha": "8bde86dc8ab7dd0f64de0e4206f9e14476d6b5b0"
+    },
+    {
+      "number": 867,
+      "result": "merged",
+      "merge_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+      "head_sha": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86"
     }
   ],
   "next_concrete_actions": [
-    "Confirm PR #807 final-head exact CI and mergeability, then merge only after all required checks are successful.",
-    "Do not dispatch update-movies manually; the next scheduled run is 2026-11-12 18:17 UTC / 2026-11-13 03:17 JST.",
-    "Read the scheduled run's backfill log: expected starting state is 51 unqueried single-title candidates, 78 recently checked singles (76 unresolved, 2 ambiguous), and 113 grouped titles excluded; compare new verified enrichments and Neon sync status.",
-    "After the main push, refetch production /data/boxoffice.json, count all year rows and missing posters, and inspect production Chromium 1280px/WebKit 390px image-coverage artifacts.",
-    "Keep #593 open and #244 untouched until user-visible data improvement and full production acceptance are proven."
+    "Read current #868 head and exact-head required Actions; do not merge until all succeed.",
+    "Recheck #593 and public boxoffice JSON; if poster gaps reappear, stop #244 and repair #593.",
+    "After merging #868, verify the new production deployment's READY state and the source-proof/Pages checks.",
+    "Check Actions for no overlapping update-movies writer; then trigger the existing workflow once, because run 43784784850 failed before importing.",
+    "Verify six official streaming entries in public data, identities/posters only where unique TMDB evidence exists, and real calendar rendering on production; do not guess unresolved identities.",
+    "Record actual post-import counts, Neon result, Vercel and production acceptance in #239 and this checkpoint; keep #244 open."
   ],
   "continuation_checkpoint_20261106_0002": {
     "recorded_at": "2026-11-06T00:02:30Z",
@@ -3677,10 +3741,10 @@
     "next_action": "After final-head CI is green, merge PR #807; allow one scheduled update-movies run, then verify JSON recovery, Neon sync and production browser metrics."
   },
   "latest_live_state_20261116": {
-    "checked_at": "2026-11-16T01:04:00Z",
-    "main_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
+    "checked_at": "2026-11-16T01:15:05Z",
+    "main_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
     "open_prs": [
-      867
+      868
     ],
     "open_issues": [
       239,
@@ -3695,12 +3759,17 @@
       "state_reason": "completed"
     },
     "production": {
-      "deployment": "READY",
-      "sha": "93bff91f15268d1888af61aa38c209cb32b7650f"
+      "latest_main_deployment_state": "ERROR",
+      "latest_main_deployment_id": "dpl_8pdAnVFbUgdxkgJKh7vEuBGEw6Tj",
+      "latest_main_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+      "previous_ready_state": "READY",
+      "previous_ready_id": "dpl_Djs8HEw8PLbDY6RJEy8sdprxF5K1",
+      "previous_ready_sha": "93bff91f15268d1888af61aa38c209cb32b7650f",
+      "blocker": "Production source-proof digest mismatch; no manual deployment or bypass."
     },
     "boxoffice": {
       "http_status": 200,
-      "generated_at": "2026-09-27",
+      "source": "previous READY production deployment",
       "by_year_rows": 1808,
       "by_year_poster_rows": 1808,
       "by_year_missing_poster_rows": 0,
@@ -3709,35 +3778,48 @@
     },
     "streaming": {
       "http_status": 200,
+      "source": "previous READY production deployment",
       "generated_at": "2026-11-15T08:42:39.808Z",
       "rows": 457,
-      "added_by_pr_867": [
+      "missing_new_official_titles": [
+        "Steps",
         "In Waves",
         "Ray Gunn",
         "Proxies",
-        "Secrets"
+        "Secrets",
+        "ミニオンズ＆モンスターズ"
       ],
-      "auto_discovery_services": 0,
-      "approved_rss_atom_feeds": 0
-    },
-    "prior_backend_sync": {
-      "run_id": 43771219437,
-      "conclusion": "failure",
-      "reason": "JSON/data processing completed; final Neon direct sync failed P1001 at ep-snowy-wave-b4gwato2.c-6.us-east-2.aws.neon.tech:5432. No retry."
+      "announcement_intake_rows": 71,
+      "approved_rss_atom_feeds": 0,
+      "auto_discovery_services": 0
     },
     "pr_867": {
-      "previous_head_sha": "b07e2df82f2f629470d2b0800ba7a99698295932",
-      "previous_exact_head_actions": "7/7 success on all seven Actions",
-      "additional_candidate": "ミニオンズ＆モンスターズ / Minions & Monsters",
-      "service": "U-NEXT",
-      "date": "2026-11-11",
-      "type": "rental",
-      "official_release_source": "https://www.unext.co.jp/ja/press-room/2026-11-unext-lineup",
-      "official_identity_year_source": "https://www.illumination.com/movie/minions-monsters/",
-      "production_before_rows": 457,
-      "absent_from_production": true,
-      "candidates_total": 6,
-      "new_commit_requires_exact_head_ci": true
+      "state": "merged",
+      "merge_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+      "verified_source_head": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86",
+      "exact_head_workflows": "7/7 success; 20/20 check runs"
+    },
+    "update_movies_run": {
+      "id": 43784784850,
+      "state": "failure",
+      "failed_at": "Verify approved source and exact-source CI before collection",
+      "import_skipped": true,
+      "enrichment_skipped": true,
+      "snapshot_commit_skipped": true,
+      "neon_sync_skipped": true,
+      "reason": "receipt points to source digest 191d8991..., current and exact-tested source digest a7906e3a..."
+    },
+    "pages_run": {
+      "id": 43784785028,
+      "state": "failure",
+      "failed_at": "Verify source CI and quality before creating publication output",
+      "deploy_skipped": true,
+      "reason": "same stale production-proof receipt"
+    },
+    "approved_feeds": {
+      "rss_atom_count": 0,
+      "provider_service_count": 12,
+      "automatic_discovery_enabled": 0
     }
   },
   "latest_streaming_in_waves_20261116": {
@@ -3813,6 +3895,33 @@
       "failure_stage": "final Neon sync P1001 after data snapshot stage",
       "retry": "none"
     },
-    "next_action": "Run all seven exact-head workflows on new commit. Merge only if green; then one normal push-triggered updater and production acceptance."
+    "next_action": "Run all seven exact-head workflows on new commit. Merge only if green; then one normal push-triggered updater and production acceptance.",
+    "after_merge": {
+      "main_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+      "merge_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+      "public_snapshot_rows_before": 457,
+      "six_new_titles_absent": true,
+      "updater_run": 43784784850,
+      "updater_result": "blocked_before_collection_by_stale_source_proof",
+      "update_snapshot_changed": false,
+      "release_pr": 868,
+      "next": "Pass exact-head CI, merge source-proof refresh; verify production release, then one existing updater run."
+    }
+  },
+  "latest_production_proof_gate_recovery_20261116": {
+    "issue_244": "open",
+    "issue_593": "closed; boxoffice poster gap count remains zero on previous READY deployment",
+    "main_sha": "fd48f9c347af3f9234f5c579b500a79d86ef90ea",
+    "verified_source_head": "7179d04dbe2f66626ffc10ebcdbaca24a161ab86",
+    "exact_head_checks": "all seven required workflows and all 20 check runs succeeded",
+    "source_tree_sha": "79dd3c914ceafc870ffbb516a0e0a9fcfc792ced",
+    "current_source_digest": "a7906e3a1c1535fb598fe0130363480ec35f24a2d2db25c8dadfb7d9dd1df658",
+    "prior_receipt_digest": "191d8991c24e04685ce218c8b23212b39a67753fe8c3026e87a324a66e3e0d65",
+    "updater_run": 43784784850,
+    "pages_run": 43784785028,
+    "production_error_code": "BUILD_UTILS_SPAWN_1",
+    "new_pr": 868,
+    "status": "pr_created",
+    "next_action": "Exact-head CI then safe merge; one existing updater run only after release gate passes."
   }
 }

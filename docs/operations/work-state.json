@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T10:57:37Z",
+  "updated_at": "2026-11-16T11:00:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
   "branch": "fix/recheck-curated-fuzzy-streaming-id-20261116",
-  "head_sha": "9fd4bfd3e490a0e46fd3f17f37ba0e039350b628",
+  "head_sha": "49721b02eeb8dd2a7773ac5a41f8b5d9fcb5907a",
   "pull_request": 874,
   "work_items": [
     {
@@ -828,7 +828,7 @@
     {
       "id": "P0-244-PROXIES-IDENTITY-RECHECK-20261116",
       "title": "Recheck curated fuzzy-poster rows for strict TMDB identity",
-      "status": "blocked",
+      "status": "in_progress",
       "issue": 244,
       "pull_request": {
         "number": 874,
@@ -838,8 +838,8 @@
       "acceptance": "For the explicitly reviewed Proxies / En nombre de otro alias, revisit only an existing fuzzy_search_fallback row with no saved identity; replace the fallback poster and assign an ID only for one exact title plus 2026 TMDB result. Ambiguous, wrong-year, failed, or unavailable lookups must preserve the existing row.",
       "implementation": "scripts/enrich_streaming_posters.py and tests/test_streaming_poster_enrichment.py; no public dataset or user storage mutation.",
       "verification": "Three deterministic regression cases added. Exact-head GitHub Actions pending. Current official updater already ran successfully but skips populated posters; normal scheduled run after safe release is required for data acceptance.",
-      "blocker": "Vercel Hobby build rate limit on PR previews and stale main production-proof receipt (head aaa160a2..., digest 616cfe97...); no deployment or bypass.",
-      "ci": "All 8 exact-head PR Actions succeeded: runs 43852552692, 43852552757, 43852552699, 43852552526, 43852552595, 43852552729, 43852552697, 43852552779. Vercel backend check fails with build-rate-limit.",
+      "blocker": "Vercel Hobby build rate limit on preview; main production-proof receipt is stale. Do not merge/deploy or bypass.",
+      "ci": "Code head 9fd4bfd3: all 8 Actions passed. Latest checkpoint head 49721b02: 4 completed successfully and 4 still in progress at 11:00 UTC. Vercel backend status is build-rate-limit.",
       "next_action": "Wait for normal Vercel reset; refresh exact-source proof only after required CI evidence is verified for the executable source, then run normal release/production acceptance. Do not merge until release gate passes."
     }
   ],
@@ -5850,7 +5850,7 @@
     "safety": "No scraping, paid actions, manual dispatch, Neon retry, manual deploy, or user-storage edits."
   },
   "live_snapshot": {
-    "observed_at": "2026-11-16T10:57:37Z",
+    "observed_at": "2026-11-16T11:00:00Z",
     "main_sha": "66b04cc44140346e5865c5fdd4679bacf42aaac7",
     "open_issues": {
       "239": "open",
@@ -5887,5 +5887,7 @@
       "state": "READY",
       "sha": "1717965d5e6a000e1a97948e64237c6366076764"
     }
-  }
+  },
+  "code_head_sha": "9fd4bfd3e490a0e46fd3f17f37ba0e039350b628",
+  "pr_head_status": "documentation checkpoint commit followed; exact-head Actions are running on 49721b02eeb8dd2a7773ac5a41f8b5d9fcb5907a"
 }

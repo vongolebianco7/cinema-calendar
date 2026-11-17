@@ -2,21 +2,110 @@
 """Discover possible streaming announcements from explicitly configured official RSS feeds.
 Candidates are never published as release dates without verification.
 """
+import ipaddress
 import json
+import os
 import pathlib
 import re
-import urllib.request
-import ipaddress
 import socket
-from urllib.parse import urlparse
+import tempfile
+from datetime import date
+import unicodedata
+import urllib.request
 import xml.etree.ElementTree as ET
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "data/streaming-official-feeds.json"
 OUTPUT = ROOT / "data/streaming-announcement-candidates.json"
+VERIFIED_CATALOG = ROOT / "data/streaming-official-current.json"
 KEYWORDS = re.compile(r"配信|映画|作品|prime video|netflix|disney|apple tv|unext|u-next|wowow|hulu", re.I)
-def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen):
+ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+def canonical_source_url(value):
+    """Ignore tracking only; keep all other URL components significant."""
+    if not isinstance(value, str):
+        return ""
+    parsed = urlparse(value)
+    if parsed.scheme.lower() != "https" or not parsed.hostname or parsed.username or parsed.password:
+        return ""
+    query = sorted(
+        (key, item)
+        for key, item in parse_qsl(parsed.query, keep_blank_values=True)
+        if not key.lower().startswith("utm_")
+    )
+    return urlunparse((
+        "https",
+        parsed.netloc.lower(),
+        parsed.path,
+        parsed.params,
+        urlencode(query, doseq=True),
+        "",
+    ))
+
+
+def normalized_title(value):
+    if not isinstance(value, str):
+        return ""
+    return "".join(
+        char for char in unicodedata.normalize("NFKC", value).casefold()
+        if char.isalnum()
+    )
+
+
+def find_verified_catalog_match(candidate, verified_movies):
+    """Return one strict same-source film identity, or None when uncertain."""
+    service = candidate.get("service")
+    candidate_url = canonical_source_url(candidate.get("source_url"))
+    headline = normalized_title(candidate.get("title"))
+    if not service or not candidate_url or not headline:
+        return None
+
+    matches = {}
+    for movie in verified_movies:
+        if movie.get("service") != service:
+            continue
+        if canonical_source_url(movie.get("source_url")) != candidate_url:
+            continue
+        title = movie.get("title")
+        normalized = normalized_title(title)
+        release_date = movie.get("date")
+        tmdb_id = movie.get("tmdb_id") or movie.get("id")
+        if len(normalized) < 6 or normalized not in headline:
+            continue
+        if not isinstance(release_date, str) or not ISO_DATE.fullmatch(release_date):
+            continue
+        try:
+            date.fromisoformat(release_date)
+        except ValueError:
+            continue
+        if isinstance(tmdb_id, bool) or not isinstance(tmdb_id, int) or tmdb_id <= 0:
+            continue
+        identity = (tmdb_id, release_date, normalized)
+        matches[identity] = {"title": title, "date": release_date, "tmdb_id": tmdb_id}
+
+    if len(matches) != 1:
+        return None
+    return next(iter(matches.values()))
+
+
+def classify_candidate(candidate, verified_movies):
+    result = dict(candidate)
+    match = find_verified_catalog_match(candidate, verified_movies)
+    if match:
+        result["status"] = "already_in_verified_catalog"
+        result["verified_catalog_match"] = match
+    return result
+
+
+def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen, catalog=VERIFIED_CATALOG):
     feeds = json.loads(config.read_text(encoding="utf-8"))
+    catalog_data = json.loads(catalog.read_text(encoding="utf-8"))
+    verified_movies = catalog_data.get("movies")
+    if not isinstance(verified_movies, list):
+        raise ValueError("Verified streaming catalog must contain a movies list")
+
     candidates = []
     for feed in feeds.get("feeds", []):
         url = feed["url"]
@@ -49,19 +138,20 @@ def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen):
                 link = atom.get("href", "") if atom is not None else ""
             if title and KEYWORDS.search(title) and link.startswith("https://"):
                 candidates.append({"service": feed["service"], "title": title, "source_url": link, "status": "needs_release_date_verification"})
-    unique = list({(x["service"], x["source_url"]): x for x in candidates}.values())
+    unique = list({(item["service"], item["source_url"]): item for item in candidates}.values())
+    classified = [classify_candidate(item, verified_movies) for item in unique]
     if not feeds.get("feeds"):
         print("No verified official RSS endpoints configured; discovery is inactive")
-    result = {"candidates": sorted(unique, key=lambda item: (item["service"], item["source_url"]))}
+    result = {"candidates": sorted(classified, key=lambda item: (item["service"], item["source_url"]))}
     content = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if output.exists() and output.read_text(encoding="utf-8") == content:
-        return len(unique)
-    import os
-    import tempfile
+        return len(classified)
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=output.parent, delete=False) as tmp:
         tmp.write(content)
         path = tmp.name
     os.replace(path, output)
-    return len(unique)
+    return len(classified)
+
+
 if __name__ == "__main__":
     print("Official feed candidates:", discover())

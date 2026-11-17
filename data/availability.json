@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T19:28:00.984999+00:00",
+  "generated_at": "2026-11-17T20:26:33.595194+00:00",
   "source": "TMDB watch/providers (JustWatch)",
   "country": "JP",
   "note": "日本向け配信先の観測。配信開始日ではありません。更新日は作品ごとのchecked_atを参照。",
@@ -159961,10 +159961,1794 @@
       ],
       "checked_at": "2026-11-17T19:28:00.984999+00:00",
       "source_url": "https://www.themoviedb.org/movie/941-lethal-weapon/watch?locale=JP"
+    },
+    "1323475": {
+      "title": "そして恋にはシャンパンを",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/a66w2eVNFHMgevJlw0d6f4TTrrD.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1323475-champagne-problems/watch?locale=JP"
+    },
+    "20329": {
+      "title": "L change the WorLd",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/sxtU5dLduyjO8Jii9wdfYq2MK9f.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/20329-l-change-the-world/watch?locale=JP"
+    },
+    "977871": {
+      "title": "今夜、世界からこの恋が消えても",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/juIi7mM9cYOPsUnGAFSagsVDsRD.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/977871-jin-ye-shi-jie-karakono-lian-ga-xiao-etemo/watch?locale=JP"
+    },
+    "500682": {
+      "title": "ザ・テキサス・レンジャーズ",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/mRoY7rb8F4Gl5fGKevF9oWklbFz.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/500682-the-highwaymen/watch?locale=JP"
+    },
+    "354287": {
+      "title": "ウォー・マシーン：戦争は話術だ！",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/ny7JLlVmWi8WiTu10bE9ZxiWC3n.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/354287-war-machine/watch?locale=JP"
+    },
+    "1151534": {
+      "title": "ノーウェア: 漂流",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/qBZI3HcAeFt74qBLL3lpqX7gFIw.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1151534-nowhere/watch?locale=JP"
+    },
+    "248087": {
+      "title": "永遠の0",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/zGGa0729JQrfVk4bXBKQLGeW4Ga.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/248087-yong-yuan-no0/watch?locale=JP"
+    },
+    "543753": {
+      "title": "上流階級",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/nTQCbkxGjZNmD5pezpke7SSg62Z.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/543753-sanglyusahoe/watch?locale=JP"
+    },
+    "571891": {
+      "title": "ミュウツーの逆襲 EVOLUTION",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/xaSoSy7v6WTGpRd15TjBwTekqB2.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/571891-evolution/watch?locale=JP"
+    },
+    "581600": {
+      "title": "スペンサー・コンフィデンシャル",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/4hSG6svBpCdv3MvMCR5Dkl2GnCi.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/581600-spenser-confidential/watch?locale=JP"
+    },
+    "19333": {
+      "title": "メカゴジラの逆襲",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/dpEuCwRBErdkXwQjHd9qsnoo9ot.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/19333-mekagojirano-ni-xi/watch?locale=JP"
+    },
+    "1682": {
+      "title": "モスラ対ゴジラ",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/vsZ84VABklpYCKvLF1XnYSmRSeT.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1682-mosura-dui-gojira/watch?locale=JP"
+    },
+    "656690": {
+      "title": "監視資本主義: デジタル社会がもたらす光と影",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/jcaM6V2tCtu6iMHDsGLBUbaYgYp.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/656690-the-social-dilemma/watch?locale=JP"
+    },
+    "1002185": {
+      "title": "ミリオン・マイルズ・アウェイ 遠き宇宙への旅路",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/aFZid7l08HzxRKDYF7OunLF9syY.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1002185-a-million-miles-away/watch?locale=JP"
+    },
+    "1327690": {
+      "title": "One Mile: Chapter Two",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/3sjc9qXXmQoUWKQ3qIjS1nZaUJy.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1327690-one-mile-chapter-two/watch?locale=JP"
+    },
+    "36648": {
+      "title": "ブレイド3",
+      "flatrate": [
+        "HBO Max on U-Next",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "HBO Max on U-Next",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/lNMtF62HCd6Z62F668Mkl6ATBFc.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/36648-blade-trinity/watch?locale=JP"
+    },
+    "11619": {
+      "title": "マウス・タウン ロディとリタの大冒険",
+      "flatrate": [
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/jXjCb7bdD8om5JU1VlJ8PYO7ycV.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/11619-flushed-away/watch?locale=JP"
+    },
+    "30112": {
+      "title": "苹果",
+      "flatrate": [
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/y7T2Z1sI5O83n3V7o8QHxsaqInx.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/30112-ping-guo/watch?locale=JP"
+    },
+    "10323": {
+      "title": "タイタンの戦い",
+      "flatrate": [
+        "HBO Max on U-Next",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "HBO Max on U-Next",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/3tVenkMAcsSDeGBjLrTL665xe9s.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/10323-clash-of-the-titans/watch?locale=JP"
+    },
+    "920125": {
+      "title": "ハード・プレイ",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/i83Ykng2HVY5EF043zMmeQdLUQY.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/920125-white-men-can-t-jump/watch?locale=JP"
+    },
+    "26264": {
+      "title": "ジャングル・ジョージ2",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/lkBPEYxitQ0z0LC2gByo66fhQqF.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/26264-george-of-the-jungle-2/watch?locale=JP"
+    },
+    "10874": {
+      "title": "マペットの宝島",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/k4KW2CUkzDKaCy4H4cS02cO8gvV.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/10874-muppet-treasure-island/watch?locale=JP"
+    },
+    "860159": {
+      "title": "クラッシュ 真実の愛",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/hayr56csDzCSADaejgrRMVPHyDy.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/860159-crush/watch?locale=JP"
+    },
+    "14906": {
+      "title": "ラテン・アメリカの旅",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "FOD"
+      ],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/jiNSrKpgKdLXEUasOvNaCBgEner.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "FOD"
+          ],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/14906-saludos-amigos/watch?locale=JP"
+    },
+    "144616": {
+      "title": "Sofia the First: Once Upon a Princess",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/5MGUoGtlOK646iHo8sJLyDSrpDC.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/144616-sofia-the-first-once-upon-a-princess/watch?locale=JP"
+    },
+    "11260": {
+      "title": "デイブは宇宙船",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/eTHiDCm5vDYEZMCM2WHCAoMGjeN.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/11260-meet-dave/watch?locale=JP"
+    },
+    "732670": {
+      "title": "LEGO スター・ウォーズ／ホリデー・スペシャル",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/3Xn8moae8kZY9PKDvLUzJFG4GSG.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/732670-lego-star-wars-holiday-special/watch?locale=JP"
+    },
+    "9469": {
+      "title": "ラストゲーム",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Apple TV Store"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/kd8hRaysUQOz7AvSorZDJHuihcJ.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/9469-he-got-game/watch?locale=JP"
+    },
+    "25059": {
+      "title": "奇跡の旅 2 サンフランシスコの大冒険",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Apple TV Store"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/aTOxjmV9JhsAnN0hLrM7slnkBUL.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/25059-homeward-bound-ii-lost-in-san-francisco/watch?locale=JP"
+    },
+    "1139979": {
+      "title": "ミッキーマウスのワンダフルワールド：蒸気船シリー",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/bcphVuYET95d5VvtC6zrLxz7Lbh.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1139979-the-wonderful-world-of-mickey-mouse-steamboat-silly/watch?locale=JP"
+    },
+    "1716513": {
+      "title": "Extreme Makeover: Homer Edition",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/vim76mMXig00YRxN2iGYJASoGkP.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1716513-extreme-makeover-homer-edition/watch?locale=JP"
+    },
+    "15487": {
+      "title": "グレイテスト・ゲーム",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/kh4vd6wKa6j9xVFzxhQrsT0p2YN.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/15487-the-greatest-game-ever-played/watch?locale=JP"
+    },
+    "486589": {
+      "title": "白雪姫の赤い靴と7人のこびと",
+      "flatrate": [
+        "Hulu",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Apple TV Store"
+      ],
+      "buy": [
+        "Apple TV Store"
+      ],
+      "services": [
+        "Hulu",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/h5UAIwnshcdtV90hNP1yV6h0f8t.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Hulu",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/486589-ledeusyujeu/watch?locale=JP"
+    },
+    "748230": {
+      "title": "死霊伝説 呪われた町",
+      "flatrate": [
+        "HBO Max on U-Next",
+        "Hulu"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "HBO Max on U-Next",
+        "Hulu"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/vCUpo94Qm6DhV5fkQF4xMPsKCP8.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "Hulu"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/748230-salem-s-lot/watch?locale=JP"
+    },
+    "581644": {
+      "title": "ザ・ミスフィッツ",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "Hulu",
+        "Prime Video"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video"
+      ],
+      "buy": [
+        "Amazon Video"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "Hulu",
+        "Prime Video"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/fmdPeseZaAvevmaXglWL61vvzTT.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "FOD",
+            "Hulu",
+            "Prime Video"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video"
+          ],
+          "buy": [
+            "Amazon Video"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/581644-the-misfits/watch?locale=JP"
+    },
+    "55341": {
+      "title": "リターン・オブ・ジーパーズ・クリーパーズ",
+      "flatrate": [
+        "Hulu",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Hulu",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/pK7ge28ubs45av9aGEbVWW7ZbA8.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Hulu",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/55341-jeepers-creepers-3/watch?locale=JP"
+    },
+    "10044": {
+      "title": "香港発活劇エクスプレス 大福星",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Prime Video",
+        "Tencent Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Prime Video",
+        "Tencent Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/txlrK81RXHGrdYIGYIjkxja9dMT.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Hulu",
+            "Prime Video",
+            "Tencent Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/10044-fu-xing-gao-zhao/watch?locale=JP"
+    },
+    "13310": {
+      "title": "ぼくのエリ 200歳の少女",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/1NYbwbS2aaY7qxTjBrKjviwO6GD.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Hulu",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/13310-lat-den-ratte-komma-in/watch?locale=JP"
+    },
+    "9759": {
+      "title": "セルラー",
+      "flatrate": [
+        "HBO Max on U-Next",
+        "Hulu",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "HBO Max on U-Next",
+        "Hulu",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/p9YxZJ5EpBqYTYQwmd1QzvFWw8Q.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "Hulu",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/9759-cellular/watch?locale=JP"
+    },
+    "6964": {
+      "title": "恋愛適齢期",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "HBO Max on U-Next",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "HBO Max on U-Next",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/ygKSVGp1lYiGDulEyJS05csA8Rj.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "HBO Max on U-Next",
+            "Hulu",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/6964-something-s-gotta-give/watch?locale=JP"
+    },
+    "50456": {
+      "title": "ハンナ",
+      "flatrate": [
+        "Hulu",
+        "Sony Pictures Core Amazon Channel",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Hulu",
+        "Sony Pictures Core Amazon Channel",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/kofxgiu8mySmHcaj1rZozpIqUUt.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Hulu",
+            "Sony Pictures Core Amazon Channel",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/50456-hanna/watch?locale=JP"
+    },
+    "727340": {
+      "title": "ハント",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Apple TV Store"
+      ],
+      "buy": [
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/c6WWPzZG2rTpdIVPgNtdLm0013c.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "FOD",
+            "Hulu",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/727340-heonteu/watch?locale=JP"
+    },
+    "1013601": {
+      "title": "アルトナイツ",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "HBO Max on U-Next",
+        "Hulu",
+        "Prime Video"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD",
+        "HBO Max on U-Next"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "HBO Max on U-Next",
+        "Hulu",
+        "Prime Video"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/epGF8vv3caKLm6X8PKbD5xirFLa.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "HBO Max on U-Next",
+            "Hulu",
+            "Prime Video"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD",
+            "HBO Max on U-Next"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1013601-the-alto-knights/watch?locale=JP"
+    },
+    "223702": {
+      "title": "ソーセージ・パーティー",
+      "flatrate": [
+        "Anime Times Amazon Channel",
+        "Sony Pictures Core Amazon Channel",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Anime Times Amazon Channel",
+        "Sony Pictures Core Amazon Channel",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/y3bQjnNvdFnQfD3zKEjBNWfu1Gz.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-17T20:26:33.595194+00:00",
+          "flatrate": [
+            "Anime Times Amazon Channel",
+            "Sony Pictures Core Amazon Channel",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-17T20:26:33.595194+00:00",
+      "source_url": "https://www.themoviedb.org/movie/223702-sausage-party/watch?locale=JP"
     }
   },
   "provider_discovery": {
-    "provider_list_checked_at": "2026-11-17T19:28:01.060417+00:00",
+    "provider_list_checked_at": "2026-11-17T20:26:33.664196+00:00",
     "missing_services": [
       "ABEMA",
       "WOWOWオンデマンド",
@@ -159975,45 +161759,45 @@
     "service_pages": {
       "Netflix": {
         "provider_ids": "8|1796",
-        "next_page": 42,
+        "next_page": 43,
         "total_pages": 268,
-        "last_page_at": "2026-11-17T19:28:01.060417+00:00"
+        "last_page_at": "2026-11-17T20:26:33.664196+00:00"
       },
       "Prime Video": {
         "provider_ids": "9|2100",
-        "next_page": 42,
+        "next_page": 43,
         "total_pages": 489,
-        "last_page_at": "2026-11-17T19:28:01.060417+00:00"
+        "last_page_at": "2026-11-17T20:26:33.664196+00:00"
       },
       "U-NEXT": {
         "provider_ids": "84",
-        "next_page": 42,
+        "next_page": 43,
         "total_pages": 511,
-        "last_page_at": "2026-11-17T19:28:01.060417+00:00"
+        "last_page_at": "2026-11-17T20:26:33.664196+00:00"
       },
       "Disney+": {
         "provider_ids": "337",
-        "next_page": 42,
+        "next_page": 43,
         "total_pages": 96,
-        "last_page_at": "2026-11-17T19:28:01.060417+00:00"
+        "last_page_at": "2026-11-17T20:26:33.664196+00:00"
       },
       "Hulu": {
         "provider_ids": "15",
-        "next_page": 42,
+        "next_page": 43,
         "total_pages": 298,
-        "last_page_at": "2026-11-17T19:28:01.060417+00:00"
+        "last_page_at": "2026-11-17T20:26:33.664196+00:00"
       },
       "FOD": {
         "provider_ids": "2683",
-        "next_page": 42,
+        "next_page": 43,
         "total_pages": 1001,
-        "last_page_at": "2026-11-17T19:28:01.060417+00:00"
+        "last_page_at": "2026-11-17T20:26:33.664196+00:00"
       },
       "Apple TV+": {
         "provider_ids": "350",
-        "next_page": 1,
+        "next_page": 2,
         "total_pages": 7,
-        "last_page_at": "2026-11-17T19:28:01.060417+00:00"
+        "last_page_at": "2026-11-17T20:26:33.664196+00:00"
       }
     },
     "next_service_index": 0,

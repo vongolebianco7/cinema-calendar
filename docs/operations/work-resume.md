@@ -548,3 +548,10 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - PR #880 exact head `ffe13fd8e2545a131c2e0938dfa89026152c9fe9` now has all 9 observed Actions successful. It remains unmerged because the latest normal Vercel release attempt is blocked by the Hobby build-rate limit; prior production remains READY. No manual deploy, quota workaround, Neon retry, scraping or paid source was used.
 - Next: open a separate small PR for the FOD change, read its exact-head CI, and merge only through the normal gate when Vercel permits one ordinary release. Then verify public streaming count 464 and the rendered FOD card. Keep #244 open until that evidence is complete.
 
+## 2026-11-17 17:15 JST — PR #881 exact-source receipt
+
+- PR #881 source head `e5a2fc6be8a4831e62e7ec290b8bb7e7f477b430` is mergeable and all eight observed Actions succeeded. Required runs: Autonomous `44036208100`, smoke `44036208150`, frontend `44036208149`, backend `44036208136`. Supplemental Python, mobile, scorecard and visual runs also succeeded. Vercel backend status is success.
+- The executable source digest is `4b5e79e5d1fd7ecf2dc45788fe37898be5b979479961bdbbe29ec4b38b11edea`. `quality/production-proof.json` now points to the exact tested remote source head; this proof/docs-only commit does not change executable source or published data.
+- Latest visible production remains READY on `c1ccdc084fd6ce8e3b0e9837b388ec06cac310a5`. The later `11eac0a8cc5ef81bb7212cba9c7a5c0e3af1ffa4` production attempt is ERROR; do not retry or merge around it without the normal gate. Public data last rechecked this run remains boxoffice poster gaps 0 and streaming 463 rows/0 poster gaps.
+- Next: require fresh exact-head CI on the receipt-only PR tip. If successful and the ordinary frontend release gate is available, merge once and verify public streaming count 464 plus the actual FOD card in Chromium/WebKit. Keep #244 open until production evidence is complete.
+

@@ -6193,5 +6193,40 @@
       "Issue #244 remains open until exact-head CI, ordinary release, public JSON and rendered production acceptance are complete."
     ],
     "next_action": "Open a small PR for the FOD row and exact-identity reuse guard. Read fresh exact-head CI; do not merge or deploy while the ordinary Vercel release gate is rate-limited. When the gate is available, use one normal release and verify public streaming count 464 plus the rendered FOD card."
+  },
+  "latest_live_checkpoint_20261117_1715": {
+    "checked_at": "2026-11-17T08:15:00Z",
+    "main_sha": "63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531",
+    "issues": {"239": "open", "244": "open", "593": "closed/completed"},
+    "pull_request": {
+      "number": 881,
+      "source_head": "e5a2fc6be8a4831e62e7ec290b8bb7e7f477b430",
+      "state": "open",
+      "mergeable": true,
+      "candidate_rows": 464,
+      "production_rows": 463
+    },
+    "exact_source": {
+      "digest": "4b5e79e5d1fd7ecf2dc45788fe37898be5b979479961bdbbe29ec4b38b11edea",
+      "required_workflows": {
+        "autonomous": {"run": 44036208100, "result": "success"},
+        "smoke": {"run": 44036208150, "result": "success"},
+        "frontend": {"run": 44036208149, "result": "success"},
+        "backend": {"run": 44036208136, "result": "success"}
+      },
+      "supplemental": "Full Python, mobile layout, completeness scorecard and continuous visual QA succeeded on the same head."
+    },
+    "deployment": {
+      "latest_ready_sha": "c1ccdc084fd6ce8e3b0e9837b388ec06cac310a5",
+      "latest_attempt_sha": "11eac0a8cc5ef81bb7212cba9c7a5c0e3af1ffa4",
+      "latest_attempt_state": "ERROR",
+      "action": "Do not manually retry, bypass quota, or merge until the receipt-only final head passes and the ordinary frontend release gate is available."
+    },
+    "completed": [
+      "Confirmed all eight PR #881 Actions succeeded on the exact source head.",
+      "Refreshed the production receipt to that exact tested source without changing executable source or public data.",
+      "Kept #593 closed with zero observed boxoffice poster gaps and #244 open pending production acceptance."
+    ],
+    "next_action": "Run fresh exact-head CI on the receipt-only PR tip. If green and the ordinary frontend release gate is available, merge once, verify production READY, public streaming count 464, and the rendered FOD card in Chromium/WebKit."
   }
 }

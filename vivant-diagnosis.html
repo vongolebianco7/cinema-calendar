@@ -89,6 +89,7 @@
   let index = 0;
   const qContent = document.getElementById('questionContent');
   const qCount = document.getElementById('questionCount');
+  const stepHint = document.getElementById('stepHint');
   const progress = document.querySelector('.progress');
   const progressBar = document.getElementById('progressBar');
   const next = document.getElementById('nextButton');
@@ -98,6 +99,7 @@
   function drawQuestion() {
     const isFavoriteStep = index === favoriteStep;
     qCount.textContent = `質問 ${index + 1} / ${totalSteps}`;
+    stepHint.textContent = isFavoriteStep ? '選ばずに進めます' : '選択肢をひとつ選んでください';
     progress.setAttribute('aria-valuemax', String(totalSteps));
     progress.setAttribute('aria-valuenow', String(index));
     progressBar.style.width = `${(index / totalSteps) * 100}%`;
@@ -115,9 +117,7 @@
         button.addEventListener('click', () => { favoriteTitle = movie.title; drawQuestion(); });
         choices.append(button);
       });
-      const hint = document.createElement('p'); hint.className = 'favoriteQuestionHint';
-      hint.textContent = '選ばずに進むこともできます。';
-      qContent.append(choices, hint);
+      qContent.append(choices);
     } else {
       const question = data.QUESTIONS[index];
       const choices = document.createElement('div'); choices.className = 'choices';

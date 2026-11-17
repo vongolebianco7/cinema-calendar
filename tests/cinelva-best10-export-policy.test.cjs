@@ -17,7 +17,7 @@ test('the three font choices use visibly distinct Japanese font fallbacks',()=>{
 });
 test('My Best 10 cache-busts the updated typography renderer',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
- assert.match(html,/js\/my-cinemap-art\.js\?v=20261114-rank-stars-logo/);
+ assert.match(html,/js\/my-cinemap-art\.js\?v=20261118-larger-posters/);
 });
 test('cinema ranking uses larger numbers, clipped star shapes, and the original black emblem',()=>{
  const art=fs.readFileSync('js/my-cinemap-art.js','utf8'),templates=fs.readFileSync('js/my-cinemap-cinema-templates.js','utf8');

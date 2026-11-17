@@ -42,6 +42,14 @@ test('120本前後の有名映画からジャンルが重ならない3本を推�
   assert.ok(diagnosis.MOVIES.filter(movie => /spy|espionage|スパイ|諜報/i.test(`${movie.genre} ${movie.title}`)).length < 12);
 });
 
+test('好きな映画の選択肢は候補データ内の9作品でジャンルが広い', () => {
+  const options = diagnosis.FAVORITE_MOVIE_OPTIONS;
+  assert.equal(options.length, 9);
+  assert.equal(new Set(options.map(movie => movie.id)).size, 9);
+  assert.ok(options.every(movie => diagnosis.MOVIES.includes(movie)));
+  assert.ok(new Set(options.map(movie => movie.genre)).size >= 8);
+});
+
 test('鑑賞済み指定作品を除外し、同じ3本を繰り返さない', () => {
   const answers = diagnosis.QUESTIONS.map(q => q.choices[2 % q.choices.length].id);
   const first = diagnosis.recommendMovies(answers, []);

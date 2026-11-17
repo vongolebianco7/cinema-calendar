@@ -71,6 +71,13 @@
     traits: Object.fromEntries(AXES.map(axis => [axis, traitText.split(' ').includes(axis) ? 2 : 0]))
   })));
 
+  const favoriteMovieTitles = [
+    'ベイビー・ドライバー', 'インターステラー', 'ショーシャンクの空に',
+    'グランド・ブダペスト・ホテル', '千と千尋の神隠し', 'ジュラシック・パーク',
+    'ゴッドファーザー', '羊たちの沈黙', 'タイタニック'
+  ];
+  const favoriteMovieOptions = favoriteMovieTitles.map(title => movies.find(movie => movie.title === title)).filter(Boolean);
+
   function hash(text) {
     let value = 2166136261;
     for (let i = 0; i < text.length; i++) value = Math.imul(value ^ text.charCodeAt(i), 16777619);
@@ -124,5 +131,5 @@
     return selected;
   }
 
-  return { AXES, QUESTIONS: questions, RESULTS: results, MOVIES: movies, scoreAnswers, getResult, recommendMovies };
+  return { AXES, QUESTIONS: questions, RESULTS: results, MOVIES: movies, FAVORITE_MOVIE_OPTIONS: favoriteMovieOptions, scoreAnswers, getResult, recommendMovies };
 });

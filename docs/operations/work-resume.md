@@ -539,3 +539,12 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - The three official feeds remain candidate discovery only. Automated premiere publication stays disabled, and movie type, Japanese premiere date and unique TMDB identity are still mandatory.
 - Production remains READY on main `0482952604ec79b2bbde263ebfcba4eb5c595586`; public boxoffice is 1,908/1,908 postered and streaming is 463/463 postered. No production data or user storage changed.
 
+## 2026-11-17 14:10 JST — verified FOD release and exact identity reuse
+
+- Live main is `63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531`. Issue #593 remains closed. Production boxoffice JSON is HTTP 200 with 1,808 yearly rows plus 100 all-time rows and zero missing posters. Production streaming JSON is HTTP 200 with 463 rows and zero missing posters.
+- FOD's official Help announcement lists `箱の中の羊` as a rental release on 2026-11-18. The existing U-NEXT row has the exact normalized title and date, one unique TMDB identity (`1553969`) and a valid TMDB-hosted poster. The reviewed FOD row therefore reuses that identity; no title-only or fuzzy identity was accepted.
+- The candidate snapshot increases from 463 to 464 rows. The new row is not yet production evidence. Conflicting same-title/date identities fail closed and leave ID/poster unset.
+- Focused importer tests passed 6/6. `scripts/quality_gate.py` passed, including 598 Node tests and all Python/contract checks. Viewing history, ratings, reviews, bookmarks and backups were not changed.
+- PR #880 exact head `ffe13fd8e2545a131c2e0938dfa89026152c9fe9` now has all 9 observed Actions successful. It remains unmerged because the latest normal Vercel release attempt is blocked by the Hobby build-rate limit; prior production remains READY. No manual deploy, quota workaround, Neon retry, scraping or paid source was used.
+- Next: open a separate small PR for the FOD change, read its exact-head CI, and merge only through the normal gate when Vercel permits one ordinary release. Then verify public streaming count 464 and the rendered FOD card. Keep #244 open until that evidence is complete.
+

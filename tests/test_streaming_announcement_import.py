@@ -49,6 +49,31 @@ class StreamingAnnouncementImportTests(unittest.TestCase):
    movies=json.loads((root/'streaming.json').read_text())['movies']
    self.assertEqual(len(movies),1);self.assertEqual(movies[0].get('original_title'),'Animals');self.assertEqual(movies[0].get('release_year'),2026);self.assertEqual(movies[0]['date'],'2026-10-09');self.assertNotIn('id',movies[0])
 
+ def test_same_title_and_date_reuses_one_verified_identity_across_services(self):
+  with tempfile.TemporaryDirectory() as directory:
+   root=Path(directory)/'data';root.mkdir()
+   known={'title':'箱の中の羊','date':'2026-11-18','service':'U-NEXT','id':1553969,'tmdb_id':1553969,'poster':'https://image.tmdb.org/t/p/w500/a.jpg','runtime':89}
+   reviewed={'title':'箱の中の羊','date':'2026-11-18','service':'FOD','source_url':'https://help.fod.fujitv.co.jp/hc/ja/articles/official','verified':True,'content_type':'movie'}
+   sources={'services':[{'name':'U-NEXT','official_url':'https://www.unext.co.jp/'},{'name':'FOD','official_url':'https://fod.fujitv.co.jp/','reviewed_premiere_hosts':['help.fod.fujitv.co.jp']}]}
+   for name,value in {'streaming_sources.json':sources,'streaming.json':{'movies':[known]},'streaming_announcements.json':{'movies':[reviewed]}}.items():(root/name).write_text(json.dumps(value))
+   subprocess.run([sys.executable,str(SCRIPT)],cwd=directory,check=True,capture_output=True)
+   added=next(movie for movie in json.loads((root/'streaming.json').read_text())['movies'] if movie['service']=='FOD')
+   self.assertEqual(added['tmdb_id'],1553969)
+   self.assertEqual(added['poster'],known['poster'])
+   self.assertEqual(added['runtime'],89)
+
+ def test_conflicting_same_title_and_date_does_not_reuse_identity(self):
+  with tempfile.TemporaryDirectory() as directory:
+   root=Path(directory)/'data';root.mkdir()
+   rows=[{'title':'同名','date':'2026-11-18','service':'U-NEXT','id':1,'poster':'https://image.tmdb.org/t/p/w500/a.jpg'},{'title':'同名','date':'2026-11-18','service':'Netflix','id':2,'poster':'https://image.tmdb.org/t/p/w500/b.jpg'}]
+   reviewed={'title':'同名','date':'2026-11-18','service':'FOD','source_url':'https://help.fod.fujitv.co.jp/hc/ja/articles/official','verified':True,'content_type':'movie'}
+   sources={'services':[{'name':'U-NEXT','official_url':'https://www.unext.co.jp/'},{'name':'Netflix','official_url':'https://about.netflix.com/'},{'name':'FOD','official_url':'https://fod.fujitv.co.jp/','reviewed_premiere_hosts':['help.fod.fujitv.co.jp']}]}
+   for name,value in {'streaming_sources.json':sources,'streaming.json':{'movies':rows},'streaming_announcements.json':{'movies':[reviewed]}}.items():(root/name).write_text(json.dumps(value))
+   subprocess.run([sys.executable,str(SCRIPT)],cwd=directory,check=True,capture_output=True)
+   added=next(movie for movie in json.loads((root/'streaming.json').read_text())['movies'] if movie['service']=='FOD')
+   self.assertNotIn('id',added)
+   self.assertIsNone(added['poster'])
+
  def test_generated_official_snapshot_is_imported_and_preserves_existing_poster(self):
   with tempfile.TemporaryDirectory() as directory:
    root=Path(directory)/'data';root.mkdir()

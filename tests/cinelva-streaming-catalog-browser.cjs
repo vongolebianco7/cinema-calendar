@@ -26,7 +26,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    note:'国内向け配信先の観測。配信開始日ではありません。',
    movies:{
     '101':{title:'Netflixの映画',services:['Netflix'],flatrate:['Netflix'],rent:[],buy:[],checked_at:now,source_url:'https://www.themoviedb.org/movie/101/watch?locale=JP'},
-    '102':{title:'レンタル映画',services:['Prime Video'],flatrate:['Prime Video'],rent:['Amazon Video'],buy:[],checked_at:now,source_url:'https://www.themoviedb.org/movie/102/watch?locale=JP'},
+    '102':{title:'レンタル映画',services:['Prime Video'],flatrate:['Prime Video'],rent:['Amazon Video'],buy:[],checked_at:now,source_url:'https://www.themoviedb.org/movie/999/watch?locale=JP'},
     '103':{title:'古い観測',services:['Netflix'],flatrate:['Netflix'],rent:[],buy:[],checked_at:'2026-01-01T00:00:00Z'},
     '104':{title:'レンタル専用',services:[],flatrate:[],rent:['Amazon Video'],buy:[],checked_at:now},
     '105':{title:'FODチャンネル作品',services:['FOD Channel Amazon Channel'],flatrate:['FOD Channel Amazon Channel'],rent:[],buy:[],checked_at:now},
@@ -74,6 +74,13 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   assert.equal(await theaterCard.locator('.cinelva-bookmark-button').getAttribute('aria-pressed'),'true','existing bookmark is read from the existing bookmark key');
   assert.match(await page.locator('header.gTop').innerText(),/Cinelva/,'the canonical shared navigation header is present');
   assert.equal(await page.locator('#streamingGrid').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),2,'streaming cards use two mobile columns so posters are larger');
+  const netflixCard=page.locator('#streamingGrid .card').filter({hasText:'Netflixの映画'});
+  const sourceLink=netflixCard.locator('a.sourceLink');
+  assert.equal(await sourceLink.getAttribute('href'),'https://www.themoviedb.org/movie/101/watch?locale=JP','card links to the matching TMDB provider observation');
+  assert.equal(await sourceLink.getAttribute('target'),'_blank');
+  assert.equal(await sourceLink.getAttribute('rel'),'noopener noreferrer');
+  const mismatchedSourceCard=page.locator('#streamingGrid .card').filter({hasText:'レンタル映画'});
+  assert.equal(await mismatchedSourceCard.locator('a.sourceLink').count(),0,'a source for another TMDB ID is never attached');
   assert.doesNotMatch(await page.locator('body').innerText(),/\\n/,'literal escaped newlines are not exposed in page content');
   const recoveredCard=page.locator('#streamingGrid .card').filter({hasText:'カタログ未収録の配信作品'});
   await recoveredCard.scrollIntoViewIfNeeded();

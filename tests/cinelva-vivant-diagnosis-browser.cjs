@@ -52,7 +52,10 @@ assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
       await page.locator('.choice').nth(question % 4).click();
       await page.locator('#nextButton').click();
     }
-    await page.getByLabel('好きな映画').fill('ベイビー・ドライバー');
+    const favoriteChoices = page.locator('.favoriteChoices .choice');
+    assert.equal(await favoriteChoices.count(), 9, 'favorite step offers nine selectable movies');
+    await page.getByRole('button', { name: 'ベイビー・ドライバー', exact: true }).click();
+    assert.equal(await page.getByRole('button', { name: 'ベイビー・ドライバー', exact: true }).getAttribute('aria-pressed'), 'true');
     await page.locator('#nextButton').click();
     await page.getByRole('heading', { name: '診断結果' }).waitFor();
     assert.deepEqual(errors, [], 'result rendering has no uncaught browser errors');
@@ -84,7 +87,7 @@ assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
       assert.ok(layout.scrollWidth <= layout.width, `no horizontal page overflow at ${width}px: ${JSON.stringify(layout)}`);
     }
     assert.deepEqual(errors, [], 'no uncaught browser errors');
-    console.log(`VIVANT diagnosis ${process.env.CINELVA_BROWSER || 'chromium'} 390px journey passed; 8 answers, favorite movie, 3 poster-backed recommendations, replacement and saved-data preservation verified.`);
+    console.log(`VIVANT diagnosis ${process.env.CINELVA_BROWSER || 'chromium'} 390px journey passed; 8 answers, 9 selectable favorite movies, 3 poster-backed recommendations, replacement and saved-data preservation verified.`);
     await context.close();
   } finally {
     if (browser) await browser.close();

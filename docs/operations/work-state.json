@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T02:10:00Z",
+  "updated_at": "2026-11-17T03:20:00Z",
   "status": "pr_created",
-  "issue": 239,
+  "issue": "#239",
   "base_branch": "main",
-  "base_sha": "0482952604ec79b2bbde263ebfcba4eb5c595586",
-  "branch": "feat/official-streaming-feeds-20261117",
-  "head_sha": "693e10fb4c8597d22f7bb01f58c08b23cc512833",
+  "base_sha": "63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531",
+  "branch": "feat/vivant-favorite-movie-selection-20261117",
+  "head_sha": "9c23b36b240274c41bc337bac78ddee87304b721",
   "pull_request": {
-    "number": 877,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/877",
+    "number": 879,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/879",
     "state": "open"
   },
   "work_items": [
@@ -1356,9 +1356,9 @@
     "visual_acceptance_reason": "Direct Chrome navigation redirected to Vercel login; authenticated fetch verified static HTML/JSON HTTP 200 but not rendered cards/images."
   },
   "blockers": [
-    "Vercel production deployment dpl_ET4MJ2daxx6vcwUVTYRHAQRyNMCy for merge 4a19f628ddbf5b228e5518fd0ddfc9525db51ea7 failed before publication because production-proof.json still referred to a843b1c5 and digest 15b62689..., while current exact-CI-tested source is digest ddd9459c... . This is a source-proof mismatch, not a quota failure. Prior READY production at dpl_CPZGWBYFcfR2UkNxnab9P6zocoCP / 86a43264... remains live."
+    "Vercel – backend: Vercel Hobby limit `api-deployments-free-per-day` (>100 deployments/day); no manual deployment or quota workaround."
   ],
-  "next_action": "Wait for exact-head required checks on the proof-only receipt PR. If green, merge once through the normal path; allow automatic Vercel to verify the receipt. Only mark production_verified after READY and canonical pages no longer contain the removed helper copy. Do not manually deploy or bypass the gate.",
+  "next_action": "Read final exact-head CI for PR #879. Merge only if all required checks are green and normal release can proceed; then verify the feature on the canonical production URL. If Vercel remains rate-limited, preserve the PR and production state, and resume after the quota window without manual deployment.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -6144,5 +6144,68 @@
       "No scraping, paid action, Neon retry, manual deployment, quota bypass or user-storage mutation"
     ],
     "next_action": "Read fresh exact-head CI after the runner pin. Merge only when required checks pass; then inspect generated candidates and publish only independently verified movie/date/TMDB matches. Keep #244 open."
+  },
+  "latest_live_checkpoint_20261117_1220": {
+    "checked_at": "2026-11-17T03:20:00Z",
+    "main_sha": "63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed/completed"
+    },
+    "pull_request": {
+      "number": 879,
+      "branch": "feat/vivant-favorite-movie-selection-20261117",
+      "head_sha": "9c23b36b240274c41bc337bac78ddee87304b721",
+      "title": "VIVANT診断の好きな映画を9作品から選べるようにする",
+      "state": "open"
+    },
+    "completed": [
+      "VIVANT diagnosis favorite-movie free text replaced by 9 existing curated movie buttons; skipping remains optional.",
+      "Cloudflare Pages PR preview interaction confirmed: selecting ベイビー・ドライバー is reflected in results and excluded from the three recommendations; no viewing or user-storage records are written.",
+      "Production public boxoffice JSON HTTP 200: 1,908 rows, 0 missing posters; #593 remains closed."
+    ],
+    "exact_head_ci": {
+      "green": [
+        "CINELVA smoke tests",
+        "CINELVA mobile layout smoke test",
+        "Check brand identity",
+        "Reproducible backend build"
+      ],
+      "in_progress": [
+        "Validate frontend",
+        "Autonomous quality gate",
+        "CINELVA continuous visual QA",
+        "Cinemap completeness scorecard",
+        "CINELVA backup safety"
+      ],
+      "external_failure": [
+        "Vercel – backend: Vercel Hobby limit `api-deployments-free-per-day` (>100 deployments/day); no manual deployment or quota workaround."
+      ]
+    },
+    "ci_remediation": {
+      "finding": "Backup safety browser installation failed before assertions because runner resolved to Ubuntu 26.04; Playwright 1.59.0 reports chromium unsupported on ubuntu26.04-x64.",
+      "change": "Pinned .github/workflows/cinelva-backup.yml to ubuntu-24.04 on PR #879; exact-head rerun was in progress.",
+      "next": "Wait for 9c23b36 exact-head rerun and inspect final results; do not merge if any required check is failing."
+    },
+    "production": {
+      "state": "READY",
+      "sha": "c1ccdc084fd6ce8e3b0e9837b388ec06cac310a5",
+      "note": "No manual deployment. PR preview is not production."
+    },
+    "public_data": {
+      "boxoffice": {
+        "http": 200,
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27"
+      }
+    },
+    "safeguards": [
+      "No user viewing/rating/review/bookmark changes.",
+      "No manual deploy, paid plan, scraping, CI bypass, or blind merge.",
+      "#244 remains untouched until the #879 UI change reaches its normal release gate."
+    ],
+    "next_action": "Read final exact-head CI for PR #879. Merge only if all required checks are green and normal release can proceed; then verify the feature on the canonical production URL. If Vercel remains rate-limited, preserve the PR and production state, and resume after the quota window without manual deployment."
   }
 }

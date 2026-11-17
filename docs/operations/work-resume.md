@@ -539,3 +539,13 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - The three official feeds remain candidate discovery only. Automated premiere publication stays disabled, and movie type, Japanese premiere date and unique TMDB identity are still mandatory.
 - Production remains READY on main `0482952604ec79b2bbde263ebfcba4eb5c595586`; public boxoffice is 1,908/1,908 postered and streaming is 463/463 postered. No production data or user storage changed.
 
+
+
+## 2026-11-17 12:20 JST — VIVANT movie selection
+
+- Live `main`: `63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531`. Issue #593 is closed; canonical production boxoffice JSON is HTTP 200 with 1,908 rows and 0 missing posters. #244 remains open.
+- PR #879 (`feat/vivant-favorite-movie-selection-20261117`) changes the final VIVANT diagnosis step from free text to 9 existing movie choices. Selection is optional. Browser preview verified the selected favorite is reflected in the result and excluded from the three recommendations; answers are not saved, and no viewing/rating/review/bookmark records are changed.
+- Latest implementation head at checkpoint: `9c23b36b240274c41bc337bac78ddee87304b721`. Smoke, mobile layout, brand identity and reproducible backend build passed. Frontend validation, quality gate, visual QA, scorecard and backup browser safety were still in progress.
+- Backup browser safety had failed before assertions on Ubuntu 26.04 because Playwright 1.59.0 does not support Chromium there. PR #879 pins the backup workflow to Ubuntu 24.04; read its exact-head rerun before any merge.
+- Vercel's backend status is blocked by the Hobby daily cap (`api-deployments-free-per-day`, over 100 deployments). Production remains READY on `c1ccdc084fd6ce8e3b0e9837b388ec06cac310a5`; no manual deployment or quota bypass was attempted. The Cloudflare Pages PR preview is not production acceptance.
+- Next: inspect final exact-head CI for PR #879. Merge only if required checks pass through the normal gate; after any automatic production release, verify the canonical page. If the Vercel quota gate remains blocked, leave production untouched and resume after the rate-limit window.

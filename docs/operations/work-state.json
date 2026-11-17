@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T13:30:00Z",
+  "updated_at": "2026-11-17T13:45:44.853Z",
   "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "01de2d1cf0e25f0f1f3c15d3146f27e1a1eac7e1",
-  "branch": "fix/calendar-multi-service-labels-20261117",
-  "head_sha": "4907bef30d7b9ff7d5e8bca47eaaa62d6f15086f",
+  "base_sha": "f53d9e9fdce36a68eeb9a21127f558b6139a1261",
+  "branch": "feat/streaming-source-evidence-link-20261116",
+  "head_sha": "2f0fa46a564d7a8d36413579396cc0cfdbd16954",
   "pull_request": {
-    "number": 882,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/882",
+    "number": 873,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/873",
     "state": "open"
   },
   "work_items": [
@@ -1356,9 +1356,9 @@
     "visual_acceptance_reason": "Direct Chrome navigation redirected to Vercel login; authenticated fetch verified static HTML/JSON HTTP 200 but not rendered cards/images."
   },
   "blockers": [
-    "Vercel production deployment dpl_ET4MJ2daxx6vcwUVTYRHAQRyNMCy for merge 4a19f628ddbf5b228e5518fd0ddfc9525db51ea7 failed before publication because production-proof.json still referred to a843b1c5 and digest 15b62689..., while current exact-CI-tested source is digest ddd9459c... . This is a source-proof mismatch, not a quota failure. Prior READY production at dpl_CPZGWBYFcfR2UkNxnab9P6zocoCP / 86a43264... remains live."
+    "Production acceptance for PR #873 is pending: the exact-source code head passed 33/33 checks, but the proof/docs-only final tip must pass exact-head CI before one ordinary merge and automatic Vercel release. No manual deployment or quota workaround."
   ],
-  "next_action": "Wait for exact-head required checks on the proof-only receipt PR. If green, merge once through the normal path; allow automatic Vercel to verify the receipt. Only mark production_verified after READY and canonical pages no longer contain the removed helper copy. Do not manually deploy or bypass the gate.",
+  "next_action": "Require exact-head CI on the proof/docs-only PR #873 tip, merge once if green, wait for the ordinary automatic Vercel production release, then verify the matching-ID TMDB source link on desktop and mobile. Keep #244 open.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -6197,7 +6197,11 @@
   "latest_live_checkpoint_20261117_1715": {
     "checked_at": "2026-11-17T08:15:00Z",
     "main_sha": "63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531",
-    "issues": {"239": "open", "244": "open", "593": "closed/completed"},
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed/completed"
+    },
     "pull_request": {
       "number": 881,
       "source_head": "e5a2fc6be8a4831e62e7ec290b8bb7e7f477b430",
@@ -6209,10 +6213,22 @@
     "exact_source": {
       "digest": "4b5e79e5d1fd7ecf2dc45788fe37898be5b979479961bdbbe29ec4b38b11edea",
       "required_workflows": {
-        "autonomous": {"run": 44036208100, "result": "success"},
-        "smoke": {"run": 44036208150, "result": "success"},
-        "frontend": {"run": 44036208149, "result": "success"},
-        "backend": {"run": 44036208136, "result": "success"}
+        "autonomous": {
+          "run": 44036208100,
+          "result": "success"
+        },
+        "smoke": {
+          "run": 44036208150,
+          "result": "success"
+        },
+        "frontend": {
+          "run": 44036208149,
+          "result": "success"
+        },
+        "backend": {
+          "run": 44036208136,
+          "result": "success"
+        }
       },
       "supplemental": "Full Python, mobile layout, completeness scorecard and continuous visual QA succeeded on the same head."
     },
@@ -6232,15 +6248,38 @@
   "latest_live_checkpoint_20261117_1736": {
     "checked_at": "2026-11-17T08:36:00Z",
     "main_sha": "63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531",
-    "issues": {"239": "open", "244": "open", "593": "closed/completed"},
-    "pull_request": {"number": 881, "source_head": "658b0fe3f106b30c9477bce31c6cbfde41af68e3", "state": "open", "mergeable": true, "candidate_rows": 464, "production_rows": 463},
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed/completed"
+    },
+    "pull_request": {
+      "number": 881,
+      "source_head": "658b0fe3f106b30c9477bce31c6cbfde41af68e3",
+      "state": "open",
+      "mergeable": true,
+      "candidate_rows": 464,
+      "production_rows": 463
+    },
     "exact_source": {
       "digest": "3c703bf9e8255b3392b842356d01c2aabdff4a2b7deb95d7d9812d0fae2897c7",
       "required_workflows": {
-        "autonomous": {"run": 44047187577, "result": "success"},
-        "smoke": {"run": 44047187576, "result": "success"},
-        "frontend": {"run": 44047187540, "result": "success"},
-        "backend": {"run": 44047187463, "result": "success"}
+        "autonomous": {
+          "run": 44047187577,
+          "result": "success"
+        },
+        "smoke": {
+          "run": 44047187576,
+          "result": "success"
+        },
+        "frontend": {
+          "run": 44047187540,
+          "result": "success"
+        },
+        "backend": {
+          "run": 44047187463,
+          "result": "success"
+        }
       },
       "supplemental": "Full Python, mobile layout, scorecard contract, completeness scorecard and continuous visual QA succeeded on the same source head."
     },
@@ -6260,7 +6299,11 @@
   "latest_live_checkpoint_20261117_2210": {
     "checked_at": "2026-11-17T13:10:00Z",
     "main_sha": "01de2d1cf0e25f0f1f3c15d3146f27e1a1eac7e1",
-    "issues": {"239": "open", "244": "open", "593": "closed/completed"},
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed/completed"
+    },
     "pull_request": {
       "number": 882,
       "source_head": "4907bef30d7b9ff7d5e8bca47eaaa62d6f15086f",
@@ -6271,8 +6314,16 @@
       "vercel_state": "READY",
       "deployment": "dpl_7cxoReLKpNLKBRbT9XVpdKPrB7Ly",
       "deployment_sha": "01de2d1cf0e25f0f1f3c15d3146f27e1a1eac7e1",
-      "streaming": {"http": 200, "rows": 464, "missing_posters": 0},
-      "boxoffice": {"http": 200, "rows": 1908, "missing_posters": 0}
+      "streaming": {
+        "http": 200,
+        "rows": 464,
+        "missing_posters": 0
+      },
+      "boxoffice": {
+        "http": 200,
+        "rows": 1908,
+        "missing_posters": 0
+      }
     },
     "completed": [
       "Confirmed the official FOD and U-NEXT rows for 箱の中の羊 share TMDB movie 1553969 and date 2026-11-18 in production JSON.",
@@ -6284,14 +6335,98 @@
     "exact_source": {
       "digest": "bde9a73fab335030d4316e054312959c7d7f3b041a3d7bd854ce0af6e903c97c",
       "required_workflows": {
-        "autonomous": {"run": 44090187452, "result": "success"},
-        "smoke": {"run": 44090187460, "result": "success"},
-        "frontend": {"run": 44090187679, "result": "success"},
-        "backend": {"run": 44090187606, "result": "success"}
+        "autonomous": {
+          "run": 44090187452,
+          "result": "success"
+        },
+        "smoke": {
+          "run": 44090187460,
+          "result": "success"
+        },
+        "frontend": {
+          "run": 44090187679,
+          "result": "success"
+        },
+        "backend": {
+          "run": 44090187606,
+          "result": "success"
+        }
       },
       "supplemental": "Full Python, mobile layout, completeness scorecard, continuous visual QA, backup safety, isolated Pages and brand identity also succeeded on the same exact head."
     },
     "external_blocker": "The latest updater persisted its JSON snapshots but Neon sync ended with P1001. No Neon retry was made because the public JSON path is healthy and prior endpoint start was quota-stopped.",
     "next_action": "Require fresh exact-head CI on the proof/docs-only PR tip. If green, merge PR #882 once, wait for the ordinary automatic Vercel release, and verify one production card shows both U-NEXT and FOD in Chromium/WebKit. Keep #244 open."
+  },
+  "latest_live_checkpoint_20261117_2245": {
+    "checked_at": "2026-11-17T13:45:44.853Z",
+    "main_sha": "f53d9e9fdce36a68eeb9a21127f558b6139a1261",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed/completed"
+    },
+    "pull_request": {
+      "number": 873,
+      "code_head": "2f0fa46a564d7a8d36413579396cc0cfdbd16954",
+      "state": "open/mergeable",
+      "base_sha": "f53d9e9fdce36a68eeb9a21127f558b6139a1261",
+      "changed_files": 2
+    },
+    "production": {
+      "vercel_state": "READY",
+      "deployment": "dpl_J8t4ixBFpVP8x8swjW8nDxg6T4vW",
+      "deployment_sha": "f53d9e9fdce36a68eeb9a21127f558b6139a1261",
+      "streaming": {
+        "http": 200,
+        "rows": 464,
+        "missing_posters": 0
+      },
+      "boxoffice": {
+        "http": 200,
+        "rows": 1908,
+        "missing_posters": 0
+      }
+    },
+    "completed": [
+      "Rebased existing PR #873 onto live main without opening a duplicate PR or overwriting the merged multi-service-card behavior.",
+      "Added a visible TMDB confirmation link only when the URL is HTTPS, the exact official www.themoviedb.org host, the watch-provider path, and the same verified movie ID.",
+      "Added a browser regression proving a URL for movie 999 is not attached to movie 102.",
+      "Exact code head passed 33/33 check runs with zero failures, including Chromium/WebKit, backup safety, visual audit, smoke and build.",
+      "Computed exact executable source digest 7e74754055752272f4d8170247378fa447d9c605d60b71edabf48d3253246310 and refreshed the production proof receipt."
+    ],
+    "exact_source": {
+      "head_sha": "2f0fa46a564d7a8d36413579396cc0cfdbd16954",
+      "digest": "7e74754055752272f4d8170247378fa447d9c605d60b71edabf48d3253246310",
+      "checks": {
+        "total": 33,
+        "success": 33,
+        "failed": 0,
+        "pending": 0
+      },
+      "required_workflows": {
+        "autonomous": {
+          "run": 44094815671,
+          "result": "success"
+        },
+        "smoke": {
+          "run": 44094815401,
+          "result": "success"
+        },
+        "frontend": {
+          "run": 44094815580,
+          "result": "success"
+        },
+        "backend": {
+          "run": 44094815510,
+          "result": "success"
+        }
+      }
+    },
+    "external_constraints": [
+      "Neon was not retried; no database write is needed for this UI provenance change.",
+      "No manual Vercel deploy, workflow dispatch, paid action, scraping, or quota workaround was used.",
+      "Physical iPhone Safari remains unverified; exact-head CI covers Chromium and WebKit."
+    ],
+    "next_action": "Wait for exact-head CI on the proof/docs-only final tip, merge once if green, confirm Vercel production READY on the merge, and verify the source link is visible and ID-correct on the public streaming card. Keep #244 open."
   }
 }

@@ -555,3 +555,10 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - Latest visible production remains READY on `c1ccdc084fd6ce8e3b0e9837b388ec06cac310a5`. The later `11eac0a8cc5ef81bb7212cba9c7a5c0e3af1ffa4` production attempt is ERROR; do not retry or merge around it without the normal gate. Public data last rechecked this run remains boxoffice poster gaps 0 and streaming 463 rows/0 poster gaps.
 - Next: require fresh exact-head CI on the receipt-only PR tip. If successful and the ordinary frontend release gate is available, merge once and verify public streaming count 464 plus the actual FOD card in Chromium/WebKit. Keep #244 open until production evidence is complete.
 
+## 2026-11-17 17:36 JST — WebKit CI stabilized on PR #881
+
+- Receipt-only head `57b1c108711029aca9a2c09231e582fbd194f7ea` exposed two different serial WebKit timeouts: first the provider offline status, then global-search navigation. The first passed on the targeted rerun while the second timed out, confirming runner timing rather than an FOD data failure. No further retry was launched.
+- Source head `658b0fe3f106b30c9477bce31c6cbfde41af68e3` now waits for `DOMContentLoaded` on the affected saved-director navigation. All nine Actions succeeded on this exact head, including frontend run `44047187540`; both provider-list and global-search Chromium/WebKit paths passed.
+- Executable digest `3c703bf9e8255b3392b842356d01c2aabdff4a2b7deb95d7d9812d0fae2897c7` is recorded in the release receipt. Candidate streaming remains 464 rows; production remains 463 until merge and the ordinary automatic deployment complete.
+- Next: require fresh exact-head checks on the proof/docs-only tip, merge only if green, then wait for the automatic Vercel production deployment and verify public streaming count 464 plus the rendered FOD card. Keep #244 open.
+

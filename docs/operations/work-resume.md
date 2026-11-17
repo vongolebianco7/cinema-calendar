@@ -528,3 +528,5 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - Existing PR #873 remains separate. Its browser jobs fail during Playwright browser preparation before app assertions; one targeted retry reproduced the infrastructure failure, so do not loop retries.
 - No user records, ratings, reviews, bookmarks, backups, Neon data or production deployment were changed. No scraping or paid source was introduced.
 - Next: read exact-head CI for PR #877. If green, inspect generated candidates, discard series and ambiguous matches, verify official Japanese dates and TMDB identities, then use the normal merge/release gate and perform production acceptance. Keep #244 open.
+
+- CI follow-up at 10:00 JST: the only implementation-related Python failure was a stale audit assertion that all services had zero approved feeds. Commit `52bdb0ee586b135f2a694cee3ccffc9f379b25e8` now expects one approved candidate feed for Netflix, Prime Video and Apple TV+ while still requiring `automated_premiere_services == 0`. Browser failures remain in Playwright preparation, before application assertions.

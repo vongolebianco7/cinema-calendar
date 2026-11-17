@@ -26,8 +26,9 @@ class StreamingCoverageAuditTests(unittest.TestCase):
                          sum(row["records_with_https_citations"] for row in result["services"]))
         self.assertEqual(result["cited_curated_record_count"], len(cited))
         self.assertGreater(result["services_with_cited_curated_records"], 0)
+        expected_feeds = {"Netflix": 1, "Prime Video": 1, "Apple TV+": 1}
         for row in result["services"]:
-            self.assertEqual(row["registered_approved_feeds"], 0)
+            self.assertEqual(row["registered_approved_feeds"], expected_feeds.get(row["service"], 0))
             self.assertTrue(row["limitation"] is None or "not continuous discovery" in row["limitation"]
                             or "does not mean no releases" in row["limitation"])
             if row["records_with_https_citations"]:

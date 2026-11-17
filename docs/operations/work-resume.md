@@ -562,3 +562,12 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - Executable digest `3c703bf9e8255b3392b842356d01c2aabdff4a2b7deb95d7d9812d0fae2897c7` is recorded in the release receipt. Candidate streaming remains 464 rows; production remains 463 until merge and the ordinary automatic deployment complete.
 - Next: require fresh exact-head checks on the proof/docs-only tip, merge only if green, then wait for the automatic Vercel production deployment and verify public streaming count 464 plus the rendered FOD card. Keep #244 open.
 
+## 2026-11-17 22:10 JST — multi-service calendar card
+
+- Live main is `01de2d1cf0e25f0f1f3c15d3146f27e1a1eac7e1`. #593 remains closed; production boxoffice JSON is HTTP 200 with 1,908 rows and zero poster gaps. #244 remains open.
+- Production streaming JSON is HTTP 200 with 464 rows and zero poster gaps. `箱の中の羊` has two official announcement rows on 2026-11-18, FOD and U-NEXT, both with verified TMDB identity `1553969`; the current production UI only exposes the first service on its card.
+- PR #882 source head `92f67a9cef3712dd9f452988459312fba27526c6` groups only rows sharing the same positive TMDB identity inside the same date group, renders every service label on one card, and counts unique works instead of raw service rows. ID-less or conflicting-ID same-title rows remain separate.
+- Focused Node tests passed 22/22. The complete local quality gate passed 599/599 Node tests and all Python, compliance, source and work-state checks. Local Playwright could not start because this runner has no browser binary; Chromium/WebKit coverage is required from exact-head CI.
+- Vercel production is READY on main deployment `dpl_7cxoReLKpNLKBRbT9XVpdKPrB7Ly`. The latest updater saved JSON successfully but Neon sync failed P1001; no retry, paid action, manual deploy or quota workaround was attempted. User viewing history, ratings, reviews, bookmarks and backups remain untouched.
+- Next: read exact-head required CI for PR #882. If the source head passes, refresh the exact-source production receipt, require final-head checks, merge once and verify the automatic READY deployment plus one live card showing both FOD and U-NEXT in Chromium/WebKit. Keep #244 open.
+

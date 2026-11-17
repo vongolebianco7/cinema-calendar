@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T19:12:39Z",
+  "updated_at": "2026-11-17T20:07:27Z",
   "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "847c647263c2ffed269d5ffa6a88333239190d3f",
-  "branch": "feat/verified-streaming-candidate-dedupe-20261117",
-  "head_sha": "3f14be9b241dc84904018ac2007b4aee2cace4bd",
+  "base_sha": "5ff369544df2e2b15029a0fba9a7bbafc0bbba6c",
+  "branch": "fix/strict-streaming-poster-identity-20261118",
+  "head_sha": "8184ff75e76220feff1f03caf4e365708c1ad19f",
   "pull_request": {
-    "number": 880,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/880",
+    "number": 885,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/885",
     "state": "open"
   },
   "work_items": [
@@ -6466,5 +6466,48 @@
     },
     "safety": "No candidate was published; no viewing records, ratings, reviews, bookmarks or backups changed; no scraping, paid action, Neon retry, manual updater dispatch, manual deploy or quota workaround.",
     "next_action": "Require fresh exact-head checks on this proof/docs-only tip. If all required checks pass and the PR head is unchanged and mergeable, squash-merge once through the normal path, then confirm automatic production READY and public JSON remains healthy. Keep #244 open."
+  },
+  "latest_live_checkpoint_20261118_0507": {
+    "checked_at": "2026-11-18 05:07 JST",
+    "live_main_sha": "5ff369544df2e2b15029a0fba9a7bbafc0bbba6c",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed"
+    },
+    "pull_request": {
+      "number": 885,
+      "head_sha": "8184ff75e76220feff1f03caf4e365708c1ad19f",
+      "state": "open/mergeable",
+      "changed_files": 2
+    },
+    "completed": [
+      "Removed the opt-in fuzzy poster fallback from both official streaming enrichment passes; existing verified-ID and unique title/year identity paths remain enabled.",
+      "Added a workflow contract test that fails if fuzzy poster matching is re-enabled or either strict enrichment pass is removed.",
+      "Focused local verification passed 41 tests; source and streaming coverage checks passed.",
+      "Exact code head passed required Autonomous quality, CINELVA smoke, Validate frontend and Reproducible backend workflows plus Python, mobile, visual and completeness coverage."
+    ],
+    "exact_source": {
+      "head_sha": "8184ff75e76220feff1f03caf4e365708c1ad19f",
+      "digest": "5d52805320aa5e31981738606397a3b308dfcf30b2b2f5fa1d1806e32ca087d8",
+      "required_workflows": {
+        "autonomous_quality_gate": 44164733008,
+        "cinelva_smoke": 44164733053,
+        "validate_frontend": 44164732844,
+        "reproducible_backend_build": 44164732945,
+        "completeness_scorecard": 44164733155
+      }
+    },
+    "production": {
+      "deployment": "dpl_FQrGSQh2ju44veo57avuN4aEA8Ka READY on exact live main 5ff369544df2e2b15029a0fba9a7bbafc0bbba6c",
+      "boxoffice": "HTTP 200; 1,908 rows; missing poster 0",
+      "streaming": "HTTP 200; 464 rows; missing poster 0; generated 2026-11-17T05:08:01.685949+00:00"
+    },
+    "external_constraints": [
+      "Latest scheduled update-movies run 44158083603 saved JSON but failed only during direct PostgreSQL sync because Neon was unavailable; no retry was launched.",
+      "No manual updater dispatch, manual Vercel deploy, paid action, scraping or quota workaround was used.",
+      "No viewing history, ratings, reviews, bookmarks or backups changed."
+    ],
+    "next_action": "Require fresh exact-head checks on the proof/docs-only tip. Merge once only when the final PR head is unchanged and green; then confirm automatic production READY and public JSON health. Keep #244 open."
   }
 }

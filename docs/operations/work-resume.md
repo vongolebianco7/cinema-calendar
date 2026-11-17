@@ -590,3 +590,13 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - No viewing history, ratings, reviews, bookmarks or backups changed. No scraping, paid source, Neon retry, manual updater dispatch, manual Vercel deploy or quota workaround was used.
 - Next: require fresh exact-head CI on the proof/docs-only tip. Merge only if it is unchanged, mergeable and all required checks are green; then confirm the ordinary automatic production deployment and re-fetch public JSON. Keep #244 open.
 
+## 2026-11-18 05:07 JST — strict official-streaming poster identity
+
+- Live main is `5ff369544df2e2b15029a0fba9a7bbafc0bbba6c`; #239/#244 are open and #593 remains closed. Vercel production deployment `dpl_FQrGSQh2ju44veo57avuN4aEA8Ka` is READY on that exact main.
+- Public boxoffice JSON is HTTP 200 with 1,908 rows and zero poster gaps. Public streaming JSON is HTTP 200 with 464 rows and zero poster gaps, generated `2026-11-17T05:08:01.685949+00:00`.
+- PR #885 code head `8184ff75e76220feff1f03caf4e365708c1ad19f` removes `CINELVA_ALLOW_FUZZY_POSTER_FALLBACK` from both official streaming enrichment passes. Existing verified-ID and unique title/year enrichment remains; unresolved rows now fail closed instead of receiving guessed artwork.
+- A workflow contract test prevents fuzzy poster fallback from being re-enabled. Focused local verification passed 41 tests, and source/streaming coverage checks passed.
+- Required exact-code-head Actions passed: Autonomous `44164733008`, smoke `44164733053`, frontend `44164732844`, backend `44164732945`. Full Python, mobile, visual and completeness scorecard `44164733155` also passed. Executable digest: `5d52805320aa5e31981738606397a3b308dfcf30b2b2f5fa1d1806e32ca087d8`.
+- Latest scheduled updater run `44158083603` saved JSON successfully and failed only at direct PostgreSQL sync because Neon was unavailable. It was not retried. No manual updater dispatch, manual Vercel deploy, scraping, paid action or quota workaround was used; user viewing history, ratings, reviews, bookmarks and backups were untouched.
+- Next: require fresh exact-head checks on this proof/docs-only tip, merge only if unchanged and green, then confirm automatic production READY and public JSON health. Keep #244 open.
+

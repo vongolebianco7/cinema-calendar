@@ -581,3 +581,12 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - Exact tested head `4907bef30d7b9ff7d5e8bca47eaaa62d6f15086f` passed all 11 observed workflows. Required runs: Autonomous `44090187452`, smoke `44090187460`, frontend `44090187679`, backend `44090187606`. Supplemental Python, mobile, completeness, visual, backup, isolated Pages and brand checks also passed. Executable digest: `bde9a73fab335030d4316e054312959c7d7f3b041a3d7bd854ce0af6e903c97c`.
 - Next: require fresh exact-head CI on the proof/docs-only tip, merge once if green, and verify the automatic READY deployment plus one live card showing both FOD and U-NEXT in Chromium/WebKit. Keep #244 open.
 
+## 2026-11-18 04:12 JST — verified official-feed candidate dedupe
+
+- Live main is `847c647263c2ffed269d5ffa6a88333239190d3f`; #593 remains closed. Public boxoffice JSON is HTTP 200 with 1,908 rows and zero poster gaps. Public streaming JSON is HTTP 200 with 464 rows and zero poster gaps, generated `2026-11-17T05:08:01.685949+00:00`.
+- Existing PR #880 was rebuilt on live main rather than duplicated. Its code head `3f14be9b241dc84904018ac2007b4aee2cace4bd` changes only candidate classification/tests plus the pre-existing My Best 10 Python release-contract correction required by current main.
+- A feed candidate becomes `already_in_verified_catalog` only when its official source URL matches after removing `utm_*` parameters only, service and normalized title match, the catalog date is a real ISO date, and exactly one positive TMDB identity remains. Candidates remain review-only; no movie row is published.
+- All 22 observed exact-head checks succeeded. Required runs: Autonomous `44154596960`, smoke `44154597017`, frontend `44154597088`, backend `44154596926`. Supplemental Python, mobile, backup, completeness and visual checks also passed. Executable digest: `91956f9674d047a38d5c85874f388d3d94e07dc1e015ec071d2374ee4ce5dd38`.
+- No viewing history, ratings, reviews, bookmarks or backups changed. No scraping, paid source, Neon retry, manual updater dispatch, manual Vercel deploy or quota workaround was used.
+- Next: require fresh exact-head CI on the proof/docs-only tip. Merge only if it is unchanged, mergeable and all required checks are green; then confirm the ordinary automatic production deployment and re-fetch public JSON. Keep #244 open.
+

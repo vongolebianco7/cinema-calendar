@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T13:45:44.853Z",
+  "updated_at": "2026-11-17T19:12:39Z",
   "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "f53d9e9fdce36a68eeb9a21127f558b6139a1261",
-  "branch": "feat/streaming-source-evidence-link-20261116",
-  "head_sha": "2f0fa46a564d7a8d36413579396cc0cfdbd16954",
+  "base_sha": "847c647263c2ffed269d5ffa6a88333239190d3f",
+  "branch": "feat/verified-streaming-candidate-dedupe-20261117",
+  "head_sha": "3f14be9b241dc84904018ac2007b4aee2cace4bd",
   "pull_request": {
-    "number": 873,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/873",
+    "number": 880,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/880",
     "state": "open"
   },
   "work_items": [
@@ -6428,5 +6428,43 @@
       "Physical iPhone Safari remains unverified; exact-head CI covers Chromium and WebKit."
     ],
     "next_action": "Wait for exact-head CI on the proof/docs-only final tip, merge once if green, confirm Vercel production READY on the merge, and verify the source link is visible and ID-correct on the public streaming card. Keep #244 open."
+  },
+  "latest_live_checkpoint_20261118_0412": {
+    "checked_at": "2026-11-18 04:12 JST",
+    "live_main_sha": "847c647263c2ffed269d5ffa6a88333239190d3f",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed"
+    },
+    "pull_request": {
+      "number": 880,
+      "head_sha": "3f14be9b241dc84904018ac2007b4aee2cace4bd",
+      "state": "open/mergeable",
+      "changed_files": 3
+    },
+    "completed": [
+      "Rebuilt existing PR #880 on live main instead of creating a duplicate PR; stale proof and operations history were not carried forward.",
+      "Kept official-feed candidates review-only and marked one as already represented only after same official source URL, service, normalized title, valid release date and one unique positive TMDB identity matched.",
+      "Fixed the pre-existing My Best 10 Python release-contract mismatch exposed by the exact-head suite without changing the renderer or saved user data.",
+      "Exact code head passed all 22 observed checks, including required Chromium/WebKit, Python, backup, visual, smoke and reproducible build coverage."
+    ],
+    "exact_source": {
+      "head_sha": "3f14be9b241dc84904018ac2007b4aee2cace4bd",
+      "digest": "91956f9674d047a38d5c85874f388d3d94e07dc1e015ec071d2374ee4ce5dd38",
+      "checks": "22/22 success",
+      "required_workflows": {
+        "autonomous_quality_gate": 44154596960,
+        "cinelva_smoke": 44154597017,
+        "validate_frontend": 44154597088,
+        "reproducible_backend_build": 44154596926
+      }
+    },
+    "production_json": {
+      "boxoffice": "HTTP 200; 1,908 rows; missing poster 0",
+      "streaming": "HTTP 200; 464 rows; missing poster 0; generated 2026-11-17T05:08:01.685949+00:00"
+    },
+    "safety": "No candidate was published; no viewing records, ratings, reviews, bookmarks or backups changed; no scraping, paid action, Neon retry, manual updater dispatch, manual deploy or quota workaround.",
+    "next_action": "Require fresh exact-head checks on this proof/docs-only tip. If all required checks pass and the PR head is unchanged and mergeable, squash-merge once through the normal path, then confirm automatic production READY and public JSON remains healthy. Keep #244 open."
   }
 }

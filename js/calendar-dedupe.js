@@ -44,10 +44,32 @@
     }
     return output;
   }
+  function groupStreamingWorks(rows) {
+    const output = [], indices = new Map();
+    for (const row of rows) {
+      const id = movieId(row);
+      // A title match alone is not enough to merge two releases. Only rows
+      // carrying the same verified movie identity may share one calendar card.
+      if (!id) {
+        output.push({ primary: row, rows: [row], services: [String(row.service || 'その他')] });
+        continue;
+      }
+      if (!indices.has(id)) {
+        indices.set(id, output.length);
+        output.push({ primary: row, rows: [row], services: [String(row.service || 'その他')] });
+        continue;
+      }
+      const group = output[indices.get(id)];
+      group.rows.push(row);
+      const service = String(row.service || 'その他');
+      if (!group.services.includes(service)) group.services.push(service);
+    }
+    return output;
+  }
   function inFirstVisibleWeek(row,weekStart,weekEnd,viewStart){
     if(!row?.date)return false;
     const first=row.date<viewStart?viewStart:row.date;
     return first>=weekStart&&first<=weekEnd&&(row.end_date||row.date)>=weekStart;
   }
-  return { dedupe, inFirstVisibleWeek };
+  return { dedupe, groupStreamingWorks, inFirstVisibleWeek };
 });

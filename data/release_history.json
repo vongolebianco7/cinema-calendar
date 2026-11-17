@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T02:40:38.970774+00:00",
+  "generated_at": "2026-11-17T01:56:22.431781+00:00",
   "note": "出典付きの公開・配信開始・テレビ放映予定の掲載履歴。実際の上映・放映を保証する記録ではありません。",
   "records": [
     {
@@ -6777,6 +6777,19 @@
     },
     {
       "kind": "theatrical",
+      "title": "Itsuka Kyo o Omoidasu Daro",
+      "id": 1796849,
+      "original_title": "Itsuka Kyo o Omoidasu Daro",
+      "date": "2026-05-18",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1796849",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
       "title": "My home / 光の家",
       "id": 1678849,
       "original_title": "My home / 光の家",
@@ -7384,6 +7397,19 @@
       "program": null,
       "source": "TMDB JP release dates",
       "source_url": "https://www.themoviedb.org/movie/1729298",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
+      "title": "Nobody knows me",
+      "id": 1758540,
+      "original_title": "Nobody knows me",
+      "date": "2026-06-07",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1758540",
       "record_type": "掲載した予定日（実施確認なし）"
     },
     {
@@ -18360,6 +18386,19 @@
     },
     {
       "kind": "theatrical",
+      "title": "RYUJI 竜二",
+      "id": 1646897,
+      "original_title": "RYUJI 竜二",
+      "date": "2026-10-30",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1646897",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
       "title": "Super Lucky Girl",
       "id": 1785779,
       "original_title": "Super Lucky Girl",
@@ -21983,6 +22022,32 @@
       "program": null,
       "source": "About Amazon Japan 2026年11月",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-november-2026",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "streaming",
+      "title": "笑えない世界でも",
+      "id": 1737338,
+      "original_title": null,
+      "date": "2026-11-17",
+      "service": "Hulu",
+      "time": null,
+      "program": null,
+      "source": "Hulu公式 まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "streaming",
+      "title": "笑えない世界でも",
+      "id": 1737338,
+      "original_title": null,
+      "date": "2026-11-17",
+      "service": "Netflix",
+      "time": null,
+      "program": null,
+      "source": "Netflix公式の日本向け11月新作ラインアップ・公式作品ページ",
+      "source_url": "https://www.netflix.com/jp/title/83087557",
       "record_type": "掲載した予定日（実施確認なし）"
     }
   ]

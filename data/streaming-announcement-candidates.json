@@ -56,12 +56,6 @@
     },
     {
       "service": "Netflix",
-      "title": "約2200人のファンの前で堂々初披露！ 北米最大級のアニメの祭典《Anime NYC 2026》で Netflixから世界へ羽ばたくアニメの新素材一挙解禁",
-      "source_url": "https://about.netflix.com/ja/news/anime-nyc-2026",
-      "status": "needs_release_date_verification"
-    },
-    {
-      "service": "Netflix",
       "title": "Netflixシリーズ 「俺のこと、なんか言ってた？」 “承認欲求モンスター” 高瀬川（役所広司）と 癖強キャラクターたちが感情剥き出しで大暴れ！ 笑えて！泣ける！極上の痛快コメディ！！ 作詞：宮藤官九郎 × 作曲：横山剣が手掛ける 中毒性抜群の劇中楽曲「ア・タ・シ　ケンチャナヨ」 も公開！",
       "source_url": "https://about.netflix.com/ja/news/did-someone-happen-to-mention-me-main-trailer",
       "status": "needs_release_date_verification"
@@ -82,6 +76,12 @@
       "service": "Netflix",
       "title": "Netflixシリーズ「フジヤマBOY」制作決定！2027年配信、主演・一ノ瀬ワタル × ヒロイン・広瀬すず",
       "source_url": "https://about.netflix.com/ja/news/from-neet-to-peak-announcement",
+      "status": "needs_release_date_verification"
+    },
+    {
+      "service": "Netflix",
+      "title": "Netflixコメディシリーズ 「ハニートラップ」 12月1日（火）より配信決定！",
+      "source_url": "https://about.netflix.com/ja/news/honey-trap-trailer",
       "status": "needs_release_date_verification"
     },
     {
@@ -116,6 +116,12 @@
     },
     {
       "service": "Netflix",
+      "title": "今年の年末カウントダウンはNetflixで！  STARTO ENTERTAINMENTが開催する カウントダウンコンサートをNetflixが初の世界同時ライブ配信",
+      "source_url": "https://about.netflix.com/ja/news/netflix-live-stream-starto-entertainment-new-years-eve-countdown-concert-worldwide",
+      "status": "needs_release_date_verification"
+    },
+    {
+      "service": "Netflix",
       "title": "Netflixシリーズ「国民クイズ」 新映像が解禁！全国民の欲望はこの男が支配する— 明るく楽しい“熱狂のディストピア”が幕を開ける！",
       "source_url": "https://about.netflix.com/ja/news/netflix-unveils-trailer-and-key-art-for-quiztopia",
       "status": "needs_release_date_verification"
@@ -124,7 +130,12 @@
       "service": "Netflix",
       "title": "Netflix映画 『余命一年、男をかう』11月5日(木)配信決定！予告&キーアート解禁: 72万円の契約から始まる、予想外の大人のシンデレラストーリー",
       "source_url": "https://about.netflix.com/ja/news/one-year-to-live-buy-a-man-trailer",
-      "status": "needs_release_date_verification"
+      "status": "already_in_verified_catalog",
+      "verified_catalog_match": {
+        "title": "余命一年、男をかう",
+        "date": "2026-11-05",
+        "tmdb_id": 1654940
+      }
     },
     {
       "service": "Netflix",
@@ -136,12 +147,6 @@
       "service": "Netflix",
       "title": "主演：山田孝之 Netflixシリーズ「国民クイズ」 民度が問われる。こんなニッポンはアリか、ナシかー？最新映像＆総勢16名の新キャスト、一挙解禁",
       "source_url": "https://about.netflix.com/ja/news/quiztopia-premieres-december-17-teaser-trailer-cast-unveiled",
-      "status": "needs_release_date_verification"
-    },
-    {
-      "service": "Netflix",
-      "title": "Netflixシリーズ「SとX」 - 主演：中島健人 x ヒロイン：新木優子：本作初となる予告映像＆キーアート解禁！",
-      "source_url": "https://about.netflix.com/ja/news/s-and-x-title-trailer-debut",
       "status": "needs_release_date_verification"
     },
     {

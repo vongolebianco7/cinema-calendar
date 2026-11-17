@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { dedupe } = require('../js/calendar-dedupe.js');
+const { dedupe, groupStreamingWorks } = require('../js/calendar-dedupe.js');
 
 test('one film listed twice for the same date and service appears once with a usable poster and ID', () => {
   const rows = [
@@ -49,4 +49,25 @@ test('online-only channel schedules never appear as TV airings', () => {
   const online = ['Abemaアニメ','ＡＢＥＭＡ特設その他','アニメLIVE','YouTube','WOWOWオンデマンド'].map(service=>({...entry,service}));
   const release = {...entry,event:'streaming',service:'ABEMA'};
   assert.deepEqual(dedupe([...tv,...online,release]),[...tv,release]);
+});
+
+test('same verified movie keeps every same-day streaming service on one card model', () => {
+  const rows = [
+    {tmdbId:1553969,title:'箱の中の羊',date:'2026-11-18',event:'streaming',service:'U-NEXT'},
+    {id:1553969,title:'箱の中の羊',date:'2026-11-18',event:'streaming',service:'FOD'}
+  ];
+  const groups = groupStreamingWorks(rows);
+  assert.equal(groups.length, 1);
+  assert.deepEqual(groups[0].services, ['U-NEXT', 'FOD']);
+  assert.equal(groups[0].rows.length, 2);
+});
+
+test('same title is not merged when verified identities differ or are absent', () => {
+  const rows = [
+    {tmdbId:1,title:'同名作品',service:'Netflix'},
+    {tmdbId:2,title:'同名作品',service:'FOD'},
+    {title:'同名作品',service:'U-NEXT'},
+    {title:'同名作品',service:'Hulu'}
+  ];
+  assert.equal(groupStreamingWorks(rows).length, 4);
 });

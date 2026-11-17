@@ -333,3 +333,7 @@ html[data-theme="light"] #detail .formatCompactRecommended {
 .formatCompactRecommended{display:inline-flex;align-items:center;justify-content:center;margin:3px 0 0;padding:2px 6px;border:1px solid #9b7930;border-radius:999px;background:#f0e4be;color:#3d321a;font-size:9px;font-style:normal;font-weight:800;line-height:1.35}
 .formatCompact.recommended,.experienceFitCard.recommended{border:2px solid #d6ae56!important;box-shadow:0 0 0 2px #d6ae5633}
 html[data-theme="light"] .experienceFitCard.recommended{border:2px solid #8a6b21!important;box-shadow:0 0 0 2px #e9d9a8!important}
+
+/* One verified movie/date card can retain every announced streaming service. */
+.streamMovieServices{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px}
+.streamMovieServices .streamMovieService{margin-top:0}

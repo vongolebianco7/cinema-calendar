@@ -480,19 +480,23 @@ function groupedMovieCards(weekMovies,modeName){
   return '<div class="streamMovieService" style="background:'+color+';color:'+ink+'">'+label+'</div>';
  };
  return entries.map(([group,rows])=>{
-  let cards=rows.slice().sort((a,b)=>(rank.get(service(a))??999)-(rank.get(service(b))??999)||service(a).localeCompare(service(b),"ja")||popularitySort(a,b)).map(m=>{
+  const sorted=rows.slice().sort((a,b)=>(rank.get(service(a))??999)-(rank.get(service(b))??999)||service(a).localeCompare(service(b),"ja")||popularitySort(a,b));
+  const cardGroups=modeName==='streaming'?CinemapCalendarDedupe.groupStreamingWorks(sorted):sorted.map(primary=>({primary,rows:[primary],services:[service(primary)]}));
+  let cards=cardGroups.map(cardGroup=>{
+   const m=cardGroup.primary;
    let idx=movies.indexOf(m),date=m.date.slice(5).replace("-","/"),hasPeriod=m.end_date&&m.end_date!==m.date;
    const runtimeValue=Number(m.runtime??m.runtime_minutes??m.duration),runtimeLabel=Number.isFinite(runtimeValue)&&runtimeValue>0?runtimeValue+'分':'上映時間未確認';
    if(hasPeriod)date+="〜"+m.end_date.slice(5).replace("-","/");
    if(modeName==="streaming"){
     let avId=globalThis.CinelvaMovieIdentity?.id(m)||m.tmdbId||m.tmdb_id||m.id,av=(availabilitySnapshot.movies||{})[String(avId)],flat=CinelvaDataQuality.availabilityIsFresh(av)?(av.flatrate||av.services||[]):[],rent=CinelvaDataQuality.availabilityIsFresh(av)?(av.rent||[]):[],badges=[...flat.map(s=>"見放題 "+s),...rent.map(s=>"レンタル "+s)].slice(0,3).map(s=>'<span>'+s+'</span>').join("");
     if(!badges){const announced=globalThis.CinelvaOfficialOffers?.verifiedEvent(m);badges=announced?'<span title="公式発表による配信開始日">'+announced.service+' · 配信開始</span>':'<span class="availabilityUnknown">配信先未確認</span>';}
-    return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster" data-now-film-id="'+(globalThis.CinelvaCalendarNowPlaying?.id(m)||'')+'">'+(m.poster?'<img src="'+m.poster+'" alt="'+esc(m.title)+'のポスター" loading="lazy">':missingPoster())+'<span class="streamMovieDate '+(hasPeriod?'isPeriod':'')+'">'+date+'</span></div>'+colorTag(m.service||'その他',streamServiceColor(m.service))+(badges?'<div class="streamMovieAvail">'+badges+'</div>':'')+'<div class="streamMovieTitle">'+m.title+'</div><div class="streamMovieRuntime">'+runtimeLabel+'</div></article>'
+    const serviceTags=cardGroup.services.map(name=>colorTag(name,streamServiceColor(name))).join('');
+    return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster" data-now-film-id="'+(globalThis.CinelvaCalendarNowPlaying?.id(m)||'')+'">'+(m.poster?'<img src="'+m.poster+'" alt="'+esc(m.title)+'のポスター" loading="lazy">':missingPoster())+'<span class="streamMovieDate '+(hasPeriod?'isPeriod':'')+'">'+date+'</span></div><div class="streamMovieServices" aria-label="配信サービス">'+serviceTags+'</div>'+(badges?'<div class="streamMovieAvail">'+badges+'</div>':'')+'<div class="streamMovieTitle">'+m.title+'</div><div class="streamMovieRuntime">'+runtimeLabel+'</div></article>'
    }
    let groupName=service(m),kind=groupName==="午前十時の映画祭"?"asa10":groupName==="リバイバル上映"?"revival":"theatrical";
    return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster" data-now-film-id="'+(globalThis.CinelvaCalendarNowPlaying?.id(m)||'')+'">'+(m.poster?'<img src="'+m.poster+'" alt="'+esc(m.title)+'のポスター" loading="lazy">':'<div class="theatricalPosterFallback">'+m.title+'</div>')+'<span class="streamMovieDate '+(hasPeriod?'isPeriod':'')+'">'+date+'</span></div>'+colorTag(groupName,kind==='asa10'?'#c69232':kind==='revival'?'#7d5aa8':'#6b3a3a')+'<div class="streamMovieTitle">'+m.title+'</div><div class="streamMovieRuntime">'+runtimeLabel+'</div></article>'
   }).join("");
-  return '<div class="weekGroup"><div class="weekGroupHead"><div class="weekGroupTitle">'+group.slice(5).replace('-','/')+'</div><div class="weekGroupCount">'+rows.length+'作品</div></div><div class="streamingWeekMovies">'+cards+'</div></div>'
+  return '<div class="weekGroup"><div class="weekGroupHead"><div class="weekGroupTitle">'+group.slice(5).replace('-','/')+'</div><div class="weekGroupCount">'+cardGroups.length+'作品</div></div><div class="streamingWeekMovies">'+cards+'</div></div>'
  }).join("")
 }
 
@@ -593,8 +597,8 @@ function renderCal(){if(mode==="festival"||mode==="events"){renderOutdoorCalenda
     let d=new Date(m.date+"T00:00:00");
     return m.event==="streaming"&&d>=ws&&d<=we
    }).sort((a,b)=>a.date.localeCompare(b.date)||popularitySort(a,b));
-   let groups=groupedMovieCards(weekMovies,"streaming"),isCurrent=sameDay(ws,currentWeekStart());
-   out+='<section class="streamingWeekBlock '+(isCurrent?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(ws.getMonth()+1)+'/'+ws.getDate()+' 〜 '+(we.getMonth()+1)+'/'+we.getDate()+' · '+weekMovies.length+'作品</div><div class="streamingWeekFrame">'+(groups?'<div class="weekGroups">'+groups+'</div>':'<div class="small">この週の配信開始作品はありません</div>')+'</div></section>'
+   let groups=groupedMovieCards(weekMovies,"streaming"),isCurrent=sameDay(ws,currentWeekStart()),workCount=CinemapCalendarDedupe.groupStreamingWorks(weekMovies).length;
+   out+='<section class="streamingWeekBlock '+(isCurrent?'isCurrentWeek':'')+'"><div class="streamingWeekLabel">'+(ws.getMonth()+1)+'/'+ws.getDate()+' 〜 '+(we.getMonth()+1)+'/'+we.getDate()+' · '+workCount+'作品</div><div class="streamingWeekFrame">'+(groups?'<div class="weekGroups">'+groups+'</div>':'<div class="small">この週の配信開始作品はありません</div>')+'</div></section>'
   }
   out+='</div>';
   $("#dates").innerHTML=out;

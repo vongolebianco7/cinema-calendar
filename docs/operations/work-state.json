@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T02:10:00Z",
-  "status": "pr_created",
+  "updated_at": "2026-11-17T13:30:00Z",
+  "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "0482952604ec79b2bbde263ebfcba4eb5c595586",
-  "branch": "feat/official-streaming-feeds-20261117",
-  "head_sha": "693e10fb4c8597d22f7bb01f58c08b23cc512833",
+  "base_sha": "01de2d1cf0e25f0f1f3c15d3146f27e1a1eac7e1",
+  "branch": "fix/calendar-multi-service-labels-20261117",
+  "head_sha": "4907bef30d7b9ff7d5e8bca47eaaa62d6f15086f",
   "pull_request": {
-    "number": 877,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/877",
+    "number": 882,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/882",
     "state": "open"
   },
   "work_items": [
@@ -6256,5 +6256,42 @@
       "Refreshed the release receipt to the changed source digest while preserving user storage and production data."
     ],
     "next_action": "Require fresh exact-head CI on the proof/docs-only tip. If green, merge PR #881 once, wait for the ordinary automatic Vercel deployment, then verify public streaming count 464 and the rendered FOD card in Chromium/WebKit. Keep #244 open."
+  },
+  "latest_live_checkpoint_20261117_2210": {
+    "checked_at": "2026-11-17T13:10:00Z",
+    "main_sha": "01de2d1cf0e25f0f1f3c15d3146f27e1a1eac7e1",
+    "issues": {"239": "open", "244": "open", "593": "closed/completed"},
+    "pull_request": {
+      "number": 882,
+      "source_head": "4907bef30d7b9ff7d5e8bca47eaaa62d6f15086f",
+      "state": "open",
+      "base_sha": "01de2d1cf0e25f0f1f3c15d3146f27e1a1eac7e1"
+    },
+    "production": {
+      "vercel_state": "READY",
+      "deployment": "dpl_7cxoReLKpNLKBRbT9XVpdKPrB7Ly",
+      "deployment_sha": "01de2d1cf0e25f0f1f3c15d3146f27e1a1eac7e1",
+      "streaming": {"http": 200, "rows": 464, "missing_posters": 0},
+      "boxoffice": {"http": 200, "rows": 1908, "missing_posters": 0}
+    },
+    "completed": [
+      "Confirmed the official FOD and U-NEXT rows for 箱の中の羊 share TMDB movie 1553969 and date 2026-11-18 in production JSON.",
+      "Implemented a one-card model that retains every service label only when rows share the same positive verified movie identity inside the same date group.",
+      "Kept different IDs and ID-less same-title rows separate; source rows and user storage are unchanged.",
+      "Focused tests passed 22/22 and the full local quality gate passed 599/599 plus Python, compliance, source and work-state checks.",
+      "Diagnosed backup run 44089721031 and isolated Pages run 44089720866: application tests passed, then Playwright 1.59 rejected GitHub's ubuntu26.04-x64 image before browser assertions. Pinned those two remaining browser workflows to ubuntu-24.04, matching the already-stable browser workflows."
+    ],
+    "exact_source": {
+      "digest": "bde9a73fab335030d4316e054312959c7d7f3b041a3d7bd854ce0af6e903c97c",
+      "required_workflows": {
+        "autonomous": {"run": 44090187452, "result": "success"},
+        "smoke": {"run": 44090187460, "result": "success"},
+        "frontend": {"run": 44090187679, "result": "success"},
+        "backend": {"run": 44090187606, "result": "success"}
+      },
+      "supplemental": "Full Python, mobile layout, completeness scorecard, continuous visual QA, backup safety, isolated Pages and brand identity also succeeded on the same exact head."
+    },
+    "external_blocker": "The latest updater persisted its JSON snapshots but Neon sync ended with P1001. No Neon retry was made because the public JSON path is healthy and prior endpoint start was quota-stopped.",
+    "next_action": "Require fresh exact-head CI on the proof/docs-only PR tip. If green, merge PR #882 once, wait for the ordinary automatic Vercel release, and verify one production card shows both U-NEXT and FOD in Chromium/WebKit. Keep #244 open."
   }
 }

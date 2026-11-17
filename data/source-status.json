@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-17T02:32:32.194Z",
+  "generated_at": "2026-11-17T08:51:25.777Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -8,16 +8,16 @@
       "status": "automated",
       "source": "TMDB watch/providers (JustWatch)",
       "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
-      "source_observed_at": "2026-11-17T01:54:25.898Z",
+      "source_observed_at": "2026-11-17T02:35:24.120Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
-        "total": 3993,
-        "fresh": 3842,
-        "stale": 151,
+        "total": 4046,
+        "fresh": 3744,
+        "stale": 302,
         "unknown": 0
       }
     },
@@ -27,13 +27,13 @@
       "status": "manual",
       "source": "source-reviewed official service announcements",
       "source_url": null,
-      "source_observed_at": "2026-11-17T01:51:27.655Z",
+      "source_observed_at": "2026-11-17T05:08:01.685Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "日次の検証・取込と公式発表データ更新時。元発表の自動収集は認証済み公式フィードがないため手動。",
       "coverage": "dated premieres with citations; not current availability",
-      "record_count": 463
+      "record_count": 464
     },
     {
       "id": "theater-showtimes",
@@ -83,7 +83,7 @@
       "status": "automated",
       "source": "しょぼいカレンダー公開番組表 API（映画カテゴリ）",
       "source_url": "https://docs.cal.syoboi.jp/spec/rss2.php/",
-      "source_observed_at": "2026-11-17T02:00:32.620Z",
+      "source_observed_at": "2026-11-17T08:51:24.100Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-tv-movie-broadcasts.yml",
@@ -111,7 +111,7 @@
       "status": "automated",
       "source": "TMDB API plus source-reviewed release records",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-17T01:52:50.132Z",
+      "source_observed_at": "2026-11-17T02:34:08.245Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",

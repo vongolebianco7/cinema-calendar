@@ -52,6 +52,8 @@ assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
       await page.locator('.choice').nth(question % 4).click();
       await page.locator('#nextButton').click();
     }
+    assert.equal(await page.locator('#nextButton').isEnabled(), true, 'favorite movie can be skipped');
+    assert.match(await page.locator('#stepHint').innerText(), /選ばずに進めます/);
     const favoriteChoices = page.locator('.favoriteChoices .choice');
     assert.equal(await favoriteChoices.count(), 9, 'favorite step offers nine selectable movies');
     await page.getByRole('button', { name: 'ベイビー・ドライバー', exact: true }).click();

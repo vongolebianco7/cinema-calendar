@@ -197,7 +197,7 @@ function posterArtworkUrl(movie){
 function artworkMovieTitle(movie){const original=String(movie?.original_title||movie?.originalTitle||movie?.original_name||'').trim();return artValue('artworkTitleMode')==='original'&&original?original:String(movie?.title||'')}
 function drawRankingMovie(ctx,m,x,y,width,height,columns,shape,font,fontScale,p){
   const rankWidth=columns===2?98:94;
-  const posterHeight=Math.min(height-16,columns===2?204:132),posterWidth=posterHeight*2/3;
+  const posterHeight=Math.min(height-16,columns===2?246:132),posterWidth=posterHeight*2/3;
   const posterX=x+rankWidth,posterY=y+(height-posterHeight)/2;
   const image=artworkImage(posterArtworkUrl(m),m);
   if(image?.complete&&image.naturalWidth)ctx.drawImage(image,posterX,posterY,posterWidth,posterHeight);
@@ -257,7 +257,7 @@ function drawArtwork(movies){
   drawCinemaBackground(ctx,w,h,cinemaBackground);
   if(cinemaBackground==='none')drawThemeIllustration(ctx,w,h,theme,p);
   ctx.textBaseline='top';ctx.fillStyle=p.fg;
-  const title=artValue('title').trim()||'MY TOP OF 2026';
+  const title=artValue('title').trim()||'MY TOP 10 — 2026';
   ctx.textAlign='center';
   const titleHeight=writeLines(ctx,title,w/2,metrics.titleY,inner*.78,2,metrics.titleSize,40,font.title,font.titleWeight,1.04);
   const titleBottom=metrics.titleY+titleHeight;

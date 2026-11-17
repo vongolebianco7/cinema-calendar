@@ -7,6 +7,7 @@ This deliberately does not crawl or scrape third-party sites.
 import datetime
 import json
 import sys
+import unicodedata
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from urllib.parse import urlparse
@@ -30,6 +31,33 @@ intake = read("streaming_announcements.json")
 # as the tested normalizer; only source hosts recorded in streaming_sources.json are accepted.
 intake["movies"] = normalize_premieres(intake.get("movies", []), approved_hosts)
 existing = {(m["service"], m["title"], m["date"]) for m in current["movies"]}
+
+def normalized_title(value):
+    if not isinstance(value, str):
+        return ""
+    return "".join(
+        char for char in unicodedata.normalize("NFKC", value).casefold()
+        if char.isalnum()
+    )
+
+def exact_existing_identity(title, date):
+    """Reuse identity only when exact title/date rows agree on one TMDB movie."""
+    normalized = normalized_title(title)
+    matches = {}
+    for row in current["movies"]:
+        if row.get("date") != date or normalized_title(row.get("title")) != normalized:
+            continue
+        tmdb_id = row.get("tmdb_id") or row.get("id")
+        poster = row.get("poster")
+        if isinstance(tmdb_id, bool) or not isinstance(tmdb_id, int) or tmdb_id <= 0:
+            continue
+        if not isinstance(poster, str) or not poster.startswith("https://image.tmdb.org/"):
+            continue
+        matches[tmdb_id] = row
+    if len(matches) != 1:
+        return None
+    return next(iter(matches.values()))
+
 pending = []
 identity_updates = 0
 for entry in intake.get("movies", []):
@@ -66,6 +94,18 @@ for entry in intake.get("movies", []):
     if isinstance(year, int) and not isinstance(year, bool) and 1888 <= year <= 2100:
         movie["release_year"] = year
         movie["year"] = year
+    identity = exact_existing_identity(title, date)
+    if identity:
+        tmdb_id = identity.get("tmdb_id") or identity["id"]
+        movie.update({
+            "id": tmdb_id,
+            "tmdb_id": tmdb_id,
+            "tmdb": f"https://www.themoviedb.org/movie/{tmdb_id}",
+            "poster": identity["poster"],
+        })
+        for field in ("original_title", "release_year", "year", "runtime"):
+            if identity.get(field) and not movie.get(field):
+                movie[field] = identity[field]
     title_url = entry.get("title_url", "")
     if title_url:
         parsed_title = urlparse(title_url)

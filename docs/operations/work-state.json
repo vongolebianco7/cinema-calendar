@@ -6144,5 +6144,117 @@
       "No scraping, paid action, Neon retry, manual deployment, quota bypass or user-storage mutation"
     ],
     "next_action": "Read fresh exact-head CI after the runner pin. Merge only when required checks pass; then inspect generated candidates and publish only independently verified movie/date/TMDB matches. Keep #244 open."
+  },
+  "latest_live_checkpoint_20261117_1410": {
+    "checked_at": "2026-11-17T05:10:00Z",
+    "main_sha": "63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed/completed"
+    },
+    "public_data": {
+      "boxoffice": {
+        "http": 200,
+        "by_year_rows": 1808,
+        "all_time_rows": 100,
+        "missing_posters": 0
+      },
+      "streaming": {
+        "http": 200,
+        "rows": 463,
+        "missing_posters": 0,
+        "generated_at": "2026-11-17T01:51:27.655531+00:00"
+      }
+    },
+    "completed": [
+      "Verified the official FOD Help announcement that 箱の中の羊 is scheduled as a rental on 2026-11-18.",
+      "Added one reviewed FOD announcement and reused TMDB movie 1553969 only because the existing U-NEXT row has the exact normalized title, exact date, one unique positive TMDB identity and a valid TMDB poster.",
+      "Added fail-closed regression coverage: conflicting same-title/date identities do not supply an ID or poster.",
+      "Focused importer tests passed (6/6) and scripts/quality_gate.py passed, including 598 Node tests and all Python/contract checks."
+    ],
+    "candidate_data": {
+      "before_rows": 463,
+      "after_rows": 464,
+      "new_service": "FOD",
+      "new_title": "箱の中の羊",
+      "date": "2026-11-18",
+      "tmdb_id": 1553969,
+      "production_state": "not yet merged or deployed"
+    },
+    "release_state": {
+      "pr_880_head": "ffe13fd8e2545a131c2e0938dfa89026152c9fe9",
+      "pr_880_exact_head_actions": "9/9 success",
+      "vercel": "Latest attempted main deployment is blocked by the normal Hobby build-rate limit; the prior canonical production remains READY. No manual deployment was requested."
+    },
+    "safeguards": [
+      "No scraping, paid source, manual updater dispatch, Neon retry, quota bypass or user-storage mutation.",
+      "The identity reuse path requires exact normalized title, exact date, one unique TMDB ID and an existing TMDB-hosted poster; ambiguity fails closed.",
+      "Issue #244 remains open until exact-head CI, ordinary release, public JSON and rendered production acceptance are complete."
+    ],
+    "next_action": "Open a small PR for the FOD row and exact-identity reuse guard. Read fresh exact-head CI; do not merge or deploy while the ordinary Vercel release gate is rate-limited. When the gate is available, use one normal release and verify public streaming count 464 plus the rendered FOD card."
+  },
+  "latest_live_checkpoint_20261117_1715": {
+    "checked_at": "2026-11-17T08:15:00Z",
+    "main_sha": "63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531",
+    "issues": {"239": "open", "244": "open", "593": "closed/completed"},
+    "pull_request": {
+      "number": 881,
+      "source_head": "e5a2fc6be8a4831e62e7ec290b8bb7e7f477b430",
+      "state": "open",
+      "mergeable": true,
+      "candidate_rows": 464,
+      "production_rows": 463
+    },
+    "exact_source": {
+      "digest": "4b5e79e5d1fd7ecf2dc45788fe37898be5b979479961bdbbe29ec4b38b11edea",
+      "required_workflows": {
+        "autonomous": {"run": 44036208100, "result": "success"},
+        "smoke": {"run": 44036208150, "result": "success"},
+        "frontend": {"run": 44036208149, "result": "success"},
+        "backend": {"run": 44036208136, "result": "success"}
+      },
+      "supplemental": "Full Python, mobile layout, completeness scorecard and continuous visual QA succeeded on the same head."
+    },
+    "deployment": {
+      "latest_ready_sha": "c1ccdc084fd6ce8e3b0e9837b388ec06cac310a5",
+      "latest_attempt_sha": "11eac0a8cc5ef81bb7212cba9c7a5c0e3af1ffa4",
+      "latest_attempt_state": "ERROR",
+      "action": "Do not manually retry, bypass quota, or merge until the receipt-only final head passes and the ordinary frontend release gate is available."
+    },
+    "completed": [
+      "Confirmed all eight PR #881 Actions succeeded on the exact source head.",
+      "Refreshed the production receipt to that exact tested source without changing executable source or public data.",
+      "Kept #593 closed with zero observed boxoffice poster gaps and #244 open pending production acceptance."
+    ],
+    "next_action": "Run fresh exact-head CI on the receipt-only PR tip. If green and the ordinary frontend release gate is available, merge once, verify production READY, public streaming count 464, and the rendered FOD card in Chromium/WebKit."
+  },
+  "latest_live_checkpoint_20261117_1736": {
+    "checked_at": "2026-11-17T08:36:00Z",
+    "main_sha": "63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531",
+    "issues": {"239": "open", "244": "open", "593": "closed/completed"},
+    "pull_request": {"number": 881, "source_head": "658b0fe3f106b30c9477bce31c6cbfde41af68e3", "state": "open", "mergeable": true, "candidate_rows": 464, "production_rows": 463},
+    "exact_source": {
+      "digest": "3c703bf9e8255b3392b842356d01c2aabdff4a2b7deb95d7d9812d0fae2897c7",
+      "required_workflows": {
+        "autonomous": {"run": 44047187577, "result": "success"},
+        "smoke": {"run": 44047187576, "result": "success"},
+        "frontend": {"run": 44047187540, "result": "success"},
+        "backend": {"run": 44047187463, "result": "success"}
+      },
+      "supplemental": "Full Python, mobile layout, scorecard contract, completeness scorecard and continuous visual QA succeeded on the same source head."
+    },
+    "ci_diagnosis": {
+      "failed_receipt_head": "57b1c108711029aca9a2c09231e582fbd194f7ea",
+      "first_timeout": "WebKit provider-list offline status wait; passed on targeted rerun.",
+      "second_timeout": "WebKit global-search saved-director navigation load event; fixed by waiting for DOMContentLoaded.",
+      "retry_policy": "One targeted failed-job rerun only; no repeated retry."
+    },
+    "completed": [
+      "Stabilized the actual WebKit navigation wait without changing application behavior.",
+      "Confirmed all nine Actions succeeded on the changed exact source head.",
+      "Refreshed the release receipt to the changed source digest while preserving user storage and production data."
+    ],
+    "next_action": "Require fresh exact-head CI on the proof/docs-only tip. If green, merge PR #881 once, wait for the ordinary automatic Vercel deployment, then verify public streaming count 464 and the rendered FOD card in Chromium/WebKit. Keep #244 open."
   }
 }

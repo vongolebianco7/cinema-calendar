@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T03:20:00Z",
-  "status": "pr_created",
+  "updated_at": "2026-11-17T03:32:00Z",
+  "status": "deployment_pending",
   "issue": "#239",
   "base_branch": "main",
   "base_sha": "63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531",
   "branch": "feat/vivant-favorite-movie-selection-20261117",
-  "head_sha": "9c23b36b240274c41bc337bac78ddee87304b721",
+  "head_sha": "ec5cedc082294f09dd7e51f5f1dab4a3d3f015f6",
   "pull_request": {
     "number": 879,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/879",
@@ -1358,7 +1358,7 @@
   "blockers": [
     "Vercel – backend: Vercel Hobby limit `api-deployments-free-per-day` (>100 deployments/day); no manual deployment or quota workaround."
   ],
-  "next_action": "Read final exact-head CI for PR #879. Merge only if all required checks are green and normal release can proceed; then verify the feature on the canonical production URL. If Vercel remains rate-limited, preserve the PR and production state, and resume after the quota window without manual deployment.",
+  "next_action": "Keep PR #879 open until its normal Vercel release gate is available; do not bypass the Hobby limit. Independently continue #244: use the public screen search/filter with a supported browser interaction or the existing browser acceptance workflow to verify the live Netflix card, and classify the remaining official feed candidates without promoting undated/ambiguous entries. Recheck exact-head CI after checkpoint commit.",
   "resume_rule": "State file updates create a new commit after the recorded head_sha. On resume, refresh the live PR head SHA from GitHub before checking out; this is the state checkpoint's parent.",
   "progress_ledger": [
     "d",
@@ -5964,8 +5964,14 @@
     },
     "safety": "No viewing history, ratings, reviews, bookmarks, or backups were changed. No scraping, paid plan, manual dispatch, Neon retry, Vercel manual deployment, quota bypass, or CI bypass."
   },
-  "code_head_sha": "9fd4bfd3e490a0e46fd3f17f37ba0e039350b628",
-  "pr_head_status": "PR #874 exact head 70aad988920dfed261766bed5af26f9a7939f287: 5/8 Actions successful, 3 in progress; Vercel backend success. Re-fetch before release decision.",
+  "code_head_sha": "9c23b36b240274c41bc337bac78ddee87304b721",
+  "pr_head_status": {
+    "pull_request": 879,
+    "exact_head": "ec5cedc082294f09dd7e51f5f1dab4a3d3f015f6",
+    "github_actions": "9/9 success",
+    "vercel_backend": "failure: Vercel Hobby build-rate-limit",
+    "recorded_at": "2026-11-17T03:32:00Z"
+  },
   "latest_live_checkpoint_20261116_copy_cleanup": {
     "checked_at": "2026-11-16T18:40:03Z",
     "main_sha": "4a19f628ddbf5b228e5518fd0ddfc9525db51ea7",
@@ -6207,5 +6213,100 @@
       "#244 remains untouched until the #879 UI change reaches its normal release gate."
     ],
     "next_action": "Read final exact-head CI for PR #879. Merge only if all required checks are green and normal release can proceed; then verify the feature on the canonical production URL. If Vercel remains rate-limited, preserve the PR and production state, and resume after the quota window without manual deployment."
+  },
+  "latest_live_checkpoint_20261117_1232": {
+    "checked_at": "2026-11-17T03:32:00Z",
+    "main_sha": "63d24b9af9dc59f7e8046e0f7b7ede7c5ebb3531",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed/completed"
+    },
+    "open_pull_requests": [
+      {
+        "number": 879,
+        "head_sha": "ec5cedc082294f09dd7e51f5f1dab4a3d3f015f6",
+        "title": "VIVANT診断の好きな映画を9作品から選べるようにする",
+        "state": "open"
+      },
+      {
+        "number": 873,
+        "title": "feat: show verified streaming source on catalog cards",
+        "state": "open",
+        "mergeable": false
+      }
+    ],
+    "pull_request_879": {
+      "code_sha": "9c23b36b240274c41bc337bac78ddee87304b721",
+      "exact_head_sha": "ec5cedc082294f09dd7e51f5f1dab4a3d3f015f6",
+      "actions": {
+        "conclusion": "9/9 success",
+        "run_ids": [
+          44009358201,
+          44009358204,
+          44009358228,
+          44009358248,
+          44009358177,
+          44009358178,
+          44009358303,
+          44009358321,
+          44009358292
+        ],
+        "validate_frontend": "Chromium/WebKit regressions and route/browser shards passed"
+      },
+      "vercel_backend": {
+        "state": "failure",
+        "cause": "Hobby build-rate-limit",
+        "url": "https://vercel.com/vongole1?upgradeToPro=build-rate-limit"
+      },
+      "preview": "https://feat-vivant-favorite-movie-s.cinema-calendar.pages.dev/vivant-diagnosis",
+      "preview_acceptance": "9 existing movie choices; optional skip; selected movie is reflected in results and omitted from recommendations; no user records changed."
+    },
+    "issue_593": {
+      "state": "closed/completed",
+      "production_json": {
+        "http": 200,
+        "by_year_rows": 1808,
+        "all_time_rows": 100,
+        "total_rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27"
+      }
+    },
+    "production": {
+      "last_ready_sha": "c1ccdc084fd6ce8e3b0e9837b388ec06cac310a5",
+      "latest_attempt": {
+        "sha": "11eac0a8cc5ef81bb7212cba9c7a5c0e3af1ffa4",
+        "state": "ERROR",
+        "cause": "The attempted main release was stopped at the production source-proof gate; the exact main receipt/tree relationship needs re-verification before a release retry."
+      },
+      "manual_deploy_attempted": false
+    },
+    "issue_244": {
+      "state": "open",
+      "official_feed_workflow": "Daily at 01:23 UTC plus manual; official feed entries remain candidate-only until dated Japanese premiere evidence and unique TMDB movie identity are verified.",
+      "production_json": {
+        "http": 200,
+        "rows": 463,
+        "generated_at": "2026-11-17T01:51:27.655531+00:00"
+      },
+      "verified_record": {
+        "title": "僕の狂ったフェミ彼女",
+        "service": "Netflix",
+        "date": "2026-12-03",
+        "source": "Netflix公式ニュースルーム",
+        "source_url": "https://about.netflix.com/ja/news/my-crazy-feminist-girlfriend-additionalcast",
+        "tmdbId": 1591961,
+        "artwork_type": "backdrop",
+        "artwork_note": "TMDB poster unavailable; same-work backdrop is used as artwork.",
+        "production_data_present": true,
+        "card_visual_acceptance": "not_verified"
+      },
+      "status": "The record is live and identity/date provenance are present; this run did not prove its card is visible on the public screen, and it did not change production data."
+    },
+    "safeguards": [
+      "No viewing/rating/review/bookmark or backup changes.",
+      "No scraping, payment, manual deploy, quota workaround, CI bypass, or blind merge."
+    ]
   }
 }

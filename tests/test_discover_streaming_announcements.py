@@ -34,5 +34,52 @@ class DiscoveryTests(unittest.TestCase):
             self.assertEqual(json.loads(first)["candidates"], [])
 
 
+    def test_parses_registered_rss_and_atom_as_review_candidates(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            config = root / "feeds.json"
+            output = root / "candidates.json"
+            feeds = [
+                {"service": "Netflix", "url": "https://about.netflix.com/ja/feed.xml"},
+                {"service": "Apple TV+", "url": "https://www.apple.com/tv-pr/news-feed.xml"},
+            ]
+            config.write_text(json.dumps({"feeds": feeds}), encoding="utf-8")
+            payloads = {
+                feeds[0]["url"]: b"""<?xml version="1.0" encoding="UTF-8"?>
+                    <rss><channel><item>
+                    <title>Netflix movie Example starts streaming</title>
+                    <link>https://about.netflix.com/ja/news/example</link>
+                    </item></channel></rss>""",
+                feeds[1]["url"]: b"""<?xml version="1.0" encoding="UTF-8"?>
+                    <feed xmlns="http://www.w3.org/2005/Atom"><entry>
+                    <title>Apple TV announces film Example</title>
+                    <link href="https://www.apple.com/tv-pr/news/2026/example/"/>
+                    </entry></feed>""",
+            }
+
+            class Response:
+                def __init__(self, url):
+                    self.url = url
+                def __enter__(self):
+                    return self
+                def __exit__(self, *args):
+                    return False
+                def geturl(self):
+                    return self.url
+                def read(self, limit):
+                    return payloads[self.url][:limit]
+
+            def opener(request, timeout):
+                self.assertEqual(timeout, 12)
+                return Response(request.full_url)
+
+            public_dns = [(2, 1, 6, "", ("93.184.216.34", 443))]
+            with patch("scripts.discover_streaming_announcements.socket.getaddrinfo", return_value=public_dns):
+                self.assertEqual(discover(config, output, opener=opener), 2)
+            candidates = json.loads(output.read_text(encoding="utf-8"))["candidates"]
+            self.assertEqual({item["service"] for item in candidates}, {"Netflix", "Apple TV+"})
+            self.assertTrue(all(item["status"] == "needs_release_date_verification" for item in candidates))
+
+
 if __name__ == "__main__":
     unittest.main()

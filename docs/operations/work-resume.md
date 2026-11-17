@@ -517,3 +517,25 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - Exact-head required Actions passed: Autonomous quality 43928544188, CINELVA smoke 43928544484, Validate frontend 43928544207, Reproducible backend build 43928544618. Supplemental backup, visual, mobile, scorecard, brand, Python-contract and isolated Pages checks also passed.
 - Automatic production deployment `dpl_ET4MJ2daxx6vcwUVTYRHAQRyNMCy` failed before publishing. Exact log: old receipt head a843b1c5 had digest 15b626893271be537de20d7cc32b8c4445a619479f03d8b21b41ebe984e7c899; current tested source digest is ddd9459c1790fb81b4e698405b9b2a9180634d5c3c034d2ed55561fe1ce81d63. This is the release proof gate, not deployment quota. Old production remains READY at `dpl_CPZGWBYFcfR2UkNxnab9P6zocoCP` on `86a43264371c0e6b77a6980419f415ce7`.
 - A receipt-only proof refresh is being prepared for already-tested PR #875 source head. Do not bypass the guard, manually deploy, or change saved viewing/rating/review/bookmark/backup data. After the proof PR’s exact-head checks pass and it is merged, let the normal Vercel integration build once; verify READY and affected public routes before marking this task production-verified.
+
+
+## 2026-11-17 08:10 JST — official streaming feed activation
+
+- Live main is `0482952604ec79b2bbde263ebfcba4eb5c595586`. Issue #593 remains closed/completed. Production boxoffice JSON is HTTP 200 with 1,908 rows and zero missing posters. Production streaming JSON is HTTP 200 with 463 rows and zero missing posters.
+- Vercel production deployment `dpl_DmcgctfTBS5hRxUy16mC9s8cP399` is READY on that exact main SHA. No manual deployment was requested.
+- PR #877 (`feat/official-streaming-feeds-20261117`) registers publisher-advertised RSS/Atom endpoints for Netflix Newsroom Japan, About Amazon Japan and Apple TV Press, connects registry changes to the existing discovery workflow, and adds zero-network RSS/Atom parser coverage.
+- Feed entries are candidates only. `auto_premiere_discovery` remains false. Never publish until movie/series type, Japanese premiere date and a unique TMDB movie identity are independently verified.
+- Existing PR #873 remains separate. Its browser jobs fail during Playwright browser preparation before app assertions; one targeted retry reproduced the infrastructure failure, so do not loop retries.
+- No user records, ratings, reviews, bookmarks, backups, Neon data or production deployment were changed. No scraping or paid source was introduced.
+- Next: read exact-head CI for PR #877. If green, inspect generated candidates, discard series and ambiguous matches, verify official Japanese dates and TMDB identities, then use the normal merge/release gate and perform production acceptance. Keep #244 open.
+
+- CI follow-up at 10:00 JST: the only implementation-related Python failure was a stale audit assertion that all services had zero approved feeds. Commit `52bdb0ee586b135f2a694cee3ccffc9f379b25e8` now expects one approved candidate feed for Netflix, Prime Video and Apple TV+ while still requiring `automated_premiere_services == 0`. Browser failures remain in Playwright preparation, before application assertions.
+
+## 2026-11-17 11:10 JST — official-feed CI compatibility
+
+- PR #877 implementation head `693e10fb4c8597d22f7bb01f58c08b23cc512833` passes the full Python suite, deterministic shared quality gate, smoke tests and reproducible backend build.
+- Browser workflows did not reach application assertions. GitHub's `ubuntu-latest` resolved to Ubuntu 26.04, while Playwright 1.59 stopped with `Playwright does not support chromium on ubuntu26.04-x64`.
+- The five browser-bearing workflows are pinned to `ubuntu-24.04`, a supported hosted runner, instead of retrying the unchanged failure. Read the new exact-head checks before any merge.
+- The three official feeds remain candidate discovery only. Automated premiere publication stays disabled, and movie type, Japanese premiere date and unique TMDB identity are still mandatory.
+- Production remains READY on main `0482952604ec79b2bbde263ebfcba4eb5c595586`; public boxoffice is 1,908/1,908 postered and streaming is 463/463 postered. No production data or user storage changed.
+

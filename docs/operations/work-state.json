@@ -1,13 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T18:40:03Z",
+  "updated_at": "2026-11-17T02:10:00Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "4a19f628ddbf5b228e5518fd0ddfc9525db51ea7",
-  "branch": "ops/refresh-proof-after-copy-trim-20261116",
-  "head_sha": "0aeeac274d48f572e27246602a500cb5812cbe79",
-  "pull_request": null,
+  "base_sha": "0482952604ec79b2bbde263ebfcba4eb5c595586",
+  "branch": "feat/official-streaming-feeds-20261117",
+  "head_sha": "693e10fb4c8597d22f7bb01f58c08b23cc512833",
+  "pull_request": {
+    "number": 877,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/877",
+    "state": "open"
+  },
   "work_items": [
     {
       "id": "P0-RESTART",
@@ -6000,5 +6004,145 @@
       "live_sha": "86a43264371c0e6b77a6980419f415ce7f3456d7"
     },
     "next": "Refresh only quality/production-proof.json to source head 0aeeac2 after its exact required CI; merge that receipt-only PR only after its own checks pass; verify automatic production READY and affected pages."
+  },
+  "latest_live_checkpoint_20261117_0810": {
+    "checked_at": "2026-11-17T01:00:00Z",
+    "main_sha": "0482952604ec79b2bbde263ebfcba4eb5c595586",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed/completed"
+    },
+    "open_prs": [
+      {
+        "number": 873,
+        "title": "feat: show verified streaming source on catalog cards",
+        "head_sha": "cd10d99fcdd81cb9355010148df8ec930506520c",
+        "status": "browser CI infrastructure failures; no retry loop"
+      },
+      {
+        "number": 877,
+        "title": "feat: activate verified official streaming feeds",
+        "head_sha": "d66a617fa585a8e4d618d5492690919a554c3e82",
+        "status": "exact-head CI started"
+      }
+    ],
+    "public_data": {
+      "boxoffice": {
+        "http": 200,
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27"
+      },
+      "streaming": {
+        "http": 200,
+        "rows": 463,
+        "missing_posters": 0,
+        "generated_at": "2026-11-16T08:05:29.780681+00:00"
+      }
+    },
+    "production": {
+      "deployment_id": "dpl_DmcgctfTBS5hRxUy16mC9s8cP399",
+      "state": "READY",
+      "sha": "0482952604ec79b2bbde263ebfcba4eb5c595586"
+    },
+    "completed": [
+      "Verified publisher-advertised syndication endpoints for Netflix Newsroom Japan, About Amazon Japan and Apple TV Press.",
+      "Registered the three official RSS/Atom feeds in the approved source registry and connected registry changes to the existing scheduled discovery workflow.",
+      "Added zero-network RSS/Atom parser regression coverage. Feed entries remain review candidates and cannot publish directly."
+    ],
+    "safeguards": [
+      "auto_premiere_discovery remains false",
+      "No HTML scraping, paid API, Neon retry, manual Vercel deploy or user-storage mutation",
+      "Movie/series type, Japanese premiere date and unique TMDB movie identity remain mandatory before publication"
+    ],
+    "exact_head": {
+      "pr": 877,
+      "prior_head": "fea81a025e465890671caa6387d5169f9d91275a",
+      "implementation_head": "52bdb0ee586b135f2a694cee3ccffc9f379b25e8",
+      "status": "in_progress",
+      "fixed_failure": "Updated streaming coverage audit contract to expect the three approved candidate feeds while keeping automated_premiere_services at zero."
+    },
+    "blockers": [
+      "Browser jobs continue to fail during Playwright browser preparation/download before app assertions; no blind retry.",
+      "PR #877 final exact-head CI is running after the coverage-contract fix.",
+      "Physical iPhone Safari remains unverified."
+    ],
+    "next_action": "Confirm the full Python and deterministic suites pass on the final PR #877 head. Do not merge while browser preparation jobs or any implementation test fails. Inspect generated candidates only after the safe release gate."
+  },
+  "latest_live_checkpoint_20261117_1110": {
+    "checked_at": "2026-11-17T02:10:00Z",
+    "main_sha": "0482952604ec79b2bbde263ebfcba4eb5c595586",
+    "issues": {
+      "239": "open",
+      "244": "open",
+      "593": "closed/completed"
+    },
+    "pull_request": {
+      "number": 877,
+      "implementation_head": "693e10fb4c8597d22f7bb01f58c08b23cc512833",
+      "title": "feat: activate verified official streaming feeds",
+      "state": "open"
+    },
+    "production": {
+      "deployment_id": "dpl_DmcgctfTBS5hRxUy16mC9s8cP399",
+      "state": "READY",
+      "sha": "0482952604ec79b2bbde263ebfcba4eb5c595586"
+    },
+    "public_data": {
+      "boxoffice": {
+        "http": 200,
+        "rows": 1908,
+        "missing_posters": 0,
+        "generated_at": "2026-09-27"
+      },
+      "streaming": {
+        "http": 200,
+        "rows": 463,
+        "missing_posters": 0,
+        "generated_at": "2026-11-16T08:05:29.780681+00:00"
+      }
+    },
+    "completed": [
+      "Registered publisher-advertised Netflix Japan RSS, About Amazon Japan RSS and Apple TV Press Atom as review-candidate sources only.",
+      "Updated Python and Node contracts to expect exactly those three approved feeds while keeping automated premiere publication disabled.",
+      "Full Python contract suite, deterministic shared quality gate, smoke tests and reproducible backend build passed on the implementation head."
+    ],
+    "exact_head_ci": {
+      "full_python": {
+        "run": 44000074853,
+        "result": "success"
+      },
+      "smoke": {
+        "run": 44000074964,
+        "result": "success"
+      },
+      "backend": {
+        "run": 44000074925,
+        "result": "success"
+      },
+      "autonomous_deterministic": {
+        "run": 44000074857,
+        "result": "success"
+      },
+      "browser_jobs": "failed before assertions because ubuntu-latest resolved to Ubuntu 26.04 and Playwright 1.59 reports that platform unsupported"
+    },
+    "ci_remediation": {
+      "action": "Pin browser-bearing workflows to the supported ubuntu-24.04 GitHub runner; do not retry unchanged failed jobs.",
+      "workflows": [
+        ".github/workflows/autonomous-quality-gate.yml",
+        ".github/workflows/continuous-visual-qa.yml",
+        ".github/workflows/cinelva-mobile-visual.yml",
+        ".github/workflows/completeness-scorecard.yml",
+        ".github/workflows/validate-frontend.yml"
+      ]
+    },
+    "safeguards": [
+      "auto_premiere_discovery remains false for all services",
+      "Feed entries cannot directly update the public catalog",
+      "Movie type, Japanese premiere date and unique TMDB movie identity remain required",
+      "No scraping, paid action, Neon retry, manual deployment, quota bypass or user-storage mutation"
+    ],
+    "next_action": "Read fresh exact-head CI after the runner pin. Merge only when required checks pass; then inspect generated candidates and publish only independently verified movie/date/TMDB matches. Keep #244 open."
   }
 }

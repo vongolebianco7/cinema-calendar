@@ -1,4 +1,31 @@
 {
-  "feeds": [],
-  "note": "Add only confirmed official RSS/Atom endpoints. Unverified or HTML pages must not be listed."
+  "schema_version": 1,
+  "policy": "Only official RSS/Atom endpoints advertised by the publisher may be fetched. Entries are discovery candidates only and must pass release-date and TMDB movie-identity verification before publication.",
+  "feeds": [
+    {
+      "service": "Netflix",
+      "source_id": "netflix_official_rss",
+      "url": "https://about.netflix.com/ja/feed.xml",
+      "format": "rss",
+      "locale": "ja-JP",
+      "scope": "Netflix official newsroom announcements; includes films and series"
+    },
+    {
+      "service": "Prime Video",
+      "source_id": "amazon_japan_official_rss",
+      "url": "https://www.aboutamazon.jp/rss/feed.rss",
+      "format": "rss",
+      "locale": "ja-JP",
+      "scope": "Amazon Japan official news; requires entertainment and movie review"
+    },
+    {
+      "service": "Apple TV+",
+      "source_id": "apple_tv_press_atom",
+      "url": "https://www.apple.com/tv-pr/news-feed.xml",
+      "format": "atom",
+      "locale": "global",
+      "scope": "Apple TV Press official announcements; includes films and series"
+    }
+  ],
+  "note": "Feed discovery never publishes dates or movie identity directly. Series, ambiguous titles and entries without an independently verified premiere date remain review candidates."
 }

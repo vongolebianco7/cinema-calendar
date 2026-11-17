@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T23:10:00Z",
+  "updated_at": "2026-11-17T01:00:00Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "0482952604ec79b2bbde263ebfcba4eb5c595586",
   "branch": "feat/official-streaming-feeds-20261117",
-  "head_sha": "d66a617fa585a8e4d618d5492690919a554c3e82",
+  "head_sha": "52bdb0ee586b135f2a694cee3ccffc9f379b25e8",
   "pull_request": {
     "number": 877,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/877",
@@ -6006,7 +6006,7 @@
     "next": "Refresh only quality/production-proof.json to source head 0aeeac2 after its exact required CI; merge that receipt-only PR only after its own checks pass; verify automatic production READY and affected pages."
   },
   "latest_live_checkpoint_20261117_0810": {
-    "checked_at": "2026-11-16T23:10:00Z",
+    "checked_at": "2026-11-17T01:00:00Z",
     "main_sha": "0482952604ec79b2bbde263ebfcba4eb5c595586",
     "issues": {
       "239": "open",
@@ -6058,14 +6058,16 @@
     ],
     "exact_head": {
       "pr": 877,
-      "head_sha": "d66a617fa585a8e4d618d5492690919a554c3e82",
-      "status": "in_progress"
+      "prior_head": "fea81a025e465890671caa6387d5169f9d91275a",
+      "implementation_head": "52bdb0ee586b135f2a694cee3ccffc9f379b25e8",
+      "status": "in_progress",
+      "fixed_failure": "Updated streaming coverage audit contract to expect the three approved candidate feeds while keeping automated_premiere_services at zero."
     },
     "blockers": [
-      "PR #873 browser jobs fail during Playwright browser preparation before app assertions; targeted retry already reproduced and no repeated retry is planned.",
-      "PR #877 requires exact-head CI and a live candidate extraction result before safe merge.",
+      "Browser jobs continue to fail during Playwright browser preparation/download before app assertions; no blind retry.",
+      "PR #877 final exact-head CI is running after the coverage-contract fix.",
       "Physical iPhone Safari remains unverified."
     ],
-    "next_action": "Read PR #877 exact-head results. If green, inspect the generated official-feed candidates, reject series/ambiguous rows, verify Japanese premiere dates and exact TMDB movie identities, then merge through the normal gate and verify production. Keep #244 open."
+    "next_action": "Confirm the full Python and deterministic suites pass on the final PR #877 head. Do not merge while browser preparation jobs or any implementation test fails. Inspect generated candidates only after the safe release gate."
   }
 }

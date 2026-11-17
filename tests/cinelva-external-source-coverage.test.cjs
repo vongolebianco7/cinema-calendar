@@ -18,7 +18,30 @@ test('streaming provider observations are not described as complete premiere cov
     sources.services.every((service) => service.auto_premiere_discovery === false),
     'do not claim automated premiere discovery without a verified feed',
   );
-  assert.deepEqual(feeds.feeds, [], 'only confirmed official feed endpoints may be configured');
+  assert.deepEqual(
+    feeds.feeds.map(({ service, source_id, url, format }) => ({ service, source_id, url, format })),
+    [
+      {
+        service: 'Netflix',
+        source_id: 'netflix_official_rss',
+        url: 'https://about.netflix.com/ja/feed.xml',
+        format: 'rss',
+      },
+      {
+        service: 'Prime Video',
+        source_id: 'amazon_japan_official_rss',
+        url: 'https://www.aboutamazon.jp/rss/feed.rss',
+        format: 'rss',
+      },
+      {
+        service: 'Apple TV+',
+        source_id: 'apple_tv_press_atom',
+        url: 'https://www.apple.com/tv-pr/news-feed.xml',
+        format: 'atom',
+      },
+    ],
+    'only publisher-advertised official syndication endpoints may be configured',
+  );
   assert.match(availability.coverage, /not a complete provider catalogue/i);
   assert.equal(premieres.status, 'manual', 'official premiere announcements remain manually reviewed');
   assert.match(premieres.coverage, /not current availability/i);

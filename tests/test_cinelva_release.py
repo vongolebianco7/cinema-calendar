@@ -44,7 +44,7 @@ class RebrandReleaseTests(unittest.TestCase):
                 source = (ROOT / path).read_text()
                 urls = re.findall(r'''js/my-cinemap-(?:art|tools|art-direction|cinema-templates)\.js\?([^'"\s]+)''', source)
                 self.assertTrue(urls)
-                expected = 'v=20261118-larger-posters' if path == 'my-best10.html' or path.startswith('js/') else 'v=20261016-cinelva-case'
+                expected = 'v=20261118-larger-posters' if path == 'my-best10.html' else ('v=20261114-rank-stars-logo' if path.startswith('js/') else 'v=20261016-cinelva-case')
                 self.assertTrue(all(url == expected for url in urls), urls)
 
     def test_legacy_namespaces_and_record_modules_are_preserved(self):

@@ -530,3 +530,12 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - Next: read exact-head CI for PR #877. If green, inspect generated candidates, discard series and ambiguous matches, verify official Japanese dates and TMDB identities, then use the normal merge/release gate and perform production acceptance. Keep #244 open.
 
 - CI follow-up at 10:00 JST: the only implementation-related Python failure was a stale audit assertion that all services had zero approved feeds. Commit `52bdb0ee586b135f2a694cee3ccffc9f379b25e8` now expects one approved candidate feed for Netflix, Prime Video and Apple TV+ while still requiring `automated_premiere_services == 0`. Browser failures remain in Playwright preparation, before application assertions.
+
+## 2026-11-17 11:10 JST — official-feed CI compatibility
+
+- PR #877 implementation head `693e10fb4c8597d22f7bb01f58c08b23cc512833` passes the full Python suite, deterministic shared quality gate, smoke tests and reproducible backend build.
+- Browser workflows did not reach application assertions. GitHub's `ubuntu-latest` resolved to Ubuntu 26.04, while Playwright 1.59 stopped with `Playwright does not support chromium on ubuntu26.04-x64`.
+- The five browser-bearing workflows are pinned to `ubuntu-24.04`, a supported hosted runner, instead of retrying the unchanged failure. Read the new exact-head checks before any merge.
+- The three official feeds remain candidate discovery only. Automated premiere publication stays disabled, and movie type, Japanese premiere date and unique TMDB identity are still mandatory.
+- Production remains READY on main `0482952604ec79b2bbde263ebfcba4eb5c595586`; public boxoffice is 1,908/1,908 postered and streaming is 463/463 postered. No production data or user storage changed.
+

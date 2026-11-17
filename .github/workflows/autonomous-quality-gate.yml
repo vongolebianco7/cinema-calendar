@@ -16,7 +16,7 @@ concurrency:
 jobs:
   deterministic:
     name: Deterministic checks (no AI)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
 
   mobile-smoke:
     name: iPhone-size smoke test (Chromium + WebKit, no AI)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4

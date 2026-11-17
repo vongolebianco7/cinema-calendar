@@ -97,7 +97,7 @@ permissions:
 
 jobs:
   browser-scope:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       run_browser: ${{ steps.browser_scope.outputs.run_browser }}
     steps:
@@ -125,7 +125,7 @@ jobs:
     needs: browser-scope
     if: needs.browser-scope.outputs.run_browser == 'true'
     name: Frontend browser journey shard ${{ matrix.shard }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
       fail-fast: false
@@ -219,7 +219,7 @@ jobs:
   validate:
     needs: [browser-scope, browser-journey]
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
@@ -335,7 +335,7 @@ jobs:
           node --test tests/cinelva-theater-schedule.test.cjs
   now-playing:
     name: Nationwide now-playing shared controls (Chromium + WebKit)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
@@ -362,7 +362,7 @@ jobs:
           if-no-files-found: warn
   reported-audit:
     name: Reported UI and data regressions (Chromium + WebKit)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4

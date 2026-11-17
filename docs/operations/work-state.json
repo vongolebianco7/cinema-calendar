@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T13:10:00Z",
+  "updated_at": "2026-11-17T13:16:00Z",
   "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "01de2d1cf0e25f0f1f3c15d3146f27e1a1eac7e1",
   "branch": "fix/calendar-multi-service-labels-20261117",
-  "head_sha": "92f67a9cef3712dd9f452988459312fba27526c6",
+  "head_sha": "a48c0e0548221f28ffa173564dbe72526daeb6e7",
   "pull_request": {
     "number": 882,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/882",
@@ -6263,7 +6263,7 @@
     "issues": {"239": "open", "244": "open", "593": "closed/completed"},
     "pull_request": {
       "number": 882,
-      "source_head": "92f67a9cef3712dd9f452988459312fba27526c6",
+      "source_head": "a48c0e0548221f28ffa173564dbe72526daeb6e7",
       "state": "open",
       "base_sha": "01de2d1cf0e25f0f1f3c15d3146f27e1a1eac7e1"
     },
@@ -6278,9 +6278,10 @@
       "Confirmed the official FOD and U-NEXT rows for 箱の中の羊 share TMDB movie 1553969 and date 2026-11-18 in production JSON.",
       "Implemented a one-card model that retains every service label only when rows share the same positive verified movie identity inside the same date group.",
       "Kept different IDs and ID-less same-title rows separate; source rows and user storage are unchanged.",
-      "Focused tests passed 22/22 and the full local quality gate passed 599/599 plus Python, compliance, source and work-state checks."
+      "Focused tests passed 22/22 and the full local quality gate passed 599/599 plus Python, compliance, source and work-state checks.",
+      "Diagnosed backup run 44089721031 and isolated Pages run 44089720866: application tests passed, then Playwright 1.59 rejected GitHub's ubuntu26.04-x64 image before browser assertions. Pinned those two remaining browser workflows to ubuntu-24.04, matching the already-stable browser workflows."
     ],
     "external_blocker": "The latest updater persisted its JSON snapshots but Neon sync ended with P1001. No Neon retry was made because the public JSON path is healthy and prior endpoint start was quota-stopped.",
-    "next_action": "Read PR #882 exact-head CI. After required source checks pass, refresh the production receipt to that exact tested source, require fresh final-head checks, merge once, wait for the ordinary automatic Vercel release, and verify one production card shows both U-NEXT and FOD in Chromium/WebKit. Keep #244 open."
+    "next_action": "Read PR #882 exact-head CI for source a48c0e0548221f28ffa173564dbe72526daeb6e7. After required source checks pass, refresh the production receipt to that exact tested source, require fresh final-head checks, merge once, wait for the ordinary automatic Vercel release, and verify one production card shows both U-NEXT and FOD in Chromium/WebKit. Keep #244 open."
   }
 }

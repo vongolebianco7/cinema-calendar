@@ -2,6 +2,14 @@
 
 Use this guide whenever a Work session ends, loses context, or reaches a usage limit. GitHub issue [#239](https://github.com/vongolebianco7/cinema-calendar/issues/239) is the single progress hub; this guide and `work-state.json` carry the durable checkpoint.
 
+## Current live checkpoint — 2026-11-17 22:45 JST
+
+- Live main: `f53d9e9fdce36a68eeb9a21127f558b6139a1261`. Issue #593 remains closed and public production boxoffice JSON is HTTP 200 with 1,908 rows and zero missing posters. Issue #244 remains open.
+- Existing PR #873 was rebuilt on live main without a duplicate PR. Tested code head `2f0fa46a564d7a8d36413579396cc0cfdbd16954` changes only `streaming.html` and its browser regression: matching official TMDB watch URLs render a confirmation link; a different movie ID is rejected.
+- Exact code-head CI finished **33/33 successful**, zero failed/pending. Executable digest: `7e74754055752272f4d8170247378fa447d9c605d60b71edabf48d3253246310`. The production proof receipt now points to that tested code source.
+- Current production remains READY on `dpl_J8t4ixBFpVP8x8swjW8nDxg6T4vW` / `f53d9e9...`; PR #873 is not live yet. Public streaming JSON is HTTP 200 with 464 rows and zero missing poster URLs.
+- Next: require exact-head CI on the proof/docs-only final PR tip; if green, merge once, wait for the ordinary automatic production release, and verify the live source link at desktop/mobile widths. Do not manually dispatch/deploy or retry Neon. Keep #244 open.
+
 ## Resume sequence
 
 1. Read issue #239, this guide, and `docs/operations/work-state.json`.

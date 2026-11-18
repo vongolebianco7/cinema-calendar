@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-17T20:23:39.166151+00:00",
+  "generated_at": "2026-11-18T00:57:11.075241+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-10-18",
-      "2027-03-17"
+      "2026-10-19",
+      "2027-03-18"
     ],
     "background_slice": [
-      "2026-05-16",
-      "2026-07-14"
+      "2026-07-16",
+      "2026-09-13"
     ],
     "max_detail_requests": 40
   },
@@ -15724,6 +15724,35 @@
       ]
     },
     {
+      "id": 1479498,
+      "title": "ジーコ：キンチーノの侍",
+      "original_title": "Zico: O Samurai de Quintino",
+      "date": "2026-07-27",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/33nJ33aN0LmWyVmrOdkc2EepInp.jpg",
+      "score": 8.5,
+      "votes": 6,
+      "overview": "ジョアン・ワイネル監督がサッカー界のレジェンド、ジーコ（アルトゥール・アントゥネス・コインブラ）の人生とキャリアを、未公開の個人アーカイブや家族・著名人の証言を通して描くドキュメンタリー。  人間ジーコに焦点を当てた構成で、日本との深い絆と「侍」の精神を描いており、タイトルの「侍」は、ジーコの決断力、謙虚さ、規律正しさが日本の文化と共鳴したことに由来しています。  1991年にサッカーの伝統がない日本の住友金属（現・鹿島アントラーズ）へ移籍した際の困難や、日本サッカーの基礎を築いた功績を深く掘り下げています。  また、ジーコ自身が長年保管していたスーパー8やVHSなどの個人アーカイブといった貴重なプライベート映像がデジタル化され、初めて公開されます。1981年トヨタカップの決勝で着用した背番号10のユニフォームなど、歴史的な品々も登場します。  ジーコは、自身のキャリアを通じて「連帯（コレクティブ）」や「他者への敬意」という価値観を伝えたいと考えており、ブラジルにおけるサッカーの歴史保存と記憶の継承の重要性についても言及しています。",
+      "tmdb": "https://www.themoviedb.org/movie/1479498",
+      "director": "João Wainer",
+      "director_id": 1327760,
+      "cast": [
+        "Zico",
+        "Alcindo Sartori",
+        "Bruno Coimbra",
+        "Carlos Alberto Parreira"
+      ],
+      "countries": [
+        "Brazil"
+      ],
+      "runtime": 101,
+      "genres": [
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-11-18T00:57:11.075241+00:00"
+    },
+    {
       "id": 1291712,
       "title": "ヒトラーの毒見役",
       "original_title": "Le assaggiatrici",
@@ -16026,6 +16055,35 @@
         "ドラマ"
       ],
       "checked_at": "2026-10-23T12:21:11.921996+00:00"
+    },
+    {
+      "id": 1464258,
+      "title": "インビジブルハーフ",
+      "original_title": "インビジブルハーフ",
+      "date": "2026-07-31",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/s8re0zVQZVdtat1K5hydnUtwQo1.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1464258",
+      "director": "Masaki Nishiyama",
+      "director_id": 3188167,
+      "cast": [
+        "Lisa Siera",
+        "Miyu Okuno",
+        "Runa Hirasawa",
+        "小沢まゆ"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 106,
+      "genres": [
+        "ホラー"
+      ],
+      "checked_at": "2026-11-18T00:57:11.075241+00:00"
     },
     {
       "id": 1374315,
@@ -16870,6 +16928,33 @@
         "ファンタジー",
         "ドラマ"
       ]
+    },
+    {
+      "id": 1824166,
+      "title": "ウォーターガーディアンズ",
+      "original_title": "ウォーターガーディアンズ",
+      "date": "2026-08-21",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/kD0u8L0v3RRrDTCZuwV8GiBRvkp.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1824166",
+      "director": "瀧川元気",
+      "director_id": 2129421,
+      "cast": [
+        "森愁斗",
+        "田辺桃子",
+        "椿泰我",
+        "小西詠斗"
+      ],
+      "countries": [],
+      "runtime": 120,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-11-18T00:57:11.075241+00:00"
     },
     {
       "id": 1750273,
@@ -22486,8 +22571,10 @@
       ],
       "countries": [],
       "runtime": 90,
-      "genres": [],
-      "checked_at": "2026-11-10T23:19:36.862330+00:00"
+      "genres": [
+        "アニメーション"
+      ],
+      "checked_at": "2026-11-18T00:57:11.075241+00:00"
     },
     {
       "id": 1823861,
@@ -24907,7 +24994,7 @@
         "履歴",
         "ドラマ"
       ],
-      "checked_at": "2026-11-10T23:19:36.862330+00:00"
+      "checked_at": "2026-11-18T00:57:11.075241+00:00"
     },
     {
       "id": 1820368,
@@ -25078,6 +25165,33 @@
         "ドラマ"
       ],
       "checked_at": "2026-11-16T02:37:40.767649+00:00"
+    },
+    {
+      "id": 1804139,
+      "title": "かすかな彼を抱きしめて",
+      "original_title": "かすかな彼を抱きしめて",
+      "date": "2027-01-15",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/9SRDPmA9XVeQ9bZyl1BCyvnatCq.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "かすかな彼を抱きしめて",
+      "tmdb": "https://www.themoviedb.org/movie/1804139",
+      "director": "山西竜矢",
+      "director_id": 3159502,
+      "cast": [
+        "奈緒",
+        "坂東龍汰",
+        "大東駿介",
+        "中島歩"
+      ],
+      "countries": [],
+      "runtime": 138,
+      "genres": [
+        "ドラマ"
+      ],
+      "checked_at": "2026-11-18T00:57:11.075241+00:00"
     },
     {
       "id": 1257420,
@@ -25656,6 +25770,31 @@
       ]
     },
     {
+      "id": 1765609,
+      "title": "劇場版ラブールけいぶ 大ピンチ！ねらわれたマンゴーフェスティバル！",
+      "original_title": "啦咘啦哆警长之巡逻行动：保卫芒果节启动，全速出发",
+      "date": "2027-02-11",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/190XbbKdPfdPNxwfh4chCHwRYVv.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1765609",
+      "director": "Naiyong Yan",
+      "director_id": 6521519,
+      "cast": [],
+      "countries": [
+        "China"
+      ],
+      "runtime": 64,
+      "genres": [
+        "アニメーション",
+        "ファミリー"
+      ],
+      "checked_at": "2026-11-18T00:57:11.075241+00:00"
+    },
+    {
       "id": 1825690,
       "title": "声よ広がれ",
       "original_title": "声よ広がれ",
@@ -25875,6 +26014,36 @@
         "ドラマ"
       ],
       "checked_at": "2026-11-12T18:56:17.831849+00:00"
+    },
+    {
+      "id": 1828261,
+      "title": "時空警察ヴェッカー　シブヤネクサス",
+      "original_title": "時空警察ヴェッカー　シブヤネクサス",
+      "date": "2027-02-26",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/pjBIs5ESuqahnzxRJpUbQQE2nHk.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1828261",
+      "director": "林雅貴",
+      "director_id": 2641695,
+      "cast": [
+        "本島純政",
+        "平澤宏々路",
+        "長野凌大",
+        "小寺結花"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "サイエンスフィクション",
+        "ロマンス"
+      ],
+      "checked_at": "2026-11-18T00:57:11.075241+00:00"
     },
     {
       "id": 1736959,

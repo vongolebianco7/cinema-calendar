@@ -11,6 +11,7 @@ test('streaming provider observations are not described as complete premiere cov
   const registry = readJson('quality/external-data-registry.json');
   const availability = registry.categories.find((item) => item.id === 'streaming-availability');
   const premieres = registry.categories.find((item) => item.id === 'streaming-premieres');
+  const discovery = registry.categories.find((item) => item.id === 'streaming-premiere-discovery');
 
   assert.ok(sources.services.length > 0, 'provider inventory remains explicit');
   assert.ok(sources.services.every((service) => service.official_url), 'each listed service retains an official reference');
@@ -45,6 +46,11 @@ test('streaming provider observations are not described as complete premiere cov
   assert.match(availability.coverage, /not a complete provider catalogue/i);
   assert.equal(premieres.status, 'manual', 'official premiere announcements remain manually reviewed');
   assert.match(premieres.coverage, /not current availability/i);
+  assert.equal(discovery.status, 'automated');
+  assert.equal(discovery.dataset, 'data/streaming-announcement-candidates.json');
+  assert.match(discovery.coverage, /別途審査/);
+  assert.match(discovery.coverage, /網羅ではない/);
+  assert.match(discovery.trigger, /直近の成功候補を保持/);
 });
 
 test('unavailable theater schedules and nationwide television are not reported as automated', () => {

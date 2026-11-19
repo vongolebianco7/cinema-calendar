@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T00:59:53.002866+00:00",
+  "generated_at": "2026-11-19T00:25:55.165424+00:00",
   "note": "出典付きの公開・配信開始・テレビ放映予定の掲載履歴。実際の上映・放映を保証する記録ではありません。",
   "records": [
     {
@@ -16825,6 +16825,19 @@
       "record_type": "掲載した予定日（実施確認なし）"
     },
     {
+      "kind": "theatrical",
+      "title": "आँ बाट आमा 2",
+      "id": 1705668,
+      "original_title": "आँ बाट आमा 2",
+      "date": "2026-10-08",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1705668",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
       "kind": "streaming",
       "title": "Matchbox The Movie",
       "id": null,
@@ -22191,6 +22204,45 @@
       "program": null,
       "source": "U-NEXT 2026年11月新着配信ラインナップ",
       "source_url": "https://www.unext.co.jp/ja/press-room/2026-11-unext-lineup",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "streaming",
+      "title": "放送局に届いたある映像 (放送版)",
+      "id": null,
+      "original_title": null,
+      "date": "2026-11-19",
+      "service": "Hulu",
+      "time": null,
+      "program": null,
+      "source": "Hulu公式 まもなく配信（2026年11月）",
+      "source_url": "https://www.hulu.jp/features/comingsoon",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "tv",
+      "title": "ガールズ＆パンツァー もっとらぶらぶ作戦です！",
+      "id": null,
+      "original_title": "Girls und Panzer: Motto Love Love Sakusen Desu!",
+      "date": "2026-11-19",
+      "service": "TOKYO MX",
+      "time": "23:30",
+      "program": "ガールズ＆パンツァー もっとらぶらぶ作戦です！",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "tv",
+      "title": "屋根裏のラジャー",
+      "id": null,
+      "original_title": null,
+      "date": "2026-11-19",
+      "service": "WOWOWシネマ",
+      "time": "14:30",
+      "program": "屋根裏のラジャー",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
       "record_type": "掲載した予定日（実施確認なし）"
     }
   ]

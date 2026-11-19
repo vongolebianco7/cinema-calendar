@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-18T00:57:11.075241+00:00",
+  "generated_at": "2026-11-19T00:21:52.279180+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-10-19",
-      "2027-03-18"
+      "2026-10-20",
+      "2027-03-19"
     ],
     "background_slice": [
-      "2026-07-16",
-      "2026-09-13"
+      "2026-09-15",
+      "2026-11-13"
     ],
     "max_detail_requests": 40
   },
@@ -20022,6 +20022,34 @@
       "checked_at": "2026-11-05T23:37:53.801962+00:00"
     },
     {
+      "id": 1705668,
+      "title": "आँ बाट आमा 2",
+      "original_title": "आँ बाट आमा 2",
+      "date": "2026-10-08",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/pgrZ3AKWvv0jywAg6j18T6RU0TK.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1705668",
+      "director": "Chandra Pant",
+      "director_id": 5058472,
+      "cast": [
+        "Bipana Thapa",
+        "Pradeep Ram Singh Rawat",
+        "पल शाह",
+        "Aakash Shrestha"
+      ],
+      "countries": [],
+      "runtime": 157,
+      "genres": [
+        "ドラマ",
+        "ファミリー"
+      ],
+      "checked_at": "2026-11-19T00:21:52.279180+00:00"
+    },
+    {
       "id": 1248832,
       "title": "DIGGER／ディガー",
       "original_title": "Digger",
@@ -23474,6 +23502,33 @@
       "runtime": 75,
       "genres": [],
       "checked_at": "2026-11-17T01:51:35.947376+00:00"
+    },
+    {
+      "id": 1828903,
+      "title": "永遠の映画館━高田世界館━",
+      "original_title": "L'éternel de Takada",
+      "date": "2026-11-29",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/3SlP4KqFi839AOAnREZHmexpfp3.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "現存する日本最古の映画館、高田世界館。1911年、かつて軍の駐屯地であった北陸の町・高田に誕生し、一世紀を超える歴史を歩んできた。1970年代、テレビの普及によって全国の映画館が経営危機に陥る中、高田世界館も倒産の危機に立たされる。生き残りをかけて、成人映画館へと路線を変更した。その後、人口減少と郊外のニュータウン開発が進み、木造の町屋が並ぶ旧市街から若者たちの姿は消えていく。まちは次第に活気を失い、ゴーストタウンのようになっていった。2004年、新潟県中越地震がこの地を襲い、映画館は再び存続の危機に立たされる。それを救ったのが、僧侶であり映画愛好家でもある増村さんだった。彼は50年近くにわたり、この映画館を拠点とする上映会を見守り続けてきた。上映会のメンバーは70代、中には90代の方も。それでも彼らの映画への情熱は少しも衰えることなく、冬の終わりを祝う新たな上映会の準備を進めている。そして今、まちを離れていた若い世代も、少しずつ戻り始めている。",
+      "tmdb": "https://www.themoviedb.org/movie/1828903",
+      "director": "Atsushi Hirai",
+      "director_id": 2733905,
+      "cast": [
+        "Shun-ichi Masumura",
+        "Michinari Ueno"
+      ],
+      "countries": [
+        "France"
+      ],
+      "runtime": 52,
+      "genres": [
+        "ドキュメンタリー"
+      ],
+      "checked_at": "2026-11-19T00:21:52.279180+00:00"
     },
     {
       "id": 1287141,

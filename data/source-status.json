@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-21T00:08:31.408Z",
+  "generated_at": "2026-11-21T23:08:22.660Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -16,8 +16,8 @@
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
         "total": 4442,
-        "fresh": 4250,
-        "stale": 192,
+        "fresh": 3037,
+        "stale": 1405,
         "unknown": 0
       }
     },
@@ -152,7 +152,7 @@
       "status": "automated",
       "source": "TMDB API",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-20T23:58:01.795Z",
+      "source_observed_at": "2026-11-21T23:08:22.170Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-now-playing.yml",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T00:39:09.701029+00:00",
+  "generated_at": "2026-11-21T00:01:30.471630+00:00",
   "source": "TMDB watch/providers (JustWatch)",
   "country": "JP",
   "note": "日本向け配信先の観測。配信開始日ではありません。更新日は作品ごとのchecked_atを参照。",
@@ -44,7 +44,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1425485/watch",
       "flatrate": [],
       "rent": [],
@@ -82,7 +82,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1382513/watch",
       "flatrate": [],
       "rent": [],
@@ -113,16 +113,33 @@
             "Amazon Video",
             "Apple TV Store"
           ]
+        },
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD",
+            "U-NEXT"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1263337-heart-of-the-beast/watch?locale=JP",
       "flatrate": [],
       "rent": [
         "Amazon Video",
         "Apple TV Store",
-        "FOD"
+        "FOD",
+        "U-NEXT"
       ],
       "buy": [
         "Amazon Video",
@@ -142,7 +159,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1697647/watch",
       "flatrate": [],
       "rent": [],
@@ -161,7 +178,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1670061/watch",
       "flatrate": [],
       "rent": [],
@@ -180,7 +197,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1651263/watch",
       "flatrate": [],
       "rent": [],
@@ -199,7 +216,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1595400/watch",
       "flatrate": [],
       "rent": [],
@@ -218,7 +235,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1567787/watch",
       "flatrate": [],
       "rent": [],
@@ -237,7 +254,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1496928/watch",
       "flatrate": [],
       "rent": [],
@@ -256,7 +273,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1448971/watch",
       "flatrate": [],
       "rent": [],
@@ -275,7 +292,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1522668/watch",
       "flatrate": [],
       "rent": [],
@@ -294,7 +311,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1554986/watch",
       "flatrate": [],
       "rent": [],
@@ -313,7 +330,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1775245/watch",
       "flatrate": [],
       "rent": [],
@@ -332,7 +349,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1775243/watch",
       "flatrate": [],
       "rent": [],
@@ -351,7 +368,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1775239/watch",
       "flatrate": [],
       "rent": [],
@@ -370,7 +387,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1775231/watch",
       "flatrate": [],
       "rent": [],
@@ -389,7 +406,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1740257/watch",
       "flatrate": [],
       "rent": [],
@@ -408,7 +425,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1727196/watch",
       "flatrate": [],
       "rent": [],
@@ -427,7 +444,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1691059/watch",
       "flatrate": [],
       "rent": [],
@@ -446,7 +463,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1641572/watch",
       "flatrate": [],
       "rent": [],
@@ -522,7 +539,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1645621/watch",
       "flatrate": [],
       "rent": [],
@@ -541,7 +558,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1772435/watch",
       "flatrate": [],
       "rent": [],
@@ -560,7 +577,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1772423/watch",
       "flatrate": [],
       "rent": [],
@@ -579,7 +596,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1772415/watch",
       "flatrate": [],
       "rent": [],
@@ -598,7 +615,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1657826/watch",
       "flatrate": [],
       "rent": [],
@@ -731,7 +748,7 @@
         }
       ],
       "services": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1547224/watch",
       "flatrate": [],
       "rent": [],
@@ -2244,7 +2261,7 @@
         "Netflix",
         "Netflix Standard with Ads"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1522689-why-did-i-get-married-again/watch?locale=JP",
       "flatrate": [
         "Netflix",
@@ -2836,7 +2853,7 @@
         "Netflix",
         "Netflix Standard with Ads"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1400383-teenage-wasteland/watch?locale=JP",
       "flatrate": [
         "Netflix",
@@ -7602,7 +7619,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1781670/watch",
       "poster": "https://image.tmdb.org/t/p/w500/jUIxCg53LuQcCmgDeINaoXUfeJt.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -7616,7 +7633,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1781808/watch",
       "poster": "https://image.tmdb.org/t/p/w500/QR4q0E5CHIMqDz2DOMp4dqoTDo.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -7979,7 +7996,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1782212/watch",
       "poster": "https://image.tmdb.org/t/p/w500/A8dVnHpI3AFIc8y0Gbmgdhbvodo.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -8382,7 +8399,7 @@
       ],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1148365-matchbox-the-movie/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w500/4bY4EvWpIoi8Q9F51l9OyeuDd5X.jpg",
       "poster_source": "TMDB Japan provider discovery",
@@ -9257,7 +9274,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/13-forrest-gump/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w500/98LQsdCFEP9ubfhDI8YOB72AkOm.jpg",
       "poster_source": "TMDB Japan provider discovery",
@@ -9298,7 +9315,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/14-american-beauty/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w342/toq7UrFKL6GkZlsZ4eR5VncMwUh.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -9345,7 +9362,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/33-unforgiven/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w342/6675vjtwkIbQS9YDQ41XtSa4qTs.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -9376,7 +9393,7 @@
         "Amazon Video"
       ],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/70-million-dollar-baby/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w342/aDLLmgnPrEidB5WaT8ZdLuAubaW.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -9423,7 +9440,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/98-gladiator/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w342/gcXdbLu9aatgLNYCxu3QMATrDoo.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -9701,7 +9718,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/238-the-godfather/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w500/hJ1oIGxEoskl4YfNpQ4AFUO5uub.jpg",
       "poster_source": "TMDB Japan provider discovery",
@@ -9745,7 +9762,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/240-the-godfather-part-ii/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w342/lABWNSfEuSws7eOAOSdya8MHIVY.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -9889,7 +9906,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/284-the-apartment/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w342/bYgqt9i72hgWbCgbTkg162tddz9.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -10072,7 +10089,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/424-schindler-s-list/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w342/dWVnnqInKFHmNie1fyThdlDbGnG.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -10215,7 +10232,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/597-titanic/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w500/ofhCnW6i7mQIiLSSucBHqZQ7XT7.jpg",
       "poster_source": "TMDB Japan provider discovery",
@@ -11177,7 +11194,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/6977-no-country-for-old-men/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w342/2s1HtXu8MM9QY6GcH3EHsDT4ynT.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -11669,7 +11686,7 @@
       ],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/12162-the-hurt-locker/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w342/lDDxfyV8Py03I2WWtfY1ugg9E3d.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -11683,7 +11700,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/12405/watch",
       "poster": "https://image.tmdb.org/t/p/w342/eRYIQp8pmpcGErzlVBMaKOu7Uok.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -11888,7 +11905,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/19995-avatar/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w500/A6oeVEQ1S1e3UKAIgb7un9ioZPl.jpg",
       "poster_source": "TMDB Japan provider discovery",
@@ -12207,7 +12224,7 @@
       ],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/39210-somewhere/watch?locale=JP",
       "free": [],
       "ads": []
@@ -14477,7 +14494,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1401459/watch",
       "poster": "https://image.tmdb.org/t/p/w500/qiYm44CQBFOZ0Vs8BtmH2swYLz2.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14547,7 +14564,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1801113/watch",
       "poster": "https://image.tmdb.org/t/p/w500/suzbIuFNc3qFWMaHoD6Zvt8wCsn.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14603,7 +14620,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1799743/watch",
       "poster": "https://image.tmdb.org/t/p/w500/mL5APDoPtAnYDWICsQrAWNmXUKz.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14617,7 +14634,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1234139/watch",
       "poster": "https://image.tmdb.org/t/p/w500/upwdEyhhYZ7pT2hD535fr2MGfpx.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14631,7 +14648,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1793888/watch",
       "poster": "https://image.tmdb.org/t/p/w500/dXRX2GKmYJTaB0KygwxfZsveCVD.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14645,7 +14662,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1793343/watch",
       "poster": "https://image.tmdb.org/t/p/w500/ziYU7xKR9G7WdwrtPVzWUEicuEI.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14687,7 +14704,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1792352/watch",
       "poster": "https://image.tmdb.org/t/p/w500/sl9cTq0Eq8dR5y7K4NvCHGQR7i0.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14701,7 +14718,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1799159/watch",
       "poster": "https://image.tmdb.org/t/p/w500/d6SMs485koXn7gGrCLSYuwMKQ5i.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14715,7 +14732,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1800610/watch",
       "poster": "https://image.tmdb.org/t/p/w500/3X7WSROLYMdrV6DW8ZaudLFUBp2.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14743,7 +14760,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1788417/watch",
       "poster": "https://image.tmdb.org/t/p/w500/qiT2MTlgu86HVqb4OxUnJBY5sDv.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14757,7 +14774,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1801103/watch",
       "poster": "https://image.tmdb.org/t/p/w500/lCjGWr9yBXuzYpwKFTbG8hfcCAG.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14825,7 +14842,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1794649/watch",
       "poster": "https://image.tmdb.org/t/p/w500/bHMMZuEzFWDfmicQ0KtU4hJ43wy.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14853,7 +14870,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1317512/watch",
       "poster": "https://image.tmdb.org/t/p/w500/A3yTrZi1hSGTYcAEqEPXd3FO2sG.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14867,7 +14884,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1785664/watch",
       "poster": "https://image.tmdb.org/t/p/w500/gqGz9hj8T8p7M5XeFnb5BtKZrHU.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14881,7 +14898,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1785714/watch",
       "poster": "https://image.tmdb.org/t/p/w500/lC4YEgGjMy8PMS3z2zYI5JYIDRD.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14895,7 +14912,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1759805/watch",
       "poster": "https://image.tmdb.org/t/p/w500/8Gs1ALPgqDQw9KWvODUSUBkwPfB.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14909,7 +14926,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1800641/watch",
       "poster": "https://image.tmdb.org/t/p/w500/vvUGRMBs9cP1r4A8oCvwqa5Sehv.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14923,7 +14940,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1003596/watch",
       "poster": "https://image.tmdb.org/t/p/w500/axD1jIfE2Is83vDKyTb1CnZ2EBt.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14937,7 +14954,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1170608/watch",
       "poster": "https://image.tmdb.org/t/p/w500/1MQA1Wg2dK7KmvsM5UOXXdMqrDd.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14951,7 +14968,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1220564/watch",
       "poster": "https://image.tmdb.org/t/p/w500/j4uObYUBht95uiIxGy8VqVmHwet.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14965,7 +14982,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1790602/watch",
       "poster": "https://image.tmdb.org/t/p/w500/VtUaqFxH8klAznDPUHhX05g117.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14979,7 +14996,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1094274/watch",
       "poster": "https://image.tmdb.org/t/p/w500/vWigdAG9Q4xrlbcWcBOYkIJZ4sb.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -14993,7 +15010,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1117898/watch",
       "poster": "https://image.tmdb.org/t/p/w500/ltbl17lqYWdbHfgfsm5BPujOS4f.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15007,7 +15024,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1284016/watch",
       "poster": "https://image.tmdb.org/t/p/w500/sGgX2K0SJqw90Ju8TONdhDVwlzT.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15021,7 +15038,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1397364/watch",
       "poster": "https://image.tmdb.org/t/p/w500/g8x2zmPvlmYobahJRb7enPDa1ZU.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15035,7 +15052,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1621673/watch",
       "poster": "https://image.tmdb.org/t/p/w500/75A08il8gi8ToPCEAFqWdCwoZ1.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15049,7 +15066,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1657317/watch",
       "poster": "https://image.tmdb.org/t/p/w500/5AvghJZ79dqvbmfKMILVHjrWq0I.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15063,7 +15080,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1757707/watch",
       "poster": "https://image.tmdb.org/t/p/w500/sTeAfh4rVEFw1lrpD9bFjoarhtK.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15129,7 +15146,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/840464/watch",
       "poster": "https://image.tmdb.org/t/p/w500/z2tqCJLsw6uEJ8nJV8BsQXGa3dr.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15143,7 +15160,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1167307/watch",
       "poster": "https://image.tmdb.org/t/p/w500/bESlrLOrsQ9gKzaGQGHXKOyIUtX.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15157,7 +15174,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1320392/watch",
       "poster": "https://image.tmdb.org/t/p/w500/7jv9DMLnYVCux6Q0FFWZCjdo5XF.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15171,7 +15188,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1375646/watch",
       "poster": "https://image.tmdb.org/t/p/w500/zrYz4XEfT4Rx6Div0wPFfQwyFqK.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15185,7 +15202,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1481955/watch",
       "poster": "https://image.tmdb.org/t/p/w500/ryCanTADyAo7bqRr1aca2ThuTeE.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15213,7 +15230,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1153714/watch",
       "poster": "https://image.tmdb.org/t/p/w500/xWlF2i51zUq7BUq4iJte1g9NyIM.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15227,7 +15244,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1520395/watch",
       "poster": "https://image.tmdb.org/t/p/w500/yzIEeq7xsbPUCdxQIKcZiVvVBxO.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15241,7 +15258,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1628271/watch",
       "poster": "https://image.tmdb.org/t/p/w500/hlBOr3o0eu07VKXsxPMMKmXKbfy.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15255,7 +15272,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1740088/watch",
       "poster": "https://image.tmdb.org/t/p/w500/viroAsjxCxGBC5SYnsBvmDAzgsb.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15283,7 +15300,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1214931/watch",
       "poster": "https://image.tmdb.org/t/p/w500/xthXNYltOOm80vW5Kxjzxx5gvQ6.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15297,7 +15314,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1440769/watch",
       "poster": "https://image.tmdb.org/t/p/w500/10jGGKeNxY4j6pvJpWLmBzcMeMH.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15311,7 +15328,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1695893/watch",
       "poster": "https://image.tmdb.org/t/p/w500/oaVT7ZdNgZnBmq1Hncb072qJ5dD.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15325,7 +15342,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1753605/watch",
       "poster": "https://image.tmdb.org/t/p/w500/mRg5WCLGXJ1hsBRIyi8r4Si7H2k.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15339,7 +15356,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1257420/watch",
       "poster": "https://image.tmdb.org/t/p/w500/gmZkCDwBQfiYX9llE9BBDYYggK4.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15429,7 +15446,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/787699-wonka/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w500/iKYFLQoYQRuogD2mh8QYZQXPnTT.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15560,7 +15577,7 @@
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1280282-gabby-s-dollhouse-the-movie/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w500/sM1CDaFdb4WNjtxsbV1Rw78km0A.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -15767,7 +15784,7 @@
       ],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1561726-masterplan/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w500/8EPrnSM1MjDd9NGuzXrcI5KlG9e.jpg",
       "poster_source": "TMDB Japan provider discovery",
@@ -15797,7 +15814,7 @@
       ],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1381078-love-of-your-life/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w500/hPGQkr1FqOLOEX5q77KXFa33JYq.jpg",
       "poster_source": "TMDB Japan provider discovery",
@@ -16037,7 +16054,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1196776/watch",
       "poster": "https://image.tmdb.org/t/p/w500/sHnbbkUAArhDgHA8ax4rvT0PlzM.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -16051,7 +16068,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1300926/watch",
       "poster": "https://image.tmdb.org/t/p/w500/tCu74x8KMTJ9UZreG7wQkm68Qs5.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -16065,7 +16082,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1375441/watch",
       "poster": "https://image.tmdb.org/t/p/w500/lmrulvLbmaejTix1YaMxo1oGhH1.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -16079,7 +16096,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1560316/watch",
       "poster": "https://image.tmdb.org/t/p/w500/vJ5dpcqly5KjRhFK73WwjLAjWtu.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -16093,7 +16110,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1774278/watch",
       "poster": "https://image.tmdb.org/t/p/w500/5AXJPqBetQgYhD2vz4rgTxqP4O1.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -16195,7 +16212,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/891621/watch",
       "poster": "https://image.tmdb.org/t/p/w500/dNJFRtVg3xLQ7dbNIQ55cmmIniD.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -16209,7 +16226,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1280738/watch",
       "poster": "https://image.tmdb.org/t/p/w500/aZfUsZjBRa9WSXeIlxaH6jO1Srj.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -16223,7 +16240,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1711861/watch",
       "poster": "https://image.tmdb.org/t/p/w500/8uAmlY27QuIb9Cp84Af4bhiMS1.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -16237,7 +16254,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1739413/watch",
       "poster": "https://image.tmdb.org/t/p/w500/bgapSeASBoacEvypu6lp7yIqubP.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -16615,7 +16632,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1788769/watch",
       "poster": "https://image.tmdb.org/t/p/w500/7mK027tqpxMLoyzwaAVy8sy63vg.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -16784,6 +16801,23 @@
             "Amazon Video",
             "Apple TV Store"
           ]
+        },
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
         }
       ],
       "services": [
@@ -16792,12 +16826,16 @@
       "flatrate": [
         "Disney+"
       ],
-      "rent": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
       "buy": [
         "Amazon Video",
         "Apple TV Store"
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1084244-toy-story-5/watch?locale=JP",
       "poster": "https://image.tmdb.org/t/p/w500/dEoN5k2ulqk9mhEwVrapciKJm8s.jpg",
       "poster_source": "TMDB Japan provider discovery",
@@ -30966,7 +31004,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1617319/watch",
       "poster_checked_at": "2026-11-10T01:33:48.040263+00:00",
       "poster": "https://image.tmdb.org/t/p/w500/kMvJSIz7ufSIm8vNnl99P1r8wJn.jpg",
@@ -30981,7 +31019,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1629310/watch",
       "poster_checked_at": "2026-11-10T01:33:48.040263+00:00",
       "poster": "https://image.tmdb.org/t/p/w500/tYeldWcVkgzleEuUXB7efvQqgYd.jpg",
@@ -30996,7 +31034,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1560679/watch",
       "poster_checked_at": "2026-11-10T01:33:48.040263+00:00",
       "poster": "https://image.tmdb.org/t/p/w500/pSClW3ln0nWNEKrWTQKfWNfqQXa.jpg",
@@ -31011,7 +31049,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1566897/watch",
       "poster_checked_at": "2026-11-10T01:33:48.040263+00:00",
       "poster": "https://image.tmdb.org/t/p/w500/tn4sMkqqvsZz1GLlXsyZ0wcuRaJ.jpg",
@@ -46723,7 +46761,7 @@
       "flatrate": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1433339/watch",
       "poster": "https://image.tmdb.org/t/p/w500/dJVt8OJLIzwiOcpJJiwHg88xrdb.jpg",
       "poster_source": "TMDB canonical movie catalog",
@@ -75054,7 +75092,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/646097-rebel-ridge/watch?locale=JP"
     },
     "646380": {
@@ -75086,7 +75124,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/646380-don-t-look-up/watch?locale=JP"
     },
     "168259": {
@@ -75144,7 +75182,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/168259-furious-7/watch?locale=JP"
     },
     "1630409": {
@@ -75176,8 +75214,8 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
-      "source_url": "https://www.themoviedb.org/movie/1630409/watch?locale=JP"
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1630409-khnedueodthwngaekhn/watch?locale=JP"
     },
     "812225": {
       "title": "映画 ブラッククローバー 魔法帝の剣",
@@ -75208,8 +75246,8 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
-      "source_url": "https://www.themoviedb.org/movie/812225/watch?locale=JP"
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/812225-ying-hua-buratkukuroba-mo-fa-di-no-jian/watch?locale=JP"
     },
     "829560": {
       "title": "愛は、新たな日々へ",
@@ -75240,7 +75278,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/829560-kolejne-365-dni/watch?locale=JP"
     },
     "11220": {
@@ -75331,7 +75369,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/333484-the-magnificent-seven/watch?locale=JP"
     },
     "635302": {
@@ -75385,8 +75423,8 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
-      "source_url": "https://www.themoviedb.org/movie/635302/watch?locale=JP"
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/635302-ju-chang-ban-gui-mie-no-ren-wu-xian-lie-che-bian/watch?locale=JP"
     },
     "9737": {
       "title": "バッドボーイズ",
@@ -75514,7 +75552,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1380291-tom-clancy-s-jack-ryan-ghost-war/watch?locale=JP"
     },
     "146233": {
@@ -75683,7 +75721,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/359724-ford-v-ferrari/watch?locale=JP"
     },
     "6477": {
@@ -75813,7 +75851,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/318846-the-big-short/watch?locale=JP"
     },
     "593643": {
@@ -75856,7 +75894,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/593643-the-menu/watch?locale=JP"
     },
     "567609": {
@@ -75899,7 +75937,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/567609-ready-or-not/watch?locale=JP"
     },
     "1895": {
@@ -75985,7 +76023,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/447273-snow-white/watch?locale=JP"
     },
     "568124": {
@@ -76028,7 +76066,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/568124-encanto/watch?locale=JP"
     },
     "508947": {
@@ -76063,7 +76101,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/508947-turning-red/watch?locale=JP"
     },
     "2109": {
@@ -76220,7 +76258,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/696506-mickey-17/watch?locale=JP"
     },
     "2501": {
@@ -76318,7 +76356,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/351286-jurassic-world-fallen-kingdom/watch?locale=JP"
     },
     "588228": {
@@ -76356,7 +76394,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/588228-the-tomorrow-war/watch?locale=JP"
     },
     "297762": {
@@ -76405,7 +76443,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/297762-wonder-woman/watch?locale=JP"
     },
     "799583": {
@@ -76451,7 +76489,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/799583-the-ministry-of-ungentlemanly-warfare/watch?locale=JP"
     },
     "1949": {
@@ -76601,7 +76639,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/454626-sonic-the-hedgehog/watch?locale=JP"
     },
     "447332": {
@@ -76653,7 +76691,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/447332-a-quiet-place/watch?locale=JP"
     },
     "1159559": {
@@ -76690,7 +76728,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1159559-scream-7/watch?locale=JP"
     },
     "1168190": {
@@ -76736,7 +76774,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1168190-the-wrecking-crew/watch?locale=JP"
     },
     "1823861": {
@@ -76763,7 +76801,7 @@
       "ads": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1102883/watch",
       "poster_checked_at": "2026-11-12T19:00:17.978901+00:00",
       "poster": "https://image.tmdb.org/t/p/w500/uVcsN3yoHh7ZcJ6ecj1FJfv7dLa.jpg",
@@ -76778,7 +76816,7 @@
       "ads": [],
       "rent": [],
       "buy": [],
-      "checked_at": "2026-11-12T18:58:33.947642+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1452168/watch",
       "poster_checked_at": "2026-11-12T19:00:17.978901+00:00",
       "poster": "https://image.tmdb.org/t/p/w500/bcyGYWfcXr0GnXewaE5gkvYy1iQ.jpg",
@@ -76836,7 +76874,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/974576-conclave/watch?locale=JP"
     },
     "746036": {
@@ -76884,7 +76922,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/746036-the-fall-guy/watch?locale=JP"
     },
     "254128": {
@@ -76939,7 +76977,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/254128-san-andreas/watch?locale=JP"
     },
     "698687": {
@@ -76985,7 +77023,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/698687-transformers-one/watch?locale=JP"
     },
     "316727": {
@@ -77040,7 +77078,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/316727-the-purge-election-year/watch?locale=JP"
     },
     "11088": {
@@ -77072,7 +77110,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/11088-heist/watch?locale=JP"
     },
     "568160": {
@@ -77124,8 +77162,8 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
-      "source_url": "https://www.themoviedb.org/movie/568160/watch?locale=JP"
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/568160-tian-qi-no-zi/watch?locale=JP"
     },
     "11104": {
       "title": "恋する惑星",
@@ -77163,8 +77201,8 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
-      "source_url": "https://www.themoviedb.org/movie/11104/watch?locale=JP"
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/11104-zhong-qing-sen-lin/watch?locale=JP"
     },
     "15767": {
       "title": "ゴジラ ファイナルウォーズ",
@@ -77221,8 +77259,8 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
-      "source_url": "https://www.themoviedb.org/movie/15767/watch?locale=JP"
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/15767-gojira-fuainaruuozu/watch?locale=JP"
     },
     "299054": {
       "title": "エクスペンダブルズ ニューブラッド",
@@ -77277,7 +77315,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/299054-expend4bles/watch?locale=JP"
     },
     "882569": {
@@ -77338,7 +77376,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/882569-guy-ritchie-s-the-covenant/watch?locale=JP"
     },
     "675353": {
@@ -77393,7 +77431,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/675353-sonic-the-hedgehog-2/watch?locale=JP"
     },
     "512195": {
@@ -77425,7 +77463,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/512195-red-notice/watch?locale=JP"
     },
     "949838": {
@@ -77457,7 +77495,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/949838-72-hours/watch?locale=JP"
     },
     "1226578": {
@@ -77513,7 +77551,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1226578-longlegs/watch?locale=JP"
     },
     "273477": {
@@ -77562,7 +77600,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/273477-scouts-guide-to-the-zombie-apocalypse/watch?locale=JP"
     },
     "1685882": {
@@ -77594,8 +77632,8 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
-      "source_url": "https://www.themoviedb.org/movie/1685882/watch?locale=JP"
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1685882-mot-rattiri/watch?locale=JP"
     },
     "163": {
       "title": "オーシャンズ12",
@@ -77649,7 +77687,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/163-ocean-s-twelve/watch?locale=JP"
     },
     "337339": {
@@ -77707,7 +77745,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/337339-the-fate-of-the-furious/watch?locale=JP"
     },
     "620": {
@@ -77762,7 +77800,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/620-ghostbusters/watch?locale=JP"
     },
     "930094": {
@@ -77794,7 +77832,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/930094-red-white-royal-blue/watch?locale=JP"
     },
     "1585": {
@@ -77843,7 +77881,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1585-it-s-a-wonderful-life/watch?locale=JP"
     },
     "74": {
@@ -77895,7 +77933,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/74-war-of-the-worlds/watch?locale=JP"
     },
     "615457": {
@@ -77944,7 +77982,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/615457-nobody/watch?locale=JP"
     },
     "1091": {
@@ -77987,7 +78025,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1091-the-thing/watch?locale=JP"
     },
     "436969": {
@@ -78033,7 +78071,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/436969-the-suicide-squad/watch?locale=JP"
     },
     "49521": {
@@ -78082,7 +78120,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/49521-man-of-steel/watch?locale=JP"
     },
     "637": {
@@ -78125,7 +78163,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/637-la-vita-e-bella/watch?locale=JP"
     },
     "426063": {
@@ -78173,7 +78211,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/426063-nosferatu/watch?locale=JP"
     },
     "1011477": {
@@ -78221,7 +78259,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1011477-karate-kid-legends/watch?locale=JP"
     },
     "420818": {
@@ -78264,7 +78302,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/420818-the-lion-king/watch?locale=JP"
     },
     "653346": {
@@ -78313,7 +78351,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/653346-kingdom-of-the-planet-of-the-apes/watch?locale=JP"
     },
     "1022787": {
@@ -78356,7 +78394,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1022787-elio/watch?locale=JP"
     },
     "102651": {
@@ -78399,7 +78437,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/102651-maleficent/watch?locale=JP"
     },
     "37135": {
@@ -78442,7 +78480,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/37135-tarzan/watch?locale=JP"
     },
     "260513": {
@@ -78485,7 +78523,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/260513-incredibles-2/watch?locale=JP"
     },
     "533533": {
@@ -78528,7 +78566,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/533533-tron-ares/watch?locale=JP"
     },
     "974262": {
@@ -78557,7 +78595,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/974262-descendants-the-rise-of-red/watch?locale=JP"
     },
     "762509": {
@@ -78600,7 +78638,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/762509-mufasa-the-lion-king/watch?locale=JP"
     },
     "95": {
@@ -78646,7 +78684,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/95-armageddon/watch?locale=JP"
     },
     "9820": {
@@ -78689,7 +78727,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/9820-the-parent-trap/watch?locale=JP"
     },
     "70981": {
@@ -78732,7 +78770,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/70981-prometheus/watch?locale=JP"
     },
     "609681": {
@@ -78775,7 +78813,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/609681-the-marvels/watch?locale=JP"
     },
     "316029": {
@@ -78824,7 +78862,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/316029-the-greatest-showman/watch?locale=JP"
     },
     "766507": {
@@ -78853,7 +78891,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/766507-prey/watch?locale=JP"
     },
     "337404": {
@@ -78896,7 +78934,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/337404-cruella/watch?locale=JP"
     },
     "1271": {
@@ -78945,7 +78983,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1271-300/watch?locale=JP"
     },
     "591": {
@@ -78997,7 +79035,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/591-the-da-vinci-code/watch?locale=JP"
     },
     "76": {
@@ -79052,7 +79090,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/76-before-sunrise/watch?locale=JP"
     },
     "329": {
@@ -79104,7 +79142,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/329-jurassic-park/watch?locale=JP"
     },
     "4922": {
@@ -79153,7 +79191,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/4922-the-curious-case-of-benjamin-button/watch?locale=JP"
     },
     "353081": {
@@ -79205,7 +79243,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/353081-mission-impossible-fallout/watch?locale=JP"
     },
     "917496": {
@@ -79261,7 +79299,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/917496-beetlejuice-beetlejuice/watch?locale=JP"
     },
     "1084199": {
@@ -79317,7 +79355,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1084199-companion/watch?locale=JP"
     },
     "13207": {
@@ -79363,7 +79401,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/13207-friday-the-13th/watch?locale=JP"
     },
     "180": {
@@ -79415,7 +79453,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/180-minority-report/watch?locale=JP"
     },
     "370663": {
@@ -79455,7 +79493,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/370663-below-her-mouth/watch?locale=JP"
     },
     "7131": {
@@ -79498,7 +79536,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/7131-van-helsing/watch?locale=JP"
     },
     "1323244": {
@@ -79507,9 +79545,12 @@
       "free": [],
       "ads": [],
       "rent": [
+        "Apple TV Store",
         "FOD"
       ],
-      "buy": [],
+      "buy": [
+        "Apple TV Store"
+      ],
       "services": [],
       "poster": "https://image.tmdb.org/t/p/w500/oLld47ZT1I3iecM3OWhIphohQUJ.jpg",
       "poster_source": "TMDB Japan provider discovery",
@@ -79523,9 +79564,22 @@
             "FOD"
           ],
           "buy": []
+        },
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
         }
       ],
-      "checked_at": "2026-11-12T23:40:21.022545+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1323244-rage-of-stars/watch?locale=JP"
     },
     "1419036": {
@@ -79557,8 +79611,8 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
-      "source_url": "https://www.themoviedb.org/movie/1419036/watch?locale=JP"
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1419036-kruesda-pharaaids/watch?locale=JP"
     },
     "505026": {
       "title": "ナイル殺人事件",
@@ -79612,7 +79666,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/505026-death-on-the-nile/watch?locale=JP"
     },
     "454640": {
@@ -79664,7 +79718,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/454640-the-angry-birds-movie-2/watch?locale=JP"
     },
     "460465": {
@@ -79719,7 +79773,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/460465-mortal-kombat/watch?locale=JP"
     },
     "594": {
@@ -79777,13 +79831,14 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/594-the-terminal/watch?locale=JP"
     },
     "578701": {
       "title": "モンタナの目撃者",
       "flatrate": [
         "HBO Max on U-Next",
+        "Hulu",
         "Netflix",
         "Netflix Standard with Ads",
         "U-NEXT"
@@ -79801,6 +79856,7 @@
       ],
       "services": [
         "HBO Max on U-Next",
+        "Hulu",
         "Netflix",
         "Netflix Standard with Ads",
         "U-NEXT"
@@ -79827,9 +79883,30 @@
             "Amazon Video",
             "Apple TV Store"
           ]
+        },
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/578701-those-who-wish-me-dead/watch?locale=JP"
     },
     "496450": {
@@ -79861,7 +79938,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/496450-miraculous-le-film/watch?locale=JP"
     },
     "15512": {
@@ -79907,7 +79984,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/15512-monsters-vs-aliens/watch?locale=JP"
     },
     "398978": {
@@ -79939,7 +80016,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/398978-the-irishman/watch?locale=JP"
     },
     "916224": {
@@ -79991,7 +80068,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/916224-suzumeno-hu-di-mari/watch?locale=JP"
     },
     "762975": {
@@ -80023,7 +80100,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/762975-purple-hearts/watch?locale=JP"
     },
     "268896": {
@@ -80072,7 +80149,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/268896-pacific-rim-uprising/watch?locale=JP"
     },
     "748783": {
@@ -80118,7 +80195,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/748783-the-garfield-movie/watch?locale=JP"
     },
     "298618": {
@@ -80171,7 +80248,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/298618-the-flash/watch?locale=JP"
     },
     "254": {
@@ -80220,7 +80297,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/254-king-kong/watch?locale=JP"
     },
     "500": {
@@ -80269,7 +80346,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/500-reservoir-dogs/watch?locale=JP"
     },
     "392044": {
@@ -80318,7 +80395,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/392044-murder-on-the-orient-express/watch?locale=JP"
     },
     "1402": {
@@ -80364,7 +80441,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1402-the-pursuit-of-happyness/watch?locale=JP"
     },
     "10625": {
@@ -80407,7 +80484,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/10625-mean-girls/watch?locale=JP"
     },
     "953": {
@@ -80450,7 +80527,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/953-madagascar/watch?locale=JP"
     },
     "561": {
@@ -80499,7 +80576,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/561-constantine/watch?locale=JP"
     },
     "343668": {
@@ -80551,7 +80628,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/343668-kingsman-the-golden-circle/watch?locale=JP"
     },
     "320288": {
@@ -80594,7 +80671,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/320288-dark-phoenix/watch?locale=JP"
     },
     "10591": {
@@ -80633,7 +80710,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/10591-the-girl-next-door/watch?locale=JP"
     },
     "676": {
@@ -80676,7 +80753,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/676-pearl-harbor/watch?locale=JP"
     },
     "35": {
@@ -80719,7 +80796,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/35-the-simpsons-movie/watch?locale=JP"
     },
     "2048": {
@@ -80762,7 +80839,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/2048-i-robot/watch?locale=JP"
     },
     "1572": {
@@ -80811,7 +80888,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1572-die-hard-with-a-vengeance/watch?locale=JP"
     },
     "420817": {
@@ -80854,7 +80931,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/420817-aladdin/watch?locale=JP"
     },
     "871": {
@@ -80897,7 +80974,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/871-planet-of-the-apes/watch?locale=JP"
     },
     "1637": {
@@ -80946,7 +81023,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1637-speed/watch?locale=JP"
     },
     "330459": {
@@ -80989,7 +81066,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/330459-rogue-one-a-star-wars-story/watch?locale=JP"
     },
     "9714": {
@@ -81032,7 +81109,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/9714-home-alone-3/watch?locale=JP"
     },
     "12092": {
@@ -81075,7 +81152,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/12092-alice-in-wonderland/watch?locale=JP"
     },
     "290859": {
@@ -81124,7 +81201,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/290859-terminator-dark-fate/watch?locale=JP"
     },
     "616": {
@@ -81179,7 +81256,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/616-the-last-samurai/watch?locale=JP"
     },
     "268": {
@@ -81228,7 +81305,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/268-batman/watch?locale=JP"
     },
     "520763": {
@@ -81280,7 +81357,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/520763-a-quiet-place-part-ii/watch?locale=JP"
     },
     "270303": {
@@ -81320,7 +81397,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/270303-it-follows/watch?locale=JP"
     },
     "9532": {
@@ -81375,7 +81452,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/9532-final-destination/watch?locale=JP"
     },
     "109439": {
@@ -81424,7 +81501,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/109439-the-hangover-part-iii/watch?locale=JP"
     },
     "425909": {
@@ -81432,7 +81509,8 @@
       "flatrate": [
         "Amazon Prime Video with Ads",
         "Hulu",
-        "Prime Video"
+        "Prime Video",
+        "Sony Pictures Core Amazon Channel"
       ],
       "free": [],
       "ads": [],
@@ -81448,7 +81526,8 @@
       "services": [
         "Amazon Prime Video with Ads",
         "Hulu",
-        "Prime Video"
+        "Prime Video",
+        "Sony Pictures Core Amazon Channel"
       ],
       "poster": "https://image.tmdb.org/t/p/w500/xam0gbIx6wh88BJ1d7kMk52fzs8.jpg",
       "poster_source": "TMDB Japan provider discovery",
@@ -81471,9 +81550,29 @@
             "Amazon Video",
             "Apple TV Store"
           ]
+        },
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Hulu",
+            "Prime Video",
+            "Sony Pictures Core Amazon Channel"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/425909-ghostbusters-afterlife/watch?locale=JP"
     },
     "50014": {
@@ -81519,7 +81618,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/50014-the-help/watch?locale=JP"
     },
     "400155": {
@@ -81568,7 +81667,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/400155-hotel-transylvania-3-summer-vacation/watch?locale=JP"
     },
     "345940": {
@@ -81623,7 +81722,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/345940-the-meg/watch?locale=JP"
     },
     "419430": {
@@ -81666,7 +81765,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/419430-get-out/watch?locale=JP"
     },
     "269955": {
@@ -81709,7 +81808,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/269955-inganjungdog/watch?locale=JP"
     },
     "860278": {
@@ -81741,7 +81840,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/860278-stephen-curry-underrated/watch?locale=JP"
     },
     "869025": {
@@ -81773,7 +81872,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-13T20:50:53.885506+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/869025-raymond-ray/watch?locale=JP"
     },
     "1824798": {
@@ -81852,7 +81951,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/20662-robin-hood/watch?locale=JP"
     },
     "1512493": {
@@ -81942,7 +82041,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/8961-bad-boys-ii/watch?locale=JP"
     },
     "508965": {
@@ -82020,7 +82119,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/50546-just-go-with-it/watch?locale=JP"
     },
     "19404": {
@@ -82052,7 +82151,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/19404-dilvale-dulhniya-le-jayemge/watch?locale=JP"
     },
     "670292": {
@@ -82237,7 +82336,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/9476-a-knight-s-tale/watch?locale=JP"
     },
     "338970": {
@@ -82480,7 +82579,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1735-the-mummy-tomb-of-the-dragon-emperor/watch?locale=JP"
     },
     "559969": {
@@ -82917,7 +83016,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1368-first-blood/watch?locale=JP"
     },
     "667538": {
@@ -83008,7 +83107,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/9880-the-princess-diaries/watch?locale=JP"
     },
     "476669": {
@@ -83099,7 +83198,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/13053-bolt/watch?locale=JP"
     },
     "1894": {
@@ -83142,7 +83241,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1894-star-wars-episode-ii-attack-of-the-clones/watch?locale=JP"
     },
     "32657": {
@@ -83191,7 +83290,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/32657-percy-jackson-the-olympians-the-lightning-thief/watch?locale=JP"
     },
     "294254": {
@@ -83283,7 +83382,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1573-die-hard-2/watch?locale=JP"
     },
     "563": {
@@ -83326,7 +83425,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/563-starship-troopers/watch?locale=JP"
     },
     "20526": {
@@ -83369,7 +83468,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/20526-tron-legacy/watch?locale=JP"
     },
     "2059": {
@@ -83412,7 +83511,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/2059-national-treasure/watch?locale=JP"
     },
     "283366": {
@@ -83498,7 +83597,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/10545-the-hunchback-of-notre-dame/watch?locale=JP"
     },
     "82675": {
@@ -83590,7 +83689,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/10882-sleeping-beauty/watch?locale=JP"
     },
     "527774": {
@@ -83728,7 +83827,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/9802-the-rock/watch?locale=JP"
     },
     "36647": {
@@ -83771,7 +83870,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/36647-blade/watch?locale=JP"
     },
     "190859": {
@@ -83913,7 +84012,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/605-the-matrix-revolutions/watch?locale=JP"
     },
     "1924": {
@@ -83960,7 +84059,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/1924-superman/watch?locale=JP"
     },
     "8358": {
@@ -84012,7 +84111,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/8358-cast-away/watch?locale=JP"
     },
     "262500": {
@@ -84105,7 +84204,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/296-terminator-3-rise-of-the-machines/watch?locale=JP"
     },
     "804": {
@@ -84161,7 +84260,7 @@
           ]
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/804-roman-holiday/watch?locale=JP"
     },
     "75780": {
@@ -84342,7 +84441,7 @@
           "buy": []
         }
       ],
-      "checked_at": "2026-11-14T00:49:58.788641+00:00",
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
       "source_url": "https://www.themoviedb.org/movie/51940-happy-new-year-charlie-brown/watch?locale=JP"
     },
     "25538": {
@@ -167872,10 +167971,1732 @@
       "poster_checked_at": "2026-11-20T00:40:54.746952+00:00",
       "poster": "https://image.tmdb.org/t/p/w500/xE5tY3lppZUyG7WKKThsuYHuAHr.jpg",
       "poster_source": "TMDB movie details"
+    },
+    "17165": {
+      "title": "劇場版 BLEACH Fade to Black 君の名を呼ぶ",
+      "flatrate": [
+        "Anime Times Amazon Channel",
+        "FOD",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "U-NEXT",
+        "dAnime Amazon Channel"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Anime Times Amazon Channel",
+        "FOD",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "U-NEXT",
+        "dAnime Amazon Channel"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/14VhFcofaLd1tKJ6831jf8i3mLO.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Anime Times Amazon Channel",
+            "FOD",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "U-NEXT",
+            "dAnime Amazon Channel"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/17165-bleach-fade-to-black/watch?locale=JP"
+    },
+    "1239146": {
+      "title": "ウッディー・ウッドペッカー サマーキャンプ",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/6hw6zvAsBSMyDxnk68XPpjZZyvz.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1239146-woody-woodpecker-goes-to-camp/watch?locale=JP"
+    },
+    "353577": {
+      "title": "カレとカノジョの確率／一目で恋に落ちる確率",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/vCMGlarDrcmhclBmnYoH7JUCDuA.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/353577-love-at-first-sight/watch?locale=JP"
+    },
+    "39465": {
+      "title": "ゴジラvsモスラ",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/53T0H0ODcXlx7U8vptnITyXTBxV.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/39465-vs/watch?locale=JP"
+    },
+    "1596335": {
+      "title": "The AI Doc: Or How I Became an Apocaloptimist",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/A610QT1gWjhJ1dJrXP9qMm4JMLr.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1596335-the-ai-doc-or-how-i-became-an-apocaloptimist/watch?locale=JP"
+    },
+    "268920": {
+      "title": "キューティ・コップ",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/lobNOBHuJQCP9ZYAf86MBMwRrmZ.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/268920-hot-pursuit/watch?locale=JP"
+    },
+    "556803": {
+      "title": "スイッチング・プリンセス",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/A8XgZE8CsHiYN243MEd07GLCep.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/556803-the-princess-switch/watch?locale=JP"
+    },
+    "736769": {
+      "title": "ゼイ・クローン・タイローン/俺たちクローン",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/hnzXoDaK346U4ByfvQenu2DZnTg.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/736769-they-cloned-tyrone/watch?locale=JP"
+    },
+    "47854": {
+      "title": "レジェンド・オブ・フィスト 怒りの鉄拳",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/mru0tysp3eWHJ4p4pAs9ubTfeMy.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/47854-jing-wu-feng-yun/watch?locale=JP"
+    },
+    "1118224": {
+      "title": "மகாராஜா",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/s0m4TM1XRAftQStgKpw024RvkJo.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1118224-mkaraja/watch?locale=JP"
+    },
+    "1484913": {
+      "title": "इक्का",
+      "flatrate": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Netflix",
+        "Netflix Standard with Ads"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/fp5EAKE8nTx402n1fWz55QsuYY9.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Netflix",
+            "Netflix Standard with Ads"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1484913-ikka/watch?locale=JP"
+    },
+    "1155828": {
+      "title": "シンシン SING SING",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/qSLWReXQyqUT5zRpCm6bv2Oj18y.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1155828-sing-sing/watch?locale=JP"
+    },
+    "502033": {
+      "title": "サウンド・オブ・メタル ～聞こえるということ～",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/5TQQuDis4fhUJz0qTQDTNULZd4F.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/502033-sound-of-metal/watch?locale=JP"
+    },
+    "10065": {
+      "title": "悪魔の棲む家",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/4D246dpe7yy2GvHI2IbpeqkUXry.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/10065-the-amityville-horror/watch?locale=JP"
+    },
+    "1580": {
+      "title": "ロープ",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/9ar6rxLDB8kagAnXZKn6h9smscr.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1580-rope/watch?locale=JP"
+    },
+    "16296": {
+      "title": "キラークラウン",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/lHdAk5T42ofyi3NTjmrdyR7xPmY.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/16296-killer-klowns-from-outer-space/watch?locale=JP"
+    },
+    "376865": {
+      "title": "ハイ・ライフ",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/aHGtgKkZTCUxRRuNLlXujf14KGG.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/376865-high-life/watch?locale=JP"
+    },
+    "132363": {
+      "title": "大統領の執事の涙",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/pAi8Bl3ZKX6pANPVhNwbhbQANop.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/132363-the-butler/watch?locale=JP"
+    },
+    "50544": {
+      "title": "ステイ・フレンズ",
+      "flatrate": [
+        "Sony Pictures Core Amazon Channel",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Sony Pictures Core Amazon Channel",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/5gLrTBVod3meTGvpM03AvZZEyDh.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Sony Pictures Core Amazon Channel",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/50544-friends-with-benefits/watch?locale=JP"
+    },
+    "44826": {
+      "title": "ヒューゴの不思議な発明",
+      "flatrate": [
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/scJFexuRd4aXXWidomZFOdxrBWn.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/44826-hugo/watch?locale=JP"
+    },
+    "112336": {
+      "title": "ヒッチコック",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/bm7OJ4bqdcVOfZzX4X7snMYRj7p.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/112336-hitchcock/watch?locale=JP"
+    },
+    "34205": {
+      "title": "ハロウィーンタウン2 カラバーの復讐を視聴",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/uDnp52aGXxnfU4vqnnc6YpfzjHb.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/34205-halloweentown-ii-kalabar-s-revenge/watch?locale=JP"
+    },
+    "13761": {
+      "title": "ポカホンタスⅡ／イングランドへの旅立ち",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/rA0DONGoSTn9FpU9xZIuSh0ZjY.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/13761-pocahontas-ii-journey-to-a-new-world/watch?locale=JP"
+    },
+    "113947": {
+      "title": "セッションズ",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Apple TV Store"
+      ],
+      "buy": [
+        "Apple TV Store"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/5Njn6LpV1rHnqe1y6jtxLKdGInw.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/113947-the-sessions/watch?locale=JP"
+    },
+    "9849": {
+      "title": "My Favorite Martian",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/pOp4xriDEFUy2uN0BfnHJcjzqWt.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/9849-my-favorite-martian/watch?locale=JP"
+    },
+    "13706": {
+      "title": "くまのプーさん／みんなのクリスマス",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/yWvIoXAqzK1obxG2Lv87Eoa7tQk.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/13706-winnie-the-pooh-a-very-merry-pooh-year/watch?locale=JP"
+    },
+    "81250": {
+      "title": "イケてる私とサエない僕",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/xweQBQSYQyHKiUxN1nCDQbLvJE0.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/81250-geek-charming/watch?locale=JP"
+    },
+    "34560": {
+      "title": "ハロウィーンタウン3 カーニバルは大騒動",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/dJsmptwkTWbxk1NwLAKeoYtcTuJ.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/34560-halloweentown-high/watch?locale=JP"
+    },
+    "47166": {
+      "title": "Ferdinand the Bull",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/u9VJv0kT6X0m2oVJQ6RWftM5sSy.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/47166-ferdinand-the-bull/watch?locale=JP"
+    },
+    "21845": {
+      "title": "がんばれ!ルーキー",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/lEMN2pUZDTpoe4HUd0y83qnKcoC.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/21845-rookie-of-the-year/watch?locale=JP"
+    },
+    "81440": {
+      "title": "Good Luck Charlie, It's Christmas!",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/ecuJMYZM3HQ96mnWtmyXoHb7s7T.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/81440-good-luck-charlie-it-s-christmas/watch?locale=JP"
+    },
+    "74534": {
+      "title": "マリーゴールド・ホテルで会いましょう",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/gwYEKvRuNZ1EKLKF8PKvxa8DEA3.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/74534-the-best-exotic-marigold-hotel/watch?locale=JP"
+    },
+    "178682": {
+      "title": "The Wizards Return: Alex vs. Alex",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/iWL88DymJrzO6hYI1ykUeUohqef.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/178682-the-wizards-return-alex-vs-alex/watch?locale=JP"
+    },
+    "1355755": {
+      "title": "クリスマスはすぐそこに",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/w6nC5XBlIxmczhfIhivvlMxSEx2.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1355755-an-almost-christmas-story/watch?locale=JP"
+    },
+    "1304800": {
+      "title": "「ライオン・キング」コンサート IN ハリウッド・ボウル",
+      "flatrate": [
+        "Disney+"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Disney+"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/1xJqSPKxOsOXesXpTo0Sh2luD4t.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Disney+"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1304800-the-lion-king-at-the-hollywood-bowl/watch?locale=JP"
+    },
+    "10648": {
+      "title": "ダーティハリー2",
+      "flatrate": [
+        "HBO Max on U-Next",
+        "Hulu",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "HBO Max on U-Next",
+        "Hulu",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/cjz8hjD9wEaUcouFIb3WfztyJca.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "HBO Max on U-Next",
+            "Hulu",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/10648-magnum-force/watch?locale=JP"
+    },
+    "42684": {
+      "title": "スカイライン－征服－",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/lTwXLSO4bzUcI858MlpijnoW9Pq.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Hulu",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/42684-skyline/watch?locale=JP"
+    },
+    "37280": {
+      "title": "クレヨンしんちゃん 嵐を呼ぶ モーレツ！オトナ帝国の逆襲",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/dUBxeDBAtr8kSIDDPD86aWqmHFr.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/37280-kureyonshinchiyan-lan-o-hu-bu-moretsu-otona-di-guo-no-ni-xi/watch?locale=JP"
+    },
+    "158445": {
+      "title": "７番房の奇跡",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "Hulu",
+        "Prime Video",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/2wUqVohCk5SYn5AfjSYcozD5mwe.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "Hulu",
+            "Prime Video",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/158445-7beonbangui-seonmul/watch?locale=JP"
+    },
+    "842934": {
+      "title": "ポーカーフェイス 裏切りのカード",
+      "flatrate": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "FOD Channel Amazon Channel",
+        "Hulu",
+        "Prime Video"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [
+        "Amazon Prime Video with Ads",
+        "FOD",
+        "FOD Channel Amazon Channel",
+        "Hulu",
+        "Prime Video"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/b2ZeudAr29lSL7pLmjvLtepFVXS.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Amazon Prime Video with Ads",
+            "FOD",
+            "FOD Channel Amazon Channel",
+            "Hulu",
+            "Prime Video"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/842934-poker-face/watch?locale=JP"
+    },
+    "575222": {
+      "title": "映画ドラえもん のび太の月面探査記",
+      "flatrate": [
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "U-NEXT"
+      ],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "services": [
+        "Hulu",
+        "Netflix",
+        "Netflix Standard with Ads",
+        "U-NEXT"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/9iHINcxTdknFzdaQ3qfqKZvQGLX.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [
+            "Hulu",
+            "Netflix",
+            "Netflix Standard with Ads",
+            "U-NEXT"
+          ],
+          "free": [],
+          "ads": [],
+          "rent": [],
+          "buy": []
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/575222-ying-hua-doraemon-nobi-tai-no-yue-mian-tan-zha-ji/watch?locale=JP"
+    },
+    "274857": {
+      "title": "キング・アーサー",
+      "flatrate": [],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [],
+      "poster": "https://image.tmdb.org/t/p/w500/9K3HfQ9Vc2SEa6BPjn8cZ5a0q0Z.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/274857-king-arthur-legend-of-the-sword/watch?locale=JP"
+    },
+    "287903": {
+      "title": "クランプス",
+      "flatrate": [],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [],
+      "poster": "https://image.tmdb.org/t/p/w500/sAolMRD9rFSTU7tssfFuLEJJa7w.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/287903-krampus/watch?locale=JP"
+    },
+    "762504": {
+      "title": "NOPE／ノープ",
+      "flatrate": [],
+      "free": [],
+      "ads": [],
+      "rent": [
+        "Amazon Video",
+        "Apple TV Store",
+        "FOD"
+      ],
+      "buy": [
+        "Amazon Video",
+        "Apple TV Store"
+      ],
+      "services": [],
+      "poster": "https://image.tmdb.org/t/p/w500/nZAq1443q08FZEGCl4atvnx4IFU.jpg",
+      "poster_source": "TMDB Japan provider discovery",
+      "changes": [
+        {
+          "observed_at": "2026-11-21T00:01:30.471630+00:00",
+          "flatrate": [],
+          "free": [],
+          "ads": [],
+          "rent": [
+            "Amazon Video",
+            "Apple TV Store",
+            "FOD"
+          ],
+          "buy": [
+            "Amazon Video",
+            "Apple TV Store"
+          ]
+        }
+      ],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/762504-nope/watch?locale=JP"
+    },
+    "1088140": {
+      "title": "那張照片裡的我們",
+      "changes": [],
+      "services": [],
+      "flatrate": [],
+      "free": [],
+      "ads": [],
+      "rent": [],
+      "buy": [],
+      "checked_at": "2026-11-21T00:01:30.471630+00:00",
+      "source_url": "https://www.themoviedb.org/movie/1088140/watch",
+      "poster_checked_at": "2026-11-21T00:03:05.146625+00:00",
+      "poster": "https://image.tmdb.org/t/p/w500/3QIRaf4yHONrvIwaLwWOOizEnst.jpg",
+      "poster_source": "TMDB movie details"
     }
   },
   "provider_discovery": {
-    "provider_list_checked_at": "2026-11-20T00:39:09.776355+00:00",
+    "provider_list_checked_at": "2026-11-21T00:01:30.555775+00:00",
     "missing_services": [
       "ABEMA",
       "WOWOWオンデマンド",
@@ -167886,45 +169707,45 @@
     "service_pages": {
       "Netflix": {
         "provider_ids": "8|1796",
-        "next_page": 46,
+        "next_page": 47,
         "total_pages": 268,
-        "last_page_at": "2026-11-20T00:39:09.776355+00:00"
+        "last_page_at": "2026-11-21T00:01:30.555775+00:00"
       },
       "Prime Video": {
         "provider_ids": "9|2100",
-        "next_page": 46,
-        "total_pages": 490,
-        "last_page_at": "2026-11-20T00:39:09.776355+00:00"
+        "next_page": 47,
+        "total_pages": 491,
+        "last_page_at": "2026-11-21T00:01:30.555775+00:00"
       },
       "U-NEXT": {
         "provider_ids": "84",
-        "next_page": 46,
-        "total_pages": 513,
-        "last_page_at": "2026-11-20T00:39:09.776355+00:00"
+        "next_page": 47,
+        "total_pages": 514,
+        "last_page_at": "2026-11-21T00:01:30.555775+00:00"
       },
       "Disney+": {
         "provider_ids": "337",
-        "next_page": 46,
+        "next_page": 47,
         "total_pages": 96,
-        "last_page_at": "2026-11-20T00:39:09.776355+00:00"
+        "last_page_at": "2026-11-21T00:01:30.555775+00:00"
       },
       "Hulu": {
         "provider_ids": "15",
-        "next_page": 46,
+        "next_page": 47,
         "total_pages": 298,
-        "last_page_at": "2026-11-20T00:39:09.776355+00:00"
+        "last_page_at": "2026-11-21T00:01:30.555775+00:00"
       },
       "FOD": {
         "provider_ids": "2683",
-        "next_page": 46,
+        "next_page": 47,
         "total_pages": 1001,
-        "last_page_at": "2026-11-20T00:39:09.776355+00:00"
+        "last_page_at": "2026-11-21T00:01:30.555775+00:00"
       },
       "Apple TV+": {
         "provider_ids": "350",
-        "next_page": 5,
+        "next_page": 6,
         "total_pages": 7,
-        "last_page_at": "2026-11-20T00:39:09.776355+00:00"
+        "last_page_at": "2026-11-21T00:01:30.555775+00:00"
       }
     },
     "next_service_index": 0,

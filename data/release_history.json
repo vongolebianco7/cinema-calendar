@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T00:40:57.095643+00:00",
+  "generated_at": "2026-11-21T00:03:06.831006+00:00",
   "note": "出典付きの公開・配信開始・テレビ放映予定の掲載履歴。実際の上映・放映を保証する記録ではありません。",
   "records": [
     {
@@ -22624,6 +22624,19 @@
     },
     {
       "kind": "theatrical",
+      "title": "那張照片裡的我們",
+      "id": 1088140,
+      "original_title": "那張照片裡的我們",
+      "date": "2026-11-20",
+      "service": "劇場公開",
+      "time": null,
+      "program": null,
+      "source": "TMDB JP release dates",
+      "source_url": "https://www.themoviedb.org/movie/1088140",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "theatrical",
       "title": "魔法使いの夜",
       "id": 920167,
       "original_title": "魔法使いの夜",
@@ -22685,6 +22698,45 @@
       "program": "金曜ロードショー",
       "source": "日本テレビ 金曜ロードシネマクラブ",
       "source_url": "https://kinro.ntv.co.jp/lineup/20261120",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "tv",
+      "title": "青春ブタ野郎はおでかけシスターの夢を見ない",
+      "id": 1056803,
+      "original_title": "Rascal Does Not Dream of a Sister Venturing Out",
+      "date": "2026-11-21",
+      "service": "ラブコメアニメ",
+      "time": "04:30",
+      "program": "青春ブタ野郎はおでかけシスターの夢を見ない",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "tv",
+      "title": "青春ブタ野郎はゆめみる少女の夢を見ない",
+      "id": 572154,
+      "original_title": null,
+      "date": "2026-11-21",
+      "service": "ラブコメアニメ",
+      "time": "02:30",
+      "program": "青春ブタ野郎はゆめみる少女の夢を見ない",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
+      "record_type": "掲載した予定日（実施確認なし）"
+    },
+    {
+      "kind": "tv",
+      "title": "青春ブタ野郎はランドセルガールの夢を見ない",
+      "id": 1086591,
+      "original_title": "Rascal Does Not Dream of a Knapsack Kid",
+      "date": "2026-11-21",
+      "service": "ラブコメアニメ",
+      "time": "06:00",
+      "program": "青春ブタ野郎はランドセルガールの夢を見ない",
+      "source": "しょぼいカレンダー公開番組表（映画カテゴリ）",
+      "source_url": "https://cal.syoboi.jp/rss2.php?days=7&alt=json",
       "record_type": "掲載した予定日（実施確認なし）"
     }
   ]

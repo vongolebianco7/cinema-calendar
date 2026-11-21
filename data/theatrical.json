@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T00:36:26.268128+00:00",
+  "generated_at": "2026-11-20T23:58:58.152220+00:00",
   "refresh_policy": {
     "near_term": [
       "2026-10-21",
@@ -23041,6 +23041,36 @@
       "checked_at": "2026-11-20T00:36:26.268128+00:00"
     },
     {
+      "id": 1088140,
+      "title": "那張照片裡的我們",
+      "original_title": "那張照片裡的我們",
+      "date": "2026-11-20",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/3QIRaf4yHONrvIwaLwWOOizEnst.jpg",
+      "score": 5.0,
+      "votes": 1,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1088140",
+      "director": "湯昇榮",
+      "director_id": 2889459,
+      "cast": [
+        "李沐",
+        "정진영",
+        "宋柏緯",
+        "夏靖庭"
+      ],
+      "countries": [
+        "Taiwan"
+      ],
+      "runtime": 126,
+      "genres": [
+        "ロマンス",
+        "履歴"
+      ],
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
+    },
+    {
       "id": 1457866,
       "title": "ザ・ファーザー・ミスアドベンチャー・オブ・クリフ・ブース",
       "original_title": "THE FURTHER MIS-ADVENTURES OF CLIFF BOOTH",
@@ -23615,9 +23645,12 @@
         "中島瑠菜"
       ],
       "countries": [],
-      "runtime": 0,
-      "genres": [],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "runtime": 114,
+      "genres": [
+        "ロマンス",
+        "ドラマ"
+      ],
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1740230,
@@ -23645,7 +23678,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1538497,
@@ -23743,37 +23776,6 @@
       "checked_at": "2026-11-17T01:51:35.947376+00:00"
     },
     {
-      "id": 1078446,
-      "title": "バイオレント・ナイト2",
-      "original_title": "Violent Night 2",
-      "date": "2026-12-04",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/bew9Mt8o1jgijcG5TptQOWMfz0g.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1078446",
-      "director": "Tommy Wirkola",
-      "director_id": 76927,
-      "cast": [
-        "デヴィッド・ハーバー",
-        "クリステン・ベル",
-        "ダニエラ・メルキオール",
-        "ジャレッド・ハリス"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 110,
-      "genres": [
-        "アクション",
-        "コメディ",
-        "ファンタジー"
-      ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
-    },
-    {
       "id": 1827408,
       "title": "彼女にあったら、よろしくと",
       "original_title": "彼女にあったら、よろしくと",
@@ -23831,7 +23833,7 @@
         "コメディ",
         "ロマンス"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1794649,
@@ -23856,7 +23858,7 @@
         "ドキュメンタリー",
         "音楽"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1816698,
@@ -23882,7 +23884,38 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
+    },
+    {
+      "id": 1078446,
+      "title": "バイオレント・ナイト2",
+      "original_title": "Violent Night 2",
+      "date": "2026-12-11",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/bew9Mt8o1jgijcG5TptQOWMfz0g.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/1078446",
+      "director": "トミー・ウィルコラ",
+      "director_id": 76927,
+      "cast": [
+        "デヴィッド・ハーバー",
+        "クリステン・ベル",
+        "ダニエラ・メルキオール",
+        "ジャレッド・ハリス"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 110,
+      "genres": [
+        "アクション",
+        "コメディ",
+        "ファンタジー"
+      ],
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 478798,
@@ -23914,7 +23947,7 @@
         "犯罪",
         "スリラー"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1242332,
@@ -23924,8 +23957,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/bIwQxcZl2CdyhVRNDtQl36YCZVr.jpg",
-      "score": 7.219,
-      "votes": 796,
+      "score": 7.2,
+      "votes": 804,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1242332",
       "director": "Ben Wheatley",
@@ -23945,7 +23978,7 @@
         "犯罪",
         "スリラー"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1759822,
@@ -23973,7 +24006,7 @@
         "スリラー",
         "謎"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1741752,
@@ -24004,7 +24037,7 @@
         "アドベンチャー",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1620525,
@@ -24035,7 +24068,7 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1566920,
@@ -24066,7 +24099,7 @@
         "ドラマ",
         "謎"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1317512,
@@ -24076,8 +24109,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/A3yTrZi1hSGTYcAEqEPXd3FO2sG.jpg",
-      "score": 7.556,
-      "votes": 45,
+      "score": 7.522,
+      "votes": 46,
       "overview": "快活で物怖じしない17歳の女子高生ジュインが主人公。怒りと勢いに任せて口にした言葉がきっかけで校内に騒動を巻き起こし、匿名の手紙が届き始めたことから、彼女の平穏な日常が崩れていく。",
       "tmdb": "https://www.themoviedb.org/movie/1317512",
       "director": "윤가은",
@@ -24096,7 +24129,7 @@
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1785714,
@@ -24125,7 +24158,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1785664,
@@ -24152,7 +24185,7 @@
       "genres": [
         "ロマンス"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1759805,
@@ -24182,7 +24215,7 @@
       "genres": [
         "ドキュメンタリー"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1800641,
@@ -24210,7 +24243,7 @@
         "ドキュメンタリー",
         "音楽"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1170608,
@@ -24241,7 +24274,7 @@
         "サイエンスフィクション",
         "アドベンチャー"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1003596,
@@ -24272,7 +24305,7 @@
         "アクション",
         "アドベンチャー"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1220564,
@@ -24282,8 +24315,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/j4uObYUBht95uiIxGy8VqVmHwet.jpg",
-      "score": 7.1,
-      "votes": 958,
+      "score": 7.129,
+      "votes": 967,
       "overview": "1977 年、軍事政権下のブラジル。カーニバルの喧騒に紛れ、男は再び街へと舞い戻る。過去を消し身分を隠し、抑圧された僅かな自由にすがる人々と猜疑心渦巻くこの国で、「ある目的」を果たすために……。",
       "tmdb": "https://www.themoviedb.org/movie/1220564",
       "director": "クレベール・メンドンサ・フィリオ",
@@ -24307,7 +24340,7 @@
         "ドラマ",
         "犯罪"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1790602,
@@ -24316,7 +24349,7 @@
       "date": "2026-12-18",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/VtUaqFxH8klAznDPUHhX05g117.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/v8m5wCfmr5nFpsSQwN4LvfdP3X6.jpg",
       "score": 0.0,
       "votes": 0,
       "overview": "中学時代は人気者だったイシカワは、進学した高校で周囲にうまくなじめず居場所を失い、いじめの標的となってしまう。持ち前の明るさで逆境を乗り越えようとするイシカワだったが、いじめは止まらず確実に彼の心身をむしばんでいく。やがて彼は、学校最大のイベントである秋の文劇祭で大逆転を果たすべく立ち上がり、周囲を巻き込みながら前向きに突き進んでいく。",
@@ -24332,12 +24365,12 @@
       "countries": [
         "Japan"
       ],
-      "runtime": 0,
+      "runtime": 116,
       "genres": [
         "ドラマ",
         "コメディ"
       ],
-      "checked_at": "2026-11-12T03:25:37.435367+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1094274,
@@ -24347,8 +24380,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/vWigdAG9Q4xrlbcWcBOYkIJZ4sb.jpg",
-      "score": 5.14,
-      "votes": 333,
+      "score": 5.136,
+      "votes": 334,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1094274",
       "director": "カイル・ムーニー",
@@ -24368,7 +24401,7 @@
         "ホラー",
         "コメディ"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1397364,
@@ -24378,8 +24411,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/g8x2zmPvlmYobahJRb7enPDa1ZU.jpg",
-      "score": 7.328,
-      "votes": 470,
+      "score": 7.327,
+      "votes": 471,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1397364",
       "director": "パオロ・ソレンティーノ",
@@ -24397,7 +24430,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1284016,
@@ -24407,7 +24440,7 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/sGgX2K0SJqw90Ju8TONdhDVwlzT.jpg",
-      "score": 7.118,
+      "score": 7.068,
       "votes": 140,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1284016",
@@ -24429,7 +24462,7 @@
         "音楽",
         "ドラマ"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1117898,
@@ -24439,8 +24472,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/ltbl17lqYWdbHfgfsm5BPujOS4f.jpg",
-      "score": 7.2,
-      "votes": 22,
+      "score": 6.8,
+      "votes": 30,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1117898",
       "director": "Erica Rivinoja",
@@ -24463,7 +24496,7 @@
         "ファミリー",
         "コメディ"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1757707,
@@ -24492,7 +24525,7 @@
       "genres": [
         "ホラー"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1657317,
@@ -24520,7 +24553,7 @@
         "謎",
         "アクション"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1621673,
@@ -24551,7 +24584,7 @@
         "音楽",
         "履歴"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1260649,
@@ -24576,13 +24609,13 @@
       "countries": [
         "United States of America"
       ],
-      "runtime": 0,
+      "runtime": 126,
       "genres": [
         "アドベンチャー",
         "コメディ",
         "ファンタジー"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1824798,
@@ -24607,7 +24640,7 @@
       ],
       "runtime": 0,
       "genres": [],
-      "checked_at": "2026-11-13T20:49:07.398189+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1825680,
@@ -24662,7 +24695,7 @@
         "ドキュメンタリー",
         "音楽"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1167307,
@@ -24671,8 +24704,8 @@
       "date": "2027-01-01",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/bESlrLOrsQ9gKzaGQGHXKOyIUtX.jpg",
-      "score": 8.043,
+      "poster": "https://image.tmdb.org/t/p/w500/7lFG1WrCwAxBfyGK8ahlBVzXno7.jpg",
+      "score": 8.053,
       "votes": 209,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/1167307",
@@ -24696,7 +24729,7 @@
         "履歴",
         "アドベンチャー"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 840464,
@@ -24707,7 +24740,7 @@
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/z2tqCJLsw6uEJ8nJV8BsQXGa3dr.jpg",
       "score": 6.4,
-      "votes": 1656,
+      "votes": 1667,
       "overview": "",
       "tmdb": "https://www.themoviedb.org/movie/840464",
       "director": "Ric Roman Waugh",
@@ -24728,7 +24761,7 @@
         "スリラー",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1375646,
@@ -24738,8 +24771,8 @@
       "event": "theatrical",
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/zrYz4XEfT4Rx6Div0wPFfQwyFqK.jpg",
-      "score": 8.2,
-      "votes": 1580,
+      "score": 8.175,
+      "votes": 1626,
       "overview": "ソウル都心の超高層ビル。突如発生した未知のバイオテロにより封鎖され逃げ場なきビルに残されたバイオテクノロジー教授であるクォン・セジョン（チョン・ジヒョン）らは、粘る糸を引きながら猛スピードで襲い来る“未知の感染者たち”が、集団知性を持ち、進化し続けることに気づく。生存者たちはヤツらから逃げ切り、超高層ビルから脱出することが出来るのかー──？",
       "tmdb": "https://www.themoviedb.org/movie/1375646",
       "director": "ヨン・サンホ",
@@ -24759,7 +24792,7 @@
         "アクション",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1481955,
@@ -24770,7 +24803,7 @@
       "service": "劇場公開",
       "poster": "https://image.tmdb.org/t/p/w500/ryCanTADyAo7bqRr1aca2ThuTeE.jpg",
       "score": 7.2,
-      "votes": 12,
+      "votes": 13,
       "overview": "光の届かない場所で生まれた歌声が、台湾全土をやさしく包み込んだ──。 女子刑務所で誕生した女児を大切に育てる母親と、辛い過去を抱えた4人の受刑者たち。 しかし、娘に“失明の危機”が迫り、「最後に最高の思い出を！」と合唱団を結成する。 反発を重ねながらも、歌を通して絆を深めていく姿は、世代を超えて人々の心を揺さぶり、",
       "tmdb": "https://www.themoviedb.org/movie/1481955",
       "director": "林孝謙",
@@ -24788,7 +24821,7 @@
       "genres": [
         "ドラマ"
       ],
-      "checked_at": "2026-11-12T18:56:17.831849+00:00"
+      "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
       "id": 1153714,

@@ -26,7 +26,7 @@
 | 作品 | 配信日 | サービス | TMDB映画ID | 公式出典 |
 |---|---|---|---:|---|
 | 5 - 嵐という時間 - | 2026-12-15 | Prime Video | 1761050 | [Prime Video JP公式予告](https://www.youtube.com/watch?v=t0d2CxpElPo) |
-| デッドマンズ・ワイヤー | 2026-12-13 | WOWOWオンデマンド | 1263012 | [WOWOW作品ページ](https://wod.wowow.co.jp/browse/program/207651) |
+| デッドマンズ・ワイヤー | 2026-12-13 | WOWOWオンデマンド | 1263012 | [WOWOW作品ページ](https://wod.wowow.co.jp/program/207651) |
 | シンシン アンド ザ マウス | 2026-12-25 | WOWOWオンデマンド | 1370545 | [WOWOW作品ページ](https://wod.wowow.co.jp/program/207811) |
 
 ## 自動収集の境界

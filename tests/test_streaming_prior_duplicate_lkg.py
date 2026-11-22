@@ -20,7 +20,7 @@ class DuplicatePriorSnapshotTest(unittest.TestCase):
             entry = {
                 "title": "Verified film", "service": "Netflix",
                 "date": "2026-11-05", "event": "streaming",
-                "source_url": "https://example.org/official",
+                "source_url": "https://about.netflix.com/ja/news/official",
                 "tmdb_id": 1234,
             }
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
@@ -42,7 +42,7 @@ class DuplicatePriorSnapshotTest(unittest.TestCase):
             entry = {
                 "title": "Verified film", "service": "Netflix",
                 "date": "2026-11-05", "event": "streaming",
-                "source_url": "https://example.org/official",
+                "source_url": "https://about.netflix.com/ja/news/official",
                 "tmdb_id": 1234,
             }
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")

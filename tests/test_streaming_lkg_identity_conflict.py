@@ -25,7 +25,7 @@ class PriorIdentityConflictTest(unittest.TestCase):
             output.write_bytes(original)
             incoming = {"period": "2026-11", "movies": [{
                 "title": "Example Movie", "service": "Netflix", "date": "2026-11-05",
-                "event": "streaming", "source_url": "https://example.org/official",
+                "event": "streaming", "source_url": "https://about.netflix.com/ja/news/official",
                 "tmdb_id": 456, "poster_path": "/wrong.jpg"
             }]}
             source.write_text(json.dumps(incoming), encoding="utf-8")
@@ -44,7 +44,7 @@ class PriorIdentityConflictTest(unittest.TestCase):
             }]}), encoding="utf-8")
             source.write_text(json.dumps({"period": "2026-11", "movies": [{
                 "title": "Example Movie", "service": "Netflix", "date": "2026-11-05",
-                "event": "streaming", "source_url": "https://example.org/official",
+                "event": "streaming", "source_url": "https://about.netflix.com/ja/news/official",
                 "tmdb_id": 123
             }]}), encoding="utf-8")
             self.assertTrue(module.refresh([source], output))

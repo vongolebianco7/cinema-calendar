@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "ac66f62a718a9a0a12a0f8675de3b3813680c048",
-  "verified_at": "2026-11-22T13:42:27Z",
-  "note": "Exact-source CI receipt for PR #887 tested head ac66f62a718a9a0a12a0f8675de3b3813680c048, executable digest 0cde4c8ca7e0b000b0774e5aede0d91040d97d51b66f4493d2f0a18b8e64c408. The four required PR workflows passed on this exact head: Autonomous quality gate run 45028311839, Validate frontend run 45028311840, Reproducible backend build run 45028311859, and CINELVA smoke tests run 45028311888. The tested source adds one officially announced Netflix Japan movie to the reviewed December supplement and retains its Japan title-page provenance. This receipt-only update does not change the tested source tree; require fresh exact-head CI on the final PR tip before normal merge. Publication acceptance remains pending the automatic official-streaming refresh, public JSON, Vercel READY, and rendered calendar verification."
+  "head_sha": "e9b08ad7823d56011e8885627ee71d2e30a4b936",
+  "verified_at": "2026-11-22T17:06:00Z",
+  "note": "Exact-source CI receipt for PR #888 tested head e9b08ad7823d56011e8885627ee71d2e30a4b936, executable digest c4e0c991482836ce2af8b29ce3d5b0b025252646c30e99b398017dad84d6c702. Required workflows passed on this exact head: Autonomous quality gate run 45036702530, CINELVA smoke tests run 45036702463, Validate frontend run 45036702426, and Reproducible backend build run 45036702589. Full Python contract suite run 45036702472 also passed 431 tests. The tested source enforces each streaming supplement source and optional regional evidence URL against the service-specific reviewed official-host allowlist, rejects cross-service/arbitrary HTTPS provenance, and preserves last-known-good bytes on rejection. It changes no published movie row or user storage. This receipt/docs-only update requires fresh exact-head CI before normal merge."
 }

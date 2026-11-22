@@ -1,329 +1,17 @@
 {
-  "generated_at": "2026-11-21T23:14:35.761772+00:00",
+  "generated_at": "2026-11-22T13:57:50.001020+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-10-22",
-      "2027-03-21"
+      "2026-10-23",
+      "2027-03-22"
     ],
     "background_slice": [
-      "2027-01-15",
-      "2027-03-15"
+      "2027-03-17",
+      "2027-05-15"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 15916,
-      "title": "天使のたまご",
-      "original_title": "天使のたまご",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/dqi68LqT8z4lduMg0xR2TZHkRId.jpg",
-      "score": 7.691,
-      "votes": 618,
-      "overview": "ノアの方舟が陸地を見つけられなかったもう1つの世界。巨大な眼球を模し、中に複数の人型の彫像が鎮座する宗教の象徴のような機械仕掛けの太陽が海に沈み、世界は夜を迎える。  方舟の中の動物がすべて化石になった頃、忘れ去られた街で一人の少年と一人の少女が出会う。",
-      "tmdb": "https://www.themoviedb.org/movie/15916",
-      "director": "押井守",
-      "director_id": 12180,
-      "cast": [
-        "野田圭一",
-        "兵藤まこ",
-        "根津甚八"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 71,
-      "genres": [
-        "アニメーション",
-        "ファンタジー",
-        "謎",
-        "サイエンスフィクション"
-      ]
-    },
-    {
-      "id": 1066298,
-      "title": "满江红",
-      "original_title": "满江红",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/4eFNcvct2xB7XuxSWhQKW1aTAz4.jpg",
-      "score": 6.0,
-      "votes": 185,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1066298",
-      "director": "チャン・イーモウ",
-      "director_id": 607,
-      "cast": [
-        "沈腾",
-        "易烊千璽",
-        "チャン・イー",
-        "雷佳音"
-      ],
-      "countries": [
-        "China",
-        "Hong Kong"
-      ],
-      "runtime": 157,
-      "genres": [
-        "謎",
-        "コメディ",
-        "スリラー",
-        "履歴"
-      ]
-    },
-    {
-      "id": 1197137,
-      "title": "ブラック・フォン 2",
-      "original_title": "Black Phone 2",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/uKpt97U84Y5EdIxtHG9S56VNped.jpg",
-      "score": 6.638,
-      "votes": 1346,
-      "overview": "4年前、グラバーから逃げ延びた後、フィニーとグウェンは監禁体験のトラウマと向き合いながら苦しい日々を送っている。  そんな中、妹のグウェンは夢の中で“黒い電話”からの着信を受けるようになり、冬のキャンプで3人の少年が何者かに執拗に狙われているという不穏なビジョンを見るようになる。  やがて2人は、その謎を解き明かす決意を固める。そして、死後さらに強大な存在となり、彼ら自身とも想像以上に深い関係を持つ殺人犯と対峙することになる。",
-      "tmdb": "https://www.themoviedb.org/movie/1197137",
-      "director": "スコット・デリクソン",
-      "director_id": 55499,
-      "cast": [
-        "メイソン・テムズ",
-        "マデリーン・マックグロウ",
-        "イーサン・ホーク",
-        "デミアン・ビチル"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "runtime": 114,
-      "genres": [
-        "ホラー",
-        "スリラー"
-      ]
-    },
-    {
-      "id": 1692537,
-      "title": "ミュージカル『フラガリアメモリーズ』～Promise of Love～",
-      "original_title": "ミュージカル『フラガリアメモリーズ』～Promise of Love～",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/AbtTNYu60pLkbOWcr60pCQwRG1w.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1692537",
-      "director": "Masami Ito",
-      "director_id": 4538879,
-      "cast": [
-        "植田圭輔",
-        "広井雄士",
-        "北園涼",
-        "田中涼星"
-      ],
-      "countries": [],
-      "runtime": 150,
-      "genres": []
-    },
-    {
-      "id": 1559125,
-      "title": "ヒグマ!!",
-      "original_title": "ヒグマ!!",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/tS4a25k00z6Oesl8VPpmpy0Pgat.jpg",
-      "score": 4.5,
-      "votes": 4,
-      "overview": "18歳の小山内（鈴木福）は、大学合格の通知を受け取った日に、特殊詐欺の被害に遭い多額の借金を背負った父親が自殺。進学を諦め、金策に走る彼が始めたのは、父親を追い詰めた“闇バイト”だった…。  ある日、最も高額な報酬が見込める拉致工作に参加した小山内だったが、そのバイトにはいつの間にかターゲットである若葉桜子（円井わん）の殺害&遺棄までもが追加されていた――。森の中まで運び、いよいよ殺害しようとしたその時…！！前代未聞、規格外の予測不能なストーリー展開が待ち受ける。",
-      "tmdb": "https://www.themoviedb.org/movie/1559125",
-      "director": "内藤瑛亮",
-      "director_id": 1158128,
-      "cast": [
-        "鈴木福",
-        "円井わん",
-        "上村侑",
-        "岩永ジョーイ"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 100,
-      "genres": [
-        "ホラー",
-        "犯罪"
-      ]
-    },
-    {
-      "id": 1555819,
-      "title": "GENERATIONS：The Documentary",
-      "original_title": "GENERATIONS：The Documentary",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/vqzd28XeaKBv5ZjKyl35PeR1QjE.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1555819",
-      "director": "松永大司",
-      "director_id": 1462262,
-      "cast": [
-        "白濱亜嵐",
-        "片寄涼太",
-        "数原龍友",
-        "小森隼"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 107,
-      "genres": [
-        "ドキュメンタリー",
-        "音楽"
-      ]
-    },
-    {
-      "id": 1551201,
-      "title": "わたしが恋人になれるわけないじゃん、ムリムリ!（※ムリじゃなかった!?）～ネクストシャイン！～",
-      "original_title": "わたしが恋人になれるわけないじゃん、ムリムリ!（※ムリじゃなかった!?）～ネクストシャイン！～",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/cDlficyHUnNDnKoRc7HBCweDOR4.jpg",
-      "score": 7.7,
-      "votes": 3,
-      "overview": "わたしはわたしを、好きになりたいから！  陰キャでダメダメだった過去を捨て、高校デビューを果たした少女、 甘織れな子。運よくカーストトップの陽キャグループに入ったと思いきや、何とその中の二人から告白されちゃった！？学園のスパダリ・王塚真唯と、学園の天使・瀬名紫陽花さん。そんな二人の愛を受け止めるなんて、ムリムリ！返事に悩んでいたら、香穂ちゃんと一緒にコスプレイベントに出ることに。友達の頼みを聞くという形で、告白の返事を保留にするれな子。でもコスプレを通して香穂ちゃんの『好き』に触れたら、なにかが自分の中で変わるような気がして……！わたしが本当に欲しかったものって、なんだろう。果たして恋人はムリなのか！？\"ムリじゃなかった\"のか！？",
-      "tmdb": "https://www.themoviedb.org/movie/1551201",
-      "director": "内沼菜摘",
-      "director_id": 3511562,
-      "cast": [
-        "中村カンナ",
-        "大西沙織",
-        "安齋由香里",
-        "市ノ瀬加那"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 110,
-      "genres": [
-        "アニメーション",
-        "コメディ"
-      ]
-    },
-    {
-      "id": 1541169,
-      "title": "金髪",
-      "original_title": "金髪",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/uaTSHqpWBuI5RvZCK3d6YBLdNHA.jpg",
-      "score": 6.4,
-      "votes": 5,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1541169",
-      "director": "坂下雄一郎",
-      "director_id": 1421873,
-      "cast": [
-        "岩田剛典",
-        "白鳥玉季",
-        "門脇麦",
-        "山田真歩"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 103,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1422404,
-      "title": "TOKYOタクシー",
-      "original_title": "TOKYOタクシー",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/iJHARu7sCkQy419txqTwKCgQQWQ.jpg",
-      "score": 7.3,
-      "votes": 20,
-      "overview": "タクシー運転手の宇佐美浩二は、ある日、85歳の高野すみれを東京の柴又から、神奈川の葉山にある高齢者施設まで送ることになった。すみれは浩二に、いくつか寄り道を依頼する。次第に心を許したすみれは、自らの壮絶な過去を語り始める。偶然出会った二人の心が、そして人生が大きく動いていくことになる。",
-      "tmdb": "https://www.themoviedb.org/movie/1422404",
-      "director": "山田洋次",
-      "director_id": 72496,
-      "cast": [
-        "倍賞千恵子",
-        "木村拓哉",
-        "蒼井優",
-        "迫田孝也"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 103,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1406657,
-      "title": "果てしなきスカーレット",
-      "original_title": "果てしなきスカーレット",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/leoZnShYBiq1yUwQnA7MiUNEJJA.jpg",
-      "score": 6.986,
-      "votes": 139,
-      "overview": "父を殺され、復讐に失敗した王女・スカーレットは “死者の国”で目を覚ます。狂気にあふれたこの世界では、宿敵に復讐を果たし、“見果てぬ場所”に辿り着かなければ、〈虚無〉となり存在が消えてしまう。想像を超えた冒険。終わることなき闘い。時空を超えた運命の出会い。果てしなき旅路の先に、スカーレットは生きる道を見出せるのか？",
-      "tmdb": "https://www.themoviedb.org/movie/1406657",
-      "director": "細田守",
-      "director_id": 81718,
-      "cast": [
-        "芦田愛菜",
-        "岡田将生",
-        "松重豊",
-        "吉田鋼太郎"
-      ],
-      "countries": [
-        "Japan",
-        "United States of America"
-      ],
-      "runtime": 112,
-      "genres": [
-        "アニメーション",
-        "アクション",
-        "ドラマ",
-        "サイエンスフィクション"
-      ]
-    },
-    {
-      "id": 1786038,
-      "title": "名無しの子",
-      "original_title": "名無しの子",
-      "date": "2025-11-21",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/bZBsO9zlQgNizZtn0vXXgY800zX.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "「我是日本人还是中国人？」——私は日本人？それとも中国人？  中国語しか話せない日本人、中国残留孤児。答えのない問いを胸に、80年の歳月を生きてきた彼らは言う。  「私たちの戦争は、まだ終わっていない。」  1945年、第二次世界大戦末期の中国・旧満州。  当時そこには、日本の国策によって移住した約150万人の日本人庶民が暮らしていた。  だが、終戦直前、日本軍は彼らを見捨てて撤退。  戦火の中、数多くの女性や高齢者が命を落とし、数千人の幼い子供たちが親と離れ離れになった。  彼らは国籍を失い、孤児となり、“名無しの子”となった——。  本作は、日中共同取材チームが100人以上の残留孤児とその家族を、2年にわたって徹底取材。  1990年代に帰国するも、日本社会に馴染めず自殺未遂に追い込まれた一世。  差別の中で自らの居場所をつくるため、準暴力団「チャイニーズドラゴン」を結成した二世。  日中ハーフである自分のルーツを隠し、友人にさえ真実を語れない三世。  ——あれから80年。  今もなお「私は誰なのか」を探る彼らの、アイデンティティの物語。  『再会長江』の竹内亮監督が、日中合作チームとともに魂を込めて描く、心の国境を越えるドキュメンタリー。  本映画祭にて世界初公開。",
-      "tmdb": "https://www.themoviedb.org/movie/1786038",
-      "director": "竹内亮",
-      "director_id": 6518159,
-      "cast": [],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 110,
-      "genres": [],
-      "checked_at": "2026-10-06T18:32:14.724206+00:00"
-    },
     {
       "id": 1713257,
       "title": "カノン 夏の夜の猫",
@@ -21189,6 +20877,35 @@
       "checked_at": "2026-11-21T23:14:35.761772+00:00"
     },
     {
+      "id": 1837209,
+      "title": "超ときめき♡宣伝部のきみのハートにロックオンTOUR 2026 ～夢見てるからずっとかわいいでしょ！～アリーナファイナル at 有明アリーナ",
+      "original_title": "超ときめき♡宣伝部のきみのハートにロックオンTOUR 2026 ～夢見てるからずっとかわいいでしょ！～アリーナファイナル at 有明アリーナ",
+      "date": "2026-10-25",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/kKbqcSkP4gr360arDjoWrqzO0rh.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "超ときめき♡宣伝部のきみのハートにロックオンTOUR 2026 ～夢見てるからずっとかわいいでしょ！～アリーナファイナル at 有明アリーナ",
+      "tmdb": "https://www.themoviedb.org/movie/1837209",
+      "director": null,
+      "director_id": null,
+      "cast": [
+        "辻野かなみ",
+        "杏ジュリア",
+        "坂井仁香",
+        "小泉遥香"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 197,
+      "genres": [
+        "音楽"
+      ],
+      "checked_at": "2026-11-22T13:57:50.001020+00:00"
+    },
+    {
       "id": 1688795,
       "title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
       "original_title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
@@ -22375,7 +22092,7 @@
       "genres": [
         "ホラー"
       ],
-      "checked_at": "2026-11-15T08:39:20.265701+00:00"
+      "checked_at": "2026-11-22T13:57:50.001020+00:00"
     },
     {
       "id": 1806317,
@@ -26581,6 +26298,34 @@
         "アドベンチャー",
         "ファンタジー"
       ]
+    },
+    {
+      "id": 1824414,
+      "title": "くろねこ",
+      "original_title": "くろねこ",
+      "date": "2027-05-14",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/nQHPusHYgYcNr965ygI4SAyYIrn.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "かつて何不自由ない家庭で育ちながらも、現在はアルバイトで家計を支え、就活のプレッシャーを抱える大学生の涼（水上恒司）。 押しつぶされそうな日々のなか、涼はアルバイト先の近くにあるストリートピアノの前で、青い髪の女性（幾田りら）と出会う。 黒ずくめの服をまとい、近づくとすり抜けていく彼女を、涼はいつしか“くろねこ”と呼ぶようになっていた。 ある出来事をきっかけに少しずつ言葉を交わすようになり、本当の名前も過去も明かさない彼女に、強く惹かれていく涼。 けれど、彼はまだ知らなかった。彼女が生きる、あまりにも過酷な世界のことを＿＿。",
+      "tmdb": "https://www.themoviedb.org/movie/1824414",
+      "director": "井上剛",
+      "director_id": 1493929,
+      "cast": [
+        "水上恒司",
+        "幾田りら"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "runtime": 0,
+      "genres": [
+        "ロマンス",
+        "ドラマ"
+      ],
+      "checked_at": "2026-11-22T13:57:50.001020+00:00"
     },
     {
       "id": 1551110,

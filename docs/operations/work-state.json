@@ -1,13 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T13:32:00Z",
-  "status": "in_progress",
+  "updated_at": "2026-11-22T13:35:00Z",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "957829ca9a55714b812786be132e275d0c079951",
   "branch": "codex/244-december-netflix-movie-20261122",
-  "head_sha": "pending-pr-creation",
-  "pull_request": null,
+  "head_sha": "c06351b2f62a8ddd0facb5ada386215c01d30db5",
+  "pull_request": {
+    "number": 887,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/887",
+    "state": "open"
+  },
   "work_items": [
     {
       "id": "P0-593-POSTERS",
@@ -19,7 +23,7 @@
     {
       "id": "P0-244-DECEMBER-STREAMING",
       "title": "Add an officially verified December streaming movie",
-      "status": "in_progress",
+      "status": "pr_created",
       "issue": 244,
       "acceptance": "Official provider announcement, Japan availability, and an existing unique TMDB movie identity/poster are traceable; the ordinary refresh workflow publishes the row and the production calendar displays it."
     }
@@ -56,11 +60,15 @@
     {
       "check": "Publication guard classification",
       "result": "The new monthly supplement is protected manual intake under scripts/verify-production-release.cjs, not GENERATED_DATA. The importer change now retains region_source_url for public provenance. Required exact-source workflows plus receipt renewal are pending; no proof was bypassed."
+    },
+    {
+      "check": "PR #887 exact-head workflow start",
+      "result": "On head c06351b2f62a8ddd0facb5ada386215c01d30db5, PR-triggered Autonomous quality gate, Validate frontend, Reproducible backend build and CINELVA smoke runs are in progress; final checkpoint update will require fresh checks."
     }
   ],
   "blockers": [
-    "Because the reviewed supplement is protected source (not in GENERATED_DATA), the four exact-head workflows and a renewed quality/production-proof.json receipt are required before publication.",
-    "PR exact-head workflows, post-merge automatic refresh, public row/poster count, Vercel READY and calendar rendering remain pending."
+    "Required exact-head CI has not completed. Because the supplement is protected source, successful runs for all four required workflows are needed before updating the production-proof receipt.",
+    "After receipt renewal, final-head CI, normal merge, the ordinary streaming refresh, public JSON verification, production READY and calendar rendering remain pending."
   ],
   "deployment": {
     "status": "production_verified",
@@ -75,5 +83,5 @@
     "No viewing history, rating, review, bookmark or backup changed.",
     "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass."
   ],
-  "next_action": "Open one PR with the manual supplement and provenance-preserving importer change. Require Autonomous quality gate, CINELVA smoke, Validate frontend and Reproducible backend build on the exact code head; then renew the production-proof receipt and require fresh final-head CI. Merge only after green checks, observe the ordinary updater, and verify public JSON/calendar rendering. Keep #244 open until accepted."
+  "next_action": "Wait for and verify the four required PR workflows on the exact head. Only then update quality/production-proof.json to that tested source head, rerun required exact-final-head checks, and merge only if green. After normal merge, observe the ordinary updater and verify the public December entry/poster and calendar rendering. Keep #244 open."
 }

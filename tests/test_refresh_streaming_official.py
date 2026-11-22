@@ -16,7 +16,7 @@ class RefreshTest(unittest.TestCase):
             source, output = root / "source.json", root / "output.json"
             entry = {
                 "title": "Test", "date": "2026-11-10", "event": "streaming",
-                "service": "Netflix", "source_url": "https://example.org/official",
+                "service": "Netflix", "source_url": "https://about.netflix.com/ja/news/official",
             }
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
             self.assertTrue(module.refresh(source, output))
@@ -31,6 +31,31 @@ class RefreshTest(unittest.TestCase):
         self.assertIn("FOD", module.ALLOWED)
         self.assertIn("DMM TV", module.ALLOWED)
 
+    def test_unapproved_or_cross_service_host_preserves_last_good_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            source, output = root / "source.json", root / "output.json"
+            entry = {
+                "title": "Test", "date": "2026-11-10", "event": "streaming",
+                "service": "Netflix",
+                "source_url": "https://about.netflix.com/ja/news/official",
+                "region_source_url": "https://www.netflix.com/jp/title/123",
+            }
+            source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
+            self.assertTrue(module.refresh(source, output))
+            previous = output.read_bytes()
+
+            rejected = (
+                {**entry, "source_url": "https://example.org/looks-official"},
+                {**entry, "source_url": "https://www.aboutamazon.jp/news/entertainment"},
+                {**entry, "region_source_url": "https://example.org/japan-title"},
+            )
+            for movie in rejected:
+                source.write_text(json.dumps({"period": "2026-11", "movies": [movie]}), encoding="utf-8")
+                with self.subTest(movie=movie), self.assertRaisesRegex(ValueError, "provenance host"):
+                    module.refresh(source, output)
+                self.assertEqual(output.read_bytes(), previous)
+
     def test_empty_optional_identity_metadata_is_not_exported(self):
         with tempfile.TemporaryDirectory() as directory:
             root = pathlib.Path(directory)
@@ -38,7 +63,7 @@ class RefreshTest(unittest.TestCase):
             entry = {
                 "title": "Test", "date": "2026-11-10",
                 "event": "streaming", "service": "Netflix",
-                "source_url": "https://example.org/official",
+                "source_url": "https://about.netflix.com/ja/news/official",
                 "poster": "  \t ", "poster_path": None, "tmdb_id": "", "tmdbId": "  \t ",
                 "release_year": None, "image_url": "\n  ",
             }
@@ -55,7 +80,7 @@ class RefreshTest(unittest.TestCase):
             source, output = root / "source.json", root / "output.json"
             entry = {
                 "title": "Test", "date": "2026-11-10", "event": "streaming",
-                "service": "Netflix", "source_url": "https://example.org/official",
+                "service": "Netflix", "source_url": "https://about.netflix.com/ja/news/official",
                 "tmdb_id": 123, "tmdbId": "123",
             }
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
@@ -73,7 +98,7 @@ class RefreshTest(unittest.TestCase):
             source, output = root / "source.json", root / "output.json"
             entry = {
                 "title": "Test", "date": "2026-11-10", "event": "streaming",
-                "service": "Netflix", "source_url": "https://example.org/official",
+                "service": "Netflix", "source_url": "https://about.netflix.com/ja/news/official",
                 "tmdb_id": 123,
             }
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
@@ -97,7 +122,7 @@ class RefreshTest(unittest.TestCase):
             source, output = root / "source.json", root / "output.json"
             entry = {
                 "title": "Test", "date": "2026-11-10", "event": "streaming",
-                "service": "Netflix", "source_url": "https://example.org/official",
+                "service": "Netflix", "source_url": "https://about.netflix.com/ja/news/official",
                 "tmdb_id": 123, "poster": "",
             }
             richer = {**entry, "poster": "https://image.tmdb.org/t/p/w500/valid.jpg", "release_year": 2026}
@@ -121,7 +146,7 @@ class RefreshTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = pathlib.Path(directory)
             source, output = root / "source.json", root / "output.json"
-            entry = {"title": "Test", "date": "2026-11-10", "event": "streaming", "service": "Netflix", "source_url": "https://example.org/official"}
+            entry = {"title": "Test", "date": "2026-11-10", "event": "streaming", "service": "Netflix", "source_url": "https://about.netflix.com/ja/news/official"}
             source.write_text(json.dumps({"period": "2026-11", "movies": [entry, entry]}), encoding="utf-8")
             self.assertTrue(module.refresh(source, output))
             self.assertEqual(len(json.loads(output.read_text())["movies"]), 1)
@@ -136,7 +161,7 @@ class RefreshTest(unittest.TestCase):
             root = pathlib.Path(directory)
             source, output = root / "source.json", root / "output.json"
             movie = {"title": "Test", "date": "2026-11-10", "event": "streaming",
-                     "service": "Netflix", "source_url": "https://example.org/official"}
+                     "service": "Netflix", "source_url": "https://about.netflix.com/ja/news/official"}
             source.write_text(json.dumps({"period": "2026-11", "movies": [movie]}), encoding="utf-8")
             self.assertTrue(module.refresh(source, output))
             last_good = output.read_bytes()
@@ -155,7 +180,7 @@ class RefreshTest(unittest.TestCase):
             source_dir = root / "data"
             source_dir.mkdir()
             output = root / "output.json"
-            entry = {"title": "Test", "date": "2026-11-10", "event": "streaming", "service": "Netflix", "source_url": "https://example.org/official"}
+            entry = {"title": "Test", "date": "2026-11-10", "event": "streaming", "service": "Netflix", "source_url": "https://about.netflix.com/ja/news/official"}
             (source_dir / "streaming-2026-11-official-supplement.json").write_text(json.dumps({"period": "2026-11", "movies": [entry]}), encoding="utf-8")
             november = (source_dir / "streaming-2026-11-official-supplement.json").read_text(encoding="utf-8")
             (source_dir / "streaming-2026-12-official-supplement.json").write_text(json.dumps({"period": "2026-12", "movies": [{**entry, "date": "2026-12-01", "title": "Next month"}]}), encoding="utf-8")

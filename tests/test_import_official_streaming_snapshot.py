@@ -19,13 +19,15 @@ class OfficialSnapshotImportTests(unittest.TestCase):
             snapshot, catalog = root / "official.json", root / "streaming.json"
             self.assertTrue(refresh_streaming_official.refresh(source=sources, output=snapshot))
             before = json.loads(Path("data/streaming.json").read_text(encoding="utf-8"))
+            expected_rows = {
+                ("Netflix", "2026-12-23", 1457866),
+                ("Prime Video", "2026-12-15", 1761050),
+                ("WOWOWオンデマンド", "2026-12-13", 1263012),
+                ("WOWOWオンデマンド", "2026-12-25", 1370545),
+            }
             before["movies"] = [
                 row for row in before["movies"]
-                if not (
-                    row.get("service") == "Netflix"
-                    and row.get("date") == "2026-12-23"
-                    and row.get("tmdb_id") == 1457866
-                )
+                if (row.get("service"), row.get("date"), row.get("tmdb_id")) not in expected_rows
             ]
             catalog.write_text(json.dumps(before, ensure_ascii=False), encoding="utf-8")
 

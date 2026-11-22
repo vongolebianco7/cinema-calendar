@@ -629,3 +629,14 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - Publication guard classifies the new monthly supplement as protected manual intake, not generated data. Therefore the four exact-head workflows and a renewed `quality/production-proof.json` receipt are required before publication; neither has been skipped. Exact-head PR CI, post-merge automatic refresh, public row/poster count, Vercel READY on the data-update main, and calendar rendering remain pending.
 - User records, ratings, reviews, bookmarks and backups were not changed. No scraping, paid action, Neon retry, manual deployment, quota workaround or CI bypass.
 - Next: wait for PR #887 checks, then confirm all four required workflows passed on the exact code head. Renew `quality/production-proof.json` only after that evidence, require fresh checks on the final receipt head, and merge only when green. Observe the ordinary refresh run and verify public JSON plus calendar rendering. Keep #244 open until production acceptance is evidenced.
+
+
+## 2026-11-22 22:45 JST — #887 source CI passed; receipt renewed
+
+- Live main remains `957829ca9a55714b812786be132e275d0c079951`; #593 is closed/completed, #244 and #239 are open. PR #887 is open and mergeable; #879 remains the unrelated open PR.
+- Production boxoffice JSON remains HTTP 200 with 1,808 by-year + 100 all-time rows and zero missing posters. Production streaming JSON remains HTTP 200 with 464 rows and zero missing posters; December has five movie rows, all Netflix.
+- All four required workflows succeeded on exact source head `ac66f62a718a9a0a12a0f8675de3b3813680c048`: Autonomous quality gate `45028311839`, Validate frontend `45028311840`, Reproducible backend build `45028311859`, and CINELVA smoke `45028311888`. Executable-source digest is `0cde4c8ca7e0b000b0774e5aede0d91040d97d51b66f4493d2f0a18b8e64c408`.
+- Renewed `quality/production-proof.json` to bind those exact-head runs and digest. The only source-data addition remains the one Netflix Dec 23 film with official Japan source URL; the existing unique TMDB identity/poster is preserved. Local supplement/import verification is 464→465 exactly, 22 focused tests and the full quality gate passed.
+- The receipt/docs-only PR tip still requires fresh exact-head CI; do not merge until its four required workflows pass and PR head is unchanged/mergeable.
+- Production deployment remains READY on unchanged main (`dpl_5PZVhxZn4ns4SLJaSqyMyovWWVwf`, SHA `957829ca9a55714b812786be132e275d0c079951`). The new data is not live.
+- After final-tip CI, merge normally once, then observe the normal automatic streaming refresh once. Verify public December count changes 5→6, row date/title/service/TMDB ID/poster/Japan source URL, Vercel READY on the resulting main, and calendar rendering. Keep #244 open until accepted. No manual dispatch/deploy, quota workaround, scraping, paid action, or user-storage change.

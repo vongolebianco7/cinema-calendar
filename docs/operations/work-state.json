@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T13:35:00Z",
-  "status": "pr_created",
+  "updated_at": "2026-11-22T13:45:00Z",
+  "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "957829ca9a55714b812786be132e275d0c079951",
   "branch": "codex/244-december-netflix-movie-20261122",
-  "head_sha": "c06351b2f62a8ddd0facb5ada386215c01d30db5",
+  "head_sha": "ac66f62a718a9a0a12a0f8675de3b3813680c048",
   "pull_request": {
     "number": 887,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/887",
@@ -23,52 +23,44 @@
     {
       "id": "P0-244-DECEMBER-STREAMING",
       "title": "Add an officially verified December streaming movie",
-      "status": "pr_created",
+      "status": "ci_passed",
       "issue": 244,
       "acceptance": "Official provider announcement, Japan availability, and an existing unique TMDB movie identity/poster are traceable; the ordinary refresh workflow publishes the row and the production calendar displays it."
     }
   ],
   "verification": [
     {
-      "check": "Live baseline 2026-11-22 13:24 UTC",
-      "result": "main 957829ca9a55714b812786be132e275d0c079951; #593 closed/completed; #244 and #239 open; only unrelated PR #879 open; #886 merged; main Vercel checks successful; production READY on exact main."
+      "check": "Live GitHub state 2026-11-22 22:42 JST",
+      "result": "main 957829ca9a55714b812786be132e275d0c079951; #593 closed/completed; #244 and #239 open; #887 open and mergeable on head ac66f62a718a9a0a12a0f8675de3b3813680c048; unrelated #879 remains open."
+    },
+    {
+      "check": "Required exact-head CI",
+      "result": "All four required PR workflows succeeded on exact head ac66f62a718a9a0a12a0f8675de3b3813680c048: Autonomous quality gate 45028311839, Validate frontend 45028311840, Reproducible backend build 45028311859, CINELVA smoke 45028311888."
     },
     {
       "check": "Canonical production JSON",
-      "result": "boxoffice.json HTTP 200: 1,808 by-year + 100 all-time rows, poster gaps 0. streaming.json HTTP 200: 464 rows, poster gaps 0, generated 2026-11-17T05:08:01.685949Z; December 2026 has 5 rows, all Netflix."
+      "result": "boxoffice.json HTTP 200: 1,808 by-year + 100 all-time rows, poster gaps 0. streaming.json HTTP 200: 464 rows, poster gaps 0; five December 2026 movies, all Netflix. Candidate feed snapshot has 26 candidates and one verified catalog match; no other December movie candidate met identity/date checks."
     },
     {
       "check": "Official December item",
-      "result": "Netflix Tudum announces THE FURTHER MIS-ADVENTURES OF CLIFF BOOTH for Netflix on 2026-12-23; official Japan title page https://www.netflix.com/jp/title/82054606."
+      "result": "Netflix Tudum announcement lists THE FURTHER MIS-ADVENTURES OF CLIFF BOOTH for 2026-12-23; Japan title page https://www.netflix.com/jp/title/82054606. Existing unique catalog identity is TMDB movie 1457866 and poster gEqfmochcRmyDQFThatTKQfH9GT.jpg."
     },
     {
-      "check": "Canonical TMDB identity",
-      "result": "Current production data/movies.json contains exact Japanese and original title, year 2026, David Fincher, TMDB movie ID 1457866, and poster URL https://image.tmdb.org/t/p/w500/gEqfmochcRmyDQFThatTKQfH9GT.jpg. Reused this existing unique identity; no title-only match or invented URL."
+      "check": "Source acceptance",
+      "result": "Local exact supplement/import acceptance previously verified 464→465 with exactly one row, existing unique identity/poster, and retained Japan source URL. Focused 22 tests and full local quality gate passed; tracked public JSON was not mutated."
     },
     {
-      "check": "Automatic source path",
-      "result": "New reviewed row is in data/streaming-2026-12-official-supplement.json. Existing refresh-official-streaming workflow consumes monthly supplements on push/schedule, validates and merges into the public catalog, and must be allowed to run once after merge; do not dispatch manually."
+      "check": "Production baseline",
+      "result": "Production frontend/backend remain READY on unchanged live main 957829ca9a55714b812786be132e275d0c079951. No manual Vercel deployment or quota action."
     },
     {
-      "check": "Local supplement/import acceptance",
-      "result": "22 focused tests passed; isolated monthly refresh/import added exactly one 2026-12-23 Netflix entry for TMDB 1457866 and preserved its existing poster. Catalog row count 464→465; tracked public JSON was not mutated."
-    },
-    {
-      "check": "Local quality gate",
-      "result": "scripts/quality_gate.py passed: 601 Node tests and the repository Python checks."
-    },
-    {
-      "check": "Publication guard classification",
-      "result": "The new monthly supplement is protected manual intake under scripts/verify-production-release.cjs, not GENERATED_DATA. The importer change now retains region_source_url for public provenance. Required exact-source workflows plus receipt renewal are pending; no proof was bypassed."
-    },
-    {
-      "check": "PR #887 exact-head workflow start",
-      "result": "On head c06351b2f62a8ddd0facb5ada386215c01d30db5, PR-triggered Autonomous quality gate, Validate frontend, Reproducible backend build and CINELVA smoke runs are in progress; final checkpoint update will require fresh checks."
+      "check": "Release receipt",
+      "result": "quality/production-proof.json now binds required successful exact-head CI to tested source head ac66f62 and executable digest 0cde4c8ca7e0b000b0774e5aede0d91040d97d51b66f4493d2f0a18b8e64c408; receipt-only change still needs final-tip exact-head CI."
     }
   ],
   "blockers": [
-    "Required exact-head CI has not completed. Because the supplement is protected source, successful runs for all four required workflows are needed before updating the production-proof receipt.",
-    "After receipt renewal, final-head CI, normal merge, the ordinary streaming refresh, public JSON verification, production READY and calendar rendering remain pending."
+    "The receipt/docs-only PR tip has not yet received its own fresh exact-head CI. Do not merge until the four required checks pass on the final tip.",
+    "After normal merge, observe exactly the ordinary automatic streaming refresh; then verify updated public December JSON, image presence, production READY and rendered calendar acceptance. Keep #244 open until those proofs exist."
   ],
   "deployment": {
     "status": "production_verified",
@@ -83,5 +75,5 @@
     "No viewing history, rating, review, bookmark or backup changed.",
     "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass."
   ],
-  "next_action": "Wait for and verify the four required PR workflows on the exact head. Only then update quality/production-proof.json to that tested source head, rerun required exact-final-head checks, and merge only if green. After normal merge, observe the ordinary updater and verify the public December entry/poster and calendar rendering. Keep #244 open."
+  "next_action": "Wait for all four required exact-head workflows on the receipt/docs-only final PR tip. If they succeed and PR #887 is still mergeable on the same SHA, merge normally with expected_head_sha. Do not manually dispatch or deploy. Observe the single ordinary official-streaming refresh, then verify public streaming JSON count/date/poster, Vercel production READY and the calendar rendering. Keep #244 open."
 }

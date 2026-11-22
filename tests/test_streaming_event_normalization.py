@@ -47,6 +47,21 @@ class NormalizePremiereTests(unittest.TestCase):
                 [dict(BASE, source_url="https://sub.example.org/notice")],
                 APPROVED_HOSTS)
 
+    def test_accepts_only_exact_individually_reviewed_official_video_url(self):
+        reviewed = "https://www.youtube.com/watch?v=t0d2CxpElPo"
+        exact = dict(BASE, service="Prime Video", source_url=reviewed)
+        result = normalize_premieres(
+            [exact], {"Prime Video": ["www.aboutamazon.jp"]},
+            {"Prime Video": [reviewed]},
+        )
+        self.assertEqual(result[0]["source_url"], reviewed)
+        with self.assertRaisesRegex(ValueError, "approved official HTTPS host"):
+            normalize_premieres(
+                [dict(exact, source_url="https://www.youtube.com/watch?v=other")],
+                {"Prime Video": ["www.aboutamazon.jp"]},
+                {"Prime Video": [reviewed]},
+            )
+
     def test_rejects_non_object_entries_without_partial_import(self):
         for invalid in (None, [], "Film", 42):
             with self.subTest(entry=invalid), self.assertRaisesRegex(ValueError, "must be an object"):

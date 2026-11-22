@@ -6,7 +6,7 @@ from datetime import date
 from urllib.parse import urlparse
 
 
-def normalize_premieres(entries, approved_hosts_by_service):
+def normalize_premieres(entries, approved_hosts_by_service, approved_urls_by_service=None):
     """Return validated, deduplicated events without mutating source entries.
 
     Distinct movie identities are not merged based solely on a similar title.
@@ -38,7 +38,9 @@ def normalize_premieres(entries, approved_hosts_by_service):
             for value in approved_hosts_by_service.get(service, [])
             if isinstance(value, str) and value
         }
-        if parsed.scheme != "https" or not host or host not in approved_hosts:
+        approved_urls = (approved_urls_by_service or {}).get(service, [])
+        exact_url_allowed = isinstance(source_url, str) and source_url in approved_urls
+        if parsed.scheme != "https" or not host or (host not in approved_hosts and not exact_url_allowed):
             raise ValueError("An approved official HTTPS host is required for this service")
         tmdb_id = entry.get("tmdb_id")
         if tmdb_id is not None and (type(tmdb_id) is not int or tmdb_id <= 0):

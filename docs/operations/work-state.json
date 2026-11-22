@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T18:13:00Z",
+  "updated_at": "2026-11-22T22:49:23Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "14f555a2817e2d5e69ce6cae7d11ecb64df03068",
-  "branch": "codex/244-serialize-generated-data-writers-20261123",
-  "head_sha": "747b39261ab18e6f658ed5664255a7c744ad7c2f",
+  "base_sha": "f0b56a7b93692a67b41639a319226b25a40c4855",
+  "branch": "codex/244-december-multiservice-20261123",
+  "head_sha": "a37f34b10094c7212d45bce73e27b7c53a615e66",
   "pull_request": {
-    "number": 890,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/890",
+    "number": 891,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/891",
     "state": "open"
   },
   "open_pull_requests": [
@@ -19,9 +19,9 @@
       "title": "VIVANT診断の好きな映画を9作品から選べるようにする"
     },
     {
-      "number": 890,
-      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/890",
-      "title": "fix: serialize official streaming data writer"
+      "number": 891,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/891",
+      "title": "fix: publish verified December streaming films"
     }
   ],
   "work_items": [
@@ -45,6 +45,34 @@
       "status": "ci_passed",
       "issue": 244,
       "acceptance": "The official streaming refresh uses the shared cinema-database-write concurrency lock; exact source CI is green and final receipt-head CI is required before merge."
+    },
+    {
+      "id": "P0-244-DECEMBER-COVERAGE",
+      "title": "Add officially confirmed December 2026 streaming movies",
+      "status": "in_progress",
+      "issue": 244,
+      "acceptance": "Add only dated, official Japan-relevant film announcements with reviewed TMDB identities and sources; preserve user data and publish-verify the resulting count."
+    },
+    {
+      "id": "P0-244-RELEASE-DISCOVERY",
+      "title": "Verify future streaming announcement discovery and limits",
+      "status": "in_progress",
+      "issue": 244,
+      "acceptance": "Exercise the reviewed-source pipeline with a January 2027 fixture; accurately classify permitted feeds and document services without licensed announcement feeds."
+    },
+    {
+      "id": "P1-242-USER-UI-REFINEMENTS",
+      "title": "Implement user-requested calendar, search, streaming, pricing, VIVANT and feedback changes",
+      "status": "planned",
+      "issue": 242,
+      "acceptance": "Implement each requested page change without altering unrelated UI; preserve stored viewing/rating/bookmark data; verify key screens at 390px in Chromium/WebKit and deployed production."
+    },
+    {
+      "id": "P1-683-BEST10-USER-REFINEMENTS",
+      "title": "Implement year-based My Best 10 and device-save UX",
+      "status": "planned",
+      "issue": 683,
+      "acceptance": "Unify Best 10/Top 10 naming, select a target year through the requested flow, update title, remove hidden editor controls, align rating checkbox and dimensions, and verify platform save behavior."
     }
   ],
   "verification": [
@@ -83,25 +111,56 @@
     {
       "check": "Generated-data writer serialization",
       "result": "refresh-official-streaming now shares cinema-database-write with movie, now-playing and TV writers. cancel-in-progress remains false; bounded rebase/push retries and last-known-good publication behavior remain unchanged."
+    },
+    {
+      "check": "Live state 2026-11-23 before this change",
+      "result": "Main 4b783db37908ad027b3bddaf2661b7081202376e after ordinary official streaming candidate refresh; open PR #879 remains unrelated; #239/#244 open and #593 closed."
+    },
+    {
+      "check": "Pre-change public data",
+      "result": "Canonical streaming.json HTTP 200, 465 rows, no poster gaps, six December rows, all Netflix."
+    },
+    {
+      "check": "Focused implementation tests",
+      "result": "33 refresh/import/normalization tests passed, including January 2027 reviewed-fixture refresh and catalog import. Full quality gate passed before adding the final 2027 regression case; rerun required."
+    },
+    {
+      "check": "PR #891 source CI and mergeability",
+      "result": "PR head 847580c is mergeable. Initial check suite was triggered on prior draft commit b159db6; the canonical WOWOW URL was then corrected and exact-head checks are pending. Local full quality gate and focused 33-test suite pass."
+    },
+    {
+      "check": "December multi-service isolated publication simulation",
+      "result": "On latest observed main f0b56a7, refresh + approved poster enrichment + atomic import preserved 465 existing rows, appended 3, produced 468 total and 9 December service rows (Netflix 6, Prime Video 1, WOWOW 2) with zero missing December posters."
+    },
+    {
+      "check": "Local quality and future-month regression",
+      "result": "python scripts/quality_gate.py passed; 33 focused refresh/import/normalization tests passed, including a synthetic January 2027 release flowing to catalog with TMDB identity."
+    },
+    {
+      "check": "PR #891 exact-source required CI",
+      "result": "Head a37f34b10094c7212d45bce73e27b7c53a615e66: Autonomous quality gate run 45078862912 passed, including Chromium/WebKit iPhone-width smoke; CINELVA smoke 45078862839 passed; Validate frontend 45078862727 passed; Reproducible backend build 45078862719 passed. Executable digest f51a728e994700b05a50561cfea234626adf6e325915b18080d6855c86216ee9."
+    },
+    {
+      "check": "Official feed discovery observation",
+      "result": "Current candidate snapshot generated 2026-11-22T22:20:59.947430Z: 3 official RSS/Atom feeds checked, 26 candidates, one verified-catalog match. Candidate discovery does not independently establish release dates/movie IDs and did not auto-add titles."
     }
   ],
   "blockers": [
-    "PR #890 receipt/docs-only tip requires fresh exact-head CI before merge. After merge, confirm the next ordinary official refresh queues behind other generated-data writers and publishes without overlap; do not manually dispatch.",
-    "December 2026 public coverage remains six Netflix films; no additional non-Netflix film has yet met Japan-specific official date and unique identity evidence."
+    "No licensed API/official premiere-date feed was identified for Disney+, U-NEXT, Hulu, Lemino, ABEMA, DMM TV, FOD, TELASA or WOWOW. All 12 auto_premiere_discovery flags remain false; candidate feed records require verification.",
+    "No authorized source for streaming date changes/cancellations was identified; explicit corrections require reviewed evidence. Do not infer cancellation from absence.",
+    "Production confirmation is pending: final receipt/docs head CI, safe merge, normal refresh, Vercel READY, public 468-row JSON and 390px page acceptance remain required."
   ],
   "deployment": {
-    "status": "production_verified",
+    "status": "deployment_pending",
     "canonical_url": "https://cinelva.vercel.app/",
-    "ready_deployment_id": "dpl_CH7h1Hbyz9iJ5gqAvzWrhhaVGgpR",
-    "ready_sha": "5301f58ea42d2c5cfe742a702a9778dd83fe0aa9",
-    "production_verified": true,
-    "change_live": true,
-    "visual_acceptance_verified": true
+    "production_verified": false,
+    "change_live": false,
+    "visual_acceptance_verified": false
   },
   "safety": [
     "No viewing history, rating, review, bookmark or backup changed.",
     "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass.",
     "The failed generated-data writer was not retried; last-known-good public data remains intact."
   ],
-  "next_action": "Require fresh exact-head CI on PR #890 after the CI receipt/checkpoint update. Merge only if unchanged, mergeable and green; then confirm Vercel READY, public JSON health and the next ordinary official refresh writer serialization. Keep #244 open."
+  "next_action": "PR #891 source checks passed. Commit the receipt and checkpoint as docs-only, require the four exact-head checks again on that final tip, then merge normally only if mergeable and green. Verify ordinary refresh, public streaming JSON 465->468 / December 6->9 / zero poster gaps, and the published 390px streaming page. Then start the requested UI work against #242 and #683: home poster sizing, discovery duplicate year/runtime, streaming tabs/cards/copy, cinema logo, VIVANT entry/logo/selection/result layout/art, year-based Best 10 and save, and email removal. Keep #244 open until licensed-source and change/cancellation limits are fully addressed."
 }

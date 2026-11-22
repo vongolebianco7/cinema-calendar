@@ -35,6 +35,11 @@ def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=
         for x in registry.get("services", [])
         if isinstance(x, dict) and isinstance(x.get("name"), str) and x.get("name")
     }
+    approved_urls = {
+        x["name"]: x.get("reviewed_premiere_urls", [])
+        for x in registry.get("services", [])
+        if isinstance(x, dict) and isinstance(x.get("name"), str) and x.get("name")
+    }
     entries = official.get("movies") if isinstance(official, dict) else None
     rows = catalog.get("movies") if isinstance(catalog, dict) else None
     if not providers or not isinstance(entries, list) or not entries or not isinstance(rows, list):
@@ -59,7 +64,7 @@ def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=
             # Treat an ID as canonical only when the saved URL proves the same TMDB identity.
             reviewed["tmdb_id"] = movie_id
         normalized_entries.append(reviewed)
-    entries = normalize_premieres(normalized_entries, approved_hosts)
+    entries = normalize_premieres(normalized_entries, approved_hosts, approved_urls)
 
     def title_key(row):
         return (row.get("service"), " ".join(str(row.get("title", "")).casefold().split()), row.get("date"))

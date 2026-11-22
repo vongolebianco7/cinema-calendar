@@ -42,7 +42,7 @@
     {
       "id": "P0-244-GENERATED-WRITER-LOCK",
       "title": "Serialize official streaming and generated-data publishers",
-      "status": "exact_source_ci_verified",
+      "status": "ci_passed",
       "issue": 244,
       "acceptance": "The official streaming refresh uses the shared cinema-database-write concurrency lock; exact source CI is green and final receipt-head CI is required before merge."
     }

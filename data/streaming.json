@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T13:56:27.688255+00:00",
+  "generated_at": "2026-11-22T22:59:04.888597+00:00",
   "movies": [
     {
       "title": "Outcome",
@@ -10849,6 +10849,62 @@
       "runtime": 141,
       "region_source_url": "https://www.netflix.com/jp/title/82054606",
       "source_published_at": "2026-09-21"
+    },
+    {
+      "title": "5 - 嵐という時間 -",
+      "date": "2026-12-15",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/eEXFBWG5F6fOwQjekuCZTNMKVOG.jpg",
+      "source": "Prime Video JP official teaser; worldwide December 15 premiere",
+      "source_url": "https://www.youtube.com/watch?v=t0d2CxpElPo",
+      "checked_at": "2026-11-22T22:59:04.888558+00:00",
+      "id": 1761050,
+      "tmdb": "https://www.themoviedb.org/movie/1761050",
+      "tmdb_id": 1761050,
+      "release_year": 2026,
+      "original_title": "5 - The Time Called Arashi -",
+      "source_published_at": "2026-09-02"
+    },
+    {
+      "title": "デッドマンズ・ワイヤー",
+      "date": "2026-12-13",
+      "event": "streaming",
+      "service": "WOWOWオンデマンド",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/vJfJM1L0J0OxOS4zvbEnSqOmUrh.jpg",
+      "source": "WOWOWオンデマンド official film page",
+      "source_url": "https://wod.wowow.co.jp/program/207651",
+      "checked_at": "2026-11-22T22:59:04.888581+00:00",
+      "id": 1263012,
+      "tmdb": "https://www.themoviedb.org/movie/1263012",
+      "tmdb_id": 1263012,
+      "original_title": "Dead Man's Wire",
+      "runtime": 106
+    },
+    {
+      "title": "シンシン アンド ザ マウス／SINSIN AND THE MOUSE",
+      "date": "2026-12-25",
+      "event": "streaming",
+      "service": "WOWOWオンデマンド",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/djnoeys978pM0Fr82wck5NVIBo.jpg",
+      "source": "WOWOWオンデマンド official film page",
+      "source_url": "https://wod.wowow.co.jp/program/207811",
+      "checked_at": "2026-11-22T22:59:04.888592+00:00",
+      "id": 1370545,
+      "tmdb": "https://www.themoviedb.org/movie/1370545",
+      "tmdb_id": 1370545,
+      "release_year": 2026,
+      "original_title": "シンシン アンド ザ マウス／SINSIN AND THE MOUSE",
+      "runtime": 108
     }
   ],
   "poster_enrichment": {

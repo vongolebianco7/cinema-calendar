@@ -2439,9 +2439,56 @@
       "release_year": 2026,
       "poster": "https://image.tmdb.org/t/p/w500/gEqfmochcRmyDQFThatTKQfH9GT.jpg",
       "runtime": 141
+    },
+    {
+      "title": "5 - 嵐という時間 -",
+      "original_title": "5 - The Time Called Arashi -",
+      "date": "2026-12-15",
+      "event": "streaming",
+      "service": "Prime Video",
+      "source": "Prime Video JP official teaser; worldwide December 15 premiere",
+      "source_url": "https://www.youtube.com/watch?v=t0d2CxpElPo",
+      "source_published_at": "2026-09-02",
+      "checked_at": "2026-11-23",
+      "id": 1761050,
+      "tmdb_id": 1761050,
+      "tmdb": "https://www.themoviedb.org/movie/1761050",
+      "release_year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/eEXFBWG5F6fOwQjekuCZTNMKVOG.jpg"
+    },
+    {
+      "title": "デッドマンズ・ワイヤー",
+      "original_title": "Dead Man's Wire",
+      "date": "2026-12-13",
+      "event": "streaming",
+      "service": "WOWOWオンデマンド",
+      "source": "WOWOWオンデマンド official film page",
+      "source_url": "https://wod.wowow.co.jp/program/207651",
+      "checked_at": "2026-11-23",
+      "id": 1263012,
+      "tmdb_id": 1263012,
+      "tmdb": "https://www.themoviedb.org/movie/1263012",
+      "poster": "https://image.tmdb.org/t/p/w500/vJfJM1L0J0OxOS4zvbEnSqOmUrh.jpg",
+      "runtime": 106
+    },
+    {
+      "title": "シンシン アンド ザ マウス／SINSIN AND THE MOUSE",
+      "original_title": "シンシン アンド ザ マウス／SINSIN AND THE MOUSE",
+      "date": "2026-12-25",
+      "event": "streaming",
+      "service": "WOWOWオンデマンド",
+      "source": "WOWOWオンデマンド official film page",
+      "source_url": "https://wod.wowow.co.jp/program/207811",
+      "checked_at": "2026-11-23",
+      "id": 1370545,
+      "tmdb_id": 1370545,
+      "tmdb": "https://www.themoviedb.org/movie/1370545",
+      "release_year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w500/djnoeys978pM0Fr82wck5NVIBo.jpg",
+      "runtime": 108
     }
   ],
-  "count": 182,
+  "count": 185,
   "note": "Verified-source subset, not a complete subscription catalog",
   "poster_enrichment": {
     "source": "TMDB identity matches; optional workflow-approved fuzzy posters are explicitly marked"

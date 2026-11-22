@@ -1,22 +1,27 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T00:00:00Z",
+  "updated_at": "2026-11-23T00:30:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f0b56a7b93692a67b41639a319226b25a40c4855",
   "branch": "codex/244-december-multiservice-20261123",
-  "head_sha": "f0b56a7b93692a67b41639a319226b25a40c4855",
+  "head_sha": "847580c5a65da9d9ef1347173628d0f806b17989",
   "pull_request": {
-    "number": null,
-    "url": null,
-    "state": "not_created"
+    "number": 891,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/891",
+    "state": "open"
   },
   "open_pull_requests": [
     {
       "number": 879,
       "url": "https://github.com/vongolebianco7/cinema-calendar/pull/879",
       "title": "VIVANT診断の好きな映画を9作品から選べるようにする"
+    },
+    {
+      "number": 891,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/891",
+      "title": "fix: publish verified December streaming films"
     }
   ],
   "work_items": [
@@ -104,12 +109,16 @@
     {
       "check": "Focused implementation tests",
       "result": "33 refresh/import/normalization tests passed, including January 2027 reviewed-fixture refresh and catalog import. Full quality gate passed before adding the final 2027 regression case; rerun required."
+    },
+    {
+      "check": "PR #891 source CI and mergeability",
+      "result": "PR head 847580c is mergeable. Initial check suite was triggered on prior draft commit b159db6; the canonical WOWOW URL was then corrected and exact-head checks are pending. Local full quality gate and focused 33-test suite pass."
     }
   ],
   "blockers": [
     "No licensed API/official date feed was identified for Disney+, U-NEXT, Hulu, Lemino, ABEMA, DMM TV, FOD, TELASA or WOWOW. These providers remain editorially reviewed; the issue cannot be declared fully automatic for all 12 without an allowed source.",
-    "This change is not yet on GitHub, exact-head CI has not run, and production data/UI acceptance is pending.",
-    "Official reschedule/cancellation notices lack an authorized change feed; explicit corrections require manual review and a tested safe update path."
+    "Official reschedule/cancellation notices lack an authorized change feed; explicit corrections require manual review and a tested safe update path.",
+    "Exact-head CI and production data/page acceptance remain pending; do not merge before required source and final receipt-head checks pass."
   ],
   "deployment": {
     "status": "deployment_pending",
@@ -123,5 +132,5 @@
     "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass.",
     "The failed generated-data writer was not retried; last-known-good public data remains intact."
   ],
-  "next_action": "Create a PR from latest main 4b783db; run exact-source required CI, renew quality/production-proof.json on a receipt-only follow-up, require final-head CI, merge normally, and verify the ordinary generated-data refresh plus public JSON and mobile production page. Keep #244 open and resume the hourly CINELVA automation after this run."
+  "next_action": "Require exact-head Autonomous quality gate, CINELVA smoke, Validate frontend and Reproducible backend build for PR #891. Then renew quality/production-proof.json in a receipt-only commit, require those same checks on the final head, and merge normally only when mergeable and all required checks pass. Verify ordinary generated-data refresh, production streaming JSON, posters and 390px view; keep #244 open due licensed-source coverage limits."
 }

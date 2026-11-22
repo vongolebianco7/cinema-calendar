@@ -5,15 +5,10 @@
   "source": {
     "id": "tmdb",
     "endpoint": "/movie/now_playing",
-    "url": "https://developer.themoviedb.org/reference/movie-now-playing-list",
-    "retrieval_endpoint": "/discover/movie",
-    "upstream_window": {
-      "minimum": "2026-10-14",
-      "maximum": "2026-11-25"
-    }
+    "url": "https://developer.themoviedb.org/reference/movie-now-playing-list"
   },
   "complete": true,
-  "generated_at": "2026-11-22T12:08:21.432194+00:00",
+  "generated_at": "2026-11-22T17:14:09.000914+00:00",
   "upstream_total_results": 98,
   "movies": [
     {
@@ -264,19 +259,6 @@
       "source_url": "https://www.themoviedb.org/movie/920167"
     },
     {
-      "id": 793058,
-      "tmdbId": 793058,
-      "title": "ハイファイブ！",
-      "original_title": "하이파이브",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/xpqa2ShXecFxMUGKv82Zx56ZoUD.jpg",
-      "score": 7.1,
-      "votes": 83,
-      "popularity": 4.1231,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/793058"
-    },
-    {
       "id": 1306816,
       "tmdbId": 1306816,
       "title": "世界で最後の愛しい娘！",
@@ -316,17 +298,17 @@
       "source_url": "https://www.themoviedb.org/movie/1184941"
     },
     {
-      "id": 1313587,
-      "tmdbId": 1313587,
-      "title": "GROTESQQQUE -グロテスク-",
-      "original_title": "GROTESQQQUE -グロテスク-",
+      "id": 1526917,
+      "tmdbId": 1526917,
+      "title": "メイドインアビス 目覚める神秘",
+      "original_title": "メイドインアビス 目覚める神秘",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/tLiCExCaevA5t2mXwsW6qUfimVE.jpg",
-      "score": 8.0,
+      "poster": "https://image.tmdb.org/t/p/w342/7HfBlYDlMVaHnvd7NEpZLd8r7FO.jpg",
+      "score": 1.0,
       "votes": 1,
-      "popularity": 2.4652,
-      "overview": "『エリィアンズ』 『夜露死駆★少女』 『ノクターン～このグロテスクな夜に～』  歪で、不揃いで、どこまでも美しい３つのエピソードがキメラのように溶けあい、 心揺さぶるオリジナル音楽とともに瑞々しく沸き立つ。 ポップでエッジィな映像と音が重なり、世界が脈打つ。 異星人、ギャル、ヴァンパイア。 錦織敦史が描く“グロテスク”な少女たちの物語が、いま動き出す────。",
-      "source_url": "https://www.themoviedb.org/movie/1313587"
+      "popularity": 3.135,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1526917"
     },
     {
       "id": 1567149,
@@ -342,19 +324,6 @@
       "source_url": "https://www.themoviedb.org/movie/1567149"
     },
     {
-      "id": 1526917,
-      "tmdbId": 1526917,
-      "title": "メイドインアビス 目覚める神秘",
-      "original_title": "メイドインアビス 目覚める神秘",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/7HfBlYDlMVaHnvd7NEpZLd8r7FO.jpg",
-      "score": 1.0,
-      "votes": 1,
-      "popularity": 3.135,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1526917"
-    },
-    {
       "id": 1433339,
       "tmdbId": 1433339,
       "title": "ムクドリと人生とレモンパスタ",
@@ -368,6 +337,32 @@
       "source_url": "https://www.themoviedb.org/movie/1433339"
     },
     {
+      "id": 1313587,
+      "tmdbId": 1313587,
+      "title": "GROTESQQQUE -グロテスク-",
+      "original_title": "GROTESQQQUE -グロテスク-",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/tLiCExCaevA5t2mXwsW6qUfimVE.jpg",
+      "score": 8.0,
+      "votes": 1,
+      "popularity": 2.4652,
+      "overview": "『エリィアンズ』 『夜露死駆★少女』 『ノクターン～このグロテスクな夜に～』  歪で、不揃いで、どこまでも美しい３つのエピソードがキメラのように溶けあい、 心揺さぶるオリジナル音楽とともに瑞々しく沸き立つ。 ポップでエッジィな映像と音が重なり、世界が脈打つ。 異星人、ギャル、ヴァンパイア。 錦織敦史が描く“グロテスク”な少女たちの物語が、いま動き出す────。",
+      "source_url": "https://www.themoviedb.org/movie/1313587"
+    },
+    {
+      "id": 1053231,
+      "tmdbId": 1053231,
+      "title": "BOSS／ボス",
+      "original_title": "보스",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/fkKBSgw4yv1C7d3n2UP5UvGRS2q.jpg",
+      "score": 6.1,
+      "votes": 12,
+      "popularity": 2.2613,
+      "overview": "あるギャング組織で、カリスマと呼ばれたボスが不慮の死を遂げる。長年ボスを支え、組織のために抗争を生き抜いてきた側近の三人が、そのまま後継者候補として名前を挙げられる。だが本命と目されるスンテにも、対抗馬のガンピョにも、跡目を継ぐ気はない。ただ一人その座を望むパノは、組織内の人望を得られずにいる。誰も引き受けたがらない次期ボスの座をめぐって押し付け合いが続くなか、組織に潜入したものの正体をほとんど隠せていない警官までが巻き込まれ、事態はいっそう収拾がつかなくなっていく。",
+      "source_url": "https://www.themoviedb.org/movie/1053231"
+    },
+    {
       "id": 1473439,
       "tmdbId": 1473439,
       "title": "バッド・ルーテナント：トウキョウ",
@@ -379,6 +374,19 @@
       "popularity": 2.2209,
       "overview": "まるでこの世の業を全て請け負うかのように、自暴自棄な生活を送る警部補・矢吹恭二。闇に落ちた彼の悪行は、警察署内でも噂として囁かれはじめていた。時を同じくしてアメリカのＦＢＩ捜査官・グエンが来日。とある目的をもって来日したグエンと矢吹の思惑はこの東京の街で複雑に絡み合っていく。果たして彼らを待つものは絶望か、それとも―。",
       "source_url": "https://www.themoviedb.org/movie/1473439"
+    },
+    {
+      "id": 1694711,
+      "tmdbId": 1694711,
+      "title": "装甲騎兵ボトムズ 灰色の魔女 第1作",
+      "original_title": "装甲騎兵ボトムズ 灰色の魔女 第1作",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/2EQ3JA0NT6bDg0xoZlYWGSBbzqO.jpg",
+      "score": 10.0,
+      "votes": 1,
+      "popularity": 2.1919,
+      "overview": "アストラギウス銀河を二分するギルガメスとバララント。 この二つの勢力は、原因すら定かではない戦争を100年近く続けていた。  “百年戦争”末期――アスガルズ星系第二惑星ヴァルキュリアⅡの前線基地に、一人の女性士官マキ・シュタウフェンベルクが赴任する。 彼女は、寄せ集めの兵士で構成された懲罰部隊にあって、どんな過酷な作戦でもただ一人生還することから“魔女”と呼ばれる兵士、アッシュ・ヴァンプスを調査する任務を密かに受けていた。  戦場の真実は、戦場でしか知ることはできない。  アッシュの部隊に命じられた敵陣への強行降下作戦に、AT（アーマードトルーパー）のパイロットとしてマキは参加を決意する。  生還不可能にも見える作戦の中、戦況は刻一刻と絶望へ向かう。 戦火の中でアッシュを追うマキは、やがて彼女に秘められた真実へと近づいていく――。",
+      "source_url": "https://www.themoviedb.org/movie/1694711"
     },
     {
       "id": 1236857,
@@ -407,32 +415,6 @@
       "source_url": "https://www.themoviedb.org/movie/59352"
     },
     {
-      "id": 1053231,
-      "tmdbId": 1053231,
-      "title": "BOSS／ボス",
-      "original_title": "보스",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/fkKBSgw4yv1C7d3n2UP5UvGRS2q.jpg",
-      "score": 6.1,
-      "votes": 12,
-      "popularity": 2.2613,
-      "overview": "あるギャング組織で、カリスマと呼ばれたボスが不慮の死を遂げる。長年ボスを支え、組織のために抗争を生き抜いてきた側近の三人が、そのまま後継者候補として名前を挙げられる。だが本命と目されるスンテにも、対抗馬のガンピョにも、跡目を継ぐ気はない。ただ一人その座を望むパノは、組織内の人望を得られずにいる。誰も引き受けたがらない次期ボスの座をめぐって押し付け合いが続くなか、組織に潜入したものの正体をほとんど隠せていない警官までが巻き込まれ、事態はいっそう収拾がつかなくなっていく。",
-      "source_url": "https://www.themoviedb.org/movie/1053231"
-    },
-    {
-      "id": 1410955,
-      "tmdbId": 1410955,
-      "title": "うるわしの宵の月",
-      "original_title": "うるわしの宵の月",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/2ap3yvDVquHTGZp1rSDShK4piNI.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 1.7783,
-      "overview": "滝口宵は、容姿端麗・スマートな「王子」と呼ばれる女子。でも内心では、その完璧な王子像に複雑な思いを抱いていた。そんなとき突然出会ったのは、同じく「王子」と呼ばれる一つ上の先輩、市村琥珀。「あんた、めちゃくちゃ美しいな」彼に言われた一言が、宵の世界を揺らし始める。",
-      "source_url": "https://www.themoviedb.org/movie/1410955"
-    },
-    {
       "id": 1283320,
       "tmdbId": 1283320,
       "title": "URCHIN／アーチン",
@@ -459,19 +441,6 @@
       "source_url": "https://www.themoviedb.org/movie/1707955"
     },
     {
-      "id": 1694711,
-      "tmdbId": 1694711,
-      "title": "装甲騎兵ボトムズ 灰色の魔女 第1作",
-      "original_title": "装甲騎兵ボトムズ 灰色の魔女 第1作",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/2EQ3JA0NT6bDg0xoZlYWGSBbzqO.jpg",
-      "score": 10.0,
-      "votes": 1,
-      "popularity": 2.1919,
-      "overview": "アストラギウス銀河を二分するギルガメスとバララント。 この二つの勢力は、原因すら定かではない戦争を100年近く続けていた。  “百年戦争”末期――アスガルズ星系第二惑星ヴァルキュリアⅡの前線基地に、一人の女性士官マキ・シュタウフェンベルクが赴任する。 彼女は、寄せ集めの兵士で構成された懲罰部隊にあって、どんな過酷な作戦でもただ一人生還することから“魔女”と呼ばれる兵士、アッシュ・ヴァンプスを調査する任務を密かに受けていた。  戦場の真実は、戦場でしか知ることはできない。  アッシュの部隊に命じられた敵陣への強行降下作戦に、AT（アーマードトルーパー）のパイロットとしてマキは参加を決意する。  生還不可能にも見える作戦の中、戦況は刻一刻と絶望へ向かう。 戦火の中でアッシュを追うマキは、やがて彼女に秘められた真実へと近づいていく――。",
-      "source_url": "https://www.themoviedb.org/movie/1694711"
-    },
-    {
       "id": 1560309,
       "tmdbId": 1560309,
       "title": "すべて真夜中の恋人たち",
@@ -485,43 +454,17 @@
       "source_url": "https://www.themoviedb.org/movie/1560309"
     },
     {
-      "id": 1088140,
-      "tmdbId": 1088140,
-      "title": "那張照片裡的我們",
-      "original_title": "那張照片裡的我們",
+      "id": 1410955,
+      "tmdbId": 1410955,
+      "title": "うるわしの宵の月",
+      "original_title": "うるわしの宵の月",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/3QIRaf4yHONrvIwaLwWOOizEnst.jpg",
-      "score": 5.0,
-      "votes": 1,
-      "popularity": 1.4963,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1088140"
-    },
-    {
-      "id": 106378,
-      "tmdbId": 106378,
-      "title": "南極料理人",
-      "original_title": "南極料理人",
-      "year": 2009,
-      "poster": "https://image.tmdb.org/t/p/w342/99vPuzrGf8cDIvpaLaTdyj0s9tF.jpg",
-      "score": 7.1,
-      "votes": 54,
-      "popularity": 1.5404,
-      "overview": "西村は南極の昭和基地からも遠く離れた陸の孤島、南極ドームふじ基地に料理人として派遣される。妻と娘を置いての単身赴任生活で、彼は8人の男性南極越冬隊員たちの胃袋を満たすという大役を任される。基地では雪氷学者をはじめ、雪氷サポート隊員らが彼の料理を心待ちにしており……。",
-      "source_url": "https://www.themoviedb.org/movie/106378"
-    },
-    {
-      "id": 1160984,
-      "tmdbId": 1160984,
-      "title": "정보원",
-      "original_title": "정보원",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/vY1eAlMBfng26chmN5PvHV6Wn8z.jpg",
-      "score": 5.6,
-      "votes": 11,
-      "popularity": 1.1573,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1160984"
+      "poster": "https://image.tmdb.org/t/p/w342/2ap3yvDVquHTGZp1rSDShK4piNI.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 1.7783,
+      "overview": "滝口宵は、容姿端麗・スマートな「王子」と呼ばれる女子。でも内心では、その完璧な王子像に複雑な思いを抱いていた。そんなとき突然出会ったのは、同じく「王子」と呼ばれる一つ上の先輩、市村琥珀。「あんた、めちゃくちゃ美しいな」彼に言われた一言が、宵の世界を揺らし始める。",
+      "source_url": "https://www.themoviedb.org/movie/1410955"
     },
     {
       "id": 1575667,
@@ -537,30 +480,30 @@
       "source_url": "https://www.themoviedb.org/movie/1575667"
     },
     {
-      "id": 1692852,
-      "tmdbId": 1692852,
-      "title": "わたしの知らない子どもたち",
-      "original_title": "わたしの知らない子どもたち",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/lwRpfzxJCmXIPmnvGDUTuzKSYYd.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 1.1787,
-      "overview": "1945年、終戦。音楽家の父のもとで育ち、ごく普通の暮らしを送っていた12歳の少女・茅野琴子は戦争によって家も家族も失い、焼け野原となった東京で、たったひとり生きることになる。  女性であることが生きる危険につながる現実を知った琴子は、少女という性を隠し、少年として生きることを決意する。 やがて将吉をはじめ、同じように家や家族を失った少年たちと出会い、「吉田茂男」と名乗って彼らと行動をともにする。闇市を束ねる菊沢組の親分・菊沢徹から仕事をもらい、ともに支え合う仲間との日々は、戦後ひとりぼっちだった琴子が初めて見つけた「居場所」となっていく。 一方、担任教師だった曽根文美子もまた、敗戦によるイデオロギーの転換と、婚約者を失った中で教師としての誇りも生きる意味も見失っていた。 しかし、父の友人から「琴子を探している」という知らせを受け、琴子を探す旅に出る。 曽根もまた、自らも失っていた人として生きる意味を少しずつ取り戻していく。 やがて子どもたちは東京湾上の孤島の隔離施設へ送られる。 そこでの過酷な環境の中で生かされている子どもたちの実態を知った新聞記者・諸積は、脱走すると決意する琴子たちを海苔漁師・山井甚平と妻・けいへ託す。 山井夫妻は、突然現れた子どもたちを煙たがりながらも生きる術を教えながら、その命を明日へとつないでいく。 これは、戦争によって人生を変えられながらも懸命に生きた子どもたちの 命の輝きと、その命を信じ、それぞれの選択で未来へつないだ人々の姿を描く物語。",
-      "source_url": "https://www.themoviedb.org/movie/1692852"
+      "id": 106378,
+      "tmdbId": 106378,
+      "title": "南極料理人",
+      "original_title": "南極料理人",
+      "year": 2009,
+      "poster": "https://image.tmdb.org/t/p/w342/99vPuzrGf8cDIvpaLaTdyj0s9tF.jpg",
+      "score": 7.1,
+      "votes": 54,
+      "popularity": 1.5404,
+      "overview": "西村は南極の昭和基地からも遠く離れた陸の孤島、南極ドームふじ基地に料理人として派遣される。妻と娘を置いての単身赴任生活で、彼は8人の男性南極越冬隊員たちの胃袋を満たすという大役を任される。基地では雪氷学者をはじめ、雪氷サポート隊員らが彼の料理を心待ちにしており……。",
+      "source_url": "https://www.themoviedb.org/movie/106378"
     },
     {
-      "id": 1822524,
-      "tmdbId": 1822524,
-      "title": "劇場先行版 風を継ぐもの -はじまり-",
-      "original_title": "劇場先行版 風を継ぐもの -はじまり-",
+      "id": 1088140,
+      "tmdbId": 1088140,
+      "title": "那張照片裡的我們",
+      "original_title": "那張照片裡的我們",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/zo376iUKWzBG0M1MIpNW3o1tXzJ.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 1.2388,
-      "overview": "2027年1月のテレビ放送に先行し、2週間限定で映画館で先行上映。  文久3年6月。京都・壬生浪士組屯所に、記憶を失った1人の隊員が運び込まれる。彼に手差し伸べたのは壬生浪士組の助勤・沖田総司です。「君の名前は立川迅助です」そこから始まる記憶喪失の迅助の、隊士としての日々。幕末の混迷の中、壬生浪士組――新選組はその存在感を強め、迅助たちは激動の波に飲み込んでいく。そして、すべての記憶が速やかに蘇ると、世界は大きな変貌を遂げます――――。",
-      "source_url": "https://www.themoviedb.org/movie/1822524"
+      "poster": "https://image.tmdb.org/t/p/w342/3QIRaf4yHONrvIwaLwWOOizEnst.jpg",
+      "score": 5.0,
+      "votes": 1,
+      "popularity": 1.4963,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1088140"
     },
     {
       "id": 1614539,
@@ -576,6 +519,45 @@
       "source_url": "https://www.themoviedb.org/movie/1614539"
     },
     {
+      "id": 1822524,
+      "tmdbId": 1822524,
+      "title": "劇場先行版 風を継ぐもの -はじまり-",
+      "original_title": "劇場先行版 風を継ぐもの -はじまり-",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/zo376iUKWzBG0M1MIpNW3o1tXzJ.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 1.2388,
+      "overview": "2027年1月のテレビ放送に先行し、2週間限定で映画館で先行上映。  文久3年6月。京都・壬生浪士組屯所に、記憶を失った1人の隊員が運び込まれる。彼に手差し伸べたのは壬生浪士組の助勤・沖田総司です。「君の名前は立川迅助です」そこから始まる記憶喪失の迅助の、隊士としての日々。幕末の混迷の中、壬生浪士組――新選組はその存在感を強め、迅助たちは激動の波に飲み込んでいく。そして、すべての記憶が速やかに蘇ると、世界は大きな変貌を遂げます――――。",
+      "source_url": "https://www.themoviedb.org/movie/1822524"
+    },
+    {
+      "id": 1692852,
+      "tmdbId": 1692852,
+      "title": "わたしの知らない子どもたち",
+      "original_title": "わたしの知らない子どもたち",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/lwRpfzxJCmXIPmnvGDUTuzKSYYd.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 1.1787,
+      "overview": "1945年、終戦。音楽家の父のもとで育ち、ごく普通の暮らしを送っていた12歳の少女・茅野琴子は戦争によって家も家族も失い、焼け野原となった東京で、たったひとり生きることになる。  女性であることが生きる危険につながる現実を知った琴子は、少女という性を隠し、少年として生きることを決意する。 やがて将吉をはじめ、同じように家や家族を失った少年たちと出会い、「吉田茂男」と名乗って彼らと行動をともにする。闇市を束ねる菊沢組の親分・菊沢徹から仕事をもらい、ともに支え合う仲間との日々は、戦後ひとりぼっちだった琴子が初めて見つけた「居場所」となっていく。 一方、担任教師だった曽根文美子もまた、敗戦によるイデオロギーの転換と、婚約者を失った中で教師としての誇りも生きる意味も見失っていた。 しかし、父の友人から「琴子を探している」という知らせを受け、琴子を探す旅に出る。 曽根もまた、自らも失っていた人として生きる意味を少しずつ取り戻していく。 やがて子どもたちは東京湾上の孤島の隔離施設へ送られる。 そこでの過酷な環境の中で生かされている子どもたちの実態を知った新聞記者・諸積は、脱走すると決意する琴子たちを海苔漁師・山井甚平と妻・けいへ託す。 山井夫妻は、突然現れた子どもたちを煙たがりながらも生きる術を教えながら、その命を明日へとつないでいく。 これは、戦争によって人生を変えられながらも懸命に生きた子どもたちの 命の輝きと、その命を信じ、それぞれの選択で未来へつないだ人々の姿を描く物語。",
+      "source_url": "https://www.themoviedb.org/movie/1692852"
+    },
+    {
+      "id": 1160984,
+      "tmdbId": 1160984,
+      "title": "정보원",
+      "original_title": "정보원",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/vY1eAlMBfng26chmN5PvHV6Wn8z.jpg",
+      "score": 5.6,
+      "votes": 11,
+      "popularity": 1.1573,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1160984"
+    },
+    {
       "id": 1688795,
       "tmdbId": 1688795,
       "title": "투모로우바이투게더 월드 투어 ‘액트 : 투모로우'",
@@ -587,45 +569,6 @@
       "popularity": 1.1057,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1688795"
-    },
-    {
-      "id": 1746633,
-      "tmdbId": 1746633,
-      "title": "日曜のあと",
-      "original_title": "日曜のあと",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/m2pk8MqzzfpVdWzxwqhV9ZMJ7dQ.jpg",
-      "score": 4.0,
-      "votes": 1,
-      "popularity": 1.019,
-      "overview": "日曜のあと\r 2026年製作／日本\r 配給：ラビットハウス\r 劇場公開日：2026年11月20日",
-      "source_url": "https://www.themoviedb.org/movie/1746633"
-    },
-    {
-      "id": 517815,
-      "tmdbId": 517815,
-      "title": "ガール・アンド・スパイダー",
-      "original_title": "Das Mädchen und die Spinne",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/juDYUbDjUh3KiuOQqUd3rbL5HOU.jpg",
-      "score": 6.0,
-      "votes": 45,
-      "popularity": 0.9492,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/517815"
-    },
-    {
-      "id": 1797226,
-      "tmdbId": 1797226,
-      "title": "하이브 치어링 파티",
-      "original_title": "하이브 치어링 파티",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/8udWFUoL5NxqKR1xtYinhcxY3gn.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.8702,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1797226"
     },
     {
       "id": 1767360,
@@ -641,30 +584,17 @@
       "source_url": "https://www.themoviedb.org/movie/1767360"
     },
     {
-      "id": 1707282,
-      "tmdbId": 1707282,
-      "title": "男ともだち",
-      "original_title": "男ともだち",
+      "id": 1746633,
+      "tmdbId": 1746633,
+      "title": "日曜のあと",
+      "original_title": "日曜のあと",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/im9W3Hw08NsHhOlF60FCX76Ln7u.jpg",
-      "score": 8.0,
+      "poster": "https://image.tmdb.org/t/p/w342/m2pk8MqzzfpVdWzxwqhV9ZMJ7dQ.jpg",
+      "score": 4.0,
       "votes": 1,
-      "popularity": 0.8869,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1707282"
-    },
-    {
-      "id": 1102390,
-      "tmdbId": 1102390,
-      "title": "煙突の中の雀",
-      "original_title": "Der Spatz im Kamin",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/yX4ZvG4ly26ePyfOkkx6dIHeVWN.jpg",
-      "score": 5.731,
-      "votes": 13,
-      "popularity": 0.7894,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1102390"
+      "popularity": 1.019,
+      "overview": "日曜のあと\r 2026年製作／日本\r 配給：ラビットハウス\r 劇場公開日：2026年11月20日",
+      "source_url": "https://www.themoviedb.org/movie/1746633"
     },
     {
       "id": 1748514,
@@ -680,17 +610,17 @@
       "source_url": "https://www.themoviedb.org/movie/1748514"
     },
     {
-      "id": 1527427,
-      "tmdbId": 1527427,
-      "title": "3ミリの恋",
-      "original_title": "3ミリの恋",
+      "id": 517815,
+      "tmdbId": 517815,
+      "title": "ガール・アンド・スパイダー",
+      "original_title": "Das Mädchen und die Spinne",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/cg0VwQsusxRMPNbyJUlUb1JBVH8.jpg",
-      "score": 5.0,
-      "votes": 1,
-      "popularity": 0.8056,
+      "poster": "https://image.tmdb.org/t/p/w342/juDYUbDjUh3KiuOQqUd3rbL5HOU.jpg",
+      "score": 6.0,
+      "votes": 45,
+      "popularity": 0.9492,
       "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1527427"
+      "source_url": "https://www.themoviedb.org/movie/517815"
     },
     {
       "id": 1575872,
@@ -706,43 +636,56 @@
       "source_url": "https://www.themoviedb.org/movie/1575872"
     },
     {
-      "id": 1820858,
-      "tmdbId": 1820858,
-      "title": "いつかの走馬灯で",
-      "original_title": "いつかの走馬灯で",
+      "id": 1707282,
+      "tmdbId": 1707282,
+      "title": "男ともだち",
+      "original_title": "男ともだち",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/kKtfP7PJAdghhRUXtthBG1rTK5D.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.693,
-      "overview": "3 つの異なる世界で、それぞれ別の人生を歩む女性「涼」\r 仕事の重圧、孤独な日常、守り続けたい小さな領域－\r 京都を舞台に繰り広げられる並行世界\r 並行世界として存在する彼女たちは、置かれた環境も抱える思いも異なりますが、日々の中でふと立ち止まり、自身の弱さや葛藤、そしてかすかな希望と向き合う瞬間を迎えます。それらが揺れ動く中で、各編は独立しながらも絡み合い、それぞれの「物語の出口」を探していきます。",
-      "source_url": "https://www.themoviedb.org/movie/1820858"
-    },
-    {
-      "id": 1759179,
-      "tmdbId": 1759179,
-      "title": "シルバー・エクスプレス",
-      "original_title": "シルバー・エクスプレス",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/jOGlxJo4nr1SohOOgN87sIhnZFn.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.62,
+      "poster": "https://image.tmdb.org/t/p/w342/im9W3Hw08NsHhOlF60FCX76Ln7u.jpg",
+      "score": 8.0,
+      "votes": 1,
+      "popularity": 0.8869,
       "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1759179"
+      "source_url": "https://www.themoviedb.org/movie/1707282"
     },
     {
-      "id": 1555226,
-      "tmdbId": 1555226,
-      "title": "恒星の向こう側",
-      "original_title": "恒星の向こう側",
+      "id": 1797226,
+      "tmdbId": 1797226,
+      "title": "하이브 치어링 파티",
+      "original_title": "하이브 치어링 파티",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/2VEvO7Jw0CPCX3Jj1RZ2Ouvrl7V.jpg",
+      "poster": "https://image.tmdb.org/t/p/w342/8udWFUoL5NxqKR1xtYinhcxY3gn.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.5819,
-      "overview": "母と娘、そして夫婦の愛と葛藤。喪失と再生を経て受け継がれる愛のかたちを描く、中川龍太郎監督三部作の最終章。",
-      "source_url": "https://www.themoviedb.org/movie/1555226"
+      "popularity": 0.8702,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1797226"
+    },
+    {
+      "id": 1527427,
+      "tmdbId": 1527427,
+      "title": "3ミリの恋",
+      "original_title": "3ミリの恋",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/cg0VwQsusxRMPNbyJUlUb1JBVH8.jpg",
+      "score": 5.0,
+      "votes": 1,
+      "popularity": 0.8056,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1527427"
+    },
+    {
+      "id": 1102390,
+      "tmdbId": 1102390,
+      "title": "煙突の中の雀",
+      "original_title": "Der Spatz im Kamin",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/yX4ZvG4ly26ePyfOkkx6dIHeVWN.jpg",
+      "score": 5.731,
+      "votes": 13,
+      "popularity": 0.7894,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1102390"
     },
     {
       "id": 1814090,
@@ -758,6 +701,19 @@
       "source_url": "https://www.themoviedb.org/movie/1814090"
     },
     {
+      "id": 1807529,
+      "tmdbId": 1807529,
+      "title": "つりこまち",
+      "original_title": "つりこまち",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/tvtdgpfZJGVaC6cOE0pP0n1fxkH.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 0.7531,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1807529"
+    },
+    {
       "id": 1646897,
       "tmdbId": 1646897,
       "title": "RYUJI 竜二",
@@ -769,6 +725,19 @@
       "popularity": 0.7302,
       "overview": "",
       "source_url": "https://www.themoviedb.org/movie/1646897"
+    },
+    {
+      "id": 1820858,
+      "tmdbId": 1820858,
+      "title": "いつかの走馬灯で",
+      "original_title": "いつかの走馬灯で",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/kKtfP7PJAdghhRUXtthBG1rTK5D.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 0.693,
+      "overview": "3 つの異なる世界で、それぞれ別の人生を歩む女性「涼」\r 仕事の重圧、孤独な日常、守り続けたい小さな領域－\r 京都を舞台に繰り広げられる並行世界\r 並行世界として存在する彼女たちは、置かれた環境も抱える思いも異なりますが、日々の中でふと立ち止まり、自身の弱さや葛藤、そしてかすかな希望と向き合う瞬間を迎えます。それらが揺れ動く中で、各編は独立しながらも絡み合い、それぞれの「物語の出口」を探していきます。",
+      "source_url": "https://www.themoviedb.org/movie/1820858"
     },
     {
       "id": 1754757,
@@ -797,69 +766,17 @@
       "source_url": "https://www.themoviedb.org/movie/1807459"
     },
     {
-      "id": 1795736,
-      "tmdbId": 1795736,
-      "title": "星の教室",
-      "original_title": "星の教室",
+      "id": 1759179,
+      "tmdbId": 1759179,
+      "title": "シルバー・エクスプレス",
+      "original_title": "シルバー・エクスプレス",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/cvOS0T7bals4dRLsYu15YOMmgsM.jpg",
+      "poster": "https://image.tmdb.org/t/p/w342/jOGlxJo4nr1SohOOgN87sIhnZFn.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.5449,
-      "overview": "中学生の頃、いじめが原因で学校へ通えなくなり、義務教育を十分に受けられないまま大人になった潤間さやか  （桜田ひより）。学歴への引け目や生きづらさを抱えながらフリーターとして日々を過ごしていたある日、さまさまな事情から学ぶ機会を失った人たちのための\"夜間中学”があることを知る。  「もう一度やり直したいーー」勇気を振り絞って夜間中学の門を叩いたさやかは、中国残留孤児の蕗子（浅野温子）、ベトナム出身のスアン（ナターシャ）、料亭で修業に励む健児（小林虎之介）、韓国料理店を営む正子（中尾ミエ）、戦後の混乱の中で十分な教育を受けられなかった  遠見（山本學）ら、年齢も国籍も境遇も異なる仲間たちと出会う。生徒たちに寄り添う担任教師・江口（真木よう子） や夜間中学を取材する漫画家・用瀬（小泉孝太郎）  らの支えのもと、さやかの2度目の中学生活が始まる。  仲間たちとの出会いは、止まっていた彼女の人生を少しずつ動かしていくのだった。",
-      "source_url": "https://www.themoviedb.org/movie/1795736"
-    },
-    {
-      "id": 1689343,
-      "tmdbId": 1689343,
-      "title": "ミュージカル「ヘタリア〜World⭐︎Starts〜」",
-      "original_title": "ミュージカル「ヘタリア〜World⭐︎Starts〜」",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/bwfdiCXUzWbjD2TGxWOlt4rZq8C.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.482,
+      "popularity": 0.62,
       "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1689343"
-    },
-    {
-      "id": 1801113,
-      "tmdbId": 1801113,
-      "title": "昨夜は殺れたかも",
-      "original_title": "昨夜は殺れたかも",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/suzbIuFNc3qFWMaHoD6Zvt8wCsn.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.4991,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1801113"
-    },
-    {
-      "id": 1774868,
-      "tmdbId": 1774868,
-      "title": "エリザベート－愛と死の輪舞－",
-      "original_title": "エリザベート－愛と死の輪舞－",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/jHBAc7DbVgd7FozCFv7Pdk7ZhTj.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.4462,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1774868"
-    },
-    {
-      "id": 1724371,
-      "tmdbId": 1724371,
-      "title": "ないものねだりの君に光の花束を",
-      "original_title": "ないものねだりの君に光の花束を",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/ijOsHTIae0dYcRUSvGrCrAeTIJ6.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.5034,
-      "overview": "高校生の染矢影子は、すべてにおいて“普通”で個性のない自分にコンプレックスを抱えている。同じクラスの鈴木真昼は人気急上昇中のアイドルグループ「CHROME（クロム）」のメンバーとして活躍しており、勉強も性格も完璧の“特別”な存在だ。自分とは生きる世界の違う真昼に引け目を感じてしまう影子だったが、一緒に図書委員になったことをきっかけに、彼が誰にも打ち明けてこなかった過去を知る。",
-      "source_url": "https://www.themoviedb.org/movie/1724371"
+      "source_url": "https://www.themoviedb.org/movie/1759179"
     },
     {
       "id": 1807470,
@@ -875,17 +792,30 @@
       "source_url": "https://www.themoviedb.org/movie/1807470"
     },
     {
-      "id": 1807529,
-      "tmdbId": 1807529,
-      "title": "つりこまち",
-      "original_title": "つりこまち",
+      "id": 1555226,
+      "tmdbId": 1555226,
+      "title": "恒星の向こう側",
+      "original_title": "恒星の向こう側",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/tvtdgpfZJGVaC6cOE0pP0n1fxkH.jpg",
+      "poster": "https://image.tmdb.org/t/p/w342/2VEvO7Jw0CPCX3Jj1RZ2Ouvrl7V.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.7531,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1807529"
+      "popularity": 0.5819,
+      "overview": "母と娘、そして夫婦の愛と葛藤。喪失と再生を経て受け継がれる愛のかたちを描く、中川龍太郎監督三部作の最終章。",
+      "source_url": "https://www.themoviedb.org/movie/1555226"
+    },
+    {
+      "id": 1795736,
+      "tmdbId": 1795736,
+      "title": "星の教室",
+      "original_title": "星の教室",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/cvOS0T7bals4dRLsYu15YOMmgsM.jpg",
+      "score": 8.0,
+      "votes": 1,
+      "popularity": 0.5449,
+      "overview": "中学生の頃、いじめが原因で学校へ通えなくなり、義務教育を十分に受けられないまま大人になった潤間さやか  （桜田ひより）。学歴への引け目や生きづらさを抱えながらフリーターとして日々を過ごしていたある日、さまさまな事情から学ぶ機会を失った人たちのための\"夜間中学”があることを知る。  「もう一度やり直したいーー」勇気を振り絞って夜間中学の門を叩いたさやかは、中国残留孤児の蕗子（浅野温子）、ベトナム出身のスアン（ナターシャ）、料亭で修業に励む健児（小林虎之介）、韓国料理店を営む正子（中尾ミエ）、戦後の混乱の中で十分な教育を受けられなかった  遠見（山本學）ら、年齢も国籍も境遇も異なる仲間たちと出会う。生徒たちに寄り添う担任教師・江口（真木よう子） や夜間中学を取材する漫画家・用瀬（小泉孝太郎）  らの支えのもと、さやかの2度目の中学生活が始まる。  仲間たちとの出会いは、止まっていた彼女の人生を少しずつ動かしていくのだった。",
+      "source_url": "https://www.themoviedb.org/movie/1795736"
     },
     {
       "id": 1687667,
@@ -901,17 +831,43 @@
       "source_url": "https://www.themoviedb.org/movie/1687667"
     },
     {
-      "id": 1773014,
-      "tmdbId": 1773014,
-      "title": "4アウト ─もう一度、プレイボール─",
-      "original_title": "4アウト ─もう一度、プレイボール─",
+      "id": 1724371,
+      "tmdbId": 1724371,
+      "title": "ないものねだりの君に光の花束を",
+      "original_title": "ないものねだりの君に光の花束を",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/jc3MtWlLeuHQJwEYlvb5SVcVhCv.jpg",
-      "score": 5.0,
-      "votes": 1,
-      "popularity": 0.3658,
-      "overview": "子どもの頃から野球一筋だった矢上雄一は、結婚して父になってからも社会人野球に情熱を注いでいたが、年齢の壁には勝てず戦力外通告を受けてしまう。身体障害者スポーツセンターに再就職した彼は、聴覚障害を持つ泉邦衛から野球チームの監督を依頼され、戸惑いながらも引き受けることを決める。同僚の高橋明日香と共に選手集めに奔走し、やがてチームは全国大会に挑むことになるが、現実は厳しく初めての大舞台で惨敗してしまう。「勝ちたい」と言いながらも悔しそうな様子を見せない選手たちに失望した矢上は、監督を降りると宣言するが……。",
-      "source_url": "https://www.themoviedb.org/movie/1773014"
+      "poster": "https://image.tmdb.org/t/p/w342/ijOsHTIae0dYcRUSvGrCrAeTIJ6.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 0.5034,
+      "overview": "高校生の染矢影子は、すべてにおいて“普通”で個性のない自分にコンプレックスを抱えている。同じクラスの鈴木真昼は人気急上昇中のアイドルグループ「CHROME（クロム）」のメンバーとして活躍しており、勉強も性格も完璧の“特別”な存在だ。自分とは生きる世界の違う真昼に引け目を感じてしまう影子だったが、一緒に図書委員になったことをきっかけに、彼が誰にも打ち明けてこなかった過去を知る。",
+      "source_url": "https://www.themoviedb.org/movie/1724371"
+    },
+    {
+      "id": 1801113,
+      "tmdbId": 1801113,
+      "title": "昨夜は殺れたかも",
+      "original_title": "昨夜は殺れたかも",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/suzbIuFNc3qFWMaHoD6Zvt8wCsn.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 0.4991,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1801113"
+    },
+    {
+      "id": 1689343,
+      "tmdbId": 1689343,
+      "title": "ミュージカル「ヘタリア〜World⭐︎Starts〜」",
+      "original_title": "ミュージカル「ヘタリア〜World⭐︎Starts〜」",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/bwfdiCXUzWbjD2TGxWOlt4rZq8C.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 0.482,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1689343"
     },
     {
       "id": 1069537,
@@ -927,17 +883,30 @@
       "source_url": "https://www.themoviedb.org/movie/1069537"
     },
     {
-      "id": 1462841,
-      "tmdbId": 1462841,
-      "title": "LEONIDAS",
-      "original_title": "LEONIDAS",
+      "id": 1802704,
+      "tmdbId": 1802704,
+      "title": "Creepy Nuts - NORTH AMERICA TOUR: LIVE in NY & DOCUMENTARY FILM",
+      "original_title": "Creepy Nuts - NORTH AMERICA TOUR: LIVE in NY & DOCUMENTARY FILM",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/aiWQBdmDcZc0RjVCkie2LKPzMnu.jpg",
+      "poster": "https://image.tmdb.org/t/p/w342/tiMQ6zWgrNGOEk3JdO2Ovt7R5Br.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.3271,
+      "popularity": 0.4644,
+      "overview": "ヒップホップユニット・Creepy Nutsの初の劇場作品",
+      "source_url": "https://www.themoviedb.org/movie/1802704"
+    },
+    {
+      "id": 1774868,
+      "tmdbId": 1774868,
+      "title": "エリザベート－愛と死の輪舞－",
+      "original_title": "エリザベート－愛と死の輪舞－",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/jHBAc7DbVgd7FozCFv7Pdk7ZhTj.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 0.4462,
       "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1462841"
+      "source_url": "https://www.themoviedb.org/movie/1774868"
     },
     {
       "id": 1823861,
@@ -953,17 +922,17 @@
       "source_url": "https://www.themoviedb.org/movie/1823861"
     },
     {
-      "id": 1802704,
-      "tmdbId": 1802704,
-      "title": "Creepy Nuts - NORTH AMERICA TOUR: LIVE in NY & DOCUMENTARY FILM",
-      "original_title": "Creepy Nuts - NORTH AMERICA TOUR: LIVE in NY & DOCUMENTARY FILM",
+      "id": 1807431,
+      "tmdbId": 1807431,
+      "title": "月影のゴールデン街",
+      "original_title": "月影のゴールデン街",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/tiMQ6zWgrNGOEk3JdO2Ovt7R5Br.jpg",
+      "poster": "https://image.tmdb.org/t/p/w342/57Cvx1ePJl4jJJ9CNVyRWSPtvfs.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.4644,
-      "overview": "ヒップホップユニット・Creepy Nutsの初の劇場作品",
-      "source_url": "https://www.themoviedb.org/movie/1802704"
+      "popularity": 0.4157,
+      "overview": "戦後の混乱期から昭和、平成、令和へと姿を変えながら、夢を追う者、夢にやぶれた者、それでも今を生きる者たちが夜ごと集まってきた新宿ゴールデン街。映画監督を目指して大阪から上京してきた青年・ギンジは、ゴールデン街の小さなスナック「スイカズラ」に迷い込み、マスターの青木や個性豊かな常連客たちと出会う。そこから始まる35年の物語は、ひとりの青年の成長のみならず、街に生きる人々の時間を記録していく。",
+      "source_url": "https://www.themoviedb.org/movie/1807431"
     },
     {
       "id": 1693902,
@@ -979,17 +948,17 @@
       "source_url": "https://www.themoviedb.org/movie/1693902"
     },
     {
-      "id": 164328,
-      "tmdbId": 164328,
-      "title": "ストレンジ・リトル・キャット",
-      "original_title": "Das merkwürdige Kätzchen",
+      "id": 1773014,
+      "tmdbId": 1773014,
+      "title": "4アウト ─もう一度、プレイボール─",
+      "original_title": "4アウト ─もう一度、プレイボール─",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/cTOis8vPhu1XZxJVgDMDrpZFXE3.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.3193,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/164328"
+      "poster": "https://image.tmdb.org/t/p/w342/jc3MtWlLeuHQJwEYlvb5SVcVhCv.jpg",
+      "score": 5.0,
+      "votes": 1,
+      "popularity": 0.3658,
+      "overview": "子どもの頃から野球一筋だった矢上雄一は、結婚して父になってからも社会人野球に情熱を注いでいたが、年齢の壁には勝てず戦力外通告を受けてしまう。身体障害者スポーツセンターに再就職した彼は、聴覚障害を持つ泉邦衛から野球チームの監督を依頼され、戸惑いながらも引き受けることを決める。同僚の高橋明日香と共に選手集めに奔走し、やがてチームは全国大会に挑むことになるが、現実は厳しく初めての大舞台で惨敗してしまう。「勝ちたい」と言いながらも悔しそうな様子を見せない選手たちに失望した矢上は、監督を降りると宣言するが……。",
+      "source_url": "https://www.themoviedb.org/movie/1773014"
     },
     {
       "id": 1774055,
@@ -1005,56 +974,30 @@
       "source_url": "https://www.themoviedb.org/movie/1774055"
     },
     {
-      "id": 1807431,
-      "tmdbId": 1807431,
-      "title": "月影のゴールデン街",
-      "original_title": "月影のゴールデン街",
+      "id": 1462841,
+      "tmdbId": 1462841,
+      "title": "LEONIDAS",
+      "original_title": "LEONIDAS",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/57Cvx1ePJl4jJJ9CNVyRWSPtvfs.jpg",
+      "poster": "https://image.tmdb.org/t/p/w342/aiWQBdmDcZc0RjVCkie2LKPzMnu.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.4157,
-      "overview": "戦後の混乱期から昭和、平成、令和へと姿を変えながら、夢を追う者、夢にやぶれた者、それでも今を生きる者たちが夜ごと集まってきた新宿ゴールデン街。映画監督を目指して大阪から上京してきた青年・ギンジは、ゴールデン街の小さなスナック「スイカズラ」に迷い込み、マスターの青木や個性豊かな常連客たちと出会う。そこから始まる35年の物語は、ひとりの青年の成長のみならず、街に生きる人々の時間を記録していく。",
-      "source_url": "https://www.themoviedb.org/movie/1807431"
+      "popularity": 0.3271,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1462841"
     },
     {
-      "id": 1805382,
-      "tmdbId": 1805382,
-      "title": "椎名林檎 党大会 令和八年列島巡回",
-      "original_title": "椎名林檎 党大会 令和八年列島巡回",
+      "id": 164328,
+      "tmdbId": 164328,
+      "title": "ストレンジ・リトル・キャット",
+      "original_title": "Das merkwürdige Kätzchen",
       "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/mhLlv62pOP44vLq6YsS31u9bU7t.jpg",
+      "poster": "https://image.tmdb.org/t/p/w342/cTOis8vPhu1XZxJVgDMDrpZFXE3.jpg",
       "score": 0,
       "votes": 0,
-      "popularity": 0.2684,
+      "popularity": 0.3193,
       "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1805382"
-    },
-    {
-      "id": 1820214,
-      "tmdbId": 1820214,
-      "title": "妖怪VS仮面ライダーマイス",
-      "original_title": "妖怪VS仮面ライダーマイス",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/yh5e5UERGyO6MqdBxRRi4HlSqNy.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.2245,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1820214"
-    },
-    {
-      "id": 1799743,
-      "tmdbId": 1799743,
-      "title": "演歌の坂道",
-      "original_title": "演歌の坂道",
-      "year": 2026,
-      "poster": "https://image.tmdb.org/t/p/w342/mL5APDoPtAnYDWICsQrAWNmXUKz.jpg",
-      "score": 0,
-      "votes": 0,
-      "popularity": 0.3091,
-      "overview": "",
-      "source_url": "https://www.themoviedb.org/movie/1799743"
+      "source_url": "https://www.themoviedb.org/movie/164328"
     },
     {
       "id": 1807445,
@@ -1068,6 +1011,19 @@
       "popularity": 0.3166,
       "overview": "人生に迷走している歴史教師・野田柚季は、車を運転中に隕石に直撃されそうになったところを、教え子の村木蒼によって救われる。柚季は廃校が決まった高校で、単位の足りない3年生2人の補習講義を担当しており、そのうちの1人が蒼だった。蒼は未来を予知できる超能力者で、彼の父親も時間を止める能力をもっている。教師の仕事にうんざりしていた柚季は、蒼の予知能力を使って人生を逆転させようと考える。一方、孤独を抱える蒼は、どこかズレているが真っ直ぐに自分と向き合ってくれる柚季に恋心を抱きはじめる。しかし柚季の未来には、ある重大な秘密が隠されていた。",
       "source_url": "https://www.themoviedb.org/movie/1807445"
+    },
+    {
+      "id": 1799743,
+      "tmdbId": 1799743,
+      "title": "演歌の坂道",
+      "original_title": "演歌の坂道",
+      "year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w342/mL5APDoPtAnYDWICsQrAWNmXUKz.jpg",
+      "score": 0,
+      "votes": 0,
+      "popularity": 0.3091,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1799743"
     },
     {
       "id": 1755423,
@@ -1120,6 +1076,19 @@
       "popularity": 0.1183,
       "overview": "「見えるか保己一」で直木賞候補となった蝉谷めぐ実、エッセイ「夢みるかかとにご飯つぶ」の清繭子、「解答者は走ってください」で文藝賞優秀作を受賞した佐佐木陸、芥川賞候補作「たえまない光の足し算」の日比野コレコ、第一歌集「これからの友情」を発表した丸田洋渡、さらに角田光代、西加奈子、金原ひとみ、穂村弘ら、世代も作風もキャリアも異なる作家たちの姿と言葉を記録。作品を生み出す喜びをもつ一方で、評価されること、執筆で生計を立てること、作家として生き続けることへの葛藤など、それぞれの場所で言葉と向き合い、書くことを続ける彼らの日常を追い、文学の現在とその先を見つめる。",
       "source_url": "https://www.themoviedb.org/movie/1807502"
+    },
+    {
+      "id": 1730207,
+      "tmdbId": 1730207,
+      "title": "アユラ",
+      "original_title": "アユラ",
+      "year": 2026,
+      "poster": null,
+      "score": 0,
+      "votes": 0,
+      "popularity": 0.0969,
+      "overview": "",
+      "source_url": "https://www.themoviedb.org/movie/1730207"
     },
     {
       "id": 1369767,

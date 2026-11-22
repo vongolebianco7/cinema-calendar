@@ -2,6 +2,7 @@ import json
 import pathlib
 import tempfile
 import unittest
+from datetime import datetime, timezone
 from unittest.mock import patch
 
 from scripts.discover_streaming_announcements import discover
@@ -75,10 +76,18 @@ class DiscoveryTests(unittest.TestCase):
 
             public_dns = [(2, 1, 6, "", ("93.184.216.34", 443))]
             with patch("scripts.discover_streaming_announcements.socket.getaddrinfo", return_value=public_dns):
-                self.assertEqual(discover(config, output, opener=opener), 2)
-            candidates = json.loads(output.read_text(encoding="utf-8"))["candidates"]
+                self.assertEqual(discover(
+                    config, output, opener=opener,
+                    now=datetime(2026, 11, 18, 1, 23, tzinfo=timezone.utc),
+                ), 2)
+            result = json.loads(output.read_text(encoding="utf-8"))
+            candidates = result["candidates"]
             self.assertEqual({item["service"] for item in candidates}, {"Netflix", "Apple TV+"})
             self.assertTrue(all(item["status"] == "needs_release_date_verification" for item in candidates))
+            self.assertEqual(result["generated_at"], "2026-11-18T01:23:00Z")
+            self.assertEqual(result["feeds_checked"], 2)
+            self.assertEqual(result["candidate_count"], 2)
+            self.assertEqual(result["verified_catalog_matches"], 0)
 
 
 if __name__ == "__main__":

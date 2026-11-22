@@ -35,13 +35,33 @@
       "acquisition": "curated official announcements imported by script",
       "coverage": "dated premieres with citations; not current availability",
       "workflow": ".github/workflows/update-movies.yml",
-      "trigger": "日次の検証・取込と公式発表データ更新時。元発表の自動収集は認証済み公式フィードがないため手動。",
+      "trigger": "日次の検証・取込と公式発表データ更新時。公式フィードの自動発見候補または手動確認した公式発表を、映画・日本向け日付・作品IDの審査後に公開。",
       "ui_routes": [
         "index.html",
         "discover.html"
       ],
       "name": "配信開始予定の公式発表",
       "count_field": "movies"
+    },
+    {
+      "id": "streaming-premiere-discovery",
+      "category": "streaming",
+      "status": "automated",
+      "dataset": "data/streaming-announcement-candidates.json",
+      "generated_at_field": "generated_at",
+      "max_age_hours": 48,
+      "freshness_enforced": false,
+      "source": "Netflix・Amazon Japan・Apple TV Pressの公式RSS/Atom",
+      "source_url": "data/streaming-official-feeds.json",
+      "acquisition": "発行元が案内する公式フィードだけを毎日取得。HTMLは取得せず、候補を公開データへ自動登録しない。",
+      "coverage": "3つの公式ニュースフィードから発表候補を検出。映画か、日付が日本向けか、TMDB作品IDが一意かは別途審査し、合格した記録だけを配信開始予定へ公開する。全サービス・全作品の網羅ではない。",
+      "workflow": ".github/workflows/refresh-official-streaming.yml",
+      "trigger": "毎日01:23 UTCと関連設定変更時。取得失敗時は直近の成功候補を保持。",
+      "ui_routes": [
+        "about-data.html"
+      ],
+      "name": "配信開始発表の公式フィード候補発見",
+      "count_field": "candidates"
     },
     {
       "id": "theater-showtimes",

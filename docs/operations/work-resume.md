@@ -600,3 +600,12 @@ Keep #872 and #244 open. Require fresh exact-head CI after this documentation ch
 - Latest scheduled updater run `44158083603` saved JSON successfully and failed only at direct PostgreSQL sync because Neon was unavailable. It was not retried. No manual updater dispatch, manual Vercel deploy, scraping, paid action or quota workaround was used; user viewing history, ratings, reviews, bookmarks and backups were untouched.
 - Next: require fresh exact-head checks on this proof/docs-only tip, merge only if unchanged and green, then confirm automatic production READY and public JSON health. Keep #244 open.
 
+## 2026-11-22 15:06 JST — official-feed health PR resumed on live main
+
+- Live main is `98754aabfcebb3a65539d982272b824843972793`. Issue #593 remains closed. Canonical production is READY on the same SHA (`dpl_7TuysNXLoy73G8MoLVLSHmDxY3QG`).
+- Canonical boxoffice JSON is HTTP 200 with 1,808 by-year rows plus 100 all-time rows and zero missing posters. Canonical streaming JSON is HTTP 200 with 464 rows and zero missing posters. Issue #244 remains open.
+- Existing PR #886 was not duplicated. Its prior source had two cancelled long workflows and had become unmergeable after four days of main updates. The implementation was rebased onto current main; live source timestamps and counts won every data conflict.
+- Source head `fffc3fd17b1efed50e2d80a45837a841923f2d6f` reports approved official RSS/Atom candidate discovery separately from reviewed publication, records check/candidate/catalog-match counts, and preserves last-known-good candidates/status after fetch failure. It does not auto-publish candidates.
+- Focused verification passed 14 tests. `python scripts/quality_gate.py` passed the complete deterministic suite. No user history, rating, review, bookmark, backup, Neon data, paid service, scraper, manual updater dispatch or manual deployment changed.
+- Next: move the existing PR #886 branch to the rebased commit, require fresh exact-head CI, then renew the release receipt only after the four required source-head workflows pass. Keep #244 open until production status and rendered acceptance are verified.
+

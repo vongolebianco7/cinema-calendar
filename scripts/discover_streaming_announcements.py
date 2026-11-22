@@ -9,7 +9,7 @@ import pathlib
 import re
 import socket
 import tempfile
-from datetime import date
+from datetime import date, datetime, timezone
 import unicodedata
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -99,7 +99,8 @@ def classify_candidate(candidate, verified_movies):
     return result
 
 
-def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen, catalog=VERIFIED_CATALOG):
+def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen,
+             catalog=VERIFIED_CATALOG, now=None):
     feeds = json.loads(config.read_text(encoding="utf-8"))
     catalog_data = json.loads(catalog.read_text(encoding="utf-8"))
     verified_movies = catalog_data.get("movies")
@@ -142,7 +143,22 @@ def discover(config=CONFIG, output=OUTPUT, opener=urllib.request.urlopen, catalo
     classified = [classify_candidate(item, verified_movies) for item in unique]
     if not feeds.get("feeds"):
         print("No verified official RSS endpoints configured; discovery is inactive")
-    result = {"candidates": sorted(classified, key=lambda item: (item["service"], item["source_url"]))}
+    result = {"schema_version": 1}
+    if feeds.get("feeds"):
+        checked_at = now or datetime.now(timezone.utc)
+        if checked_at.tzinfo is None:
+            checked_at = checked_at.replace(tzinfo=timezone.utc)
+        result.update({
+            "generated_at": checked_at.astimezone(timezone.utc).isoformat().replace("+00:00", "Z"),
+            "feeds_checked": len(feeds["feeds"]),
+            "candidate_count": len(classified),
+            "verified_catalog_matches": sum(
+                item.get("status") == "already_in_verified_catalog" for item in classified
+            ),
+        })
+    result["candidates"] = sorted(
+        classified, key=lambda item: (item["service"], item["source_url"])
+    )
     content = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if output.exists() and output.read_text(encoding="utf-8") == content:
         return len(classified)

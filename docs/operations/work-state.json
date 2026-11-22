@@ -1,22 +1,27 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T17:16:00Z",
-  "status": "production_verified",
+  "updated_at": "2026-11-22T18:13:00Z",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "49826243044a4df88ba9542fc86691edd29a7a91",
-  "branch": "codex/239-checkpoint-source-guard-20261123",
-  "head_sha": "49826243044a4df88ba9542fc86691edd29a7a91",
+  "base_sha": "14f555a2817e2d5e69ce6cae7d11ecb64df03068",
+  "branch": "codex/244-serialize-generated-data-writers-20261123",
+  "head_sha": "747b39261ab18e6f658ed5664255a7c744ad7c2f",
   "pull_request": {
-    "number": 888,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/888",
-    "state": "merged"
+    "number": 890,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/890",
+    "state": "open"
   },
   "open_pull_requests": [
     {
       "number": 879,
       "url": "https://github.com/vongolebianco7/cinema-calendar/pull/879",
       "title": "VIVANT診断の好きな映画を9作品から選べるようにする"
+    },
+    {
+      "number": 890,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/890",
+      "title": "fix: serialize official streaming data writer"
     }
   ],
   "work_items": [
@@ -33,6 +38,13 @@
       "status": "production_verified",
       "issue": 244,
       "acceptance": "Every reviewed supplement source and regional evidence URL must use the service-specific official-host allowlist; rejection preserves last-known-good output."
+    },
+    {
+      "id": "P0-244-GENERATED-WRITER-LOCK",
+      "title": "Serialize official streaming and generated-data publishers",
+      "status": "exact_source_ci_verified",
+      "issue": 244,
+      "acceptance": "The official streaming refresh uses the shared cinema-database-write concurrency lock; exact source CI is green and final receipt-head CI is required before merge."
     }
   ],
   "verification": [
@@ -59,10 +71,22 @@
     {
       "check": "Ordinary official refresh",
       "result": "Run 45048269309 accepted the current supplements and succeeded through validation, enrichment, import, poster/runtime backfill, official candidate discovery and source-status generation. Only final generated-data commit failed when concurrent now-playing commit 2b9a07a4 moved main and conflicted during safe rebase; no rerun was dispatched."
+    },
+    {
+      "check": "Live state 2026-11-23 03:13 JST",
+      "result": "main 14f555a2817e2d5e69ce6cae7d11ecb64df03068; #239/#244 open; #593 closed. Canonical boxoffice JSON HTTP 200 with 1,908 rows and zero poster gaps; streaming JSON HTTP 200 with 465 rows and zero poster gaps."
+    },
+    {
+      "check": "PR #890 exact source CI",
+      "result": "Source head 747b39261ab18e6f658ed5664255a7c744ad7c2f passed Autonomous 45052805004, smoke 45052804968, frontend 45052804983, backend 45052804990, Full Python 45052804982, mobile 45052804979, completeness 45052805009 and visual QA 45052804966. Executable digest bfe23e06e4e13054233d0c562225363d17113255c655116796fffdc2c7339e1d."
+    },
+    {
+      "check": "Generated-data writer serialization",
+      "result": "refresh-official-streaming now shares cinema-database-write with movie, now-playing and TV writers. cancel-in-progress remains false; bounded rebase/push retries and last-known-good publication behavior remain unchanged."
     }
   ],
   "blockers": [
-    "The official refresh final writer step was not re-run because the failure was a bounded concurrent-main conflict after every validation step succeeded. Confirm the next ordinary scheduled refresh publishes cleanly on a quiet main.",
+    "PR #890 receipt/docs-only tip requires fresh exact-head CI before merge. After merge, confirm the next ordinary official refresh queues behind other generated-data writers and publishes without overlap; do not manually dispatch.",
     "December 2026 public coverage remains six Netflix films; no additional non-Netflix film has yet met Japan-specific official date and unique identity evidence."
   ],
   "deployment": {
@@ -79,5 +103,5 @@
     "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass.",
     "The failed generated-data writer was not retried; last-known-good public data remains intact."
   ],
-  "next_action": "At the next ordinary refresh-official-streaming schedule, confirm the final atomic publish succeeds against a quiet main; do not manually dispatch. Continue reviewing official Japan December announcements for non-Netflix movies with unique TMDB identity. Keep #244 open."
+  "next_action": "Require fresh exact-head CI on PR #890 after the CI receipt/checkpoint update. Merge only if unchanged, mergeable and green; then confirm Vercel READY, public JSON health and the next ordinary official refresh writer serialization. Keep #244 open."
 }

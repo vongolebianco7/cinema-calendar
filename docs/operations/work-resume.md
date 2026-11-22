@@ -525,3 +525,14 @@ This makes six reviewed candidates on PR #867: Steps, In Waves, Ray Gunn, Proxie
 - No viewing history, rating, review, bookmark or backup changed. No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deploy, quota workaround or CI bypass.
 - Blocker: December coverage remains six Netflix movies. No further non-Netflix movie has yet met Japan-specific official release-date evidence and unique identity requirements.
 - Next: observe the next ordinary scheduled official refresh and confirm its final atomic publish succeeds on a quiet main. Continue reviewing official Japan December announcements for non-Netflix movies; do not infer dates or identities. Keep #244 open.
+
+
+## Live checkpoint — 2026-11-23 03:13 JST — generated-data writer serialization
+
+- Live main is `14f555a2817e2d5e69ce6cae7d11ecb64df03068`. #239 and #244 remain open; #593 remains closed. Canonical boxoffice JSON is HTTP 200 with 1,808 by-year + 100 all-time rows and zero poster gaps. Canonical streaming JSON is HTTP 200 with 465 rows and zero poster gaps.
+- The last ordinary official refresh run `45048269309` passed validation, enrichment, import, backfill, discovery and source-status generation, then conflicted only at its final commit with a concurrent now-playing writer.
+- PR #890 source head `747b39261ab18e6f658ed5664255a7c744ad7c2f` moves the official streaming workflow from its private concurrency group to the repository-wide `cinema-database-write` group already used by movie, now-playing and TV writers. `cancel-in-progress: false`, bounded safe push retries and last-known-good behavior are unchanged.
+- Local focused tests passed 32/32 and the complete quality gate passed, including 601 Node tests. Exact source CI passed: Autonomous `45052805004`, smoke `45052804968`, frontend `45052804983`, backend `45052804990`, Full Python `45052804982`, mobile `45052804979`, completeness `45052805009`, visual QA `45052804966`. Executable digest: `bfe23e06e4e13054233d0c562225363d17113255c655116796fffdc2c7339e1d`.
+- The production receipt now binds that tested source. Require fresh CI on the receipt/docs-only final tip before merge. Do not manually dispatch an updater or deploy.
+- No movie data, viewing history, ratings, reviews, bookmarks or backups changed. No scraping, paid source, Neon retry, quota workaround or CI bypass.
+- Next: merge only after final exact-head checks pass, then verify Vercel READY and public JSON remain healthy. Observe the next ordinary official refresh to prove queued serialization. Keep #244 open.

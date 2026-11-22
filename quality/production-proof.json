@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "a37f34b10094c7212d45bce73e27b7c53a615e66",
-  "verified_at": "2026-11-22T22:49:23Z",
-  "note": "Exact-source CI receipt for PR #891 source head a37f34b10094c7212d45bce73e27b7c53a615e66; executable digest f51a728e994700b05a50561cfea234626adf6e325915b18080d6855c86216ee9. Required workflows passed on this exact head: Autonomous quality gate run 45078862912, CINELVA smoke tests run 45078862839, Validate frontend run 45078862727, and Reproducible backend build run 45078862719. The Autonomous quality gate included Chromium and WebKit 390px smoke checks. The source adds three officially confirmed December streaming entries and a strict individual Prime Video source URL allowlist; current TMDB identity/poster data is matched by exact IDs. This is a source receipt; the receipt/docs-only final PR tip requires fresh exact-head CI before merge."
+  "head_sha": "9cf85cea32ba7564c5753eb2f172a9c6df034b26",
+  "verified_at": "2026-11-22T23:25:16Z",
+  "note": "Exact-source CI receipt for PR #892 source head 9cf85cea32ba7564c5753eb2f172a9c6df034b26; executable digest 26343d04a57cab3b3be9ef636416763bc64f9f9101efd98824b26ab97e07bc02. The merged main tree has the same Git tree as this tested source head. Required workflows passed on this exact PR head: Autonomous quality gate run 45082212202, CINELVA smoke tests run 45082212070, Validate frontend run 45082212099, and Reproducible backend build run 45082212025. Autonomous quality gate included Chromium and WebKit iPhone-size smoke checks. This change only renews the source-bound publication receipt; fresh exact-head checks on this receipt-only PR are required before merge."
 }

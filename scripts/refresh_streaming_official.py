@@ -35,7 +35,25 @@ def registered_service_hosts(path=SERVICES):
         raise ValueError("Streaming service registry is empty")
     return registry
 
+def registered_service_urls(path=SERVICES):
+    data = json.loads(path.read_text(encoding="utf-8"))
+    services = data.get("services") if isinstance(data, dict) else None
+    if not isinstance(services, list):
+        raise ValueError("Invalid streaming service registry")
+    registry = {}
+    for entry in services:
+        if not isinstance(entry, dict) or not isinstance(entry.get("name"), str):
+            raise ValueError("Invalid streaming service entry")
+        urls = entry.get("reviewed_premiere_urls", [])
+        if not isinstance(urls, list):
+            raise ValueError("Invalid reviewed premiere URL policy")
+        registry[entry["name"]] = frozenset(
+            value.strip() for value in urls if isinstance(value, str) and value.strip()
+        )
+    return registry
+
 SERVICE_HOSTS = registered_service_hosts()
+SERVICE_URLS = registered_service_urls()
 ALLOWED = frozenset(SERVICE_HOSTS)
 def refresh(source=None, output=OUTPUT, today=None):
     # Default runs consume every reviewed month file so a new month needs only
@@ -72,7 +90,8 @@ def refresh(source=None, output=OUTPUT, today=None):
             if (service not in ALLOWED or parsed_source.scheme != "https"
                     or not source_host or parsed_source.username
                     or parsed_source.password
-                    or source_host not in SERVICE_HOSTS[service]):
+                    or (source_host not in SERVICE_HOSTS[service]
+                        and url not in SERVICE_URLS.get(service, frozenset()))):
                 raise ValueError("Unrecognized service or unapproved official provenance host")
             region_url = movie.get("region_source_url")
             if region_url is not None:

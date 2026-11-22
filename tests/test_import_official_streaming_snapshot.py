@@ -30,9 +30,9 @@ class OfficialSnapshotImportTests(unittest.TestCase):
             catalog.write_text(json.dumps(before, ensure_ascii=False), encoding="utf-8")
 
             added, _updated = import_snapshot(snapshot, catalog, Path("data/streaming_sources.json"))
-            self.assertEqual(added, 1)
+            self.assertEqual(added, 4)
             after = json.loads(catalog.read_text(encoding="utf-8"))
-            self.assertEqual(len(after["movies"]), len(before["movies"]) + 1)
+            self.assertEqual(len(after["movies"]), len(before["movies"]) + 4)
             matches = [
                 row for row in after["movies"]
                 if row.get("service") == "Netflix"
@@ -43,6 +43,32 @@ class OfficialSnapshotImportTests(unittest.TestCase):
             self.assertEqual(matches[0]["title"], "ザ・ファーザー・ミスアドベンチャー・オブ・クリフ・ブース")
             self.assertEqual(matches[0]["poster"], "https://image.tmdb.org/t/p/w500/gEqfmochcRmyDQFThatTKQfH9GT.jpg")
             self.assertEqual(matches[0]["region_source_url"], "https://www.netflix.com/jp/title/82054606")
+            for service, tmdb_id, date in (
+                ("Prime Video", 1761050, "2026-12-15"),
+                ("WOWOWオンデマンド", 1263012, "2026-12-13"),
+                ("WOWOWオンデマンド", 1370545, "2026-12-25"),
+            ):
+                with self.subTest(service=service, tmdb_id=tmdb_id):
+                    imported = [row for row in after["movies"] if row.get("service") == service and row.get("tmdb_id") == tmdb_id and row.get("date") == date]
+                    self.assertEqual(len(imported), 1)
+
+    def test_january_2027_reviewed_fixture_flows_through_refresh_and_catalog_import(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            supplement, snapshot, catalog = (root / name for name in ("streaming-2027-01-official-supplement.json", "official.json", "streaming.json"))
+            supplement.write_text(json.dumps({"period": "2027-01", "movies": [{
+                "title": "Future Fixture Film", "date": "2027-01-15", "event": "streaming",
+                "service": "Netflix", "source_url": "https://about.netflix.com/ja/news/future-fixture",
+                "id": 1999999, "tmdb_id": 1999999,
+                "tmdb": "https://www.themoviedb.org/movie/1999999", "release_year": 2027,
+            }]}), encoding="utf-8")
+            self.assertTrue(refresh_streaming_official.refresh(source=supplement, output=snapshot))
+            catalog.write_text(json.dumps({"movies": []}), encoding="utf-8")
+            added, updated = import_snapshot(snapshot, catalog, Path("data/streaming_sources.json"))
+            self.assertEqual((added, updated), (1, 0))
+            result = json.loads(catalog.read_text(encoding="utf-8"))
+            self.assertEqual(result["movies"][0]["date"], "2027-01-15")
+            self.assertEqual(result["movies"][0]["tmdb_id"], 1999999)
 
     def test_curated_streaming_identity_repairs_survive_official_refresh(self):
         source_path = Path("data/streaming-2026-11-official-supplement.json")

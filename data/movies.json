@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T23:00:33.947392+00:00",
+  "generated_at": "2026-11-22T23:43:39.179847+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
     {
@@ -20969,8 +20969,8 @@
       "date": "2026-09-23",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.859,
-      "votes": 758,
+      "score": 7.86,
+      "votes": 759,
       "overview": "ニューヨーク・タイムズのベストセラーを原作とした本作は、博士課程の学生オリーヴが、学科で最も威圧的な教授、アダム・カールセンに衝動的にキスをしてしまうところから物語が始まる。偽りの関係を必要としていた二人の思惑は、やがて化学実験のような関係へと変わっていく。果たして、愛という未知数を解くことはできるのだろうか。",
       "poster": "https://image.tmdb.org/t/p/w500/baZi0cpYCIb78xyhOe9EjC2iRy6.jpg",
       "source": "About Amazon Japan 2026年9月Prime Video新着配信",
@@ -24468,7 +24468,7 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.4,
+      "score": 7.367,
       "votes": 8861,
       "overview": "新居を手に入れたアダムとバーバラの夫婦は、自分たちが事故でもう死んでいることに気付かず、幽霊になったままその家に住み続け、しばらくしてその事実を知る。人間には空家に思えるその家に、オカルト好きの少女リディアら人間の一家が引っ越してくる。アダムたちは一家を脅して家から追い出そうとするが効果はない。アダムたちは呼ばないほうがいいといわれる人間退治が得意なゴースト、ビートルジュースを呼んでしまう。",
       "poster": "https://image.tmdb.org/t/p/w500/kGaRiVGdrgb8dBirjUK4c1Udwn.jpg",
@@ -30473,7 +30473,7 @@
     {
       "original_title": "銀魂 THE FINAL",
       "overview": "地球滅亡のカウントダウンが迫る中、かつての盟友である銀時、高杉、桂はそれぞれの想いを胸にひた走る。  だが彼らの前に立ちはだかったのは、あまりにも哀しい絆を持つ人物……  銀時たちを教え導いた師匠・吉田松陽とは別の人格、虚（うつろ）だった――。  最後にして最大の敵・虚は、自らの命を終わらせるため、地球を丸ごと道連れにしようとしていた。  虚の野望を阻止し、師匠・松陽の悲願を胸に戦い続ける銀時たちを援護するため、新八、神楽、真選組、かぶき町の面々、かつてのライバルたちまでもが参戦する！  巨大化してゆく虚の力。己の命をかけて対峙する高杉。  ぼろぼろになった銀時が最後に見たものとは…！銀時は果たして、すべてを終わらせることができるのか…！  星の生命力“アルタナ”のエネルギーで生まれた魔人、虚（うつろ）。  長い年月をかけて生まれ変わりを繰り返してきた不老不死の化け物、  その中でつかの間に現れた人格が、かつて松下村塾を開き、幼い銀時たちを教え導いた師匠・吉田松陽だった…。",
-      "poster": "https://image.tmdb.org/t/p/w342/z1fMY89FyeLTfulnwWypdkW8IXc.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/z1fMY89FyeLTfulnwWypdkW8IXc.jpg",
       "score": 8.2,
       "votes": 80,
       "title": "銀魂 THE FINAL",
@@ -30489,15 +30489,32 @@
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/732203",
       "checked_at": "2026-10-26T08:48:50.008240+00:00",
-      "runtime": 104
+      "runtime": 104,
+      "director": "宮脇千鶴",
+      "director_id": 2739367,
+      "cast": [
+        "杉田智和",
+        "阪口大助",
+        "釘宮理恵",
+        "中井和哉"
+      ],
+      "countries": [
+        "Japan"
+      ],
+      "genres": [
+        "アニメーション",
+        "アクション",
+        "サイエンスフィクション",
+        "コメディ"
+      ]
     },
     {
       "title": "PEACOCK／ピーコック",
       "date": "2026-10-28",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 0,
-      "votes": 0,
+      "score": 6.802,
+      "votes": 48,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/jXAth8yqkjtI1GHeqy9IlDZtlV9.jpg",
       "source": "公式配信発表（2026-10-22確認）",
@@ -30510,7 +30527,23 @@
       "original_title": "Pfau - Bin ich echt?",
       "identity_verified_at": "2026-10-22",
       "runtime": 102,
-      "id": 1245728
+      "id": 1245728,
+      "year": 2025,
+      "director": "Bernhard Wenger",
+      "director_id": 1894775,
+      "cast": [
+        "アルブレヒト・シュッフ",
+        "Julia Franz Richter",
+        "Anton Noori",
+        "Theresa Frostad Eggesbø"
+      ],
+      "countries": [
+        "Austria",
+        "Germany"
+      ],
+      "genres": [
+        "コメディ"
+      ]
     },
     {
       "title": "パンダのすごい世界",
@@ -37174,6 +37207,43 @@
       "checked_at": "2026-11-20T23:58:58.152220+00:00"
     },
     {
+      "title": "デッドマンズ・ワイヤー",
+      "date": "2026-12-13",
+      "event": "streaming",
+      "service": "WOWOWオンデマンド",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/vJfJM1L0J0OxOS4zvbEnSqOmUrh.jpg",
+      "source": "WOWOWオンデマンド official film page",
+      "source_url": "https://wod.wowow.co.jp/program/207651",
+      "checked_at": "2026-11-22T22:59:04.888581+00:00",
+      "id": 1263012,
+      "tmdb": "https://www.themoviedb.org/movie/1263012",
+      "tmdb_id": 1263012,
+      "original_title": "Dead Man's Wire",
+      "runtime": 106
+    },
+    {
+      "title": "5 - 嵐という時間 -",
+      "date": "2026-12-15",
+      "event": "streaming",
+      "service": "Prime Video",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w342/eEXFBWG5F6fOwQjekuCZTNMKVOG.jpg",
+      "source": "Prime Video JP official teaser; worldwide December 15 premiere",
+      "source_url": "https://www.youtube.com/watch?v=t0d2CxpElPo",
+      "checked_at": "2026-11-22T22:59:04.888558+00:00",
+      "id": 1761050,
+      "tmdb": "https://www.themoviedb.org/movie/1761050",
+      "tmdb_id": 1761050,
+      "release_year": 2026,
+      "original_title": "5 - The Time Called Arashi -",
+      "source_published_at": "2026-09-02"
+    },
+    {
       "id": 1170608,
       "title": "デューン 砂の惑星PART3",
       "original_title": "Dune: Part Three",
@@ -37635,6 +37705,25 @@
       "runtime": 0,
       "genres": [],
       "checked_at": "2026-11-21T23:14:35.761772+00:00"
+    },
+    {
+      "title": "シンシン アンド ザ マウス／SINSIN AND THE MOUSE",
+      "date": "2026-12-25",
+      "event": "streaming",
+      "service": "WOWOWオンデマンド",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/djnoeys978pM0Fr82wck5NVIBo.jpg",
+      "source": "WOWOWオンデマンド official film page",
+      "source_url": "https://wod.wowow.co.jp/program/207811",
+      "checked_at": "2026-11-22T22:59:04.888592+00:00",
+      "id": 1370545,
+      "tmdb": "https://www.themoviedb.org/movie/1370545",
+      "tmdb_id": 1370545,
+      "release_year": 2026,
+      "original_title": "シンシン アンド ザ マウス／SINSIN AND THE MOUSE",
+      "runtime": 108
     },
     {
       "id": 1696095,

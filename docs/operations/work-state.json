@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T17:07:00Z",
-  "status": "ci_passed",
+  "updated_at": "2026-11-22T17:16:00Z",
+  "status": "production_verified",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "e70d82cf358f362bd74950a8149fe9ffb987071e",
-  "branch": "codex/244-verify-official-source-hosts-20261123",
-  "head_sha": "e9b08ad7823d56011e8885627ee71d2e30a4b936",
+  "base_sha": "49826243044a4df88ba9542fc86691edd29a7a91",
+  "branch": "codex/239-checkpoint-source-guard-20261123",
+  "head_sha": "49826243044a4df88ba9542fc86691edd29a7a91",
   "pull_request": {
     "number": 888,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/888",
-    "state": "open"
+    "state": "merged"
   },
   "open_pull_requests": [
     {
@@ -30,54 +30,54 @@
     {
       "id": "P0-244-OFFICIAL-SOURCE-HOSTS",
       "title": "Reject unapproved streaming announcement provenance hosts",
-      "status": "ci_passed",
+      "status": "production_verified",
       "issue": 244,
       "acceptance": "Every reviewed supplement source and regional evidence URL must use the service-specific official-host allowlist; rejection preserves last-known-good output."
     }
   ],
   "verification": [
     {
-      "check": "Live state 2026-11-23 02:04 JST",
-      "result": "main e70d82cf358f362bd74950a8149fe9ffb987071e; #239/#244 open; #593 closed; unrelated PR #879 and #244 PR #888 open."
+      "check": "Live state 2026-11-23 02:16 JST",
+      "result": "main 49826243044a4df88ba9542fc86691edd29a7a91 after the normal now-playing and anime-TV generated-data writers; #239/#244 open; #593 closed; PR #888 merged."
     },
     {
-      "check": "Canonical production JSON",
-      "result": "boxoffice.json HTTP 200: 1,808 by-year + 100 all-time rows, poster gaps 0. streaming.json HTTP 200: 465 rows, poster gaps 0, six December 2026 rows."
+      "check": "Canonical public JSON",
+      "result": "boxoffice.json HTTP 200: 1,808 by-year + 100 all-time rows, poster gaps 0. streaming.json HTTP 200: 465 rows, poster gaps 0, six December 2026 rows. source-status.json HTTP 200, generated 2026-11-22T17:14:35.192Z."
     },
     {
-      "check": "Official-source policy implementation",
-      "result": "PR #888 requires source_url and optional region_source_url to match the selected service's reviewed_premiere_hosts; arbitrary HTTPS and cross-service official hosts are rejected without replacing last-known-good output."
+      "check": "Merged implementation",
+      "result": "PR #888 merged at 5301f58ea42d2c5cfe742a702a9778dd83fe0aa9. source_url and optional region_source_url now must match the selected service's reviewed_premiere_hosts; arbitrary HTTPS and cross-service hosts fail before atomic replacement."
     },
     {
-      "check": "Local verification",
-      "result": "Focused refresh tests passed 10/10; full quality gate passed; strict full Python suite passed 431 tests; isolated refresh of all current monthly supplements succeeded."
+      "check": "Exact-head CI",
+      "result": "Source head e9b08ad7 passed Autonomous 45036702530, smoke 45036702463, frontend 45036702426, backend 45036702589 and Full Python 45036702472. Final tip dda9a75d passed Autonomous 45047596032, smoke 45047596112, frontend 45047596026, backend 45047596192, Full Python 45047596036, mobile 45047596028, scorecard 45047596050 and visual QA 45047596075."
     },
     {
-      "check": "Exact source CI",
-      "result": "On source head e9b08ad7823d56011e8885627ee71d2e30a4b936: Autonomous 45036702530, smoke 45036702463, frontend 45036702426, backend 45036702589, and full Python 45036702472 all succeeded. Executable digest c4e0c991482836ce2af8b29ce3d5b0b025252646c30e99b398017dad84d6c702."
+      "check": "Vercel production",
+      "result": "Exact merge SHA 5301f58ea42d2c5cfe742a702a9778dd83fe0aa9 reached READY as deployment dpl_CH7h1Hbyz9iJ5gqAvzWrhhaVGgpR. No manual deployment."
     },
     {
-      "check": "Production baseline",
-      "result": "Vercel production remains READY on deployment dpl_5NPj76MU3u8peyE61hRMcDDZmoHE, product/data SHA 35c74d1696434850bc7a999e1c299d59e5af2f72; docs-only main deploys were safely ignored."
+      "check": "Ordinary official refresh",
+      "result": "Run 45048269309 accepted the current supplements and succeeded through validation, enrichment, import, poster/runtime backfill, official candidate discovery and source-status generation. Only final generated-data commit failed when concurrent now-playing commit 2b9a07a4 moved main and conflicted during safe rebase; no rerun was dispatched."
     }
   ],
   "blockers": [
-    "The proof/docs-only PR tip still needs fresh exact-head CI before merge.",
-    "After merge, observe the ordinary refresh-official-streaming push run once. Do not manually dispatch. Confirm it accepts all current supplements, leaves public counts unchanged, and preserves Vercel READY."
+    "The official refresh final writer step was not re-run because the failure was a bounded concurrent-main conflict after every validation step succeeded. Confirm the next ordinary scheduled refresh publishes cleanly on a quiet main.",
+    "December 2026 public coverage remains six Netflix films; no additional non-Netflix film has yet met Japan-specific official date and unique identity evidence."
   ],
   "deployment": {
     "status": "production_verified",
     "canonical_url": "https://cinelva.vercel.app/",
-    "ready_deployment_id": "dpl_5NPj76MU3u8peyE61hRMcDDZmoHE",
-    "ready_sha": "35c74d1696434850bc7a999e1c299d59e5af2f72",
+    "ready_deployment_id": "dpl_CH7h1Hbyz9iJ5gqAvzWrhhaVGgpR",
+    "ready_sha": "5301f58ea42d2c5cfe742a702a9778dd83fe0aa9",
     "production_verified": true,
-    "change_live": false,
+    "change_live": true,
     "visual_acceptance_verified": true
   },
   "safety": [
-    "No published movie row or user storage changed.",
+    "No viewing history, rating, review, bookmark or backup changed.",
     "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass.",
-    "Unapproved provenance is rejected before atomic replacement, preserving last-known-good data."
+    "The failed generated-data writer was not retried; last-known-good public data remains intact."
   ],
-  "next_action": "Require fresh exact-head CI on the proof/docs-only final PR #888 tip. If all required checks pass and the head is unchanged/mergeable, merge normally with expected_head_sha. Observe the one ordinary refresh-official-streaming push run, then recheck public JSON and Vercel READY. Keep #244 open."
+  "next_action": "At the next ordinary refresh-official-streaming schedule, confirm the final atomic publish succeeds against a quiet main; do not manually dispatch. Continue reviewing official Japan December announcements for non-Netflix movies with unique TMDB identity. Keep #244 open."
 }

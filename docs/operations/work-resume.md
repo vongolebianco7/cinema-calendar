@@ -512,3 +512,16 @@ This makes six reviewed candidates on PR #867: Steps, In Waves, Ray Gunn, Proxie
 - Vercel production remains READY on `dpl_5NPj76MU3u8peyE61hRMcDDZmoHE`, product/data SHA `35c74d1696434850bc7a999e1c299d59e5af2f72`. This guard does not alter visible data; after merge, observe the ordinary `refresh-official-streaming` push run once and confirm all current supplements remain accepted. Do not manually dispatch or deploy.
 - No viewing history, rating, review, bookmark or backup changed. No scraping, paid action, Neon retry, manual deployment, quota workaround, or CI bypass occurred.
 - Next: require fresh exact-head CI on PR #888's final proof/docs tip. Merge only if the same head is mergeable and green; then verify the automatic refresh, unchanged public counts/poster coverage, and Vercel READY. Keep #244 open.
+
+
+## Live checkpoint — 2026-11-23 02:16 JST — source guard accepted
+
+- Live main is `49826243044a4df88ba9542fc86691edd29a7a91`, after the normal now-playing and anime-TV generated-data writers. #239 and #244 remain open; #593 remains closed.
+- PR #888 merged as `5301f58ea42d2c5cfe742a702a9778dd83fe0aa9`. Reviewed streaming supplement `source_url` and optional `region_source_url` must now match the selected service's registered `reviewed_premiere_hosts`. Arbitrary HTTPS and cross-service official hosts are rejected before atomic replacement, preserving last-known-good bytes.
+- Exact-head verification passed. Source `e9b08ad7`: Autonomous `45036702530`, smoke `45036702463`, frontend `45036702426`, backend `45036702589`, Full Python `45036702472`. Final tip `dda9a75d`: Autonomous `45047596032`, smoke `45047596112`, frontend `45047596026`, backend `45047596192`, Full Python `45047596036`, mobile `45047596028`, scorecard `45047596050`, visual QA `45047596075`.
+- Vercel production deployment `dpl_CH7h1Hbyz9iJ5gqAvzWrhhaVGgpR` is READY on exact merge SHA `5301f58e`; no manual deployment was used.
+- Public acceptance: `boxoffice.json` HTTP 200, 1,808 by-year + 100 all-time rows, poster gaps 0. `streaming.json` HTTP 200, 465 rows, poster gaps 0, six December 2026 rows. `source-status.json` HTTP 200, generated `2026-11-22T17:14:35.192Z`.
+- Ordinary push run `45048269309` succeeded through official supplement validation, poster/runtime enrichment, catalog import, backfill, candidate discovery and source-status generation. The final generated-data commit alone failed because concurrent now-playing writer commit `2b9a07a4` moved main and caused the guarded rebase to stop. The failed writer was not manually retried; last-known-good public data remains intact.
+- No viewing history, rating, review, bookmark or backup changed. No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deploy, quota workaround or CI bypass.
+- Blocker: December coverage remains six Netflix movies. No further non-Netflix movie has yet met Japan-specific official release-date evidence and unique identity requirements.
+- Next: observe the next ordinary scheduled official refresh and confirm its final atomic publish succeeds on a quiet main. Continue reviewing official Japan December announcements for non-Netflix movies; do not infer dates or identities. Keep #244 open.

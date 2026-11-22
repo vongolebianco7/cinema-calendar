@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T14:11:09Z",
+  "updated_at": "2026-11-22T14:16:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "35c74d1696434850bc7a999e1c299d59e5af2f72",
   "branch": "main",
-  "head_sha": "35c74d1696434850bc7a999e1c299d59e5af2f72",
+  "head_sha": "5be8fd5a9b573c5eeb8eaed67080c4d93e70bd53",
   "pull_request": {
     "number": 887,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/887",
@@ -75,11 +75,16 @@
     {
       "check": "Live official-feed candidate audit 2026-11-22 14:11 UTC",
       "result": "The official Netflix Japan title page for Bad Day exists, but Netflix Media/Tudum release evidence specifies December 11 in the United States only. No Japan premiere date is evidenced, so it was intentionally excluded from streaming.json. Apple TV and Amazon Japan current official feed candidates were also screened; series, non-film events and items without a verified Japan movie premiere remain candidates only."
+    },
+    {
+      "check": "Docs checkpoint main-head checks 2026-11-22 14:15 UTC",
+      "result": "Docs-only main head 5be8fd5a9b573c5eeb8eaed67080c4d93e70bd53: smoke run 45031567290 success, completeness scorecard 45031567253 success, Pages build/deploy run 45031566534 success. Publish verified legacy Pages guard run 45031567246 failed closed because verify-production-release.cjs got GitHub REST HTTP 403 API rate-limit exceeded while checking CI proof at ac66f62; deployment stage was skipped, no bypass. Both Vercel status checks were successful as ignored-build-step cancellations; product production remains READY on 35c74d1, whose executable/data tree is unchanged."
     }
   ],
   "blockers": [
     "Issue #244 source/category coverage, freshness thresholds and last-known-good acceptance are not complete. Official discovery feed candidates remain review-only; no unverified film or Japan release date may be published.",
-    "Update movie data run 45030064770 failed at the final direct DB sync due Neon P1001. The JSON snapshot and Vercel publication succeeded. Do not retry Neon until the external endpoint is confirmed available."
+    "Update movie data run 45030064770 failed at the final direct DB sync due Neon P1001. The JSON snapshot and Vercel publication succeeded. Do not retry Neon until the external endpoint is confirmed available.",
+    "Docs-only legacy Pages publication gate failed closed on GitHub REST HTTP 403 rate limit while reading proof; no static Pages deployment occurred. Do not retry until API access/rate limit recovers. Vercel correctly skipped the docs-only build and product production remains READY on 35c74d1."
   ],
   "deployment": {
     "status": "production_verified",
@@ -94,5 +99,5 @@
     "No viewing history, ratings, reviews, bookmarks, or backups were modified.",
     "No scraping, paid action, manual update dispatch, manual Vercel deployment, quota workaround, CI bypass, or repeated Neon attempt."
   ],
-  "next_action": "Continue #244 with source/category evidence and the next Japan-confirmed film release. The candidate Bad Day is excluded because the official date found is US-only. Keep automated discovery candidate-only, preserve last-known-good snapshots, and do not retry Neon P1001 until endpoint availability is confirmed."
+  "next_action": "Continue #244 with a new category/source only when official Japanese premiere evidence and a unique TMDB identity are available. Keep the three official discovery feeds candidate-only; do not reuse US dates. Audit stale/disabled source categories for safe, permitted paths. Do not retry the Neon P1001 or Pages publication gate until their external endpoints/rate limit are confirmed recovered. Keep #244 open."
 }

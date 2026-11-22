@@ -18,7 +18,10 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: refresh-official-streaming
+  # Share the repository-wide writer lock with the movie, now-playing and TV
+  # updaters. They all publish generated snapshots directly to main, including
+  # the shared source-status file, so per-workflow locking is not sufficient.
+  group: cinema-database-write
   cancel-in-progress: false
 jobs:
   refresh:

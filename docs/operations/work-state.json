@@ -1,67 +1,79 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T06:26:00Z",
+  "updated_at": "2026-11-22T13:45:00Z",
   "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "98754aabfcebb3a65539d982272b824843972793",
-  "branch": "codex/244-official-feed-observability",
-  "head_sha": "7cf2f5ce922b64d983c77dc3c0bb304b32ae8c8a",
+  "base_sha": "957829ca9a55714b812786be132e275d0c079951",
+  "branch": "codex/244-december-netflix-movie-20261122",
+  "head_sha": "ac66f62a718a9a0a12a0f8675de3b3813680c048",
   "pull_request": {
-    "number": 886,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/886",
+    "number": 887,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/887",
     "state": "open"
   },
   "work_items": [
-    {
-      "id": "P0-244-OFFICIAL-FEED-HEALTH",
-      "title": "Expose official streaming feed candidate discovery health",
-      "status": "ci_passed",
-      "issue": 244,
-      "acceptance": "Approved official feed candidate checks are reported separately from manually reviewed publication, preserve last-known-good data on failure, and never publish a candidate without movie/date/identity review."
-    },
     {
       "id": "P0-593-POSTERS",
       "title": "Keep public box-office poster coverage complete",
       "status": "production_verified",
       "issue": 593,
       "acceptance": "Canonical public box-office JSON has zero posterless rows and the issue remains closed."
+    },
+    {
+      "id": "P0-244-DECEMBER-STREAMING",
+      "title": "Add an officially verified December streaming movie",
+      "status": "ci_passed",
+      "issue": 244,
+      "acceptance": "Official provider announcement, Japan availability, and an existing unique TMDB movie identity/poster are traceable; the ordinary refresh workflow publishes the row and the production calendar displays it."
     }
   ],
   "verification": [
     {
-      "check": "Live state 2026-11-22 15:06 JST",
-      "result": "Main 98754aab; #239/#244 open; #593 closed; PR #886 open; production dpl_7TuysNXLoy73G8MoLVLSHmDxY3QG READY on exact main."
+      "check": "Live GitHub state 2026-11-22 22:42 JST",
+      "result": "main 957829ca9a55714b812786be132e275d0c079951; #593 closed/completed; #244 and #239 open; #887 open and mergeable on head ac66f62a718a9a0a12a0f8675de3b3813680c048; unrelated #879 remains open."
     },
     {
-      "check": "Canonical public JSON",
-      "result": "Boxoffice HTTP 200: 1,808 by-year plus 100 all-time rows, missing posters 0. Streaming HTTP 200: 464 rows, missing posters 0, generated 2026-11-17T05:08:01.685949+00:00."
+      "check": "Required exact-head CI",
+      "result": "All four required PR workflows succeeded on exact head ac66f62a718a9a0a12a0f8675de3b3813680c048: Autonomous quality gate 45028311839, Validate frontend 45028311840, Reproducible backend build 45028311859, CINELVA smoke 45028311888."
     },
     {
-      "check": "Local rebased source",
-      "result": "Focused verification passed 14 tests; python scripts/quality_gate.py passed the complete deterministic suite. Live source timestamps and counts were retained while resolving the only rebase conflict."
+      "check": "Canonical production JSON",
+      "result": "boxoffice.json HTTP 200: 1,808 by-year + 100 all-time rows, poster gaps 0. streaming.json HTTP 200: 464 rows, poster gaps 0; five December 2026 movies, all Netflix. Candidate feed snapshot has 26 candidates and one verified catalog match; no other December movie candidate met identity/date checks."
     },
     {
-      "check": "Exact source and backend dependency safety",
-      "result": "PR #886 code head 7cf2f5ce has executable digest b9a8384a. Required Actions: Autonomous 44993393756, smoke 44993393746, frontend 44993393773, backend 44993393759. Backend audit is 0; deepmerge security regression and production build pass."
+      "check": "Official December item",
+      "result": "Netflix Tudum announcement lists THE FURTHER MIS-ADVENTURES OF CLIFF BOOTH for 2026-12-23; Japan title page https://www.netflix.com/jp/title/82054606. Existing unique catalog identity is TMDB movie 1457866 and poster gEqfmochcRmyDQFThatTKQfH9GT.jpg."
+    },
+    {
+      "check": "Source acceptance",
+      "result": "Local exact supplement/import acceptance previously verified 464→465 with exactly one row, existing unique identity/poster, and retained Japan source URL. Focused 22 tests and full local quality gate passed; tracked public JSON was not mutated."
+    },
+    {
+      "check": "Production baseline",
+      "result": "Production frontend/backend remain READY on unchanged live main 957829ca9a55714b812786be132e275d0c079951. No manual Vercel deployment or quota action."
+    },
+    {
+      "check": "Release receipt",
+      "result": "quality/production-proof.json now binds required successful exact-head CI to tested source head ac66f62 and executable digest 0cde4c8ca7e0b000b0774e5aede0d91040d97d51b66f4493d2f0a18b8e64c408; receipt-only change still needs final-tip exact-head CI."
     }
   ],
   "blockers": [
-    "Production acceptance is pending: the proof/docs-only PR tip must pass fresh exact-head CI, merge normally, and reach an automatic READY deployment before the public status UI can be accepted."
+    "The receipt/docs-only PR tip has not yet received its own fresh exact-head CI. Do not merge until the four required checks pass on the final tip.",
+    "After normal merge, observe exactly the ordinary automatic streaming refresh; then verify updated public December JSON, image presence, production READY and rendered calendar acceptance. Keep #244 open until those proofs exist."
   ],
   "deployment": {
-    "status": "deployment_pending",
+    "status": "production_verified",
     "canonical_url": "https://cinelva.vercel.app/",
-    "ready_deployment_id": "dpl_7TuysNXLoy73G8MoLVLSHmDxY3QG",
-    "ready_sha": "98754aabfcebb3a65539d982272b824843972793",
+    "ready_deployment_id": "dpl_5PZVhxZn4ns4SLJaSqyMyovWWVwf",
+    "ready_sha": "957829ca9a55714b812786be132e275d0c079951",
     "production_verified": true,
     "change_live": false,
     "visual_acceptance_verified": false
   },
   "safety": [
-    "No candidate was auto-published.",
     "No viewing history, rating, review, bookmark or backup changed.",
-    "No scraping, paid action, Neon retry, manual updater dispatch, manual deployment or quota workaround was used."
+    "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass."
   ],
-  "next_action": "Require fresh exact-head CI on the proof/docs-only PR #886 tip, then merge normally and verify automatic production READY plus the public source-status rendering. Keep #244 open."
+  "next_action": "Wait for all four required exact-head workflows on the receipt/docs-only final PR tip. If they succeed and PR #887 is still mergeable on the same SHA, merge normally with expected_head_sha. Do not manually dispatch or deploy. Observe the single ordinary official-streaming refresh, then verify public streaming JSON count/date/poster, Vercel production READY and the calendar rendering. Keep #244 open."
 }

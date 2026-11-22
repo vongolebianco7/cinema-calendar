@@ -9,6 +9,33 @@ from scripts import refresh_streaming_official
 
 
 class OfficialSnapshotImportTests(unittest.TestCase):
+    def test_verified_december_netflix_movie_adds_once_with_existing_tmdb_identity(self):
+        sources = [
+            Path("data/streaming-2026-11-official-supplement.json"),
+            Path("data/streaming-2026-12-official-supplement.json"),
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            snapshot, catalog = root / "official.json", root / "streaming.json"
+            self.assertTrue(refresh_streaming_official.refresh(source=sources, output=snapshot))
+            before = json.loads(Path("data/streaming.json").read_text(encoding="utf-8"))
+            catalog.write_text(json.dumps(before, ensure_ascii=False), encoding="utf-8")
+
+            added, _updated = import_snapshot(snapshot, catalog, Path("data/streaming_sources.json"))
+            self.assertEqual(added, 1)
+            after = json.loads(catalog.read_text(encoding="utf-8"))
+            self.assertEqual(len(after["movies"]), len(before["movies"]) + 1)
+            matches = [
+                row for row in after["movies"]
+                if row.get("service") == "Netflix"
+                and row.get("date") == "2026-12-23"
+                and row.get("tmdb_id") == 1457866
+            ]
+            self.assertEqual(len(matches), 1)
+            self.assertEqual(matches[0]["title"], "ザ・ファーザー・ミスアドベンチャー・オブ・クリフ・ブース")
+            self.assertEqual(matches[0]["poster"], "https://image.tmdb.org/t/p/w500/gEqfmochcRmyDQFThatTKQfH9GT.jpg")
+            self.assertEqual(matches[0]["region_source_url"], "https://www.netflix.com/jp/title/82054606")
+
     def test_curated_streaming_identity_repairs_survive_official_refresh(self):
         source_path = Path("data/streaming-2026-11-official-supplement.json")
         source = json.loads(source_path.read_text(encoding="utf-8"))

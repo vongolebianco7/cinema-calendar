@@ -27,7 +27,7 @@ class MultiSourceAtomicRefreshTest(unittest.TestCase):
                 "movies": [{
                     "title": "November movie", "date": "2026-11-10",
                     "event": "streaming", "service": "Netflix",
-                    "source_url": "https://example.org/official/november",
+                    "source_url": "https://about.netflix.com/ja/news/november",
                 }],
             }
             second = {
@@ -35,7 +35,7 @@ class MultiSourceAtomicRefreshTest(unittest.TestCase):
                 "movies": [{
                     "title": "December movie", "date": "2026-12-10",
                     "event": "streaming", "service": "Netflix",
-                    "source_url": "https://example.org/official/december",
+                    "source_url": "https://about.netflix.com/ja/news/december",
                 }],
             }
             november.write_text(json.dumps(first), encoding="utf-8")

@@ -1,79 +1,98 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T13:45:00Z",
-  "status": "ci_passed",
+  "updated_at": "2026-11-22T14:11:09Z",
+  "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "957829ca9a55714b812786be132e275d0c079951",
-  "branch": "codex/244-december-netflix-movie-20261122",
-  "head_sha": "ac66f62a718a9a0a12a0f8675de3b3813680c048",
+  "base_sha": "35c74d1696434850bc7a999e1c299d59e5af2f72",
+  "branch": "main",
+  "head_sha": "35c74d1696434850bc7a999e1c299d59e5af2f72",
   "pull_request": {
     "number": 887,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/887",
-    "state": "open"
+    "state": "merged",
+    "merge_sha": "75a4667a7339ef95f3675e11c420ffa009a8c33e"
   },
+  "open_pull_requests": [
+    {
+      "number": 879,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/879",
+      "title": "VIVANT診断の好きな映画を9作品から選べるようにする"
+    }
+  ],
   "work_items": [
     {
       "id": "P0-593-POSTERS",
       "title": "Keep public box-office poster coverage complete",
       "status": "production_verified",
       "issue": 593,
-      "acceptance": "Canonical public box-office JSON has zero posterless rows and the issue remains closed."
+      "acceptance": "Production boxoffice JSON HTTP 200; all 1,808 by-year plus 100 all-time rows have posters; issue #593 remains closed."
     },
     {
       "id": "P0-244-DECEMBER-STREAMING",
-      "title": "Add an officially verified December streaming movie",
-      "status": "ci_passed",
+      "title": "Publish the officially verified 2026-12-23 Netflix film",
+      "status": "production_verified",
       "issue": 244,
-      "acceptance": "Official provider announcement, Japan availability, and an existing unique TMDB movie identity/poster are traceable; the ordinary refresh workflow publishes the row and the production calendar displays it."
+      "acceptance": "The official Netflix announcement and Japan title page, existing unique TMDB ID/poster, successful automatic refresh, public streaming JSON row, READY production, and December calendar rendering are verified."
+    },
+    {
+      "id": "P0-244-COVERAGE-REMAINS",
+      "title": "Continue source-by-source freshness and coverage audit",
+      "status": "in_progress",
+      "issue": 244,
+      "acceptance": "Keep #244 open until source permissions, automatic/manual status, freshness, last-known-good behavior, counts, and screen effects are evidenced for each category."
     }
   ],
   "verification": [
     {
-      "check": "Live GitHub state 2026-11-22 22:42 JST",
-      "result": "main 957829ca9a55714b812786be132e275d0c079951; #593 closed/completed; #244 and #239 open; #887 open and mergeable on head ac66f62a718a9a0a12a0f8675de3b3813680c048; unrelated #879 remains open."
+      "check": "Live GitHub state 2026-11-22 14:05 UTC",
+      "result": "main is 35c74d1696434850bc7a999e1c299d59e5af2f72. #593 closed; #244 and #239 open. PR #887 merged at 75a4667a7339ef95f3675e11c420ffa009a8c33e. PR #879 is the only open PR and is unrelated."
     },
     {
-      "check": "Required exact-head CI",
-      "result": "All four required PR workflows succeeded on exact head ac66f62a718a9a0a12a0f8675de3b3813680c048: Autonomous quality gate 45028311839, Validate frontend 45028311840, Reproducible backend build 45028311859, CINELVA smoke 45028311888."
+      "check": "Exact-head CI and release proof",
+      "result": "The four required PR workflows passed on final PR head 9b498d352f32f5b6ae64a607b761cfa7ac1a3bf7 (Autonomous 45029542623, frontend 45029542577, backend 45029542553, smoke 45029542570). All additional visual/mobile/Python/scorecard checks on that exact head passed. Production proof binds tested source head ac66f62a718a9a0a12a0f8675de3b3813680c048 and digest 0cde4c8ca7e0b000b0774e5aede0d91040d97d51b66f4493d2f0a18b8e64c408."
     },
     {
-      "check": "Canonical production JSON",
-      "result": "boxoffice.json HTTP 200: 1,808 by-year + 100 all-time rows, poster gaps 0. streaming.json HTTP 200: 464 rows, poster gaps 0; five December 2026 movies, all Netflix. Candidate feed snapshot has 26 candidates and one verified catalog match; no other December movie candidate met identity/date checks."
+      "check": "Official streaming updater",
+      "result": "Refresh run 45030064750 succeeded on merge; it committed official streaming JSON at 43ecb2bd805f4d42150262c3aab06ccd5c0abe12. Update movie data run 45030064770 committed its JSON snapshots at 35c74d1696434850bc7a999e1c299d59e5af2f72, then failed only at Neon DB sync with Prisma P1001 (ep-snowy-wave-b4gwato2.c-6.us-east-2.aws.neon.tech:5432 unreachable). No repeat was started."
     },
     {
-      "check": "Official December item",
-      "result": "Netflix Tudum announcement lists THE FURTHER MIS-ADVENTURES OF CLIFF BOOTH for 2026-12-23; Japan title page https://www.netflix.com/jp/title/82054606. Existing unique catalog identity is TMDB movie 1457866 and poster gEqfmochcRmyDQFThatTKQfH9GT.jpg."
+      "check": "Public production JSON",
+      "result": "streaming.json HTTP 200, generated 2026-11-22T13:56:27.688255Z, 465 records; 6 December 2026 records, all Netflix, each with poster; new record is 2026-12-23, TMDB 1457866, official Japan page https://www.netflix.com/jp/title/82054606. boxoffice.json HTTP 200, 1,808 by-year + 100 all-time rows, 0 posterless."
     },
     {
-      "check": "Source acceptance",
-      "result": "Local exact supplement/import acceptance previously verified 464→465 with exactly one row, existing unique identity/poster, and retained Japan source URL. Focused 22 tests and full local quality gate passed; tracked public JSON was not mutated."
+      "check": "Production deployment",
+      "result": "Vercel production deployment dpl_5NPj76MU3u8peyE61hRMcDDZmoHE is READY on main SHA 35c74d1696434850bc7a999e1c299d59e5af2f72."
     },
     {
-      "check": "Production baseline",
-      "result": "Production frontend/backend remain READY on unchanged live main 957829ca9a55714b812786be132e275d0c079951. No manual Vercel deployment or quota action."
+      "check": "Rendered calendar acceptance",
+      "result": "Production calendar was advanced to December 2026. The 12/21–12/27 section renders the new film's poster, Netflix label, 12/23 premiere date, title, 141-minute runtime, and review/bookmark controls. Browser visual/AX acceptance passed; physical iPhone Safari was not tested."
     },
     {
-      "check": "Release receipt",
-      "result": "quality/production-proof.json now binds required successful exact-head CI to tested source head ac66f62 and executable digest 0cde4c8ca7e0b000b0774e5aede0d91040d97d51b66f4493d2f0a18b8e64c408; receipt-only change still needs final-tip exact-head CI."
+      "check": "Official source and identity",
+      "result": "Netflix Tudum announcement https://www.netflix.com/tudum/articles/david-fincher-new-film-release-date and Japan title page https://www.netflix.com/jp/title/82054606 support the date and Japan availability. Matched to existing TMDB movie 1457866 and its existing poster path; no title-only ID guess or invented URL."
+    },
+    {
+      "check": "Live official-feed candidate audit 2026-11-22 14:11 UTC",
+      "result": "The official Netflix Japan title page for Bad Day exists, but Netflix Media/Tudum release evidence specifies December 11 in the United States only. No Japan premiere date is evidenced, so it was intentionally excluded from streaming.json. Apple TV and Amazon Japan current official feed candidates were also screened; series, non-film events and items without a verified Japan movie premiere remain candidates only."
     }
   ],
   "blockers": [
-    "The receipt/docs-only PR tip has not yet received its own fresh exact-head CI. Do not merge until the four required checks pass on the final tip.",
-    "After normal merge, observe exactly the ordinary automatic streaming refresh; then verify updated public December JSON, image presence, production READY and rendered calendar acceptance. Keep #244 open until those proofs exist."
+    "Issue #244 source/category coverage, freshness thresholds and last-known-good acceptance are not complete. Official discovery feed candidates remain review-only; no unverified film or Japan release date may be published.",
+    "Update movie data run 45030064770 failed at the final direct DB sync due Neon P1001. The JSON snapshot and Vercel publication succeeded. Do not retry Neon until the external endpoint is confirmed available."
   ],
   "deployment": {
     "status": "production_verified",
     "canonical_url": "https://cinelva.vercel.app/",
-    "ready_deployment_id": "dpl_5PZVhxZn4ns4SLJaSqyMyovWWVwf",
-    "ready_sha": "957829ca9a55714b812786be132e275d0c079951",
+    "ready_deployment_id": "dpl_5NPj76MU3u8peyE61hRMcDDZmoHE",
+    "ready_sha": "35c74d1696434850bc7a999e1c299d59e5af2f72",
     "production_verified": true,
-    "change_live": false,
-    "visual_acceptance_verified": false
+    "change_live": true,
+    "visual_acceptance_verified": true
   },
   "safety": [
-    "No viewing history, rating, review, bookmark or backup changed.",
-    "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass."
+    "No viewing history, ratings, reviews, bookmarks, or backups were modified.",
+    "No scraping, paid action, manual update dispatch, manual Vercel deployment, quota workaround, CI bypass, or repeated Neon attempt."
   ],
-  "next_action": "Wait for all four required exact-head workflows on the receipt/docs-only final PR tip. If they succeed and PR #887 is still mergeable on the same SHA, merge normally with expected_head_sha. Do not manually dispatch or deploy. Observe the single ordinary official-streaming refresh, then verify public streaming JSON count/date/poster, Vercel production READY and the calendar rendering. Keep #244 open."
+  "next_action": "Continue #244 with source/category evidence and the next Japan-confirmed film release. The candidate Bad Day is excluded because the official date found is US-only. Keep automated discovery candidate-only, preserve last-known-good snapshots, and do not retry Neon P1001 until endpoint availability is confirmed."
 }

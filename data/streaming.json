@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T05:08:01.685949+00:00",
+  "generated_at": "2026-11-22T13:56:27.688255+00:00",
   "movies": [
     {
       "title": "Outcome",
@@ -8676,7 +8676,8 @@
       "checked_at": "2026-10-26",
       "identity_source": "https://www.themoviedb.org/movie/1483525",
       "tmdb": "https://www.themoviedb.org/movie/1483525",
-      "tmdb_id": 1483525
+      "tmdb_id": 1483525,
+      "region_source_url": "https://www.netflix.com/jp/title/82106490"
     },
     {
       "title": "夜が明けたら、いちばんに君に会いにいく",
@@ -9115,7 +9116,8 @@
       "original_title": "The Good Lawyer",
       "runtime": 115,
       "runtime_source_url": "https://filmarks.com/movies/131530",
-      "runtime_checked_at": "2026-11-15"
+      "runtime_checked_at": "2026-11-15",
+      "region_source_url": "https://www.netflix.com/jp/title/81955038"
     },
     {
       "title": "ツイスターズ",
@@ -9521,7 +9523,8 @@
       "tmdb_id": 313093,
       "release_year": 2014,
       "original_title": "The Christmas Switch",
-      "runtime": 97
+      "runtime": 97,
+      "region_source_url": "https://www.netflix.com/jp/title/81625025"
     },
     {
       "title": "Being Heumann",
@@ -9624,7 +9627,8 @@
       "tmdb": "https://www.themoviedb.org/movie/1543469",
       "release_year": 2026,
       "year": 2026,
-      "runtime": 114
+      "runtime": 114,
+      "region_source_url": "https://www.netflix.com/jp/title/81486332"
     },
     {
       "title": "ジョーカー",
@@ -10589,7 +10593,8 @@
       "tmdb_id": 1458300,
       "release_year": 2026,
       "original_title": "The Mosquito Bowl",
-      "runtime": 128
+      "runtime": 128,
+      "region_source_url": "https://www.netflix.com/jp/title/81661161"
     },
     {
       "title": "#拡散",
@@ -10823,6 +10828,27 @@
       "id": 940009,
       "tmdb": "https://www.themoviedb.org/movie/940009",
       "runtime": 119
+    },
+    {
+      "title": "ザ・ファーザー・ミスアドベンチャー・オブ・クリフ・ブース",
+      "date": "2026-12-23",
+      "event": "streaming",
+      "service": "Netflix",
+      "score": 0,
+      "votes": 0,
+      "overview": "",
+      "poster": "https://image.tmdb.org/t/p/w500/gEqfmochcRmyDQFThatTKQfH9GT.jpg",
+      "source": "Netflix Tudum release announcement; Japan Netflix title page verified",
+      "source_url": "https://www.netflix.com/tudum/articles/david-fincher-new-film-release-date",
+      "checked_at": "2026-11-22T13:56:27.688240+00:00",
+      "id": 1457866,
+      "tmdb": "https://www.themoviedb.org/movie/1457866",
+      "tmdb_id": 1457866,
+      "release_year": 2026,
+      "original_title": "THE FURTHER MIS-ADVENTURES OF CLIFF BOOTH",
+      "runtime": 141,
+      "region_source_url": "https://www.netflix.com/jp/title/82054606",
+      "source_published_at": "2026-09-21"
     }
   ],
   "poster_enrichment": {

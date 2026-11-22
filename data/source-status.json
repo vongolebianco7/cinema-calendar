@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-22T12:08:21.776Z",
+  "generated_at": "2026-11-22T13:56:30.975Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -27,13 +27,13 @@
       "status": "manual",
       "source": "source-reviewed official service announcements",
       "source_url": null,
-      "source_observed_at": "2026-11-17T05:08:01.685Z",
+      "source_observed_at": "2026-11-22T13:56:27.688Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "日次の検証・取込と公式発表データ更新時。公式フィードの自動発見候補または手動確認した公式発表を、映画・日本向け日付・作品IDの審査後に公開。",
       "coverage": "dated premieres with citations; not current availability",
-      "record_count": 464
+      "record_count": 465
     },
     {
       "id": "streaming-premiere-discovery",
@@ -41,7 +41,7 @@
       "status": "automated",
       "source": "Netflix・Amazon Japan・Apple TV Pressの公式RSS/Atom",
       "source_url": null,
-      "source_observed_at": "2026-11-22T12:07:05.834Z",
+      "source_observed_at": "2026-11-22T13:56:30.808Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/refresh-official-streaming.yml",

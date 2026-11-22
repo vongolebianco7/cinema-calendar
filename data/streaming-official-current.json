@@ -1,7 +1,8 @@
 {
-  "period": "2026-11",
+  "period": null,
   "periods": [
-    "2026-11"
+    "2026-11",
+    "2026-12"
   ],
   "movies": [
     {
@@ -2420,9 +2421,27 @@
       "year": 2025,
       "runtime": 115,
       "overview": "砂漠で行われるレイブパーティに参加したまま失踪した娘を探すため、父ルイスと息子エステバンは、モロッコの山岳地帯から砂漠の奥深くへと車を走らせる。行き着いたのは、現実と幻覚が混濁するような野外レイブのカオス。耳をつんざく重低音、赤い照明の海、沈黙を貫く父親の背中。だがそこにはすでに娘の姿はなく、父と息子は、レイブの参加者グループを追って、娘が向かったと思われる次のレイブ会場を目指すことになるが......。"
+    },
+    {
+      "title": "ザ・ファーザー・ミスアドベンチャー・オブ・クリフ・ブース",
+      "original_title": "THE FURTHER MIS-ADVENTURES OF CLIFF BOOTH",
+      "date": "2026-12-23",
+      "event": "streaming",
+      "service": "Netflix",
+      "source": "Netflix Tudum release announcement; Japan Netflix title page verified",
+      "source_url": "https://www.netflix.com/tudum/articles/david-fincher-new-film-release-date",
+      "region_source_url": "https://www.netflix.com/jp/title/82054606",
+      "source_published_at": "2026-09-21",
+      "checked_at": "2026-11-22",
+      "id": 1457866,
+      "tmdb_id": 1457866,
+      "tmdb": "https://www.themoviedb.org/movie/1457866",
+      "release_year": 2026,
+      "poster": "https://image.tmdb.org/t/p/w500/gEqfmochcRmyDQFThatTKQfH9GT.jpg",
+      "runtime": 141
     }
   ],
-  "count": 181,
+  "count": 182,
   "note": "Verified-source subset, not a complete subscription catalog",
   "poster_enrichment": {
     "source": "TMDB identity matches; optional workflow-approved fuzzy posters are explicitly marked"

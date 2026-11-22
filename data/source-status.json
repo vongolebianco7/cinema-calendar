@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-21T23:08:22.660Z",
+  "generated_at": "2026-11-22T12:07:06.653Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -8,16 +8,16 @@
       "status": "automated",
       "source": "TMDB watch/providers (JustWatch)",
       "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
-      "source_observed_at": "2026-11-21T00:01:30.471Z",
+      "source_observed_at": "2026-11-21T23:17:31.687Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
-        "total": 4442,
-        "fresh": 3037,
-        "stale": 1405,
+        "total": 4489,
+        "fresh": 2936,
+        "stale": 1553,
         "unknown": 0
       }
     },
@@ -41,13 +41,13 @@
       "status": "automated",
       "source": "Netflix・Amazon Japan・Apple TV Pressの公式RSS/Atom",
       "source_url": null,
-      "source_observed_at": "2026-11-17T20:23:49.000Z",
+      "source_observed_at": "2026-11-22T12:07:05.834Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/refresh-official-streaming.yml",
       "trigger": "毎日01:23 UTCと関連設定変更時。取得失敗時は直近の成功候補を保持。",
       "coverage": "3つの公式ニュースフィードから発表候補を検出。映画か、日付が日本向けか、TMDB作品IDが一意かは別途審査し、合格した記録だけを配信開始予定へ公開する。全サービス・全作品の網羅ではない。",
-      "record_count": 27
+      "record_count": 26
     },
     {
       "id": "theater-showtimes",
@@ -125,7 +125,7 @@
       "status": "automated",
       "source": "TMDB API plus source-reviewed release records",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-21T00:00:05.677Z",
+      "source_observed_at": "2026-11-21T23:15:54.104Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",

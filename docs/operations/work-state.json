@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T00:30:00Z",
+  "updated_at": "2026-11-23T00:45:00Z",
   "status": "in_progress",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "f0b56a7b93692a67b41639a319226b25a40c4855",
   "branch": "codex/244-december-multiservice-20261123",
-  "head_sha": "847580c5a65da9d9ef1347173628d0f806b17989",
+  "head_sha": "2085b1bcedc7c69e0a76612e707f67ba58f3f00c",
   "pull_request": {
     "number": 891,
     "url": "https://github.com/vongolebianco7/cinema-calendar/pull/891",
@@ -113,12 +113,20 @@
     {
       "check": "PR #891 source CI and mergeability",
       "result": "PR head 847580c is mergeable. Initial check suite was triggered on prior draft commit b159db6; the canonical WOWOW URL was then corrected and exact-head checks are pending. Local full quality gate and focused 33-test suite pass."
+    },
+    {
+      "check": "December multi-service isolated publication simulation",
+      "result": "On latest observed main f0b56a7, refresh + approved poster enrichment + atomic import preserved 465 existing rows, appended 3, produced 468 total and 9 December service rows (Netflix 6, Prime Video 1, WOWOW 2) with zero missing December posters."
+    },
+    {
+      "check": "Local quality and future-month regression",
+      "result": "python scripts/quality_gate.py passed; 33 focused refresh/import/normalization tests passed, including a synthetic January 2027 release flowing to catalog with TMDB identity."
     }
   ],
   "blockers": [
-    "No licensed API/official date feed was identified for Disney+, U-NEXT, Hulu, Lemino, ABEMA, DMM TV, FOD, TELASA or WOWOW. These providers remain editorially reviewed; the issue cannot be declared fully automatic for all 12 without an allowed source.",
-    "Official reschedule/cancellation notices lack an authorized change feed; explicit corrections require manual review and a tested safe update path.",
-    "Exact-head CI and production data/page acceptance remain pending; do not merge before required source and final receipt-head checks pass."
+    "No licensed API/official date feed was identified for Disney+, U-NEXT, Hulu, Lemino, ABEMA, DMM TV, FOD, TELASA or WOWOW. Keep auto_premiere_discovery=false unless an allowed announcement source is verified.",
+    "No authorized source for streaming date changes/cancellations was identified. Do not infer removal from absence; manual reviewed corrections remain necessary.",
+    "PR #891 still needs exact-head required CI, receipt-only proof update followed by final-head CI, normal merge, ordinary generated-data refresh and production JSON/mobile acceptance."
   ],
   "deployment": {
     "status": "deployment_pending",
@@ -132,5 +140,5 @@
     "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass.",
     "The failed generated-data writer was not retried; last-known-good public data remains intact."
   ],
-  "next_action": "Require exact-head Autonomous quality gate, CINELVA smoke, Validate frontend and Reproducible backend build for PR #891. Then renew quality/production-proof.json in a receipt-only commit, require those same checks on the final head, and merge normally only when mergeable and all required checks pass. Verify ordinary generated-data refresh, production streaming JSON, posters and 390px view; keep #244 open due licensed-source coverage limits."
+  "next_action": "Run exact-head Autonomous quality gate, CINELVA smoke, Validate frontend and Reproducible backend build on PR #891 head 2085b1b. After they succeed, compute source digest and renew quality/production-proof.json in receipt-only commit, then require the same four workflows on final head. Merge only when mergeable and green; verify standard refresh, 468-row public JSON with 9 December rows and posters, and 390px production page. Keep #244 open."
 }

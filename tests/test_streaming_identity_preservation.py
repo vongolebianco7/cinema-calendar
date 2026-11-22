@@ -20,7 +20,7 @@ class StreamingMetadataPreservationTest(unittest.TestCase):
             movie = {
                 "title": "Test Film", "date": "2026-11-10",
                 "event": "streaming", "service": "Netflix",
-                "source_url": "https://example.org/official",
+                "source_url": "https://about.netflix.com/ja/news/official",
                 "poster": "https://image.tmdb.org/t/p/w500/valid.jpg",
                 "poster_path": "/valid.jpg", "tmdb_id": 12345,
                 "release_year": 2025, "year": 2025,

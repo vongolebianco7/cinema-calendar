@@ -1,17 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T14:16:00Z",
-  "status": "in_progress",
+  "updated_at": "2026-11-22T17:07:00Z",
+  "status": "ci_passed",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "35c74d1696434850bc7a999e1c299d59e5af2f72",
-  "branch": "main",
-  "head_sha": "5be8fd5a9b573c5eeb8eaed67080c4d93e70bd53",
+  "base_sha": "e70d82cf358f362bd74950a8149fe9ffb987071e",
+  "branch": "codex/244-verify-official-source-hosts-20261123",
+  "head_sha": "e9b08ad7823d56011e8885627ee71d2e30a4b936",
   "pull_request": {
-    "number": 887,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/887",
-    "state": "merged",
-    "merge_sha": "75a4667a7339ef95f3675e11c420ffa009a8c33e"
+    "number": 888,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/888",
+    "state": "open"
   },
   "open_pull_requests": [
     {
@@ -26,65 +25,45 @@
       "title": "Keep public box-office poster coverage complete",
       "status": "production_verified",
       "issue": 593,
-      "acceptance": "Production boxoffice JSON HTTP 200; all 1,808 by-year plus 100 all-time rows have posters; issue #593 remains closed."
+      "acceptance": "Canonical public box-office JSON has zero posterless rows and the issue remains closed."
     },
     {
-      "id": "P0-244-DECEMBER-STREAMING",
-      "title": "Publish the officially verified 2026-12-23 Netflix film",
-      "status": "production_verified",
+      "id": "P0-244-OFFICIAL-SOURCE-HOSTS",
+      "title": "Reject unapproved streaming announcement provenance hosts",
+      "status": "ci_passed",
       "issue": 244,
-      "acceptance": "The official Netflix announcement and Japan title page, existing unique TMDB ID/poster, successful automatic refresh, public streaming JSON row, READY production, and December calendar rendering are verified."
-    },
-    {
-      "id": "P0-244-COVERAGE-REMAINS",
-      "title": "Continue source-by-source freshness and coverage audit",
-      "status": "in_progress",
-      "issue": 244,
-      "acceptance": "Keep #244 open until source permissions, automatic/manual status, freshness, last-known-good behavior, counts, and screen effects are evidenced for each category."
+      "acceptance": "Every reviewed supplement source and regional evidence URL must use the service-specific official-host allowlist; rejection preserves last-known-good output."
     }
   ],
   "verification": [
     {
-      "check": "Live GitHub state 2026-11-22 14:05 UTC",
-      "result": "main is 35c74d1696434850bc7a999e1c299d59e5af2f72. #593 closed; #244 and #239 open. PR #887 merged at 75a4667a7339ef95f3675e11c420ffa009a8c33e. PR #879 is the only open PR and is unrelated."
+      "check": "Live state 2026-11-23 02:04 JST",
+      "result": "main e70d82cf358f362bd74950a8149fe9ffb987071e; #239/#244 open; #593 closed; unrelated PR #879 and #244 PR #888 open."
     },
     {
-      "check": "Exact-head CI and release proof",
-      "result": "The four required PR workflows passed on final PR head 9b498d352f32f5b6ae64a607b761cfa7ac1a3bf7 (Autonomous 45029542623, frontend 45029542577, backend 45029542553, smoke 45029542570). All additional visual/mobile/Python/scorecard checks on that exact head passed. Production proof binds tested source head ac66f62a718a9a0a12a0f8675de3b3813680c048 and digest 0cde4c8ca7e0b000b0774e5aede0d91040d97d51b66f4493d2f0a18b8e64c408."
+      "check": "Canonical production JSON",
+      "result": "boxoffice.json HTTP 200: 1,808 by-year + 100 all-time rows, poster gaps 0. streaming.json HTTP 200: 465 rows, poster gaps 0, six December 2026 rows."
     },
     {
-      "check": "Official streaming updater",
-      "result": "Refresh run 45030064750 succeeded on merge; it committed official streaming JSON at 43ecb2bd805f4d42150262c3aab06ccd5c0abe12. Update movie data run 45030064770 committed its JSON snapshots at 35c74d1696434850bc7a999e1c299d59e5af2f72, then failed only at Neon DB sync with Prisma P1001 (ep-snowy-wave-b4gwato2.c-6.us-east-2.aws.neon.tech:5432 unreachable). No repeat was started."
+      "check": "Official-source policy implementation",
+      "result": "PR #888 requires source_url and optional region_source_url to match the selected service's reviewed_premiere_hosts; arbitrary HTTPS and cross-service official hosts are rejected without replacing last-known-good output."
     },
     {
-      "check": "Public production JSON",
-      "result": "streaming.json HTTP 200, generated 2026-11-22T13:56:27.688255Z, 465 records; 6 December 2026 records, all Netflix, each with poster; new record is 2026-12-23, TMDB 1457866, official Japan page https://www.netflix.com/jp/title/82054606. boxoffice.json HTTP 200, 1,808 by-year + 100 all-time rows, 0 posterless."
+      "check": "Local verification",
+      "result": "Focused refresh tests passed 10/10; full quality gate passed; strict full Python suite passed 431 tests; isolated refresh of all current monthly supplements succeeded."
     },
     {
-      "check": "Production deployment",
-      "result": "Vercel production deployment dpl_5NPj76MU3u8peyE61hRMcDDZmoHE is READY on main SHA 35c74d1696434850bc7a999e1c299d59e5af2f72."
+      "check": "Exact source CI",
+      "result": "On source head e9b08ad7823d56011e8885627ee71d2e30a4b936: Autonomous 45036702530, smoke 45036702463, frontend 45036702426, backend 45036702589, and full Python 45036702472 all succeeded. Executable digest c4e0c991482836ce2af8b29ce3d5b0b025252646c30e99b398017dad84d6c702."
     },
     {
-      "check": "Rendered calendar acceptance",
-      "result": "Production calendar was advanced to December 2026. The 12/21–12/27 section renders the new film's poster, Netflix label, 12/23 premiere date, title, 141-minute runtime, and review/bookmark controls. Browser visual/AX acceptance passed; physical iPhone Safari was not tested."
-    },
-    {
-      "check": "Official source and identity",
-      "result": "Netflix Tudum announcement https://www.netflix.com/tudum/articles/david-fincher-new-film-release-date and Japan title page https://www.netflix.com/jp/title/82054606 support the date and Japan availability. Matched to existing TMDB movie 1457866 and its existing poster path; no title-only ID guess or invented URL."
-    },
-    {
-      "check": "Live official-feed candidate audit 2026-11-22 14:11 UTC",
-      "result": "The official Netflix Japan title page for Bad Day exists, but Netflix Media/Tudum release evidence specifies December 11 in the United States only. No Japan premiere date is evidenced, so it was intentionally excluded from streaming.json. Apple TV and Amazon Japan current official feed candidates were also screened; series, non-film events and items without a verified Japan movie premiere remain candidates only."
-    },
-    {
-      "check": "Docs checkpoint main-head checks 2026-11-22 14:15 UTC",
-      "result": "Docs-only main head 5be8fd5a9b573c5eeb8eaed67080c4d93e70bd53: smoke run 45031567290 success, completeness scorecard 45031567253 success, Pages build/deploy run 45031566534 success. Publish verified legacy Pages guard run 45031567246 failed closed because verify-production-release.cjs got GitHub REST HTTP 403 API rate-limit exceeded while checking CI proof at ac66f62; deployment stage was skipped, no bypass. Both Vercel status checks were successful as ignored-build-step cancellations; product production remains READY on 35c74d1, whose executable/data tree is unchanged."
+      "check": "Production baseline",
+      "result": "Vercel production remains READY on deployment dpl_5NPj76MU3u8peyE61hRMcDDZmoHE, product/data SHA 35c74d1696434850bc7a999e1c299d59e5af2f72; docs-only main deploys were safely ignored."
     }
   ],
   "blockers": [
-    "Issue #244 source/category coverage, freshness thresholds and last-known-good acceptance are not complete. Official discovery feed candidates remain review-only; no unverified film or Japan release date may be published.",
-    "Update movie data run 45030064770 failed at the final direct DB sync due Neon P1001. The JSON snapshot and Vercel publication succeeded. Do not retry Neon until the external endpoint is confirmed available.",
-    "Docs-only legacy Pages publication gate failed closed on GitHub REST HTTP 403 rate limit while reading proof; no static Pages deployment occurred. Do not retry until API access/rate limit recovers. Vercel correctly skipped the docs-only build and product production remains READY on 35c74d1."
+    "The proof/docs-only PR tip still needs fresh exact-head CI before merge.",
+    "After merge, observe the ordinary refresh-official-streaming push run once. Do not manually dispatch. Confirm it accepts all current supplements, leaves public counts unchanged, and preserves Vercel READY."
   ],
   "deployment": {
     "status": "production_verified",
@@ -92,12 +71,13 @@
     "ready_deployment_id": "dpl_5NPj76MU3u8peyE61hRMcDDZmoHE",
     "ready_sha": "35c74d1696434850bc7a999e1c299d59e5af2f72",
     "production_verified": true,
-    "change_live": true,
+    "change_live": false,
     "visual_acceptance_verified": true
   },
   "safety": [
-    "No viewing history, ratings, reviews, bookmarks, or backups were modified.",
-    "No scraping, paid action, manual update dispatch, manual Vercel deployment, quota workaround, CI bypass, or repeated Neon attempt."
+    "No published movie row or user storage changed.",
+    "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass.",
+    "Unapproved provenance is rejected before atomic replacement, preserving last-known-good data."
   ],
-  "next_action": "Continue #244 with a new category/source only when official Japanese premiere evidence and a unique TMDB identity are available. Keep the three official discovery feeds candidate-only; do not reuse US dates. Audit stale/disabled source categories for safe, permitted paths. Do not retry the Neon P1001 or Pages publication gate until their external endpoints/rate limit are confirmed recovered. Keep #244 open."
+  "next_action": "Require fresh exact-head CI on the proof/docs-only final PR #888 tip. If all required checks pass and the head is unchanged/mergeable, merge normally with expected_head_sha. Observe the one ordinary refresh-official-streaming push run, then recheck public JSON and Vercel READY. Keep #244 open."
 }

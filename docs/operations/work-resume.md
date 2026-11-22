@@ -499,3 +499,16 @@ This makes six reviewed candidates on PR #867: Steps, In Waves, Ray Gunn, Proxie
 - Official Netflix `Bad Day` candidate was rejected: the Japan title page exists but the only located Dec 11 release date is explicitly US-only. No Japan date was inferred.
 - No user storage, paid source, scraper, manual workflow/deploy, quota workaround, CI bypass or Neon retry. The `Update movie data` run remains blocked only at final Neon sync with P1001.
 - Next: continue source-by-source #244 audit; promote only official Japan-dated film items with unique TMDB IDs. Wait for external Neon/API recovery rather than retrying. Keep #244 open.
+
+
+## Live checkpoint — 2026-11-23 02:07 JST — official-source host enforcement
+
+- Live main is `e70d82cf358f362bd74950a8149fe9ffb987071e`. #239 and #244 are open; #593 remains closed. PR #888 is the only #244 implementation PR; unrelated PR #879 remains open.
+- Production `boxoffice.json` remains HTTP 200 with 1,808 by-year + 100 all-time rows and zero missing posters. Production `streaming.json` remains HTTP 200 with 465 rows, zero missing posters, and six December 2026 rows. #593 has not recurred.
+- The reviewed supplement validator previously accepted any syntactically valid HTTPS source for a registered service. PR #888 now binds `source_url` and optional `region_source_url` to that service's existing `reviewed_premiere_hosts` policy. Arbitrary HTTPS and a different provider's official host are rejected before atomic replacement, preserving last-known-good bytes.
+- Local verification passed: 10 focused refresh tests, the full quality gate, the strict full Python suite (431 tests), and an isolated refresh of all current monthly supplements. The first PR head exposed stale test fixtures and a December import test that assumed the already-published row was absent; those fixtures were corrected, not retried blindly.
+- Exact source head `e9b08ad7823d56011e8885627ee71d2e30a4b936` passed Autonomous quality gate `45036702530`, CINELVA smoke `45036702463`, Validate frontend `45036702426`, Reproducible backend build `45036702589`, and Full Python contract suite `45036702472`. Executable digest: `c4e0c991482836ce2af8b29ce3d5b0b025252646c30e99b398017dad84d6c702`.
+- `quality/production-proof.json` now binds that exact tested source. The receipt/docs-only final tip still requires fresh exact-head CI before merge.
+- Vercel production remains READY on `dpl_5NPj76MU3u8peyE61hRMcDDZmoHE`, product/data SHA `35c74d1696434850bc7a999e1c299d59e5af2f72`. This guard does not alter visible data; after merge, observe the ordinary `refresh-official-streaming` push run once and confirm all current supplements remain accepted. Do not manually dispatch or deploy.
+- No viewing history, rating, review, bookmark or backup changed. No scraping, paid action, Neon retry, manual deployment, quota workaround, or CI bypass occurred.
+- Next: require fresh exact-head CI on PR #888's final proof/docs tip. Merge only if the same head is mergeable and green; then verify the automatic refresh, unchanged public counts/poster coverage, and Vercel READY. Keep #244 open.

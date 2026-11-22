@@ -10,16 +10,33 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 SOURCE_GLOB = "streaming-*-official-supplement.json"
 OUTPUT = ROOT / "data/streaming-official-current.json"
 SERVICES = ROOT / "data/streaming_sources.json"
-def registered_services(path=SERVICES):
+def registered_service_hosts(path=SERVICES):
     data = json.loads(path.read_text(encoding="utf-8"))
     services = data.get("services") if isinstance(data, dict) else None
     if not isinstance(services, list):
         raise ValueError("Invalid streaming service registry")
-    names = {entry.get("name") for entry in services if isinstance(entry, dict) and isinstance(entry.get("name"), str) and entry["name"].strip()}
-    if not names:
+    registry = {}
+    for entry in services:
+        if not isinstance(entry, dict):
+            raise ValueError("Invalid streaming service entry")
+        name = entry.get("name")
+        hosts = entry.get("reviewed_premiere_hosts")
+        if not isinstance(name, str) or not name.strip() or not isinstance(hosts, list):
+            raise ValueError("Invalid streaming service source policy")
+        normalized_hosts = {
+            host.strip().lower()
+            for host in hosts
+            if isinstance(host, str) and host.strip()
+        }
+        if not normalized_hosts or name in registry:
+            raise ValueError("Invalid streaming service source policy")
+        registry[name] = frozenset(normalized_hosts)
+    if not registry:
         raise ValueError("Streaming service registry is empty")
-    return names
-ALLOWED = registered_services()
+    return registry
+
+SERVICE_HOSTS = registered_service_hosts()
+ALLOWED = frozenset(SERVICE_HOSTS)
 def refresh(source=None, output=OUTPUT, today=None):
     # Default runs consume every reviewed month file so a new month needs only
     # a verified data addition; the scheduled workflow itself remains stable.
@@ -51,10 +68,22 @@ def refresh(source=None, output=OUTPUT, today=None):
                 raise ValueError("Missing title, service, date or provenance")
             # A bare https:// prefix is not sufficient evidence of a valid source.
             parsed_source = urlsplit(url)
+            source_host = parsed_source.hostname.lower() if parsed_source.hostname else None
             if (service not in ALLOWED or parsed_source.scheme != "https"
-                    or not parsed_source.hostname or parsed_source.username
-                    or parsed_source.password):
-                raise ValueError("Unrecognized service or invalid HTTPS provenance")
+                    or not source_host or parsed_source.username
+                    or parsed_source.password
+                    or source_host not in SERVICE_HOSTS[service]):
+                raise ValueError("Unrecognized service or unapproved official provenance host")
+            region_url = movie.get("region_source_url")
+            if region_url is not None:
+                if not isinstance(region_url, str) or not region_url.strip():
+                    raise ValueError("Invalid regional provenance")
+                parsed_region = urlsplit(region_url)
+                region_host = parsed_region.hostname.lower() if parsed_region.hostname else None
+                if (parsed_region.scheme != "https" or not region_host
+                        or parsed_region.username or parsed_region.password
+                        or region_host not in SERVICE_HOSTS[service]):
+                    raise ValueError("Unapproved regional provenance host")
             parsed = dt.date.fromisoformat(date)
             if date[:7] != period:
                 raise ValueError("Streaming release date outside official supplement period")

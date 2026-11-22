@@ -2,8 +2,8 @@
   "generated_at": "2026-11-07",
   "note": "Partial television schedule coverage: curated records plus anime-related movie broadcasts from a public feed. This is not a nationwide all-channel listing; schedules may change and source links are retained per item.",
   "automation_source": "syoboi_calendar",
-  "automation_generated_at": "2026-11-22T17:15:36.855980Z",
-  "automation_checked_at": "2026-11-22T17:15:36.880260Z",
+  "automation_generated_at": "2026-11-22T23:47:47.917437Z",
+  "automation_checked_at": "2026-11-22T23:47:47.941056Z",
   "automated_movies": [
     {
       "title": "ガールズ＆パンツァー もっとらぶらぶ作戦です！",
@@ -20,7 +20,9 @@
       "source_title_id": "7738",
       "original_title": "Girls und Panzer: Motto Love Love Sakusen Desu!",
       "release_year": 2025,
-      "year": 2025
+      "year": 2025,
+      "poster": "https://image.tmdb.org/t/p/w500/dugOSr2KtXpPzjt8XEK1kGErFPU.jpg",
+      "poster_match_status": "fuzzy_tmdb_search_fallback"
     },
     {
       "title": "ガールズ＆パンツァー もっとらぶらぶ作戦です！",
@@ -37,7 +39,9 @@
       "source_title_id": "7738",
       "original_title": "Girls und Panzer: Motto Love Love Sakusen Desu!",
       "release_year": 2025,
-      "year": 2025
+      "year": 2025,
+      "poster": "https://image.tmdb.org/t/p/w500/dugOSr2KtXpPzjt8XEK1kGErFPU.jpg",
+      "poster_match_status": "fuzzy_tmdb_search_fallback"
     },
     {
       "title": "ガールズ＆パンツァー もっとらぶらぶ作戦です！",
@@ -54,7 +58,9 @@
       "source_title_id": "7738",
       "original_title": "Girls und Panzer: Motto Love Love Sakusen Desu!",
       "release_year": 2025,
-      "year": 2025
+      "year": 2025,
+      "poster": "https://image.tmdb.org/t/p/w500/dugOSr2KtXpPzjt8XEK1kGErFPU.jpg",
+      "poster_match_status": "fuzzy_tmdb_search_fallback"
     },
     {
       "title": "名探偵コナン 緋色の不在証明",
@@ -70,7 +76,10 @@
       "source_program_id": "725953",
       "source_title_id": "7759",
       "release_year": 2021,
-      "year": 2021
+      "year": 2021,
+      "runtime": 93,
+      "poster": "https://image.tmdb.org/t/p/w500/9gMIFPFs9mlESSzTt2zXLSQhXj4.jpg",
+      "poster_match_status": "matched"
     }
   ],
   "movies": [
@@ -534,7 +543,9 @@
       "source_title_id": "7738",
       "original_title": "Girls und Panzer: Motto Love Love Sakusen Desu!",
       "release_year": 2025,
-      "year": 2025
+      "year": 2025,
+      "poster": "https://image.tmdb.org/t/p/w500/dugOSr2KtXpPzjt8XEK1kGErFPU.jpg",
+      "poster_match_status": "fuzzy_tmdb_search_fallback"
     },
     {
       "title": "ガールズ＆パンツァー もっとらぶらぶ作戦です！",
@@ -551,7 +562,9 @@
       "source_title_id": "7738",
       "original_title": "Girls und Panzer: Motto Love Love Sakusen Desu!",
       "release_year": 2025,
-      "year": 2025
+      "year": 2025,
+      "poster": "https://image.tmdb.org/t/p/w500/dugOSr2KtXpPzjt8XEK1kGErFPU.jpg",
+      "poster_match_status": "fuzzy_tmdb_search_fallback"
     },
     {
       "title": "ガールズ＆パンツァー もっとらぶらぶ作戦です！",
@@ -568,7 +581,9 @@
       "source_title_id": "7738",
       "original_title": "Girls und Panzer: Motto Love Love Sakusen Desu!",
       "release_year": 2025,
-      "year": 2025
+      "year": 2025,
+      "poster": "https://image.tmdb.org/t/p/w500/dugOSr2KtXpPzjt8XEK1kGErFPU.jpg",
+      "poster_match_status": "fuzzy_tmdb_search_fallback"
     },
     {
       "title": "名探偵コナン 緋色の不在証明",
@@ -584,7 +599,10 @@
       "source_program_id": "725953",
       "source_title_id": "7759",
       "release_year": 2021,
-      "year": 2021
+      "year": 2021,
+      "runtime": 93,
+      "poster": "https://image.tmdb.org/t/p/w500/9gMIFPFs9mlESSzTt2zXLSQhXj4.jpg",
+      "poster_match_status": "matched"
     }
   ],
   "source_cache_control": "max-age=180, s-maxage=180"

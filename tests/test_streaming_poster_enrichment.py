@@ -530,6 +530,7 @@ class StreamingPosterEnrichmentTests(unittest.TestCase):
         workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/refresh-official-streaming.yml").read_text()
         start = workflow.index("- name: Commit only verified generated data")
         step = workflow[start:]
+        self.assertIn("group: cinema-database-write", workflow)
         self.assertIn("for attempt in 1 2 3", step)
         self.assertIn("fetch-depth: 0", workflow)
         self.assertIn("git fetch origin main", step)

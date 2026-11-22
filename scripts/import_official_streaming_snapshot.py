@@ -22,7 +22,7 @@ SNAPSHOT = ROOT / "data/streaming-official-current.json"
 CATALOG = ROOT / "data/streaming.json"
 REGISTRY = ROOT / "data/streaming_sources.json"
 FILL_FIELDS = ("poster", "id", "tmdb", "tmdb_id", "overview", "score", "votes", "release_year", "year", "runtime")
-PROVENANCE_FIELDS = ("announcement_source_url", "source_published_at", "observed_at", "verified_at")
+PROVENANCE_FIELDS = ("announcement_source_url", "region_source_url", "source_published_at", "observed_at", "verified_at")
 
 
 def import_snapshot(snapshot_path=SNAPSHOT, catalog_path=CATALOG, registry_path=REGISTRY):

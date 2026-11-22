@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "747b39261ab18e6f658ed5664255a7c744ad7c2f",
-  "verified_at": "2026-11-22T18:12:00Z",
-  "note": "Exact-source CI receipt for PR #890 tested head 747b39261ab18e6f658ed5664255a7c744ad7c2f, executable digest bfe23e06e4e13054233d0c562225363d17113255c655116796fffdc2c7339e1d. Required workflows passed on this exact head: Autonomous quality gate run 45052805004, CINELVA smoke tests run 45052804968, Validate frontend run 45052804983, and Reproducible backend build run 45052804990. Full Python contract suite run 45052804982, mobile run 45052804979, completeness run 45052805009, and visual QA run 45052804966 also passed. The tested source puts the official streaming publisher under the existing cinema-database-write concurrency lock shared by movie, now-playing and TV snapshot writers, preventing overlapping generated-data commits to main while retaining bounded safe retries and last-known-good behavior. It changes no published movie row or user storage. This receipt/docs-only update requires fresh exact-head CI before normal merge."
+  "head_sha": "a37f34b10094c7212d45bce73e27b7c53a615e66",
+  "verified_at": "2026-11-22T22:49:23Z",
+  "note": "Exact-source CI receipt for PR #891 source head a37f34b10094c7212d45bce73e27b7c53a615e66; executable digest f51a728e994700b05a50561cfea234626adf6e325915b18080d6855c86216ee9. Required workflows passed on this exact head: Autonomous quality gate run 45078862912, CINELVA smoke tests run 45078862839, Validate frontend run 45078862727, and Reproducible backend build run 45078862719. The Autonomous quality gate included Chromium and WebKit 390px smoke checks. The source adds three officially confirmed December streaming entries and a strict individual Prime Video source URL allowlist; current TMDB identity/poster data is matched by exact IDs. This is a source receipt; the receipt/docs-only final PR tip requires fresh exact-head CI before merge."
 }

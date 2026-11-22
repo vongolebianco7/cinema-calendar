@@ -18,8 +18,13 @@ test('movie details always show runtime and provide a Filmarks search link', () 
   vm.runInContext(search.slice(start, end), context);
   assert.equal(context.movieRuntimeLabel({ runtime: 135 }), '135分');
   assert.equal(context.movieRuntimeLabel({}), '未確認');
-  assert.match(search, /filmarks\.com\/search\/movies\?term=/);
-  assert.match(calendar, /filmarks\.com\/search\/movies\?term=/);
+  assert.match(search, /filmarks\.com\/search\/movies\?q=/);
+  assert.match(calendar, /filmarks\.com\/search\/movies\?q=/);
+  for (const file of ['index.html', 'search.html', 'cinelva/index.html', 'cinelva/search.html']) {
+    const html = fs.readFileSync(file, 'utf8');
+    assert.match(html, /filmarks\.com\/search\/movies\?q=/, `${file} must use Filmarks' supported q parameter`);
+    assert.doesNotMatch(html, /filmarks\.com\/search\/movies\?term=/, `${file} must not use the ignored term parameter`);
+  }
 });
 
 test('detail timeline follows production information and related films are last', () => {

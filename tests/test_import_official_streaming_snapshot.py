@@ -19,6 +19,14 @@ class OfficialSnapshotImportTests(unittest.TestCase):
             snapshot, catalog = root / "official.json", root / "streaming.json"
             self.assertTrue(refresh_streaming_official.refresh(source=sources, output=snapshot))
             before = json.loads(Path("data/streaming.json").read_text(encoding="utf-8"))
+            before["movies"] = [
+                row for row in before["movies"]
+                if not (
+                    row.get("service") == "Netflix"
+                    and row.get("date") == "2026-12-23"
+                    and row.get("tmdb_id") == 1457866
+                )
+            ]
             catalog.write_text(json.dumps(before, ensure_ascii=False), encoding="utf-8")
 
             added, _updated = import_snapshot(snapshot, catalog, Path("data/streaming_sources.json"))

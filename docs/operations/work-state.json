@@ -1,78 +1,74 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T22:49:23Z",
-  "status": "in_progress",
+  "updated_at": "2026-11-23T08:39:07Z",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
-  "base_sha": "f0b56a7b93692a67b41639a319226b25a40c4855",
-  "branch": "codex/244-december-multiservice-20261123",
-  "head_sha": "a37f34b10094c7212d45bce73e27b7c53a615e66",
+  "base_sha": "41fd1f8871c66bc255c9770fba9604162aa689c8",
+  "branch": "codex/refresh-work-checkpoint-20261123",
+  "head_sha": "97c2b42dd78f7e9e53a21aa4892848596882288d",
   "pull_request": {
-    "number": 891,
-    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/891",
+    "number": 900,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/900",
     "state": "open"
   },
   "open_pull_requests": [
     {
-      "number": 879,
-      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/879",
-      "title": "VIVANT診断の好きな映画を9作品から選べるようにする"
-    },
-    {
-      "number": 891,
-      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/891",
-      "title": "fix: publish verified December streaming films"
+      "number": 900,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/900",
+      "title": "docs: refresh live CINELVA work checkpoint"
     }
   ],
   "work_items": [
     {
       "id": "P0-593-POSTERS",
-      "title": "Keep public box-office poster coverage complete",
+      "title": "Cross-screen poster recovery",
       "status": "production_verified",
       "issue": 593,
-      "acceptance": "Canonical public box-office JSON has zero posterless rows and the issue remains closed."
-    },
-    {
-      "id": "P0-244-OFFICIAL-SOURCE-HOSTS",
-      "title": "Reject unapproved streaming announcement provenance hosts",
-      "status": "production_verified",
-      "issue": 244,
-      "acceptance": "Every reviewed supplement source and regional evidence URL must use the service-specific official-host allowlist; rejection preserves last-known-good output."
-    },
-    {
-      "id": "P0-244-GENERATED-WRITER-LOCK",
-      "title": "Serialize official streaming and generated-data publishers",
-      "status": "ci_passed",
-      "issue": 244,
-      "acceptance": "The official streaming refresh uses the shared cinema-database-write concurrency lock; exact source CI is green and final receipt-head CI is required before merge."
+      "acceptance": "Issue #593 is closed after production evidence; do not reopen unless fresh failures are measured."
     },
     {
       "id": "P0-244-DECEMBER-COVERAGE",
-      "title": "Add officially confirmed December 2026 streaming movies",
-      "status": "in_progress",
+      "title": "Publish verified December streaming additions",
+      "status": "deployment_pending",
       "issue": 244,
-      "acceptance": "Add only dated, official Japan-relevant film announcements with reviewed TMDB identities and sources; preserve user data and publish-verify the resulting count."
+      "pr": 891,
+      "acceptance": "The merged 468-row source and nine December entries still require production confirmation; the matching Vercel deployment was canceled."
     },
     {
       "id": "P0-244-RELEASE-DISCOVERY",
-      "title": "Verify future streaming announcement discovery and limits",
-      "status": "in_progress",
+      "title": "Automate permitted streaming premiere discovery",
+      "status": "blocked",
       "issue": 244,
-      "acceptance": "Exercise the reviewed-source pipeline with a January 2027 fixture; accurately classify permitted feeds and document services without licensed announcement feeds."
+      "acceptance": "Only permitted sources may auto-add dated titles; no licensed premiere feed has been identified for most providers, so keep unverified discovery disabled."
+    },
+    {
+      "id": "P0-243-QUALITY-MONITORING",
+      "title": "Complete cross-screen quality monitoring",
+      "status": "in_progress",
+      "issue": 243,
+      "acceptance": "Quality gate passes locally; full production route/data freshness and real-device Safari verification remain outstanding."
     },
     {
       "id": "P1-242-USER-UI-REFINEMENTS",
-      "title": "Implement user-requested calendar, search, streaming, pricing, VIVANT and feedback changes",
-      "status": "planned",
+      "title": "Verify current user-requested UI fixes",
+      "status": "deployment_pending",
       "issue": 242,
-      "acceptance": "Implement each requested page change without altering unrelated UI; preserve stored viewing/rating/bookmark data; verify key screens at 390px in Chromium/WebKit and deployed production."
+      "acceptance": "Current main contains the calendar, search, streaming, cinema pricing, VIVANT, and feedback UI changes; public production acceptance is blocked."
     },
     {
       "id": "P1-683-BEST10-USER-REFINEMENTS",
-      "title": "Implement year-based My Best 10 and device-save UX",
-      "status": "planned",
+      "title": "Verify My Best 10 fixes",
+      "status": "deployment_pending",
       "issue": 683,
-      "acceptance": "Unify Best 10/Top 10 naming, select a target year through the requested flow, update title, remove hidden editor controls, align rating checkbox and dimensions, and verify platform save behavior."
+      "acceptance": "Current main contains the year-aware Best 10 and image/save improvements; public iPhone Safari acceptance is blocked."
+    },
+    {
+      "id": "P1-585-FEEDBACK",
+      "title": "Verify feedback intake and analytics",
+      "status": "deployment_pending",
+      "issue": 585,
+      "acceptance": "Feedback form no longer asks for email; verify submission, admin triage, and analytics on the deployed service."
     }
   ],
   "verification": [
@@ -143,24 +139,36 @@
     {
       "check": "Official feed discovery observation",
       "result": "Current candidate snapshot generated 2026-11-22T22:20:59.947430Z: 3 official RSS/Atom feeds checked, 26 candidates, one verified-catalog match. Candidate discovery does not independently establish release dates/movie IDs and did not auto-add titles."
+    },
+    {
+      "check": "2026-11-23 current-main audit and local quality gate",
+      "result": "GitHub main is 41fd1f8871c66bc255c9770fba9604162aa689c8. No open PRs found; PRs #891 and #879 are merged. Python scripts/quality_gate.py passed on this exact main: 608 Node tests passed, Python/compliance/data checks completed, final QUALITY GATE PASSED. Recent UI changes are already in main: #895 cinema pricing logos, #897/#898 calendar poster sizing, #879/#899 VIVANT poster choice and check/header, and commit 8f97782 applies the remaining user feedback. Vercel deployment remains blocked by HTTP 402."
+    },
+    {
+      "check": "Checkpoint documentation PR #900",
+      "result": "Two documentation files record the current main, tests, open issues and deployment block. Local state schema and git diff checks pass; PR checks are pending."
     }
   ],
   "blockers": [
-    "No licensed API/official premiere-date feed was identified for Disney+, U-NEXT, Hulu, Lemino, ABEMA, DMM TV, FOD, TELASA or WOWOW. All 12 auto_premiere_discovery flags remain false; candidate feed records require verification.",
-    "No authorized source for streaming date changes/cancellations was identified; explicit corrections require reviewed evidence. Do not infer cancellation from absence.",
-    "Production confirmation is pending: final receipt/docs head CI, safe merge, normal refresh, Vercel READY, public 468-row JSON and 390px page acceptance remain required."
+    "Vercel POST /v13/deployments returned HTTP 402 resource_creation_blocked: team exceeded fair-use limits. Do not retry until the user resolves the Vercel block; do not upgrade or bypass free-tier restrictions.",
+    "Vercel latest READY deployment is commit 4fa293d00ddde42436147935f1a574b3d313cb81; latest main 41fd1f8871c66bc255c9770fba9604162aa689c8 has no deployment. PR #891 deployment dce3d8fe97d7a3a77080da2ebfd9e59612018bc3 is canceled.",
+    "No licensed premiere-date or change/cancellation feeds were identified for most streaming providers; do not infer availability or cancellation."
   ],
   "deployment": {
-    "status": "deployment_pending",
+    "status": "blocked",
     "canonical_url": "https://cinelva.vercel.app/",
     "production_verified": false,
     "change_live": false,
+    "latest_main_sha": "41fd1f8871c66bc255c9770fba9604162aa689c8",
+    "latest_ready_sha": "4fa293d00ddde42436147935f1a574b3d313cb81",
+    "latest_ready_url": "https://vercel.com/vongole1/cinema-calendar/HNaj5eMndf984uQFUH3Wf4hryHVp",
+    "blocked_deployment_url": "https://vercel.com/vongole1/cinema-calendar/7jM5q9D6d4SKbHqfrrKzHzy2hc1i",
     "visual_acceptance_verified": false
   },
   "safety": [
-    "No viewing history, rating, review, bookmark or backup changed.",
-    "No scraping, paid action, Neon retry, manual updater dispatch, manual Vercel deployment, quota workaround, or CI bypass.",
-    "The failed generated-data writer was not retried; last-known-good public data remains intact."
+    "No viewing history, rating, review, bookmark, or backup changed.",
+    "No scraping, paid service, billing setting, alternate account, manual data workflow, deployment retry, quota workaround, or CI bypass used.",
+    "No repository source changes were needed in this run; the user-requested UI changes are already present in main."
   ],
-  "next_action": "PR #891 source checks passed. Commit the receipt and checkpoint as docs-only, require the four exact-head checks again on that final tip, then merge normally only if mergeable and green. Verify ordinary refresh, public streaming JSON 465->468 / December 6->9 / zero poster gaps, and the published 390px streaming page. Then start the requested UI work against #242 and #683: home poster sizing, discovery duplicate year/runtime, streaming tabs/cards/copy, cinema logo, VIVANT entry/logo/selection/result layout/art, year-based Best 10 and save, and email removal. Keep #244 open until licensed-source and change/cancellation limits are fully addressed."
+  "next_action": "After Vercel clears the fair-use block, deploy exact main 41fd1f8871c66bc255c9770fba9604162aa689c8 once through the normal production path and verify the canonical URL, streaming JSON, calendar, VIVANT selection, Best 10, and feedback flow. Until then, continue only independent source/data work that does not require unapproved feeds or production access."
 }

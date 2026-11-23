@@ -1,7 +1,15 @@
-Warning: truncated output (original token count: 29921)
-Total output lines: 674
-
 # CINELVA Work restart guide
+
+## Current live checkpoint — 2026-11-23 17:16 JST
+
+- Current `main`: `41fd1f8871c66bc255c9770fba9604162aa689c8`. No open application PRs were found; PRs #891 and #879 are merged. This documentation checkpoint is now PR #900. Current code includes the latest user-requested UI changes, including calendar poster sizing, VIVANT poster selection/check/header, cinema chain logos, streaming tabs/cards, Best 10 year selection/image flow, and an email-free feedback form.
+- Local `python scripts/quality_gate.py` passed on this exact main: 608 Node tests passed; Python, data/compliance, static-build, and release checks completed; final result `QUALITY GATE PASSED`.
+- Vercel deployment is blocked: creating a production deployment returned HTTP 402 `resource_creation_blocked` because the team exceeded fair-use limits. Latest READY deployment is on `4fa293d00ddde42436147935f1a574b3d313cb81`; no deployment exists for current main `41fd1f8`. PR #891 production deployment is canceled. Do not retry or change billing until the Vercel block is resolved.
+- #593 remains closed. #242 and #244 are reopened; #243, #585, and #683 remain open. #244 still lacks permitted premiere-date and cancellation/change sources for most providers, so unsupported automatic discovery remains disabled.
+- Next: continue only work that does not require production deployment or unapproved data sources. Once Vercel clears the block, make one normal deployment of exact main and verify the canonical site and critical flows. Do not mark UI acceptance or #244 complete until production evidence exists.
+
+---
+
 
 Use this guide whenever a Work session ends, loses context, or reaches a usage limit. GitHub issue [#239](https://github.com/vongolebianco7/cinema-calendar/issues/239) is the single progress hub; this guide and `work-state.json` carry the durable checkpoint.
 

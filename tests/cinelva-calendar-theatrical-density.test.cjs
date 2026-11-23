@@ -68,7 +68,9 @@ test('poster enrichment failure keeps the existing calendar snapshot available',
   assert.match(html, /catch\(e\)\{console\.warn\("Calendar refresh failed; retaining last good movie snapshot",e\);if\(!movies\.length\)\$\("#dates"\)\.innerHTML/);
 });
 
-test('single-film weeks use a compact horizontal poster and details layout on mobile', () => {
-  assert.match(html, /\.calendar\.theatricalWeekMode \.streamingWeekMovies \.streamMovie:only-child\{display:grid;grid-template-columns:76px minmax\(0,1fr\)/);
+test('single-film week cards span the row and use a large poster with readable details on mobile', () => {
+  assert.match(html, /\.calendar\.theatricalWeekMode \.streamingWeekMovies \.streamMovie:only-child\{grid-column:1\/-1;display:grid;grid-template-columns:clamp\(112px,38vw,148px\) minmax\(0,1fr\)/);
+  assert.match(html, /\.streamMovie:only-child \.streamMoviePoster\{grid-column:1;grid-row:1 \/ span 4;width:100%;max-width:148px/);
+  assert.match(html, /\.streamMovie:only-child \.streamMovieTitle\{grid-column:2;grid-row:3;align-self:start;margin-top:5px;-webkit-line-clamp:4;font-size:14px\}/);
   assert.match(html, /@media\(max-width:760px\)[\s\S]*?\.calendar\.theatricalWeekMode \.streamingWeekFrame\{padding:6px\}/);
 });

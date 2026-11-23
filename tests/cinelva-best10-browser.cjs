@@ -19,7 +19,10 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
   const origin = `http://127.0.0.1:${port}`;
   const server = spawn("python", ["-m", "http.server", String(port), "--bind", "127.0.0.1"], { stdio: "ignore" });
   const recordsKey = "cinelva-library-records-v2";
-  const records = { "807": { title: "既存の鑑賞記録", year: 2020, rating: 4.3, watched: true, watchedAt: "2025-01-02" } };
+  const records = {
+    "807": { id: 807, tmdbId: 807, title: "既存の鑑賞記録", year: 2020, rating: 4.3, watched: true, watchedAt: "2025-01-02" },
+    "808": { id: 808, tmdbId: 808, title: "別年の鑑賞記録", year: 2024, rating: 4.9, watched: true, watchedAt: "2025-01-03" },
+  };
   const poster = "https://image.tmdb.org/t/p/w342/seven-fixture.png";
   const movies = [
     { id: 807, tmdbId: 807, title: "セブン", original_title: "Se7en", year: 1995, poster },
@@ -124,6 +127,25 @@ const { waitForLocalServer } = require("./helpers/local-server.cjs");
     await page.locator("#saveToPhotos").click();
     await page.locator("#saveImageDialog[open]").waitFor();
     assert.match(await page.locator("#saveImagePreview").getAttribute("src"), /^data:image\/png;base64,/);
+    await page.locator("#closeSaveImage").click();
+    await page.evaluate(() => {
+      Object.defineProperty(navigator, "canShare", { configurable: true, value: () => true });
+      Object.defineProperty(navigator, "share", { configurable: true, value: async payload => { window.__photoSharePayload = payload; } });
+    });
+    await page.locator("#saveToPhotos").click();
+    await page.waitForFunction(() => Boolean(window.__photoSharePayload));
+    assert.equal(await page.evaluate(() => window.__photoSharePayload.files[0].type), "image/png", "phone share sheet receives the generated PNG file");
+    assert.match(await page.locator("#msg").innerText(), /共有メニューから「写真に保存」/);
+    await page.locator("#applyTopRatings").click();
+    await page.locator("#topRatingsConfirm[open]").waitFor();
+    await page.locator("#topRatingsYear").selectOption("2024");
+    assert.equal(await page.locator("#title").inputValue(), "MY BEST 10 — 2024年", "the artwork title follows the selected year");
+    assert.match(await page.locator("#topRatingsCandidates").innerText(), /別年の鑑賞記録/);
+    assert.doesNotMatch(await page.locator("#topRatingsCandidates").innerText(), /既存の鑑賞記録/);
+    await page.locator("#topRatingsYear").selectOption("2020");
+    assert.equal(await page.locator("#topRatingsCandidates li").count(), 1, "an exact calendar year excludes highly rated works from adjacent years");
+    await page.locator("#cancelTopRatings").click();
+    assert.equal(await page.locator("#count").innerText(), "2/10", "cancel leaves the current Best 10 list untouched");
     assert.equal(await page.evaluate((key) => localStorage.getItem(key), recordsKey), JSON.stringify(records), "poster hydration and export do not alter canonical viewing records");
     assert.deepEqual(pageErrors, []);
     fs.mkdirSync("artifacts/my-best10", { recursive: true });

@@ -1,6 +1,15 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs'),vm=require('node:vm');
+for(const path of ['discover.html','cinelva/discover.html'])test(path+' removes duplicate years and shows runtime on movie cards',()=>{
+ const html=fs.readFileSync(path,'utf8'),code=['discoverDate','discoverYear','discoverTitle','discoverMeta'].map(name=>html.match(new RegExp('function '+name+'\\(m\\)[^\\n]*'))?.[0]).join('\n');
+ assert.ok(!code.includes('undefined'),'year and metadata projection helpers are present');
+ const context={CinelvaDiscoveryShelves:{displayDate:m=>m.release_date||m.year||''}};vm.runInNewContext(code+';globalThis.project=[discoverTitle,discoverMeta]',context);
+ assert.deepEqual(Array.from(context.project[0]({title:'タイトル（2026）',year:'2026'})),Array.from('タイトル'));
+ assert.equal(context.project[1]({title:'タイトル（2026）',year:'2026',runtime:124}),'2026年 · 124分');
+ assert.equal(context.project[1]({title:'タイトル',year:'2026'}),'2026年 · 上映時間未確認');
+ assert.equal(context.project[1]({title:'タイトル（2007）',release_date:'2007-11-10',year:'2007',runtime:124}),'2007/11/10 · 124分');
+});
 for(const path of ['discover.html','cinelva/discover.html'])test(path+' does not turn an event date into a release year',()=>{
  const code=fs.readFileSync(path,'utf8').match(/^function normalizeLocalMovie\(m\).*$/m)[0];
  const context={window:{CinelvaMovieIdentity:{ingest:()=>({}),posterFor:()=>''}}};

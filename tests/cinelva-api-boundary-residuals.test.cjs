@@ -23,6 +23,7 @@ function loadRoute(file, fetcher, timeoutFactory = AbortSignal.timeout) {
     Map, Set, Date, Number, String, JSON, console,
     process: { env: { TMDB_API_KEY: 'fixture-key' } },
     fetch: fetcher,
+    calendarSnapshot: () => ({ movies: [] }),
     ...loadHttp(),
     isFilmMedium: () => true,
     filmMediumMetadata: value => value,

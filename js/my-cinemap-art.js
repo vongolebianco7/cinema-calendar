@@ -257,7 +257,7 @@ function drawArtwork(movies){
   drawCinemaBackground(ctx,w,h,cinemaBackground);
   if(cinemaBackground==='none')drawThemeIllustration(ctx,w,h,theme,p);
   ctx.textBaseline='top';ctx.fillStyle=p.fg;
-  const title=artValue('title').trim()||'MY TOP 10 — 2026';
+  const title=artValue('title').trim()||'MY BEST 10 — 2026';
   ctx.textAlign='center';
   const titleHeight=writeLines(ctx,title,w/2,metrics.titleY,inner*.78,2,metrics.titleSize,40,font.title,font.titleWeight,1.04);
   const titleBottom=metrics.titleY+titleHeight;
@@ -295,7 +295,7 @@ function drawArtwork(movies){
 }
 function downloadArtwork(file){if(artworkURL)URL.revokeObjectURL(artworkURL);artworkURL=URL.createObjectURL(file);const a=document.createElement('a');a.href=artworkURL;a.download='my-cinelva.png';document.body.append(a);a.click();a.remove()}
 async function saveArtwork(){if(!artworkReady()){document.getElementById('msg').textContent='画像を準備中です。少し待ってからお試しください。';return}const msg=document.getElementById('msg');try{const file=artworkFile||await new Promise((resolve,reject)=>document.getElementById('artCanvas').toBlob(b=>b?resolve(new File([b],'my-cinelva.png',{type:'image/png'})):reject(new Error('encode')),'image/png'));downloadArtwork(file);msg.textContent='PNGをダウンロードしました。iPhoneでは「写真に保存」から画像を長押ししてください。'}catch{msg.textContent='画像を保存できませんでした。もう一度お試しください。'}}
-function openImageForSaving(){if(!artworkReady()){document.getElementById('msg').textContent='画像を準備中です。少し待ってからお試しください。';return}const dialog=document.getElementById('saveImageDialog'),image=document.getElementById('saveImagePreview');image.src=document.getElementById('artCanvas').toDataURL('image/png');if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','')}
+async function openImageForSaving(){if(!artworkReady()){document.getElementById('msg').textContent='画像を準備中です。少し待ってからお試しください。';return}const msg=document.getElementById('msg');try{const file=artworkFile||await new Promise((resolve,reject)=>document.getElementById('artCanvas').toBlob(b=>b?resolve(new File([b],'my-cinelva.png',{type:'image/png'})):reject(new Error('encode')),'image/png'));if(navigator.canShare?.({files:[file]})&&navigator.share){await navigator.share({files:[file],title:artValue('title')});msg.textContent='共有メニューから「写真に保存」を選べます。';return}}catch(e){if(e.name==='AbortError')return}const dialog=document.getElementById('saveImageDialog'),image=document.getElementById('saveImagePreview');image.src=document.getElementById('artCanvas').toDataURL('image/png');if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','')}
 async function shareArtwork(){const msg=document.getElementById('msg'),file=artworkFile;if(!file){msg.textContent='画像を準備中です。少し待ってからお試しください。';return}try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:artValue('title')});msg.textContent='共有しました。'}else{downloadArtwork(file);msg.textContent='画像の共有に対応していないため、PNGを保存しました。'}}catch(e){if(e.name!=='AbortError')msg.textContent='共有できませんでした。「PNGを保存」をお試しください。'}}
 window.addEventListener('DOMContentLoaded',()=>{
   const s=document.createElement('script');

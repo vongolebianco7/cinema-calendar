@@ -7,9 +7,9 @@ test('public support guidance points to private feedback form, not public GitHub
  assert.match(credits,/個人情報、秘密情報、鑑賞履歴、バックアップ内容は記載しないでください/);
  assert.doesNotMatch(credits,/href="https:\/\/github\.com\/[^\"]+\/issues/);
 });
-test('reject invalid types, long/blank body, malformed email and non-object input',()=>{
- assert.ok(f);for(const v of [null,[],{}, {kind:'other',body:'abc'}, {kind:'bug',body:'  '}, {kind:'bug',body:'a'.repeat(4001)}, {kind:'bug',body:'abc',email:'bad'}])assert.throws(()=>f.validate(v));
- assert.deepEqual(f.validate({kind:'bug',body:' <img src=x>\u0000 ',email:''}),{kind:'bug',body:'<img src=x>',email:null});
+test('reject invalid types, long/blank body and non-object input; legacy email is ignored',()=>{
+ assert.ok(f);for(const v of [null,[],{}, {kind:'other',body:'abc'}, {kind:'bug',body:'  '}, {kind:'bug',body:'a'.repeat(4001)}])assert.throws(()=>f.validate(v));
+ assert.deepEqual(f.validate({kind:'bug',body:' <img src=x>\u0000 ',email:'old@example.com'}),{kind:'bug',body:'<img src=x>',email:null});
 });
 const token='a'.repeat(40),origin='https://cinelva.vercel.app';
 function setup(){const rows=[];return{rows,handle:f.createHandler({adminToken:token,rateSecret:'b'.repeat(40),origins:[origin],store:{submit:async(data,key)=>{rows.push({...data,id:'one',status:'new'});return true;},list:async()=>rows,update:async(id,status)=>{const r=rows.find(r=>r.id===id);if(!r)return false;r.status=status;return true;}}})};}
@@ -34,8 +34,8 @@ test('database errors fail closed and rate denial returns 429 without echoing co
 });
 test('Unicode minimum length agrees with PostgreSQL character count',()=>{assert.throws(()=>f.validate({kind:'bug',body:'😀a'}));assert.equal(f.validate({kind:'bug',body:'😀ab'}).body,'😀ab');});
 
-test('reject non-string honeypot payloads and control characters in contact emails',()=>{
+test('reject non-string honeypot payloads and discard legacy contact emails',()=>{
  for(const website of [1,true,{},[],['spam']])assert.throws(()=>f.validate({kind:'bug',body:'valid report',website}));
- for(const email of ['a\u0000b@example.com','a\u007fb@example.com'])assert.throws(()=>f.validate({kind:'bug',body:'valid report',email}));
+ for(const email of ['a\u0000b@example.com','a\u007fb@example.com'])assert.equal(f.validate({kind:'bug',body:'valid report',email}).email,null);
  assert.equal(f.validate({kind:'bug',body:'valid report',website:''}).body,'valid report');
 });

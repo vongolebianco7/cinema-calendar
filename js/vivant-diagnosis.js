@@ -93,13 +93,16 @@
     return results.map((result, index) => ({ result, index, score: similarity(scores, result.vector) }))
       .sort((a, b) => b.score - a.score || (hash(`${(answerIds || []).join('|')}:${a.result.id}`) - hash(`${(answerIds || []).join('|')}:${b.result.id}`)))[0].result;
   }
+  const favoriteChoices = ['ショーシャンクの空に','千と千尋の神隠し','インターステラー','トップガン マーヴェリック','ゴッドファーザー','パラサイト 半地下の家族','ホーム・アローン','タイタニック','バック・トゥ・ザ・フューチャー']
+    .map(title => movies.find(movie => movie.title === title)).filter(Boolean);
   function recommendMovies(answerIds, watchedIds = [], favoriteTitle = '') {
     const profile = scoreAnswers(answerIds);
     const result = getResult(answerIds);
     const excluded = new Set(watchedIds);
     const titleKey = value => String(value || '').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
-    const favorite = movies.find(movie => titleKey(movie.title) === titleKey(favoriteTitle));
-    if (favorite) excluded.add(favorite.id);
+    const favoriteTitles = (Array.isArray(favoriteTitle) ? favoriteTitle : [favoriteTitle]).filter(Boolean);
+    const favorites = favoriteTitles.map(title => movies.find(movie => titleKey(movie.title) === titleKey(title))).filter(Boolean);
+    favorites.forEach(favorite => excluded.add(favorite.id));
     const seed = hash((answerIds || []).join('|'));
     const seenTitles = new Set();
     const ranked = movies.filter(movie => {
@@ -108,7 +111,7 @@
       return true;
     }).map(movie => ({
       movie,
-      score: similarity(profile, movie.traits) + similarity(result.vector, movie.traits) * 0.2 + (favorite && movie.genre === favorite.genre ? 2 : 0) + (hash(`${seed}:${movie.id}`) % 1000) / 100000
+      score: similarity(profile, movie.traits) + similarity(result.vector, movie.traits) * 0.2 + (favorites.some(favorite => movie.genre === favorite.genre) ? 20 : 0) + (hash(`${seed}:${movie.id}`) % 1000) / 100000
     })).sort((a, b) => b.score - a.score || a.movie.id.localeCompare(b.movie.id));
     const selected = [];
     const genres = new Set();
@@ -124,5 +127,5 @@
     return selected;
   }
 
-  return { AXES, QUESTIONS: questions, RESULTS: results, MOVIES: movies, scoreAnswers, getResult, recommendMovies };
+  return { AXES, QUESTIONS: questions, RESULTS: results, MOVIES: movies, FAVORITE_CHOICES: favoriteChoices, scoreAnswers, getResult, recommendMovies };
 });

@@ -38,7 +38,7 @@ test('MY Rating visibility toggle shows a star row and score in the export',()=>
  r.context.CinelvaLibraryRecords={all:()=>[{id:'42',title:movie.title,rating:null,watched:true}]};r.calls.text=[];r.context.drawArtwork([{...movie,rating:4.8}]);
  assert.ok(!r.calls.text.includes('4.8'),'a cleared rating does not fall back to a stale imported score');
 });
-test('rating import filters release decades, keeps all-time mode, and removes duplicate works',()=>{
+test('rating import filters exact calendar years, keeps all-time mode, and removes duplicate works',()=>{
  const scope={window:{}};vm.runInNewContext(fs.readFileSync('js/my-best10-rating-import.js','utf8'),scope);
  const records=[
   {id:'1',title:'New A',year:'2024',rating:4.7,watched:true},
@@ -51,14 +51,16 @@ test('rating import filters release decades, keeps all-time mode, and removes du
   {id:'7',title:'Before 1950',year:'1947',rating:4.4,watched:true}
  ];
  const api=scope.window.CinelvaBest10RatingImport;
- assert.equal(api.filterCandidates(records,'2020').map(x=>x.id).join(','),'2,1');
+ assert.equal(api.filterCandidates(records,'2021').map(x=>x.id).join(','),'2');
+ assert.equal(api.filterCandidates(records,'2024').map(x=>x.id).join(','),'1');
  assert.equal(api.filterCandidates(records,'pre1950').map(x=>x.id).join(','),'7');
  assert.equal(api.filterCandidates(records,'all').map(x=>x.id).join(','),'3,6,2,1,4,7');
  assert.equal(api.periodLabel('all'),'オールタイムベスト');
+ assert.equal(api.periodLabel('2024'),'2024年');
 });
-test('My Best 10 exposes decade selection and an image-rating toggle',()=>{
+test('My Best 10 exposes exact-year selection and an image-rating toggle',()=>{
  const html=fs.readFileSync('my-best10.html','utf8');
- assert.match(html,/id="topRatingsPeriod"/);assert.match(html,/value="2020">2020年代/);assert.match(html,/value="all">オールタイムベスト/);
+ assert.match(html,/id="topRatingsYear"/);assert.match(html,/new Option\('すべての年','all'\)/);assert.doesNotMatch(html,/id="topRatingsPeriod"/);assert.match(html,/MY BEST 10 — /);
  assert.match(html,/id="showMyRating"/);assert.ok(html.includes('my-best10-rating-import.js?v=20261107-title-rating'));
 });
 

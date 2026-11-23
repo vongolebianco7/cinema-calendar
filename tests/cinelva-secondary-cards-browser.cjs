@@ -9,6 +9,7 @@ const {assertTextContrast}=require('./helpers/text-contrast.cjs');
   await context.route('https://image.tmdb.org/**',r=>r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aYl8AAAAASUVORK5CYII=','base64')}));
   await context.route('**/api/calendar*',r=>r.fulfill({json:{movies:[{...movie,event:'theatrical',date:'2026-10-23'}]}}));
   await context.route('**/api/movies?*',r=>r.fulfill({json:{movies:[{...movie,tmdbId:undefined}],external:[]}}));await context.route('**/api/movie-detail?*',r=>r.fulfill({json:{movie}}));
+  await context.route('https://backend-one-gray-94.vercel.app/api/watch-providers**',r=>r.fulfill({json:{providers:[]}}));
   await context.route('**/data/revival_screenings.json',r=>r.fulfill({json:{generated_at:'2026-10-20',screenings:[{...movie,date:'2026-10-23',venue:'確認済み劇場',source_url:'https://www.ttcg.jp/'},{id:550,title:'ID未確認の上映',date:'2026-10-23',source_url:'https://www.ttcg.jp/'}]}}));
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(`http://127.0.0.1:${port}/revivals.html`,{waitUntil:'domcontentloaded'});
   const card=page.locator('[data-revival-index="0"]');await card.locator('.cinelva-rate-button').waitFor();await card.locator('.poster > img').waitFor();await page.waitForFunction(()=>document.querySelector('[data-revival-index="0"] .poster > img')?.naturalWidth>0);assert.equal(await page.locator('#grid').evaluate(x=>getComputedStyle(x).gridTemplateColumns.split(' ').length),3);

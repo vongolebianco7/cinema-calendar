@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0a0c0f">
+<title>ポスター当て | Cinelva</title><meta name="description" content="映画ポスターを少しずつ見て、作品名を当てる5問ゲーム。">
+<meta property="og:image" content="https://cinelva.vercel.app/assets/cinelva_original_colors_transparent.png"><link rel="icon" href="assets/cinelva_original_colors_transparent.png" type="image/png"><link rel="apple-touch-icon" href="assets/cinelva_original_colors_transparent.png"><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="assets/theme.css"><script src="js/theme.js?v=20261023-frame-2"></script>
+<style>
+
+:root{color-scheme:dark;--bg:#090909;--text:#f4f4f4;--muted:#999;--line:#292929;--gold:#e5b64d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Yu Gothic",sans-serif}a{color:inherit;text-decoration:none}
+.gTop{position:sticky;top:0;z-index:90;background:rgba(9,9,9,.97);backdrop-filter:blur(14px);border-bottom:1px solid #262626}
+.gTop .wrap{max-width:1180px;margin:auto;padding:0 18px}
+.gNav{height:62px;display:flex;align-items:center;gap:12px}
+.gBrand{display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;text-decoration:none;line-height:1}
+.gBrandImage{display:block;width:33px;height:33px;object-fit:contain;flex:none}
+.gBrandWord{color:#f2dfbb;font:600 21px/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;white-space:nowrap}
+.gSearchForm{margin-left:auto;display:flex;align-items:center;width:min(360px,42vw);height:36px;border:1px solid #333;border-radius:18px;background:#111;overflow:hidden}
+.gSearch{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f2f2f2;padding:0 4px 0 13px;font:inherit;font-size:13px}
+.gSearch::placeholder{color:#777}
+.gSearchBtn{width:38px;height:100%;border:0;background:transparent;color:#aaa;font-size:19px;display:grid;place-items:center}
+.gMenuBtn{flex:0 0 auto;width:40px;height:40px;border:0;background:transparent;color:#f2f2f2;display:grid;place-items:center;padding:0}
+.gMenuLines,.gMenuLines:before,.gMenuLines:after{display:block;width:19px;height:1px;background:currentColor;content:""}
+.gMenuLines{position:relative}.gMenuLines:before{position:absolute;top:-6px}.gMenuLines:after{position:absolute;top:6px}
+.gDrawerMask{position:fixed;inset:0;background:#0009;z-index:98;display:none}.gDrawerMask.show{display:block}
+.gDrawer{position:fixed;top:0;right:0;height:100dvh;width:min(320px,84vw);background:#111318;border-left:1px solid #292929;z-index:99;transform:translateX(100%);transition:.22s ease;padding:20px}
+.gDrawer.show{transform:translateX(0)}
+.gDrawerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.gDrawerClose{width:38px;height:38px;border:0;border-radius:50%;background:#1b1d22;color:#f2f2f2;font-size:22px}
+.gDrawer>a{display:block;color:#f2f2f2;text-decoration:none;font-size:17px;font-weight:750;padding:14px 4px;border-bottom:1px solid #292929}
+@media(max-width:600px){
+ .gTop .wrap{padding:0 12px}.gNav{height:58px;gap:8px}
+ .gSearchForm{width:auto;flex:1;min-width:0;height:34px}.gSearch{font-size:12px;padding-left:10px}.gSearchBtn{width:32px}
+ .gMenuBtn{width:36px}
+}
+@media(max-width:370px){.gBrandImage{width:29px;height:29px}.gBrandWord{font-size:18px}}
+main{max-width:900px;margin:auto;padding:30px 18px max(48px,env(safe-area-inset-bottom))}.eyebrow{color:var(--gold);font-size:11px;font-weight:800;letter-spacing:.15em}.hero{margin-bottom:24px}.hero h1{font-size:clamp(30px,7vw,44px);line-height:1.1;margin:9px 0 8px;letter-spacing:-.03em}.hero p{color:var(--muted);font-size:14px;margin:0}
+.specialGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.specialCard{min-height:220px;border:1px solid #343434;border-radius:12px;padding:22px;background:linear-gradient(145deg,#171717,#101010);display:flex;flex-direction:column}.tag{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.08em}.specialCard h2{font-size:24px;line-height:1.2;margin:14px 0 8px}.specialCard p{color:#b6b6b6;font-size:14px;line-height:1.65;margin:0 0 18px}.specialAction{display:inline-flex;align-items:center;justify-content:center;min-height:46px;margin-top:auto;padding:10px 16px;border:1px solid var(--gold);border-radius:7px;color:#17130b;background:var(--gold);font-weight:800}.note{color:#999;font-size:11px;margin-top:10px}.footer{border-top:1px solid var(--line);margin-top:26px;padding-top:16px;color:#888;font-size:11px}
+.specialLogoVivant{width:42px;height:42px;margin-top:12px;display:grid;place-items:center;border:1px solid #b9954e;border-radius:50%;background:radial-gradient(circle,#352912,#101010 72%);color:#e5c879;font:700 22px/1 Georgia,serif;box-shadow:0 0 18px #b9954e30}
+.specialLogoMood{width:42px;height:42px;margin-top:12px;display:grid;place-items:center;border:1px solid #8e8b83;border-radius:50%;background:radial-gradient(circle,#33312c,#101010 72%);color:#eee8da;font:700 18px/1 Georgia,serif}
+.moodQuiz[hidden],.moodResult[hidden]{display:none}.moodQuiz{margin-top:14px;border-top:1px solid #343434;padding-top:14px}.moodQuestion{font-size:15px;font-weight:750;line-height:1.5}.moodProgress{font-size:11px;color:var(--muted);margin:4px 0 10px}.moodChoices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.moodChoices button,.moodControls button{min-height:44px;border:1px solid #444;border-radius:7px;background:#1c1c1c;color:var(--text);padding:9px;font:inherit;font-size:13px;line-height:1.35}.moodChoices button[aria-pressed="true"]{border-color:var(--gold);background:#292315}.moodControls{display:flex;justify-content:space-between;gap:8px;margin-top:12px}.moodControls button:disabled{opacity:.5}.moodResult{margin-top:14px;padding:14px;border:1px solid #494238;border-radius:9px;background:#171511}.moodResult h3{margin:0 0 6px;font-size:18px}.moodResult p{margin:0 0 12px}.moodResult a{display:inline-flex;align-items:center;min-height:44px;padding:9px 13px;border-radius:7px;background:var(--gold);color:#17130b;font-weight:800}
+html[data-theme="light"]{color-scheme:light;--bg:#f6f4ef;--text:#242521;--muted:#5b5c57;--line:#d5d1c8;--gold:#9a7022}
+html[data-theme="light"] .specialCard{background:#fffefa;color:#242521;border-color:#d2cec4}html[data-theme="light"] .specialCard p,html[data-theme="light"] .note,html[data-theme="light"] .footer{color:#565750}html[data-theme="light"] .specialAction{color:#fff;background:#89631c;border-color:#89631c}
+@media(max-width:620px){main{padding:24px 14px max(42px,env(safe-area-inset-bottom))}.specialGrid{grid-template-columns:1fr;gap:10px}.specialCard{min-height:190px;padding:18px}}
+
+
+.posterMain{max-width:1000px;margin:auto;padding:28px 18px max(48px,env(safe-area-inset-bottom))}
+.posterHero{margin-bottom:22px}.posterHero h1{font-size:clamp(30px,7vw,44px);line-height:1.1;margin:9px 0 8px;letter-spacing:-.03em}.posterHero p{color:var(--muted);font-size:14px;margin:0}
+.posterQuiz{border:1px solid #343434;border-radius:14px;background:linear-gradient(145deg,#171717,#0f0f0f);padding:clamp(16px,3vw,24px)}
+.posterQuizTop{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 14px;color:#aaa;font-size:12px}
+.posterQuizScore{color:var(--gold);font-weight:800;font-size:14px}
+.posterQuizProgress{height:3px;background:#292929;border-radius:99px;grid-column:1/-1;overflow:hidden}
+.posterQuizProgress span{display:block;width:0;height:100%;background:var(--gold);transition:width .2s}
+.posterQuizContent{display:grid;grid-template-columns:minmax(210px,320px) minmax(0,1fr);gap:clamp(18px,4vw,38px);align-items:center;padding-top:20px}
+.posterFrame{position:relative;margin:0;aspect-ratio:2/3;border-radius:10px;overflow:hidden;background:#1d232c;box-shadow:0 8px 28px #0008}
+.posterImage{width:100%;height:100%;object-fit:cover;display:block;filter:blur(15px) brightness(.8);transform:scale(1.1);transition:filter .45s ease,transform .45s ease}
+.posterFrame[data-stage="1"] .posterImage{filter:blur(9px) brightness(.82);transform:scale(1.07)}
+.posterFrame[data-stage="2"] .posterImage{filter:blur(4px) brightness(.9);transform:scale(1.03)}
+.posterFrame[data-stage="3"] .posterImage{filter:none;transform:scale(1)}
+.posterUnavailable{position:absolute;inset:0;display:grid;place-items:center;color:#d6d7dc;font-size:14px;padding:20px;text-align:center}
+.posterQuizControls{min-width:0}.posterQuizEyebrow{color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.16em}
+.posterQuizPrompt{font-size:clamp(22px,4vw,32px);line-height:1.25;margin:10px 0 8px}
+.posterQuizNote,.posterFeedback{font-size:13px;color:#aaa;line-height:1.55;margin:0 0 13px}
+.posterFeedback{min-height:21px}.posterFeedback.isCorrect{color:#9be1ae}.posterFeedback.isError{color:#f1b27d}
+.posterQuizActions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.posterQuizButton,.posterQuizTextButton{min-height:46px;border:1px solid #444;border-radius:8px;background:#1c1c1c;color:#f4f4f4;padding:10px 14px;font:inherit;font-size:14px;font-weight:750;cursor:pointer;touch-action:manipulation}
+.posterQuizButton:hover,.posterQuizButton:focus-visible,.posterQuizTextButton:hover,.posterQuizTextButton:focus-visible{border-color:#aaa;outline:2px solid #ffffff20;outline-offset:1px}
+.posterQuizButton:disabled{opacity:.45;cursor:default}
+.answerButton,.shareButton{background:var(--gold);border-color:var(--gold);color:#17130b}
+.posterQuizTextButton{background:transparent;color:#bbb;border-color:transparent}
+.posterAnswerForm{display:flex;gap:8px;margin-top:10px}
+.answerInput{min-width:0;flex:1;height:46px;border:1px solid #414141;border-radius:8px;background:#090909;color:#fff;padding:0 12px;font:inherit;font-size:16px}
+.answerInput::placeholder{color:#777}.answerInput:focus{outline:2px solid var(--gold);outline-offset:1px}
+.posterQuizAttribution{margin:14px 0 0;text-align:right;font-size:10px;color:#777}.posterQuizAttribution a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.posterQuizResult{text-align:center;padding:clamp(30px,8vw,72px) 10px}.posterQuizResult h2{font-size:clamp(28px,7vw,42px);margin:12px 0}.posterQuizResultScore{font-size:22px;color:var(--gold);font-weight:800;margin:0 0 20px}.posterQuizResult .restartButton{display:block;margin:12px auto}
+html[data-theme="light"] .posterQuiz{background:#fffefa;border-color:#d2cec4}
+html[data-theme="light"] .posterQuizButton:not(.answerButton):not(.shareButton){color:#242521;background:#f2efe8;border-color:#c8c1b4}
+html[data-theme="light"] .answerInput{background:#fff;color:#242521;border-color:#c8c1b4}
+html[data-theme="light"] .posterQuizNote,html[data-theme="light"] .posterFeedback{color:#565750}
+@media(max-width:620px){.posterMain{padding:24px 14px max(42px,env(safe-area-inset-bottom))}.posterQuizContent{grid-template-columns:1fr;gap:18px}.posterFrame{width:min(62vw,250px);margin:auto}.posterQuizControls{width:100%}.posterQuizActions{gap:6px}.posterQuizButton,.posterQuizTextButton{min-height:48px}}
+@media(prefers-reduced-motion:reduce){.posterImage,.posterQuizProgress span{transition:none}}
+
+</style></head><body>
+<header class="gTop"><div class="wrap gNav">
+<a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span class="gBrandWord">Cinelva</span></a>
+<form class="gSearchForm" action="search.html" method="get">
+<input class="gSearch" name="search" type="search" placeholder="作品・映画館を検索" autocomplete="off" aria-label="作品・映画館を検索">
+<button class="gSearchBtn" type="submit" aria-label="検索">⌕</button>
+</form>
+<button class="gMenuBtn" id="gMenuBtn" aria-label="メニュー"><span class="gMenuLines" aria-hidden="true"></span></button>
+</div></header>
+<div class="gDrawerMask" id="gDrawerMask"></div>
+<aside class="gDrawer" id="gDrawer">
+<div class="gDrawerHead"><a class="gBrand" href="index.html" aria-label="Cinelva"><img class="gBrandImage" src="assets/cinelva_original_colors_transparent.png?v=20261023-clean" alt=""><span class="gBrandWord">Cinelva</span></a><button class="gDrawerClose" id="gDrawerClose" aria-label="閉じる">×</button></div>
+<a href="index.html">カレンダー</a>
+<a href="discover.html">映画を探す</a>
+<a href="streaming.html">配信作品</a>
+<a href="rankings.html">ランキング</a>
+<a href="theaters.html">映画館を探す</a>
+<a href="experience.html">上映方式</a>
+<a href="specials.html" aria-current="page">特集・診断</a>
+<a href="my-cinelva/">My Cinelva</a>
+<a href="my-best10.html">My Best 10</a>
+<a href="feedback.html">ご意見・ご要望</a>
+</aside>
+
+<main class="posterMain"><section class="posterHero" aria-labelledby="posterTitle"><span class="eyebrow">Cinelva / GAME</span><h1 id="posterTitle">ポスター当て</h1><p>5問。何枚目で当てられる？</p></section><section class="posterQuiz" id="posterQuiz" aria-label="ポスター当てゲーム"></section><footer class="footer">Cinelva</footer></main>
+<script>(()=>{const b=document.getElementById("gMenuBtn"),d=document.getElementById("gDrawer"),m=document.getElementById("gDrawerMask"),x=document.getElementById("gDrawerClose");if(!b||!d||!m)return;const open=()=>{d.classList.add("show");m.classList.add("show")},close=()=>{d.classList.remove("show");m.classList.remove("show")};b.addEventListener("click",open);m.addEventListener("click",close);x&&x.addEventListener("click",close);document.addEventListener("keydown",e=>{if(e.key==="Escape")close()})})();</script>
+<script src="js/vivant-diagnosis.js"></script><script src="js/cinelva-poster-quiz.js"></script><script>window.CinelvaPosterQuiz.mount(document.getElementById("posterQuiz"),window.VivantDiagnosis.FAVORITE_CHOICES,{count:5});</script>
+</body></html>

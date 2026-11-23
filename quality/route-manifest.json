@@ -47,6 +47,17 @@
       ]
     },
     {
+      "path": "poster-quiz.html",
+      "surface": "public",
+      "purpose": "five-round movie poster guessing game",
+      "data_owner": "curated movie poster catalog",
+      "count_contract": "five unique posters per game, up to fifteen points",
+      "primary_cta": "reveal poster or answer title",
+      "source_refs": [
+        "tmdb"
+      ]
+    },
+    {
       "path": "discover.html",
       "surface": "public",
       "purpose": "discovery",

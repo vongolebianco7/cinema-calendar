@@ -98,6 +98,7 @@
 #discounts .discountCalendarRanks strong{min-width:0;font-size:9px;font-weight:600;overflow-wrap:anywhere}
 #discounts .discountCalendarRanks small{font-size:7px;line-height:1.1;white-space:nowrap;color:var(--muted)}
 #discounts .discountCalendarRanks b{font-size:9px;white-space:nowrap}
+.discountChainLogo{display:inline-flex;align-items:center;justify-content:center;min-height:16px;padding:1px 4px;border-radius:3px;background:#252525;color:#fff;font-size:8px;font-weight:800;line-height:1.2;letter-spacing:-.03em;white-space:nowrap}.discountChainLogo-toho{background:#c62828}.discountChainLogo-aeon{background:#c2185b}.discountChainLogo-109{background:#c62828}.discountChainLogo-tjoy{background:#292929;color:#f4d14e}.discountChainLogo-sunshine{background:#1565c0}.discountChainLogo-smt{background:#303f9f}.discountChainLogo-united{background:#00796b}.discountChainLogo-ttcg{background:#4e342e}.discountChainLogo-corona{background:#455a64}.discountChainLogo-forum{background:#5d4037}.discountChainLogo-kino{background:#ef6c00}.discountChainLogo-cinemart{background:#6a1b9a}.discountChainLogo-os{background:#283593}.discountChainLogo-central-miyazaki{background:#00695c}
 #discounts .discountCalendarUnconfirmed{font-size:8px;color:var(--muted);white-space:normal}
 #discounts .discountTheaterSources{margin:6px 0;padding:0 8px;font-size:11px}
 #discounts .discountTheaterSources summary{min-height:32px;padding:6px 0;font-size:11px}

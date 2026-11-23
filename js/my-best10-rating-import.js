@@ -11,6 +11,7 @@
     if(!period||period==='all')return true;
     const year=releaseYear(record);
     if(year===null)return false;
+    if(/^\d{4}$/.test(String(period)))return year===Number(period);
     if(period==='pre1950')return year<1950;
     const start=Number(period);
     return Number.isInteger(start)&&start>=1950&&start<=2090&&start%10===0&&year>=start&&year<start+10;
@@ -28,6 +29,7 @@
   }
   function periodLabel(period){
     if(!period||period==='all')return 'オールタイムベスト';
+    if(/^\d{4}$/.test(String(period)))return String(period)+'年';
     if(period==='pre1950')return '1950年代以前';
     return String(period)+'年代';
   }

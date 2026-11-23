@@ -9,7 +9,7 @@ const context=await browser.newContext({viewport:{width:390,height:844},colorSch
 await context.route(/backend-one-gray-94\.vercel\.app\/api\//,route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[]}'}));
 const page=await context.newPage();
 const errors=[];
-page.on('pageerror',error=>errors.push(error.message));
+page.on('pageerror',error=>errors.push(error.stack||error.message));
 fs.mkdirSync('artifacts/mobile-smoke',{recursive:true});
 try {
  for (const prefix of ['', 'cinelva/']) for (const file of pages) {

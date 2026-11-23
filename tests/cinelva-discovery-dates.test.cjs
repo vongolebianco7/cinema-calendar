@@ -13,13 +13,14 @@ test('year-only and invalid-date records never acquire an invented day',()=>{
  assert.equal(shelves.displayDate?.({date:'2026-10'}),'');
  assert.equal(shelves.displayDate?.({release_date:'2024-02-29'}),'2024-02-29');
 });
-test('all discover card renderers use the same full-date formatter',()=>{
+test('all discover card renderers use the shared date and runtime projection',()=>{
  for(const path of ['discover.html','cinelva/discover.html']) {
   const html=fs.readFileSync(path,'utf8');
   assert.ok(html.indexOf('src="js/cinelva-discovery-shelves.js"')<html.indexOf('function popularCardHtml(')&&html.includes('src="js/cinelva-discovery-shelves.js"'),path+' loads formatter before render');
+  assert.match(html,/function discoverDate\(m\)[^\n]*CinelvaDiscoveryShelves\.displayDate\(m\)/,path+' centralizes the date projection');
   for(const name of ['popularCardHtml','render','personCardHtml']) {
    const fn=html.match(new RegExp('function '+name+'\\([^\\n]+'))?.[0]||'';
-   assert.match(fn,/CinelvaDiscoveryShelves\.displayDate\(m\)/,path+' '+name);
+   assert.match(fn,/discoverMeta\(m\)/,path+' '+name+' includes runtime and release year');
   }
  }
 });

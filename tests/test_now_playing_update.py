@@ -70,6 +70,14 @@ class NowPlayingUpdateTests(unittest.TestCase):
             self.module.refresh(target,lambda n:self.page(1,[]),NOW)
             result=json.loads(target.read_text());self.assertTrue(result['complete']);self.assertEqual(result['movies'],[])
 
+    def test_catalog_runtime_is_joined_without_changing_release_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target=Path(directory)/'snapshot.json'
+            result=self.module.refresh(target,lambda n:self.page(1,[self.film(1),self.film(2)]),NOW,runtime_by_id={'1':121,'2':0})
+            self.assertEqual(result['movies'][0]['runtime'],121)
+            self.assertNotIn('runtime',result['movies'][1])
+            self.assertEqual([movie['id'] for movie in result['movies']],[1,2])
+
     def test_disabled_source_is_rejected(self):
         self.module.ensure_approved({'sources':[{'id':'tmdb','mode':'approved'}]})
         for mode in ['disabled','link_only']:

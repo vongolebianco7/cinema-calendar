@@ -14,7 +14,7 @@ function createFeedbackStore(prisma){ return {
   }).catch(error=>{if(error.limited)return false;throw error;});
  },
  async list(status,cursor){
-  return prisma.feedback.findMany({where:status?{status}:{},orderBy:[{createdAt:'desc'},{id:'desc'}],take:50,...(cursor?{cursor:{id:cursor},skip:1}:{})});
+  return prisma.feedback.findMany({select:{id:true,kind:true,body:true,status:true,createdAt:true},where:status?{status}:{},orderBy:[{createdAt:'desc'},{id:'desc'}],take:50,...(cursor?{cursor:{id:cursor},skip:1}:{})});
  },
  async update(id,status){return (await prisma.feedback.updateMany({where:{id},data:{status}})).count===1;}
 }; }

@@ -51,7 +51,7 @@
      const poster=doc.createElement('div');poster.className='presetCardPoster';
      const body=doc.createElement('div');body.className='presetCardBody';
      const title=doc.createElement('div');title.className='presetCardTitle';title.textContent=movie.title;body.append(title);
-     const year=doc.createElement('div');year.className='presetCardMeta';year.textContent=movie.year||'公開年未確認';body.append(year);
+     const year=doc.createElement('div');year.className='presetCardMeta';year.textContent=[movie.year||'公開年未確認',Number(movie.runtime)>0?`${Number(movie.runtime)}分`:'上映時間未確認'].join(' · ');body.append(year);
      card.append(poster,body);wrap.append(card);
      const review=doc.createElement('div');review.className='cinelva-discover-review';wrap.append(review);
      root.CinelvaQuickRate?.mountInline(review,movie);

@@ -11,9 +11,12 @@ class CurrentStreamingCatalogContractTests(unittest.TestCase):
         page = (ROOT / "streaming.html").read_text(encoding="utf-8")
         self.assertIn('fetch("data/availability.json"', page)
         self.assertIn("entry.checked_at", page)
-        self.assertIn("配信開始日やサービスの全作品一覧を保証するものではありません", page)
-        self.assertIn("TMDB watch providers（JustWatch）", page)
         self.assertIn("7*86400000", page)
+        self.assertIn('id="theatricalTab"', page)
+        self.assertIn('id="streamingTab"', page)
+        self.assertIn('class="tabs streamingFilters"', page)
+        self.assertIn("配信状況は直近の確認結果です。", page)
+        self.assertNotIn("直近7日以内に観測がないサービスは掲載していません", page)
 
     def test_page_exposes_services_and_distinct_access_types(self):
         page = (ROOT / "streaming.html").read_text(encoding="utf-8")

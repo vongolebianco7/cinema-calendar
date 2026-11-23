@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "9cf85cea32ba7564c5753eb2f172a9c6df034b26",
-  "verified_at": "2026-11-22T23:25:16Z",
-  "note": "Exact-source CI receipt for PR #892 source head 9cf85cea32ba7564c5753eb2f172a9c6df034b26; executable digest 26343d04a57cab3b3be9ef636416763bc64f9f9101efd98824b26ab97e07bc02. The merged main tree has the same Git tree as this tested source head. Required workflows passed on this exact PR head: Autonomous quality gate run 45082212202, CINELVA smoke tests run 45082212070, Validate frontend run 45082212099, and Reproducible backend build run 45082212025. Autonomous quality gate included Chromium and WebKit iPhone-size smoke checks. This change only renews the source-bound publication receipt; fresh exact-head checks on this receipt-only PR are required before merge."
+  "head_sha": "ef02467bd7dc1106a9aeebc0b52ef9d45f2c4895",
+  "verified_at": "2026-11-23T01:29:08.995Z",
+  "note": "Exact-source CI receipt for PR #894 source head ef02467bd7dc1106a9aeebc0b52ef9d45f2c4895; executable digest b49fc64089eaa80f72047db6a5df9392f798d6f22eee2a1524d502a3c6b73a79. Required workflows succeeded on this exact source head: Autonomous quality gate run 45094071524, CINELVA smoke tests run 45094071529, Validate frontend run 45094071638, and Reproducible backend build run 45094071483. Autonomous quality gate included Chromium and WebKit iPhone-size checks. This is a receipt-only commit; fresh exact-head CI on the receipt-only PR head is required before merge."
 }

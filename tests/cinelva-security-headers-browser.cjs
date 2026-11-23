@@ -26,7 +26,7 @@ const {spawn,spawnSync}=require('node:child_process'),{waitForLocalServer}=requi
   // Fulfil them locally so browser CORS diagnostics only report CSP behavior.
   await context.route(`https://127.0.0.1:${port}/data/**`,route=>route.fulfill({status:200,headers:{'access-control-allow-origin':'*'},contentType:'application/json',body:'{"movies":[]}'}));
   const page=await context.newPage(),errors=[];
-  page.on('pageerror',e=>errors.push(e.message));
+  page.on('pageerror',e=>errors.push(e.stack||e.message));
   page.on('console',m=>{if(m.type()==='error')console.log(name+' console '+m.text())});
   page.on('requestfailed',r=>console.log(name+' request failed '+r.url()+' '+r.failure()?.errorText));
   await page.addInitScript(()=>{window.cspViolations=[];document.addEventListener('securitypolicyviolation',e=>window.cspViolations.push({directive:e.effectiveDirective,blocked:e.blockedURI}))});

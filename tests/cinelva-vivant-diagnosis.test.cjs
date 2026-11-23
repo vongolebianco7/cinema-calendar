@@ -40,6 +40,16 @@ test('120本前後の有名映画からジャンルが重ならない3本を推�
   assert.equal(new Set(picks.map(movie => movie.title)).size, 3);
   assert.ok(new Set(picks.map(movie => movie.genre)).size >= 2);
   assert.ok(diagnosis.MOVIES.filter(movie => /spy|espionage|スパイ|諜報/i.test(`${movie.genre} ${movie.title}`)).length < 12);
+  assert.equal(diagnosis.FAVORITE_CHOICES.length, 9);
+});
+
+test('2本の好きな映画を推薦から除外し、どちらのジャンルも推薦に反映する', () => {
+  const answers = diagnosis.QUESTIONS.map(q => q.choices[1].id);
+  const favorites = diagnosis.FAVORITE_CHOICES.slice(0, 2);
+  const picks = diagnosis.recommendMovies(answers, [], favorites.map(movie => movie.title));
+  assert.equal(picks.length, 3);
+  assert.ok(picks.every(movie => !favorites.some(favorite => favorite.id === movie.id)));
+  assert.ok(picks.some(movie => favorites.some(favorite => favorite.genre === movie.genre)));
 });
 
 test('鑑賞済み指定作品を除外し、同じ3本を繰り返さない', () => {

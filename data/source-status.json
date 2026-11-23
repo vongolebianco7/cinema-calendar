@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-23T05:32:10.685Z",
+  "generated_at": "2026-11-23T09:14:52.250Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -8,16 +8,16 @@
       "status": "automated",
       "source": "TMDB watch/providers (JustWatch)",
       "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
-      "source_observed_at": "2026-11-23T04:37:13.410Z",
+      "source_observed_at": "2026-11-23T05:35:37.479Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
-        "total": 4960,
-        "fresh": 4892,
-        "stale": 68,
+        "total": 5024,
+        "fresh": 5019,
+        "stale": 5,
         "unknown": 0
       }
     },
@@ -41,7 +41,7 @@
       "status": "automated",
       "source": "Netflix・Amazon Japan・Apple TV Pressの公式RSS/Atom",
       "source_url": null,
-      "source_observed_at": "2026-11-22T22:59:08.626Z",
+      "source_observed_at": "2026-11-23T09:14:52.071Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/refresh-official-streaming.yml",
@@ -125,7 +125,7 @@
       "status": "automated",
       "source": "TMDB API plus source-reviewed release records",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-23T04:35:46.779Z",
+      "source_observed_at": "2026-11-23T05:34:01.955Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "d082d4353a922b2c03a4d750a2e7cebe438d0820",
-  "verified_at": "2026-11-23T04:48:00Z",
-  "note": "Exact-source CI receipt for PR #898 source head d082d4353a922b2c03a4d750a2e7cebe438d0820; executable digest a0b5f72c49c29b781f8a2d2ff8fa6ae7c6c78b8b3c6dab2b9961387e6853a3fc. Required workflows succeeded on this exact source head: Autonomous quality gate run 45111145180, CINELVA smoke tests run 45111145186, Validate frontend run 45111145230, and Reproducible backend build run 45111145198. Chromium and WebKit confirmed three theater calendar columns remain at 320/390/430px, a single-date film card stays within one column, and the page has no horizontal overflow. This is a receipt-only commit; fresh exact-head CI on the receipt-only PR head is required before merge."
+  "head_sha": "856fa1f3731100ef8b41d1dd2bc03598b1c1a79e",
+  "verified_at": "2026-11-23T05:18:00Z",
+  "note": "Exact-source CI receipt for PR #879 source head 856fa1f3731100ef8b41d1dd2bc03598b1c1a79e; executable digest cc86aaefaa84da9968929d9172b4379ba7d8edc664d33d3a6a0e8f7f2d14c9cb. Required workflows passed on this exact source head: Autonomous quality gate run 45116145828, CINELVA smoke tests run 45116145940, Validate frontend run 45116145852, and Reproducible backend build run 45116145882. Chromium/WebKit reported-UI regression checks, 320px and 390px mobile layout checks, and continuous visual QA passed. All nine favorite movie posters use verified TMDB IDs; selection is shown with an accessible gold frame and selected label. No user records or generated catalog data changed. This is a receipt-only commit; fresh exact-head CI on the receipt-only PR tip is required before merge."
 }

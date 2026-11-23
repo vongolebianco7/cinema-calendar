@@ -62,7 +62,7 @@ assert.match(diagnosisHtml, /class="gSearchForm"/);
     assert.equal(await page.locator('.favoriteChoices .choice').count(), 9);
     await page.locator('.favoriteChoices .choice').filter({ hasText: 'ショーシャンクの空に' }).click();
     assert.equal(await page.locator('.favoriteChoices .choice[aria-pressed="true"]').count(), 1, 'the selected favorite is visibly marked');
-    assert.equal(await page.locator('.favoriteChoiceCheck').innerText(), '✓ 選択中', 'selected poster has a concrete selected badge');
+    assert.equal(await page.locator('.favoriteChoices .choice[aria-pressed="true"] .favoriteChoiceCheck').innerText(), '✓ 選択中', 'selected poster has a concrete selected badge');
     await page.locator('#nextButton').click();
     await page.locator('.favoriteChoices .choice').filter({ hasText: '千と千尋の神隠し' }).click();
     await page.locator('#nextButton').click();

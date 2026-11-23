@@ -11,8 +11,8 @@
  const labels={public:'登録不要',member:'会員向け',card:'対象カードが必要'};
  const prefectures='北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県'.split(' ');
  const shortNames={toho:'TOHO',aeon:'イオン',109:'109',tjoy:'T・ジョイ',sunshine:'サンシャイン',smt:'MOVIX',united:'ユナイテッド',ttcg:'テアトル',corona:'コロナ',forum:'フォーラム',kino:'キノシネマ',cinemart:'シネマート',os:'OS','central-miyazaki':'セントラル'};
- const badgeNames={united:'UC'};
- const chainBadge=(id,name)=>`<span class="discountChainLogo discountChainLogo-${esc(id)}" aria-label="${esc(name)}" title="${esc(name)}">${esc(badgeNames[id]||shortNames[id]||name)}</span>`;
+ const chainMarks={toho:'T',aeon:'A',109:'109',tjoy:'TJ',sunshine:'S',smt:'M',united:'UC',ttcg:'T',corona:'C',forum:'F',kino:'K',cinemart:'C',os:'OS','central-miyazaki':'C'};
+ const chainBadge=(id,name)=>`<span class="discountChainLogo discountChainLogo-${esc(id)}" role="img" aria-label="${esc(name)}" title="${esc(name)}"><svg class="discountChainMark" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><rect x="1" y="1" width="18" height="18" rx="5"></rect><text x="10" y="13.5" text-anchor="middle">${esc(chainMarks[id]||'映')}</text></svg><span class="discountChainWordmark">${esc(shortNames[id]||name)}</span></span>`;
  const winnerText=chains=>chains.length?chains.map(c=>shortNames[c.id]||c.name).join('・'):'系列未掲載';
  const params=new URLSearchParams(location.search),named=params.get('discountTheater')||'';
  let data=null,requestedPrefecture=params.get('discountPrefecture')||params.get('prefecture')||'';

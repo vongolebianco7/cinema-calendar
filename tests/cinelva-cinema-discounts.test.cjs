@@ -7,9 +7,12 @@ const data=JSON.parse(fs.readFileSync('data/cinema_discounts.json','utf8'));
 const now=new Date('2026-10-25T12:00:00Z');
 const rows=(date,options={},source=data,clock=now)=>D.compare(source,{date,benefits:[],...options},clock);
 const venue=(id,date,options={},source=data,clock=now)=>rows(date,options,source,clock).find(x=>x.id===id);
-test('cinema-chain badges retain the full accessible name while using compact United Cinemas mark',()=>{
- assert.match(ui,/badgeNames=\{united:'UC'\}/);
- assert.match(ui,/aria-label="\$\{esc\(name\)\}" title="\$\{esc\(name\)\}"/);
+test('cinema-chain wordmarks include a compact vector mark and retain the full accessible chain name',()=>{
+ assert.match(ui,/chainMarks=\{toho:'T',aeon:'A',109:'109',tjoy:'TJ',sunshine:'S',smt:'M',united:'UC',ttcg:'T',corona:'C',forum:'F',kino:'K',cinemart:'C',os:'OS','central-miyazaki':'C'\}/);
+ assert.match(ui,/<svg class="discountChainMark" viewBox="0 0 20 20" aria-hidden="true" focusable="false">/);
+ assert.match(ui,/<span class="discountChainWordmark">\$\{esc\(shortNames\[id\]\|\|name\)\}<\/span>/);
+ assert.match(ui,/role="img" aria-label="\$\{esc\(name\)\}" title="\$\{esc\(name\)\}"/);
+ assert.match(fs.readFileSync('assets/cinema-discounts.css','utf8'),/\.discountChainMark\{display:block;flex:none;width:17px;height:17px/);
 });
 test('ordinary Wednesday and eligible memberships choose one price; no invented stacking',()=>{
  assert.equal(venue('toho-kawasaki','2026-10-28').best.price,1400);

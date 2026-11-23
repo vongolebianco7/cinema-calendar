@@ -201,15 +201,15 @@ document.querySelectorAll("button[data-theme]").forEach(b=>b.onclick=()=>{docume
 /* Preview the selected release year; only replace the current list after confirmation. */
 (function(){
  const button=document.getElementById('applyTopRatings'),yearSelect=document.getElementById('topRatingsYear'),dialog=document.getElementById('topRatingsConfirm'),list=document.getElementById('topRatingsCandidates'),desc=document.getElementById('topRatingsConfirmDesc'),confirmButton=document.getElementById('confirmTopRatings'),cancelButton=document.getElementById('cancelTopRatings'),title=document.getElementById('title');
- let records=[],pending=null;
+ let records=[],pending=null,originalTitle='',committed=false;
  const currentYear=new Date().getFullYear();yearSelect.replaceChildren(new Option('すべての年','all'));
  for(let year=currentYear;year>=1900;year--)yearSelect.add(new Option(year+'年',String(year)));
  yearSelect.value=String(currentYear);
  const periodLabel=period=>window.CinelvaBest10RatingImport.periodLabel(period);
  function updateTitle(){title.value='MY BEST 10 — '+periodLabel(yearSelect.value);}
  function preview(){pending=null;list.replaceChildren();const rated=window.CinelvaBest10RatingImport.filterCandidates(records,yearSelect.value);desc.textContent=rated.length?periodLabel(yearSelect.value)+'のMY評価上位'+rated.length+'作品です。反映すると現在のランキングが置き換わります。':'この年にMY評価を付けた鑑賞済み作品はありません。';confirmButton.disabled=!rated.length;pending=rated.map(r=>({id:r.id,tmdbId:r.tmdbId||r.tmdb_id||r.id,title:r.title,year:r.year||'',poster:r.poster||r.posterUrl||'',director:r.director||'',rating:r.rating}));rated.forEach(r=>{const item=document.createElement('li'),label=document.createElement('span'),score=document.createElement('small');label.textContent=r.title;score.textContent='MY '+r.rating.toFixed(1)+(r.year?' · '+r.year:'');item.append(label,score);list.append(item)});updateTitle();}
- button.addEventListener('click',()=>{try{records=window.CinelvaLibraryRecords.all();}catch(e){document.getElementById('msg').textContent='鑑賞記録を読み込めませんでした：'+e.message;return;}preview();dialog.showModal();});
+ button.addEventListener('click',()=>{try{records=window.CinelvaLibraryRecords.all();}catch(e){document.getElementById('msg').textContent='鑑賞記録を読み込めませんでした：'+e.message;return;}originalTitle=title.value;preview();dialog.showModal();});
  yearSelect.addEventListener('change',preview);
- cancelButton.addEventListener('click',()=>{pending=null;dialog.close();});dialog.addEventListener('close',()=>{pending=null;});
- confirmButton.addEventListener('click',()=>{if(!pending?.length)return;const selected=pending;pending=null;picks=selected;persist();window.hydrateBest10Posters?.();dialog.close();document.getElementById('msg').textContent=periodLabel(yearSelect.value)+'のMY評価上位'+selected.length+'作品を反映しました。';});
+ cancelButton.addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>{pending=null;if(!committed)title.value=originalTitle;committed=false;});
+ confirmButton.addEventListener('click',()=>{if(!pending?.length)return;const selected=pending;pending=null;picks=selected;persist();window.hydrateBest10Posters?.();committed=true;dialog.close();document.getElementById('msg').textContent=periodLabel(yearSelect.value)+'のMY評価上位'+selected.length+'作品を反映しました。';});
 })();</script></body></html>

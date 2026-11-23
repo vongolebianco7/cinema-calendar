@@ -1,3 +1,8 @@
+
+[codex/ui-feedback-20261123 122b01a2] fix: shorten mobile cinema badge text
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+122b01a20d98235c8bccddcdab2311992c8a4cca
+f562e0e10fb7dee54eed947fecc3b636c687701d
 (()=>{
  'use strict';
  const host=document.getElementById('discounts'),D=globalThis.CinelvaCinemaDiscounts;
@@ -10,7 +15,7 @@
  const dayLabel=date=>{const d=new Date(date+'T00:00:00Z');return `${d.getUTCMonth()+1}/${d.getUTCDate()}（${'日月火水木金土'[d.getUTCDay()]}）`;};
  const labels={public:'登録不要',member:'会員向け',card:'対象カードが必要'};
  const prefectures='北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県'.split(' ');
- const shortNames={toho:'TOHO',aeon:'イオン',109:'109',tjoy:'T・ジョイ',sunshine:'サンシャイン',smt:'MOVIX等',united:'ユナイテッド',ttcg:'テアトル',corona:'コロナ',forum:'フォーラム',kino:'キノシネマ',cinemart:'シネマート',os:'OS','central-miyazaki':'セントラル'};
+ const shortNames={toho:'TOHO',aeon:'イオン',109:'109',tjoy:'T・ジョイ',sunshine:'サンシャイン',smt:'MOVIX',united:'ユナイテッド',ttcg:'テアトル',corona:'コロナ',forum:'フォーラム',kino:'キノシネマ',cinemart:'シネマート',os:'OS','central-miyazaki':'セントラル'};
  const badgeNames={united:'UC'};
  const chainBadge=(id,name)=>`<span class="discountChainLogo discountChainLogo-${esc(id)}" aria-label="${esc(name)}" title="${esc(name)}">${esc(badgeNames[id]||shortNames[id]||name)}</span>`;
  const winnerText=chains=>chains.length?chains.map(c=>shortNames[c.id]||c.name).join('・'):'系列未掲載';
@@ -62,74 +67,7 @@
  #discounts .discountTable tbody td:last-child{border-right:1px solid rgba(128,128,128,.22);border-radius:0 12px 12px 0}
  #discounts .discountTable tbody th h3{font-size:15px;line-height:1.35;margin:0 0 6px}
  #discounts .discountTable .discountPrice{font-weight:800;font-size:19px;line-height:1.3;font-variant-numeric:tabular-nums}
- #discounts .discountTable .discountPrice small{display:block;font-size:11px;font-weight:500;line-height:1.45;margin-top:6px;overflow-wrap:anywhere}
- #discounts .discountTheaterList{font-size:12px;font-weight:400}
- #discounts .discountTable .discountDetailButton{width:100%;min-width:0;min-height:44px;font-size:13px}
- @media(max-width:650px){
-  #discounts .discountTableScroll{overflow:visible}
-  #discounts .discountTable{display:block;border-spacing:0;table-layout:auto}
-  #discounts .discountTable caption{display:block;font-size:13px;padding:10px 0}
-  #discounts .discountTable thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-  #discounts .discountTable tbody{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-  #discounts .discountTable tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 4px;overflow:hidden;border:1px solid rgba(128,128,128,.32);border-radius:14px;background:rgba(128,128,128,.07)}
-  #discounts .discountTable tbody th{grid-column:1/-1;grid-row:1;min-width:0;border:0;border-radius:0;padding:10px 4px 10px 10px}
-  #discounts .discountTable tbody td{display:block;min-width:0;border:0;border-radius:0;grid-row:2;padding:7px 4px;overflow-wrap:anywhere}
-  #discounts .discountTable tbody td:nth-of-type(1){grid-column:1;border:0}
-  #discounts .discountTable tbody td:nth-of-type(1)::before{content:'登録不要'}
-  #discounts .discountTable tbody td:nth-of-type(2){grid-column:2}#discounts .discountTable tbody td:nth-of-type(2)::before{content:'会員・カード等'}
-  #discounts .discountTable tbody td:nth-of-type(1)::before,#discounts .discountTable tbody td:nth-of-type(2)::before{display:block;font-size:11px;font-weight:600;opacity:.75;margin-bottom:6px}
-  #discounts .discountTable tbody td:last-child{grid-column:1/-1;grid-row:3;border:0;border-top:1px solid rgba(128,128,128,.2);border-radius:0;padding:9px 12px}
-  #discounts .discountTable .discountDetailButton{width:100%;min-height:44px;font-size:13px}
-  #discounts .discountTable tbody th h3{font-size:14px;line-height:1.4}#discounts .discountTable .discountPrice{font-size:16px;line-height:1.4;white-space:normal}#discounts .discountPriceValue{display:block;white-space:nowrap}#discounts .discountTable .discountPrice small{font-size:11px;line-height:1.45}#discounts .discountTheaterOpen{min-height:44px;font-size:12px}
- }
-
- @media(max-width:600px){#discounts .discountDetailDialog{width:94vw;max-height:86dvh;padding:14px}#discounts .discountDialogHead{top:-14px}#discounts .discountDetailDialog p,#discounts .discountDetailDialog li{font-size:14px;line-height:1.65}}
- `;
-
- host.append(modalStyle);
- const dialog=host.querySelector('#discountDetailDialog'),dialogBody=host.querySelector('#discountDialogBody');
- let activeRows=[],returnFocus=null;
- function closeDialog(){dialog.close();returnFocus?.focus();returnFocus=null;}
- dialog.querySelector('#discountDialogClose').addEventListener('click',closeDialog);
- dialog.addEventListener('click',e=>{if(e.target===dialog)closeDialog();});
- dialog.addEventListener('close',()=>{returnFocus?.focus();returnFocus=null;});
- const prefDialog=host.querySelector('#discountPrefDialog'),theaterPopup=host.querySelector('#discountTheaterPopup');
- host.querySelector('#discountPrefOpen').addEventListener('click',()=>prefDialog.showModal());
- host.querySelector('#discountPrefClose').addEventListener('click',()=>prefDialog.close());
- host.querySelector('#discountTheaterClose').addEventListener('click',()=>theaterPopup.hidePopover());
- prefDialog.addEventListener('change',e=>{if(!e.target.matches('[data-pref-check]'))return;const p=e.target.dataset.prefCheck;selectedPrefs=e.target.checked?[...selectedPrefs,p]:selectedPrefs.filter(x=>x!==p);selectedPrefs=prefectures.filter(x=>selectedPrefs.includes(x));prefInput.value=selectedPrefs[0]||'';updateUrl();render();});
- function refreshPrefs(){host.querySelector('#discountPrefSummary').textContent=selectedPrefs.length?selectedPrefs.join('・'):'未選択';host.querySelector('#discountPrefOpen').textContent=selectedPrefs.length?selectedPrefs.slice(0,2).join('・')+(selectedPrefs.length>2?` 他${selectedPrefs.length-2}`:''):'都道府県を選択';host.querySelectorAll('[data-pref-check]').forEach(el=>{el.checked=selectedPrefs.includes(el.dataset.prefCheck);});}
- const timeInput=host.querySelector('#discountTime'),sortInput=host.querySelector('#discountSort'),dateInput=host.querySelector('#discountDate'),prefInput=host.querySelector('#discountPrefecture'),results=host.querySelector('#discountResults'),summary=host.querySelector('#discountSummary');
- const today=D.today(),lastDate=D.addDays(today,60);
- const requestedDate=params.get('discountDate')||'';
- let selectedDate=D.addDays(requestedDate,0)&&requestedDate>=today&&requestedDate<=lastDate?requestedDate:today;
- dateInput.min=today;dateInput.max=lastDate;dateInput.value=selectedDate;
- let calendarStart=monday(selectedDate>D.addDays(today,47)?D.addDays(today,47):selectedDate);
- timeInput.value=params.get('discountTime')==='evening'?'evening':'day';
- sortInput.value=params.get('discountSort')==='conditional'?'conditional':'public';
- function updateUrl(){
-  const p=new URLSearchParams(location.search);p.delete('discountChain');
-  if(selectedPrefs.length)p.set('discountPrefectures',selectedPrefs.join(','));else p.delete('discountPrefectures');
-  if(selectedPrefs.length)p.set('discountPrefecture',selectedPrefs[0]);else p.delete('discountPrefecture');
-  if(selectedDate)p.set('discountDate',selectedDate);else p.delete('discountDate');
-  p.set('discountTime',timeInput.value);
-  if(sortInput.value==='conditional')p.set('discountSort','conditional');else p.delete('discountSort');
-  history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:'')+location.hash);
- }
- const tablePrice=o=>o?`<span class="discountPriceValue">${money(o.price)}</span>${o.maxPrice&&o.maxPrice!==o.price?`<small>〜${money(o.maxPrice)}</small>`:''}`:'未掲載';
- function method(o){const groups=new Map(),normalize=s=>String(s||'').normalize('NFKC').replace(/[\s・･ー−–—-]/g,'').toLowerCase();for(const row of Array.isArray(o.theaterPrices)?o.theaterPrices:[]){const theaters=Array.isArray(row.theaters)?row.theaters.filter(t=>o.applicableTheaters.some(name=>normalize(name).includes(normalize(t)))):[],href=official(row.sourceUrl);if(!href||!theaters.length)continue;if(!groups.has(href))groups.set(href,[]);groups.get(href).push(...theaters);}const theaterSources=groups.size?`<details class="discountTheaterSources"><summary>劇場別の公式料金表（${o.applicableTheaters.length}館）</summary><ul>${[...groups].map(([href,theaters])=>`<li>${theaters.map(esc).join('・')} <a href="${href}" target="_blank" rel="noopener noreferrer">公式料金表</a></li>`).join('')}</ul></details>`:'';return `<section class="discountWay"><h4>${esc(o.label)} · ${price(o)}</h4><table class="discountOfferFacts"><tbody><tr><th scope="row">料金</th><td>${price(o)}</td></tr><tr><th scope="row">割引条件・適用時間</th><td>${esc(labels[o.access]||'条件あり')}<br>${esc(o.condition)}</td></tr><tr><th scope="row">会費・注意事項</th><td>${esc(o.feeText)}</td></tr><tr><th scope="row">対象映画館</th><td>${o.applicableTheaters.map(esc).join('・')}</td></tr></tbody></table>${theaterSources}<ol class="discountSteps">${o.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><div class="discountLinks">${official(o.sourceUrl)?`<a href="${official(o.sourceUrl)}" target="_blank" rel="noopener noreferrer">公式で条件・購入手順を確認</a>`:''}${official(o.feeSourceUrl)?`<a href="${official(o.feeSourceUrl)}" target="_blank" rel="noopener noreferrer">会費・ポイントの公式情報</a>`:''}</div><p class="discountMuted">条件確認日：${esc(o.verifiedAt)}</p></section>`;}
- function render(){
-  if(!data)return;
-  if(!D.addDays(selectedDate,0)||selectedDate<today||selectedDate>lastDate){summary.textContent='今日以降の有効な鑑賞日を選択してください。';results.innerHTML='';return;}
-  refreshPrefs();
-  const options={date:selectedDate,prefectures:selectedPrefs,evening:timeInput.value==='evening'},guideRows=selectedPrefs.length?D.regionalGuide(data,options):[],sortPrice=c=>(sortInput.value==='conditional'?c.conditionalBest:c.publicBest)?.price??Infinity,rows=guideRows.slice().sort((a,b)=>sortPrice(a)-sortPrice(b)||a.name.localeCompare(b.name,'ja')),days=selectedPrefs.length?D.regionalCalendar(data,{...options,date:calendarStart}):[];
-  activeRows=rows;
-  host.querySelector('#discountSortControl').hidden=!selectedPrefs.length;
-  host.querySelector('#discountTheater').textContent=named&&selectedPrefs.length?`選択元：${named}。選択した都道府県の掲載系列を比較しています。`:'';
-  host.querySelector('#discountPeriod').textContent=days.length?`${dayLabel(days[0].date)}〜${dayLabel(days[days.length-1].date)}`:'';
-  host.querySelector('#discountPrev').disabled=calendarStart<=monday(today);host.querySelector('#discountNext').disabled=calendarStart>=monday(D.addDays(today,47));
-  const publishedPublicPrices=days.filter(d=>d.publicPrice!==null).map(d=>d.publicPrice),calendarMin=publishedPublicPrices.length?Math.min(...publishedPublicPrices):null;
-  const renderDay=d=>{const top=d.publicTop3||[],publicLabel=top.length?top.map((o,i)=>`${i+1}位 ${shortNames[o.id]||o.name} 掲載${o.regionalTheaterCount}館のうち${o.theaterCount}館で適用 ${money(o.price)}`).join('、'):'料金未確認',ranks=top.map((o,i)=>`<span title="${esc(o.name)} 掲載${o.regionalTheaterCount}館のうち${o.theaterCount}館で適用 ${money(o.price)}"><em>${i+1}</em><strong>${chainBadge(o.id,o.name)}</strong><small>対象${o.theaterCount}館</small><b>${money(o.price)}</b></span>`).join('');return `<button type="button" class="discountDay${d.date<today?' discountPast':''}${d.publicPrice!==null&&d.publicPrice===calendarMin?' discountLowest':''}" data-discount-date="${d.date}" ${d.date<today?'disabled':''} aria-pressed="${d.date===selectedDate}" aria-label="${esc(dayLabel(d.date))}${d.publicPrice!==null&&d.publicPrice===calendarMin?' 登録不要最安':''} 登録不要上位 ${esc(publicLabel)} 条件付き最安 ${d.conditionalPrice===null?'料金未確認':money(d.conditionalPrice)+' '+d.conditionalChains.map(c=>c.name).join('・')}"><span class="discountDayDate">${Number(d.date.slice(5,7))}/${Number(d.date.slice(8))}<small>${dayLabel(d.date).slice(dayLabel(d.date).indexOf('（'))}</small></span>${d.date<today?'<small class="discountPastLabel">過去日・料金確認対象外</small>':''}${d.publicPrice!==null&&d.publicPrice===calendarMin?'<em class="discountLowestBadge">最安</em>':''}<small class="discountPublicLabel">登録不要・安い順</small><span class="discountCalendarRanks">${ranks||'<span class="discountCalendarUnconfirmed">料金未確認</span>'}</span><span class="discountConditional"><small>会員・カード等</small><b>${d.conditionalPrice===null?'料金未確認':money(d.conditionalPrice)}</b><small class="discountWinner">${esc(winnerText(d.conditionalChains))}</small></span></button>`;};
+ #discounts .discountTable .discountPrice small{display:block;fon…2490 tokens truncated…${d.date}" ${d.date<today?'disabled':''} aria-pressed="${d.date===selectedDate}" aria-label="${esc(dayLabel(d.date))}${d.publicPrice!==null&&d.publicPrice===calendarMin?' 登録不要最安':''} 登録不要上位 ${esc(publicLabel)} 条件付き最安 ${d.conditionalPrice===null?'料金未確認':money(d.conditionalPrice)+' '+d.conditionalChains.map(c=>c.name).join('・')}"><span class="discountDayDate">${Number(d.date.slice(5,7))}/${Number(d.date.slice(8))}<small>${dayLabel(d.date).slice(dayLabel(d.date).indexOf('（'))}</small></span>${d.date<today?'<small class="discountPastLabel">過去日・料金確認対象外</small>':''}${d.publicPrice!==null&&d.publicPrice===calendarMin?'<em class="discountLowestBadge">最安</em>':''}<small class="discountPublicLabel">登録不要・安い順</small><span class="discountCalendarRanks">${ranks||'<span class="discountCalendarUnconfirmed">料金未確認</span>'}</span><span class="discountConditional"><small>会員・カード等</small><b>${d.conditionalPrice===null?'料金未確認':money(d.conditionalPrice)}</b><small class="discountWinner">${esc(winnerText(d.conditionalChains))}</small></span></button>`;};
   const weekLabel=(start)=>{
    const current=monday(today);
    if(start===current)return '今週';

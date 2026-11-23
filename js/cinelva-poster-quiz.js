@@ -27,9 +27,23 @@
       .replace(/[\s\p{P}\p{S}]+/gu, '');
   }
 
+  const TITLE_ALIASES = new Map([
+    [278, ['The Shawshank Redemption']],
+    [129, ['Spirited Away']],
+    [157336, ['Interstellar']],
+    [361743, ['Top Gun: Maverick']],
+    [238, ['The Godfather']],
+    [496243, ['Parasite']],
+    [771, ['Home Alone']],
+    [597, ['Titanic']],
+    [105, ['Back to the Future']]
+  ]);
+
   function matchesAnswer(answer, movie) {
-    return !!movie && normalizeTitle(answer) !== '' &&
-      normalizeTitle(answer) === normalizeTitle(movie.title);
+    const normalized = normalizeTitle(answer);
+    if (!movie || normalized === '') return false;
+    const aliases = TITLE_ALIASES.get(Number(movie.tmdbId)) || [];
+    return [movie.title, ...aliases].some(title => normalizeTitle(title) === normalized);
   }
 
   function scoreForAnswer(revealCount, wrongCount) {

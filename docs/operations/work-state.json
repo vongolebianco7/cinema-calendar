@@ -1,14 +1,24 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T08:16:00Z",
-  "status": "blocked",
+  "updated_at": "2026-11-23T08:39:07Z",
+  "status": "pr_created",
   "issue": 239,
   "base_branch": "main",
   "base_sha": "41fd1f8871c66bc255c9770fba9604162aa689c8",
-  "branch": "main",
-  "head_sha": "41fd1f8871c66bc255c9770fba9604162aa689c8",
-  "pull_request": null,
-  "open_pull_requests": [],
+  "branch": "codex/refresh-work-checkpoint-20261123",
+  "head_sha": "97c2b42dd78f7e9e53a21aa4892848596882288d",
+  "pull_request": {
+    "number": 900,
+    "url": "https://github.com/vongolebianco7/cinema-calendar/pull/900",
+    "state": "open"
+  },
+  "open_pull_requests": [
+    {
+      "number": 900,
+      "url": "https://github.com/vongolebianco7/cinema-calendar/pull/900",
+      "title": "docs: refresh live CINELVA work checkpoint"
+    }
+  ],
   "work_items": [
     {
       "id": "P0-593-POSTERS",
@@ -133,6 +143,10 @@
     {
       "check": "2026-11-23 current-main audit and local quality gate",
       "result": "GitHub main is 41fd1f8871c66bc255c9770fba9604162aa689c8. No open PRs found; PRs #891 and #879 are merged. Python scripts/quality_gate.py passed on this exact main: 608 Node tests passed, Python/compliance/data checks completed, final QUALITY GATE PASSED. Recent UI changes are already in main: #895 cinema pricing logos, #897/#898 calendar poster sizing, #879/#899 VIVANT poster choice and check/header, and commit 8f97782 applies the remaining user feedback. Vercel deployment remains blocked by HTTP 402."
+    },
+    {
+      "check": "Checkpoint documentation PR #900",
+      "result": "Two documentation files record the current main, tests, open issues and deployment block. Local state schema and git diff checks pass; PR checks are pending."
     }
   ],
   "blockers": [

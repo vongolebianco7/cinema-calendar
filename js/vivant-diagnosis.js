@@ -93,8 +93,22 @@
     return results.map((result, index) => ({ result, index, score: similarity(scores, result.vector) }))
       .sort((a, b) => b.score - a.score || (hash(`${(answerIds || []).join('|')}:${a.result.id}`) - hash(`${(answerIds || []).join('|')}:${b.result.id}`)))[0].result;
   }
-  const favoriteChoices = ['ショーシャンクの空に','千と千尋の神隠し','インターステラー','トップガン マーヴェリック','ゴッドファーザー','パラサイト 半地下の家族','ホーム・アローン','タイタニック','バック・トゥ・ザ・フューチャー']
-    .map(title => movies.find(movie => movie.title === title)).filter(Boolean);
+  const favoritePosters = {
+    'ショーシャンクの空に': { tmdbId: 278, poster: 'https://image.tmdb.org/t/p/w342/xQY1yhixcSSfKRhdlhzwN8Mra6q.jpg' },
+    '千と千尋の神隠し': { tmdbId: 129, poster: 'https://image.tmdb.org/t/p/w342/8TEs6twIANAc2qiU8m17JO8Ujcx.jpg' },
+    'インターステラー': { tmdbId: 157336, poster: 'https://image.tmdb.org/t/p/w500/auQjFBfCWSL6DpQhWVCZ6wFtDm6.jpg' },
+    'トップガン マーヴェリック': { tmdbId: 361743, poster: 'https://image.tmdb.org/t/p/w500/qw19Vqa16HlmKyxCADncAlb0SWg.jpg' },
+    'ゴッドファーザー': { tmdbId: 238, poster: 'https://image.tmdb.org/t/p/w342/hJ1oIGxEoskl4YfNpQ4AFUO5uub.jpg' },
+    'パラサイト 半地下の家族': { tmdbId: 496243, poster: 'https://image.tmdb.org/t/p/w342/xOvSmS1oMZUBUTqNU8slwRIokaZ.jpg' },
+    'ホーム・アローン': { tmdbId: 771, poster: 'https://image.tmdb.org/t/p/w342/AoKSltQdb6DKwUFfP4rIVTU6G0N.jpg' },
+    'タイタニック': { tmdbId: 597, poster: 'https://image.tmdb.org/t/p/w342/ofhCnW6i7mQIiLSSucBHqZQ7XT7.jpg' },
+    'バック・トゥ・ザ・フューチャー': { tmdbId: 105, poster: 'https://image.tmdb.org/t/p/w500/dZFaLrpdH2roAt5ZCjAye6DynT1.jpg' }
+  };
+  const favoriteChoices = Object.entries(favoritePosters)
+    .map(([title, artwork]) => {
+      const movie = movies.find(candidate => candidate.title === title);
+      return movie ? { ...movie, ...artwork } : null;
+    }).filter(Boolean);
   function recommendMovies(answerIds, watchedIds = [], favoriteTitle = '') {
     const profile = scoreAnswers(answerIds);
     const result = getResult(answerIds);

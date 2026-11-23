@@ -2,10 +2,15 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const D=require('../js/cinelva-cinema-discounts.js');
+const ui=fs.readFileSync('js/cinelva-cinema-discounts-ui.js','utf8');
 const data=JSON.parse(fs.readFileSync('data/cinema_discounts.json','utf8'));
 const now=new Date('2026-10-25T12:00:00Z');
 const rows=(date,options={},source=data,clock=now)=>D.compare(source,{date,benefits:[],...options},clock);
 const venue=(id,date,options={},source=data,clock=now)=>rows(date,options,source,clock).find(x=>x.id===id);
+test('cinema-chain badges retain the full accessible name while using compact United Cinemas mark',()=>{
+ assert.match(ui,/badgeNames=\{united:'UC'\}/);
+ assert.match(ui,/aria-label="\$\{esc\(name\)\}" title="\$\{esc\(name\)\}"/);
+});
 test('ordinary Wednesday and eligible memberships choose one price; no invented stacking',()=>{
  assert.equal(venue('toho-kawasaki','2026-10-28').best.price,1400);
  assert.equal(venue('toho-kawasaki','2026-10-28',{benefits:['ponta']}).best.price,1100);

@@ -12,7 +12,8 @@ test('5問は既存TMDBポスターから重複なく選ぶ', () => {
 });
 
 test('タイトル判定は全角・半角や空白の違いを吸収する', () => {
-  assert.equal(quiz.matchesAnswer('ＴＯＰＧＵＮ　マーヴェリック', diagnosis.FAVORITE_CHOICES.find(movie => movie.title === 'トップガン マーヴェリック')), true);
+  assert.equal(quiz.matchesAnswer('トップガン　マーヴェリック', diagnosis.FAVORITE_CHOICES.find(movie => movie.title === 'トップガン マーヴェリック')), true);
+  assert.equal(quiz.matchesAnswer('Top Gun: Maverick', diagnosis.FAVORITE_CHOICES.find(movie => movie.title === 'トップガン マーヴェリック')), true);
   assert.equal(quiz.matchesAnswer('   ', diagnosis.FAVORITE_CHOICES[0]), false);
   assert.equal(quiz.matchesAnswer('別の映画', diagnosis.FAVORITE_CHOICES[0]), false);
 });

@@ -112,16 +112,16 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    const godzillaPosterSizes=[];
    for(const width of [320,390,430]){
     await page.setViewportSize({width,height:844});
-    const measure=await page.evaluate(()=>{movies=[{id:555,title:'ゴジラ-0.0',date:'2026-11-03',event:'theatrical',service:'通常公開',poster:'https://image.tmdb.org/t/p/w342/godzilla.jpg',runtime:135}];mode='theatrical';active='すべて';view=new Date(2026,10,1);theatricalRangeStart=null;render();const card=document.querySelector('.streamingWeekMovies .streamMovie:only-child'),grid=card?.parentElement,poster=card?.querySelector('.streamMoviePoster');if(!card||!grid||!poster)return null;const c=card.getBoundingClientRect(),g=grid.getBoundingClientRect(),p=poster.getBoundingClientRect();return {cardWidth:c.width,gridWidth:g.width,posterWidth:p.width,pageWidth:document.documentElement.scrollWidth};});
-    assert.ok(measure,'Godzilla single-film week renders at '+width+'px');
-    assert.ok(measure.cardWidth>=measure.gridWidth-1,'single film spans the week row at '+width+'px: '+JSON.stringify(measure));
-    assert.ok(measure.posterWidth>=Math.min(148,width*.38)-1,'single-film poster reaches the responsive target at '+width+'px: '+JSON.stringify(measure));
+    const measure=await page.evaluate(()=>{movies=[{id:555,title:'ゴジラ-0.0',date:'2026-11-03',event:'theatrical',service:'通常公開',poster:'https://image.tmdb.org/t/p/w342/godzilla.jpg',runtime:135}];mode='theatrical';active='すべて';view=new Date(2026,10,1);theatricalRangeStart=null;render();const group=document.querySelector('.weekGroup.singleMovieDate'),card=group?.querySelector('.streamMovie'),grid=card?.parentElement,poster=card?.querySelector('.streamMoviePoster');if(!card||!grid||!poster)return null;const c=card.getBoundingClientRect(),g=grid.getBoundingClientRect(),p=poster.getBoundingClientRect();return {cardWidth:c.width,gridWidth:g.width,posterWidth:p.width,pageWidth:document.documentElement.scrollWidth};});
+    assert.ok(measure,'Godzilla one-film date group renders at '+width+'px');
+    assert.ok(measure.cardWidth>=measure.gridWidth-1,'single-film date group spans the row at '+width+'px: '+JSON.stringify(measure));
+    assert.ok(measure.posterWidth>=Math.min(240,width*.6)-1,'single-film poster reaches the larger responsive target at '+width+'px: '+JSON.stringify(measure));
     assert.equal(measure.pageWidth,width,'poster enlargement does not cause page overflow at '+width+'px');
     godzillaPosterSizes.push(Math.round(measure.posterWidth));
    }
    await page.setViewportSize({width:390,height:844});
    await page.screenshot({path:'artifacts/reported-audit/'+(process.env.CINELVA_BROWSER||'chromium')+'-'+theme+'-godzilla-single-poster.png'});
-   assert.ok(godzillaPosterSizes[1]>120,'390px Godzilla poster is visibly larger: '+godzillaPosterSizes.join('/'));
+   assert.ok(godzillaPosterSizes[1]>=230,'390px Godzilla poster is visibly larger: '+godzillaPosterSizes.join('/'));
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
    await context.close();
   }

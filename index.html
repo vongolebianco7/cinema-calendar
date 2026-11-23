@@ -496,7 +496,7 @@ function groupedMovieCards(weekMovies,modeName){
    let groupName=service(m),kind=groupName==="午前十時の映画祭"?"asa10":groupName==="リバイバル上映"?"revival":"theatrical";
    return '<article class="streamMovie" data-mi="'+idx+'"><div class="streamMoviePoster" data-now-film-id="'+(globalThis.CinelvaCalendarNowPlaying?.id(m)||'')+'">'+(m.poster?'<img src="'+m.poster+'" alt="'+esc(m.title)+'のポスター" loading="lazy">':'<div class="theatricalPosterFallback">'+m.title+'</div>')+'<span class="streamMovieDate '+(hasPeriod?'isPeriod':'')+'">'+date+'</span></div>'+colorTag(groupName,kind==='asa10'?'#c69232':kind==='revival'?'#7d5aa8':'#6b3a3a')+'<div class="streamMovieTitle">'+m.title+'</div><div class="streamMovieRuntime">'+runtimeLabel+'</div></article>'
   }).join("");
-  return '<div class="weekGroup"><div class="weekGroupHead"><div class="weekGroupTitle">'+group.slice(5).replace('-','/')+'</div><div class="weekGroupCount">'+cardGroups.length+'作品</div></div><div class="streamingWeekMovies">'+cards+'</div></div>'
+  return '<div class="weekGroup'+(cardGroups.length===1?' singleMovieDate':'')+'"><div class="weekGroupHead"><div class="weekGroupTitle">'+group.slice(5).replace('-','/')+'</div><div class="weekGroupCount">'+cardGroups.length+'作品</div></div><div class="streamingWeekMovies">'+cards+'</div></div>'
  }).join("")
 }
 
@@ -1082,13 +1082,11 @@ window.addEventListener("load",applyHeaderSearchParam);
  .calendar.theatricalWeekMode .weekGroups{gap:6px}
  .calendar.theatricalWeekMode .weekGroup{padding-top:6px}
  .calendar.theatricalWeekMode .streamingWeekMovies{gap:5px}
- .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child{grid-column:1/-1;display:grid;grid-template-columns:clamp(112px,38vw,148px) minmax(0,1fr);column-gap:12px;align-items:start;width:100%}
- .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child .streamMoviePoster{grid-column:1;grid-row:1 / span 4;width:100%;max-width:148px;aspect-ratio:2/3}
- .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child .streamMovieService,.calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child .streamMovieServices{grid-column:2;grid-row:1;justify-self:start;margin-top:0;white-space:normal}
- .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child .streamMovieTitle{grid-column:2;grid-row:3;align-self:start;margin-top:5px;-webkit-line-clamp:4;font-size:14px}
- .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child:not(:has(.streamMovieAvail)) .streamMovieTitle{grid-row:2}
- .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child:not(:has(.streamMovieAvail)) .streamMovieRuntime{grid-column:2;grid-row:3}
- .calendar.theatricalWeekMode .streamingWeekMovies .streamMovie:only-child:has(.streamMovieAvail) .streamMovieRuntime{grid-column:2;grid-row:4}
+ .calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMovie{grid-column:1/-1;display:grid;grid-template-columns:clamp(180px,60vw,240px) minmax(0,1fr);column-gap:12px;align-items:start;width:100%}
+ .calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMoviePoster{grid-column:1;grid-row:1 / span 4;width:100%;max-width:240px;aspect-ratio:2/3}
+ .calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMovieService,.calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMovieServices{grid-column:2;grid-row:1;justify-self:start;margin-top:0;white-space:normal}
+ .calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMovieTitle{grid-column:2;grid-row:3;align-self:start;margin-top:5px;-webkit-line-clamp:4;font-size:14px}
+ .calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMovieRuntime{grid-column:2;grid-row:4}
 }
 </style>
 <!-- frontend-deploy-trigger: discover-recommendations-v1 -->

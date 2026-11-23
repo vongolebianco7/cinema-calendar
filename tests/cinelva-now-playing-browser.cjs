@@ -21,7 +21,7 @@ const engine=process.env.CINELVA_BROWSER||'chromium';
    const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
    await page.goto(`http://127.0.0.1:${port}/${route}`,{waitUntil:'domcontentloaded'});
    const section=page.locator('#nowPlaying'),cards=section.locator('[data-now-playing-id]');await cards.first().waitFor();assert.equal(await cards.count(),12);
-   assert.equal(await cards.first().locator('.presetCardMeta').count(),1,'discovery cards keep a single release metadata row');assert.match(await cards.first().locator('.presetCardMeta').innerText(),/2026/);assert.match(await cards.first().locator('.presetCardMeta').innerText(),/121分/);assert.equal(await cards.first().locator('.cinelvaMovieMetadata').count(),0,'shared card metadata does not duplicate the year');
+   assert.equal(await cards.first().locator('.presetCardMeta').count(),1,'discovery cards keep a single release metadata row');assert.match(await cards.first().locator('.presetCardMeta').innerText(),/2026/);assert.equal((await cards.first().locator('.presetCardMeta').innerText()).match(/121分/g)?.length,1,'runtime appears once');assert.equal(await cards.first().locator('.cinelvaMovieMetadata').count(),0,'shared card metadata does not duplicate the year');
    assert.match(await cards.nth(1).locator('.presetCardMeta').innerText(),/上映時間未確認/,'unavailable runtime is made explicit instead of silently omitted');
    assert.match(await section.locator('[data-now-status]').innerText(),/17作品/);
    assert.equal(await section.locator('[data-now-observed]').count(),0);

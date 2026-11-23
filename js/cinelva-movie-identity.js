@@ -358,7 +358,7 @@
     if (card.matches?.(".presetCard,.card") && card.querySelector(".presetCardMeta,.meta")) {
       const runtime = Number(m?.runtime);
       const row = card.querySelector(".presetCardMeta,.meta");
-      if (Number.isFinite(runtime) && runtime > 0 && !/\b\d+\s*分\b/.test(row.textContent || "")) {
+      if (Number.isFinite(runtime) && runtime > 0 && !/\d+\s*分/.test(row.textContent || "")) {
         row.textContent = `${row.textContent || ""}${row.textContent?.trim() ? " · " : ""}${runtime}分`;
       }
       card.querySelector(".cinelvaMovieMetadata")?.remove();

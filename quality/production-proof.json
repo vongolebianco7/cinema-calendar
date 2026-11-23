@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "982fe79e305e1c6dae9095dd04a7c119e75c6e59",
-  "verified_at": "2026-11-23T03:43:23.491Z",
-  "note": "Exact-source CI receipt for PR #896 source head 982fe79e305e1c6dae9095dd04a7c119e75c6e59; executable digest 5448312fa75162b6eabdbfbea78a8c97aec3ecf16973eba570af0b39b36e23cd. Required workflows succeeded on this exact source head: Autonomous quality gate run 45107053961, CINELVA smoke tests run 45107054045, Validate frontend run 45107054019, and Reproducible backend build run 45107054037. Autonomous quality gate and browser verification included Chromium and WebKit mobile-size tests. This is a receipt-only commit; fresh exact-head CI on the receipt-only PR head is required before merge."
+  "head_sha": "b8916501f2384b4ddedcf2e2ec1bdbe87372e790",
+  "verified_at": "2026-11-23T04:05:35Z",
+  "note": "Exact-source CI receipt for PR #897 source head b8916501f2384b4ddedcf2e2ec1bdbe87372e790; executable digest fc9edc50ef0edab3e0fcea1357728caf07c67710c30bd9b53c90f458bd3dd030. Required workflows succeeded on this exact source head: Autonomous quality gate run 45109109528, CINELVA smoke tests run 45109109516, Validate frontend run 45109109592, and Reproducible backend build run 45109109498. Chromium and WebKit mobile browser checks, including the reported single-film theater poster regression, succeeded. This is a receipt-only commit; fresh exact-head CI on the receipt-only PR head is required before merge."
 }

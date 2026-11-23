@@ -1,115 +1,17 @@
 {
-  "generated_at": "2026-11-22T23:42:36.367879+00:00",
+  "generated_at": "2026-11-23T01:36:16.438452+00:00",
   "refresh_policy": {
     "near_term": [
-      "2026-10-23",
-      "2027-03-22"
+      "2026-10-24",
+      "2027-03-23"
     ],
     "background_slice": [
-      "2027-03-17",
-      "2027-05-15"
+      "2027-05-17",
+      "2027-07-15"
     ],
     "max_detail_requests": 40
   },
   "movies": [
-    {
-      "id": 1713257,
-      "title": "カノン 夏の夜の猫",
-      "original_title": "カノン 夏の夜の猫",
-      "date": "2025-11-22",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/5sZaT1IUayKCJyMkMioh9qy98e8.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "夏の夜におきた奇跡。あの猫がかえってきました。",
-      "tmdb": "https://www.themoviedb.org/movie/1713257",
-      "director": "松岡徹",
-      "director_id": 6280953,
-      "cast": [],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 5,
-      "genres": []
-    },
-    {
-      "id": 1608589,
-      "title": "Lilypop",
-      "original_title": "Lilypop",
-      "date": "2025-11-22",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/pSLYZuRiJ2wdZQJtK16wAOGmnGz.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "りりかは美大で写真を専攻しているが最近は撮りたい被写体が見つからない。授業では昔に撮った同居人エナの写真を提出した。エナは心の調子を崩してここしばらくは部屋に引き篭っている。2人の過ごす時間はバラバラで、かつての親密さを失いつつあった。ある日、りりかは街を歩くエナの“分身”と出会う。家に帰るとここにもエナがいる。謎に誘われ、2人は夜の街に繰り出した。  分身をめぐる冒険は新たな出会いと別れを生み、気がつけば愛が対立する世界に来ている。遠ざかった人たちの写真やメッセージに囲まれながら、りりかは見失った愛をまた探しに行く。",
-      "tmdb": "https://www.themoviedb.org/movie/1608589",
-      "director": "青石太郎",
-      "director_id": 5912783,
-      "cast": [
-        "渡邉龍平"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 103,
-      "genres": []
-    },
-    {
-      "id": 1537786,
-      "title": "もういちどみつめる",
-      "original_title": "もういちどみつめる",
-      "date": "2025-11-22",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/qyaugNnxAvGGmJoGfwz8UZik6xr.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1537786",
-      "director": "佐藤慶紀",
-      "director_id": 2024553,
-      "cast": [
-        "筒井真理子",
-        "髙田万作",
-        "Yukihiro Nishiyama",
-        "Chikara Tokunaga"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 113,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1013701,
-      "title": "潜行一千里",
-      "original_title": "潜行一千里",
-      "date": "2025-11-22",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/xdHSXdfXh1zE6z3XBMx4oA1G7bN.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1013701",
-      "director": "富田克也",
-      "director_id": 1115165,
-      "cast": [
-        "Abao",
-        "大支"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 79,
-      "genres": [
-        "ドキュメンタリー"
-      ]
-    },
     {
       "id": 1464631,
       "title": "Take Me Drunk I'm Home",
@@ -23551,6 +23453,38 @@
       "checked_at": "2026-11-17T01:51:35.947376+00:00"
     },
     {
+      "id": 940009,
+      "title": "レイ・ガン",
+      "original_title": "Ray Gunn",
+      "date": "2026-12-04",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/15UtuuALdJ2Oo2Y7Ke2xwu78QJu.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/940009",
+      "director": "ブラッド・バード",
+      "director_id": 7087,
+      "cast": [
+        "サム・ロックウェル",
+        "スカーレット・ヨハンソン",
+        "トム・ウェイツ",
+        "マット・ベリー"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 120,
+      "genres": [
+        "アニメーション",
+        "サイエンスフィクション",
+        "犯罪",
+        "謎"
+      ],
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
+    },
+    {
       "id": 1782930,
       "title": "超塑性変形",
       "original_title": "超塑性変形",
@@ -25114,7 +25048,8 @@
       "genres": [
         "ドラマ",
         "ロマンス"
-      ]
+      ],
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
     },
     {
       "id": 1560316,
@@ -25141,7 +25076,7 @@
       ],
       "runtime": 0,
       "genres": [],
-      "checked_at": "2026-09-26T18:28:58.311483+00:00"
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
     },
     {
       "id": 1375441,
@@ -25150,29 +25085,29 @@
       "date": "2027-01-22",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/lmrulvLbmaejTix1YaMxo1oGhH1.jpg",
-      "score": 7.2,
-      "votes": 57,
+      "poster": "https://image.tmdb.org/t/p/w500/wqzFMOXLvt9EF5EkNGeI4QLaALE.jpg",
+      "score": 6.751,
+      "votes": 479,
       "overview": "ネットで未成年者を狙う大人たちをあぶり出す「おとり捜査」の様子を流すリアリティTV。 未成年者になりすました「おとり」で大人たちを誘い出し、隠しカメラでその姿を撮影、クリス・ハンセンが犯罪者になりえる人間を直接追及する。しかし視聴率を上げ、番組をさらに人気番組へと押し上げるため、ハンセンの行動は次第にエスカレート。大スクープを追い求めるその姿勢に、やがて周囲からはジャーナリズムやモラルのあり方を疑問視する声も上がっていく。",
       "tmdb": "https://www.themoviedb.org/movie/1375441",
       "director": "ランス・オッペンハイム",
       "director_id": 1405665,
       "cast": [
         "ロバート・パティンソン",
-        "スカイラー・ギソンド",
         "メリット・ウェヴァー",
-        "フィービー・ブリジャーズ"
+        "スカイラー・ギソンド",
+        "マシュー・マー"
       ],
       "countries": [
         "United States of America"
       ],
-      "runtime": 109,
+      "runtime": 110,
       "genres": [
-        "犯罪",
         "スリラー",
-        "コメディ"
+        "ドラマ",
+        "犯罪"
       ],
-      "checked_at": "2026-09-29T18:32:41.928750+00:00"
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
     },
     {
       "id": 1196776,
@@ -25198,7 +25133,7 @@
         "ファンタジー",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-10-04T21:14:50.255842+00:00"
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
     },
     {
       "id": 1300926,
@@ -25230,11 +25165,12 @@
       ],
       "runtime": 96,
       "genres": [
+        "アドベンチャー",
         "アニメーション",
         "コメディ",
         "ファミリー"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
     },
     {
       "id": 1280738,

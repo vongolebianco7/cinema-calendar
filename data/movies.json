@@ -1,105 +1,7 @@
 {
-  "generated_at": "2026-11-22T23:43:39.179847+00:00",
+  "generated_at": "2026-11-23T01:37:35.974103+00:00",
   "note": "Calendar events only: verified Japan theatrical releases plus separately curated official streaming premiere dates. Current-availability snapshots are excluded.",
   "movies": [
-    {
-      "id": 1713257,
-      "title": "カノン 夏の夜の猫",
-      "original_title": "カノン 夏の夜の猫",
-      "date": "2025-11-22",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/5sZaT1IUayKCJyMkMioh9qy98e8.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "夏の夜におきた奇跡。あの猫がかえってきました。",
-      "tmdb": "https://www.themoviedb.org/movie/1713257",
-      "director": "松岡徹",
-      "director_id": 6280953,
-      "cast": [],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 5,
-      "genres": []
-    },
-    {
-      "id": 1608589,
-      "title": "Lilypop",
-      "original_title": "Lilypop",
-      "date": "2025-11-22",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/pSLYZuRiJ2wdZQJtK16wAOGmnGz.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "りりかは美大で写真を専攻しているが最近は撮りたい被写体が見つからない。授業では昔に撮った同居人エナの写真を提出した。エナは心の調子を崩してここしばらくは部屋に引き篭っている。2人の過ごす時間はバラバラで、かつての親密さを失いつつあった。ある日、りりかは街を歩くエナの“分身”と出会う。家に帰るとここにもエナがいる。謎に誘われ、2人は夜の街に繰り出した。  分身をめぐる冒険は新たな出会いと別れを生み、気がつけば愛が対立する世界に来ている。遠ざかった人たちの写真やメッセージに囲まれながら、りりかは見失った愛をまた探しに行く。",
-      "tmdb": "https://www.themoviedb.org/movie/1608589",
-      "director": "青石太郎",
-      "director_id": 5912783,
-      "cast": [
-        "渡邉龍平"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 103,
-      "genres": []
-    },
-    {
-      "id": 1537786,
-      "title": "もういちどみつめる",
-      "original_title": "もういちどみつめる",
-      "date": "2025-11-22",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/qyaugNnxAvGGmJoGfwz8UZik6xr.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1537786",
-      "director": "佐藤慶紀",
-      "director_id": 2024553,
-      "cast": [
-        "筒井真理子",
-        "髙田万作",
-        "Yukihiro Nishiyama",
-        "Chikara Tokunaga"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 113,
-      "genres": [
-        "ドラマ"
-      ]
-    },
-    {
-      "id": 1013701,
-      "title": "潜行一千里",
-      "original_title": "潜行一千里",
-      "date": "2025-11-22",
-      "event": "theatrical",
-      "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/xdHSXdfXh1zE6z3XBMx4oA1G7bN.jpg",
-      "score": 0.0,
-      "votes": 0,
-      "overview": "",
-      "tmdb": "https://www.themoviedb.org/movie/1013701",
-      "director": "富田克也",
-      "director_id": 1115165,
-      "cast": [
-        "Abao",
-        "大支"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "runtime": 79,
-      "genres": [
-        "ドキュメンタリー"
-      ]
-    },
     {
       "id": 1464631,
       "title": "Take Me Drunk I'm Home",
@@ -22718,8 +22620,8 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.589,
-      "votes": 2633,
+      "score": 6.6,
+      "votes": 2634,
       "overview": "米ソの宇宙ロケットが、次々と行方不明になるという事件が発生した。事件の背後にスペクターの影を見いだした英国情報部は、真相究明のため、ジェームズ・ボンドを日本に派遣する。日本の情報部局長、タナカの助けを得て、ボンドはスペクターの秘密基地に潜入するが……。ボンドの宿敵、ブロフェルドをD・プレザンスが演じたシリーズ第5作。",
       "poster": "https://image.tmdb.org/t/p/w500/Aq2kdTKaBo77WsMnVJiKUBxQXJI.jpg",
       "source": "Prime Video公式配信予定",
@@ -22756,7 +22658,7 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.4,
+      "score": 6.356,
       "votes": 2347,
       "overview": "ボンドは中南米某国のトロ将軍に変装し、将軍が管理する高性能偵察機を破壊すべく侵入する。本物の将軍に見つかり一旦は拘束されるが、CIA女性アシスタントのビアンカの誘惑で敵兵を惑した隙に超小型ジェット機（通称：アクロスター）で逃走。地対空ミサイルに追尾されるものの、前述の偵察機の格納庫内をすり抜けた直後にミサイルが格納庫を直撃、結果的に任務に成功する。  その頃、東ベルリンでピエロに成りすましサーカス団に潜入していた009は『レディーの卵（ファベルジュの卵）』（ロシア皇帝献上品）を持ち出したのを見つかり、投擲ナイフを特技とする双子の兄弟ミーシカとグリーシカにやられ、ベルリン英国大使館公邸に『卵』を持ち込み死亡する。",
       "poster": "https://image.tmdb.org/t/p/w500/dL7n7NNwI2AoXOzn4vRwU7JdBzB.jpg",
@@ -22794,8 +22696,8 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 5.242,
-      "votes": 879,
+      "score": 5.238,
+      "votes": 880,
       "overview": "秘密組織スメルシュによって各国の諜報部員が次々と抹殺されて行く。英情報部は、００７のコードネームを後輩に譲り今では隠居生活を営む元祖ジェームズ・ボンドにスメルシュ打倒を依頼するが……。ショーン・コネリーの００７が人気を博していた当時、唯一版権が製作会社イオン・プロになかった『カジノ・ロワイヤル』をプロデューサー、チャールズ・Ｋ・フェルドマンがコロムビアで映画化した一大パロディ。笑いは泥臭く全く洗練されていないし、５人の監督の個性が裏目に出たのかシーンによっての落差が激しく、お世辞にも良く出来た作品とは言い難いが、とにかく賑やか。呆けて見るにはこれ以上の映画はないだろう。バート・バカラックの音楽は絶品、大ヒット主題歌“愛のおもかげ（Ｌｏｏｋ　ｏｆ　Ｌｏｖｅ）”も素晴らしくサウンドトラックの充実が最大の魅力。",
       "poster": "https://image.tmdb.org/t/p/w500/xK3wCTRQYqeYNhbDloT9tiNSrDU.jpg",
       "source": "Prime Video公式配信予定",
@@ -22833,7 +22735,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 7.581,
-      "votes": 12260,
+      "votes": 12261,
       "overview": "内部汚職の根を絶ち、殺しのライセンス・00（ダブルオー）を得たボンドはマダガスカルである男の監視をしていた。その男の携帯電話から得た情報、「エリプシス」の糸を手繰りバハマへ。そこでメッセージの送信者で、武器の売人のディミトリオスおよびその妻ソランジュと接触。マイアミ国際空港で披露される超大型旅客機の爆破計画を知る。この計画に絡んでいるとしてル・シッフルという男の情報をMから得る。ル・シッフルは世界各国のテロ組織から預かった資金をマネーロンダリングしつつ運用しており、旅客機製造会社の株のカラ売りを仕込んだ上で、同社が製造した超大型旅客機をお披露目式で爆破して、巨額の利益を得ようとしていた。しかし爆破をボンドに阻止されたことで大金を失い、テロ組織に返却する資金を取り戻そうとモンテネグロの「カジノ・ロワイヤル」にて開催されるポーカーゲームに参加することになった。ボンドはそのゲームに参加し、国の資金を使ってテロ資金稼ぎを阻止するよう命じられ、監視役として送られて来た金融活動部（FATF）のヴェスパー・リンドとともにゲームへ挑む。",
       "poster": "https://image.tmdb.org/t/p/w500/gpjZyQIKV6HtvP6heaTm3qPjhzk.jpg",
       "source": "Prime Video公式配信予定",
@@ -22909,7 +22811,7 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.355,
+      "score": 7.4,
       "votes": 4188,
       "overview": "メキシコでの任務の帰路、マイアミに立ち寄ったイギリス秘密情報部員ジェームズ・ボンドは、かつてのカジノ・ロワイヤルでの勝負の際同席したデュポンと再会し、彼の頼みでオーリック・ゴールドフィンガーのカードのいかさまを暴いた。ロンドンへ戻ったボンドは、ゴールドフィンガーがスメルシュの手先となって金の密輸を行っているらしいことを聞かされ、その調査を命じられた。調査中、ボンドはゴールドフィンガーに捕らわれ、彼がアメリカ合衆国のフォート・ノックスを襲撃して合衆国金塊保管所に貯蔵された金塊を奪取し、ソ連の巡洋艦に積み込んで海外に運び去ろうとしていることを知る。",
       "poster": "https://image.tmdb.org/t/p/w500/htuM0hNeqS0b8ACHk0qMRX68mnI.jpg",
@@ -23217,7 +23119,7 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.5,
+      "score": 6.547,
       "votes": 2210,
       "overview": "地中海を調査していた英国スパイ船「セント・ジョージ」が何者かが仕掛けた機雷によって沈没した。この船にはミサイルを自由に操って誘導できる装置、ATACが搭載されていた。それを知ったソ連はさっそくギリシャの組織にATACを手に入れるように依頼する。一方ボンドは政府にかわって調査していたハブロック博士が殺されたことによってギリシャへ飛ぶ。そこで博士の美しい娘メリナに接触し、彼女とともに調査を開始する。",
       "poster": "https://image.tmdb.org/t/p/w500/2ingxGKblqwU6gi8TvXWqUmFKyC.jpg",
@@ -23566,7 +23468,7 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.5,
+      "score": 6.465,
       "votes": 2415,
       "overview": "イギリス秘密情報部にボンドの番号007が刻まれた黄金の銃弾が届く。それは「黄金銃を持つ男」の異名を持つ素顔が分からない殺し屋フランシスコ・スカラマンガからの抹殺予告の様に見えた。自ら調査に乗り出したボンドはスカラマンガの銃から発射された黄金弾からマカオへ向かい、そこでスカラマンガの美しい愛人、アンドレア・アンダースと出会う。そのうち彼が別の作戦で探していた太陽光エネルギ変換装置「ソレックス・アジテーター」もスカラマンガが所有していることが判明。ソレックスを手に入れたボンドはそれを助手のメアリー・グッドナイトに預けるが、彼女はスカラマンガにさらわれてしまう。グッドナイトを追ってボンドは南シナ海の孤島へ向かう。",
       "poster": "https://image.tmdb.org/t/p/w500/3It9DILpHmZtRTTU5KjVUKmgH6i.jpg",
@@ -23902,7 +23804,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 7.352,
-      "votes": 10425,
+      "votes": 10426,
       "overview": "かつて、“ウォッチメン”と呼ばれる者たちがいた。彼らは＜監視者＞となって世界の重大事件に関わり、人々を見守り続けてきた。だが1977年、政府の施行したキーン条例によりその活動を禁止され、ある者は一線を退き、ある者は密かに活動を続けていくことに。1985年、未だニクソン大統領が権力を振るい、ソ連との核戦争に陥りかねない緊張状態にあるアメリカ。10月、ニューヨークの高層マンションからエドワード・ブレイクという名の男が突き落とされ、無惨に殺された。そして、そのそばには血の付いたスマイルバッジが。スマイルバッジは、かつてブレイクがスーパーヒーロー“コメディアン”として活躍していたときのトレードマークだった。現場に現われた“顔のない男”ロールシャッハは、事件の背後に陰謀の臭いを嗅ぎとり、すぐさま“ウォッチメン”と呼ばれたかつての仲間たちの周辺を独自に調べ始めるのだったが…。",
       "poster": "https://image.tmdb.org/t/p/w500/cRWBwQxJxlG8fuUXHeQyMc2tfPm.jpg",
       "source": "Prime Video公式配信予定",
@@ -24578,7 +24480,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 7.389,
-      "votes": 20377,
+      "votes": 20379,
       "overview": "ホビット族のビルボ・バギンズは、魔法使いのガンダルフから思わぬ旅の誘いを受ける。それは、ドラゴンに乗っ取られたドワーフの王国を奪取するというものだった。ドワーフの戦士トーリンが率いる13人のドワーフたちと、最初の目的地“はなれ山”を目指してワーグ、オークといった怪物や魔術師がひしめく荒野を進んでいくビルボ。そんな中、ゴブリンが巣食うトンネルに入っていった彼は、そこでゴラムという醜悪な化け物と出会う。",
       "poster": "https://image.tmdb.org/t/p/w500/owRdGwcveYfvJUj9ogF2sh7H6AL.jpg",
       "source": "Prime Video公式配信予定",
@@ -25298,7 +25200,7 @@
       "date": "2026-10-01",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.553,
+      "score": 6.6,
       "votes": 2277,
       "overview": "スペクターの首領ブロフェルドを探し回るのに飽き飽きし、イギリス秘密情報からの辞職を考えていたジェームズ・ボンドは、カジノ・ロワイヤルで現金を持たずに大金を賭けて負けたテレサ・ディ・ヴィセンゾ公爵夫人を助けた。テレサと一夜を共にしたボンドは、彼女の父で犯罪組織ユニオン・コルスの首領のマルク＝アンジュ・ドラコに拉致され、赤ん坊を亡くして絶望しているテレサと結婚してくれるように頼まれる。テレサに自分で立ち直らせるよう説得したボンドは、ドラコから礼としてブロフェルドがスイスに潜伏していることを聞く。",
       "poster": "https://image.tmdb.org/t/p/w500/zmVxgvZ3XYlFoHv7ydhZLGRg78V.jpg",
@@ -25410,7 +25312,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 6.384,
-      "votes": 8388,
+      "votes": 8389,
       "overview": "ハイスクールの美少女が惨殺された。犯人はもちろん“ハロウィン・マスク”をかぶった殺人鬼に決まっているが、「スクリーム」を観ていない主人公たちはそんなこと知るはずもない。ちょうど1年前、友人たちと車で人を轢いたシンディは、事件の奇妙なつながりに不安を覚える。そして、マスコミの取材攻勢でハイスクールがパニックになるなか、第2、第3の殺人が…。「ホラー映画じゃあるまいし（笑）」。笑い事ですむワケがない。だってホラー映画だもーん。",
       "poster": "https://image.tmdb.org/t/p/w500/qrIRIrykFxuhgaIqP72twUeMfhf.jpg",
       "source": "Prime Video公式配信予定",
@@ -25483,7 +25385,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 7.298,
-      "votes": 9556,
+      "votes": 9557,
       "overview": "1960年以降、アメリカを中心に数々の心霊事件を解決に導いてきた実在の心霊研究家ウォーレン夫妻。彼らが極秘にしてきた事件を描き、世界中に“真実の恐怖”を叩きつけた前作『死霊館』から3年。オリジナルキャスト＆スタッフが再び驚愕の実話恐怖事件を掘り起こす。その名は「エンフィールド事件」。“史上最長期間続いたポルターガイスト現象”として心霊史に残る悪名高き事件で、人々は“ポルターガイスト”という言葉と、その恐ろしさを知ることとなった。前作を遥かに凌ぐ“極限の恐怖”の舞台はロンドン北部エンフィールド。正体不明の音・不穏な囁き声・人体浮遊など数々の不可解現象に苦しむ人々を救うためウォーレン夫妻は再び恐怖の元凶と対峙することとなる。",
       "poster": "https://image.tmdb.org/t/p/w500/84FLZPgWeoo2nZGrtoNpLrGhOHT.jpg",
       "source": "Prime Video公式配信予定",
@@ -27014,8 +26916,8 @@
       "date": "2026-10-03",
       "event": "streaming",
       "service": "FOD",
-      "score": 6.49,
-      "votes": 143,
+      "score": 6.483,
+      "votes": 145,
       "overview": "「キャッシュアウト」に続き、ジョン・トラヴォルタが再び伝説の泥棒役を演じた痛快クライムアクション第２弾。\r 伝説の泥棒メイソンは一線を退き、元FBIの恋人エイミーと静かに暮らしていた。だが、宿敵である大物犯罪者サラザールの部下フラワーズがエイミーを誘拐、南米の高級カジノホテルオーナー、ゼイドの隠し金庫を襲撃するよう命じられる。エイミーを救うため、メイソンは仲間たちを集め、最上階にゼイドのプライベートルームがあるカジノホテルに潜入。一味はゼイドに近づこうと、派手に金を賭ける“ハイ・ローラー”を装うが……。",
       "poster": "https://image.tmdb.org/t/p/w500/hHowAaChDjwueySmwVbsjHmpWa.jpg",
       "source": "FOD INFO公式配信一覧",
@@ -27345,8 +27247,8 @@
       "date": "2026-10-05",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.252,
-      "votes": 4335,
+      "score": 7.3,
+      "votes": 4337,
       "overview": "深夜2時17分、あるクラスの生徒全員が同時に目を覚まし、無言で家を出て、そのまま闇へと消えた。ただ一人アレックスだけが残される。子供たちを最後に見たとされる教師・ジャスティン、元刑事の父親・アーチャーも事件に巻き込まれていくが…。",
       "poster": "https://image.tmdb.org/t/p/w500/yahu8opC1qh8zspPogJ4yI520ZN.jpg",
       "source": "Prime Video公式配信予定",
@@ -28129,8 +28031,8 @@
       "date": "2026-10-09",
       "event": "streaming",
       "service": "Netflix",
-      "score": 6.848,
-      "votes": 770,
+      "score": 6.831,
+      "votes": 774,
       "overview": "息子を誘拐されたロサンゼルス市長候補とその妻。自分たちの世界を引き裂きかねない選択に直面しながら、我が子のために必死で身代金をかき集めようとするが...。",
       "poster": "https://image.tmdb.org/t/p/w500/KqcfuaMk5XP72JOaFGLqzcbaob.jpg",
       "source": "Netflix公式 日本向け新作情報（2026-10-24確認）",
@@ -28220,8 +28122,8 @@
       "date": "2026-10-11",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 6.901,
-      "votes": 3341,
+      "score": 6.902,
+      "votes": 3342,
       "overview": "魔法と幻想の国・オズにあるシズ大学の学生として出会ったエルファバとグリンダ。緑色の肌をもち周囲から誤解されてしまうエルファバと、野心的で美しく人気者のグリンダは、寄宿舎で偶然ルームメイトになる。見た目も性格もまったく異なる2人は、最初こそ激しく衝突するが、次第に友情を深め、かけがえのない存在になっていく。しかしこの出会いが、やがてオズの国の運命を大きく変えることになる。",
       "poster": "https://image.tmdb.org/t/p/w500/abWp6QofDjD8fDEHV92BZnznj4.jpg",
       "source": "公式配信発表（2026-10-22確認）",
@@ -28475,8 +28377,8 @@
       "date": "2026-10-15",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.3,
-      "votes": 5795,
+      "score": 7.313,
+      "votes": 5796,
       "overview": "大手メディア「デイリー・プラネット」で平凡に働くクラーク・ケント、彼の本当の正体は人々を守るヒーロー「スーパーマン」。子どもも大人も、愛する地球で生きるすべての人を守り救うため、日々戦うスーパーマンは、誰からも愛される存在。そんな中、彼を地球の脅威とみなし暗躍する、最高の頭脳を持つ宿敵＝天才科学者して大富豪、レックス・ルーサーの世界を巻き込む綿密な計画が動き出すー",
       "poster": "https://image.tmdb.org/t/p/w500/eFnvujCLaUbhmrsRZzFy1bpdMko.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -29752,7 +29654,7 @@
       "event": "streaming",
       "service": "Prime Video",
       "score": 7.03,
-      "votes": 4654,
+      "votes": 4655,
       "overview": "世界中を虜にした名作『チャーリーとチョコレート工場』で有名な工場長ウィリー・ウォンカの若き日の物語。夢見ることを禁じられた町で、ウォンカは母と夢見た世界一のチョコレート工場をつくることができるのか―？「ハリー・ポッター」シリーズのプロデューサーが、次世代のジョニー・デップとの呼び声高いティモシー・シャラメ、名優ヒュー・グラントら超豪華キャストを迎えて贈る、歌と魔法と感動のファンタジー超大作！",
       "poster": "https://image.tmdb.org/t/p/w500/iKYFLQoYQRuogD2mh8QYZQXPnTT.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -30301,9 +30203,9 @@
       "date": "2026-10-28",
       "event": "streaming",
       "service": "Disney+",
-      "score": 8.239,
-      "votes": 2910,
-      "overview": "​想像力豊かで内気な少女・ボニーの成長を、そばで見守ってきたカウガール人形のジェシー。しかし、タブレット〈リリーパッド〉の登場で日常は大きく変わる。「みんなの時間がタブレットに支配されている」─他の子どもと同じように画面に夢中になり、このままでは遊びの中で輝いていたボニーの笑顔が失われていく…その一大事にジェシーは、ウッディに助けを求める。再びタッグを組んだウッディとバズと共に、ジェシーはボニーの心を取り戻すため立ち上がるが…。旅の途中で “ハイテクおもちゃ”のスマーティー・パンツたちと出会い、思いがけない協力によって物語は新たな方向へ──。",
+      "score": 8.27,
+      "votes": 2702,
+      "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/dEoN5k2ulqk9mhEwVrapciKJm8s.jpg",
       "source": "配信元・制作元公式発表",
       "source_url": "https://www.disneyplus.com/ja-jp/explore/articles/new-to-disney-plus",
@@ -30316,32 +30218,15 @@
       "identity_verified_at": "2026-10-25",
       "id": 1084244,
       "tmdb": "https://www.themoviedb.org/movie/1084244",
-      "runtime": 102,
-      "director": "アンドリュー・スタントン",
-      "director_id": 7,
-      "cast": [
-        "ジョーン・キューザック",
-        "トム・ハンクス",
-        "ティム・アレン",
-        "コナン・オブライエン"
-      ],
-      "countries": [
-        "United States of America"
-      ],
-      "genres": [
-        "アニメーション",
-        "ファミリー",
-        "コメディ",
-        "アドベンチャー"
-      ]
+      "runtime": 102
     },
     {
       "title": "アギトー超能力戦争ー",
       "date": "2026-10-28",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 6.6,
-      "votes": 9,
+      "score": 6.938,
+      "votes": 8,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/j0w7wmslhyT79L6PXYeGPBbnVZX.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
@@ -30364,24 +30249,17 @@
       "countries": [
         "Japan"
       ],
-      "identity_verified_at": "2026-10-20",
-      "id": 1623568,
-      "cast": [
-        "要潤",
-        "古川優奈",
-        "藤田瞳子",
-        "賀集利樹"
-      ]
+      "identity_verified_at": "2026-10-20"
     },
     {
       "title": "ドライブ ー偽りの関係ー",
       "date": "2026-10-28",
       "event": "streaming",
       "service": "Prime Video",
-      "score": 7.566,
-      "votes": 190,
+      "score": 0,
+      "votes": 0,
       "overview": "",
-      "poster": "https://image.tmdb.org/t/p/w500/o1amTBOej7F2wdrTSKzGE6eG2CT.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/bLDFCD3vMxeJJ5o8F4FOksnb0Fd.jpg",
       "source": "Amazon Japan公式 2026年10月新着配信",
       "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-october-2026",
       "type": "見放題",
@@ -30392,25 +30270,7 @@
       "original_title": "Drive - The Pretenders",
       "identity_verified_at": "2026-10-22",
       "runtime": 103,
-      "id": 1596275,
-      "year": 2026,
-      "director": "Sergej Moya",
-      "director_id": 45689,
-      "cast": [
-        "Lisa-Marie Koroll",
-        "Amin Baahmed",
-        "Gustav Schmidt",
-        "Mišel Matičević"
-      ],
-      "countries": [
-        "Germany",
-        "Canada",
-        "United States of America"
-      ],
-      "genres": [
-        "ロマンス",
-        "スリラー"
-      ]
+      "id": 1596275
     },
     {
       "original_title": "劇場版 牙狼〈GARO〉‐DIVINE FLAME‐",
@@ -30435,9 +30295,9 @@
     {
       "original_title": "劇場版 銀魂 新訳紅桜篇",
       "overview": "ある夜、橋の上で決闘を申し込まれた桂。体よくあしらおうとした瞬間、鮮血の中で桂が倒れた。  辻斬りによる被害が多発しているかぶき町。そんなある日、エリザベスが万事屋を訪ね、事の顛末と桂があの夜以来行方不明である事を話し、桂の探索と辻斬りについて一緒に調べてもらう様に依頼する。  一方で銀時はエリザベスの当面の依頼を神楽と新八に任せ、元から依頼されていた村田鉄矢・鉄子兄妹の下へ向かう。彼らの依頼は「盗まれた名刀・紅桜を取り返してほしい」。  村田兄妹の依頼を遂行する銀時と桂を探索する神楽・新八・エリザベス、二つの事案が複雑に絡み合い、遂に辻斬りの正体にまでたどり着く。そこには意外な人物がいた。",
-      "poster": "https://image.tmdb.org/t/p/w500/tIIS5ejoTOiyXlqeJsSx4O0wSQj.jpg",
+      "poster": "https://image.tmdb.org/t/p/w342/tIIS5ejoTOiyXlqeJsSx4O0wSQj.jpg",
       "score": 7.5,
-      "votes": 110,
+      "votes": 109,
       "title": "劇場版 銀魂 新訳紅桜篇",
       "release_year": 2010,
       "service": "TELASA",
@@ -30451,29 +30311,12 @@
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/71172",
       "checked_at": "2026-10-26T08:48:50.008240+00:00",
-      "runtime": 96,
-      "director": "高松信司",
-      "director_id": 552632,
-      "cast": [
-        "杉田智和",
-        "阪口大助",
-        "釘宮理恵",
-        "石田彰"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "genres": [
-        "アクション",
-        "サイエンスフィクション",
-        "アニメーション",
-        "コメディ"
-      ]
+      "runtime": 96
     },
     {
       "original_title": "銀魂 THE FINAL",
       "overview": "地球滅亡のカウントダウンが迫る中、かつての盟友である銀時、高杉、桂はそれぞれの想いを胸にひた走る。  だが彼らの前に立ちはだかったのは、あまりにも哀しい絆を持つ人物……  銀時たちを教え導いた師匠・吉田松陽とは別の人格、虚（うつろ）だった――。  最後にして最大の敵・虚は、自らの命を終わらせるため、地球を丸ごと道連れにしようとしていた。  虚の野望を阻止し、師匠・松陽の悲願を胸に戦い続ける銀時たちを援護するため、新八、神楽、真選組、かぶき町の面々、かつてのライバルたちまでもが参戦する！  巨大化してゆく虚の力。己の命をかけて対峙する高杉。  ぼろぼろになった銀時が最後に見たものとは…！銀時は果たして、すべてを終わらせることができるのか…！  星の生命力“アルタナ”のエネルギーで生まれた魔人、虚（うつろ）。  長い年月をかけて生まれ変わりを繰り返してきた不老不死の化け物、  その中でつかの間に現れた人格が、かつて松下村塾を開き、幼い銀時たちを教え導いた師匠・吉田松陽だった…。",
-      "poster": "https://image.tmdb.org/t/p/w500/z1fMY89FyeLTfulnwWypdkW8IXc.jpg",
+      "poster": "https://image.tmdb.org/t/p/w342/z1fMY89FyeLTfulnwWypdkW8IXc.jpg",
       "score": 8.2,
       "votes": 80,
       "title": "銀魂 THE FINAL",
@@ -30489,32 +30332,15 @@
       "event": "streaming",
       "tmdb": "https://www.themoviedb.org/movie/732203",
       "checked_at": "2026-10-26T08:48:50.008240+00:00",
-      "runtime": 104,
-      "director": "宮脇千鶴",
-      "director_id": 2739367,
-      "cast": [
-        "杉田智和",
-        "阪口大助",
-        "釘宮理恵",
-        "中井和哉"
-      ],
-      "countries": [
-        "Japan"
-      ],
-      "genres": [
-        "アニメーション",
-        "アクション",
-        "サイエンスフィクション",
-        "コメディ"
-      ]
+      "runtime": 104
     },
     {
       "title": "PEACOCK／ピーコック",
       "date": "2026-10-28",
       "event": "streaming",
       "service": "U-NEXT",
-      "score": 6.802,
-      "votes": 48,
+      "score": 0,
+      "votes": 0,
       "overview": "",
       "poster": "https://image.tmdb.org/t/p/w500/jXAth8yqkjtI1GHeqy9IlDZtlV9.jpg",
       "source": "公式配信発表（2026-10-22確認）",
@@ -30527,23 +30353,7 @@
       "original_title": "Pfau - Bin ich echt?",
       "identity_verified_at": "2026-10-22",
       "runtime": 102,
-      "id": 1245728,
-      "year": 2025,
-      "director": "Bernhard Wenger",
-      "director_id": 1894775,
-      "cast": [
-        "アルブレヒト・シュッフ",
-        "Julia Franz Richter",
-        "Anton Noori",
-        "Theresa Frostad Eggesbø"
-      ],
-      "countries": [
-        "Austria",
-        "Germany"
-      ],
-      "genres": [
-        "コメディ"
-      ]
+      "id": 1245728
     },
     {
       "title": "パンダのすごい世界",
@@ -36727,6 +36537,38 @@
       "checked_at": "2026-11-17T01:51:35.947376+00:00"
     },
     {
+      "id": 940009,
+      "title": "レイ・ガン",
+      "original_title": "Ray Gunn",
+      "date": "2026-12-04",
+      "event": "theatrical",
+      "service": "劇場公開",
+      "poster": "https://image.tmdb.org/t/p/w500/15UtuuALdJ2Oo2Y7Ke2xwu78QJu.jpg",
+      "score": 0.0,
+      "votes": 0,
+      "overview": "",
+      "tmdb": "https://www.themoviedb.org/movie/940009",
+      "director": "ブラッド・バード",
+      "director_id": 7087,
+      "cast": [
+        "サム・ロックウェル",
+        "スカーレット・ヨハンソン",
+        "トム・ウェイツ",
+        "マット・ベリー"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "runtime": 120,
+      "genres": [
+        "アニメーション",
+        "サイエンスフィクション",
+        "犯罪",
+        "謎"
+      ],
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
+    },
+    {
       "id": 1782930,
       "title": "超塑性変形",
       "original_title": "超塑性変形",
@@ -38426,7 +38268,8 @@
       "genres": [
         "ドラマ",
         "ロマンス"
-      ]
+      ],
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
     },
     {
       "id": 1560316,
@@ -38453,7 +38296,7 @@
       ],
       "runtime": 0,
       "genres": [],
-      "checked_at": "2026-09-26T18:28:58.311483+00:00"
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
     },
     {
       "id": 1375441,
@@ -38462,29 +38305,29 @@
       "date": "2027-01-22",
       "event": "theatrical",
       "service": "劇場公開",
-      "poster": "https://image.tmdb.org/t/p/w500/lmrulvLbmaejTix1YaMxo1oGhH1.jpg",
-      "score": 7.2,
-      "votes": 57,
+      "poster": "https://image.tmdb.org/t/p/w500/wqzFMOXLvt9EF5EkNGeI4QLaALE.jpg",
+      "score": 6.751,
+      "votes": 479,
       "overview": "ネットで未成年者を狙う大人たちをあぶり出す「おとり捜査」の様子を流すリアリティTV。 未成年者になりすました「おとり」で大人たちを誘い出し、隠しカメラでその姿を撮影、クリス・ハンセンが犯罪者になりえる人間を直接追及する。しかし視聴率を上げ、番組をさらに人気番組へと押し上げるため、ハンセンの行動は次第にエスカレート。大スクープを追い求めるその姿勢に、やがて周囲からはジャーナリズムやモラルのあり方を疑問視する声も上がっていく。",
       "tmdb": "https://www.themoviedb.org/movie/1375441",
       "director": "ランス・オッペンハイム",
       "director_id": 1405665,
       "cast": [
         "ロバート・パティンソン",
-        "スカイラー・ギソンド",
         "メリット・ウェヴァー",
-        "フィービー・ブリジャーズ"
+        "スカイラー・ギソンド",
+        "マシュー・マー"
       ],
       "countries": [
         "United States of America"
       ],
-      "runtime": 109,
+      "runtime": 110,
       "genres": [
-        "犯罪",
         "スリラー",
-        "コメディ"
+        "ドラマ",
+        "犯罪"
       ],
-      "checked_at": "2026-09-29T18:32:41.928750+00:00"
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
     },
     {
       "id": 1196776,
@@ -38510,7 +38353,7 @@
         "ファンタジー",
         "サイエンスフィクション"
       ],
-      "checked_at": "2026-10-04T21:14:50.255842+00:00"
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
     },
     {
       "id": 1300926,
@@ -38542,11 +38385,12 @@
       ],
       "runtime": 96,
       "genres": [
+        "アドベンチャー",
         "アニメーション",
         "コメディ",
         "ファミリー"
       ],
-      "checked_at": "2026-10-18T18:41:07.624083+00:00"
+      "checked_at": "2026-11-23T01:36:16.438452+00:00"
     },
     {
       "id": 1280738,

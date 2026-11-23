@@ -352,6 +352,18 @@
       card.querySelector(".cinelvaMovieMetadata")?.remove();
       return;
     }
+    // Discovery cards already own a metadata row (release year/date and
+    // sometimes score). Enrich that row in place instead of adding a second
+    // release-year line beside it.
+    if (card.matches?.(".presetCard,.card") && card.querySelector(".presetCardMeta,.meta")) {
+      const runtime = Number(m?.runtime);
+      const row = card.querySelector(".presetCardMeta,.meta");
+      if (Number.isFinite(runtime) && runtime > 0 && !/\b\d+\s*分\b/.test(row.textContent || "")) {
+        row.textContent = `${row.textContent || ""}${row.textContent?.trim() ? " · " : ""}${runtime}分`;
+      }
+      card.querySelector(".cinelvaMovieMetadata")?.remove();
+      return;
+    }
     const facts = movieMetadata(m);
     if (!facts) return;
     const title = card.querySelector?.(".title,.streamMovieTitle,.tvMovieTitle,.presetCardTitle,.filmCandidateBody b,.rankTitle,strong,b");
@@ -364,15 +376,6 @@
     if (!container || !m) return;
     const card = container.closest?.(".card,.filmCandidate,.presetCard,.rankCard,.streamMovie,.tvMovie,.want-watch-item,.filmCard") || container.parentElement;
     decorateMovieMetadata(card, m);
-    const facts = card?.matches?.(".streamMovie,.tvMovie") ? "" : movieMetadata(m);
-    if (card && facts) {
-      const title = card.querySelector?.(".title,.streamMovieTitle,.tvMovieTitle,.presetCardTitle,.filmCandidateBody b,.rankTitle,strong,b");
-      if (title) {
-        let metadata = card.querySelector(":scope > .cinelvaMovieMetadata");
-        if (!metadata) { metadata = document.createElement("small"); metadata.className = "cinelvaMovieMetadata"; title.insertAdjacentElement("afterend", metadata); }
-        metadata.textContent = facts;
-      }
-    }
     if(id(m))container.dataset.nowFilmId=id(m);
     const apply = (url) => {
       if (!url || !container.isConnected) return;

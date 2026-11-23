@@ -82,8 +82,13 @@ def collect_observation(fetch_page, fetch_equivalent, now):
     return snapshot
 
 
-def refresh(output, fetch_page, now, fetch_equivalent=None):
+def refresh(output, fetch_page, now, fetch_equivalent=None, runtime_by_id=None):
     snapshot=collect_observation(fetch_page,fetch_equivalent,now) if fetch_equivalent else collect_now_playing(fetch_page,now)
+    if runtime_by_id:
+        for movie in snapshot['movies']:
+            runtime=runtime_by_id.get(str(movie['id']))
+            if type(runtime) is int and runtime>0:
+                movie['runtime']=runtime
     output=Path(output);output.parent.mkdir(parents=True,exist_ok=True)
     temporary=None
     try:
@@ -111,7 +116,11 @@ def main():
     def fetch_page(number):return request('/movie/now_playing',{'page':number})
     def fetch_equivalent(number,minimum,maximum):
         return request('/discover/movie',{'page':number,'include_adult':'false','include_video':'false','sort_by':'popularity.desc','with_release_type':'2|3','release_date.gte':minimum,'release_date.lte':maximum})
-    result=refresh(ROOT/'data/now_playing.json',fetch_page,dt.datetime.now(dt.timezone.utc),fetch_equivalent=fetch_equivalent)
+    catalog_path=ROOT/'data/movies.json'
+    catalog=json.loads(catalog_path.read_text(encoding='utf-8')) if catalog_path.exists() else []
+    catalog_movies=catalog if isinstance(catalog,list) else catalog.get('movies',[])
+    runtime_by_id={str(movie.get('tmdbId') or movie.get('tmdb_id') or movie.get('id')):movie.get('runtime') for movie in catalog_movies if isinstance(movie,dict)}
+    result=refresh(ROOT/'data/now_playing.json',fetch_page,dt.datetime.now(dt.timezone.utc),fetch_equivalent=fetch_equivalent,runtime_by_id=runtime_by_id)
     print(f"JP now-playing snapshot published: {len(result['movies'])} titles; complete observation {result['generated_at']}")
 
 

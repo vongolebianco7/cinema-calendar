@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-23T03:08:20.476Z",
+  "generated_at": "2026-11-23T03:49:53.277Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -8,16 +8,16 @@
       "status": "automated",
       "source": "TMDB watch/providers (JustWatch)",
       "source_url": "https://developer.themoviedb.org/reference/movie-watch-providers",
-      "source_observed_at": "2026-11-23T01:39:13.286Z",
+      "source_observed_at": "2026-11-23T03:05:29.115Z",
       "max_age_hours": 168,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
       "trigger": "daily 18:17 UTC and manual",
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
-        "total": 4752,
-        "fresh": 4153,
-        "stale": 599,
+        "total": 4814,
+        "fresh": 4367,
+        "stale": 447,
         "unknown": 0
       }
     },
@@ -125,7 +125,7 @@
       "status": "automated",
       "source": "TMDB API plus source-reviewed release records",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-23T01:37:35.974Z",
+      "source_observed_at": "2026-11-23T03:04:11.410Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-movies.yml",
@@ -166,7 +166,7 @@
       "status": "automated",
       "source": "TMDB API",
       "source_url": "https://developer.themoviedb.org/",
-      "source_observed_at": "2026-11-23T01:35:39.833Z",
+      "source_observed_at": "2026-11-23T03:49:52.572Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/update-now-playing.yml",

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "b8916501f2384b4ddedcf2e2ec1bdbe87372e790",
-  "verified_at": "2026-11-23T04:05:35Z",
-  "note": "Exact-source CI receipt for PR #897 source head b8916501f2384b4ddedcf2e2ec1bdbe87372e790; executable digest fc9edc50ef0edab3e0fcea1357728caf07c67710c30bd9b53c90f458bd3dd030. Required workflows succeeded on this exact source head: Autonomous quality gate run 45109109528, CINELVA smoke tests run 45109109516, Validate frontend run 45109109592, and Reproducible backend build run 45109109498. Chromium and WebKit mobile browser checks, including the reported single-film theater poster regression, succeeded. This is a receipt-only commit; fresh exact-head CI on the receipt-only PR head is required before merge."
+  "head_sha": "d082d4353a922b2c03a4d750a2e7cebe438d0820",
+  "verified_at": "2026-11-23T04:48:00Z",
+  "note": "Exact-source CI receipt for PR #898 source head d082d4353a922b2c03a4d750a2e7cebe438d0820; executable digest a0b5f72c49c29b781f8a2d2ff8fa6ae7c6c78b8b3c6dab2b9961387e6853a3fc. Required workflows succeeded on this exact source head: Autonomous quality gate run 45111145180, CINELVA smoke tests run 45111145186, Validate frontend run 45111145230, and Reproducible backend build run 45111145198. Chromium and WebKit confirmed three theater calendar columns remain at 320/390/430px, a single-date film card stays within one column, and the page has no horizontal overflow. This is a receipt-only commit; fresh exact-head CI on the receipt-only PR head is required before merge."
 }

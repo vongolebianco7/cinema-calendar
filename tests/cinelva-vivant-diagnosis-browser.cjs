@@ -16,6 +16,9 @@ assert.match(specialHtml, /specialLogoVivant/);
 assert.match(diagnosisHtml, /好きな映画を選んでください/);
 assert.doesNotMatch(diagnosisHtml, /鑑賞済みなら入れ替え/);
 assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
+assert.match(diagnosisHtml, /<div class="wrap gNav">/);
+assert.match(diagnosisHtml, /class="gBrandWord">Cinelva<\/span>/);
+assert.match(diagnosisHtml, /class="gSearchForm"/);
 
 (async () => {
   const socket = net.createServer();
@@ -53,11 +56,13 @@ assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
     for (let question = 0; question < 8; question++) {
       assert.equal(await page.locator('.choice').count(), 4);
       await page.locator('.choice').nth(question % 4).click();
+      assert.equal(await page.locator('.choice[aria-pressed="true"] .choiceCheck').innerText(), '✓', 'selected quiz answer displays a concrete check mark');
       await page.locator('#nextButton').click();
     }
     assert.equal(await page.locator('.favoriteChoices .choice').count(), 9);
     await page.locator('.favoriteChoices .choice').filter({ hasText: 'ショーシャンクの空に' }).click();
     assert.equal(await page.locator('.favoriteChoices .choice[aria-pressed="true"]').count(), 1, 'the selected favorite is visibly marked');
+    assert.equal(await page.locator('.favoriteChoices .choice[aria-pressed="true"] .favoriteChoiceCheck').innerText(), '✓ 選択中', 'selected poster has a concrete selected badge');
     await page.locator('#nextButton').click();
     await page.locator('.favoriteChoices .choice').filter({ hasText: '千と千尋の神隠し' }).click();
     await page.locator('#nextButton').click();
@@ -91,8 +96,18 @@ assert.match(diagnosisHtml, /href="specials\.html"[^>]*>特集・診断<\/a>/);
       const recommendationsBottom = await page.locator('.movies').evaluate(el => el.getBoundingClientRect().bottom);
       assert.ok(recommendationsBottom <= 844, `diagnosis and recommendation cards fit in one 844px screen at ${width}px: bottom=${recommendationsBottom}`);
     }
+    const home = await context.newPage();
+    await home.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'domcontentloaded' });
+    await home.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+    for (const width of [320, 390]) {
+      await page.setViewportSize({ width, height: 844 });
+      await home.setViewportSize({ width, height: 844 });
+      const dimensions = async target => target.evaluate(() => ['.gNav','.gBrandImage','.gBrandWord','.gSearchForm','.gMenuBtn'].map(selector => { const el=document.querySelector(selector),r=el.getBoundingClientRect(),s=getComputedStyle(el); return [selector,Math.round(r.width),Math.round(r.height),s.fontFamily]; }));
+      assert.deepEqual(await dimensions(page), await dimensions(home), `VIVANT header matches shared header at ${width}px`);
+    }
+    await home.close();
     assert.deepEqual(errors, [], 'no uncaught browser errors');
-    console.log(`VIVANT diagnosis ${process.env.CINELVA_BROWSER || 'chromium'} 320px/390px journey passed; 8 answers, two of nine favorite films, visible selections, three recommendation columns and saved-data preservation verified.`);
+    console.log(`VIVANT diagnosis ${process.env.CINELVA_BROWSER || 'chromium'} 320px/390px journey passed; shared header matched, eight answer checks and two poster checks were visible, and three recommendation columns and saved data were preserved.`);
     await context.close();
   } finally {
     if (browser) await browser.close();

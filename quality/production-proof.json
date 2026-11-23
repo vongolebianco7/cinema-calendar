@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "head_sha": "ac5937f8459a9be9f98aa7bb8da56591f48bbab8",
-  "verified_at": "2026-11-23T02:55:51.897Z",
-  "note": "Exact-source CI receipt for PR #895 source head ac5937f8459a9be9f98aa7bb8da56591f48bbab8; executable digest 9efbdc076465ef6925420cbb6ad52af6d3973eddfe03af39dbb337a4b7e3a0b8. Required workflows succeeded on this exact source head: Autonomous quality gate run 45102325485, CINELVA smoke tests run 45102325508, Validate frontend run 45102325534, and Reproducible backend build run 45102325464. Autonomous quality gate included Chromium and WebKit iPhone-size checks. This is a receipt-only commit; fresh exact-head CI on the receipt-only PR head is required before merge."
+  "head_sha": "982fe79e305e1c6dae9095dd04a7c119e75c6e59",
+  "verified_at": "2026-11-23T03:43:23.491Z",
+  "note": "Exact-source CI receipt for PR #896 source head 982fe79e305e1c6dae9095dd04a7c119e75c6e59; executable digest 5448312fa75162b6eabdbfbea78a8c97aec3ecf16973eba570af0b39b36e23cd. Required workflows succeeded on this exact source head: Autonomous quality gate run 45107053961, CINELVA smoke tests run 45107054045, Validate frontend run 45107054019, and Reproducible backend build run 45107054037. Autonomous quality gate and browser verification included Chromium and WebKit mobile-size tests. This is a receipt-only commit; fresh exact-head CI on the receipt-only PR head is required before merge."
 }

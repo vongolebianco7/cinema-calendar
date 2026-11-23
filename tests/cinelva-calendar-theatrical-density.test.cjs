@@ -70,8 +70,8 @@ test('poster enrichment failure keeps the existing calendar snapshot available',
 
 test('single-film date groups span the row and use a large poster with readable details on mobile', () => {
   assert.match(html, /cardGroups\.length===1\?' singleMovieDate':''/);
-  assert.match(html, /\.calendar\.theatricalWeekMode \.weekGroup\.singleMovieDate \.streamMovie\{grid-column:1\/-1;display:grid;grid-template-columns:clamp\(180px,60vw,240px\) minmax\(0,1fr\)/);
-  assert.match(html, /\.weekGroup\.singleMovieDate \.streamMoviePoster\{grid-column:1;grid-row:1 \/ span 4;width:100%;max-width:240px/);
+  assert.match(html, /\.calendar\.theatricalWeekMode \.weekGroup\.singleMovieDate \.streamMovie\{grid-column:1\/-1;display:grid;grid-template-columns:clamp\(112px,34vw,132px\) minmax\(0,1fr\)/);
+  assert.match(html, /\.weekGroup\.singleMovieDate \.streamMoviePoster\{grid-column:1;grid-row:1 \/ span 4;width:100%;max-width:132px/);
   assert.match(html, /\.weekGroup\.singleMovieDate \.streamMovieTitle\{grid-column:2;grid-row:3;align-self:start;margin-top:5px;-webkit-line-clamp:4;font-size:14px\}/);
   assert.match(html, /@media\(max-width:760px\)[\s\S]*?\.calendar\.theatricalWeekMode \.streamingWeekFrame\{padding:6px\}/);
 });

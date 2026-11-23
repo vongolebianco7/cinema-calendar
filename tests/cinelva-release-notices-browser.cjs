@@ -6,6 +6,7 @@ const assert=require('node:assert/strict'),{chromium,webkit}=require('playwright
  try{
   await waitForLocalServer(port);browser=await(process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();const context=await browser.newContext({viewport:{width:390,height:844}});
   await context.route('**/data/movies.json',route=>route.fulfill({json:{movies:[{id:42,tmdbId:42,title:'公開予定の映画',year:2025,date:new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo'}).format(new Date()),event:'theatrical',service:'劇場公開',source:'公式発表',source_url:'https://example.com/official'}]}}));
+  await context.route('https://backend-one-gray-94.vercel.app/api/**',route=>route.fulfill({json:route.request().url().includes('/api/movies')?{movies:[],external:[]}:{movie:null}}));
   await context.route('**/data/streaming.json',route=>route.fulfill({json:{movies:[]}}));
   await context.addInitScript(()=>{if(sessionStorage.getItem('cinelva-release-notice-fixture-seeded'))return;sessionStorage.setItem('cinelva-release-notice-fixture-seeded','1');localStorage.setItem('cinelva-want-to-watch-v1',JSON.stringify({'42':{id:'42',tmdbId:'42',title:'公開予定の映画',year:2025,savedAt:'2026-01-01T00:00:00Z'}}));localStorage.setItem('cinelva-release-notices-enabled-v1','0');localStorage.setItem('cinelva-library-records-v2',JSON.stringify({999:{id:'999',title:'保持する既存記録',year:2000,rating:4,watchedAt:'2026-01-01'}}));});
   const page=await context.newPage(),errors=[];page.on('pageerror',error=>errors.push(error.message));await page.goto(`http://127.0.0.1:${port}/my-cinelva/`);

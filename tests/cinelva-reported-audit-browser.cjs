@@ -112,18 +112,17 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
    const godzillaPosterSizes=[];
    for(const width of [320,390,430]){
     await page.setViewportSize({width,height:844});
-    const measure=await page.evaluate(()=>{movies=[{id:555,title:'ゴジラ-0.0',date:'2026-11-03',event:'theatrical',service:'通常公開',poster:'https://image.tmdb.org/t/p/w342/godzilla.jpg',runtime:135}];mode='theatrical';active='すべて';view=new Date(2026,10,1);theatricalRangeStart=null;render();const group=document.querySelector('.weekGroup.singleMovieDate'),card=group?.querySelector('.streamMovie'),grid=card?.parentElement,poster=card?.querySelector('.streamMoviePoster');if(!card||!grid||!poster)return null;const c=card.getBoundingClientRect(),g=grid.getBoundingClientRect(),p=poster.getBoundingClientRect();return {cardWidth:c.width,gridWidth:g.width,posterWidth:p.width,pageWidth:document.documentElement.scrollWidth};});
+    const measure=await page.evaluate(()=>{movies=[{id:555,title:'ゴジラ-0.0',date:'2026-11-03',event:'theatrical',service:'通常公開',poster:'https://image.tmdb.org/t/p/w342/godzilla.jpg',runtime:135},{id:556,title:'Fixture A',date:'2026-11-06',event:'theatrical',service:'通常公開',poster:'https://image.tmdb.org/t/p/w342/a.jpg',runtime:90},{id:557,title:'Fixture B',date:'2026-11-06',event:'theatrical',service:'通常公開',poster:'https://image.tmdb.org/t/p/w342/b.jpg',runtime:90},{id:558,title:'Fixture C',date:'2026-11-06',event:'theatrical',service:'通常公開',poster:'https://image.tmdb.org/t/p/w342/c.jpg',runtime:90}];mode='theatrical';active='すべて';view=new Date(2026,10,1);theatricalRangeStart=null;render();const group=document.querySelector('.weekGroup.singleMovieDate'),card=group?.querySelector('.streamMovie'),grid=card?.parentElement,poster=card?.querySelector('.streamMoviePoster');if(!card||!grid||!poster)return null;const c=card.getBoundingClientRect(),g=grid.getBoundingClientRect(),p=poster.getBoundingClientRect(),tracks=getComputedStyle(grid).gridTemplateColumns.split(' ').map(parseFloat);return {cardWidth:c.width,gridWidth:g.width,posterWidth:p.width,columns:tracks.length,maxColumnWidth:Math.max(...tracks),pageWidth:document.documentElement.scrollWidth};});
     assert.ok(measure,'Godzilla one-film date group renders at '+width+'px');
-    assert.ok(measure.cardWidth>=measure.gridWidth-1,'single-film date group spans the row at '+width+'px: '+JSON.stringify(measure));
-    const target=Math.min(132,Math.max(112,width*.34));
-    assert.ok(measure.posterWidth>=target-1,'single-film poster reaches its moderate responsive target at '+width+'px: '+JSON.stringify(measure));
-    assert.ok(measure.posterWidth<=133,'single-film poster stays balanced with neighboring cards at '+width+'px: '+JSON.stringify(measure));
+    assert.equal(measure.columns,3,'theater calendar remains three columns at '+width+'px: '+JSON.stringify(measure));
+    assert.ok(measure.cardWidth<=measure.maxColumnWidth+1,'single-film card uses at most one column at '+width+'px: '+JSON.stringify(measure));
+    assert.ok(Math.abs(measure.posterWidth-measure.cardWidth)<=1,'poster fills only its own column at '+width+'px: '+JSON.stringify(measure));
     assert.equal(measure.pageWidth,width,'poster enlargement does not cause page overflow at '+width+'px');
     godzillaPosterSizes.push(Math.round(measure.posterWidth));
    }
    await page.setViewportSize({width:390,height:844});
    await page.screenshot({path:'artifacts/reported-audit/'+(process.env.CINELVA_BROWSER||'chromium')+'-'+theme+'-godzilla-single-poster.png'});
-   assert.ok(godzillaPosterSizes[1]>=131&&godzillaPosterSizes[1]<=133,'390px Godzilla poster is enlarged without dominating the calendar: '+godzillaPosterSizes.join('/'));
+   assert.ok(godzillaPosterSizes[1]<150,'390px Godzilla poster fits one of three columns: '+godzillaPosterSizes.join('/'));
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
    await context.close();
   }

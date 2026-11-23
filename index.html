@@ -1082,11 +1082,7 @@ window.addEventListener("load",applyHeaderSearchParam);
  .calendar.theatricalWeekMode .weekGroups{gap:6px}
  .calendar.theatricalWeekMode .weekGroup{padding-top:6px}
  .calendar.theatricalWeekMode .streamingWeekMovies{gap:5px}
- .calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMovie{grid-column:1/-1;display:grid;grid-template-columns:clamp(112px,34vw,132px) minmax(0,1fr);column-gap:12px;align-items:start;width:100%}
- .calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMoviePoster{grid-column:1;grid-row:1 / span 4;width:100%;max-width:132px;aspect-ratio:2/3}
- .calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMovieService,.calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMovieServices{grid-column:2;grid-row:1;justify-self:start;margin-top:0;white-space:normal}
- .calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMovieTitle{grid-column:2;grid-row:3;align-self:start;margin-top:5px;-webkit-line-clamp:4;font-size:14px}
- .calendar.theatricalWeekMode .weekGroup.singleMovieDate .streamMovieRuntime{grid-column:2;grid-row:4}
+ .calendar.theatricalWeekMode .streamingWeekMovies{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
 </style>
 <!-- frontend-deploy-trigger: discover-recommendations-v1 -->

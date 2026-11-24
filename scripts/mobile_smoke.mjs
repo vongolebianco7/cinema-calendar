@@ -1,7 +1,7 @@
 import { chromium, webkit } from 'playwright';
 import fs from 'node:fs';
 const base='http://127.0.0.1:4173';
-const candidates=['index.html','discover.html','my-cinemap.html'];
+const candidates=['index.html','discover.html','poster-quiz.html','my-cinemap.html'];
 const browserName=process.env.CINEMAP_BROWSER||'chromium';
 const browserType={chromium,webkit}[browserName];
 if(!browserType)throw new Error(`Unsupported CINEMAP_BROWSER: ${browserName}`);
@@ -10,6 +10,7 @@ const watchdog=setTimeout(()=>{console.error(`${browserName}: mobile smoke excee
 watchdog.unref();
 const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:3});
 await context.route(/backend-one-gray-94\.vercel\.app\/api\//,route=>route.fulfill({status:200,contentType:'application/json',body:'{"results":[],"movies":[],"theaters":[],"schedules":[]}'}));
+await context.route('https://image.tmdb.org/t/p/**',route=>route.fulfill({status:200,contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aQXcAAAAASUVORK5CYII=','base64')}));
 const page=await context.newPage();
 const errors=[];
 const optionalMovieBackendError=/backend-one-gray-94\.vercel\.app\/api\/movies.*access control checks|127\.0\.0\.1:4173\/data\/streaming-official-current\.json.*access control checks/i;
@@ -29,6 +30,17 @@ for(const path of candidates){
  console.log(`${browserName}: navigated ${path} HTTP ${res?.status()}`);
  if(!res||res.status()>=400){if(path==='index.html')errors.push(`${path}: HTTP ${res?.status()??'no response'}`);continue}
  if(path==='index.html')await page.waitForLoadState('networkidle',{timeout:5000}).catch(()=>console.warn('Index remained network-active; proceeding with DOM-ready smoke checks'));
+ if(path==='poster-quiz.html'){
+  await page.locator('.posterFrame').waitFor();
+  const frame=page.locator('.posterFrame');
+  await page.locator('.revealButton').click();
+  if(await frame.getAttribute('data-stage')!=='1')errors.push('poster-quiz.html: first reveal did not advance');
+  await page.locator('.revealButton').click();
+  if(await frame.getAttribute('data-stage')!=='2')errors.push('poster-quiz.html: second reveal did not advance');
+  await page.locator('.answerInput').fill('存在しない映画');
+  await page.locator('.answerButton').click();
+  if(!(await page.locator('.posterFeedback').innerText()).includes('違う'))errors.push('poster-quiz.html: wrong answer feedback missing');
+ }
  await page.waitForTimeout(250);
  console.log(`${browserName}: DOM ready ${path}`);
  console.log(`${browserName}: measuring overflow ${path}`);

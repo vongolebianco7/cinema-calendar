@@ -1,4 +1,5 @@
-import { isFilmMedium, filmMediumMetadata } from "../../../../js/cinelva-film-medium.js";
+import FilmMedium from "../../../../js/cinelva-film-medium.js";
+const { isFilmMedium, filmMediumMetadata } = FilmMedium;
 import { json, rateLimited, options } from "../../../lib/http";
 export const dynamic="force-dynamic";const B="https://api.themoviedb.org/3";
 function auth(u:URL){const t=process.env.TMDB_READ_ACCESS_TOKEN||process.env.TMDB_API_TOKEN,k=process.env.TMDB_API_KEY,h:Record<string,string>={accept:"application/json"};if(t)h.Authorization=`Bearer ${t}`;else if(k)u.searchParams.set("api_key",k);return t||k?h:null}

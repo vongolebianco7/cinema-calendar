@@ -7,7 +7,9 @@ const {stripTypeScriptTypes}=require('node:module');
 function detailRoute(fetch){
   const source=stripTypeScriptTypes(fs.readFileSync('backend/app/api/movie-detail/route.ts','utf8'),{mode:'transform'})
     .replace(/^import .*?;\n/gm,'').replaceAll('export ','');
+  const medium=require('../js/cinelva-film-medium.js');
   const context={
+    FilmMedium:medium,
     URL, console, process:{env:{TMDB_API_KEY:'fixture'}},
     featureIndex:require('../data/director-feature-index.json'),
     rateLimited:()=>null, options:()=>null,

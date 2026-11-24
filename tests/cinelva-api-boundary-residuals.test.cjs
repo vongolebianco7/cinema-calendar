@@ -25,6 +25,7 @@ function loadRoute(file, fetcher, timeoutFactory = AbortSignal.timeout) {
     fetch: fetcher,
     calendarSnapshot: () => ({ movies: [] }),
     ...loadHttp(),
+    FilmMedium: { isFilmMedium: () => true, filmMediumMetadata: value => value },
     isFilmMedium: () => true,
     filmMediumMetadata: value => value,
   };

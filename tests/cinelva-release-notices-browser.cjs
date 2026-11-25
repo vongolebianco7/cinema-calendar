@@ -1,10 +1,11 @@
 'use strict';
 const assert=require('node:assert/strict'),{chromium,webkit}=require('playwright'),{spawn}=require('node:child_process'),net=require('node:net'),{waitForLocalServer}=require('./helpers/local-server.cjs');
+const mockBackendApi=require('./helpers/mock-backend-api.cjs');
 (async()=>{
  const listener=net.createServer();await new Promise(resolve=>listener.listen(0,'127.0.0.1',resolve));const port=listener.address().port;await new Promise(resolve=>listener.close(resolve));
  const server=spawn('python',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});let browser;
  try{
-  await waitForLocalServer(port);browser=await(process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();const context=await browser.newContext({viewport:{width:390,height:844}});
+  await waitForLocalServer(port);browser=await(process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();const context=await browser.newContext({viewport:{width:390,height:844}});await mockBackendApi(context);
   await context.route('**/data/movies.json',route=>route.fulfill({json:{movies:[{id:42,tmdbId:42,title:'公開予定の映画',year:2025,date:new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo'}).format(new Date()),event:'theatrical',service:'劇場公開',source:'公式発表',source_url:'https://example.com/official'}]}}));
   await context.route('**/data/streaming.json',route=>route.fulfill({json:{movies:[]}}));
   await context.addInitScript(()=>{if(sessionStorage.getItem('cinelva-release-notice-fixture-seeded'))return;sessionStorage.setItem('cinelva-release-notice-fixture-seeded','1');localStorage.setItem('cinelva-want-to-watch-v1',JSON.stringify({'42':{id:'42',tmdbId:'42',title:'公開予定の映画',year:2025,savedAt:'2026-01-01T00:00:00Z'}}));localStorage.setItem('cinelva-release-notices-enabled-v1','0');localStorage.setItem('cinelva-library-records-v2',JSON.stringify({999:{id:'999',title:'保持する既存記録',year:2000,rating:4,watchedAt:'2026-01-01'}}));});

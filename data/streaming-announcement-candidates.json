@@ -1,20 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-24T11:08:44.370691Z",
+  "generated_at": "2026-11-25T09:56:53.538812Z",
   "feeds_checked": 3,
-  "candidate_count": 25,
+  "candidate_count": 24,
   "verified_catalog_matches": 1,
   "candidates": [
     {
       "service": "Apple TV+",
       "title": "Apple TV announces four-part documentary event “TIMBERLAKE”",
       "source_url": "https://www.apple.com/tv-pr/news/2026/11/apple-tv-announces-new-four-part-documentary-event-timberlake-directed-by-academy-award-winner-fisher-stevens/",
-      "status": "needs_release_date_verification"
-    },
-    {
-      "service": "Apple TV+",
-      "title": "Apple TV celebrates the premiere of its highly anticipated heist drama “12 12 12”",
-      "source_url": "https://www.apple.com/tv-pr/news/2026/11/apple-tv-celebrates-the-premiere-of-its-highly-anticipated-heist-drama-12-12-12-starring-and-executive-produced-by-anthony-mackie-and-jamie-dornan/",
       "status": "needs_release_date_verification"
     },
     {
@@ -33,6 +27,12 @@
       "service": "Apple TV+",
       "title": "Apple TV unveils first look at “She’s Fine,” new comedy starring and executive produced by Elizabeth Banks",
       "source_url": "https://www.apple.com/tv-pr/news/2026/11/apple-tv-unveils-first-look-at-shes-fine-new-comedy-starring-and-executive-produced-by-emmy-award-nominee-elizabeth-banks-created-by-emmy-award-nominee-liz-heldens-and-matt-ward-premiering-globally-wednesday-january-27/",
+      "status": "needs_release_date_verification"
+    },
+    {
+      "service": "Apple TV+",
+      "title": "Apple TV’s French hit “Carême” wins Drama Series at the 54th International Emmy Awards",
+      "source_url": "https://www.apple.com/tv-pr/news/2026/11/apple-tvs-french-hit-carme-wins-drama-series-at-the-54th-international-emmy-awards/",
       "status": "needs_release_date_verification"
     },
     {
@@ -144,14 +144,8 @@
     },
     {
       "service": "Prime Video",
-      "title": "アマゾンジャパン社長ジャスパー・チャンがホストを務める新ポッドキャストシリーズ「トーク便 by Amazon」が配信開始",
-      "source_url": "https://www.aboutamazon.jp/news/company-news/amazon-japan-podcast-by-jasper-cheung?utm_source=rss",
-      "status": "needs_release_date_verification"
-    },
-    {
-      "service": "Prime Video",
-      "title": "Audible、「名作韓ドラシリーズ」第3弾『冬のソナタ』 をオーディオドラマ化、11月12日より配信開始",
-      "source_url": "https://www.aboutamazon.jp/news/entertainment/audible-korean-content-winter-sonata?utm_source=rss",
+      "title": "Amazon Music、「FUJI ROCK FESTIVAL ’26 Limited Program」を\n12月13日、一夜限りで限定配信",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/fuji-rock-26-limited-stream?utm_source=rss",
       "status": "needs_release_date_verification"
     },
     {

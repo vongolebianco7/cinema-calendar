@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-26T09:41:00.217007Z",
+  "generated_at": "2026-11-27T09:45:50.757599Z",
   "feeds_checked": 3,
-  "candidate_count": 24,
+  "candidate_count": 25,
   "verified_catalog_matches": 1,
   "candidates": [
     {
@@ -140,6 +140,12 @@
       "service": "Netflix",
       "title": "社会現象となった大ヒットシリーズが帰ってくる！綾野剛 × 豊川悦司 W主演 大根仁 監督・脚本  Netflixシリーズ「地面師たち」 新シリーズ制作決定＆ファーストルックも解禁！",
       "source_url": "https://about.netflix.com/ja/news/tokyo-swindlers-new-season-announcement",
+      "status": "needs_release_date_verification"
+    },
+    {
+      "service": "Prime Video",
+      "title": "AmazonのPrime Video（プライム・ビデオ）2026年12月に楽しめる新着配信コンテンツ",
+      "source_url": "https://www.aboutamazon.jp/news/entertainment/amazon-prime-video-new-content-december-2026?utm_source=rss",
       "status": "needs_release_date_verification"
     },
     {

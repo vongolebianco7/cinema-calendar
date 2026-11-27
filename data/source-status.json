@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-26T09:41:00.358Z",
+  "generated_at": "2026-11-27T09:45:50.953Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -16,8 +16,8 @@
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
         "total": 5024,
-        "fresh": 3768,
-        "stale": 1256,
+        "fresh": 3454,
+        "stale": 1570,
         "unknown": 0
       }
     },
@@ -41,13 +41,13 @@
       "status": "automated",
       "source": "Netflix・Amazon Japan・Apple TV Pressの公式RSS/Atom",
       "source_url": null,
-      "source_observed_at": "2026-11-26T09:41:00.217Z",
+      "source_observed_at": "2026-11-27T09:45:50.757Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/refresh-official-streaming.yml",
       "trigger": "毎日01:23 UTCと関連設定変更時。取得失敗時は直近の成功候補を保持。",
       "coverage": "3つの公式ニュースフィードから発表候補を検出。映画か、日付が日本向けか、TMDB作品IDが一意かは別途審査し、合格した記録だけを配信開始予定へ公開する。全サービス・全作品の網羅ではない。",
-      "record_count": 24
+      "record_count": 25
     },
     {
       "id": "theater-showtimes",

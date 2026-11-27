@@ -4,6 +4,7 @@ const {chromium,webkit}=require('playwright');
 const {spawn}=require('node:child_process');
 const net=require('node:net');
 const {waitForLocalServer}=require('./helpers/local-server.cjs');
+const mockBackendApi=require('./helpers/mock-backend-api.cjs');
 
 (async()=>{
  const listener=net.createServer();
@@ -16,6 +17,7 @@ const {waitForLocalServer}=require('./helpers/local-server.cjs');
   await waitForLocalServer(port);
   browser=await(process.env.CINELVA_BROWSER==='webkit'?webkit:chromium).launch();
   const context=await browser.newContext({viewport:{width:390,height:844}});
+  await mockBackendApi(context);
   const now=new Date().toISOString();
   let releaseDelayedImage;
   const delayedImageGate=new Promise(resolve=>{releaseDelayedImage=resolve;});

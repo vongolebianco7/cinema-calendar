@@ -1,4 +1,5 @@
-import { isFilmMedium, filmMediumMetadata } from "../../../../js/cinelva-film-medium.js";
+import FilmMedium from "../../../../js/cinelva-film-medium.js";
+const { isFilmMedium, filmMediumMetadata } = FilmMedium;
 import { json, rateLimited, options } from "../../../lib/http";
 import featureIndex from "../../../../data/director-feature-index.json";
 export const dynamic="force-dynamic";

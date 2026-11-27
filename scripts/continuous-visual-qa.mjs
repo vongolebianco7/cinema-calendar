@@ -16,6 +16,15 @@ const browser=await type.launch();
 try{
  for(const width of [320,390,1280]){
   const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:1});
+  // The visual audit validates layout and runtime rendering. Avoid making it
+  // depend on the protected production API, whose access state can vary by CI.
+  await context.route(/^https:\/\/backend-one-gray-94\.vercel\.app\/api\//,async route=>{
+   const pathname=new URL(route.request().url()).pathname;
+   let body={movies:[],external:[],results:[],people:[],ids:[],providers:[],theaters:[],events:[],tv:[],items:[]};
+   if(pathname.endsWith('/movie-detail'))body={movie:null};
+   else if(pathname.endsWith('/people'))body={people:[],ids:[]};
+   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(body)});
+  });
   // Do not mutate the user's real local storage, reviews or bookmarks.
   for(const theme of ['light','dark']){
    for(const route of routes){

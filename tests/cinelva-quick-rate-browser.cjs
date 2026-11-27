@@ -1,6 +1,7 @@
 const { waitForLocalServer } = require("./helpers/local-server.cjs");
 const fs = require('node:fs');
 const {assertTextContrast}=require('./helpers/text-contrast.cjs');
+const mockBackendApi=require('./helpers/mock-backend-api.cjs');
 const { chromium, webkit } = require("playwright"),
   { spawn } = require("child_process"),
   net = require("net"),
@@ -26,6 +27,7 @@ const { chromium, webkit } = require("playwright"),
       }),
       errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
+    await mockBackendApi(page);
     await page.route("**/api/movies?*", (r) =>
       r.fulfill({ json: { movies: [], external: [] } }),
     );

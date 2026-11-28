@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-27T09:45:50.953Z",
+  "generated_at": "2026-11-28T08:58:54.321Z",
   "sources": [
     {
       "id": "streaming-availability",
@@ -16,8 +16,8 @@
       "coverage": "Japan observations for configured providers; 7-day UI freshness is evaluated per movie checked_at. Successful observations become due after6days; daily capacity adapts from60 to200 with a hard cap and six-minute batch deadline, proportional to the eligible catalogue. API failures and overflow remain explicit; not a complete provider catalogue.",
       "observations": {
         "total": 5024,
-        "fresh": 3454,
-        "stale": 1570,
+        "fresh": 3140,
+        "stale": 1884,
         "unknown": 0
       }
     },
@@ -41,7 +41,7 @@
       "status": "automated",
       "source": "Netflix・Amazon Japan・Apple TV Pressの公式RSS/Atom",
       "source_url": null,
-      "source_observed_at": "2026-11-27T09:45:50.757Z",
+      "source_observed_at": "2026-11-28T08:58:54.135Z",
       "max_age_hours": 48,
       "freshness": "within_window",
       "workflow": ".github/workflows/refresh-official-streaming.yml",
